@@ -44,6 +44,8 @@
 			return messageDate
 		}
 	}
+
+	let formElement
 </script>
 
 <PopSide bind:isOpen {toggleButton}>
@@ -93,6 +95,12 @@
 		method="POST"
 		action="/chat"
 		use:enhance={submitMessage}
+		bind:this={formElement}
+		on:keypress={e => {
+			if (e.ctrlKey && (e.code === "Enter" || e.key === "Enter")) {
+				formElement.requestSubmit()
+			}
+		}}
 	>
 		<TextArea
 			class="rounded-none pr-14 shadow-[0_-1px_3px_0_rgb(0_0_0_/_0.1),_0_-1px_2px_-1px_rgb(0_0_0_/_0.1)] -outline-offset-2"

@@ -15,7 +15,7 @@
 		class="aspect-video w-full rounded"
 		{src}
 		controls
-		preload="metadata"
+		preload="auto"
 		onloadstart="this.volume=0.25"
 		controlsList="noplaybackrate"
 		disablePictureInPicture

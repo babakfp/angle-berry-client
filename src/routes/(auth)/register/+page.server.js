@@ -1,0 +1,84 @@
+import { redirect, fail } from "@sveltejs/kit"
+import {
+	isUsernameInvalid,
+	isPasswordInvalid,
+} from "$lib/Form/formValidation.js"
+import { freeTierId } from "$lib/freeTierId.js"
+import { handlePbConnectionIssue } from "$lib/handlePbConnectionIssue.js"
+
+export const actions = {
+	default: async ({ locals, request, url }) => {
+		const { username, password } = Object.fromEntries(
+			await request.formData()
+		)
+
+		const _isUsernameInvalid = isUsernameInvalid(username, {
+			username: { value: username },
+		})
+		if (_isUsernameInvalid) return _isUsernameInvalid
+
+		const _isPasswordInvalid = isPasswordInvalid(password, {
+			username: { value: username },
+		})
+		if (_isPasswordInvalid) return _isPasswordInvalid
+
+		const inviterId = url.searchParams.get("id")
+		let doesInviterExists
+
+		try {
+			if (inviterId)
+				doesInviterExists = await locals.pb
+					.collection("users")
+					.getOne(inviterId)
+
+			// Registering
+			const newlyCreatedUser = await locals.pb
+				.collection("users")
+				.create({
+					username,
+					password,
+					passwordConfirm: password,
+					retainedTiers: [freeTierId],
+					invitedBy: doesInviterExists ? [inviterId] : null,
+				})
+
+			// Adding the new user to the list of invited users by the inviter user.
+			if (doesInviterExists && newlyCreatedUser) {
+				await locals.pb.collection("users").update(inviterId, {
+					invitedUsers: [
+						structuredClone(newlyCreatedUser).id,
+						...structuredClone(doesInviterExists).invitedUsers,
+					],
+				})
+			}
+
+			await locals.pb.collection("events").create({
+				user: structuredClone(newlyCreatedUser).id,
+				inviter: doesInviterExists ? inviterId : null,
+				inviterInvites: doesInviterExists
+					? structuredClone(doesInviterExists).invitedUsers.length + 1
+					: 0,
+			})
+
+			// Logging user in
+			await locals.pb
+				.collection("users")
+				.authWithPassword(username, password)
+		} catch ({ status, data }) {
+			handlePbConnectionIssue(status)
+
+			if (data.message === "Failed to create record.")
+				data.message =
+					"We were unable to create your account. Did you fill in all the fields correctly?"
+
+			data.data.username = {
+				value: username,
+				...(data.data.username || {}),
+			}
+
+			return fail(data.code, { message: data.message, ...data.data })
+		}
+
+		throw redirect(303, "/")
+	},
+}

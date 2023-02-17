@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	::-webkit-scrollbar {
+		@apply h-0 w-0;
+	}
+	* {
+		@apply select-none outline-none drag-none;
+		-webkit-tap-highlight-color: theme(colors.white/10%);
+	}
+	b,
+	strong,
+	th {
+		@apply font-semibold;
+	}
+	svg:not(.not-svg-icon) {
+		@apply pointer-events-none inline-block h-[1em] w-[1em] fill-current;
+		&[fill="none"] {
+			@apply fill-none;
+		}
+	}
+	.container {
+		@apply !max-w-screen-xl;
+	}
+}
+
+/* Outline */
+@layer base {
+	* {
+		@apply outline outline-2;
+	}
+	a,
+	input,
+	textarea,
+	button {
+		@apply focus-visible:outline-[orange];
+	}
+	input,
+	textarea,
+	button {
+		@apply outline-offset-0;
+	}
+	a {
+		@apply outline-dashed;
+	}
+}
+
+/* Dynamic view height */
+@layer utilities {
+	.min-h-dscreen {
+		min-height: 100vh;
+		min-height: 100dvh;
+	}
+	.h-dscreen {
+		height: 100vh;
+		height: 100dvh;
+	}
+	.min-h-dscreen-header {
+		min-height: calc(100vh - theme(spacing.header-height));
+		min-height: calc(100dvh - theme(spacing.header-height));
+	}
+}
+
+@layer components {
+	.link {
+		@apply underline duration-300 hover:text-white;
+	}
+}
+
+.toaster .base {
+	@apply !bg-gray-700 !pl-4;
+}
+
+.toaster .message {
+	@apply text-sm !text-gray-300;
+}

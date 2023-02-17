@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
+		<title>Angle Berry</title>
+		<link
+			rel="preload"
+			href="/JosefinSans-VariableFont_wght.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin
+		/>
+		<style>
+			@font-face {
+				font-family: "JosefinSans";
+				src: url("/JosefinSans-VariableFont_wght.woff2")
+						format("woff2 supports variations"),
+					url("/JosefinSans-VariableFont_wght.woff2")
+						format("woff2-variations");
+				font-weight: 100 700;
+				font-display: block;
+			}
+		</style>
+		%sveltekit.head%
+	</head>
+	<body
+		class="overflow-x-hidden bg-gray-800 text-gray-300"
+		data-sveltekit-preload-data="hover"
+	>
+		<div style="display: contents">%sveltekit.body%</div>
+	</body>
+</html>

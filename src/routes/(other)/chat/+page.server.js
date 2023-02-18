@@ -3,7 +3,11 @@ import { handlePbConnectionIssue } from "$lib/handlePbConnectionIssue.js"
 
 export const actions = {
 	default: async ({ locals, request }) => {
-		const { messageContent } = Object.fromEntries(await request.formData())
+		let { messageContent } = Object.fromEntries(await request.formData())
+		if (messageContent) {
+			messageContent = messageContent.replace(/(?:\r\n|\r|\n)/g, "<br>")
+		}
+
 		try {
 			await locals.pb.collection("messages").create({
 				content: messageContent,

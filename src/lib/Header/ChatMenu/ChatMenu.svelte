@@ -28,13 +28,15 @@
 
 	let isSendingMessage = false
 
-	function submitMessage({ form, data, action, cancel }) {
+	function submitMessage() {
 		isSendingMessage = true
 		messageTextElement.focus()
 		return async ({ result, update }) => {
-			messageTextElement.style.height = null
-			update()
 			isSendingMessage = false
+			if (result.type === "success") {
+				messageTextElement.style.height = null
+			}
+			update()
 		}
 	}
 

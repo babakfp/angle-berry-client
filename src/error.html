@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
+		<title>%sveltekit.error.message%</title>
+		<link
+			rel="preload"
+			href="/JosefinSans-VariableFont_wght.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin
+		/>
+		<style>
+			@font-face {
+				font-family: "JosefinSans";
+				src: url("/JosefinSans-VariableFont_wght.woff2")
+						format("woff2 supports variations"),
+					url("/JosefinSans-VariableFont_wght.woff2")
+						format("woff2-variations");
+				font-weight: 100 700;
+				font-display: block;
+			}
+			* {
+				margin: 0;
+			}
+			body {
+				display: grid;
+				align-content: center;
+				justify-items: center;
+				gap: 0.5rem;
+				min-height: 100vh;
+				min-height: 100dvh;
+				font-family: "JosefinSans";
+			}
+			.bg-gray-800 {
+				background-color: rgb(39 39 42);
+			}
+			.text-gray-300 {
+				color: rgb(212 212 216);
+			}
+		</style>
+	</head>
+	<body class="bg-gray-800 text-gray-300">
+		<h1>%sveltekit.status%</h1>
+		<p>%sveltekit.error.message%</p>
+	</body>
+</html>

@@ -1,5 +1,6 @@
 import { error } from "@sveltejs/kit"
 import { freeTierId } from "$lib/freeTierId.js"
+import { handlePbConnectionIssue } from "$lib/handlePbConnectionIssue.js"
 
 export async function load({ locals, params }) {
 	try {
@@ -26,9 +27,8 @@ export async function load({ locals, params }) {
 			}
 		}
 	} catch ({ status, data }) {
-		if (status === 404) {
-			throw error(404)
-		}
+		handlePbConnectionIssue(status)
+		if (status === 404) throw error(404)
 		throw error(status, data.message)
 	}
 }

@@ -9,6 +9,7 @@
 	import { messages } from "$lib/messages.js"
 	import { events } from "$lib/events.js"
 	import { error } from "@sveltejs/kit"
+	import { handlePbConnectionIssue } from "$lib/handlePbConnectionIssue.js"
 
 	export let data
 	setContext("tiers", data.tiers)
@@ -54,6 +55,7 @@
 					}
 				})
 		} catch ({ status, data }) {
+			handlePbConnectionIssue(status)
 			throw error(status, data.message)
 		}
 	})

@@ -26,11 +26,15 @@
 		)
 	}
 
+	let isSendingMessage = false
+
 	function submitMessage({ form, data, action, cancel }) {
+		isSendingMessage = true
 		messageTextElement.focus()
 		return async ({ result, update }) => {
 			messageTextElement.style.height = null
 			update()
+			isSendingMessage = false
 		}
 	}
 
@@ -91,13 +95,19 @@
 		</p>
 	{/if}
 	<form
-		class="sticky bottom-0 self-end"
+		class="sticky bottom-0 self-end
+		{isSendingMessage && 'pointer-events-none'}
+		"
 		method="POST"
 		action="/chat"
 		use:enhance={submitMessage}
 		bind:this={formElement}
 		on:keypress={e => {
-			if (e.ctrlKey && (e.code === "Enter" || e.key === "Enter")) {
+			if (
+				!isSendingMessage &&
+				e.ctrlKey &&
+				(e.code === "Enter" || e.key === "Enter")
+			) {
 				formElement.requestSubmit()
 			}
 		}}
@@ -112,13 +122,22 @@
 			bind:value={messageContent}
 		/>
 		<button
-			class="group absolute right-0 bottom-0 top-0 flex items-end -outline-offset-2"
+			class="group absolute right-0 bottom-0 top-0 flex items-end -outline-offset-2
+			{isSendingMessage && 'opacity-50'}"
+			disabled={isSendingMessage}
 		>
 			<div class="flex min-h-14 items-center px-4">
-				<!-- prettier-ignore -->
-				<svg class="text-2xl group-hover:text-white duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+				{#if isSendingMessage}
+					<!-- prettier-ignore -->
+					<svg class="text-2xl animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+					</svg>
+				{:else}
+					<!-- prettier-ignore -->
+					<svg class="text-2xl group-hover:text-white duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
 						<path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
 					</svg>
+				{/if}
 			</div>
 		</button>
 	</form>

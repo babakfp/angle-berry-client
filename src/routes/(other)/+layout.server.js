@@ -1,4 +1,5 @@
 import { redirect, error } from "@sveltejs/kit"
+import { handlePbConnectionIssue } from "$lib/handlePbConnectionIssue.js"
 
 export async function load({ locals }) {
 	if (!locals.user) throw redirect(303, "/login")
@@ -24,6 +25,7 @@ export async function load({ locals }) {
 			events: structuredClone(eventsRecords).items,
 		}
 	} catch ({ status, data }) {
+		handlePbConnectionIssue(status)
 		throw error(status, data.message)
 	}
 }

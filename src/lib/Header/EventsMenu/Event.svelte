@@ -10,7 +10,7 @@
 </script>
 
 <li
-	class="border-b border-white/5 p-4"
+	class="border-b border-white/5 px-4 py-6"
 	transition:fly={{ x: 64, duration: 500 }}
 >
 	{#if eventType === "userJoined"}

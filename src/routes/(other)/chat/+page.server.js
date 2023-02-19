@@ -4,6 +4,7 @@ import { handlePbConnectionIssue } from "$lib/handlePbConnectionIssue.js"
 export const actions = {
 	default: async ({ locals, request }) => {
 		let { messageContent } = Object.fromEntries(await request.formData())
+		if (!messageContent) return
 		if (messageContent) {
 			messageContent = messageContent.trim()
 			messageContent = messageContent.replace(/(?:\r\n|\r|\n)/g, "<br>")

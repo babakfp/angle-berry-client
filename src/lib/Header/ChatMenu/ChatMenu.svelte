@@ -2,7 +2,7 @@
 	import { enhance } from "$app/forms"
 	import PopSide from "$lib/PopSide.svelte"
 	import TextArea from "$lib/Form/TextArea.svelte"
-	import { messages } from "$lib/messages.js"
+	import { messages, unreadMessagesLength } from "$lib/messages.js"
 	import Message from "./Message.svelte"
 
 	export let data
@@ -10,6 +10,10 @@
 
 	export let isOpen
 	export let toggleButton
+
+	$: if (isOpen) {
+		unreadMessagesLength.set(0)
+	}
 
 	let messageContent
 	let messageTextElement

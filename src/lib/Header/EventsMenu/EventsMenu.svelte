@@ -1,6 +1,6 @@
 <script>
 	import PopSide from "$lib/PopSide.svelte"
-	import { events } from "$lib/events.js"
+	import { events, unseenEventsLength } from "$lib/events.js"
 	import Event from "./Event.svelte"
 
 	export let data
@@ -8,6 +8,10 @@
 
 	export let isOpen
 	export let toggleButton
+
+	$: if (isOpen) {
+		unseenEventsLength.set(0)
+	}
 </script>
 
 <PopSide id="EventsMenu" bind:isOpen {toggleButton}>

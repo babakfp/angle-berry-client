@@ -6,8 +6,8 @@
 	import { PUBLIC_POCKETBASE_URL } from "$env/static/public"
 	import { pageTransitionValues } from "$lib/pageTransitionValues.js"
 	import Header from "$lib/Header/Header.svelte"
-	import { messages } from "$lib/messages.js"
-	import { events } from "$lib/events.js"
+	import { messages, unreadMessagesLength } from "$lib/messages.js"
+	import { events, unseenEventsLength } from "$lib/events.js"
 	import { error } from "@sveltejs/kit"
 	import { handlePbConnectionIssue } from "$lib/handlePbConnectionIssue.js"
 
@@ -27,8 +27,10 @@
 							.getOne(record.user)
 						record.expand = { user: structuredClone(userRecord) }
 						messages.update(v => [record, ...v])
+						unreadMessagesLength.update(v => (v += 1))
 					} else if (action === "delete") {
 						messages.update(v => v.filter(m => m.id !== record.id))
+						unreadMessagesLength.update(v => (v -= 1))
 					}
 				})
 			await pb
@@ -50,8 +52,10 @@
 							inviter: structuredClone(inviterRecord),
 						}
 						events.update(v => [record, ...v])
+						unseenEventsLength.update(v => (v += 1))
 					} else if (action === "delete") {
 						events.update(v => v.filter(m => m.id !== record.id))
+						unseenEventsLength.update(v => (v -= 1))
 					}
 				})
 		} catch ({ status, data }) {

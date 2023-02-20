@@ -26,7 +26,7 @@
 >
 	<ul
 		id="UserMenu"
-		class="absolute top-full right-0 w-60 translate-y-4 translate-x-full overflow-y-auto rounded bg-gray-800 text-sm shadow-[0_4px_16px_0_rgb(0_0_0/0.4)] duration-300 hide
+		class="absolute top-full right-0 w-60 translate-x-full overflow-y-auto rounded bg-gray-800 text-sm shadow-[0_4px_16px_0_rgb(0_0_0/0.4)] duration-300 hide
 		{isUserMenuOpen && '!-translate-x-4 !show'}"
 	>
 		<li>

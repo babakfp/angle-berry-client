@@ -27,7 +27,6 @@
 	}
 
 	let isSendingMessage = false
-
 	function submitMessage() {
 		isSendingMessage = true
 		messageTextElement.focus()

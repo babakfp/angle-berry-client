@@ -1,5 +1,5 @@
 <script>
-	import FormError from "$lib/Form/FormError.svelte"
+	import FormErrorText from "$lib/Form/FormErrorText.svelte"
 
 	export let name
 	export let label = null
@@ -53,7 +53,5 @@
 		/>
 	</div>
 
-	{#if errorMessage}
-		<FormError message={errorMessage} />
-	{/if}
+	<FormErrorText message={errorMessage} />
 </label>

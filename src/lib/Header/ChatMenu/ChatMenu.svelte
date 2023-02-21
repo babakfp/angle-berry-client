@@ -11,7 +11,7 @@
 	export let isOpen
 	export let toggleButton
 
-	$: if (isOpen) {
+	$: if (isOpen && $unreadMessagesLength) {
 		unreadMessagesLength.set(0)
 	}
 

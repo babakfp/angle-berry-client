@@ -28,7 +28,7 @@
 		class="px-6 py-4 {(userTiers.includes(currentTier.id) ||
 			invitedUsersLength >= currentTier.invites) &&
 			isShowingAllTiers &&
-			'duration-300 group-hover:text-white'}"
+			'duration-300'}"
 	>
 		{currentTier.price === 0 ? "Free" : "$" + currentTier.price}
 	</td>
@@ -36,7 +36,7 @@
 		class="px-6 py-4 {(userTiers.includes(currentTier.id) ||
 			invitedUsersLength >= currentTier.invites) &&
 			isShowingAllTiers &&
-			'duration-300 group-hover:text-white'}"
+			'duration-300'}"
 	>
 		{currentTier.invites === 0 ? "Free" : currentTier.invites}
 	</td>

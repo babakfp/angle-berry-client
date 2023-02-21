@@ -15,15 +15,18 @@ export const actions = {
 				content: messageContent,
 				user: locals.user.id,
 			})
-		} catch ({ status, data }) {
+		} catch ({ status, response }) {
 			handlePbConnectionIssue(status)
 
-			data.data.content = {
+			response.data.content = {
 				value: messageContent,
-				...(data.data.content || {}),
+				...(response.data.content || {}),
 			}
 
-			return fail(data.code, { message: data.message, ...data.data })
+			return fail(response.code, {
+				message: response.message,
+				...response.data,
+			})
 		}
 	},
 }

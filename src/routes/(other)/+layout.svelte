@@ -58,9 +58,9 @@
 						unseenEventsLength.update(v => (v -= 1))
 					}
 				})
-		} catch ({ status, data }) {
+		} catch ({ status, response }) {
 			handlePbConnectionIssue(status)
-			throw error(status, data.message)
+			throw error(status, response.message)
 		}
 	})
 </script>

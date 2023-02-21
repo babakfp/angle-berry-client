@@ -26,9 +26,9 @@ export async function load({ locals, params }) {
 				}
 			}
 		}
-	} catch ({ status, data }) {
+	} catch ({ status, response }) {
 		handlePbConnectionIssue(status)
 		if (status === 404) throw error(404)
-		throw error(status, data.message)
+		throw error(status, response.message)
 	}
 }

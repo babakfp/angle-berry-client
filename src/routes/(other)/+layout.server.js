@@ -5,7 +5,9 @@ export async function load({ locals }) {
 	if (!locals.user) throw redirect(303, "/login")
 
 	try {
-		const tiersRecords = await locals.pb.collection("tiers").getFullList(10)
+		const tiersRecords = await locals.pb
+			.collection("tiers")
+			.getFullList({ batch: 10 })
 		const messagesRecords = await locals.pb
 			.collection("messages")
 			.getList(1, 50, {
@@ -24,8 +26,8 @@ export async function load({ locals }) {
 			messages: structuredClone(messagesRecords).items,
 			events: structuredClone(eventsRecords).items,
 		}
-	} catch ({ status, data }) {
+	} catch ({ status, response }) {
 		handlePbConnectionIssue(status)
-		throw error(status, data.message)
+		throw error(status, response.message)
 	}
 }

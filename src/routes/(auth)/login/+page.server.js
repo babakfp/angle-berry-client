@@ -25,15 +25,18 @@ export const actions = {
 			await locals.pb
 				.collection("users")
 				.authWithPassword(username, password)
-		} catch ({ status, data }) {
+		} catch ({ status, response }) {
 			handlePbConnectionIssue(status)
 
-			data.data.identity = {
+			response.data.identity = {
 				value: username,
-				...(data.data.identity || {}),
+				...(response.data.identity || {}),
 			}
 
-			return fail(data.code, { message: data.message, ...data.data })
+			return fail(response.code, {
+				message: response.message,
+				...response.data,
+			})
 		}
 
 		throw redirect(303, "/")

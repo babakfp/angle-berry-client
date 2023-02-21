@@ -64,19 +64,22 @@ export const actions = {
 			await locals.pb
 				.collection("users")
 				.authWithPassword(username, password)
-		} catch ({ status, data }) {
+		} catch ({ status, response }) {
 			handlePbConnectionIssue(status)
 
-			if (data.message === "Failed to create record.")
-				data.message =
+			if (response.message === "Failed to create record.")
+				response.message =
 					"We were unable to create your account. Did you fill in all the fields correctly?"
 
-			data.data.username = {
+			response.data.username = {
 				value: username,
-				...(data.data.username || {}),
+				...(response.data.username || {}),
 			}
 
-			return fail(data.code, { message: data.message, ...data.data })
+			return fail(response.code, {
+				message: response.message,
+				...response.data,
+			})
 		}
 
 		throw redirect(303, "/")

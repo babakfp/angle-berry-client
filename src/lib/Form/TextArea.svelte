@@ -10,22 +10,10 @@
 	export let maxlength = null
 	export let required = false
 	export let readonly = false
-	export let filterPattern = null
-	export let forceToLowercase = false
 	export let className = null
 	export { className as class }
 	export let errorMessage = null
 	export let element = null
-
-	function handleInput(e) {
-		value = e.target.value
-		if (forceToLowercase) {
-			value = value.toLowerCase()
-		}
-		if (filterPattern) {
-			value = value.replace(filterPattern, "")
-		}
-	}
 </script>
 
 <label>

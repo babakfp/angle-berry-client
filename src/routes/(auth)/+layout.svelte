@@ -66,7 +66,7 @@
 	{#key videoNameIndex}
 		<video
 			class="absolute object-cover duration-1000 hide inset-center
-				{isVideoDownloaded && 'show'}"
+			{isVideoDownloaded && 'show'}"
 			bind:this={video}
 			src="/auth-background-video-{videoNameIndex}.mp4"
 			autoplay

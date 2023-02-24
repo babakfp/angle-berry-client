@@ -52,3 +52,9 @@
 		</span>
 	</button>
 </Input>
+
+<style lang="postcss">
+	:global(input:autofill) + button {
+		@apply text-gray-800;
+	}
+</style>

@@ -24,10 +24,10 @@
 		</span>
 	{/if}
 	<div
-		class="message-content-wrapper max-w-96 rounded bg-gray-700 py-2 pl-3 pr-6 shadow
+		class="message-content-wrapper max-w-80 break-words rounded bg-gray-700 py-2 pl-3 pr-6 shadow
 		{user.id === message.expand.user.id
-			? 'ml-8 rounded-br-[2px]'
-			: 'mr-8 mt-1 rounded-tl-[2px]'}"
+			? 'rounded-br-[2px]'
+			: 'mt-1 rounded-tl-[2px]'}"
 	>
 		{@html message.content}
 	</div>

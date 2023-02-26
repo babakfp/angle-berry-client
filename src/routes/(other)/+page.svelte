@@ -4,6 +4,10 @@
 	export let data
 </script>
 
+<svelte:head>
+	<title>Angle Berry</title>
+</svelte:head>
+
 <p>
 	You can <a class="link" href="/tiers/{getPreviewTier(data.tiers).id}">
 		watch free content here

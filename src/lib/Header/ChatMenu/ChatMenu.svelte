@@ -43,17 +43,6 @@
 		}
 	}
 
-	let previousDate
-	function handleDailyDate(messageCreated) {
-		const messageDate = new Date(messageCreated).toLocaleDateString()
-		if (previousDate === messageDate) {
-			return ""
-		} else {
-			previousDate = messageDate
-			return messageDate
-		}
-	}
-
 	let formElement
 </script>
 
@@ -63,14 +52,6 @@
 			class="grid min-h-full content-start items-start gap-4 overflow-y-auto px-4 py-10 sm:text-sm"
 		>
 			{#each $messages as message (message.id)}
-				{@const date = handleDailyDate(message.created)}
-				{#if date}
-					<div
-						class="sticky top-0 mx-auto rounded-full bg-gray-800 py-1 px-2 text-center text-2xs text-gray-500 shadow"
-					>
-						{date}
-					</div>
-				{/if}
 				<Message user={data.user} {message} />
 			{/each}
 		</ol>

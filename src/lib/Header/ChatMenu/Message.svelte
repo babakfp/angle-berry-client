@@ -6,6 +6,27 @@
 	export let message
 
 	const date = new Date(message.created)
+
+	const isToday = checkIsToday(date)
+	const isYesterday = checkIsYesterday(date)
+
+	function checkIsToday(someDate) {
+		const today = new Date()
+		return (
+			someDate.getDate() == today.getDate() &&
+			someDate.getMonth() == today.getMonth() &&
+			someDate.getFullYear() == today.getFullYear()
+		)
+	}
+
+	function checkIsYesterday(someDate) {
+		const today = new Date()
+		return (
+			someDate.getDate() == today.getDate() - 1 &&
+			someDate.getMonth() == today.getMonth() - 1 &&
+			someDate.getFullYear() == today.getFullYear() - 1
+		)
+	}
 </script>
 
 <li
@@ -35,7 +56,13 @@
 		class="mt-1 text-xs text-gray-500
 			{user.id === message.expand.user.id ? 'text-right' : 'text-left'}"
 	>
-		<span>{formatTimeByAMPM(date)}</span>
+		<span>
+			{#if isToday || isYesterday}
+				{isToday ? "Today" : "Yesterday"} at {formatTimeByAMPM(date)}
+			{:else}
+				{date.toLocaleDateString()} {formatTimeByAMPM(date)}
+			{/if}
+		</span>
 	</div>
 </li>
 

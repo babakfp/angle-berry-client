@@ -31,9 +31,7 @@
 
 <li
 	class="grid
-		{user.id === message.expand.user.id
-		? 'justify-self-end'
-		: 'justify-self-start'}"
+		{user.id === message.expand.user.id && 'mr-0 ml-auto'}"
 	transition:fly={{
 		x: user.id === message.expand.user.id ? 64 : -64,
 		duration: 500,
@@ -54,7 +52,7 @@
 	</div>
 	<div
 		class="mt-1 text-xs text-gray-500
-			{user.id === message.expand.user.id ? 'text-right' : 'text-left'}"
+			{user.id === message.expand.user.id && 'text-right'}"
 	>
 		<span>
 			{#if isToday || isYesterday}

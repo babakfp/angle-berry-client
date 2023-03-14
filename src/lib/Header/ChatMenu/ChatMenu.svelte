@@ -8,7 +8,7 @@
 	export let data
 	messages.set(data.messages || [])
 
-	export let isOpen
+	export let isOpen = true
 	export let toggleButton
 
 	$: if (isOpen && $unreadMessagesLength) {
@@ -49,31 +49,12 @@
 <PopSide bind:isOpen {toggleButton}>
 	{#if $messages.length > 0}
 		<ol
-			class="grid min-h-full content-start items-start gap-4 overflow-y-auto px-4 py-10 sm:text-sm"
+			class="flex min-h-full flex-col-reverse content-start items-start gap-4 overflow-y-auto px-4 py-6 sm:text-sm"
 		>
 			{#each $messages as message (message.id)}
 				<Message user={data.user} {message} />
 			{/each}
 		</ol>
-		<div
-			class="absolute top-16 flex items-center gap-1 rounded-full bg-gray-800 py-1 px-2 text-2xs text-gray-500 shadow inset-x-center sm:top-2"
-		>
-			<!-- prettier-ignore -->
-			<svg class="w-3 h-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M12 19.5v-15m0 0l-6.75 6.75M12 4.5l6.75 6.75" />
-				</svg>
-			<span>newer messages</span>
-		</div>
-		<div
-			class="absolute bottom-16 flex items-center gap-1 rounded-full bg-gray-800 py-1 px-2 text-2xs text-gray-500 shadow inset-x-center"
-			bind:this={messageOlderLabelElement}
-		>
-			<!-- prettier-ignore -->
-			<svg class="w-3 h-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m0 0l6.75-6.75M12 19.5l-6.75-6.75" />
-				</svg>
-			<span>older messages</span>
-		</div>
 	{:else}
 		<p class="p-4">
 			No messages have been found here. You can be the one that sends the

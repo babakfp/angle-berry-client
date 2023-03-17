@@ -21,14 +21,6 @@
 		messageTextElement.style.height = null
 		messageTextElement.style.height = `${messageTextElement.scrollHeight}px`
 	}
-	let messageOlderLabelElement
-	$: if (messageOlderLabelElement && messageContent === messageContent) {
-		messageOlderLabelElement.style.setProperty("--tw-translate-y", 0)
-		messageOlderLabelElement.style.setProperty(
-			"--tw-translate-y",
-			`-${messageTextElement.clientHeight - 56}px`
-		)
-	}
 
 	let isSendingMessage = false
 	function submitMessage() {

@@ -46,12 +46,12 @@
 		class="message-content-wrapper max-w-80 break-words rounded bg-gray-700 py-2 pl-3 pr-4 shadow
 		{user.id === message.expand.user.id
 			? 'justify-self-end rounded-br-[2px]'
-			: 'mt-1 justify-self-start rounded-tl-[2px]'}"
+			: 'mt-0.5 justify-self-start rounded-tl-[2px]'}"
 	>
 		{@html message.content}
 	</div>
 	<div
-		class="mt-1 text-xs text-gray-500
+		class="mt-1.5 text-2xs text-gray-500
 			{user.id === message.expand.user.id && 'text-right'}"
 	>
 		<span>

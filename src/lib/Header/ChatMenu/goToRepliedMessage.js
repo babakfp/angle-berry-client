@@ -1,7 +1,5 @@
-let intervalId = null
-let timeoutId = null
-
-export const goToRepliedMessage = messageId => {
+export const goToRepliedMessage = (messageId, intervalId, timeoutId) => {
+	// console.log(intervalId)
 	if (intervalId) clearInterval(intervalId)
 	if (timeoutId) clearTimeout(timeoutId)
 
@@ -18,7 +16,10 @@ export const goToRepliedMessage = messageId => {
 	intervalId = setInterval(() => {
 		replyHighlightElement.style.opacity =
 			replyHighlightElement.style.opacity - 0.05
+		console.log(replyHighlightElement.style.opacity)
 	}, 100)
 
 	timeoutId = setTimeout(() => clearInterval(intervalId), 2000)
+
+	return { intervalId, timeoutId }
 }

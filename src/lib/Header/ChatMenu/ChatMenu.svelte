@@ -4,9 +4,8 @@
 	import TextArea from "$lib/Form/TextArea.svelte"
 	import { messages, unreadMessagesLength } from "$lib/messages.js"
 	import Message from "./Message.svelte"
-	import { isReplying } from "./replying"
+	import { isReplying, messageThatWeAreReplyingTo } from "./replying"
 	import Reply from "./Reply.svelte"
-	import { messageThatWeAreReplyingTo } from "./replying"
 
 	export let data
 	messages.set(data.messages || [])
@@ -18,11 +17,13 @@
 		unreadMessagesLength.set(0)
 	}
 
-	let messageContent
+	let messageContent = ""
 	let messageTextElement
 	$: if (messageTextElement && messageContent === messageContent) {
-		messageTextElement.style.height = null
-		messageTextElement.style.height = `${messageTextElement.scrollHeight}px`
+		if (messageContent.trim()) {
+			messageTextElement.style.height = null
+			messageTextElement.style.height = `${messageTextElement.scrollHeight}px`
+		}
 	}
 
 	let isSendingMessage = false
@@ -40,6 +41,8 @@
 	}
 
 	let formElement
+
+	$: replyedMessageId = $isReplying ? $messageThatWeAreReplyingTo.id : ""
 </script>
 
 <PopSide bind:isOpen {toggleButton}>
@@ -80,10 +83,9 @@
 		{/if}
 		<div class="relative">
 			<TextArea
-				class="!max-h-20 rounded-none border-t border-white/5 bg-gray-800 pr-14 shadow-[0_-1px_3px_0_rgb(0_0_0_/_0.1),_0_-1px_2px_-1px_rgb(0_0_0_/_0.1)] outline-inset"
+				class="!max-h-32 rounded-none border-t border-white/5 bg-gray-800 pr-14 shadow-[0_-1px_3px_0_rgb(0_0_0_/_0.1),_0_-1px_2px_-1px_rgb(0_0_0_/_0.1)] outline-inset"
 				name="messageContent"
 				placeholder="Write your message..."
-				minlength={3}
 				required={true}
 				bind:element={messageTextElement}
 				bind:value={messageContent}
@@ -111,7 +113,7 @@
 		<input
 			type="hidden"
 			name="replyedMessageId"
-			bind:value={$messageThatWeAreReplyingTo.id}
+			bind:value={replyedMessageId}
 		/>
 	</form>
 </PopSide>

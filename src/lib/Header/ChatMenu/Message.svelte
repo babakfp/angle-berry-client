@@ -9,6 +9,8 @@
 	export let message
 
 	let isContextMenuOpen
+	let intervalId
+	let timeoutId
 
 	const date = new Date(message.created)
 	const isToday = checkIsToday(date)
@@ -67,16 +69,25 @@
 		>
 			{#if message?.expand?.repliedTo?.content}
 				<button
-					class="mb-2 -ml-3 border-l-2 pl-2 text-2xs text-white/50 line-clamp-1 hover:text-white/100"
-					on:click={() =>
-						goToRepliedMessage(message.expand.repliedTo.id)}
+					class="mb-2 -ml-3 block border-l-2 pl-2 text-left text-xs text-white/50 hover:text-white/100"
+					on:click={() => {
+						const result = goToRepliedMessage(
+							message.expand.repliedTo.id,
+							intervalId,
+							timeoutId
+						)
+						intervalId = result.intervalId
+						timeoutId = result.timeoutId
+					}}
 				>
-					<span class="font-semibold">
-						{message.expand.user.username}
-					</span>
-					<span>
-						{message?.expand?.repliedTo?.content}
-					</span>
+					<div class="line-clamp-1">
+						<span class="font-semibold">
+							{message.expand.user.username}
+						</span>
+						<span>
+							{message?.expand?.repliedTo?.content}
+						</span>
+					</div>
 				</button>
 			{/if}
 

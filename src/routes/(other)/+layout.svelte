@@ -25,7 +25,18 @@
 						const userRecord = await pb
 							.collection("users")
 							.getOne(record.user)
-						record.expand = { user: structuredClone(userRecord) }
+						let repliedToRecord
+						if (record.repliedTo) {
+							repliedToRecord = await pb
+								.collection("messages")
+								.getOne(record.repliedTo)
+						}
+						record.expand = {
+							user: structuredClone(userRecord),
+							repliedTo: repliedToRecord
+								? structuredClone(repliedToRecord)
+								: undefined,
+						}
 						messages.update(v => [record, ...v])
 						unreadMessagesLength.update(v => (v += 1))
 					} else if (action === "delete") {

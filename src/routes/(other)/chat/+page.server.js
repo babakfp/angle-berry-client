@@ -3,7 +3,7 @@ import { handlePbConnectionIssue } from "$lib/handlePbConnectionIssue.js"
 
 export const actions = {
 	default: async ({ locals, request }) => {
-		let formData = Object.fromEntries(await request.formData())
+		const formData = Object.fromEntries(await request.formData())
 		let { messageContent } = formData
 		if (!messageContent) return
 		if (messageContent) {

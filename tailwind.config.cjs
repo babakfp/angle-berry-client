@@ -41,6 +41,9 @@ module.exports = {
 		fontWeight: {
 			semibold: "600",
 		},
+		outlineWidth: {
+			2: "2px",
+		},
 	},
 	plugins: [
 		require("@tailwindcss/line-clamp"),

@@ -19,7 +19,6 @@
 		intervalId = setInterval(() => {
 			replyHighlightElement.style.opacity =
 				replyHighlightElement.style.opacity - 0.05
-			console.log(replyHighlightElement.style.opacity)
 		}, 100)
 
 		timeoutId = setTimeout(() => clearInterval(intervalId), 2000)

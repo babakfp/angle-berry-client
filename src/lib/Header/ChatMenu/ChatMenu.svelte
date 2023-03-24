@@ -6,9 +6,12 @@
 	import Message from "./Message.svelte"
 	import { isReplying, messageThatWeAreReplyingTo } from "./replying"
 	import Reply from "./Reply.svelte"
+	import { PUBLIC_POCKETBASE_URL } from "$env/static/public"
+	import PocketBase from "pocketbase"
+	const pb = new PocketBase(PUBLIC_POCKETBASE_URL)
 
 	export let data
-	messages.set(data.messages || [])
+	messages.set(data.messages.items || [])
 
 	export let isOpen = true
 	export let toggleButton
@@ -43,6 +46,42 @@
 	let formElement
 
 	$: replyedMessageId = $isReplying ? $messageThatWeAreReplyingTo.id : ""
+
+	let isFetchingOlderMessages = false
+	let isSomethingWentWrongWhenFetchingOlderMessages = false
+	let pageNumberFortheNextOlderMessagesToFetch = 2
+	const handleScroll = async e => {
+		// Is reached the top of the scrollable?
+		// Added + 200 to fetch the data earlier for a better UX
+		if (
+			pageNumberFortheNextOlderMessagesToFetch <=
+				data.messages.totalPages &&
+			Math.abs(e.target.scrollTop) + 200 >=
+				e.target.scrollHeight - e.target.clientHeight
+		) {
+			try {
+				isFetchingOlderMessages = true
+				isSomethingWentWrongWhenFetchingOlderMessages = false
+				const messagesRecords = await pb
+					.collection("messages")
+					.getList(pageNumberFortheNextOlderMessagesToFetch, 50, {
+						sort: "-created",
+						expand: "user,repliedTo",
+					})
+				if (messagesRecords) {
+					messages.update(_messages => [
+						..._messages,
+						...structuredClone(messagesRecords).items,
+					])
+					isFetchingOlderMessages = false
+					pageNumberFortheNextOlderMessagesToFetch += 1
+				}
+			} catch (error) {
+				console.log(error)
+				isSomethingWentWrongWhenFetchingOlderMessages = true
+			}
+		}
+	}
 </script>
 
 <PopSide bind:isOpen {toggleButton}>
@@ -50,10 +89,28 @@
 		<ol
 			id="messages-wrapper"
 			class="flex min-h-full flex-col-reverse content-start items-start overflow-y-auto py-4 sm:text-sm"
+			on:scroll={handleScroll}
 		>
 			{#each $messages as message (message.id)}
 				<Message user={data.user} {message} />
 			{/each}
+			{#if isFetchingOlderMessages}
+				<div class="mx-auto flex items-center gap-2 px-4 text-gray-500">
+					{#if isSomethingWentWrongWhenFetchingOlderMessages}
+						<p>
+							Something went wrong! Maybe refreshing the page can
+							solve the problem.
+						</p>
+						<button>Try again</button>
+					{:else}
+						<!-- prettier-ignore -->
+						<svg class="text-xl animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+					</svg>
+						<p>Fetching older messages...</p>
+					{/if}
+				</div>
+			{/if}
 		</ol>
 	{:else}
 		<p class="py-6 px-4">

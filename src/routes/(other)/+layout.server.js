@@ -23,7 +23,7 @@ export async function load({ locals }) {
 
 		return {
 			tiers: structuredClone(tiersRecords),
-			messages: structuredClone(messagesRecords).items,
+			messages: structuredClone(messagesRecords),
 			events: structuredClone(eventsRecords).items,
 		}
 	} catch ({ status, response }) {

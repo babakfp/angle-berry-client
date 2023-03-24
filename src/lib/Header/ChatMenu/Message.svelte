@@ -40,7 +40,7 @@
 	class="relative grid w-full px-4 py-2
 		{user.id === message.expand.user.id && 'mr-0 ml-auto'}
 	"
-	transition:fly={{
+	transition:fly|local={{
 		x: user.id === message.expand.user.id ? 64 : -64,
 		duration: 500,
 	}}
@@ -69,7 +69,7 @@
 		>
 			{#if message?.expand?.repliedTo?.content}
 				<button
-					class="mb-2 -ml-3 block border-l-2 pl-2 text-left text-xs text-white/50 hover:text-white/100"
+					class="mb-2 -ml-3 block border-l-2 pl-2 text-left text-xs text-white/80 hover:text-white/100"
 					on:click={() => {
 						const result = goToRepliedMessage(
 							message.expand.repliedTo.id,

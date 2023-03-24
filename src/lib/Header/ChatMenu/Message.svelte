@@ -31,10 +31,6 @@
 	}
 
 	let isContextMenuOpen
-
-	function handleContextMenu() {
-		isContextMenuOpen = true
-	}
 </script>
 
 <li
@@ -42,14 +38,13 @@
 	class="relative grid w-full px-4 py-2
 		{user.id === message.expand.user.id && 'mr-0 ml-auto'}
 	"
-	on:contextmenu|preventDefault={handleContextMenu}
 	transition:fly={{
 		x: user.id === message.expand.user.id ? 64 : -64,
 		duration: 500,
 	}}
 >
 	<div
-		class="reply-highlight absolute inset-0 bg-white/20 opacity-0 duration-200 ease-in-out"
+		class="reply-highlight absolute inset-0 -z-1 bg-white/20 opacity-0 duration-200 ease-in-out"
 	/>
 
 	{#if user.id !== message.expand.user.id}
@@ -68,6 +63,7 @@
 				? 'justify-self-end rounded-br-[2px] !bg-[#7e6dd1] text-white'
 				: 'mt-0.5 justify-self-start rounded-tl-[2px]'}
 			"
+			on:contextmenu|preventDefault={() => (isContextMenuOpen = true)}
 		>
 			{@html message.content}
 		</div>

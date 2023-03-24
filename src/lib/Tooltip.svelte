@@ -49,8 +49,8 @@
 					if (isLeftNotFullyVisible) position = "right"
 				}
 
-				console.log("rootElementRect", rootElementRect)
-				console.log("parentElementRect", parentElementRect)
+				// console.log("rootElementRect", rootElementRect)
+				// console.log("parentElementRect", parentElementRect)
 			}
 		}
 	}

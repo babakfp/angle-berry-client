@@ -19,8 +19,8 @@
 				intervalId,
 				timeoutId
 			)
-			intervalId = result.intervalId
-			timeoutId = result.timeoutId
+			intervalId = result?.intervalId
+			timeoutId = result?.timeoutId
 		}}
 	>
 		<div class="text-xs text-gray-500">

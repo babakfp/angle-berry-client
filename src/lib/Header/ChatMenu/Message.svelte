@@ -76,8 +76,8 @@
 							intervalId,
 							timeoutId
 						)
-						intervalId = result.intervalId
-						timeoutId = result.timeoutId
+						intervalId = result?.intervalId
+						timeoutId = result?.timeoutId
 					}}
 				>
 					<div class="line-clamp-1">

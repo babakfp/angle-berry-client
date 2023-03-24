@@ -4,6 +4,7 @@ export const goToRepliedMessage = (messageId, intervalId, timeoutId) => {
 	if (timeoutId) clearTimeout(timeoutId)
 
 	const messageElementThatWeAreReplyingTo = document.getElementById(messageId)
+	if (!messageElementThatWeAreReplyingTo) return
 	messageElementThatWeAreReplyingTo.scrollIntoView({
 		behavior: "smooth",
 		block: "center",

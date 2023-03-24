@@ -55,7 +55,7 @@
 
 	<OutClick
 		on:outclick={() => (isContextMenuOpen = false)}
-		excludeQuerySelectorAll="message-content-wrapper"
+		excludeQuerySelectorAll=".MessageContextMenu"
 	>
 		<div
 			class="message-content-wrapper max-w-80 break-words rounded bg-gray-700 py-2 pl-3 pr-4 shadow

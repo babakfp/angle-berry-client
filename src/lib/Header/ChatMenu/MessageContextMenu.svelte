@@ -6,7 +6,7 @@
 </script>
 
 <ul
-	class="absolute top-full max-h-56 w-24 -translate-y-5 overflow-y-auto rounded bg-gray-700 text-xs shadow hide
+	class="absolute top-full max-h-56 w-36 -translate-y-5 overflow-y-auto rounded bg-gray-700 text-xs shadow hide
 		{user.id === message.expand.user.id ? 'right-4' : 'left-4'}
 		{isContextMenuOpen && 'show'}
 		"

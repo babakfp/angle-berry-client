@@ -15,18 +15,18 @@
 	function checkIsToday(someDate) {
 		const today = new Date()
 		return (
-			someDate.getDate() == today.getDate() &&
-			someDate.getMonth() == today.getMonth() &&
-			someDate.getFullYear() == today.getFullYear()
+			someDate.getDate() === today.getDate() &&
+			someDate.getMonth() === today.getMonth() &&
+			someDate.getFullYear() === today.getFullYear()
 		)
 	}
 
 	function checkIsYesterday(someDate) {
 		const today = new Date()
 		return (
-			someDate.getDate() == today.getDate() - 1 &&
-			someDate.getMonth() == today.getMonth() - 1 &&
-			someDate.getFullYear() == today.getFullYear() - 1
+			someDate.getDate() === today.getDate() - 1 &&
+			someDate.getMonth() === today.getMonth() - 1 &&
+			someDate.getFullYear() === today.getFullYear() - 1
 		)
 	}
 

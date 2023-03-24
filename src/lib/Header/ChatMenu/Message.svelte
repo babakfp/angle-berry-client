@@ -3,6 +3,7 @@
 	import { formatTimeByAMPM } from "$lib/formatTimeByAMPM.js"
 	import OutClick from "svelte-outclick"
 	import MessageContextMenu from "./MessageContextMenu.svelte"
+	import { goToRepliedMessage } from "$lib/Header/ChatMenu/goToRepliedMessage.js"
 
 	export let user
 	export let message
@@ -29,34 +30,6 @@
 			someDate.getMonth() === today.getMonth() &&
 			someDate.getFullYear() === today.getFullYear()
 		)
-	}
-
-	let intervalId = null
-	let timeoutId = null
-
-	const handleClick = () => {
-		if (intervalId) clearInterval(intervalId)
-		if (timeoutId) clearTimeout(timeoutId)
-
-		const messageElementThatWeAreReplyingTo = document.getElementById(
-			message.expand.repliedTo.id
-		)
-
-		const replyHighlightElement =
-			messageElementThatWeAreReplyingTo.querySelector(".reply-highlight")
-
-		replyHighlightElement.style.opacity = 1
-		intervalId = setInterval(() => {
-			replyHighlightElement.style.opacity =
-				replyHighlightElement.style.opacity - 0.05
-		}, 100)
-
-		timeoutId = setTimeout(() => clearInterval(intervalId), 2000)
-
-		messageElementThatWeAreReplyingTo.scrollIntoView({
-			behavior: "smooth",
-			block: "center",
-		})
 	}
 </script>
 
@@ -93,11 +66,16 @@
 			on:contextmenu|preventDefault={() => (isContextMenuOpen = true)}
 		>
 			{#if message?.expand?.repliedTo?.content}
-				<div class="mb-2 -ml-3 border-l-2 pl-2 text-2xs">
+				<div
+					class="mb-2 -ml-3 border-l-2 pl-2 text-2xs text-white/50 line-clamp-1 hover:text-white/100"
+				>
 					<span class="font-semibold">
 						{message.expand.user.username}
 					</span>
-					<button on:click={handleClick}>
+					<button
+						on:click={() =>
+							goToRepliedMessage(message.expand.repliedTo.id)}
+					>
 						{message?.expand?.repliedTo?.content}
 					</button>
 				</div>

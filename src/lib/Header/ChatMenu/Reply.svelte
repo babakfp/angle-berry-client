@@ -1,33 +1,6 @@
 <script>
 	import { isReplying, messageThatWeAreReplyingTo } from "./replying"
-
-	let intervalId = null
-	let timeoutId = null
-
-	const handleClick = () => {
-		if (intervalId) clearInterval(intervalId)
-		if (timeoutId) clearTimeout(timeoutId)
-
-		const messageElementThatWeAreReplyingTo = document.getElementById(
-			$messageThatWeAreReplyingTo.id
-		)
-
-		const replyHighlightElement =
-			messageElementThatWeAreReplyingTo.querySelector(".reply-highlight")
-
-		replyHighlightElement.style.opacity = 1
-		intervalId = setInterval(() => {
-			replyHighlightElement.style.opacity =
-				replyHighlightElement.style.opacity - 0.05
-		}, 100)
-
-		timeoutId = setTimeout(() => clearInterval(intervalId), 2000)
-
-		messageElementThatWeAreReplyingTo.scrollIntoView({
-			behavior: "smooth",
-			block: "center",
-		})
-	}
+	import { goToRepliedMessage } from "$lib/Header/ChatMenu/goToRepliedMessage.js"
 </script>
 
 <div
@@ -37,7 +10,7 @@
 		class="block w-full py-4 pl-4 text-left line-clamp-2 outline-inset hover:bg-white/5"
 		href="#{$messageThatWeAreReplyingTo.id}"
 		type="button"
-		on:click={handleClick}
+		on:click={() => goToRepliedMessage($messageThatWeAreReplyingTo.id)}
 	>
 		<div class="text-xs text-gray-500">
 			Replying to {$messageThatWeAreReplyingTo.expand.user.id}

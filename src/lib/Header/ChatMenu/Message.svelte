@@ -31,33 +31,32 @@
 	}
 
 	let isContextMenuOpen
-	let contextmenuElement
 
 	function handleContextMenu() {
 		isContextMenuOpen = true
 	}
 </script>
 
-<OutClick
-	on:outclick={() => (isContextMenuOpen = false)}
-	excludeElements={contextmenuElement}
->
-	<li
-		id={message.id}
-		class="relative grid px-4 py-2
+<li
+	id={message.id}
+	class="relative grid px-4 py-2
 		{user.id === message.expand.user.id && 'mr-0 ml-auto'}"
-		on:contextmenu|preventDefault={handleContextMenu}
-		bind:this={contextmenuElement}
-		transition:fly={{
-			x: user.id === message.expand.user.id ? 64 : -64,
-			duration: 500,
-		}}
+	on:contextmenu|preventDefault={handleContextMenu}
+	transition:fly={{
+		x: user.id === message.expand.user.id ? 64 : -64,
+		duration: 500,
+	}}
+>
+	{#if user.id !== message.expand.user.id}
+		<span class="text-xs font-semibold">
+			{message.expand.user.username}
+		</span>
+	{/if}
+
+	<OutClick
+		on:outclick={() => (isContextMenuOpen = false)}
+		excludeQuerySelectorAll="message-content-wrapper"
 	>
-		{#if user.id !== message.expand.user.id}
-			<span class="text-xs font-semibold">
-				{message.expand.user.username}
-			</span>
-		{/if}
 		<div
 			class="message-content-wrapper max-w-80 break-words rounded bg-gray-700 py-2 pl-3 pr-4 shadow
 		{user.id === message.expand.user.id
@@ -66,24 +65,22 @@
 		>
 			{@html message.content}
 		</div>
-		<div
-			class="mt-1.5 text-2xs text-gray-500
+	</OutClick>
+	<div
+		class="mt-1.5 text-2xs text-gray-500
 			{user.id === message.expand.user.id && 'text-right'}"
-		>
-			<span>
-				{#if isToday || isYesterday}
-					{isToday ? "Today" : "Yesterday"} at {formatTimeByAMPM(
-						date
-					)}
-				{:else}
-					{date.toLocaleDateString()} {formatTimeByAMPM(date)}
-				{/if}
-			</span>
-		</div>
+	>
+		<span>
+			{#if isToday || isYesterday}
+				{isToday ? "Today" : "Yesterday"} at {formatTimeByAMPM(date)}
+			{:else}
+				{date.toLocaleDateString()} {formatTimeByAMPM(date)}
+			{/if}
+		</span>
+	</div>
 
-		<MessageContextMenu {user} {message} bind:isContextMenuOpen />
-	</li>
-</OutClick>
+	<MessageContextMenu {user} {message} bind:isContextMenuOpen />
+</li>
 
 <style lang="postcss">
 	/* TODO: This is for when we add markdown support */

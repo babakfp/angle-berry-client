@@ -10,7 +10,7 @@
 	export let data
 	messages.set(data.messages || [])
 
-	export let isOpen = false
+	export let isOpen = true
 	export let toggleButton
 
 	$: if (isOpen && $unreadMessagesLength) {
@@ -43,14 +43,14 @@
 <PopSide bind:isOpen {toggleButton}>
 	{#if $messages.length > 0}
 		<ol
-			class="flex min-h-full flex-col-reverse content-start items-start gap-4 overflow-y-auto px-4 py-6 sm:text-sm"
+			class="flex min-h-full flex-col-reverse content-start items-start overflow-y-auto py-4 sm:text-sm"
 		>
 			{#each $messages as message (message.id)}
 				<Message user={data.user} {message} />
 			{/each}
 		</ol>
 	{:else}
-		<p class="p-4">
+		<p class="py-6 px-4">
 			No messages have been found here. You can be the one that sends the
 			first message in this chat room.
 		</p>
@@ -78,7 +78,7 @@
 		{/if}
 		<div class="relative">
 			<TextArea
-				class="!max-h-20 rounded-none border-t border-white/5 bg-gray-800 pr-14 outline-inset"
+				class="!max-h-20 rounded-none border-t border-white/5 bg-gray-800 pr-14 shadow-[0_-1px_3px_0_rgb(0_0_0_/_0.1),_0_-1px_2px_-1px_rgb(0_0_0_/_0.1)] outline-inset"
 				name="messageContent"
 				placeholder="Write your message..."
 				minlength={3}

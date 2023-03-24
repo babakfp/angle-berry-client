@@ -44,7 +44,9 @@
 	}
 </script>
 
-<div class="flex items-stretch justify-between border-t border-white/5 text-sm">
+<div
+	class="flex items-stretch justify-between border-t border-white/5 text-sm shadow-[0_-1px_3px_0_rgb(0_0_0_/_0.1),_0_-1px_2px_-1px_rgb(0_0_0_/_0.1)]"
+>
 	<button
 		class="block w-full py-4 pl-4 text-left line-clamp-2 outline-inset"
 		href="#{$messageThatWeAreReplyingTo.id}"

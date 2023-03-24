@@ -44,7 +44,7 @@
 >
 	<li
 		id={message.id}
-		class="relative grid
+		class="relative grid px-4 py-2
 		{user.id === message.expand.user.id && 'mr-0 ml-auto'}"
 		on:contextmenu|preventDefault={handleContextMenu}
 		bind:this={contextmenuElement}

@@ -66,19 +66,18 @@
 			on:contextmenu|preventDefault={() => (isContextMenuOpen = true)}
 		>
 			{#if message?.expand?.repliedTo?.content}
-				<div
+				<button
 					class="mb-2 -ml-3 border-l-2 pl-2 text-2xs text-white/50 line-clamp-1 hover:text-white/100"
+					on:click={() =>
+						goToRepliedMessage(message.expand.repliedTo.id)}
 				>
 					<span class="font-semibold">
 						{message.expand.user.username}
 					</span>
-					<button
-						on:click={() =>
-							goToRepliedMessage(message.expand.repliedTo.id)}
-					>
+					<span>
 						{message?.expand?.repliedTo?.content}
-					</button>
-				</div>
+					</span>
+				</button>
 			{/if}
 
 			{@html message.content}

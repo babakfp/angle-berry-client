@@ -51,6 +51,7 @@
 					})}
 			>
 				<span>Click to copy your invite link:</span>
+				<!-- Removed `select-text` class because it's buggy -->
 				<p class="mt-1 select-text leading-4 text-gray-500">
 					{$page.url.origin}/register?id={user.id}
 				</p>

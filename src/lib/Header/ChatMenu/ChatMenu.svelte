@@ -78,7 +78,7 @@
 		{/if}
 		<div class="relative">
 			<TextArea
-				class="!max-h-20 rounded-none border-t border-white/5 bg-gray-800 pr-14 -outline-offset-2"
+				class="!max-h-20 rounded-none border-t border-white/5 bg-gray-800 pr-14 outline-inset"
 				name="messageContent"
 				placeholder="Write your message..."
 				minlength={3}
@@ -87,7 +87,7 @@
 				bind:value={messageContent}
 			/>
 			<button
-				class="group absolute right-0 bottom-0 top-0 flex items-end -outline-offset-2
+				class="group absolute right-0 bottom-0 top-0 flex items-end outline-inset
 			{isSendingMessage && 'opacity-50'}"
 				disabled={isSendingMessage}
 			>

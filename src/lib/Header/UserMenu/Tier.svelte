@@ -5,7 +5,7 @@
 
 <li class="relative">
 	<a
-		class="group flex items-center justify-between gap-4 py-2 px-4 -outline-offset-2 duration-300 hover:text-white"
+		class="group flex items-center justify-between gap-4 py-2 px-4 duration-300 outline-inset hover:text-white"
 		href="/tiers/{tier.id}"
 	>
 		<div class="flex items-center gap-3">

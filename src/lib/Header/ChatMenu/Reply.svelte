@@ -46,7 +46,7 @@
 
 <div class="flex items-stretch justify-between border-t border-white/5 text-sm">
 	<button
-		class="block w-full py-4 pl-4 text-left -outline-offset-2 line-clamp-2"
+		class="block w-full py-4 pl-4 text-left line-clamp-2 outline-inset"
 		href="#{$messageThatWeAreReplyingTo.id}"
 		type="button"
 		on:click={handleClick}
@@ -57,7 +57,7 @@
 		<div>{$messageThatWeAreReplyingTo.content}</div>
 	</button>
 	<button
-		class="flex h-8 items-center px-4 -outline-offset-2 hover:bg-gray-700"
+		class="flex h-8 items-center px-4 outline-inset hover:bg-gray-700"
 		type="button"
 		on:click={() => isReplying.set(false)}
 	>

@@ -23,7 +23,7 @@
 	>
 		<button
 			slot="under-input"
-			class="absolute inset-y-0 right-0 flex w-14 items-center justify-center rounded text-2xs -outline-offset-2"
+			class="absolute inset-y-0 right-0 flex w-14 items-center justify-center rounded text-2xs outline-inset"
 			type="button"
 			use:copy={`${$page.url.origin}/register?id=${data.user.id}`}
 			on:click={() =>

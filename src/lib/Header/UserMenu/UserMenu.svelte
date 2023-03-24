@@ -31,7 +31,7 @@
 	>
 		<li>
 			<a
-				class="flex items-center justify-between rounded-t p-4 -outline-offset-2 duration-300 hover:text-white"
+				class="flex items-center justify-between rounded-t p-4 duration-300 outline-inset hover:text-white"
 				href="/how-to-invite"
 				type="button"
 			>
@@ -44,7 +44,7 @@
 
 		<li use:copy={`${$page.url.origin}/register?id=${user.id}`}>
 			<button
-				class="bg-[black] p-4 -outline-offset-2"
+				class="bg-[black] p-4 outline-inset"
 				on:click={() =>
 					toast.success("Your invite link is copied to Clipboard.", {
 						position: "bottom-right",
@@ -68,7 +68,7 @@
 		<li class="border-t border-white/5">
 			<form action="/logout" method="POST">
 				<button
-					class="w-full rounded-b p-4 text-left -outline-offset-2 duration-300 hover:text-white"
+					class="w-full rounded-b p-4 text-left duration-300 outline-inset hover:text-white"
 				>
 					Logout
 				</button>

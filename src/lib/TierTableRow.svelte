@@ -45,7 +45,7 @@
 			<span class="px-6 py-4">_</span>
 		{:else}
 			<a
-				class="link relative z-1 block px-6 py-4 -outline-offset-2"
+				class="link relative z-1 block px-6 py-4 outline-inset"
 				href="/how-to-pay"
 			>
 				Get access
@@ -57,7 +57,7 @@
 			<span class="px-6 py-4">_</span>
 		{:else}
 			<a
-				class="link relative z-1 block px-6 py-4 -outline-offset-2"
+				class="link relative z-1 block px-6 py-4 outline-inset"
 				href="/how-to-invite"
 			>
 				Start inviting
@@ -67,7 +67,7 @@
 
 	{#if isShowingAllTiers}
 		<a
-			class="absolute inset-0 -outline-offset-2"
+			class="absolute inset-0 outline-inset"
 			href="/tiers/{currentTier.id}"
 		/>
 	{/if}

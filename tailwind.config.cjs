@@ -44,6 +44,13 @@ module.exports = {
 	},
 	plugins: [
 		require("@tailwindcss/line-clamp"),
+		({ addUtilities }) => {
+			addUtilities({
+				".outline-inset": {
+					"@apply -outline-offset-2": "",
+				},
+			})
+		},
 		({ matchUtilities, theme }) => {
 			matchUtilities(
 				{

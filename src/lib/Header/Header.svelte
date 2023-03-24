@@ -27,7 +27,7 @@
 	<div class="container flex h-full justify-between px-0">
 		<div class="flex">
 			<a
-				class="flex items-center px-4 text-white underline -outline-offset-2"
+				class="flex items-center px-4 text-white underline outline-inset"
 				href="/"
 				type="button"
 			>
@@ -36,7 +36,7 @@
 		</div>
 		<div class="flex">
 			<button
-				class="group relative flex items-center px-2 -outline-offset-2"
+				class="group relative flex items-center px-2 outline-inset"
 				bind:this={eventsMenuToggle}
 				on:click={() => (isEventsMenuOpen = !isEventsMenuOpen)}
 			>
@@ -51,7 +51,7 @@
 				{/if}
 			</button>
 			<button
-				class="group relative flex items-center px-2 -outline-offset-2"
+				class="group relative flex items-center px-2 outline-inset"
 				bind:this={chatMenuToggle}
 				on:click={() => (isChatMenuOpen = !isChatMenuOpen)}
 			>
@@ -67,7 +67,7 @@
 			</button>
 			<div class="relative flex">
 				<button
-					class="flex items-center gap-2 pr-4 pl-2 -outline-offset-2"
+					class="flex items-center gap-2 pr-4 pl-2 outline-inset"
 					on:click={() => (isUserMenuOpen = !isUserMenuOpen)}
 					bind:this={userMenuToggle}
 				>

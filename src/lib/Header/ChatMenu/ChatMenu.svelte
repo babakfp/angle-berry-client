@@ -6,6 +6,7 @@
 	import Message from "./Message.svelte"
 	import { isReplying } from "./replying"
 	import Reply from "./Reply.svelte"
+	import { messageThatWeAreReplyingTo } from "./replying"
 
 	export let data
 	messages.set(data.messages || [])
@@ -32,6 +33,7 @@
 			isSendingMessage = false
 			if (result.type === "success") {
 				messageTextElement.style.height = null
+				isReplying.set(false)
 			}
 			update()
 		}
@@ -106,5 +108,10 @@
 				</div>
 			</button>
 		</div>
+		<input
+			type="hidden"
+			name="replyedMessageId"
+			bind:value={$messageThatWeAreReplyingTo.id}
+		/>
 	</form>
 </PopSide>

@@ -3,7 +3,8 @@ import { handlePbConnectionIssue } from "$lib/handlePbConnectionIssue.js"
 
 export const actions = {
 	default: async ({ locals, request }) => {
-		let { messageContent } = Object.fromEntries(await request.formData())
+		let formData = Object.fromEntries(await request.formData())
+		let { messageContent } = formData
 		if (!messageContent) return
 		if (messageContent) {
 			messageContent = messageContent.trim()
@@ -14,6 +15,7 @@ export const actions = {
 			await locals.pb.collection("messages").create({
 				content: messageContent,
 				user: locals.user.id,
+				repliedTo: formData?.replyedMessageId || undefined,
 			})
 		} catch ({ status, response }) {
 			handlePbConnectionIssue(status)

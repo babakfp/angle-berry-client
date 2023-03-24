@@ -12,7 +12,7 @@ export async function load({ locals }) {
 			.collection("messages")
 			.getList(1, 50, {
 				sort: "-created",
-				expand: "user",
+				expand: "user,repliedTo",
 			})
 		const eventsRecords = await locals.pb
 			.collection("events")

@@ -7,8 +7,9 @@
 	export let user
 	export let message
 
-	const date = new Date(message.created)
+	let isContextMenuOpen
 
+	const date = new Date(message.created)
 	const isToday = checkIsToday(date)
 	const isYesterday = checkIsYesterday(date)
 
@@ -30,7 +31,33 @@
 		)
 	}
 
-	let isContextMenuOpen
+	let intervalId = null
+	let timeoutId = null
+
+	const handleClick = () => {
+		if (intervalId) clearInterval(intervalId)
+		if (timeoutId) clearTimeout(timeoutId)
+
+		const messageElementThatWeAreReplyingTo = document.getElementById(
+			message.expand.repliedTo.id
+		)
+
+		const replyHighlightElement =
+			messageElementThatWeAreReplyingTo.querySelector(".reply-highlight")
+
+		replyHighlightElement.style.opacity = 1
+		intervalId = setInterval(() => {
+			replyHighlightElement.style.opacity =
+				replyHighlightElement.style.opacity - 0.05
+		}, 100)
+
+		timeoutId = setTimeout(() => clearInterval(intervalId), 2000)
+
+		messageElementThatWeAreReplyingTo.scrollIntoView({
+			behavior: "smooth",
+			block: "center",
+		})
+	}
 </script>
 
 <li
@@ -65,6 +92,17 @@
 			"
 			on:contextmenu|preventDefault={() => (isContextMenuOpen = true)}
 		>
+			{#if message?.expand?.repliedTo?.content}
+				<div class="mb-2 -ml-3 border-l-2 pl-2 text-2xs">
+					<span class="font-semibold">
+						{message.expand.user.username}
+					</span>
+					<button on:click={handleClick}>
+						{message?.expand?.repliedTo?.content}
+					</button>
+				</div>
+			{/if}
+
 			{@html message.content}
 		</div>
 	</OutClick>

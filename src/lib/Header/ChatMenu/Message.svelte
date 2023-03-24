@@ -1,6 +1,8 @@
 <script>
 	import { fly } from "svelte/transition"
 	import { formatTimeByAMPM } from "$lib/formatTimeByAMPM.js"
+	import OutClick from "svelte-outclick"
+	import MessageContextMenu from "./MessageContextMenu.svelte"
 
 	export let user
 	export let message
@@ -27,42 +29,61 @@
 			someDate.getFullYear() == today.getFullYear() - 1
 		)
 	}
+
+	let isContextMenuOpen
+	let contextmenuElement
+
+	function handleContextMenu() {
+		isContextMenuOpen = true
+	}
 </script>
 
-<li
-	class="grid
-		{user.id === message.expand.user.id && 'mr-0 ml-auto'}"
-	transition:fly={{
-		x: user.id === message.expand.user.id ? 64 : -64,
-		duration: 500,
-	}}
+<OutClick
+	on:outclick={() => (isContextMenuOpen = false)}
+	excludeElements={contextmenuElement}
 >
-	{#if user.id !== message.expand.user.id}
-		<span class="text-xs font-semibold">
-			{message.expand.user.username}
-		</span>
-	{/if}
-	<div
-		class="message-content-wrapper max-w-80 break-words rounded bg-gray-700 py-2 pl-3 pr-4 shadow
+	<li
+		id={message.id}
+		class="relative grid
+		{user.id === message.expand.user.id && 'mr-0 ml-auto'}"
+		on:contextmenu|preventDefault={handleContextMenu}
+		bind:this={contextmenuElement}
+		transition:fly={{
+			x: user.id === message.expand.user.id ? 64 : -64,
+			duration: 500,
+		}}
+	>
+		{#if user.id !== message.expand.user.id}
+			<span class="text-xs font-semibold">
+				{message.expand.user.username}
+			</span>
+		{/if}
+		<div
+			class="message-content-wrapper max-w-80 break-words rounded bg-gray-700 py-2 pl-3 pr-4 shadow
 		{user.id === message.expand.user.id
-			? 'justify-self-end rounded-br-[2px]'
-			: 'mt-0.5 justify-self-start rounded-tl-[2px]'}"
-	>
-		{@html message.content}
-	</div>
-	<div
-		class="mt-1.5 text-2xs text-gray-500
+				? 'justify-self-end rounded-br-[2px] !bg-[#7e6dd1] text-white'
+				: 'mt-0.5 justify-self-start rounded-tl-[2px]'}"
+		>
+			{@html message.content}
+		</div>
+		<div
+			class="mt-1.5 text-2xs text-gray-500
 			{user.id === message.expand.user.id && 'text-right'}"
-	>
-		<span>
-			{#if isToday || isYesterday}
-				{isToday ? "Today" : "Yesterday"} at {formatTimeByAMPM(date)}
-			{:else}
-				{date.toLocaleDateString()} {formatTimeByAMPM(date)}
-			{/if}
-		</span>
-	</div>
-</li>
+		>
+			<span>
+				{#if isToday || isYesterday}
+					{isToday ? "Today" : "Yesterday"} at {formatTimeByAMPM(
+						date
+					)}
+				{:else}
+					{date.toLocaleDateString()} {formatTimeByAMPM(date)}
+				{/if}
+			</span>
+		</div>
+
+		<MessageContextMenu {user} {message} bind:isContextMenuOpen />
+	</li>
+</OutClick>
 
 <style lang="postcss">
 	/* TODO: This is for when we add markdown support */

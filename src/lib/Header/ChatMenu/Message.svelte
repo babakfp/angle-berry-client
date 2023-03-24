@@ -39,14 +39,19 @@
 
 <li
 	id={message.id}
-	class="relative grid px-4 py-2
-		{user.id === message.expand.user.id && 'mr-0 ml-auto'}"
+	class="relative grid w-full px-4 py-2
+		{user.id === message.expand.user.id && 'mr-0 ml-auto'}
+	"
 	on:contextmenu|preventDefault={handleContextMenu}
 	transition:fly={{
 		x: user.id === message.expand.user.id ? 64 : -64,
 		duration: 500,
 	}}
 >
+	<div
+		class="reply-highlight absolute inset-0 bg-white/20 opacity-0 duration-200 ease-in-out"
+	/>
+
 	{#if user.id !== message.expand.user.id}
 		<span class="text-xs font-semibold">
 			{message.expand.user.username}

@@ -1,41 +1,28 @@
 <script>
 	import { isReplying, messageThatWeAreReplyingTo } from "./replying"
-	export let user
-	const handleClick = () => {
-		document
-			.querySelectorAll(".highlight-element")
-			.forEach(el => el.remove())
 
-		const messageElementThatWeAreReplyingTo = document?.getElementById(
+	let intervalId = null
+	let timeoutId = null
+
+	const handleClick = () => {
+		if (intervalId) clearInterval(intervalId)
+		if (timeoutId) clearTimeout(timeoutId)
+
+		const messageElementThatWeAreReplyingTo = document.getElementById(
 			$messageThatWeAreReplyingTo.id
 		)
 
-		const highlightElement = document.createElement("div")
-		highlightElement.classList.add(
-			"highlight-element",
-			"absolute",
-			"-inset-y-2",
-			"w-screen",
-			"sm:w-96",
-			"bg-white/10",
-			"duration-300",
-			user.id === $messageThatWeAreReplyingTo.expand.user.id
-				? "-right-4"
-				: "-left-4"
-		)
+		const replyHighlightElement =
+			messageElementThatWeAreReplyingTo.querySelector(".reply-highlight")
 
-		messageElementThatWeAreReplyingTo.appendChild(highlightElement)
-		highlightElement.style.opacity = 1
-		const myInterval = setInterval(() => {
-			highlightElement.style.opacity =
-				highlightElement.style.opacity - 0.05
-			console.log(highlightElement.style.opacity)
+		replyHighlightElement.style.opacity = 1
+		intervalId = setInterval(() => {
+			replyHighlightElement.style.opacity =
+				replyHighlightElement.style.opacity - 0.05
+			console.log(replyHighlightElement.style.opacity)
 		}, 100)
 
-		setTimeout(() => {
-			highlightElement.remove()
-			clearInterval(myInterval)
-		}, 2000)
+		timeoutId = setTimeout(() => clearInterval(intervalId), 2000)
 
 		messageElementThatWeAreReplyingTo.scrollIntoView({
 			behavior: "smooth",

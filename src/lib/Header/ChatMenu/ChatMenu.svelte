@@ -74,7 +74,7 @@
 		}}
 	>
 		{#if $isReplying}
-			<Reply user={data.user} />
+			<Reply />
 		{/if}
 		<div class="relative">
 			<TextArea

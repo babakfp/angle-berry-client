@@ -5,9 +5,14 @@ export const goToRepliedMessage = (messageId, intervalId, timeoutId) => {
 
 	const messageElementThatWeAreReplyingTo = document.getElementById(messageId)
 	if (!messageElementThatWeAreReplyingTo) return
+
 	messageElementThatWeAreReplyingTo.scrollIntoView({
 		behavior: "smooth",
-		block: "center",
+		block:
+			messageElementThatWeAreReplyingTo.clientHeight >
+			document.getElementById("messages-wrapper").clientHeight
+				? "start"
+				: "center",
 	})
 
 	const replyHighlightElement =

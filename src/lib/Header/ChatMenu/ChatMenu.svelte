@@ -48,6 +48,7 @@
 <PopSide bind:isOpen {toggleButton}>
 	{#if $messages.length > 0}
 		<ol
+			id="messages-wrapper"
 			class="flex min-h-full flex-col-reverse content-start items-start overflow-y-auto py-4 sm:text-sm"
 		>
 			{#each $messages as message (message.id)}

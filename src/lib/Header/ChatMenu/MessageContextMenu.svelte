@@ -1,5 +1,6 @@
 <script>
 	import { isReplying, messageThatWeAreReplyingTo } from "./replying"
+
 	export let user
 	export let message
 	export let isContextMenuOpen = false

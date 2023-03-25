@@ -10,8 +10,6 @@
 	import PocketBase from "pocketbase"
 	const pb = new PocketBase(PUBLIC_POCKETBASE_URL)
 
-	$: console.log($messages)
-
 	export let data
 	messages.set(data.messages.items || [])
 
@@ -84,12 +82,13 @@
 						])
 						isFetchingOlderMessages = false
 						pageNumberFortheNextOlderMessagesToFetch += 1
-					}, 1000)
+						timeoutId = null
+					}, 0)
 				}
 			} catch (error) {
-				clearInterval(timeoutId)
-				console.log(error)
+				clearTimeout(timeoutId)
 				isSomethingWentWrongWhenFetchingOlderMessages = true
+				throw error
 			}
 		}
 	}

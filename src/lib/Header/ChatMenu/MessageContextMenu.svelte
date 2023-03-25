@@ -8,13 +8,13 @@
 
 {#if isContextMenuOpen}
 	<ul
-		class="MessageContextMenu absolute top-full max-h-56 w-36 -translate-y-5 overflow-y-auto rounded bg-gray-700 text-xs shadow
+		class="MessageContextMenu absolute top-full max-h-56 w-36 -translate-y-5 overflow-y-auto rounded bg-gray-700 p-1 text-xs shadow
 		{user.id === message.expand.user.id ? 'right-4' : 'left-4'}
 		"
 	>
 		<li class="flex">
 			<button
-				class="flex w-full items-center gap-2 rounded px-4 py-2 hover:text-white"
+				class="flex w-full items-center gap-2 rounded px-3 py-2 hover:bg-white/5"
 				on:click={() => {
 					isContextMenuOpen = false
 					isReplying.set(true)

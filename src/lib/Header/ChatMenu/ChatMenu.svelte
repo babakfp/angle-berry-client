@@ -49,6 +49,7 @@
 
 	$: replyedMessageId = $isReplying ? $messageThatWeAreReplyingTo.id : ""
 
+	let timeoutId = null
 	let isFetchingOlderMessages = false
 	let isSomethingWentWrongWhenFetchingOlderMessages = false
 	let pageNumberFortheNextOlderMessagesToFetch = 2
@@ -56,6 +57,7 @@
 		// Is reached the top of the scrollable?
 		// Added + 200 to fetch the data earlier for a better UX
 		if (
+			!timeoutId &&
 			pageNumberFortheNextOlderMessagesToFetch <=
 				data.messages.totalPages &&
 			Math.abs(e.target.scrollTop) + 200 >=
@@ -64,24 +66,28 @@
 			try {
 				isFetchingOlderMessages = true
 				isSomethingWentWrongWhenFetchingOlderMessages = false
-				const messagesRecords = await pb
-					.collection("messages")
-					.getList(pageNumberFortheNextOlderMessagesToFetch, 50, {
-						sort: "-created",
-						expand: "user,repliedTo",
-						filter: `created < "${
-							$messages[$messages.length - 1].created
-						}"`,
-					})
-				if (messagesRecords) {
-					messages.update(_messages => [
-						..._messages,
-						...structuredClone(messagesRecords).items,
-					])
-					isFetchingOlderMessages = false
-					pageNumberFortheNextOlderMessagesToFetch += 1
-				}
+
+				timeoutId = setTimeout(async () => {
+					const messagesRecords = await pb
+						.collection("messages")
+						.getList(pageNumberFortheNextOlderMessagesToFetch, 50, {
+							sort: "-created",
+							expand: "user,repliedTo",
+							filter: `created < "${
+								$messages[$messages.length - 1].created
+							}"`,
+						})
+					if (messagesRecords) {
+						messages.update(_messages => [
+							..._messages,
+							...structuredClone(messagesRecords).items,
+						])
+						isFetchingOlderMessages = false
+						pageNumberFortheNextOlderMessagesToFetch += 1
+					}
+				}, 4000)
 			} catch (error) {
+				clearInterval(timeoutId)
 				console.log(error)
 				isSomethingWentWrongWhenFetchingOlderMessages = true
 			}

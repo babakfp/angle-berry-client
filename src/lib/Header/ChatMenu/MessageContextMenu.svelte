@@ -1,14 +1,29 @@
 <script>
-	export let user
-	export let message
-	export let isContextMenuOpen = false
+	export let e
+	export let isOpen = false
+
+	let contextMenu
+
+	$: if (contextMenu) {
+		let positionX = e.offsetX
+		let positionY = e.offsetY
+
+		if (e.clientX + contextMenu.offsetWidth > window.innerWidth) {
+			positionX = positionX - contextMenu.offsetWidth
+		}
+		if (e.clientY + contextMenu.offsetHeight > window.innerHeight) {
+			positionY = positionY - contextMenu.offsetHeight
+		}
+
+		contextMenu.style.left = `${positionX}px`
+		contextMenu.style.top = `${positionY}px`
+	}
 </script>
 
-{#if isContextMenuOpen}
+{#if isOpen}
 	<ul
-		class="MessageContextMenu absolute top-full max-h-56 w-36 -translate-y-5 overflow-y-auto rounded bg-gray-700 p-1 text-xs shadow
-		{user.id === message.expand.user.id ? 'right-4' : 'left-4'}
-		"
+		bind:this={contextMenu}
+		class="MessageContextMenu absolute max-h-56 w-36 -translate-y-5 overflow-y-auto overscroll-y-contain rounded bg-gray-700 p-1 text-xs shadow"
 	>
 		<slot />
 	</ul>

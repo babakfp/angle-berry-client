@@ -11,6 +11,7 @@
 	export let message
 
 	let isContextMenuOpen
+	let contextMenuEvent
 	let intervalId
 	let timeoutId
 
@@ -62,12 +63,15 @@
 		excludeQuerySelectorAll=".MessageContextMenu"
 	>
 		<div
-			class="message-content-wrapper max-w-80 break-words rounded bg-gray-700 py-2 pl-3 pr-4 shadow
+			class="message-content-wrapper relative max-w-80 break-words rounded bg-gray-700 py-2 pl-3 pr-4 shadow
 				{user.id === message.expand.user.id
 				? 'justify-self-end rounded-br-[2px] !bg-[#7e6dd1] text-white'
 				: 'mt-0.5 justify-self-start rounded-tl-[2px]'}
 			"
-			on:contextmenu|preventDefault={() => (isContextMenuOpen = true)}
+			on:contextmenu|preventDefault={e => {
+				contextMenuEvent = e
+				isContextMenuOpen = true
+			}}
 		>
 			{#if message?.expand?.repliedTo?.content}
 				<button
@@ -94,6 +98,23 @@
 			{/if}
 
 			{@html message.content}
+
+			<MessageContextMenu
+				e={contextMenuEvent}
+				bind:isOpen={isContextMenuOpen}
+			>
+				<MessageContextMenuItem
+					title="Reply"
+					on:click={() => {
+						isContextMenuOpen = false
+						isReplying.set(true)
+						messageThatWeAreReplyingTo.set(message)
+					}}
+				>
+					<!-- prettier-ignore -->
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"/></svg>
+				</MessageContextMenuItem>
+			</MessageContextMenu>
 		</div>
 	</OutClick>
 	<div
@@ -108,20 +129,6 @@
 			{/if}
 		</span>
 	</div>
-
-	<MessageContextMenu {user} {message} bind:isContextMenuOpen>
-		<MessageContextMenuItem
-			title="Reply"
-			on:click={() => {
-				isContextMenuOpen = false
-				isReplying.set(true)
-				messageThatWeAreReplyingTo.set(message)
-			}}
-		>
-			<!-- prettier-ignore -->
-			<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"/></svg>
-		</MessageContextMenuItem>
-	</MessageContextMenu>
 </li>
 
 <style lang="postcss">

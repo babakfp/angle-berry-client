@@ -1,10 +1,13 @@
 <script>
 	export let title
+	export let isDisabled
 </script>
 
 <li class="flex">
 	<button
-		class="flex h-8.5 w-full items-center gap-2 rounded px-3 hover:bg-white/5"
+		class="flex h-8.5 w-full items-center gap-2 rounded px-3 hover:bg-white/5
+		{isDisabled && 'pointer-events-none opacity-50'}"
+		disabled={isDisabled}
 		on:click
 	>
 		<div class="flex text-sm">

@@ -67,25 +67,25 @@
 				isFetchingOlderMessages = true
 				isSomethingWentWrongWhenFetchingOlderMessages = false
 
-				timeoutId = setTimeout(async () => {
-					const messagesRecords = await pb
-						.collection("messages")
-						.getList(pageNumberFortheNextOlderMessagesToFetch, 50, {
-							sort: "-created",
-							expand: "user,repliedTo",
-							filter: `created < "${
-								$messages[$messages.length - 1].created
-							}"`,
-						})
-					if (messagesRecords) {
+				const messagesRecords = await pb
+					.collection("messages")
+					.getList(pageNumberFortheNextOlderMessagesToFetch, 50, {
+						sort: "-created",
+						expand: "user,repliedTo",
+						filter: `created < "${
+							$messages[$messages.length - 1].created
+						}"`,
+					})
+				if (messagesRecords) {
+					timeoutId = setTimeout(async () => {
 						messages.update(_messages => [
 							..._messages,
 							...structuredClone(messagesRecords).items,
 						])
 						isFetchingOlderMessages = false
 						pageNumberFortheNextOlderMessagesToFetch += 1
-					}
-				}, 4000)
+					}, 1000)
+				}
 			} catch (error) {
 				clearInterval(timeoutId)
 				console.log(error)

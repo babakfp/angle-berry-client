@@ -4,11 +4,13 @@
 
 <li class="flex">
 	<button
-		class="flex w-full items-center gap-2 rounded px-3 py-2 hover:bg-white/5"
+		class="flex h-8.5 w-full items-center gap-2 rounded px-3 hover:bg-white/5"
 		on:click
 	>
-		<slot />
+		<div class="flex text-sm">
+			<slot />
+		</div>
 		<!-- Remove the styles if you change the font -->
-		<span class="pt-0.5">{title}</span>
+		<span class="pt-1">{title}</span>
 	</button>
 </li>

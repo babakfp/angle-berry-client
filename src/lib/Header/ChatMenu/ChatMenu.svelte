@@ -47,7 +47,6 @@
 
 	$: replyedMessageId = $isReplying ? $messageThatWeAreReplyingTo.id : ""
 
-	let timeoutId = null
 	let isFetchingOlderMessages = false
 	let isSomethingWentWrongWhenFetchingOlderMessages = false
 	let pageNumberFortheNextOlderMessagesToFetch = 2
@@ -55,7 +54,6 @@
 		// Is reached the top of the scrollable?
 		// Added + 200 to fetch the data earlier for a better UX
 		if (
-			!timeoutId &&
 			pageNumberFortheNextOlderMessagesToFetch <=
 				data.messages.totalPages &&
 			Math.abs(e.target.scrollTop) + 200 >=
@@ -75,18 +73,14 @@
 						}"`,
 					})
 				if (messagesRecords) {
-					timeoutId = setTimeout(async () => {
-						messages.update(_messages => [
-							..._messages,
-							...structuredClone(messagesRecords).items,
-						])
-						isFetchingOlderMessages = false
-						pageNumberFortheNextOlderMessagesToFetch += 1
-						timeoutId = null
-					}, 0)
+					messages.update(_messages => [
+						..._messages,
+						...structuredClone(messagesRecords).items,
+					])
+					isFetchingOlderMessages = false
+					pageNumberFortheNextOlderMessagesToFetch += 1
 				}
 			} catch (error) {
-				clearTimeout(timeoutId)
 				isSomethingWentWrongWhenFetchingOlderMessages = true
 				throw error
 			}

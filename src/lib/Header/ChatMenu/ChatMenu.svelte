@@ -13,7 +13,7 @@
 	export let data
 	messages.set(data.messages.items || [])
 
-	export let isOpen = true
+	export let isOpen = false
 	export let toggleButton
 
 	$: if (isOpen && $unreadMessagesLength) {

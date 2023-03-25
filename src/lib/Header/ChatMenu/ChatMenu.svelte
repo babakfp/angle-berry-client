@@ -10,6 +10,8 @@
 	import PocketBase from "pocketbase"
 	const pb = new PocketBase(PUBLIC_POCKETBASE_URL)
 
+	$: console.log($messages)
+
 	export let data
 	messages.set(data.messages.items || [])
 
@@ -67,6 +69,9 @@
 					.getList(pageNumberFortheNextOlderMessagesToFetch, 50, {
 						sort: "-created",
 						expand: "user,repliedTo",
+						filter: `created < "${
+							$messages[$messages.length - 1].created
+						}"`,
 					})
 				if (messagesRecords) {
 					messages.update(_messages => [

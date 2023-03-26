@@ -6,11 +6,11 @@
 	import Message from "./Message.svelte"
 	import { isReplying, messageThatWeAreReplyingTo } from "./replying"
 	import Reply from "./Reply.svelte"
-	import { PUBLIC_POCKETBASE_URL } from "$env/static/public"
-	import PocketBase from "pocketbase"
-	const pb = new PocketBase(PUBLIC_POCKETBASE_URL)
-	let isDeletePopupOpen = true
 	import Modal from "$lib/Modal.svelte"
+	import { messageIdToDelete } from "./deleteMessage.js"
+	let isDeletingMessage = false
+	$: isDeletePopupOpen = $messageIdToDelete
+	import { getContext } from "svelte"
 
 	export let data
 	messages.set(data.messages.items || [])
@@ -65,7 +65,7 @@
 				isFetchingOlderMessages = true
 				isSomethingWentWrongWhenFetchingOlderMessages = false
 
-				const messagesRecords = await pb
+				const messagesRecords = await getContext("pb")
 					.collection("messages")
 					.getList(pageNumberFortheNextOlderMessagesToFetch, 50, {
 						sort: "-created",
@@ -125,7 +125,7 @@
 		</p>
 	{/if}
 	<form
-		class="sticky bottom-0 self-end
+		class="sticky bottom-0 self-end border-t border-white/5
 		{isSendingMessage && 'pointer-events-none'}
 		"
 		method="POST"
@@ -147,7 +147,7 @@
 		{/if}
 		<div class="relative">
 			<TextArea
-				class="!max-h-32 rounded-none border-t border-white/5 bg-gray-800 pr-14 shadow-[0_-1px_3px_0_rgb(0_0_0_/_0.1),_0_-1px_2px_-1px_rgb(0_0_0_/_0.1)] outline-inset"
+				class="!max-h-32 rounded-none bg-gray-800 pr-14 shadow-[0_-1px_3px_0_rgb(0_0_0_/_0.1),_0_-1px_2px_-1px_rgb(0_0_0_/_0.1)] outline-inset"
 				name="messageContent"
 				placeholder="Write your message..."
 				required={true}
@@ -180,12 +180,49 @@
 			bind:value={replyedMessageId}
 		/>
 	</form>
-</PopSide>
 
-<Modal bind:isOpen={isDeletePopupOpen}>
-	<h3>Are you sure you want to delete this message?</h3>
-	<div class="mt-4 flex justify-end gap-2">
-		<button class="btn btn-light">Cancel</button>
-		<button class="btn btn-danger">Delete</button>
-	</div>
-</Modal>
+	<svelte:fragment slot="outer">
+		<Modal bind:isOpen={isDeletePopupOpen}>
+			<h3>Are you sure you want to delete this message?</h3>
+			<div class="mt-4 flex justify-end gap-2">
+				<button
+					class="btn btn-light"
+					on:click={() => {
+						messageIdToDelete.set(null)
+					}}
+				>
+					Cancel
+				</button>
+				<button
+					class="btn btn-danger
+					{isDeletingMessage && 'pointer-events-none opacity-50'}"
+					disabled={isDeletingMessage}
+					on:click={async () => {
+						try {
+							const isMessageDeleted = await getContext("pb")
+								.collection("messages")
+								.delete($messageIdToDelete)
+
+							isDeletingMessage = true
+							if (isMessageDeleted) {
+								messageIdToDelete.set(null)
+								isDeletingMessage = false
+							}
+						} catch (error) {
+							console.error(error)
+							messageIdToDelete.set(null)
+							isDeletingMessage = false
+						}
+					}}
+				>
+					{#if isDeletingMessage}
+						<!-- prettier-ignore -->
+						<svg class="animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"/></svg>
+					{:else}
+						Delete
+					{/if}
+				</button>
+			</div>
+		</Modal>
+	</svelte:fragment>
+</PopSide>

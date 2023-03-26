@@ -50,6 +50,8 @@
 
 		<slot />
 	</div>
+
+	<slot name="outer" />
 </OutClick>
 
 <style lang="postcss">

@@ -15,6 +15,7 @@
 	setContext("tiers", data.tiers)
 
 	const pb = new PocketBase(PUBLIC_POCKETBASE_URL)
+	setContext("pb", pb)
 
 	onMount(async () => {
 		try {

@@ -1,4 +1,3 @@
-import { redirect } from "@sveltejs/kit"
 import PocketBase from "pocketbase"
 import { POCKETBASE_URL } from "$env/static/private"
 

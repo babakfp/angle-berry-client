@@ -4,7 +4,11 @@
 	export let toggleElements = false
 </script>
 
-<svelte:window on:keydown={() => (isOpen = false)} />
+<svelte:window
+	on:keydown={e => {
+		if (e.key === "Escape") isOpen = false
+	}}
+/>
 
 {#if isOpen}
 	<OutClick

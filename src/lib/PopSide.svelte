@@ -32,7 +32,7 @@
 	"
 	>
 		<button
-			class="sticky top-0 z-1 flex h-14 w-full items-center justify-between self-start border-b border-white/5 bg-gray-800 px-4 sm:hidden"
+			class="sticky top-0 z-1 flex h-14 w-full items-center justify-between self-start border-b border-white/5 bg-gray-800 px-4 outline-inset sm:hidden"
 			on:click={() => (isOpen = false)}
 		>
 			<span>Close</span>

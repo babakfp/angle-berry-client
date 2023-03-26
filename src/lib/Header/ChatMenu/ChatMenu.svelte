@@ -9,6 +9,8 @@
 	import { PUBLIC_POCKETBASE_URL } from "$env/static/public"
 	import PocketBase from "pocketbase"
 	const pb = new PocketBase(PUBLIC_POCKETBASE_URL)
+	let isDeletePopupOpen = true
+	import OutClick from "svelte-outclick"
 
 	export let data
 	messages.set(data.messages.items || [])
@@ -179,3 +181,30 @@
 		/>
 	</form>
 </PopSide>
+
+{#if isDeletePopupOpen}
+	<!-- TODO excludeElements={toggleButton} -->
+	<OutClick on:outclick={() => (isDeletePopupOpen = false)}>
+		<div
+			class="fixed inset-0 z-50 flex h-screen w-screen items-center justify-center bg-gray-800/50 p-8"
+		>
+			<!-- Inner -->
+			<div
+				class="max-w-md overflow-y-auto rounded bg-gray-700 py-8 px-6 drop-shadow"
+			>
+				<div class="flex items-center gap-2 text-white">
+					<!-- prettier-ignore -->
+					<svg class="text-xl" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9-3.75h.008v.008H12V8.25z"/></svg>
+					<span class="-mb-[3px]">Delete Message</span>
+				</div>
+				<h3 class="mt-2">
+					Are you sure you want to delete this message?
+				</h3>
+				<div class="mt-4 flex gap-2">
+					<button class="btn btn-outline">No, cancel</button>
+					<button class="btn btn-danger">Yes, I'm sure</button>
+				</div>
+			</div>
+		</div>
+	</OutClick>
+{/if}

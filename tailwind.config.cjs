@@ -17,13 +17,15 @@ module.exports = {
 		colors: {
 			current: colors.current,
 			white: colors.white,
-			gray: {
-				300: colors.zinc[300],
-				400: colors.zinc[400],
-				500: colors.zinc[500],
-				700: colors.zinc[700],
-				800: colors.zinc[800],
-			},
+			red: colors.red,
+			gray: colors.zinc,
+			// gray: {
+			// 	300: colors.zinc[300],
+			// 	400: colors.zinc[400],
+			// 	500: colors.zinc[500],
+			// 	700: colors.zinc[700],
+			// 	800: colors.zinc[800],
+			// },
 			error: colors.red[600],
 		},
 		container: {

@@ -18,6 +18,8 @@
 	}
 </script>
 
+<svelte:window on:keydown={() => (isOpen = false)} />
+
 <div
 	class="hidden sm:fixed sm:inset-0 sm:top-header-height sm:z-40 sm:block sm:bg-[black]/40 sm:duration-300 sm:hide
 	{isOpen && 'sm:show'}"

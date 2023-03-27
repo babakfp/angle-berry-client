@@ -74,7 +74,7 @@
 					.collection("messages")
 					.getList(pageNumberFortheNextOlderMessagesToFetch, 50, {
 						sort: "-created",
-						expand: "user,repliedTo",
+						expand: "user,repliedTo,repliedTo.user",
 						filter: `created < "${
 							$messages[$messages.length - 1].created
 						}"`,

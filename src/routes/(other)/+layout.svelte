@@ -26,7 +26,7 @@
 						if (record.repliedTo) {
 							repliedToRecord = await $pb
 								.collection("messages")
-								.getOne(record.repliedTo)
+								.getOne(record.repliedTo, { expand: "user" })
 						}
 						record.expand = {
 							user: structuredClone(userRecord),

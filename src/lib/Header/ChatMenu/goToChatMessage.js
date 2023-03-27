@@ -2,25 +2,25 @@ export const goToChatMessage = (messageId, intervalId, timeoutId) => {
 	if (intervalId) clearInterval(intervalId)
 	if (timeoutId) clearTimeout(timeoutId)
 
-	const messageElementThatWeAreReplyingTo = document.getElementById(messageId)
-	if (!messageElementThatWeAreReplyingTo) return
+	const messageElement = document.getElementById(messageId)
+	if (!messageElement) return
 
-	messageElementThatWeAreReplyingTo.scrollIntoView({
+	messageElement.scrollIntoView({
 		behavior: "smooth",
 		block:
-			messageElementThatWeAreReplyingTo.clientHeight >
+			messageElement.clientHeight >
 			document.getElementById("messages-wrapper").clientHeight
 				? "start"
 				: "center",
 	})
 
-	const replyHighlightElement =
-		messageElementThatWeAreReplyingTo.querySelector(".reply-highlight")
+	const messageHighlightElement =
+		messageElement.querySelector(".reply-highlight")
 
-	replyHighlightElement.style.opacity = 1
+	messageHighlightElement.style.opacity = 1
 	intervalId = setInterval(() => {
-		replyHighlightElement.style.opacity =
-			replyHighlightElement.style.opacity - 0.05
+		messageHighlightElement.style.opacity =
+			messageHighlightElement.style.opacity - 0.05
 	}, 100)
 
 	timeoutId = setTimeout(() => clearInterval(intervalId), 2000)

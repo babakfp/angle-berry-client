@@ -11,12 +11,17 @@
 	let isDeletingMessage = false
 	$: isDeletePopupOpen = $messageIdToDelete
 	import { pb } from "$lib/pb.js"
+	import { messageIdToEdit } from "./editMessage.js"
 
 	export let data
 	messages.set(data.messages.items || [])
 
 	export let isOpen = false
 	export let toggleButton
+
+	$: if (!isOpen && $messageIdToEdit) {
+		messageIdToEdit.set(null)
+	}
 
 	$: if (isOpen && $unreadMessagesLength) {
 		unreadMessagesLength.set(0)
@@ -110,9 +115,7 @@
 						<button>Try again</button>
 					{:else}
 						<!-- prettier-ignore -->
-						<svg class="text-xl animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-						<path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
-					</svg>
+						<svg class="text-xl animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"/></svg>
 						<p>Fetching older messages...</p>
 					{/if}
 				</div>
@@ -125,7 +128,7 @@
 		</p>
 	{/if}
 	<form
-		class="sticky bottom-0 self-end border-t border-white/5
+		class="sticky bottom-0 self-end
 		{isSendingMessage && 'pointer-events-none'}
 		"
 		method="POST"
@@ -147,7 +150,7 @@
 		{/if}
 		<div class="relative">
 			<TextArea
-				class="!max-h-32 rounded-none bg-gray-800 pr-14 shadow-[0_-1px_3px_0_rgb(0_0_0_/_0.1),_0_-1px_2px_-1px_rgb(0_0_0_/_0.1)] outline-inset"
+				class="!max-h-32 rounded-none border-t border-white/5 bg-gray-800 pr-14 shadow-[0_-1px_3px_0_rgb(0_0_0_/_0.1),_0_-1px_2px_-1px_rgb(0_0_0_/_0.1)] outline-inset"
 				name="messageContent"
 				placeholder="Write your message..."
 				required={true}
@@ -156,20 +159,21 @@
 			/>
 			<button
 				class="absolute right-0 bottom-0 top-0 flex items-end outline-inset
-			{isSendingMessage && 'opacity-50'}"
+				{isSendingMessage && 'opacity-50'}"
 				disabled={isSendingMessage}
 			>
-				<div class="flex min-h-14 items-center px-4 hover:bg-white/5">
-					{#if isSendingMessage}
+				<div
+					class="flex min-h-14 items-center px-4 text-2xl hover:bg-white/5"
+				>
+					{#if $messageIdToEdit}
 						<!-- prettier-ignore -->
-						<svg class="text-2xl animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-						<path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
-					</svg>
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>
+					{:else if isSendingMessage}
+						<!-- prettier-ignore -->
+						<svg class="animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"/></svg>
 					{:else}
 						<!-- prettier-ignore -->
-						<svg class="text-2xl" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-						<path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
-					</svg>
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.269 3.126A59.768 59.768 0 0 1 21.485 12 59.77 59.77 0 0 1 3.27 20.876L5.999 12zm0 0h7.5"/></svg>
 					{/if}
 				</div>
 			</button>

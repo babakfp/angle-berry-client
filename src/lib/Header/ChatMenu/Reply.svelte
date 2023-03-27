@@ -26,10 +26,10 @@
 		<div class="text-xs text-gray-500">
 			Replying to {$messageThatWeAreReplyingTo.expand.user.id}
 		</div>
-		<div class="line-clamp-2">{$messageThatWeAreReplyingTo.content}</div>
+		<div class="line-clamp-1">{$messageThatWeAreReplyingTo.content}</div>
 	</button>
 	<button
-		class="flex items-center px-4 outline-inset hover:bg-white/5"
+		class="flex p-4 outline-inset hover:bg-white/5"
 		type="button"
 		on:click={() => isReplying.set(false)}
 	>

@@ -13,11 +13,14 @@
 		{$page.status}
 	</h1>
 
-	<p class="text-gray-400">
+	<div class="text-gray-400">
 		{#if $page.status === 404}
-			Sorry, the page that you are looking for couldn't be found!
+			<p>Sorry, the page that you are looking for couldn't be found!</p>
+			<div class="mt-2">
+				<a class="btn btn-light" href="/">Go home</a>
+			</div>
 		{:else}
-			{$page.error.message}
+			<p>{$page.error.message}</p>
 		{/if}
-	</p>
+	</div>
 </div>

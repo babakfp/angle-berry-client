@@ -23,11 +23,6 @@ module.exports = {
 		"\\.js$", // A regular expression that matches strings that ends with .js
 		"\\.svelte$", // A regular expression that matches strings that ends with .svelte
 	],
-	// importOrder: [
-	// 	"^@(?!(?:sveltejs/kit)).*$",
-	// 	"^svelte",
-	// 	"^@sveltejs/kit",
-	// ],
 	pluginSearchDirs: ["."],
 	plugins: [
 		require("prettier-plugin-svelte"),

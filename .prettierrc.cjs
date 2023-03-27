@@ -20,6 +20,8 @@ module.exports = {
 		"^\\$(?![^\\/]*\\/)", // A regular expression that matches strings that start with the character $ and do not contain the forward slash /
 		"^\\$[^/]*\\/[^/]+", // A regular expression that matches strings that start with the character $ and contain at least one forward slash /
 		"^[./]",
+		"\\.js$", // A regular expression that matches strings that ends with .js
+		"\\.svelte$", // A regular expression that matches strings that ends with .svelte
 	],
 	// importOrder: [
 	// 	"^@(?!(?:sveltejs/kit)).*$",

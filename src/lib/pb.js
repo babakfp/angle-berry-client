@@ -10,5 +10,4 @@ if (browser) {
 	get(pb).authStore.onChange(() => {
 		document.cookie = get(pb).authStore.exportToCookie({ httpOnly: false })
 	})
-	console.log(get(pb).authStore.isValid)
 }

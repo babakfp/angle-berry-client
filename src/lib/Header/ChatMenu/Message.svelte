@@ -87,7 +87,7 @@
 			>
 				<div class="line-clamp-1">
 					<span class="font-semibold">
-						{message.expand.user.username}
+						{message?.expand?.repliedTo?.expand?.user?.username}
 					</span>
 					<span>
 						{message?.expand?.repliedTo?.content}

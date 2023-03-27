@@ -4,7 +4,7 @@
 	import OutClick from "svelte-outclick"
 	import MessageContextMenu from "./MessageContextMenu.svelte"
 	import MessageContextMenuItem from "./MessageContextMenuItem.svelte"
-	import { goToRepliedMessage } from "$lib/Header/ChatMenu/goToRepliedMessage.js"
+	import { goToChatMessage } from "$lib/Header/ChatMenu/goToChatMessage.js"
 	import { isReplying, messageThatWeAreReplyingTo } from "./replying"
 	import { copyText } from "svelte-copy"
 	import { messageIdToDelete } from "./deleteMessage.js"
@@ -76,7 +76,7 @@
 			<button
 				class="mb-2 -ml-3 block border-l-2 pl-2 text-left text-xs text-white/80 hover:text-white/100"
 				on:click={() => {
-					const result = goToRepliedMessage(
+					const result = goToChatMessage(
 						message.expand.repliedTo.id,
 						intervalId,
 						timeoutId

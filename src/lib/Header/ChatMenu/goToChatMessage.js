@@ -1,4 +1,4 @@
-export const goToRepliedMessage = (messageId, intervalId, timeoutId) => {
+export const goToChatMessage = (messageId, intervalId, timeoutId) => {
 	if (intervalId) clearInterval(intervalId)
 	if (timeoutId) clearTimeout(timeoutId)
 

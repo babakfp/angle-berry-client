@@ -10,7 +10,7 @@
 	import { messageIdToDelete } from "./deleteMessage.js"
 	let isDeletingMessage = false
 	$: isDeletePopupOpen = $messageIdToDelete
-	import { getContext } from "svelte"
+	import { pb } from "$lib/pb.js"
 
 	export let data
 	messages.set(data.messages.items || [])
@@ -65,7 +65,7 @@
 				isFetchingOlderMessages = true
 				isSomethingWentWrongWhenFetchingOlderMessages = false
 
-				const messagesRecords = await getContext("pb")
+				const messagesRecords = await $pb
 					.collection("messages")
 					.getList(pageNumberFortheNextOlderMessagesToFetch, 50, {
 						sort: "-created",
@@ -199,7 +199,7 @@
 					disabled={isDeletingMessage}
 					on:click={async () => {
 						try {
-							const isMessageDeleted = await getContext("pb")
+							const isMessageDeleted = await $pb
 								.collection("messages")
 								.delete($messageIdToDelete)
 

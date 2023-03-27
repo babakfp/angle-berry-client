@@ -2,33 +2,29 @@
 	import { onMount, setContext } from "svelte"
 	import { fly } from "svelte/transition"
 	import { page } from "$app/stores"
-	import PocketBase from "pocketbase"
-	import { PUBLIC_POCKETBASE_URL } from "$env/static/public"
 	import { pageTransitionValues } from "$lib/pageTransitionValues.js"
-	import Header from "$lib/Header/Header.svelte"
 	import { messages, unreadMessagesLength } from "$lib/messages.js"
 	import { events, unseenEventsLength } from "$lib/events.js"
 	import { error } from "@sveltejs/kit"
 	import { handlePbConnectionIssue } from "$lib/handlePbConnectionIssue.js"
+	import { pb } from "$lib/pb.js"
+	import Header from "$lib/Header/Header.svelte"
 
 	export let data
 	setContext("tiers", data.tiers)
 
-	const pb = new PocketBase(PUBLIC_POCKETBASE_URL)
-	setContext("pb", pb)
-
 	onMount(async () => {
 		try {
-			await pb
+			await $pb
 				.collection("messages")
 				.subscribe("*", async ({ action, record }) => {
 					if (action === "create") {
-						const userRecord = await pb
+						const userRecord = await $pb
 							.collection("users")
 							.getOne(record.user)
 						let repliedToRecord
 						if (record.repliedTo) {
-							repliedToRecord = await pb
+							repliedToRecord = await $pb
 								.collection("messages")
 								.getOne(record.repliedTo)
 						}
@@ -45,16 +41,16 @@
 						unreadMessagesLength.update(v => (v -= 1))
 					}
 				})
-			await pb
+			await $pb
 				.collection("events")
 				.subscribe("*", async ({ action, record }) => {
 					if (action === "create") {
-						const userRecord = await pb
+						const userRecord = await $pb
 							.collection("users")
 							.getOne(record.user, {
 								expand: "retainedTiers",
 							})
-						const inviterRecord = await pb
+						const inviterRecord = await $pb
 							.collection("users")
 							.getOne(record.inviter, {
 								expand: "retainedTiers",

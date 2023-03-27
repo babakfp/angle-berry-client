@@ -16,7 +16,10 @@ export async function handle({ event, resolve }) {
 	const response = await resolve(event)
 	response.headers.set(
 		"set-cookie",
-		event.locals.pb.authStore.exportToCookie({ secure: false })
+		event.locals.pb.authStore.exportToCookie({
+			secure: false,
+			httpOnly: false,
+		})
 	)
 
 	return response

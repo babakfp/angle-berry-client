@@ -26,7 +26,7 @@
 >
 	<ul
 		id="UserMenu"
-		class="absolute top-full right-0 w-60 translate-x-full overflow-y-auto rounded bg-gray-800 text-sm shadow-[0_4px_16px_0_rgb(0_0_0/0.4)] duration-300 hide
+		class="absolute top-full right-0 max-h-[calc(var(--hscreen)-var(--header-height)-theme(spacing.8))] w-60 translate-x-full overflow-y-auto rounded bg-gray-800 text-sm shadow-[0_4px_16px_0_rgb(0_0_0/0.4)] duration-300 hide
 		{isUserMenuOpen && '!-translate-x-4 !show'}"
 	>
 		<li>
@@ -79,14 +79,3 @@
 </OutClick>
 
 <Toaster />
-
-<style lang="postcss">
-	#UserMenu {
-		max-height: calc(
-			100vh - theme(spacing.header-height) - theme(spacing.8)
-		);
-		max-height: calc(
-			100dvh - theme(spacing.header-height) - theme(spacing.8)
-		);
-	}
-</style>

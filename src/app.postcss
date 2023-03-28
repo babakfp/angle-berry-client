@@ -8,6 +8,7 @@
 		--hscreen: 100dvh;
 		--wscreen: 100vw;
 		--wscreen: 100dvw;
+		--header-height: theme(spacing.16);
 	}
 	::-webkit-scrollbar {
 		@apply h-0 w-0;
@@ -45,22 +46,6 @@
 	}
 	a {
 		@apply outline-dashed;
-	}
-}
-
-/* Dynamic view height */
-@layer utilities {
-	.min-h-dscreen {
-		min-height: 100vh;
-		min-height: 100dvh;
-	}
-	.h-dscreen {
-		height: 100vh;
-		height: 100dvh;
-	}
-	.min-h-dscreen-header {
-		min-height: calc(100vh - theme(spacing.header-height));
-		min-height: calc(100dvh - theme(spacing.header-height));
 	}
 }
 

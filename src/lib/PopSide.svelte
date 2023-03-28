@@ -32,7 +32,7 @@
 <OutClick on:outclick={() => (isOpen = false)} excludeElements={toggleButton}>
 	<div
 		{id}
-		class="h-dscreen fixed inset-0 z-50 grid translate-x-full grid-rows-[auto_1fr_auto] overflow-y-auto bg-gray-800 duration-300 hide
+		class="fixed inset-0 z-50 grid h-screen translate-x-full grid-rows-[auto_1fr_auto] overflow-y-auto bg-gray-800 duration-300 hide
 		{isOpen && '!translate-x-0 !show'}
 		sm:top-header-height sm:left-auto sm:z-40 sm:max-h-[calc(var(--hscreen)-theme(spacing.header-height))] sm:w-96 sm:grid-rows-[1fr_auto]
 	"

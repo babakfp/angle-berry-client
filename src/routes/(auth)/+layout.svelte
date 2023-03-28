@@ -6,7 +6,7 @@
 
 {#key $page.url.pathname}
 	<div
-		class="min-h-dscreen mx-auto grid w-full max-w-xs content-center items-center py-12"
+		class="mx-auto grid min-h-screen w-full max-w-xs content-center items-center py-12"
 		in:fly={pageTransitionValues}
 	>
 		<slot />

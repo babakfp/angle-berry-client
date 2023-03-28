@@ -93,7 +93,7 @@
 
 {#key $page.url.pathname}
 	<main
-		class="min-h-dscreen-header container grid content-start items-start py-12"
+		class="container grid min-h-[calc(var(--hscreen)-var(--header-height))] content-start items-start py-12"
 		in:fly={pageTransitionValues}
 	>
 		<slot />

@@ -16,16 +16,12 @@
 	export let toggleButton
 
 	messages.set(data.messages.items || [])
+
 	let isDeletingMessage = false
 	$: isDeletePopupOpen = $messageIdToDelete
 
-	$: if (!isOpen && $messageIdToEdit) {
-		messageIdToEdit.set(null)
-	}
-
-	$: if (isOpen && $unreadMessagesLength) {
-		unreadMessagesLength.set(0)
-	}
+	$: if (!isOpen && $messageIdToEdit) messageIdToEdit.set(null)
+	$: if (isOpen && $unreadMessagesLength) unreadMessagesLength.set(0)
 
 	let messageContent = ""
 	let messageTextElement

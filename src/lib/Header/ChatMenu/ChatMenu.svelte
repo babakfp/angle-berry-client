@@ -4,7 +4,7 @@
 	import TextArea from "$lib/Form/TextArea.svelte"
 	import { messages, unreadMessagesLength } from "$lib/messages.js"
 	import Message from "./Message.svelte"
-	import { isReplying, replyTargetMessage } from "./replying"
+	import { isReplying, replyTargetMessage } from "./replyMessage.js"
 	import Reply from "./Reply.svelte"
 	import Modal from "$lib/Modal.svelte"
 	import { messageIdToDelete } from "./deleteMessage.js"

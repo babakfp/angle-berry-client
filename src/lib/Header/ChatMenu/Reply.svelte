@@ -1,6 +1,6 @@
 <script>
 	import MessageActionPreview from "./MessageActionPreview.svelte"
-	import { isReplying, replyTargetMessage } from "./replying"
+	import { isReplying, replyTargetMessage } from "./replyMessage.js"
 </script>
 
 <MessageActionPreview

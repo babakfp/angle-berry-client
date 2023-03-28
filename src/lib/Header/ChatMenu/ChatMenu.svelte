@@ -34,7 +34,9 @@
 
 	messageIdToEdit.subscribe(id => {
 		messageInputValue =
-			$messages.filter(msg => msg.id === id)[0]?.content || ""
+			$messages
+				.filter(msg => msg.id === id)[0]
+				?.content.replaceAll("<br>", "\n") || ""
 	})
 
 	$: isEditingMessage = !!$messageIdToEdit

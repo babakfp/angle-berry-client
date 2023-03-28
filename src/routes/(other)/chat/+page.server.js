@@ -12,11 +12,19 @@ export const actions = {
 		}
 
 		try {
-			await locals.pb.collection("messages").create({
-				content: messageContent,
-				user: locals.user.id,
-				repliedTo: formData?.replyedMessageId || undefined,
-			})
+			if (!formData?.messageIdToEdit) {
+				await locals.pb.collection("messages").create({
+					content: messageContent,
+					user: locals.user.id,
+					repliedTo: formData?.replyedMessageId || undefined,
+				})
+			} else {
+				await locals.pb
+					.collection("messages")
+					.update(formData.messageIdToEdit, {
+						content: messageContent,
+					})
+			}
 		} catch ({ status, response }) {
 			handlePbConnectionIssue(status)
 

@@ -32,6 +32,13 @@
 		}
 	}
 
+	messageIdToEdit.subscribe(id => {
+		messageInputValue =
+			$messages.filter(msg => msg.id === id)[0]?.content || ""
+	})
+
+	$: isEditingMessage = !!$messageIdToEdit
+
 	let isSendingMessage = false
 	function submitMessage() {
 		isSendingMessage = true
@@ -41,6 +48,7 @@
 			if (result.type === "success") {
 				messageInputElement.style.height = null
 				isReplying.set(false)
+				messageIdToEdit.set(null)
 			}
 			update()
 		}
@@ -154,10 +162,10 @@
 			<MessageActionPreview
 				title="Editing message"
 				content={$messages.filter(msg => msg.id === $messageIdToEdit)[0]
-					.content}
+					?.content}
 				messageId={$messageIdToEdit}
 				on:close={() => messageIdToEdit.set(null)}
-				bind:isOpen={$messageIdToEdit}
+				bind:isOpen={isEditingMessage}
 			/>
 		{/if}
 		<div class="relative">
@@ -194,6 +202,11 @@
 			type="hidden"
 			name="replyedMessageId"
 			bind:value={replyedMessageId}
+		/>
+		<input
+			type="hidden"
+			name="messageIdToEdit"
+			bind:value={$messageIdToEdit}
 		/>
 	</form>
 

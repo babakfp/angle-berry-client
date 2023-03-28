@@ -34,7 +34,7 @@
 		{id}
 		class="PopSide h-dscreen fixed inset-0 z-50 grid translate-x-full grid-rows-[auto_1fr_auto] overflow-y-auto bg-gray-800 duration-300 hide
 		{isOpen && '!translate-x-0 !show'}
-		sm:top-header-height sm:left-auto sm:z-40 sm:w-96 sm:grid-rows-[1fr_auto]
+		sm:top-header-height sm:left-auto sm:z-40 sm:max-h-[calc(var(hscreen)-theme(spacing.header-height))] sm:w-96 sm:grid-rows-[1fr_auto]
 	"
 	>
 		<button
@@ -51,12 +51,3 @@
 
 	<slot name="outer" />
 </OutClick>
-
-<style lang="postcss">
-	.PopSide {
-		@screen sm {
-			max-height: calc(100vh - theme(spacing.header-height));
-			max-height: calc(100dvh - theme(spacing.header-height));
-		}
-	}
-</style>

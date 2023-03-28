@@ -1,9 +1,9 @@
 <script>
+	import { copyText } from "svelte-copy"
 	import { fly } from "svelte/transition"
 	import OutClick from "svelte-outclick"
-	import { goToMessage } from "$lib/Header/ChatMenu/goToMessage.js"
+	import { goToMessage } from "./goToMessage.js"
 	import { isReplying, replyTargetMessage } from "./replyMessage.js"
-	import { copyText } from "svelte-copy"
 	import { messageIdToDelete } from "./deleteMessage.js"
 	import { messageIdToEdit } from "./editMessage.js"
 	import MessageContextMenu from "./MessageContextMenu.svelte"

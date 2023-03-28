@@ -85,11 +85,13 @@
 					timeoutId = result?.timeoutId
 				}}
 			>
+				<!-- TODO -->
 				<div class="line-clamp-1">
 					<span class="font-semibold">
 						{message?.expand?.repliedTo?.expand?.user?.username}
 					</span>
 					<span>
+						<!-- TODO @html -->
 						{message?.expand?.repliedTo?.content}
 					</span>
 				</div>

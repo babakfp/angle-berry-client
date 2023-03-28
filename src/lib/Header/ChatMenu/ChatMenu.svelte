@@ -24,22 +24,22 @@
 	$: if (isOpen && $unreadMessagesLength) unreadMessagesLength.set(0)
 
 	let messageContent = ""
-	let messageTextElement
-	$: if (messageTextElement && messageContent === messageContent) {
+	let messageInputElement
+	$: if (messageInputElement && messageContent === messageContent) {
 		if (messageContent.trim()) {
-			messageTextElement.style.height = null
-			messageTextElement.style.height = `${messageTextElement.scrollHeight}px`
+			messageInputElement.style.height = null
+			messageInputElement.style.height = `${messageInputElement.scrollHeight}px`
 		}
 	}
 
 	let isSendingMessage = false
 	function submitMessage() {
 		isSendingMessage = true
-		messageTextElement.focus()
+		messageInputElement.focus()
 		return async ({ result, update }) => {
 			isSendingMessage = false
 			if (result.type === "success") {
-				messageTextElement.style.height = null
+				messageInputElement.style.height = null
 				isReplying.set(false)
 			}
 			update()
@@ -166,7 +166,7 @@
 				name="messageContent"
 				placeholder="Write your message..."
 				required={true}
-				bind:element={messageTextElement}
+				bind:element={messageInputElement}
 				bind:value={messageContent}
 			/>
 			<button

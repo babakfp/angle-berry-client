@@ -5,7 +5,6 @@
 	import { messages, unreadMessagesLength } from "$lib/messages.js"
 	import Message from "./Message.svelte"
 	import { isReplying, replyTargetMessage } from "./replyMessage.js"
-	import Reply from "./Reply.svelte"
 	import Modal from "$lib/Modal.svelte"
 	import { messageIdToDelete } from "./deleteMessage.js"
 	let isDeletingMessage = false
@@ -147,7 +146,13 @@
 		}}
 	>
 		{#if $isReplying}
-			<Reply />
+			<MessageActionPreview
+				title="Replying to {$replyTargetMessage.expand.user.username}"
+				content={$replyTargetMessage.content}
+				messageId={$replyTargetMessage.id}
+				on:close={() => isReplying.set(false)}
+				bind:isOpen={$isReplying}
+			/>
 		{/if}
 		{#if $messageIdToEdit}
 			<MessageActionPreview
@@ -157,9 +162,7 @@
 				messageId={$messageIdToEdit}
 				on:close={() => messageIdToEdit.set(null)}
 				bind:isOpen={$messageIdToEdit}
-			>
-				<!--  -->
-			</MessageActionPreview>
+			/>
 		{/if}
 		<div class="relative">
 			<TextArea

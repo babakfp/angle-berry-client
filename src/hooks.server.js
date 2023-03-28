@@ -7,13 +7,12 @@ export async function handle({ event, resolve }) {
 		event.request.headers.get("cookie") || ""
 	)
 
-	if (event.locals.pb.authStore.isValid) {
-		event.locals.user = structuredClone(event.locals.pb.authStore.model)
-	} else {
-		event.locals.user = null
-	}
+	event.locals.user = event.locals.pb.authStore.isValid
+		? structuredClone(event.locals.pb.authStore.model)
+		: null
 
 	const response = await resolve(event)
+
 	response.headers.set(
 		"set-cookie",
 		event.locals.pb.authStore.exportToCookie({

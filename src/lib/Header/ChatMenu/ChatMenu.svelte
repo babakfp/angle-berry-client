@@ -7,11 +7,11 @@
 	import { isReplying, replyTargetMessage } from "./replyMessage.js"
 	import Modal from "$lib/Modal.svelte"
 	import { messageIdToDelete } from "./deleteMessage.js"
-	let isDeletingMessage = false
-	$: isDeletePopupOpen = $messageIdToDelete
 	import { pb } from "$lib/pb.js"
 	import { messageIdToEdit } from "./editMessage.js"
 	import MessageActionPreview from "./MessageActionPreview.svelte"
+	let isDeletingMessage = false
+	$: isDeletePopupOpen = $messageIdToDelete
 
 	export let data
 	messages.set(data.messages.items || [])

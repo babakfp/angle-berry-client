@@ -13,6 +13,18 @@ module.exports = {
 			spacing: {
 				"header-height": "4rem",
 			},
+			height: {
+				screen: "var(--hscreen)",
+			},
+			maxHeight: {
+				screen: "var(--hscreen)",
+			},
+			minHeight: {
+				screen: "var(--hscreen)",
+			},
+			width: {
+				screen: "var(--wscreen)",
+			},
 		},
 		colors: {
 			current: colors.current,

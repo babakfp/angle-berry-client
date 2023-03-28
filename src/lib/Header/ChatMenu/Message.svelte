@@ -5,7 +5,7 @@
 	import MessageContextMenu from "./MessageContextMenu.svelte"
 	import MessageContextMenuItem from "./MessageContextMenuItem.svelte"
 	import { goToChatMessage } from "$lib/Header/ChatMenu/goToChatMessage.js"
-	import { isReplying, messageThatWeAreReplyingTo } from "./replying"
+	import { isReplying, replyTargetMessage } from "./replying"
 	import { copyText } from "svelte-copy"
 	import { messageIdToDelete } from "./deleteMessage.js"
 	import { messageIdToEdit } from "./editMessage.js"
@@ -111,7 +111,7 @@
 					on:click={() => {
 						isContextMenuOpen = false
 						isReplying.set(true)
-						messageThatWeAreReplyingTo.set(message)
+						replyTargetMessage.set(message)
 					}}
 				>
 					<!-- prettier-ignore -->

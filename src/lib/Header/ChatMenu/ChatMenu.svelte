@@ -4,7 +4,7 @@
 	import TextArea from "$lib/Form/TextArea.svelte"
 	import { messages, unreadMessagesLength } from "$lib/messages.js"
 	import Message from "./Message.svelte"
-	import { isReplying, messageThatWeAreReplyingTo } from "./replying"
+	import { isReplying, replyTargetMessage } from "./replying"
 	import Reply from "./Reply.svelte"
 	import Modal from "$lib/Modal.svelte"
 	import { messageIdToDelete } from "./deleteMessage.js"
@@ -53,7 +53,7 @@
 
 	let formElement
 
-	$: replyedMessageId = $isReplying ? $messageThatWeAreReplyingTo.id : ""
+	$: replyedMessageId = $isReplying ? $replyTargetMessage.id : ""
 
 	let isFetchingOlderMessages = false
 	let isSomethingWentWrongWhenFetchingOlderMessages = false

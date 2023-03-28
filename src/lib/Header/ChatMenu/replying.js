@@ -1,4 +1,4 @@
 import { writable } from "svelte/store"
 
 export const isReplying = writable(false)
-export const messageThatWeAreReplyingTo = writable({})
+export const replyTargetMessage = writable({})

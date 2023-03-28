@@ -1,12 +1,12 @@
 <script>
 	import MessageActionPreview from "./MessageActionPreview.svelte"
-	import { isReplying, messageThatWeAreReplyingTo } from "./replying"
+	import { isReplying, replyTargetMessage } from "./replying"
 </script>
 
 <MessageActionPreview
-	title="Replying to {$messageThatWeAreReplyingTo.expand.user.username}"
-	content={$messageThatWeAreReplyingTo.content}
-	messageId={$messageThatWeAreReplyingTo.id}
+	title="Replying to {$replyTargetMessage.expand.user.username}"
+	content={$replyTargetMessage.content}
+	messageId={$replyTargetMessage.id}
 	on:close={() => isReplying.set(false)}
 	bind:isOpen={$isReplying}
 >

@@ -2,21 +2,19 @@
 	import { copyText } from "svelte-copy"
 	import { fly } from "svelte/transition"
 	import OutClick from "svelte-outclick"
-	import { goToMessage } from "./goToMessage.js"
 	import { isReplying, replyTargetMessage } from "./replyMessage.js"
 	import { messageIdToDelete } from "./deleteMessage.js"
 	import { messageIdToEdit } from "./editMessage.js"
 	import MessageContextMenu from "./MessageContextMenu.svelte"
 	import MessageContextMenuItem from "./MessageContextMenuItem.svelte"
 	import MessageDateAndTime from "./Message/MessageDateAndTime.svelte"
+	import MessageReplyPreview from "./Message/MessageReplyPreview.svelte"
 
 	export let user
 	export let message
 
 	let isContextMenuOpen
 	let contextMenuEvent
-	let intervalId
-	let timeoutId
 	let copyTimeoutId
 </script>
 
@@ -51,29 +49,7 @@
 			isContextMenuOpen = true
 		}}
 	>
-		{#if message?.expand?.repliedTo?.content}
-			<button
-				class="mb-2 -ml-3 block border-l-2 pl-2 text-left text-xs text-white/80 hover:text-white/100"
-				on:click={() => {
-					const result = goToMessage(
-						message.expand.repliedTo.id,
-						intervalId,
-						timeoutId
-					)
-					intervalId = result?.intervalId
-					timeoutId = result?.timeoutId
-				}}
-			>
-				<div class="flex gap-1">
-					<span class="font-semibold">
-						{message?.expand?.repliedTo?.expand?.user?.username}
-					</span>
-					<div class="line-clamp-1">
-						{@html message?.expand?.repliedTo?.content}
-					</div>
-				</div>
-			</button>
-		{/if}
+		<MessageReplyPreview replyTargetMessage={message?.expand?.repliedTo} />
 
 		{@html message.content}
 

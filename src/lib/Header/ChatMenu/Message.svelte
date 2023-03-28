@@ -40,10 +40,10 @@
 
 	<div
 		class="message-content-wrapper relative max-w-80 break-words rounded bg-gray-700 py-2 pl-3 pr-4 shadow
-				{user.id === message.expand.user.id
+			{user.id === message.expand.user.id
 			? 'justify-self-end rounded-br-[2px] !bg-[#7e6dd1] text-white'
 			: 'mt-0.5 justify-self-start rounded-tl-[2px]'}
-			"
+		"
 		on:contextmenu|preventDefault={e => {
 			contextMenuEvent = e
 			isContextMenuOpen = true

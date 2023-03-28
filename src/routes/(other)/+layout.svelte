@@ -19,22 +19,21 @@
 				.collection("messages")
 				.subscribe("*", async ({ action, record }) => {
 					if (action === "update") {
-						const isMessageLoadedInChat =
-							$messages.filter(msg => msg.id === record.id)
-								.length === 1
-								? true
-								: false
-						if (isMessageLoadedInChat) {
-							messages.update(msgs => {
-								msgs.map(msg => {
-									if (msg.id === record.id) {
-										msg.content = record.content
-										msg.updated = record.updated
-									}
-								})
-								return msgs
+						messages.update(msgs => {
+							msgs.map(msg => {
+								if (msg.id === record.id) {
+									msg.content = record.content
+									msg.updated = record.updated
+								}
+								if (msg.expand?.repliedTo?.id === record.id) {
+									msg.expand.repliedTo.content =
+										record.content
+									msg.expand.repliedTo.updated =
+										record.updated
+								}
 							})
-						}
+							return msgs
+						})
 					} else if (action === "create") {
 						const userRecord = await $pb
 							.collection("users")

@@ -1,13 +1,13 @@
 <script>
 	import { fly } from "svelte/transition"
 	import OutClick from "svelte-outclick"
-	import MessageContextMenu from "./MessageContextMenu.svelte"
-	import MessageContextMenuItem from "./MessageContextMenuItem.svelte"
 	import { goToMessage } from "$lib/Header/ChatMenu/goToMessage.js"
 	import { isReplying, replyTargetMessage } from "./replyMessage.js"
 	import { copyText } from "svelte-copy"
 	import { messageIdToDelete } from "./deleteMessage.js"
 	import { messageIdToEdit } from "./editMessage.js"
+	import MessageContextMenu from "./MessageContextMenu.svelte"
+	import MessageContextMenuItem from "./MessageContextMenuItem.svelte"
 	import MessageDateAndTime from "./Message/MessageDateAndTime.svelte"
 
 	export let user

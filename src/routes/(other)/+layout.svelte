@@ -18,7 +18,24 @@
 			await $pb
 				.collection("messages")
 				.subscribe("*", async ({ action, record }) => {
-					if (action === "create") {
+					if (action === "update") {
+						const isMessageLoadedInChat =
+							$messages.filter(msg => msg.id === record.id)
+								.length === 1
+								? true
+								: false
+						if (isMessageLoadedInChat) {
+							messages.update(msgs => {
+								msgs.map(msg => {
+									if (msg.id === record.id) {
+										msg.content = record.content
+										msg.updated = record.updated
+									}
+								})
+								return msgs
+							})
+						}
+					} else if (action === "create") {
 						const userRecord = await $pb
 							.collection("users")
 							.getOne(record.user)

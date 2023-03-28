@@ -1,5 +1,5 @@
 <script>
-	import { formatTimeByAMPM } from "$lib/formatTimeByAMPM.js"
+	import { dateToAMPM } from "./dateToAMPM.js"
 
 	export let messageCreatedAt
 	export let isCurrentUser
@@ -30,9 +30,9 @@
 <div class="mt-1.5 text-2xs text-gray-500 {isCurrentUser && 'text-right'}">
 	<span>
 		{#if isToday || isYesterday}
-			{isToday ? "Today" : "Yesterday"} at {formatTimeByAMPM(date)}
+			{isToday ? "Today" : "Yesterday"} at {dateToAMPM(date)}
 		{:else}
-			{date.toLocaleDateString()} {formatTimeByAMPM(date)}
+			{date.toLocaleDateString()} {dateToAMPM(date)}
 		{/if}
 	</span>
 </div>

@@ -1,15 +1,16 @@
 <script>
 	import { enhance } from "$app/forms"
-	import PopSide from "$lib/PopSide.svelte"
-	import TextArea from "$lib/Form/TextArea.svelte"
 	import { messages, unreadMessagesLength } from "$lib/messages.js"
-	import Message from "./Message.svelte"
 	import { isReplying, replyTargetMessage } from "./replyMessage.js"
-	import Modal from "$lib/Modal.svelte"
 	import { messageIdToDelete } from "./deleteMessage.js"
 	import { pb } from "$lib/pb.js"
 	import { messageIdToEdit } from "./editMessage.js"
+	import PopSide from "$lib/PopSide.svelte"
+	import TextArea from "$lib/Form/TextArea.svelte"
+	import Message from "./Message.svelte"
+	import Modal from "$lib/Modal.svelte"
 	import MessageActionPreview from "./MessageActionPreview.svelte"
+
 	let isDeletingMessage = false
 	$: isDeletePopupOpen = $messageIdToDelete
 

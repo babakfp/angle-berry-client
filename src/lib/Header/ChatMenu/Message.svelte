@@ -112,6 +112,7 @@
 						isContextMenuOpen = false
 						isReplying.set(true)
 						replyTargetMessage.set(message)
+						messageIdToEdit.set(null)
 					}}
 				>
 					<!-- prettier-ignore -->
@@ -123,6 +124,7 @@
 						on:click={() => {
 							isContextMenuOpen = false
 							messageIdToEdit.set(message.id)
+							isReplying.set(false)
 						}}
 					>
 						<!-- prettier-ignore -->

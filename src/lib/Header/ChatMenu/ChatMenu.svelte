@@ -224,6 +224,8 @@
 							if (isMessageDeleted) {
 								messageIdToDelete.set(null)
 								isDeletingMessage = false
+								messageIdToEdit.set(null)
+								isReplying.set(false)
 							}
 						} catch (error) {
 							console.error(error)

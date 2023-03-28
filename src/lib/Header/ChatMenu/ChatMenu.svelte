@@ -23,8 +23,8 @@
 	$: if (!isOpen && $messageIdToEdit) messageIdToEdit.set(null)
 	$: if (isOpen && $unreadMessagesLength) unreadMessagesLength.set(0)
 
-	let messageInputValue = ""
 	let messageInputElement
+	let messageInputValue = ""
 	$: if (messageInputElement && messageInputValue === messageInputValue) {
 		if (messageInputValue.trim()) {
 			messageInputElement.style.height = null

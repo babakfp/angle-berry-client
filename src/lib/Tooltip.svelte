@@ -48,9 +48,6 @@
 					if (isBottomNotFullyVisible) position = "top"
 					if (isLeftNotFullyVisible) position = "right"
 				}
-
-				// "rootElementRect", rootElementRect
-				// "parentElementRect", parentElementRect
 			}
 		}
 	}

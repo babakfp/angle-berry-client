@@ -23,10 +23,10 @@
 	$: if (!isOpen && $messageIdToEdit) messageIdToEdit.set(null)
 	$: if (isOpen && $unreadMessagesLength) unreadMessagesLength.set(0)
 
-	let messageContent = ""
+	let messageInputValue = ""
 	let messageInputElement
-	$: if (messageInputElement && messageContent === messageContent) {
-		if (messageContent.trim()) {
+	$: if (messageInputElement && messageInputValue === messageInputValue) {
+		if (messageInputValue.trim()) {
 			messageInputElement.style.height = null
 			messageInputElement.style.height = `${messageInputElement.scrollHeight}px`
 		}
@@ -167,7 +167,7 @@
 				placeholder="Write your message..."
 				required={true}
 				bind:element={messageInputElement}
-				bind:value={messageContent}
+				bind:value={messageInputValue}
 			/>
 			<button
 				class="absolute right-0 bottom-0 top-0 flex items-end outline-inset

@@ -57,15 +57,15 @@
 <div
 	bind:this={rootElement}
 	class="
-		absolute hidden whitespace-nowrap rounded bg-gray-700 py-2 pl-3 pr-4 text-xs drop-shadow z-50 group-hover:block {isVisible ? 'block' : ''}
+		absolute hidden whitespace-nowrap rounded bg-gray-700 py-2 pl-3 pr-4 text-xs drop-shadow z-50 group-hover:block {isVisible && 'block'}
 		after:absolute after:block after:h-0 after:w-0 after:border-solid after:border-[transparent]
-		{position === 'top' ? 'arrow-bottom bottom-full -translate-y-2 inset-x-center after:top-full after:inset-x-center' : ''}
-		{position === 'right' ? 'arrow-left left-full translate-x-2 inset-y-center after:right-full after:inset-y-center' : ''}
-		{position === 'bottom' ? 'arrow-top top-full translate-y-2 inset-x-center after:bottom-full after:inset-x-center' : ''}
-		{position === 'left' ? 'arrow-right right-full -translate-x-2 inset-y-center after:left-full after:inset-y-center' : ''}
+		{position === 'top' && 'arrow-bottom bottom-full -translate-y-2 inset-x-center after:top-full after:inset-x-center'}
+		{position === 'right' && 'arrow-left left-full translate-x-2 inset-y-center after:right-full after:inset-y-center'}
+		{position === 'bottom' && 'arrow-top top-full translate-y-2 inset-x-center after:bottom-full after:inset-x-center'}
+		{position === 'left' && 'arrow-right right-full -translate-x-2 inset-y-center after:left-full after:inset-y-center'}
 
-		{position === 'bottom-right' ? 'arrow-top top-full right-0 translate-y-2 after:bottom-full after:right-4' : ''}
-		{position === 'bottom-left' ? 'arrow-top top-full left-0 translate-y-2 after:bottom-full after:left-4' : ''}
+		{position === 'bottom-right' && 'arrow-top top-full right-0 translate-y-2 after:bottom-full after:right-4'}
+		{position === 'bottom-left' && 'arrow-top top-full left-0 translate-y-2 after:bottom-full after:left-4'}
 	"
 >
 	<slot />

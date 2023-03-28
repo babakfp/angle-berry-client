@@ -5,10 +5,10 @@
 	export let isCurrentUser
 
 	const date = new Date(messageCreatedAt)
-	const isToday = checkIsToday(date)
-	const isYesterday = checkIsYesterday(date)
+	const isToday = isDateToday(date)
+	const isYesterday = isDateYesterday(date)
 
-	function checkIsToday(someDate) {
+	function isDateToday(someDate) {
 		const today = new Date()
 		return (
 			someDate.getDate() === today.getDate() &&
@@ -17,7 +17,7 @@
 		)
 	}
 
-	function checkIsYesterday(someDate) {
+	function isDateYesterday(someDate) {
 		const today = new Date()
 		return (
 			someDate.getDate() === today.getDate() - 1 &&

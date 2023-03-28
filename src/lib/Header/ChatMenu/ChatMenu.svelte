@@ -222,15 +222,17 @@
 
 							isDeletingMessage = true
 							if (isMessageDeleted) {
-								messageIdToDelete.set(null)
 								isDeletingMessage = false
+								messageIdToDelete.set(null)
 								messageIdToEdit.set(null)
 								isReplying.set(false)
 							}
 						} catch (error) {
 							console.error(error)
-							messageIdToDelete.set(null)
 							isDeletingMessage = false
+							messageIdToDelete.set(null)
+							messageIdToEdit.set(null)
+							isReplying.set(false)
 						}
 					}}
 				>

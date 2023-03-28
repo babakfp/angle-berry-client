@@ -79,25 +79,25 @@
 	.arrow-top::after {
 		border-left-width: var(--arrow-size);
 		border-right-width: var(--arrow-size);
-		border-bottom-color: var(--arrow-color);
 		border-bottom-width: var(--arrow-size);
+		border-bottom-color: var(--arrow-color);
 	}
 	.arrow-bottom::after {
 		border-left-width: var(--arrow-size);
 		border-right-width: var(--arrow-size);
-		border-top-color: var(--arrow-color);
 		border-top-width: var(--arrow-size);
+		border-top-color: var(--arrow-color);
 	}
 	.arrow-right::after {
 		border-top-width: var(--arrow-size);
 		border-bottom-width: var(--arrow-size);
-		border-left-color: var(--arrow-color);
 		border-left-width: var(--arrow-size);
+		border-left-color: var(--arrow-color);
 	}
 	.arrow-left::after {
 		border-top-width: var(--arrow-size);
 		border-bottom-width: var(--arrow-size);
-		border-right-color: var(--arrow-color);
 		border-right-width: var(--arrow-size);
+		border-right-color: var(--arrow-color);
 	}
 </style>

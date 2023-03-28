@@ -12,6 +12,7 @@
 	$: isDeletePopupOpen = $messageIdToDelete
 	import { pb } from "$lib/pb.js"
 	import { messageIdToEdit } from "./editMessage.js"
+	import MessageActionPreview from "./MessageActionPreview.svelte"
 
 	export let data
 	messages.set(data.messages.items || [])
@@ -147,6 +148,18 @@
 	>
 		{#if $isReplying}
 			<Reply />
+		{/if}
+		{#if $messageIdToEdit}
+			<MessageActionPreview
+				title="Editing message"
+				content={$messages.filter(msg => msg.id === $messageIdToEdit)[0]
+					.content}
+				messageId={$messageIdToEdit}
+				on:close={() => messageIdToEdit.set(null)}
+				bind:isOpen={$messageIdToEdit}
+			>
+				<!--  -->
+			</MessageActionPreview>
 		{/if}
 		<div class="relative">
 			<TextArea

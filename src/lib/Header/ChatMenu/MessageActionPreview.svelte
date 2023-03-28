@@ -36,7 +36,7 @@
 			on:click={handleJumpToMessage}
 		>
 			<div class="text-xs text-gray-500">{title}</div>
-			<div class="line-clamp-1">{content}</div>
+			<div class="line-clamp-1">{@html content}</div>
 		</button>
 		<button
 			class="flex p-4 outline-inset hover:bg-white/5"

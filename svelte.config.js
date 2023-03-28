@@ -4,6 +4,9 @@ import preprocess from "svelte-preprocess"
 export default {
 	kit: {
 		adapter: adapter(),
+		alias: {
+			$stores: "src/lib/stores",
+		},
 	},
 	preprocess: [preprocess({ postcss: true })],
 	onwarn: (warning, handler) => {

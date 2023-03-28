@@ -1,9 +1,9 @@
 <script>
 	import { enhance } from "$app/forms"
-	import { messages, unreadMessagesLength } from "$lib/messages.js"
+	import { messages, unreadMessagesLength } from "$stores/messages.js"
 	import { isReplying, replyTargetMessage } from "./replyMessage.js"
 	import { messageIdToDelete } from "./deleteMessage.js"
-	import { pb } from "$lib/pb.js"
+	import { pb } from "$stores/pb.js"
 	import { messageIdToEdit } from "./editMessage.js"
 	import PopSide from "$lib/PopSide.svelte"
 	import TextArea from "$lib/Form/TextArea.svelte"

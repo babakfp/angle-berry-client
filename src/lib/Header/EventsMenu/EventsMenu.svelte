@@ -1,6 +1,6 @@
 <script>
 	import PopSide from "$lib/PopSide.svelte"
-	import { events, unseenEventsLength } from "$lib/events.js"
+	import { events, unseenEventsLength } from "$stores/events.js"
 	import Event from "./Event.svelte"
 
 	export let data

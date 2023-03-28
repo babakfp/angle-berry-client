@@ -4,8 +4,8 @@
 	import EventsMenu from "./EventsMenu/EventsMenu.svelte"
 	import UserMenu from "./UserMenu/UserMenu.svelte"
 	import NotificationBlob from "$lib/NotificationBlob.svelte"
-	import { unreadMessagesLength } from "$lib/messages.js"
-	import { unseenEventsLength } from "$lib/events.js"
+	import { unreadMessagesLength } from "$stores/messages.js"
+	import { unseenEventsLength } from "$stores/events.js"
 
 	export let data
 	export let user

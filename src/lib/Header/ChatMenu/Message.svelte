@@ -1,6 +1,5 @@
 <script>
 	import { fly } from "svelte/transition"
-	import { formatTimeByAMPM } from "$lib/formatTimeByAMPM.js"
 	import OutClick from "svelte-outclick"
 	import MessageContextMenu from "./MessageContextMenu.svelte"
 	import MessageContextMenuItem from "./MessageContextMenuItem.svelte"
@@ -9,6 +8,8 @@
 	import { copyText } from "svelte-copy"
 	import { messageIdToDelete } from "./deleteMessage.js"
 	import { messageIdToEdit } from "./editMessage.js"
+	import MessageDateAndTime from "./Message/MessageDateAndTime.svelte"
+
 	export let user
 	export let message
 
@@ -17,28 +18,6 @@
 	let intervalId
 	let timeoutId
 	let copyTimeoutId
-
-	const date = new Date(message.created)
-	const isToday = checkIsToday(date)
-	const isYesterday = checkIsYesterday(date)
-
-	function checkIsToday(someDate) {
-		const today = new Date()
-		return (
-			someDate.getDate() === today.getDate() &&
-			someDate.getMonth() === today.getMonth() &&
-			someDate.getFullYear() === today.getFullYear()
-		)
-	}
-
-	function checkIsYesterday(someDate) {
-		const today = new Date()
-		return (
-			someDate.getDate() === today.getDate() - 1 &&
-			someDate.getMonth() === today.getMonth() &&
-			someDate.getFullYear() === today.getFullYear()
-		)
-	}
 </script>
 
 <li
@@ -162,18 +141,11 @@
 			</MessageContextMenu>
 		</OutClick>
 	</div>
-	<div
-		class="mt-1.5 text-2xs text-gray-500
-			{user.id === message.expand.user.id && 'text-right'}"
-	>
-		<span>
-			{#if isToday || isYesterday}
-				{isToday ? "Today" : "Yesterday"} at {formatTimeByAMPM(date)}
-			{:else}
-				{date.toLocaleDateString()} {formatTimeByAMPM(date)}
-			{/if}
-		</span>
-	</div>
+
+	<MessageDateAndTime
+		messageCreatedAt={message.created}
+		isCurrentUser={message.expand.user.id === user.id}
+	/>
 </li>
 
 <style lang="postcss">

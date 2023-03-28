@@ -11,14 +11,13 @@
 	import Modal from "$lib/Modal.svelte"
 	import MessageActionPreview from "./MessageActionPreview.svelte"
 
-	let isDeletingMessage = false
-	$: isDeletePopupOpen = $messageIdToDelete
-
 	export let data
-	messages.set(data.messages.items || [])
-
 	export let isOpen = false
 	export let toggleButton
+
+	messages.set(data.messages.items || [])
+	let isDeletingMessage = false
+	$: isDeletePopupOpen = $messageIdToDelete
 
 	$: if (!isOpen && $messageIdToEdit) {
 		messageIdToEdit.set(null)

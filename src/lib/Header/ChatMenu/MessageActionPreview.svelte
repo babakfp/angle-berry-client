@@ -2,7 +2,7 @@
 
 <script>
 	import { createEventDispatcher } from "svelte"
-	import { goToChatMessage } from "$lib/Header/ChatMenu/goToChatMessage.js"
+	import { goToMessage } from "$lib/Header/ChatMenu/goToMessage.js"
 
 	export let title
 	export let content
@@ -15,7 +15,7 @@
 	let timeoutId
 
 	function handleJumpToMessage() {
-		const v = goToChatMessage(messageId, intervalId, timeoutId)
+		const v = goToMessage(messageId, intervalId, timeoutId)
 		intervalId = v?.intervalId
 		timeoutId = v?.timeoutId
 	}

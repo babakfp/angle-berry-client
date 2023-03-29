@@ -2,24 +2,20 @@
 	import { enhance } from "$app/forms"
 	import { messages, unreadMessagesLength } from "$stores/messages.js"
 	import { isReplying, replyTargetMessage } from "./replyMessage.js"
-	import { messageIdToDelete } from "./deleteMessage.js"
 	import { pb } from "$stores/pb.js"
 	import { messageIdToEdit } from "./editMessage.js"
 	import PopSide from "$lib/PopSide.svelte"
 	import TextArea from "$lib/Form/TextArea.svelte"
 	import Message from "./Message.svelte"
-	import Modal from "$lib/Modal.svelte"
 	import MessageActionPreview from "./MessageActionPreview.svelte"
 	import ContextMenu from "./ContextMenu.svelte"
+	import MessageDeleteModal from "./MessageDeleteModal.svelte"
 
 	export let data
 	export let isOpen = false
 	export let toggleButton
 
 	messages.set(data.messages.items || [])
-
-	let isDeletingMessage = false
-	$: isDeletePopupOpen = $messageIdToDelete
 
 	$: if (!isOpen && $messageIdToEdit) messageIdToEdit.set(null)
 	$: if (isOpen && $unreadMessagesLength) unreadMessagesLength.set(0)
@@ -215,52 +211,6 @@
 
 	<svelte:fragment slot="outer">
 		<ContextMenu user={data.user} />
-
-		<Modal bind:isOpen={isDeletePopupOpen}>
-			<h3>Are you sure you want to delete this message?</h3>
-			<div class="mt-4 flex justify-end gap-2">
-				<button
-					class="btn btn-light"
-					on:click={() => {
-						messageIdToDelete.set(null)
-					}}
-				>
-					Cancel
-				</button>
-				<button
-					class="btn btn-danger
-					{isDeletingMessage && 'pointer-events-none opacity-50'}"
-					disabled={isDeletingMessage}
-					on:click={async () => {
-						try {
-							const isMessageDeleted = await $pb
-								.collection("messages")
-								.delete($messageIdToDelete)
-
-							isDeletingMessage = true
-							if (isMessageDeleted) {
-								isDeletingMessage = false
-								messageIdToDelete.set(null)
-								messageIdToEdit.set(null)
-								isReplying.set(false)
-							}
-						} catch (error) {
-							console.error(error)
-							isDeletingMessage = false
-							messageIdToDelete.set(null)
-							messageIdToEdit.set(null)
-							isReplying.set(false)
-						}
-					}}
-				>
-					{#if isDeletingMessage}
-						<!-- prettier-ignore -->
-						<svg class="animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"/></svg>
-					{:else}
-						Delete
-					{/if}
-				</button>
-			</div>
-		</Modal>
+		<MessageDeleteModal />
 	</svelte:fragment>
 </PopSide>

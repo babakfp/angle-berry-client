@@ -1,5 +1,5 @@
 <script>
-	import { fly, fade } from "svelte/transition"
+	import { fly } from "svelte/transition"
 	import {
 		isContextMenuOpen,
 		contextMenuTargetEvent,
@@ -12,13 +12,36 @@
 	export let message
 
 	const isCurrentUser = message.expand.user.id === user.id
+
+	function shrinkHeight(node, { delay = 0, duration = 400 }) {
+		node.style.overflow = "hidden"
+
+		const style = getComputedStyle(node)
+		const height = parseFloat(style.height)
+		const paddingTop = parseFloat(style.paddingTop)
+		const paddingBottom = parseFloat(style.paddingBottom)
+		const borderTopWidth = parseFloat(style.borderTopWidth)
+		const borderBottomWidth = parseFloat(style.borderBottomWidth)
+
+		return {
+			delay,
+			duration,
+			css: t => `
+				height: ${t * height}px;
+				padding-top: ${t * paddingTop}px;
+				padding-bottom: ${t * paddingBottom}px;
+				border-top-width: ${t * borderTopWidth}px;
+				border-bottom-width: ${t * borderBottomWidth}px;
+			`,
+		}
+	}
 </script>
 
 <li
 	id={message.id}
 	class="relative grid w-full px-4 py-2 {isCurrentUser && 'mr-0 ml-auto'}"
 	in:fly|local={{ x: isCurrentUser ? 32 : -32, duration: 300 }}
-	out:fade|local={{ x: isCurrentUser ? 32 : -32, duration: 300 }}
+	out:shrinkHeight|local={{ duration: 300 }}
 >
 	<div
 		class="reply-highlight absolute inset-0 -z-1 bg-white/20 opacity-0 duration-200 ease-in-out"

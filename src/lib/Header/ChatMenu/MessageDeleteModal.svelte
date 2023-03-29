@@ -8,7 +8,8 @@
 	import Modal from "$lib/Modal.svelte"
 
 	let isDeletingMessage = false
-	$: isDeletePopupOpen = $messageIdToDelete
+	$: isDeletePopupOpen = !!$messageIdToDelete
+	$: if (!isDeletePopupOpen && $messageIdToDelete) messageIdToDelete.set(null)
 </script>
 
 <Modal bind:isOpen={isDeletePopupOpen}>

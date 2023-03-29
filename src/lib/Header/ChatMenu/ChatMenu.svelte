@@ -25,7 +25,9 @@
 	$: if (messageInputElement && messageInputValue === messageInputValue) {
 		if (messageInputValue.trim()) {
 			messageInputElement.style.height = null
-			messageInputElement.style.height = `${messageInputElement.scrollHeight}px`
+			messageInputElement.style.height = `${
+				messageInputElement.scrollHeight + 0.8
+			}px`
 		}
 	}
 

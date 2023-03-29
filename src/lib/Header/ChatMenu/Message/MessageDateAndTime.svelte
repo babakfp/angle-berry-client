@@ -29,14 +29,12 @@
 </script>
 
 <div class="mt-1.5 text-2xs text-gray-500 {isCurrentUser && 'text-right'}">
-	<span>
-		{#if isToday || isYesterday}
-			{isToday ? "Today" : "Yesterday"} at {dateToAMPM(date)}
-		{:else}
-			{date.toLocaleDateString()} {dateToAMPM(date)}
-		{/if}
-	</span>
+	{#if isToday || isYesterday}
+		{isToday ? "Today" : "Yesterday"} at {dateToAMPM(date)}
+	{:else}
+		{date.toLocaleDateString()} {dateToAMPM(date)}
+	{/if}
 	{#if created !== updated}
-		<span>- Edited</span>
+		- Edited
 	{/if}
 </div>

@@ -25,6 +25,7 @@
 	$: if (messageInputElement && messageInputValue === messageInputValue) {
 		if (messageInputValue.trim()) {
 			messageInputElement.style.height = null
+			// 0.8 is border height
 			messageInputElement.style.height = `${
 				messageInputElement.scrollHeight + 0.8
 			}px`

@@ -5,9 +5,9 @@
 	export let updated
 	export let isCurrentUser
 
-	const date = new Date(updated)
-	const isToday = isDateToday(date)
-	const isYesterday = isDateYesterday(date)
+	$: date = new Date(updated)
+	$: isToday = isDateToday(date)
+	$: isYesterday = isDateYesterday(date)
 
 	function isDateToday(someDate) {
 		const today = new Date()
@@ -34,6 +34,7 @@
 	{:else}
 		{date.toLocaleDateString()} {dateToAMPM(date)}
 	{/if}
+
 	{#if created !== updated}
 		- Edited
 	{/if}

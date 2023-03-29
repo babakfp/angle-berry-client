@@ -23,10 +23,8 @@
 	let messageInputElement
 	let messageInputValue = ""
 	$: if (messageInputElement && messageInputValue === messageInputValue) {
-		if (messageInputValue.trim()) {
-			messageInputElement.style.height = null
-			messageInputElement.style.height = `${messageInputElement.scrollHeight}px`
-		}
+		messageInputElement.style.height = null
+		messageInputElement.style.height = `${messageInputElement.scrollHeight}px`
 	}
 
 	messageIdToEdit.subscribe(id => {

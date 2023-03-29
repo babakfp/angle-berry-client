@@ -14,7 +14,7 @@
 		on:click={() => (isOpen = false)}
 	>
 		<div
-			class="max-w-md overflow-y-auto rounded bg-gray-700 p-6 drop-shadow"
+			class="max-w-md overflow-y-auto overscroll-y-contain rounded bg-gray-700 p-6 drop-shadow"
 		>
 			<slot />
 		</div>

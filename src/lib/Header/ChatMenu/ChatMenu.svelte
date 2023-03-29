@@ -102,7 +102,7 @@
 	{#if $messages.length > 0}
 		<ol
 			id="messages-wrapper"
-			class="flex min-h-full flex-col-reverse content-start items-start overflow-y-auto py-4 sm:text-sm"
+			class="flex flex-col-reverse content-start items-start overflow-y-auto overscroll-y-contain py-4 sm:text-sm"
 			on:scroll={handleScroll}
 		>
 			{#each $messages as message (message.id)}

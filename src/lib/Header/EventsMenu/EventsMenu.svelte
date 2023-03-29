@@ -16,7 +16,7 @@
 
 <PopSide id="EventsMenu" bind:isOpen {toggleButton}>
 	{#if $events.length > 0}
-		<ol class="overflow-y-auto sm:text-sm">
+		<ol class="overflow-y-auto overscroll-y-contain sm:text-sm">
 			{#each $events as event (event.id)}
 				<Event user={data.user} {event} />
 			{/each}

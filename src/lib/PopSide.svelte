@@ -32,10 +32,10 @@
 <OutClick on:outclick={() => (isOpen = false)} excludeElements={toggleButton}>
 	<div
 		{id}
-		class="fixed inset-0 z-50 grid h-screen translate-x-full grid-rows-[auto_1fr_auto] overflow-y-auto bg-gray-800 duration-300 hide
-		{isOpen && '!translate-x-0 !show'}
-		sm:top-header-height sm:left-auto sm:z-40 sm:max-h-[calc(var(--hscreen)-theme(spacing.header-height))] sm:w-96 sm:grid-rows-[1fr_auto]
-	"
+		class="fixed inset-0 z-50 grid h-screen translate-x-full grid-rows-[auto_1fr_auto] bg-gray-800 duration-300 hide
+			{isOpen && '!translate-x-0 !show'}
+			sm:top-header-height sm:left-auto sm:z-40 sm:h-[calc(var(--hscreen)-theme(spacing.header-height))] sm:w-96 sm:grid-rows-[1fr_auto]
+		"
 	>
 		<button
 			class="sticky top-0 z-1 flex h-14 w-full items-center justify-between self-start border-b border-white/5 bg-gray-800 px-4 outline-inset sm:hidden"

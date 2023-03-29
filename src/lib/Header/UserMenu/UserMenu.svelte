@@ -26,7 +26,7 @@
 >
 	<ul
 		id="UserMenu"
-		class="absolute top-full right-0 max-h-[calc(var(--hscreen)-var(--header-height)-theme(spacing.8))] w-60 translate-x-full overflow-y-auto rounded bg-gray-800 text-sm shadow-[0_4px_16px_0_rgb(0_0_0/0.4)] duration-300 hide
+		class="absolute top-full right-0 max-h-[calc(var(--hscreen)-var(--header-height)-theme(spacing.8))] w-60 translate-x-full overflow-y-auto overscroll-y-contain rounded bg-gray-800 text-sm shadow-[0_4px_16px_0_rgb(0_0_0/0.4)] duration-300 hide
 		{isUserMenuOpen && '!-translate-x-4 !show'}"
 	>
 		<li>
@@ -58,7 +58,7 @@
 			</button>
 		</li>
 
-		<nav class="max-h-64 overflow-y-auto">
+		<nav class="max-h-64 overflow-y-auto overscroll-y-contain">
 			<ol>
 				{#each tiers as tier}
 					<Tier {tier} {user} />

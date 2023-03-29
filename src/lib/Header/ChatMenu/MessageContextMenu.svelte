@@ -4,20 +4,15 @@
 
 	let contextMenu
 
-	$: if (contextMenu) {
-		let positionX = e.offsetX
-		let positionY = e.offsetY
+	$: if (contextMenu && isOpen) {
+		let positionX = e.clientX
+		let positionY = e.clientY
 
 		if (e.clientX + contextMenu.offsetWidth > window.innerWidth) {
 			positionX = positionX - contextMenu.offsetWidth
 		}
-		// 64: header height, 56.8: chat input height
-		if (
-			e.clientY + contextMenu.offsetHeight >
-			window.innerHeight - 64 - 56.8
-		) {
+		if (e.clientY + contextMenu.offsetHeight > window.innerHeight) {
 			positionY = positionY - contextMenu.offsetHeight
-
 			contextMenu.style.transform = "translateY(1.25rem)"
 		}
 
@@ -27,10 +22,21 @@
 </script>
 
 {#if isOpen}
-	<ul
+	<div
 		bind:this={contextMenu}
-		class="MessageContextMenu absolute z-50 max-h-56 w-36 -translate-y-5 overflow-y-auto overscroll-y-contain rounded bg-gray-700 p-1 text-xs shadow"
+		class="absolute z-50 -translate-y-5"
+		on:pointerleave={() => (isOpen = false)}
 	>
-		<slot />
-	</ul>
+		<!-- Close the menu when moved out of the bunding area -->
+		<div
+			class="absolute -inset-8 -z-1"
+			on:pointerdown={() => (isOpen = false)}
+			on:contextmenu|preventDefault
+		/>
+		<ul
+			class="max-h-56 w-36 overflow-y-auto overscroll-y-contain rounded bg-gray-700 p-1 text-xs shadow"
+		>
+			<slot />
+		</ul>
+	</div>
 {/if}

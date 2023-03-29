@@ -10,6 +10,7 @@
 	import Message from "./Message.svelte"
 	import Modal from "$lib/Modal.svelte"
 	import MessageActionPreview from "./MessageActionPreview.svelte"
+	import ContextMenu from "./ContextMenu.svelte"
 
 	export let data
 	export let isOpen = false
@@ -213,6 +214,8 @@
 	</form>
 
 	<svelte:fragment slot="outer">
+		<ContextMenu user={data.user} />
+
 		<Modal bind:isOpen={isDeletePopupOpen}>
 			<h3>Are you sure you want to delete this message?</h3>
 			<div class="mt-4 flex justify-end gap-2">

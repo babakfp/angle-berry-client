@@ -46,7 +46,9 @@
 	>
 		<MessageReplyPreview replyTargetMessage={message?.expand?.repliedTo} />
 
-		{@html message.content}
+		<div>
+			{@html message.content}
+		</div>
 	</div>
 
 	<MessageDateAndTime

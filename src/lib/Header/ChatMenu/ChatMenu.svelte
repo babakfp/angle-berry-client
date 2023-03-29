@@ -25,10 +25,7 @@
 	$: if (messageInputElement && messageInputValue === messageInputValue) {
 		if (messageInputValue.trim()) {
 			messageInputElement.style.height = null
-			// 0.8 is border height
-			messageInputElement.style.height = `${
-				messageInputElement.scrollHeight + 0.8
-			}px`
+			messageInputElement.style.height = `${messageInputElement.scrollHeight}px`
 		}
 	}
 
@@ -133,6 +130,7 @@
 			first message in this chat room.
 		</p>
 	{/if}
+
 	<form
 		class="sticky bottom-0 self-end
 		{isSendingMessage && 'pointer-events-none'}
@@ -160,6 +158,7 @@
 				bind:isOpen={$isReplying}
 			/>
 		{/if}
+
 		{#if $messageIdToEdit}
 			<MessageActionPreview
 				title="Editing message"
@@ -170,9 +169,12 @@
 				bind:isOpen={isEditingMessage}
 			/>
 		{/if}
-		<div class="relative">
+
+		<div
+			class="relative border-t border-white/5 shadow-[0_-1px_3px_0_rgb(0_0_0_/_0.1),_0_-1px_2px_-1px_rgb(0_0_0_/_0.1)]"
+		>
 			<TextArea
-				class="!max-h-32 rounded-none border-t border-white/5 bg-gray-800 pr-14 shadow-[0_-1px_3px_0_rgb(0_0_0_/_0.1),_0_-1px_2px_-1px_rgb(0_0_0_/_0.1)] outline-inset"
+				class="!max-h-32 rounded-none bg-gray-800 pr-14 outline-inset"
 				name="messageContent"
 				placeholder="Write your message..."
 				required={true}

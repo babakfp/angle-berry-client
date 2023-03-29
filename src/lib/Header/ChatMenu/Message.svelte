@@ -10,23 +10,20 @@
 
 	export let user
 	export let message
+
+	const isCurrentUser = message.expand.user.id === user.id
 </script>
 
 <li
 	id={message.id}
-	class="relative grid w-full px-4 py-2
-		{user.id === message.expand.user.id && 'mr-0 ml-auto'}
-	"
-	transition:fly|local={{
-		x: user.id === message.expand.user.id ? 64 : -64,
-		duration: 500,
-	}}
+	class="relative grid w-full px-4 py-2 {isCurrentUser && 'mr-0 ml-auto'}"
+	transition:fly|local={{ x: isCurrentUser ? 64 : -64, duration: 500 }}
 >
 	<div
 		class="reply-highlight absolute inset-0 -z-1 bg-white/20 opacity-0 duration-200 ease-in-out"
 	/>
 
-	{#if user.id !== message.expand.user.id}
+	{#if !isCurrentUser}
 		<span class="text-xs font-semibold">
 			{message.expand.user.username}
 		</span>
@@ -34,7 +31,7 @@
 
 	<div
 		class="message-content-wrapper relative max-w-80 break-words rounded bg-gray-700 py-2 pl-3 pr-4 shadow
-			{user.id === message.expand.user.id
+			{isCurrentUser
 			? 'justify-self-end rounded-br-[2px] !bg-[#7e6dd1] text-white'
 			: 'mt-0.5 justify-self-start rounded-tl-[2px]'}
 		"
@@ -51,10 +48,7 @@
 		</div>
 	</div>
 
-	<MessageDateAndTime
-		messageCreatedAt={message.created}
-		isCurrentUser={message.expand.user.id === user.id}
-	/>
+	<MessageDateAndTime messageCreatedAt={message.created} {isCurrentUser} />
 </li>
 
 <style lang="postcss">

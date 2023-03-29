@@ -1,10 +1,11 @@
 <script>
 	import { dateToAMPM } from "./dateToAMPM.js"
 
-	export let messageCreatedAt
+	export let created
+	export let updated
 	export let isCurrentUser
 
-	const date = new Date(messageCreatedAt)
+	const date = new Date(updated)
 	const isToday = isDateToday(date)
 	const isYesterday = isDateYesterday(date)
 
@@ -35,4 +36,7 @@
 			{date.toLocaleDateString()} {dateToAMPM(date)}
 		{/if}
 	</span>
+	{#if created !== updated}
+		<span>- Edited</span>
+	{/if}
 </div>

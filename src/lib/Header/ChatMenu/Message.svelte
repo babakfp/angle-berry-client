@@ -48,7 +48,11 @@
 		</div>
 	</div>
 
-	<MessageDateAndTime messageCreatedAt={message.created} {isCurrentUser} />
+	<MessageDateAndTime
+		{isCurrentUser}
+		created={message.created}
+		updated={message.updated}
+	/>
 </li>
 
 <style lang="postcss">

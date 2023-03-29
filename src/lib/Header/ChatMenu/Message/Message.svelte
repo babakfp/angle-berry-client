@@ -4,9 +4,9 @@
 		isContextMenuOpen,
 		contextMenuTargetEvent,
 		contextMenuTargetMessage,
-	} from "./contextMenu.js"
-	import MessageDateAndTime from "./Message/MessageDateAndTime.svelte"
-	import MessageReplyPreview from "./Message/MessageReplyPreview.svelte"
+	} from "../contextMenu.js"
+	import MessageDateAndTime from "./MessageDateAndTime.svelte"
+	import MessageReplyPreview from "./MessageReplyPreview.svelte"
 
 	export let user
 	export let message

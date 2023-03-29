@@ -6,7 +6,7 @@
 	import { messageIdToEdit } from "./editMessage.js"
 	import PopSide from "$lib/PopSide.svelte"
 	import TextArea from "$lib/Form/TextArea.svelte"
-	import Message from "./Message.svelte"
+	import Message from "./Message/Message.svelte"
 	import MessageActionPreview from "./MessageActionPreview.svelte"
 	import ContextMenu from "./ContextMenu.svelte"
 	import MessageDeleteModal from "./MessageDeleteModal.svelte"

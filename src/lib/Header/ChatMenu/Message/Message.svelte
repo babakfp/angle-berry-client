@@ -1,5 +1,5 @@
 <script>
-	import { fly } from "svelte/transition"
+	import { fly, fade } from "svelte/transition"
 	import {
 		isContextMenuOpen,
 		contextMenuTargetEvent,
@@ -17,7 +17,8 @@
 <li
 	id={message.id}
 	class="relative grid w-full px-4 py-2 {isCurrentUser && 'mr-0 ml-auto'}"
-	transition:fly|local={{ x: isCurrentUser ? 64 : -64, duration: 500 }}
+	in:fly|local={{ x: isCurrentUser ? 32 : -32, duration: 300 }}
+	out:fade|local={{ x: isCurrentUser ? 32 : -32, duration: 300 }}
 >
 	<div
 		class="reply-highlight absolute inset-0 -z-1 bg-white/20 opacity-0 duration-200 ease-in-out"

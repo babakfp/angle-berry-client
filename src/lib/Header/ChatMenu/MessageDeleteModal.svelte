@@ -3,6 +3,8 @@
 	import { messageIdToDelete } from "./deleteMessage.js"
 	import { messageIdToEdit } from "./editMessage.js"
 	import { isReplying } from "./replyMessage.js"
+	import { messages } from "$stores/messages.js"
+	import { contextMenuTargetMessage } from "./contextMenu.js"
 	import Modal from "$lib/Modal.svelte"
 
 	let isDeletingMessage = false
@@ -36,6 +38,21 @@
 						messageIdToDelete.set(null)
 						messageIdToEdit.set(null)
 						isReplying.set(false)
+
+						// Remove other messages reply preview to that deleted message
+						messages.update(msgs =>
+							msgs.map(msg => {
+								if (
+									msg.repliedTo &&
+									msg.repliedTo ===
+										$contextMenuTargetMessage.id
+								) {
+									msg.repliedTo = ""
+									msg.expand.repliedTo = null
+								}
+								return msg
+							})
+						)
 					}
 				} catch (error) {
 					console.error(error)

@@ -58,7 +58,7 @@
 			</button>
 		</li>
 
-		<nav class="max-h-64 overflow-y-auto overscroll-y-contain">
+		<nav class="max-h-64 overflow-y-auto">
 			<ol>
 				{#each tiers as tier}
 					<Tier {tier} {user} />

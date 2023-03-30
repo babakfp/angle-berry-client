@@ -1,6 +1,6 @@
 import { error } from "@sveltejs/kit"
-import { freeTierId } from "$lib/freeTierId.js"
 import { handlePbConnectionIssue } from "$lib/handlePbConnectionIssue.js"
+import { freeTierId } from "$stores/freeTierId.js"
 
 export async function load({ locals, params }) {
 	try {

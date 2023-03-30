@@ -3,8 +3,8 @@ import {
 	isUsernameInvalid,
 	isPasswordInvalid,
 } from "$lib/Form/formValidation.js"
-import { freeTierId } from "$lib/freeTierId.js"
 import { handlePbConnectionIssue } from "$lib/handlePbConnectionIssue.js"
+import { freeTierId } from "$stores/freeTierId.js"
 
 export const actions = {
 	default: async ({ locals, request, url }) => {

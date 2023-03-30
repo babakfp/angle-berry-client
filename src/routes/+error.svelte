@@ -9,16 +9,14 @@
 <div
 	class="mx-auto grid h-screen max-w-xs content-center items-center text-center"
 >
-	<h1 class="font-bold text-4xl text-white">
+	<h1 class="text-8xl font-bold text-white">
 		{$page.status}
 	</h1>
 
 	<div class="text-gray-400">
 		{#if $page.status === 404}
-			<p>Sorry, the page that you are looking for couldn't be found!</p>
-			<div class="mt-2">
-				<a class="btn btn-light" href="/">Go home</a>
-			</div>
+			<p>The page that you are looking for couldn't be found!</p>
+			<a class="btn btn-light mt-4" href="/">Go home</a>
 		{:else}
 			<p>{$page.error.message}</p>
 		{/if}

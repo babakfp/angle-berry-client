@@ -9,6 +9,16 @@
 
 	export let form
 
+	let formData = {
+		username: form?.username?.value || "",
+		password: "",
+	}
+
+	export const snapshot = {
+		capture: () => formData,
+		restore: value => (formData = value),
+	}
+
 	let isSubmitting = false
 	function handleFormSubmit() {
 		isSubmitting = true
@@ -23,7 +33,7 @@
 	<title>Register</title>
 </svelte:head>
 
-<h1 class="font-bold text-4xl text-white">Register</h1>
+<h1 class="text-4xl font-bold text-white">Register</h1>
 <p class="text-gray-400">Welcome, please enter your details.</p>
 
 <Form
@@ -43,7 +53,7 @@
 		maxlength={maxUsernameLength}
 		required={true}
 		errorMessage={form?.username?.message}
-		value={form?.username?.value || ""}
+		bind:value={formData.username}
 		filterPattern={/[^a-z0-9]+/g}
 		forceToLowercase={true}
 	/>
@@ -54,6 +64,7 @@
 		autocomplete="new-password"
 		required={true}
 		errorMessage={form?.password?.message}
+		bind:value={formData.password}
 	/>
 </Form>
 

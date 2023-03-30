@@ -69,7 +69,6 @@
 </Form>
 
 <p class="mt-8 text-sm text-gray-400">
-	Already have an account? <a class="text-white underline" href="/login">
-		Login hero
-	</a>
+	Already have an account?
+	<a class="text-white underline" href="/login">Login hero</a>
 </p>

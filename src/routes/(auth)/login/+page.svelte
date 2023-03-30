@@ -69,7 +69,6 @@
 </Form>
 
 <p class="mt-8 text-sm text-gray-400">
-	Don't have an account? <a class="text-white underline" href="/register">
-		Register hero
-	</a>
+	Don't have an account?
+	<a class="text-white underline" href="/register">Register hero</a>
 </p>

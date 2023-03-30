@@ -2,13 +2,13 @@
 	<title>How to pay</title>
 </svelte:head>
 
-<h1 class="font-bold text-4xl text-white">How to pay</h1>
+<h1 class="text-4xl font-bold text-white">How to pay</h1>
 
 <div class="mt-8">
 	<p>
 		You can contact us via Telegram
-		<a class="link" href="https://t.me/adminTelegramUsername">
-			@adminTelegramUsername
-		</a>
+		<a class="link" href="https://t.me/adminTelegramUsername"
+			>@adminTelegramUsername</a
+		>.
 	</p>
 </div>

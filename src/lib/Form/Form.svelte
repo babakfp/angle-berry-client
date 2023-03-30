@@ -10,7 +10,7 @@
 </script>
 
 <form
-	class="mt-8 grid gap-4 {isSubmitting && 'pointer-events-none'}"
+	class="grid gap-4 {isSubmitting && 'pointer-events-none'}"
 	{method}
 	use:enhance={handleFormSubmit}
 >

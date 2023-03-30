@@ -54,6 +54,7 @@ module.exports = {
 		},
 		fontWeight: {
 			semibold: "600",
+			bold: "700",
 		},
 		outlineWidth: {
 			2: "2px",

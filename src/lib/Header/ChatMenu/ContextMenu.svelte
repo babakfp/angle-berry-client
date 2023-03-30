@@ -50,7 +50,7 @@
 			</MessageContextMenuItem>
 		{/if}
 		<MessageContextMenuItem
-			title={copyTimeoutId ? "Done!" : "Copy"}
+			title={copyTimeoutId ? "Done" : "Copy"}
 			isDisabled={!!copyTimeoutId}
 			on:click={() => {
 				copyText(

@@ -1,6 +1,6 @@
 import { error } from "@sveltejs/kit"
 import { handlePbConnectionIssue } from "$lib/handlePbConnectionIssue.js"
-import { freeTierId } from "$stores/freeTierId.js"
+import { previewTierId } from "$stores/previewTierId.js"
 
 export async function load({ locals, params }) {
 	try {
@@ -10,7 +10,7 @@ export async function load({ locals, params }) {
 		if (record) {
 			const tier = structuredClone(record)
 			if (
-				params.id === freeTierId ||
+				params.id === previewTierId ||
 				locals.user.retainedTiers.includes(params.id) ||
 				locals.user.invitedUsers.length >= tier.invites
 			) {

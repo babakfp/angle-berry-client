@@ -4,7 +4,7 @@ import {
 	isPasswordInvalid,
 } from "$lib/Form/formValidation.js"
 import { handlePbConnectionIssue } from "$lib/handlePbConnectionIssue.js"
-import { freeTierId } from "$stores/freeTierId.js"
+import { previewTierId } from "$stores/previewTierId.js"
 
 export const actions = {
 	default: async ({ locals, request, url }) => {
@@ -38,7 +38,7 @@ export const actions = {
 					username,
 					password,
 					passwordConfirm: password,
-					retainedTiers: [freeTierId],
+					retainedTiers: [previewTierId],
 					invitedBy: doesInviterExists ? [inviterId] : null,
 				})
 

@@ -168,7 +168,7 @@
 		{/if}
 
 		<div
-			class="relative border-t border-white/5 shadow-[0_-1px_3px_0_rgb(0_0_0_/_0.1),_0_-1px_2px_-1px_rgb(0_0_0_/_0.1)]"
+			class="relative grid grid-cols-[1fr_auto] border-t border-white/5 shadow-[0_-1px_3px_0_rgb(0_0_0_/_0.1),_0_-1px_2px_-1px_rgb(0_0_0_/_0.1)]"
 		>
 			<textarea
 				class="block max-h-32 min-h-14 w-full resize-none bg-gray-800 p-4 pr-14 outline-inset placeholder:text-gray-500"
@@ -181,7 +181,7 @@
 				autocomplete="off"
 			/>
 			<button
-				class="absolute right-0 bottom-0 top-0 flex items-end outline-inset
+				class="flex items-end outline-inset
 				{isSendingMessage && 'opacity-50'}"
 				disabled={isSendingMessage}
 			>

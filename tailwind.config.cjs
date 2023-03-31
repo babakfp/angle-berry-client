@@ -30,14 +30,14 @@ module.exports = {
 			current: colors.current,
 			white: colors.white,
 			red: colors.red,
-			gray: colors.zinc,
-			// gray: {
-			// 	300: colors.zinc[300],
-			// 	400: colors.zinc[400],
-			// 	500: colors.zinc[500],
-			// 	700: colors.zinc[700],
-			// 	800: colors.zinc[800],
-			// },
+			gray: {
+				300: colors.zinc[300],
+				400: colors.zinc[400],
+				500: colors.zinc[500],
+				600: colors.zinc[600],
+				700: colors.zinc[700],
+				800: colors.zinc[800],
+			},
 		},
 		container: {
 			center: true,

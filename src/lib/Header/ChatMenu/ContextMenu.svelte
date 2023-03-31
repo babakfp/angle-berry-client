@@ -13,6 +13,8 @@
 	import MessageContextMenuItem from "./MessageContextMenuItem.svelte"
 
 	export let user
+	export let messageInputElement
+
 	let copyTimeoutId
 </script>
 
@@ -31,6 +33,7 @@
 				isReplying.set(true)
 				replyTargetMessage.set($contextMenuTargetMessage)
 				messageIdToEdit.set(null)
+				if (messageInputElement) messageInputElement.focus()
 			}}
 		>
 			<!-- prettier-ignore -->

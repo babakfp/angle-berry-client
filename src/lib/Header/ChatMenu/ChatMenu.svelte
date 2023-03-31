@@ -214,7 +214,7 @@
 	</form>
 
 	<svelte:fragment slot="outer">
-		<ContextMenu user={data.user} />
+		<ContextMenu user={data.user} bind:messageInputElement />
 		<MessageDeleteModal />
 	</svelte:fragment>
 </PopSide>

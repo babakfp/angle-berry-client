@@ -68,6 +68,30 @@ module.exports = {
 				},
 			})
 		},
+		({ addComponents }) => {
+			addComponents({
+				".link": {
+					"@apply underline duration-300 hover:text-white": "",
+				},
+			})
+		},
+		({ addComponents }) => {
+			addComponents({
+				".btn": {
+					// prettier-ignore
+					"@apply relative inline-flex select-none items-center justify-center rounded py-1.5 px-3 text-sm text-white duration-150 drag-none": "",
+				},
+				".btn-light": {
+					"@apply bg-white/5 hover:bg-white/10": "",
+				},
+				".btn-danger": {
+					"@apply bg-red-700 hover:bg-red-600": "",
+				},
+				".btn-inner-input": {
+					"@apply bg-gray-600 hover:bg-gray-500": "",
+				},
+			})
+		},
 		({ matchUtilities, theme }) => {
 			matchUtilities(
 				{

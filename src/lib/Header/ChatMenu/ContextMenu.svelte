@@ -46,6 +46,7 @@
 					isContextMenuOpen.set(false)
 					messageIdToEdit.set($contextMenuTargetMessage.id)
 					isReplying.set(false)
+					if (messageInputElement) messageInputElement.focus()
 				}}
 			>
 				<!-- prettier-ignore -->

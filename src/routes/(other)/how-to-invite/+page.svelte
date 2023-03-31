@@ -29,7 +29,7 @@
 	>
 		<button
 			slot="buttons"
-			class="btn btn-light text-2xs outline-inset"
+			class="btn btn-inner-input text-2xs"
 			type="button"
 			on:click={copyInviteLink}
 		>

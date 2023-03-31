@@ -1,8 +1,8 @@
 <script>
 	import AuthWrapper from "../AuthWrapper.svelte"
 	import Form from "$lib/Form/Form.svelte"
-	import InputPassword from "$lib/Form/InputPassword.svelte"
 	import UsernameField from "$lib/Form/Fields/UsernameField.svelte"
+	import PasswordField from "$lib/Form/Fields/PasswordField.svelte"
 
 	export let form
 
@@ -48,14 +48,10 @@
 			bind:value={formData.username}
 			message={form?.username?.message}
 		/>
-		<InputPassword
-			name="password"
-			label="Password"
-			placeholder="Something that no one knows."
-			autocomplete="new-password"
-			required={true}
-			errorMessage={form?.password?.message}
+		<PasswordField
 			bind:value={formData.password}
+			autocomplete="new-password"
+			message={form?.password?.message}
 		/>
 	</Form>
 </AuthWrapper>

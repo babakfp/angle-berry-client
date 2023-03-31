@@ -5,6 +5,7 @@
 	export let label = ""
 	export let required = false
 
+	export let type = "text"
 	export let name = ""
 	export let value = ""
 	export let placeholder = ""
@@ -17,6 +18,15 @@
 	export { className as class }
 
 	export let message = ""
+
+	function fixDynamicTypeTwoWayBindingOfTheValue(e) {
+		// In here, you can switch on type and implement whatever behaviour you need
+		if (type.match(/^(number|range)$/)) {
+			value = +e.target.value
+		} else {
+			value = e.target.value
+		}
+	}
 </script>
 
 <label class="group">
@@ -28,8 +38,8 @@
 				placeholder:text-xs placeholder:text-gray-500
 				[&:focus+div]:show
 			"
-			type="text"
-			bind:value
+			{type}
+			{value}
 			{name}
 			{placeholder}
 			{minlength}
@@ -37,11 +47,12 @@
 			{autocomplete}
 			{required}
 			{readonly}
+			on:input={fixDynamicTypeTwoWayBindingOfTheValue}
 		/>
 
 		{#if $$slots.buttons}
 			<div
-				class="absolute right-0 flex h-full items-center rounded-r bg-gray-700/50 px-4 backdrop-blur duration-100 ease-in-out hide inset-y-center focus-within:show group-hover:show"
+				class="absolute right-0 flex h-full items-center rounded-r px-4 duration-100 ease-in-out hide inset-y-center focus-within:show group-hover:show"
 			>
 				<slot name="buttons" />
 			</div>

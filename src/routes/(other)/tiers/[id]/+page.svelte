@@ -8,7 +8,7 @@
 	<title>{data?.tier.name}</title>
 </svelte:head>
 
-<h1 class="font-bold text-4xl text-white">{data?.tier.name}</h1>
+<h1 class="text-4xl font-bold text-white">{data?.tier.name}</h1>
 
 <TierTable
 	class="mt-8"

@@ -30,11 +30,11 @@
 		type="button"
 		on:click={() => (isPasswordVisible = !isPasswordVisible)}
 	>
-		<span class="duration-150 {isPasswordVisible && 'scale-50 hide'}">
+		<span class="duration-100 {isPasswordVisible && 'scale-50 hide'}">
 			Show
 		</span>
 		<span
-			class="absolute duration-150
+			class="absolute duration-100
 				{!isPasswordVisible && 'scale-50 hide'}
 			"
 		>

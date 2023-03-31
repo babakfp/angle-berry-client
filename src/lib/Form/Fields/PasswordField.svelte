@@ -34,8 +34,8 @@
 			Show
 		</span>
 		<span
-			class="absolute scale-50 duration-150 hide
-				{isPasswordVisible && '!scale-100 show'}
+			class="absolute duration-150
+				{!isPasswordVisible && 'scale-50 hide'}
 			"
 		>
 			Hide

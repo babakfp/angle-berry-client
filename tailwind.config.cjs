@@ -38,7 +38,6 @@ module.exports = {
 			// 	700: colors.zinc[700],
 			// 	800: colors.zinc[800],
 			// },
-			error: colors.red[600],
 		},
 		container: {
 			center: true,

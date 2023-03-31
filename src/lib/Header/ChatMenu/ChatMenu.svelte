@@ -5,7 +5,6 @@
 	import { pb } from "$stores/pb.js"
 	import { messageIdToEdit } from "./editMessage.js"
 	import PopSide from "$lib/PopSide.svelte"
-	import TextArea from "$lib/Form/TextArea.svelte"
 	import Message from "./Message/Message.svelte"
 	import MessageActionPreview from "./MessageActionPreview.svelte"
 	import ContextMenu from "./ContextMenu.svelte"
@@ -171,13 +170,15 @@
 		<div
 			class="relative border-t border-white/5 shadow-[0_-1px_3px_0_rgb(0_0_0_/_0.1),_0_-1px_2px_-1px_rgb(0_0_0_/_0.1)]"
 		>
-			<TextArea
-				class="!max-h-32 rounded-none bg-gray-800 pr-14 outline-inset"
+			<textarea
+				class="block max-h-32 min-h-14 w-full resize-none bg-gray-800 p-4 pr-14 outline-inset placeholder:text-gray-500"
+				bind:this={messageInputElement}
+				bind:value={messageInputValue}
 				name="messageContent"
 				placeholder="Write your message..."
-				required={true}
-				bind:element={messageInputElement}
-				bind:value={messageInputValue}
+				required
+				rows="1"
+				autocomplete="off"
 			/>
 			<button
 				class="absolute right-0 bottom-0 top-0 flex items-end outline-inset

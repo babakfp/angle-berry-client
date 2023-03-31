@@ -34,10 +34,7 @@
 
 	<div class="relative">
 		<input
-			class="{className || ''} block h-12 w-full rounded bg-gray-700 px-4
-				placeholder:text-xs placeholder:text-gray-500
-				[&:focus+div]:show
-			"
+			class="{className} block h-12 w-full rounded bg-gray-700 px-4 placeholder:text-xs placeholder:text-gray-500 [&:focus+div]:show"
 			{type}
 			{value}
 			{name}

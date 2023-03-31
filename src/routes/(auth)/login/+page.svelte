@@ -1,12 +1,8 @@
 <script>
-	import {
-		minUsernameLength,
-		maxUsernameLength,
-	} from "$lib/Form/formValidation.js"
 	import AuthWrapper from "../AuthWrapper.svelte"
 	import Form from "$lib/Form/Form.svelte"
-	import Input from "$lib/Form/Input.svelte"
 	import InputPassword from "$lib/Form/InputPassword.svelte"
+	import UsernameField from "$lib/Form/Fields/UsernameField.svelte"
 
 	export let form
 
@@ -48,19 +44,9 @@
 		{handleFormSubmit}
 		submitButtonText="Login"
 	>
-		<Input
-			type="text"
-			name="username"
-			label="Username"
-			placeholder="Only lowercase letters and numbers."
-			autocomplete="username"
-			minlength={minUsernameLength}
-			maxlength={maxUsernameLength}
-			required={true}
-			errorMessage={form?.username?.message || form?.identity?.message}
+		<UsernameField
 			bind:value={formData.username}
-			filterPattern={/[^a-z0-9]+/g}
-			forceToLowercase={true}
+			message={form?.username?.message || form?.identity?.message}
 		/>
 		<InputPassword
 			name="password"

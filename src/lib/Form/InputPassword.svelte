@@ -36,7 +36,7 @@
 	{errorMessage}
 >
 	<button
-		slot="under-input"
+		slot="buttons"
 		class="absolute inset-y-0 right-0 flex w-14 items-center justify-center rounded text-2xs outline-inset"
 		type="button"
 		on:click={() => (isPasswordVisible = !isPasswordVisible)}

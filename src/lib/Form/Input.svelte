@@ -56,7 +56,7 @@
 			{readonly}
 			on:input={handleInput}
 		/>
-		<slot name="under-input" />
+		<slot name="buttons" />
 	</div>
 
 	<FormErrorText message={errorMessage} />

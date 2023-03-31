@@ -1,39 +1,41 @@
 <script>
 	import { page } from "$app/stores"
-	import Input from "$lib/Form/Input.svelte"
-	import { copy } from "svelte-copy"
+	import { copyText } from "svelte-copy"
 	import toast, { Toaster } from "svelte-french-toast"
+	import TextField from "$lib/Form/Fields/TextField.svelte"
 
 	export let data
+
+	function copyInviteLink() {
+		copyText(`${$page.url.origin}/register?id=${data.user.id}`)
+		toast.success("Your invite link is copied to Clipboard.", {
+			position: "bottom-right",
+		})
+	}
 </script>
 
 <svelte:head>
 	<title>How to invite</title>
 </svelte:head>
 
-<h1 class="font-bold text-4xl text-white">How to invite</h1>
+<h1 class="text-4xl font-bold text-white">How to invite</h1>
 
 <div class="mt-8 space-y-4">
-	<Input
-		type="text"
-		value="{$page.url.origin}/register?id={data.user.id}"
+	<TextField
 		name="userInviteLink"
 		label="Your invite link"
+		value="{$page.url.origin}/register?id={data.user.id}"
 		readonly
 	>
 		<button
-			slot="under-input"
-			class="absolute inset-y-0 right-0 flex w-14 items-center justify-center rounded text-2xs outline-inset"
+			slot="buttons"
+			class="btn btn-light text-2xs outline-inset"
 			type="button"
-			use:copy={`${$page.url.origin}/register?id=${data.user.id}`}
-			on:click={() =>
-				toast.success("Your invite link is copied to Clipboard.", {
-					position: "bottom-right",
-				})}
+			on:click={copyInviteLink}
 		>
 			Copy
 		</button>
-	</Input>
+	</TextField>
 	<p>
 		You can share your invite link with your friends or on social media
 		platforms. When someone registers on our website with your invite link,

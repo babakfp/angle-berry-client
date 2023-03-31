@@ -52,7 +52,7 @@
 
 		{#if $$slots.buttons}
 			<div
-				class="absolute right-0 flex h-full items-center rounded-r px-4 duration-100 ease-in-out hide inset-y-center focus-within:show group-hover:show"
+				class="absolute right-0 flex h-full items-center rounded-r px-3 duration-100 ease-in-out hide inset-y-center focus-within:show group-hover:show"
 			>
 				<slot name="buttons" />
 			</div>

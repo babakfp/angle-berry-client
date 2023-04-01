@@ -72,7 +72,7 @@
 		</MessageContextMenuItem>
 		{#if $contextMenuTargetMessage.expand.user.id === user.id}
 			<MessageContextMenuItem
-				class="text-[#ff595a] hover:bg-[#ff595a]/5"
+				class="text-red-500"
 				title="Delete"
 				on:click={() => {
 					isContextMenuOpen.set(false)

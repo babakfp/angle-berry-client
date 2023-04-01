@@ -81,13 +81,10 @@ module.exports = {
 					// prettier-ignore
 					"@apply relative inline-flex select-none items-center justify-center rounded py-1.5 px-3 text-sm text-white duration-150 drag-none": "",
 				},
-				".btn-light": {
-					"@apply bg-white/5 hover:bg-white/10": "",
-				},
 				".btn-danger": {
-					"@apply bg-red-700 hover:bg-red-600": "",
+					"@apply bg-red-600 hover:bg-red-500": "",
 				},
-				".btn-inner-input": {
+				".btn-gray": {
 					"@apply bg-gray-600 hover:bg-gray-500": "",
 				},
 			})

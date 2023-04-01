@@ -26,7 +26,7 @@
 >
 	<button
 		slot="buttons"
-		class="btn btn-inner-input text-2xs"
+		class="btn btn-gray text-2xs"
 		type="button"
 		on:click={() => (isPasswordVisible = !isPasswordVisible)}
 	>

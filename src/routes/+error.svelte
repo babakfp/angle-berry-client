@@ -16,7 +16,7 @@
 	<div class="text-gray-400">
 		{#if $page.status === 404}
 			<p>The page that you are looking for couldn't be found!</p>
-			<a class="btn btn-light mt-4" href="/">Go home</a>
+			<a class="btn btn-gray mt-4" href="/">Go home</a>
 		{:else}
 			<p>{$page.error.message}</p>
 		{/if}

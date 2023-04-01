@@ -13,7 +13,7 @@
 	import MessageContextMenuItem from "./MessageContextMenuItem.svelte"
 
 	export let user
-	export let messageInputElement
+	export let messageInputElement = null
 
 	let copyTimeoutId
 </script>

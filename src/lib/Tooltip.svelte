@@ -67,7 +67,7 @@
 <div
 	bind:this={tooltip}
 	class="
-		absolute hide whitespace-nowrap rounded bg-gray-700 py-2 pl-3 pr-4 text-xs drop-shadow z-50 group-hover:block {isVisible && 'show'}
+		absolute hide whitespace-nowrap rounded bg-gray-700 px-4 py-3 text-xs drop-shadow z-50 group-hover:block {isVisible && 'show'}
 		after:absolute after:block after:h-0 after:w-0 after:border-solid after:border-[transparent]
 		{(position === 'top' || position === 'top-right' || position === 'top-left') && 'arrow-bottom bottom-full -translate-y-2 after:top-full'}
 		{(position === 'right' || position === 'right-top' || position === 'right-bottom') && 'arrow-left left-full translate-x-2 after:right-full'}

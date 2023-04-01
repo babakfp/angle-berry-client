@@ -36,9 +36,9 @@
 		position="top-left"
 		parentElementQuerySelector="#EventsMenu"
 	>
-		<ul>
+		<ul class="list-inside list-disc space-y-1">
 			<li>Invites: {user.invitedUsers.length}</li>
-			<li class="lowercase">Tiers: {allTiers.join(", ")}</li>
+			<li>Tiers: <span>{allTiers.join(", ")}</span></li>
 		</ul>
 	</Tooltip>
 </TooltipWrapper>

@@ -31,7 +31,11 @@
 	>
 		{user.username}
 	</span>
-	<Tooltip parentElementQuerySelector="#EventsMenu" {isVisible}>
+	<Tooltip
+		{isVisible}
+		position="top-left"
+		parentElementQuerySelector="#EventsMenu"
+	>
 		<ul>
 			<li>Invites: {user.invitedUsers.length}</li>
 			<li class="lowercase">Tiers: {allTiers.join(", ")}</li>

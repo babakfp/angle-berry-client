@@ -63,7 +63,7 @@
 			</button>
 			<div class="relative flex">
 				<button
-					class="flex items-center gap-2 pr-4 pl-2 outline-inset"
+					class="flex items-center gap-2 pr-4 pl-2 duration-300 outline-inset hover:text-white"
 					on:click={() => (isUserMenuOpen = !isUserMenuOpen)}
 					bind:this={userMenuToggle}
 				>

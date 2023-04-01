@@ -14,7 +14,7 @@
 	const isCurrentUser = message.expand.user.id === user.id
 </script>
 
-<li id={message.id} class={isCurrentUser && "ml-auto"}>
+<li id={message.id} class="w-full {isCurrentUser && 'ml-auto'}">
 	<div
 		class="relative grid px-4 py-2"
 		in:shrinkHeight|local={{ duration: 200 }}

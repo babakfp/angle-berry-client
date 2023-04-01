@@ -1,6 +1,7 @@
 <script>
 	export let position = "top" // top, right, bottom, left
 	export let isVisible = false
+	export let keepAlive = false
 	export let parentElementQuerySelector = ""
 
 	let tooltip
@@ -67,12 +68,23 @@
 <div
 	bind:this={tooltip}
 	class="
-		absolute hide whitespace-nowrap rounded bg-gray-700 px-4 py-3 text-xs drop-shadow z-50 group-hover:block {isVisible && 'show'}
+		absolute hide whitespace-nowrap rounded bg-gray-700 px-4 py-3 text-xs drop-shadow z-50 group-hover:show {isVisible && 'show'}
 		after:absolute after:block after:h-0 after:w-0 after:border-solid after:border-[transparent]
-		{(position === 'top' || position === 'top-right' || position === 'top-left') && 'arrow-bottom bottom-full -translate-y-2 after:top-full'}
-		{(position === 'right' || position === 'right-top' || position === 'right-bottom') && 'arrow-left left-full translate-x-2 after:right-full'}
-		{(position === 'bottom' || position === 'bottom-right' || position === 'bottom-left') && 'arrow-top top-full translate-y-2 after:bottom-full'}
-		{(position === 'left' || position === 'left-top' || position === 'left-bottom') && 'arrow-right right-full -translate-x-2 after:left-full'}
+
+		before:block before:absolute
+		{((position === 'top' || position === 'top-right' || position === 'top-left') ||
+		(position === 'bottom' || position === 'bottom-right' || position === 'bottom-left')) &&
+		 'before:inset-x-0 before:h-2 before:w-full'}
+		{((position === 'right' || position === 'right-top' || position === 'right-bottom') ||
+		(position === 'left' || position === 'left-top' || position === 'left-bottom')) &&
+		 'before:inset-y-0 before:h-full before:w-2'}
+
+		{!keepAlive && 'before:[all:unset]'}
+
+		{(position === 'top' || position === 'top-right' || position === 'top-left') && 'arrow-bottom bottom-full -translate-y-2 before:top-full after:top-full'}
+		{(position === 'right' || position === 'right-top' || position === 'right-bottom') && 'arrow-left left-full translate-x-2 before:right-full after:right-full'}
+		{(position === 'bottom' || position === 'bottom-right' || position === 'bottom-left') && 'arrow-top top-full translate-y-2 before:bottom-full after:bottom-full'}
+		{(position === 'left' || position === 'left-top' || position === 'left-bottom') && 'arrow-right right-full -translate-x-2 before:left-full after:left-full'}
 
 		{position === 'top' && 'inset-x-center after:inset-x-center'}
 		{position === 'right' && 'inset-y-center after:inset-y-center'}

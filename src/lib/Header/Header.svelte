@@ -1,11 +1,12 @@
 <script>
+	import { page } from "$app/stores"
+	import { unreadMessagesLength } from "$stores/messages.js"
+	import { unseenEventsLength } from "$stores/events.js"
 	import Avatar from "$lib/Avatar.svelte"
 	import ChatMenu from "./ChatMenu/ChatMenu.svelte"
 	import EventsMenu from "./EventsMenu/EventsMenu.svelte"
 	import UserMenu from "./UserMenu/UserMenu.svelte"
 	import NotificationBlob from "$lib/NotificationBlob.svelte"
-	import { unreadMessagesLength } from "$stores/messages.js"
-	import { unseenEventsLength } from "$stores/events.js"
 
 	export let data
 	export let user
@@ -25,15 +26,14 @@
 	class="sticky top-0 z-50 h-header-height overflow-x-clip bg-gray-800 shadow"
 >
 	<div class="container flex h-full justify-between px-0">
-		<div class="flex">
-			<a
-				class="flex items-center px-4 text-white underline outline-inset"
-				href="/"
-				type="button"
-			>
-				Angle Berry
-			</a>
-		</div>
+		<a
+			class="flex items-center px-4 text-white underline outline-inset
+				{$page.url.pathname === '/' && 'pointer-events-none'}
+			"
+			href="/"
+		>
+			Angle Berry
+		</a>
 		<div class="flex">
 			<button
 				class="group relative flex items-center px-2 outline-inset"

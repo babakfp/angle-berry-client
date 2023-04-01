@@ -5,61 +5,69 @@
 
 	let tooltip
 
-	$: if (tooltip && isVisible) {
-		if (parentElementQuerySelector) {
-			const parentElement = document.querySelector(
-				parentElementQuerySelector
-			)
-			if (parentElement) {
-				const rootElementRect = tooltip.getBoundingClientRect()
-				const parentElementRect = parentElement.getBoundingClientRect()
-				let isTopNotFullyVisible = false
-				let isRightNotFullyVisible = false
-				let isBottomNotFullyVisible = false
-				let isLeftNotFullyVisible = false
+	$: if (tooltip && parentElementQuerySelector && isVisible) {
+		const parentElement = document.querySelector(parentElementQuerySelector)
 
-				if (rootElementRect.top < parentElementRect.top) {
-					isTopNotFullyVisible = true
-				}
-				if (rootElementRect.right > parentElementRect.right) {
-					isRightNotFullyVisible = true
-				}
-				if (rootElementRect.bottom > parentElementRect.bottom) {
-					isBottomNotFullyVisible = true
-				}
-				if (rootElementRect.left < parentElementRect.left) {
-					isLeftNotFullyVisible = true
-				}
+		const rootElementRect = tooltip.getBoundingClientRect()
+		const parentElementRect = parentElement.getBoundingClientRect()
+		let isTopNotFullyVisible = false
+		// let isRightNotFullyVisible = false
+		let isBottomNotFullyVisible = false
+		// let isLeftNotFullyVisible = false
 
-				if (isTopNotFullyVisible && isRightNotFullyVisible) {
-					position = "bottom-right"
-				} else if (isTopNotFullyVisible && isLeftNotFullyVisible) {
-					position = "bottom-left"
-				}
-				// TODO: Not tested.
-				else if (isBottomNotFullyVisible && isRightNotFullyVisible) {
-					position = "top-right"
-				} else if (isBottomNotFullyVisible && isLeftNotFullyVisible) {
-					position = "top-left"
-				}
-				// TODO: Not tested.
-				else {
-					if (isTopNotFullyVisible) position = "bottom"
-					if (isRightNotFullyVisible) position = "left"
-					if (isBottomNotFullyVisible) position = "top"
-					if (isLeftNotFullyVisible) position = "right"
-				}
+		if (rootElementRect.top < parentElementRect.top) {
+			isTopNotFullyVisible = true
+		}
+		// if (rootElementRect.right > parentElementRect.right) {
+		// 	isRightNotFullyVisible = true
+		// }
+		if (rootElementRect.bottom > parentElementRect.bottom) {
+			isBottomNotFullyVisible = true
+		}
+		// if (rootElementRect.left < parentElementRect.left) {
+		// 	isLeftNotFullyVisible = true
+		// }
+
+		if (isTopNotFullyVisible) {
+			if (position.includes("-")) {
+				position = position.replace("top", "bottom")
+			} else {
+				position = "bottom"
+			}
+		} else if (isBottomNotFullyVisible) {
+			if (position.includes("-")) {
+				position = position.replace("bottom", "top")
+			} else {
+				position = "top"
 			}
 		}
+
+		// if (isTopNotFullyVisible && isRightNotFullyVisible) {
+		// 	position = "bottom-right"
+		// } else if (isTopNotFullyVisible && isLeftNotFullyVisible) {
+		// 	position = "bottom-left"
+		// }
+		// // TODO: Not tested.
+		// else if (isBottomNotFullyVisible && isRightNotFullyVisible) {
+		// 	position = "top-right"
+		// } else if (isBottomNotFullyVisible && isLeftNotFullyVisible) {
+		// 	position = "top-left"
+		// }
+		// // TODO: Not tested.
+		// else {
+		// 	if (isTopNotFullyVisible) position = "bottom"
+		// 	if (isRightNotFullyVisible) position = "left"
+		// 	if (isBottomNotFullyVisible) position = "top"
+		// 	if (isLeftNotFullyVisible) position = "right"
+		// }
 	}
 </script>
 
-<!-- right-top right-bottom left-top left-bottom -->
 <!-- prettier-ignore -->
 <div
 	bind:this={tooltip}
 	class="
-		absolute hidden whitespace-nowrap rounded bg-gray-700 py-2 pl-3 pr-4 text-xs drop-shadow z-50 group-hover:block {isVisible && 'block'}
+		absolute hide whitespace-nowrap rounded bg-gray-700 py-2 pl-3 pr-4 text-xs drop-shadow z-50 group-hover:block {isVisible && 'show'}
 		after:absolute after:block after:h-0 after:w-0 after:border-solid after:border-[transparent]
 		{(position === 'top' || position === 'top-right' || position === 'top-left') && 'arrow-bottom bottom-full -translate-y-2 after:top-full'}
 		{(position === 'right' || position === 'right-top' || position === 'right-bottom') && 'arrow-left left-full translate-x-2 after:right-full'}

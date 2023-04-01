@@ -1,6 +1,9 @@
-export function getTextareaLineCount(textareaElement) {
-	const scrollHeight = textareaElement.scrollHeight
-	const style = getComputedStyle(textareaElement)
+/**
+ * @param textarea {Element}
+ */
+export function getTextareaLineCount(textarea) {
+	const scrollHeight = textarea.scrollHeight
+	const style = getComputedStyle(textarea)
 	const lineHeight = parseInt(style.lineHeight)
 	const paddingTop = parseInt(style.paddingTop)
 	const paddingBottom = parseInt(style.paddingBottom)

@@ -11,7 +11,7 @@
 	import MessageDeleteModal from "./MessageDeleteModal.svelte"
 
 	export let data
-	export let isOpen = false
+	export let isOpen = true
 	export let toggleButton
 
 	messages.set(data.messages.items || [])
@@ -21,9 +21,20 @@
 
 	let messageInputElement
 	let messageInputValue = ""
-	$: if (messageInputElement && messageInputValue === messageInputValue) {
-		messageInputElement.style.height = null
-		messageInputElement.style.height = `${messageInputElement.scrollHeight}px`
+
+	$: if (messageInputElement) {
+		console.log(messageInputValue)
+		messageInputElement.setAttribute("rows", 1)
+
+		const style = getComputedStyle(messageInputElement)
+		const scrollHeight = messageInputElement.scrollHeight
+		const lineHeight = parseInt(style.lineHeight)
+		const paddingTop = parseInt(style.paddingTop)
+		const paddingBottom = parseInt(style.paddingBottom)
+		const pureScrollHeight = scrollHeight - paddingTop - paddingBottom
+		const lineCount = pureScrollHeight / lineHeight
+
+		messageInputElement.setAttribute("rows", lineCount <= 4 ? lineCount : 4)
 	}
 
 	messageIdToEdit.subscribe(id => {
@@ -171,7 +182,7 @@
 			class="relative grid grid-cols-[1fr_auto] border-t border-white/5 shadow-[0_-1px_3px_0_rgb(0_0_0_/_0.1),_0_-1px_2px_-1px_rgb(0_0_0_/_0.1)]"
 		>
 			<textarea
-				class="block max-h-32 min-h-14 w-full resize-none bg-gray-800 p-4 pr-14 outline-inset placeholder:text-gray-500"
+				class="block w-full resize-none bg-gray-800 p-4 outline-inset placeholder:text-gray-500"
 				bind:this={messageInputElement}
 				bind:value={messageInputValue}
 				name="messageContent"

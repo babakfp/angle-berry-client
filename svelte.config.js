@@ -1,5 +1,5 @@
 import adapter from "@sveltejs/adapter-auto"
-import preprocess from "svelte-preprocess"
+import { vitePreprocess } from "@sveltejs/kit/vite"
 
 export default {
 	kit: {
@@ -8,7 +8,7 @@ export default {
 			$stores: "src/lib/stores",
 		},
 	},
-	preprocess: [preprocess({ postcss: true })],
+	preprocess: vitePreprocess(),
 	onwarn: (warning, handler) => {
 		if (warning.code.startsWith("a11y-")) return
 		handler(warning)

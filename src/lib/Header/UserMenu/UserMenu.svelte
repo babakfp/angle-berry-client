@@ -26,12 +26,12 @@
 >
 	<ul
 		id="UserMenu"
-		class="absolute top-full right-0 max-h-[calc(var(--hscreen)-var(--header-height)-theme(spacing.8))] w-60 translate-x-full overflow-y-auto overscroll-y-contain rounded bg-gray-800 text-sm shadow-[0_4px_16px_0_rgb(0_0_0/0.4)] duration-300 hide
+		class="absolute top-full right-0 max-h-[calc(var(--hscreen)-var(--header-height)-theme(spacing.8))] w-60 translate-x-full overflow-y-auto overscroll-y-contain rounded bg-gray-800 text-sm shadow-[0_4px_16px_0_rgb(0_0_0/0.4)] duration-200 hide
 		{isUserMenuOpen && '!-translate-x-4 !show'}"
 	>
 		<li>
 			<a
-				class="flex items-center justify-between rounded-t p-4 duration-300 outline-inset hover:text-white"
+				class="flex items-center justify-between rounded-t p-4 duration-200 outline-inset hover:text-white"
 				href="/how-to-invite"
 				type="button"
 			>
@@ -69,7 +69,7 @@
 		<li class="border-t border-white/5">
 			<form action="/logout" method="POST">
 				<button
-					class="w-full rounded-b p-4 text-left duration-300 outline-inset hover:text-white"
+					class="w-full rounded-b p-4 text-left duration-200 outline-inset hover:text-white"
 				>
 					Logout
 				</button>

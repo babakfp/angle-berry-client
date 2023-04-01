@@ -6,7 +6,7 @@
 </script>
 
 <tr
-	class="group relative duration-300
+	class="group relative duration-200
 	{isShowingAllTiers &&
 		'hover:bg-white/5 not-last:border-b not-last:border-white/5'}"
 >
@@ -19,7 +19,7 @@
 				: ""}
 		</span>
 		{#if (userTiers.includes(currentTier.id) || invitedUsersLength >= currentTier.invites) && isShowingAllTiers}
-			<span class="underline duration-300 group-hover:text-white">
+			<span class="underline duration-200 group-hover:text-white">
 				Watch now
 			</span>
 		{/if}
@@ -28,7 +28,7 @@
 		class="px-6 py-4 {(userTiers.includes(currentTier.id) ||
 			invitedUsersLength >= currentTier.invites) &&
 			isShowingAllTiers &&
-			'duration-300'}"
+			'duration-200'}"
 	>
 		{currentTier.price === 0 ? "Free" : "$" + currentTier.price}
 	</td>
@@ -36,7 +36,7 @@
 		class="px-6 py-4 {(userTiers.includes(currentTier.id) ||
 			invitedUsersLength >= currentTier.invites) &&
 			isShowingAllTiers &&
-			'duration-300'}"
+			'duration-200'}"
 	>
 		{currentTier.invites === 0 ? "Free" : currentTier.invites}
 	</td>

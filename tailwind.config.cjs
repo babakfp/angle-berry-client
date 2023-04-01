@@ -71,7 +71,7 @@ module.exports = {
 		({ addComponents }) => {
 			addComponents({
 				".link": {
-					"@apply underline duration-300 hover:text-white": "",
+					"@apply underline duration-200 hover:text-white": "",
 				},
 			})
 		},
@@ -79,7 +79,7 @@ module.exports = {
 			addComponents({
 				".btn": {
 					// prettier-ignore
-					"@apply relative inline-flex select-none items-center justify-center rounded py-1.5 px-3 text-sm text-white duration-150 drag-none": "",
+					"@apply relative inline-flex select-none items-center justify-center rounded py-1.5 px-3 text-sm text-white duration-200 drag-none": "",
 				},
 				".btn-danger": {
 					"@apply bg-red-600 hover:bg-red-500": "",

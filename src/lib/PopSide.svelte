@@ -25,14 +25,14 @@
 />
 
 <div
-	class="hidden sm:fixed sm:inset-0 sm:top-header-height sm:z-40 sm:block sm:bg-[black]/40 sm:duration-300 sm:hide
+	class="hidden sm:fixed sm:inset-0 sm:top-header-height sm:z-40 sm:block sm:bg-[black]/40 sm:duration-200 sm:hide
 	{isOpen && 'sm:show'}"
 />
 
 <OutClick on:outclick={() => (isOpen = false)} excludeElements={toggleButton}>
 	<div
 		{id}
-		class="fixed inset-0 z-50 grid h-screen translate-x-full grid-rows-[auto_1fr_auto] bg-gray-800 duration-300 hide
+		class="fixed inset-0 z-50 grid h-screen translate-x-full grid-rows-[auto_1fr_auto] bg-gray-800 duration-200 hide
 			{isOpen && '!translate-x-0 !show'}
 			sm:top-header-height sm:left-auto sm:z-40 sm:h-[calc(var(--hscreen)-theme(spacing.header-height))] sm:w-96 sm:grid-rows-[1fr_auto]
 		"

@@ -5,12 +5,12 @@
 
 <li class="relative">
 	<a
-		class="group flex items-center justify-between gap-4 py-2 px-4 duration-300 outline-inset hover:text-white"
+		class="group flex items-center justify-between gap-4 py-2 px-4 duration-200 outline-inset hover:text-white"
 		href="/tiers/{tier.id}"
 	>
 		<div class="flex items-center gap-3">
 			<div
-				class="h-1 w-1 rounded-full bg-gray-500 duration-300 group-hover:bg-white"
+				class="h-1 w-1 rounded-full bg-gray-500 duration-200 group-hover:bg-white"
 			/>
 			<span class="underline">
 				{tier.name}

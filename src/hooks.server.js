@@ -11,6 +11,22 @@ export async function handle({ event, resolve }) {
 		? structuredClone(event.locals.pb.authStore.model)
 		: null
 
+	if (event.locals.user) {
+		try {
+			const newestData = await event.locals.pb
+				.collection("users")
+				.authRefresh()
+			event.locals.user = structuredClone(newestData).record
+		} catch (error) {
+			if (error.response.code === 401) {
+				event.locals.pb.authStore.clear()
+				event.locals.user = null
+			} else {
+				throw error
+			}
+		}
+	}
+
 	const response = await resolve(event)
 
 	response.headers.set(

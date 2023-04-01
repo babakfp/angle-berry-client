@@ -1,5 +1,6 @@
 <script>
 	import { enhance } from "$app/forms"
+	import { writable } from "svelte/store"
 	import { messages, unreadMessagesLength } from "$stores/messages.js"
 	import { isReplying, replyTargetMessage } from "./replyMessage.js"
 	import { pb } from "$stores/pb.js"
@@ -20,29 +21,33 @@
 	$: if (isOpen && $unreadMessagesLength) unreadMessagesLength.set(0)
 
 	let messageInputElement
-	let messageInputValue = ""
+	const messageInputValue = writable("")
 
-	$: if (messageInputElement) {
-		console.log(messageInputValue)
-		messageInputElement.setAttribute("rows", 1)
-
-		const style = getComputedStyle(messageInputElement)
-		const scrollHeight = messageInputElement.scrollHeight
+	function getTextareaLineCount(el) {
+		const scrollHeight = el.scrollHeight
+		const style = getComputedStyle(el)
 		const lineHeight = parseInt(style.lineHeight)
 		const paddingTop = parseInt(style.paddingTop)
 		const paddingBottom = parseInt(style.paddingBottom)
 		const pureScrollHeight = scrollHeight - paddingTop - paddingBottom
 		const lineCount = pureScrollHeight / lineHeight
-
-		messageInputElement.setAttribute("rows", lineCount <= 4 ? lineCount : 4)
+		return lineCount
 	}
 
-	messageIdToEdit.subscribe(id => {
-		messageInputValue =
+	messageInputValue.subscribe(_ => {
+		if (!messageInputElement) return
+		messageInputElement.setAttribute("rows", 1)
+		const lineCount = getTextareaLineCount(messageInputElement)
+		messageInputElement.setAttribute("rows", lineCount <= 4 ? lineCount : 4)
+	})
+
+	messageIdToEdit.subscribe(id =>
+		messageInputValue.set(
 			$messages
 				.filter(msg => msg.id === id)[0]
 				?.content.replaceAll("<br>", "\n") || ""
-	})
+		)
+	)
 
 	$: isEditingMessage = !!$messageIdToEdit
 
@@ -184,7 +189,7 @@
 			<textarea
 				class="block w-full resize-none bg-gray-800 p-4 outline-inset placeholder:text-gray-500"
 				bind:this={messageInputElement}
-				bind:value={messageInputValue}
+				bind:value={$messageInputValue}
 				name="messageContent"
 				placeholder="Write your message..."
 				required

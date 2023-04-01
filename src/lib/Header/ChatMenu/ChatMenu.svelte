@@ -13,7 +13,7 @@
 	import MessageDeleteModal from "./MessageDeleteModal.svelte"
 
 	export let data
-	export let isOpen = true
+	export let isOpen = false
 	export let toggleButton
 
 	messages.set(data.messages.items || [])

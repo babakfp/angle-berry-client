@@ -5,6 +5,7 @@
 	import { isReplying, replyTargetMessage } from "./replyMessage.js"
 	import { pb } from "$stores/pb.js"
 	import { messageIdToEdit } from "./editMessage.js"
+	import { getTextareaLineCount } from "$lib/getTextareaLineCount.js"
 	import PopSide from "$lib/PopSide.svelte"
 	import Message from "./Message/Message.svelte"
 	import MessageActionPreview from "./MessageActionPreview.svelte"
@@ -22,17 +23,6 @@
 
 	let messageInputElement
 	const messageInputValue = writable("")
-
-	function getTextareaLineCount(el) {
-		const scrollHeight = el.scrollHeight
-		const style = getComputedStyle(el)
-		const lineHeight = parseInt(style.lineHeight)
-		const paddingTop = parseInt(style.paddingTop)
-		const paddingBottom = parseInt(style.paddingBottom)
-		const pureScrollHeight = scrollHeight - paddingTop - paddingBottom
-		const lineCount = pureScrollHeight / lineHeight
-		return lineCount
-	}
 
 	messageInputValue.subscribe(_ => {
 		if (!messageInputElement) return

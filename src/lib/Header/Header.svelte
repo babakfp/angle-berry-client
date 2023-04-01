@@ -27,8 +27,8 @@
 >
 	<div class="container flex h-full justify-between px-0">
 		<a
-			class="flex items-center px-4 text-white underline outline-inset
-				{$page.url.pathname === '/' && 'pointer-events-none'}
+			class="flex items-center px-4 text-white outline-inset
+				{$page.url.pathname === '/' ? 'pointer-events-none' : 'underline'}
 			"
 			href="/"
 		>

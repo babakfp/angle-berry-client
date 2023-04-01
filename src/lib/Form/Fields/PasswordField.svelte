@@ -26,16 +26,20 @@
 >
 	<button
 		slot="buttons"
-		class="btn btn-gray text-2xs"
+		class="btn btn-gray overflow-hidden px-3 text-2xs lowercase"
 		type="button"
 		on:click={() => (isPasswordVisible = !isPasswordVisible)}
 	>
-		<span class="duration-100 {isPasswordVisible && 'scale-50 hide'}">
+		<span
+			class="mt-0.5 duration-100
+				{isPasswordVisible && '-translate-y-4 scale-50 hide'}
+			"
+		>
 			Show
 		</span>
 		<span
-			class="absolute duration-100
-				{!isPasswordVisible && 'scale-50 hide'}
+			class="absolute mt-0.5 duration-100
+				{!isPasswordVisible && 'translate-y-4 scale-50 hide'}
 			"
 		>
 			Hide

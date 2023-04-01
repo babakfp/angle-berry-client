@@ -15,7 +15,10 @@
 >
 	{#if eventType === "userJoined"}
 		{#if event.expand.user.id === user.id}
-			<p>Welcome. You successfully joined.</p>
+			<p
+				>Welcome <UserTooltipInfo user={event.expand.user} />. You
+				successfully joined.</p
+			>
 		{:else}
 			<p>
 				<UserTooltipInfo user={event.expand.user} />

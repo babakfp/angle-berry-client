@@ -1,26 +1,9 @@
 <script>
-	import { getContext } from "svelte"
 	import Tooltip from "$lib/Tooltip.svelte"
 	import TooltipWrapper from "$lib/TooltipWrapper.svelte"
 
 	export let user
 	let isVisible
-	let allTiers = []
-
-	if (user.expand.retainedTiers) {
-		user.expand.retainedTiers.forEach(tier => {
-			allTiers.push(tier.name)
-		})
-	}
-
-	getContext("tiers").forEach(tier => {
-		if (
-			user.invitedUsers.length >= tier.invites &&
-			!allTiers.includes(tier.name)
-		) {
-			allTiers.push(tier.name)
-		}
-	})
 </script>
 
 <TooltipWrapper>
@@ -39,7 +22,14 @@
 	>
 		<ul class="list-inside list-disc space-y-1">
 			<li>Invites: {user.invitedUsers.length}</li>
-			<li>Tiers: <span>{allTiers.join(", ")}</span></li>
+			<li>
+				Tiers:
+				{#each user.expand.retainedTiers as tier, i}
+					<a class="link" href="/tiers/{tier.id}">
+						{tier.name}</a
+					>{user.expand.retainedTiers.length - 1 !== i ? " " : ""}
+				{/each}
+			</li>
 		</ul>
 	</Tooltip>
 </TooltipWrapper>

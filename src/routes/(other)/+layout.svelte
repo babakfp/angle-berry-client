@@ -64,18 +64,31 @@
 							.collection("users")
 							.getOne(record.user, {
 								expand: "retainedTiers",
+								$autoCancel: false,
 							})
-						const inviterRecord = await $pb
-							.collection("users")
-							.getOne(record.inviter, {
-								expand: "retainedTiers",
-							})
+						let inviterRecord
+						if (record.inviter)
+							inviterRecord = await $pb
+								.collection("users")
+								.getOne(record.inviter, {
+									expand: "retainedTiers",
+									$autoCancel: false,
+								})
 						record.expand = {
 							user: structuredClone(userRecord),
-							inviter: structuredClone(inviterRecord),
+							...(inviterRecord
+								? { inviter: structuredClone(inviterRecord) }
+								: {}),
 						}
 						events.update(v => [record, ...v])
 						unseenEventsLength.update(v => (v += 1))
+
+						if (record.expand.inviter.id === data.user.id) {
+							data.user.invitedUsers = [
+								...data.user.invitedUsers,
+								record.expand.user.id,
+							]
+						}
 					} else if (action === "delete") {
 						events.update(v => v.filter(m => m.id !== record.id))
 						unseenEventsLength.update(v => (v -= 1))

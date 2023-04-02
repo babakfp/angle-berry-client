@@ -1,3 +1,3 @@
-export function load({ locals }) {
-	return { user: locals.user }
+export function load({ locals: { user } }) {
+	return { user }
 }

@@ -1,6 +1,6 @@
 <script>
 	import Label from "./Label.svelte"
-	import Error from "./Error.svelte"
+	import Error from "../Error.svelte"
 
 	export let label = ""
 	export let required = false
@@ -56,5 +56,5 @@
 		{/if}
 	</div>
 
-	<Error {message} />
+	<Error class="mt-2" {message} />
 </label>

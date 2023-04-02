@@ -1,7 +1,7 @@
 <script>
 	import { enhance } from "$app/forms"
 	import FormSubmitButton from "$lib/Form/FormSubmitButton.svelte"
-	import FormErrorText from "$lib/Form/FormErrorText.svelte"
+	import Error from "./Error.svelte"
 	export let form
 	export let method
 	export let isSubmitting
@@ -25,5 +25,5 @@
 		{/if}
 	</FormSubmitButton>
 
-	<FormErrorText message={form?.message} usePrefix={true} />
+	<Error message={form?.message} />
 </form>

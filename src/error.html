@@ -27,16 +27,25 @@
 				min-height: 100vh;
 				min-height: 100dvh;
 				font-family: "JosefinSans";
+				--tw-bg-opacity: 1;
+				background-color: rgb(39 39 42 / var(--tw-bg-opacity));
+				--tw-text-opacity: 1;
+				color: rgb(212 212 216 / var(--tw-text-opacity));
 			}
-			.bg-gray-800 {
-				background-color: rgb(39 39 42);
+			h1 {
+				font-size: 6rem /* 96px */;
+				line-height: 1;
+				font-weight: 700;
+				--tw-text-opacity: 1;
+				color: rgb(255 255 255 / var(--tw-text-opacity));
 			}
-			.text-gray-300 {
-				color: rgb(212 212 216);
+			p {
+				--tw-text-opacity: 1;
+				color: rgb(161 161 170 / var(--tw-text-opacity));
 			}
 		</style>
 	</head>
-	<body class="bg-gray-800 text-gray-300">
+	<body>
 		<h1>%sveltekit.status%</h1>
 		<p>%sveltekit.error.message%</p>
 	</body>

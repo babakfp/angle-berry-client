@@ -5,7 +5,7 @@
 	export let currentTier = null
 	export let userTiers
 	export let invitedUsersLength
-	export let className = null
+	export let className = ""
 	export { className as class }
 
 	const isShowingAllTiers = !!allTiers

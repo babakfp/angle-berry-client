@@ -1,6 +1,6 @@
 <script>
 	export let message = ""
-	export let className
+	export let className = ""
 	export { className as class }
 </script>
 

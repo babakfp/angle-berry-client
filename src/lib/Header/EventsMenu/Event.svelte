@@ -15,28 +15,31 @@
 >
 	{#if eventType === "userJoined"}
 		{#if event.expand.user.id === user.id}
-			<p
-				>Welcome <UserTooltipInfo user={event.expand.user} />. You
-				successfully joined.</p
-			>
+			<p>
+				Welcome <UserTooltipInfo user={event.expand.user} />. You have
+				successfully joined this fantastic website. We hope you have a
+				fabulous time here.
+			</p>
 		{:else}
 			<p>
 				<UserTooltipInfo user={event.expand.user} />
-				successfully joined.
+				has successfully joined this website.
 			</p>
 		{/if}
 	{:else if eventType === "userJoinedByAnInvite"}
 		{#if event.expand.user.id === user.id}
 			<p>
-				Welcome. You successfully joined. <UserTooltipInfo
+				Welcome, <UserTooltipInfo user={event.expand.user} />. You have
+				successfully joined this fantastic website. We hope you have a
+				fabulous time here. User <UserTooltipInfo
 					user={event.expand.inviter}
-				/> invited you.
+				/> has invited you, and now they have 4 invites.
 			</p>
 		{:else}
 			<p>
-				<UserTooltipInfo user={event.expand.inviter} /> invited <UserTooltipInfo
-					user={event.expand.user}
-				/>. Now they have {event.inviterInvites} invites.
+				User <UserTooltipInfo user={event.expand.inviter} /> has invited
+				<UserTooltipInfo user={event.expand.user} />, and now they have
+				4 invites.
 			</p>
 		{/if}
 	{/if}

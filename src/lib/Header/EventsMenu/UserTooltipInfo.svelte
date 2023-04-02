@@ -8,7 +8,7 @@
 
 <TooltipWrapper>
 	<div
-		class="underline decoration-dotted decoration-1"
+		class="before:absolute before:inset-x-0 before:bottom-0 before:-z-1 before:block before:h-2 before:bg-white/10"
 		on:pointerenter={() => (isVisible = true)}
 		on:pointerleave={() => (isVisible = false)}
 	>

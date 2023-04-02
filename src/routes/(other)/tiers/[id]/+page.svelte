@@ -1,4 +1,5 @@
 <script>
+	import { PUBLIC_POCKETBASE_URL } from "$env/static/public"
 	import TierTable from "$lib/TierTable.svelte"
 	import VideoPlayer from "$lib/VideoPlayer.svelte"
 	export let data
@@ -30,7 +31,7 @@
 		{#each data?.tier?.expand?.videos as video}
 			<li>
 				<VideoPlayer
-					src="http://127.0.0.1:8090/api/files/{video.collectionName}/{video.id}/{video.file}"
+					src="{PUBLIC_POCKETBASE_URL}/api/files/{video.collectionName}/{video.id}/{video.file}"
 				/>
 			</li>
 		{/each}

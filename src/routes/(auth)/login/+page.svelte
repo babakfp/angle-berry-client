@@ -39,7 +39,7 @@
 >
 	<Form
 		method="POST"
-		{form}
+		message={form?.message}
 		{isSubmitting}
 		{handleFormSubmit}
 		submitButtonText="Login"

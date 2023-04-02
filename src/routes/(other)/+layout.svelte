@@ -1,5 +1,5 @@
 <script>
-	import { onMount, setContext } from "svelte"
+	import { onMount } from "svelte"
 	import { fly } from "svelte/transition"
 	import { page } from "$app/stores"
 	import { pageTransitionValues } from "$lib/pageTransitionValues.js"
@@ -11,7 +11,6 @@
 	import Header from "$lib/Header/Header.svelte"
 
 	export let data
-	setContext("tiers", data.tiers)
 
 	onMount(async () => {
 		try {

@@ -2,6 +2,7 @@
 	import OutClick from "svelte-outclick"
 	import { browser } from "$app/environment"
 	import { beforeNavigate } from "$app/navigation"
+	import IconX from "$icons/IconX.svelte"
 
 	export let isOpen = false
 	export let toggleButton = null
@@ -42,8 +43,7 @@
 			on:click={() => (isOpen = false)}
 		>
 			<span>Close</span>
-			<!-- prettier-ignore -->
-			<svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>
+			<IconX class="h-6 w-6" />
 		</button>
 
 		<slot />

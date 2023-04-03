@@ -6,6 +6,9 @@
 	import { pb } from "$stores/pb.js"
 	import { messageIdToEdit } from "./editMessage.js"
 	import { getTextareaLineCount } from "$lib/getTextareaLineCount.js"
+	import IconLoading from "$icons/IconLoading.svelte"
+	import IconCheck from "$icons/IconCheck.svelte"
+	import IconSend from "$icons/IconSend.svelte"
 	import PopSide from "$lib/PopSide.svelte"
 	import Message from "./Message/Message.svelte"
 	import MessageActionPreview from "./MessageActionPreview.svelte"
@@ -120,8 +123,7 @@
 						</p>
 						<button>Try again</button>
 					{:else}
-						<!-- prettier-ignore -->
-						<svg class="text-xl animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"/></svg>
+						<IconLoading class="text-xl" />
 						<p>Fetching older messages...</p>
 					{/if}
 				</div>
@@ -195,14 +197,11 @@
 					class="flex min-h-14 items-center px-4 text-2xl hover:bg-white/5"
 				>
 					{#if $messageIdToEdit}
-						<!-- prettier-ignore -->
-						<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>
+						<IconCheck />
 					{:else if isSendingMessage}
-						<!-- prettier-ignore -->
-						<svg class="animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"/></svg>
+						<IconLoading />
 					{:else}
-						<!-- prettier-ignore -->
-						<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.269 3.126A59.768 59.768 0 0 1 21.485 12 59.77 59.77 0 0 1 3.27 20.876L5.999 12zm0 0h7.5"/></svg>
+						<IconSend />
 					{/if}
 				</div>
 			</button>

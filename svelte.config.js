@@ -6,6 +6,7 @@ export default {
 		adapter: adapter(),
 		alias: {
 			$stores: "src/lib/stores",
+			$icons: "src/lib/Icons",
 		},
 	},
 	preprocess: vitePreprocess(),

@@ -3,6 +3,7 @@
 <script>
 	import { createEventDispatcher } from "svelte"
 	import { goToMessage } from "$lib/Header/ChatMenu/goToMessage.js"
+	import IconX from "$icons/IconX.svelte"
 
 	export let title
 	export let content
@@ -43,8 +44,7 @@
 			type="button"
 			on:click={handleClosing}
 		>
-			<!-- prettier-ignore -->
-			<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>
+			<IconX />
 		</button>
 	</div>
 {/if}

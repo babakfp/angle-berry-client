@@ -1,4 +1,5 @@
 <script>
+	import { page } from "$app/stores"
 	import AuthWrapper from "../AuthWrapper.svelte"
 	import Form from "$lib/Form/Form.svelte"
 	import UsernameField from "$lib/Form/Fields/UsernameField.svelte"
@@ -7,8 +8,12 @@
 	export let form
 
 	let formData = {
-		username: form?.username?.value || form?.identity?.value || "",
-		password: "",
+		username:
+			$page.url.searchParams.get("username") ||
+			form?.username?.value ||
+			form?.identity?.value ||
+			"",
+		password: $page.url.searchParams.get("password") || "",
 	}
 
 	export const snapshot = {

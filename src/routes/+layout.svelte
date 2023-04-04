@@ -1,10 +1,10 @@
 <script>
 	import { onMount } from "svelte"
-	import preventSavingPage from "$lib/dom/preventSavingPage.js"
-	import disableContextMenu from "$lib/dom/disableContextMenu.js"
-	import preventOpeningDevTools from "$lib/dom/preventOpeningDevTools.js"
-	import preventPrinting from "$lib/dom/preventPrinting.js"
-	import preventViewPageSource from "$lib/dom/preventViewPageSource.js"
+	import preventSavingPage from "$utils/disableBrowserDefaults/preventSavingPage.js"
+	import disableContextMenu from "$utils/disableBrowserDefaults/disableContextMenu.js"
+	import preventOpeningDevTools from "$utils/disableBrowserDefaults/preventOpeningDevTools.js"
+	import preventPrinting from "$utils/disableBrowserDefaults/preventPrinting.js"
+	import preventViewPageSource from "$utils/disableBrowserDefaults/preventViewPageSource.js"
 	import LoadingBar from "$lib/LoadingBar.svelte"
 	import "../app.postcss"
 

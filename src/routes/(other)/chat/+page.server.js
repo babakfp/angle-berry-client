@@ -1,5 +1,5 @@
 import { fail } from "@sveltejs/kit"
-import { handlePbConnectionIssue } from "$lib/handlePbConnectionIssue.js"
+import { handlePbConnectionIssue } from "$utils/handlePbConnectionIssue.js"
 
 export const actions = {
 	default: async ({ locals, request }) => {

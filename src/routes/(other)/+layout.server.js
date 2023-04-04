@@ -1,5 +1,5 @@
 import { redirect, error } from "@sveltejs/kit"
-import { handlePbConnectionIssue } from "$lib/handlePbConnectionIssue.js"
+import { handlePbConnectionIssue } from "$utils/handlePbConnectionIssue.js"
 
 export async function load({ locals, url }) {
 	if (!locals.user) throw redirect(303, "/login")

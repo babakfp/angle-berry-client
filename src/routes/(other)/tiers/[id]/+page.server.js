@@ -1,6 +1,6 @@
 import { error } from "@sveltejs/kit"
-import { handlePbConnectionIssue } from "$lib/handlePbConnectionIssue.js"
 import { previewTierId } from "$stores/previewTierId.js"
+import { handlePbConnectionIssue } from "$utils/handlePbConnectionIssue.js"
 
 export async function load({ locals, params }) {
 	try {

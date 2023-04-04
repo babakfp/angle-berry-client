@@ -6,7 +6,7 @@
 	import { messages, unreadMessagesLength } from "$stores/messages.js"
 	import { events, unseenEventsLength } from "$stores/events.js"
 	import { error } from "@sveltejs/kit"
-	import { handlePbConnectionIssue } from "$lib/handlePbConnectionIssue.js"
+	import { handlePbConnectionIssue } from "$utils/handlePbConnectionIssue.js"
 	import { pb } from "$stores/pb.js"
 	import Header from "$lib/Header/Header.svelte"
 

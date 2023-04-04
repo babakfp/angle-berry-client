@@ -1,6 +1,6 @@
 import PocketBase from "pocketbase"
 import { POCKETBASE_URL } from "$env/static/private"
-import { handlePbConnectionIssue } from "$lib/handlePbConnectionIssue.js"
+import { handlePbConnectionIssue } from "$utils/handlePbConnectionIssue.js"
 
 export async function handle({ event, resolve }) {
 	if (!POCKETBASE_URL)

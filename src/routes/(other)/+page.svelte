@@ -11,7 +11,7 @@
 
 <p>
 	You can <a class="link" href="/tiers/{getPreviewTier(data.tiers).id}">
-		watch free content here
+		watch free content
 	</a>
 	and for more content, you can get the following tiers:
 </p>

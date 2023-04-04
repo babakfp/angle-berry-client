@@ -11,11 +11,12 @@
 	<table class="w-full text-left text-sm text-gray-400">
 		<thead class="bg-white/10 text-xs uppercase">
 			<tr>
-				<th class="px-6 py-3 pt-3.5">TIER NAME</th>
+				<th class="px-6 py-3 pt-3.5">TIER</th>
+				<th class="px-6 py-3 pt-3.5">ACCESSED</th>
 				<th class="px-6 py-3 pt-3.5">PRICE</th>
 				<th class="px-6 py-3 pt-3.5">INVITES</th>
-				<th class="px-6 py-3 pt-3.5 text-right">PAYING</th>
-				<th class="px-6 py-3 pt-3.5 text-right">INVITING</th>
+				<th class="px-6 py-3 pt-3.5 text-right">PAY</th>
+				<th class="px-6 py-3 pt-3.5 text-right">INVITE</th>
 			</tr>
 		</thead>
 		<tbody>

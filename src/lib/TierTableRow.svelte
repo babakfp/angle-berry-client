@@ -11,19 +11,15 @@
 </script>
 
 <tr
-	class="group relative duration-200
+	class="relative duration-200
 	{!isShowingSingleTier &&
 		'hover:bg-white/5 not-last:border-b not-last:border-white/5'}"
 >
+	<th class="px-6 py-4 text-white">
+		{currentTier.name}
+	</th>
 	<th class="px-6 py-4">
-		<span class="text-white">
-			{currentTier.name}{hasAccess && !isShowingSingleTier ? ":" : ""}
-		</span>
-		{#if hasAccess && !isShowingSingleTier}
-			<span class="underline duration-200 group-hover:text-white">
-				Watch now
-			</span>
-		{/if}
+		{hasAccess ? "Yes" : "No"}
 	</th>
 	<td
 		class="px-6 py-4 {($page.data.user.retainedTiers.includes(

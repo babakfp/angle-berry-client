@@ -1,5 +1,5 @@
 <script>
-	import { getPreviewTier } from "$lib/getPreviewTier.js"
+	import { getPreviewTier } from "$utils/getPreviewTier.js"
 	import TierTable from "$lib/TierTable.svelte"
 
 	export let data

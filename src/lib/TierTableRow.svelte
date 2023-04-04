@@ -3,6 +3,11 @@
 
 	export let currentTier
 	export let isShowingAllTiers = null
+
+	// Does current user has access to this tier
+	const hasAccess =
+		$page.data.user.retainedTiers.includes(currentTier.id) ||
+		$page.data.user.invitedUsers.length >= currentTier.invites
 </script>
 
 <tr
@@ -12,15 +17,9 @@
 >
 	<th class="px-6 py-4">
 		<span class="text-white">
-			{currentTier.name}{($page.data.user.retainedTiers.includes(
-				currentTier.id
-			) ||
-				$page.data.user.invitedUsers.length >= currentTier.invites) &&
-			isShowingAllTiers
-				? ":"
-				: ""}
+			{currentTier.name}{hasAccess && isShowingAllTiers ? ":" : ""}
 		</span>
-		{#if ($page.data.user.retainedTiers.includes(currentTier.id) || $page.data.user.invitedUsers.length >= currentTier.invites) && isShowingAllTiers}
+		{#if hasAccess && isShowingAllTiers}
 			<span class="underline duration-200 group-hover:text-white">
 				Watch now
 			</span>
@@ -47,7 +46,7 @@
 		{currentTier.invites === 0 ? "Free" : currentTier.invites}
 	</td>
 	<td class="p-0 text-right">
-		{#if $page.data.user.retainedTiers.includes(currentTier.id) || $page.data.user.invitedUsers.length >= currentTier.invites}
+		{#if hasAccess}
 			<span class="px-6 py-4">_</span>
 		{:else}
 			<a
@@ -59,7 +58,7 @@
 		{/if}
 	</td>
 	<td class="p-0 text-right">
-		{#if $page.data.user.retainedTiers.includes(currentTier.id) || $page.data.user.invitedUsers.length >= currentTier.invites}
+		{#if hasAccess}
 			<span class="px-6 py-4">_</span>
 		{:else}
 			<a

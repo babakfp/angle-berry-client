@@ -30,7 +30,7 @@
 	let messageInputElement
 	const messageInputValue = writable("")
 
-	messageInputValue.subscribe(_ => {
+	messageInputValue.subscribe(() => {
 		if (!messageInputElement) return
 		messageInputElement.setAttribute("rows", 1)
 		const lineCount = getTextareaLineCount(messageInputElement)

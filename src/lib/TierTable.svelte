@@ -5,8 +5,6 @@
 	export let currentTier = null
 	export let className = ""
 	export { className as class }
-
-	const isShowingAllTiers = !!$page.data.tiers
 </script>
 
 <div class="{className} overflow-x-auto whitespace-nowrap rounded shadow-md">
@@ -21,12 +19,12 @@
 			</tr>
 		</thead>
 		<tbody>
-			{#if isShowingAllTiers}
-				{#each $page.data.tiers as tier}
-					<TierTableRow currentTier={tier} {isShowingAllTiers} />
-				{/each}
+			{#if !!currentTier}
+				<TierTableRow {currentTier} isShowingSingleTier={true} />
 			{:else}
-				<TierTableRow {currentTier} />
+				{#each $page.data.tiers as tier}
+					<TierTableRow currentTier={tier} />
+				{/each}
 			{/if}
 		</tbody>
 	</table>

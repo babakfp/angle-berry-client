@@ -2,7 +2,7 @@
 	import { page } from "$app/stores"
 
 	export let currentTier
-	export let isShowingAllTiers = null
+	export let isShowingSingleTier = false
 
 	// Does current user has access to this tier
 	const hasAccess =
@@ -12,14 +12,14 @@
 
 <tr
 	class="group relative duration-200
-	{isShowingAllTiers &&
+	{!isShowingSingleTier &&
 		'hover:bg-white/5 not-last:border-b not-last:border-white/5'}"
 >
 	<th class="px-6 py-4">
 		<span class="text-white">
-			{currentTier.name}{hasAccess && isShowingAllTiers ? ":" : ""}
+			{currentTier.name}{hasAccess && !isShowingSingleTier ? ":" : ""}
 		</span>
-		{#if hasAccess && isShowingAllTiers}
+		{#if hasAccess && !isShowingSingleTier}
 			<span class="underline duration-200 group-hover:text-white">
 				Watch now
 			</span>
@@ -30,7 +30,7 @@
 			currentTier.id
 		) ||
 			$page.data.user.invitedUsers.length >= currentTier.invites) &&
-			isShowingAllTiers &&
+			!isShowingSingleTier &&
 			'duration-200'}"
 	>
 		{currentTier.price === 0 ? "Free" : "$" + currentTier.price}
@@ -40,7 +40,7 @@
 			currentTier.id
 		) ||
 			$page.data.user.invitedUsers.length >= currentTier.invites) &&
-			isShowingAllTiers &&
+			!isShowingSingleTier &&
 			'duration-200'}"
 	>
 		{currentTier.invites === 0 ? "Free" : currentTier.invites}
@@ -70,7 +70,7 @@
 		{/if}
 	</td>
 
-	{#if isShowingAllTiers}
+	{#if !isShowingSingleTier}
 		<a
 			class="absolute inset-0 outline-inset"
 			href="/tiers/{currentTier.id}"

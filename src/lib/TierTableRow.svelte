@@ -18,37 +18,32 @@
 	<th class="px-6 py-4 text-white">
 		{currentTier.name}
 	</th>
-	<th class="px-6 py-4">
-		{hasAccess ? "Yes" : "No"}
-	</th>
 	<td class="px-6 py-4">
-		{currentTier.price === 0 ? "Free" : "$" + currentTier.price}
-	</td>
-	<td class="px-6 py-4">
-		{currentTier.invites === 0 ? "Free" : currentTier.invites}
-	</td>
-	<td class="p-0 text-right">
-		{#if hasAccess}
-			<span class="px-6 py-4">_</span>
+		{#if currentTier.price === 0 && currentTier.invites === 0}
+			Free
 		{:else}
-			<a
-				class="link relative z-1 block px-6 py-4 outline-inset"
-				href="/how-to-pay"
-			>
-				Get access
-			</a>
+			${currentTier.price} or {currentTier.invites} invites
 		{/if}
 	</td>
 	<td class="p-0 text-right">
 		{#if hasAccess}
-			<span class="px-6 py-4">_</span>
+			<span class="px-6 py-4">Accessed</span>
 		{:else}
-			<a
-				class="link relative z-1 block px-6 py-4 outline-inset"
-				href="/how-to-invite"
-			>
-				Start inviting
-			</a>
+			<div class="flex items-center justify-end">
+				<a
+					class="link relative z-1 block px-6 py-4 pr-2 outline-inset"
+					href="/how-to-pay"
+				>
+					Pay
+				</a>
+				or
+				<a
+					class="link relative z-1 block px-6 py-4 pl-2 outline-inset"
+					href="/how-to-invite"
+				>
+					Start inviting
+				</a>
+			</div>
 		{/if}
 	</td>
 

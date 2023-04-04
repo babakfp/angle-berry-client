@@ -21,24 +21,10 @@
 	<th class="px-6 py-4">
 		{hasAccess ? "Yes" : "No"}
 	</th>
-	<td
-		class="px-6 py-4 {($page.data.user.retainedTiers.includes(
-			currentTier.id
-		) ||
-			$page.data.user.invitedUsers.length >= currentTier.invites) &&
-			!isShowingSingleTier &&
-			'duration-200'}"
-	>
+	<td class="px-6 py-4">
 		{currentTier.price === 0 ? "Free" : "$" + currentTier.price}
 	</td>
-	<td
-		class="px-6 py-4 {($page.data.user.retainedTiers.includes(
-			currentTier.id
-		) ||
-			$page.data.user.invitedUsers.length >= currentTier.invites) &&
-			!isShowingSingleTier &&
-			'duration-200'}"
-	>
+	<td class="px-6 py-4">
 		{currentTier.invites === 0 ? "Free" : currentTier.invites}
 	</td>
 	<td class="p-0 text-right">

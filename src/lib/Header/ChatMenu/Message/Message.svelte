@@ -5,7 +5,7 @@
 		isContextMenuOpen,
 		contextMenuTargetEvent,
 		contextMenuTargetMessage,
-	} from "../contextMenu.js"
+	} from "../chatStores.js"
 	import MessageDateAndTime from "./MessageDateAndTime.svelte"
 	import MessageReplyPreview from "./MessageReplyPreview.svelte"
 

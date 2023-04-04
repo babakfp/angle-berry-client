@@ -1,10 +1,12 @@
 <script>
 	import { pb } from "$stores/pb.js"
-	import { messageIdToDelete } from "./deleteMessage.js"
-	import { messageIdToEdit } from "./editMessage.js"
-	import { isReplying } from "./replyMessage.js"
 	import { messages } from "$stores/messages.js"
-	import { contextMenuTargetMessage } from "./contextMenu.js"
+	import {
+		contextMenuTargetMessage,
+		messageIdToDelete,
+		messageIdToEdit,
+		isReplying,
+	} from "./chatStores.js"
 	import IconLoading from "$icons/IconLoading.svelte"
 	import Modal from "$lib/Modal.svelte"
 

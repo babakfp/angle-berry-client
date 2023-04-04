@@ -3,10 +3,12 @@
 	import { enhance } from "$app/forms"
 	import { writable } from "svelte/store"
 	import { messages, unreadMessagesLength } from "$stores/messages.js"
-	import { isReplying, replyTargetMessage } from "./replyMessage.js"
 	import { pb } from "$stores/pb.js"
-	import { messageIdToEdit } from "./editMessage.js"
-	import { getTextareaLineCount } from "$utils/getTextareaLineCount.js"
+	import {
+		isReplying,
+		replyTargetMessage,
+		messageIdToEdit,
+	} from "./chatStores.js"
 	import IconLoading from "$icons/IconLoading.svelte"
 	import IconCheck from "$icons/IconCheck.svelte"
 	import IconSend from "$icons/IconSend.svelte"
@@ -15,6 +17,7 @@
 	import MessageActionPreview from "./MessageActionPreview.svelte"
 	import ContextMenu from "./ContextMenu.svelte"
 	import MessageDeleteModal from "./MessageDeleteModal.svelte"
+	import { getTextareaLineCount } from "$utils/getTextareaLineCount.js"
 
 	export let isOpen = false
 	export let toggleButton

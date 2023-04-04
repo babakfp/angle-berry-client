@@ -2,14 +2,15 @@
 	import { page } from "$app/stores"
 	import { copyText } from "svelte-copy"
 	import OutClick from "svelte-outclick"
-	import { isReplying, replyTargetMessage } from "./replyMessage.js"
-	import { messageIdToDelete } from "./deleteMessage.js"
-	import { messageIdToEdit } from "./editMessage.js"
 	import {
 		isContextMenuOpen,
 		contextMenuTargetEvent,
 		contextMenuTargetMessage,
-	} from "./contextMenu.js"
+		isReplying,
+		replyTargetMessage,
+		messageIdToDelete,
+		messageIdToEdit,
+	} from "./chatStores.js"
 	import IconReply from "$icons/IconReply.svelte"
 	import IconPen from "$icons/IconPen.svelte"
 	import IconClipboard from "$icons/IconClipboard.svelte"

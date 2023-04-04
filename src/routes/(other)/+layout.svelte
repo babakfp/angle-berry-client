@@ -2,7 +2,7 @@
 	import { onMount } from "svelte"
 	import { fly } from "svelte/transition"
 	import { page } from "$app/stores"
-	import { pageTransitionValues } from "$lib/pageTransitionValues.js"
+	import { pageTransitionValues } from "$stores/pageTransitionValues.js"
 	import { messages, unreadMessagesLength } from "$stores/messages.js"
 	import { events, unseenEventsLength } from "$stores/events.js"
 	import { error } from "@sveltejs/kit"

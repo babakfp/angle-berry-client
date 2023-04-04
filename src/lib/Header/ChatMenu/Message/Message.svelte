@@ -1,6 +1,6 @@
 <script>
 	import { page } from "$app/stores"
-	import { shrinkHeight } from "$lib/shrinkHeight.js"
+	import { shrinkHeight } from "$utils/shrinkHeight.js"
 	import {
 		isContextMenuOpen,
 		contextMenuTargetEvent,

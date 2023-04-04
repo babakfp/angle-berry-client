@@ -4,6 +4,7 @@ import {
 	isPasswordInvalid,
 } from "$lib/Form/formValidation.js"
 import { handlePbConnectionIssue } from "$utils/handlePbConnectionIssue.js"
+import { getPreviewTierId } from "$utils/previewTier.js"
 
 export const actions = {
 	default: async ({ locals, request }) => {
@@ -39,6 +40,6 @@ export const actions = {
 			})
 		}
 
-		throw redirect(303, "/")
+		throw redirect(303, `/tiers/${getPreviewTierId()}`)
 	},
 }

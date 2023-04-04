@@ -11,7 +11,7 @@
 </script>
 
 <tr
-	class="relative duration-200
+	class="group relative duration-200
 	{!isShowingSingleTier &&
 		'hover:bg-white/5 not-last:border-b not-last:border-white/5'}"
 >
@@ -27,18 +27,22 @@
 	</td>
 	<td class="p-0 text-right">
 		{#if hasAccess}
-			<span class="px-6 py-4">Watch now</span>
+			<span
+				class="px-6 py-4 underline duration-200 group-hover:text-white"
+			>
+				Watch now
+			</span>
 		{:else}
-			<div class="flex items-center justify-end">
+			<div class="flex items-center justify-end px-4">
 				<a
-					class="link relative z-1 block px-6 py-4 pr-2 outline-inset"
+					class="link relative z-1 block px-2 py-4 outline-inset"
 					href="/how-to-pay"
 				>
 					Pay
 				</a>
 				or
 				<a
-					class="link relative z-1 block px-6 py-4 pl-2 outline-inset"
+					class="link relative z-1 block px-2 py-4 outline-inset"
 					href="/how-to-invite"
 				>
 					Start inviting

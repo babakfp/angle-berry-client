@@ -27,11 +27,15 @@
 	</td>
 	<td class="p-0 text-right">
 		{#if hasAccess}
-			<span
-				class="px-6 py-4 underline duration-200 group-hover:text-white"
-			>
-				Watch now
-			</span>
+			{#if !isShowingSingleTier}
+				<span
+					class="px-6 py-4 underline duration-200 group-hover:text-white"
+				>
+					Watch now
+				</span>
+			{:else}
+				<span class="px-6 py-4">Has access</span>
+			{/if}
 		{:else}
 			<div class="flex items-center justify-end px-4">
 				<a

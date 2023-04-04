@@ -13,7 +13,7 @@
 			<tr>
 				<th class="px-6 py-3 pt-3.5">TIER</th>
 				<th class="px-6 py-3 pt-3.5">PRICE</th>
-				<th class="px-6 py-3 pt-3.5 text-right">GET ACCESS</th>
+				<th class="px-6 py-3 pt-3.5 text-right">ACCESS</th>
 			</tr>
 		</thead>
 		<tbody>

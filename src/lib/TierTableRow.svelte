@@ -27,7 +27,7 @@
 	</td>
 	<td class="p-0 text-right">
 		{#if hasAccess}
-			<span class="px-6 py-4">Accessed</span>
+			<span class="px-6 py-4">Watch now</span>
 		{:else}
 			<div class="flex items-center justify-end">
 				<a

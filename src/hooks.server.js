@@ -3,6 +3,9 @@ import { POCKETBASE_URL } from "$env/static/private"
 import { handlePbConnectionIssue } from "$lib/handlePbConnectionIssue.js"
 
 export async function handle({ event, resolve }) {
+	if (!POCKETBASE_URL)
+		throw new Error("Missing required Environment Variables!")
+
 	event.locals.pb = new PocketBase(POCKETBASE_URL)
 	event.locals.pb.authStore.loadFromCookie(
 		event.request.headers.get("cookie") || ""

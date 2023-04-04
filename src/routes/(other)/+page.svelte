@@ -1,8 +1,6 @@
 <script>
-	import { getPreviewTier } from "$utils/getPreviewTier.js"
+	import { getPreviewTierId } from "$utils/previewTier.js"
 	import TierTable from "$lib/TierTable.svelte"
-
-	export let data
 </script>
 
 <svelte:head>
@@ -10,7 +8,7 @@
 </svelte:head>
 
 <p>
-	You can <a class="link" href="/tiers/{getPreviewTier(data.tiers).id}">
+	You can <a class="link" href="/tiers/{getPreviewTierId()}">
 		watch free content
 	</a>
 	and for more content, you can get the following tiers:

@@ -3,8 +3,8 @@ import {
 	isUsernameInvalid,
 	isPasswordInvalid,
 } from "$lib/Form/formValidation.js"
-import { previewTierId } from "$stores/previewTierId.js"
 import { handlePbConnectionIssue } from "$utils/handlePbConnectionIssue.js"
+import { getPreviewTierId } from "$utils/previewTier.js"
 
 export const actions = {
 	default: async ({ locals, request, url }) => {
@@ -38,7 +38,7 @@ export const actions = {
 					username,
 					password,
 					passwordConfirm: password,
-					retainedTiers: [previewTierId],
+					retainedTiers: [getPreviewTierId()],
 					invitedBy: doesInviterExists ? [inviterId] : null,
 				})
 

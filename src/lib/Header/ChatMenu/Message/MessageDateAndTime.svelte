@@ -1,5 +1,5 @@
 <script>
-	import { dateToAMPM } from "./dateToAMPM.js"
+	import { dateToAMPM } from "$utils/dateToAMPM.js"
 
 	export let created
 	export let updated

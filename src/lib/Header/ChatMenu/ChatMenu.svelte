@@ -1,4 +1,5 @@
 <script>
+	import { page } from "$app/stores"
 	import { enhance } from "$app/forms"
 	import { writable } from "svelte/store"
 	import { messages, unreadMessagesLength } from "$stores/messages.js"
@@ -15,11 +16,10 @@
 	import ContextMenu from "./ContextMenu.svelte"
 	import MessageDeleteModal from "./MessageDeleteModal.svelte"
 
-	export let data
 	export let isOpen = false
 	export let toggleButton
 
-	messages.set(data.messages.items || [])
+	messages.set($page.data.messages.items || [])
 
 	$: if (!isOpen && $messageIdToEdit) messageIdToEdit.set(null)
 	$: if (isOpen && $unreadMessagesLength) unreadMessagesLength.set(0)
@@ -71,7 +71,7 @@
 		// Added + 200 to fetch the data earlier for a better UX
 		if (
 			pageNumberFortheNextOlderMessagesToFetch <=
-				data.messages.totalPages &&
+				$page.data.messages.totalPages &&
 			Math.abs(e.target.scrollTop) + 200 >=
 				e.target.scrollHeight - e.target.clientHeight
 		) {
@@ -112,7 +112,7 @@
 			on:scroll={handleScroll}
 		>
 			{#each $messages as message (message.id)}
-				<Message user={data.user} {message} />
+				<Message {message} />
 			{/each}
 			{#if isFetchingOlderMessages}
 				<div class="mx-auto flex items-center gap-2 px-4 text-gray-500">
@@ -219,7 +219,7 @@
 	</form>
 
 	<svelte:fragment slot="outer">
-		<ContextMenu user={data.user} bind:messageInputElement />
+		<ContextMenu bind:messageInputElement />
 		<MessageDeleteModal />
 	</svelte:fragment>
 </PopSide>

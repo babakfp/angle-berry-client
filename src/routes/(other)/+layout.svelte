@@ -101,7 +101,7 @@
 	})
 </script>
 
-<Header {data} user={data?.user} tiers={data?.tiers} />
+<Header />
 
 {#key $page.url.pathname}
 	<main

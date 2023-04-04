@@ -10,10 +10,6 @@
 	import EventsMenu from "./EventsMenu/EventsMenu.svelte"
 	import UserMenu from "./UserMenu/UserMenu.svelte"
 
-	export let data
-	export let user
-	export let tiers
-
 	let isEventsMenuOpen
 	let eventsMenuToggle
 
@@ -72,22 +68,13 @@
 					bind:this={userMenuToggle}
 				>
 					<Avatar class="w-8 rounded-full" />
-					{user.username}
+					{$page.data.user.username}
 				</button>
-				<UserMenu
-					user={data.user}
-					{tiers}
-					{userMenuToggle}
-					bind:isUserMenuOpen
-				/>
+				<UserMenu {userMenuToggle} bind:isUserMenuOpen />
 			</div>
 		</div>
 	</div>
 </header>
 
-<EventsMenu
-	{data}
-	bind:isOpen={isEventsMenuOpen}
-	toggleButton={eventsMenuToggle}
-/>
-<ChatMenu {data} bind:isOpen={isChatMenuOpen} toggleButton={chatMenuToggle} />
+<EventsMenu bind:isOpen={isEventsMenuOpen} toggleButton={eventsMenuToggle} />
+<ChatMenu bind:isOpen={isChatMenuOpen} toggleButton={chatMenuToggle} />

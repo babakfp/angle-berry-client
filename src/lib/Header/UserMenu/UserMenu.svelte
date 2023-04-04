@@ -7,8 +7,6 @@
 	import { beforeNavigate } from "$app/navigation"
 	import Tier from "./Tier.svelte"
 
-	export let user
-	export let tiers
 	export let userMenuToggle
 	export let isUserMenuOpen = false
 
@@ -36,13 +34,13 @@
 				type="button"
 			>
 				<span>
-					Invites: {user.invitedUsers.length}
+					Invites: {$page.data.user.invitedUsers.length}
 				</span>
 				<span class="underline">Start inviting</span>
 			</a>
 		</li>
 
-		<li use:copy={`${$page.url.origin}/register?id=${user.id}`}>
+		<li use:copy={`${$page.url.origin}/register?id=${$page.data.user.id}`}>
 			<button
 				class="bg-[black] p-4 outline-inset"
 				on:click={() =>
@@ -53,15 +51,15 @@
 				<span>Click to copy your invite link:</span>
 				<!-- Removed `select-text` class because it's buggy -->
 				<p class="mt-1 leading-4 text-gray-500">
-					{$page.url.origin}/register?id={user.id}
+					{$page.url.origin}/register?id={$page.data.user.id}
 				</p>
 			</button>
 		</li>
 
 		<nav class="max-h-64 overflow-y-auto">
 			<ol>
-				{#each tiers as tier}
-					<Tier {tier} {user} />
+				{#each $page.data.tiers as tier}
+					<Tier {tier} />
 				{/each}
 			</ol>
 		</nav>

@@ -1,6 +1,7 @@
 <script>
+	import { page } from "$app/stores"
+
 	export let tier
-	export let user
 </script>
 
 <li class="relative">
@@ -17,7 +18,7 @@
 			</span>
 		</div>
 		<div>
-			{#if user.retainedTiers.includes(tier.id) || user.invitedUsers.length >= tier.invites}
+			{#if $page.data.user.retainedTiers.includes(tier.id) || $page.data.user.invitedUsers.length >= tier.invites}
 				<span>Watch now</span>
 			{:else}
 				<span class="group-hover:hidden">Locked</span>

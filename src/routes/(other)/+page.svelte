@@ -16,12 +16,7 @@
 	and for more content, you can get the following tiers:
 </p>
 
-<TierTable
-	class="mt-8"
-	allTiers={data?.tiers}
-	userTiers={data?.user.retainedTiers}
-	invitedUsersLength={data?.user.invitedUsers.length}
-/>
+<TierTable class="mt-8" />
 
 <div class="mt-8">
 	<!-- prettier-ignore -->

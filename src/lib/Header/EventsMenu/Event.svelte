@@ -1,8 +1,8 @@
 <script>
+	import { page } from "$app/stores"
 	import { fly } from "svelte/transition"
 	import UserTooltipInfo from "./UserTooltipInfo.svelte"
 
-	export let user
 	export let event
 
 	let eventType = "userJoined"
@@ -14,7 +14,7 @@
 	transition:fly={{ x: 64, duration: 500 }}
 >
 	{#if eventType === "userJoined"}
-		{#if event.expand.user.id === user.id}
+		{#if event.expand.user.id === $page.data.user.id}
 			<p>
 				Welcome <UserTooltipInfo user={event.expand.user} />. You have
 				successfully joined this fantastic website. We hope you have a
@@ -27,7 +27,7 @@
 			</p>
 		{/if}
 	{:else if eventType === "userJoinedByAnInvite"}
-		{#if event.expand.user.id === user.id}
+		{#if event.expand.user.id === $page.data.user.id}
 			<p>
 				Welcome, <UserTooltipInfo user={event.expand.user} />. You have
 				successfully joined this fantastic website. We hope you have a

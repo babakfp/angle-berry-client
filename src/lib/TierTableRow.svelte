@@ -1,8 +1,8 @@
 <script>
+	import { page } from "$app/stores"
+
 	export let currentTier
-	export let userTiers
 	export let isShowingAllTiers = null
-	export let invitedUsersLength
 </script>
 
 <tr
@@ -12,36 +12,42 @@
 >
 	<th class="px-6 py-4">
 		<span class="text-white">
-			{currentTier.name}{(userTiers.includes(currentTier.id) ||
-				invitedUsersLength >= currentTier.invites) &&
+			{currentTier.name}{($page.data.user.retainedTiers.includes(
+				currentTier.id
+			) ||
+				$page.data.user.invitedUsers.length >= currentTier.invites) &&
 			isShowingAllTiers
 				? ":"
 				: ""}
 		</span>
-		{#if (userTiers.includes(currentTier.id) || invitedUsersLength >= currentTier.invites) && isShowingAllTiers}
+		{#if ($page.data.user.retainedTiers.includes(currentTier.id) || $page.data.user.invitedUsers.length >= currentTier.invites) && isShowingAllTiers}
 			<span class="underline duration-200 group-hover:text-white">
 				Watch now
 			</span>
 		{/if}
 	</th>
 	<td
-		class="px-6 py-4 {(userTiers.includes(currentTier.id) ||
-			invitedUsersLength >= currentTier.invites) &&
+		class="px-6 py-4 {($page.data.user.retainedTiers.includes(
+			currentTier.id
+		) ||
+			$page.data.user.invitedUsers.length >= currentTier.invites) &&
 			isShowingAllTiers &&
 			'duration-200'}"
 	>
 		{currentTier.price === 0 ? "Free" : "$" + currentTier.price}
 	</td>
 	<td
-		class="px-6 py-4 {(userTiers.includes(currentTier.id) ||
-			invitedUsersLength >= currentTier.invites) &&
+		class="px-6 py-4 {($page.data.user.retainedTiers.includes(
+			currentTier.id
+		) ||
+			$page.data.user.invitedUsers.length >= currentTier.invites) &&
 			isShowingAllTiers &&
 			'duration-200'}"
 	>
 		{currentTier.invites === 0 ? "Free" : currentTier.invites}
 	</td>
 	<td class="p-0 text-right">
-		{#if userTiers.includes(currentTier.id) || invitedUsersLength >= currentTier.invites}
+		{#if $page.data.user.retainedTiers.includes(currentTier.id) || $page.data.user.invitedUsers.length >= currentTier.invites}
 			<span class="px-6 py-4">_</span>
 		{:else}
 			<a
@@ -53,7 +59,7 @@
 		{/if}
 	</td>
 	<td class="p-0 text-right">
-		{#if userTiers.includes(currentTier.id) || invitedUsersLength >= currentTier.invites}
+		{#if $page.data.user.retainedTiers.includes(currentTier.id) || $page.data.user.invitedUsers.length >= currentTier.invites}
 			<span class="px-6 py-4">_</span>
 		{:else}
 			<a

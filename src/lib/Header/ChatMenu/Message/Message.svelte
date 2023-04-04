@@ -1,4 +1,5 @@
 <script>
+	import { page } from "$app/stores"
 	import { shrinkHeight } from "$lib/shrinkHeight.js"
 	import {
 		isContextMenuOpen,
@@ -8,10 +9,9 @@
 	import MessageDateAndTime from "./MessageDateAndTime.svelte"
 	import MessageReplyPreview from "./MessageReplyPreview.svelte"
 
-	export let user
 	export let message
 
-	const isCurrentUser = message.expand.user.id === user.id
+	const isCurrentUser = message.expand.user.id === $page.data.user.id
 </script>
 
 <li id={message.id} class="w-full {isCurrentUser && 'ml-auto'}">

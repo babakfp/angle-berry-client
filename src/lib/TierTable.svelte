@@ -1,14 +1,12 @@
 <script>
+	import { page } from "$app/stores"
 	import TierTableRow from "$lib/TierTableRow.svelte"
 
-	export let allTiers = null
 	export let currentTier = null
-	export let userTiers
-	export let invitedUsersLength
 	export let className = ""
 	export { className as class }
 
-	const isShowingAllTiers = !!allTiers
+	const isShowingAllTiers = !!$page.data.tiers
 </script>
 
 <div class="{className} overflow-x-auto whitespace-nowrap rounded shadow-md">
@@ -24,16 +22,11 @@
 		</thead>
 		<tbody>
 			{#if isShowingAllTiers}
-				{#each allTiers as tier}
-					<TierTableRow
-						currentTier={tier}
-						{userTiers}
-						{invitedUsersLength}
-						{isShowingAllTiers}
-					/>
+				{#each $page.data.tiers as tier}
+					<TierTableRow currentTier={tier} {isShowingAllTiers} />
 				{/each}
 			{:else}
-				<TierTableRow {currentTier} {userTiers} {invitedUsersLength} />
+				<TierTableRow {currentTier} />
 			{/if}
 		</tbody>
 	</table>

@@ -1,4 +1,5 @@
 <script>
+	import { page } from "$app/stores"
 	import { copyText } from "svelte-copy"
 	import OutClick from "svelte-outclick"
 	import { isReplying, replyTargetMessage } from "./replyMessage.js"
@@ -16,7 +17,6 @@
 	import MessageContextMenu from "./MessageContextMenu.svelte"
 	import MessageContextMenuItem from "./MessageContextMenuItem.svelte"
 
-	export let user
 	export let messageInputElement = null
 
 	let copyTimeoutId
@@ -42,7 +42,7 @@
 		>
 			<IconReply />
 		</MessageContextMenuItem>
-		{#if $contextMenuTargetMessage.expand?.user.id === user.id}
+		{#if $contextMenuTargetMessage.expand?.user.id === $page.data.user.id}
 			<MessageContextMenuItem
 				title="Edit"
 				on:click={() => {
@@ -71,7 +71,7 @@
 		>
 			<IconClipboard />
 		</MessageContextMenuItem>
-		{#if $contextMenuTargetMessage.expand.user.id === user.id}
+		{#if $contextMenuTargetMessage.expand.user.id === $page.data.user.id}
 			<MessageContextMenuItem
 				class="text-red-500"
 				title="Delete"

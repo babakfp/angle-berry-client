@@ -11,12 +11,7 @@
 
 <h1 class="text-4xl font-bold text-white">{data?.tier.name}</h1>
 
-<TierTable
-	class="mt-8"
-	currentTier={data.tier}
-	userTiers={data?.user.retainedTiers}
-	invitedUsersLength={data?.user.invitedUsers.length}
-/>
+<TierTable class="mt-8" currentTier={data.tier} />
 
 {#if !data.hasAccessToThisTier}
 	<p class="mt-8">

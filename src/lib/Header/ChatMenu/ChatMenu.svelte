@@ -6,7 +6,7 @@
 	import { isReplying, replyTargetMessage } from "./replyMessage.js"
 	import { pb } from "$stores/pb.js"
 	import { messageIdToEdit } from "./editMessage.js"
-	import { getTextareaLineCount } from "$lib/getTextareaLineCount.js"
+	import { getTextareaLineCount } from "$utils/getTextareaLineCount.js"
 	import IconLoading from "$icons/IconLoading.svelte"
 	import IconCheck from "$icons/IconCheck.svelte"
 	import IconSend from "$icons/IconSend.svelte"

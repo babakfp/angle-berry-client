@@ -33,7 +33,11 @@
 			!isShowingSingleTier &&
 			'duration-200'}"
 	>
-		{currentTier.price === 0 ? "Free" : "$" + currentTier.price}
+		{#if hasAccess}
+			_
+		{:else}
+			{currentTier.price === 0 ? "Free" : "$" + currentTier.price}
+		{/if}
 	</td>
 	<td
 		class="px-6 py-4 {($page.data.user.retainedTiers.includes(
@@ -43,7 +47,11 @@
 			!isShowingSingleTier &&
 			'duration-200'}"
 	>
-		{currentTier.invites === 0 ? "Free" : currentTier.invites}
+		{#if hasAccess}
+			_
+		{:else}
+			{currentTier.invites === 0 ? "Free" : currentTier.invites}
+		{/if}
 	</td>
 	<td class="p-0 text-right">
 		{#if hasAccess}

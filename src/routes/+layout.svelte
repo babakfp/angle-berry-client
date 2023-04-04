@@ -1,20 +1,20 @@
 <script>
 	import { onMount } from "svelte"
-	import preventSavingPage from "$utils/disableBrowserDefaults/preventSavingPage.js"
+	import disablePageSave from "$utils/disableBrowserDefaults/disablePageSave.js"
 	import disableContextMenu from "$utils/disableBrowserDefaults/disableContextMenu.js"
-	import preventOpeningDevTools from "$utils/disableBrowserDefaults/preventOpeningDevTools.js"
-	import preventPrinting from "$utils/disableBrowserDefaults/preventPrinting.js"
-	import preventViewPageSource from "$utils/disableBrowserDefaults/preventViewPageSource.js"
+	import disableDevTools from "$utils/disableBrowserDefaults/disableDevTools.js"
+	import disablePrint from "$utils/disableBrowserDefaults/disablePrint.js"
+	import disableSourceView from "$utils/disableBrowserDefaults/disableSourceView.js"
 	import LoadingBar from "$lib/LoadingBar.svelte"
 	import "../app.postcss"
 
 	onMount(() => {
 		if (process.env.NODE_ENV === "production") {
-			preventSavingPage()
+			disablePageSave()
 			disableContextMenu()
-			preventOpeningDevTools()
-			preventPrinting()
-			preventViewPageSource()
+			disableDevTools()
+			disablePrint()
+			disableSourceView()
 		}
 	})
 </script>

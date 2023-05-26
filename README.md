@@ -2,6 +2,8 @@
 
 ## Development
 
+Before proceeding with the setup, please ensure that you have the latest version of Node.js installed on your system. Node.js is required to run the development environment for this project.
+
 ### Installing PNPM
 
 If you don't have PNPM installed on your system, you will need to install it before proceeding with the setup. PNPM is required for this repository, and it's an alternative package manager to NPM or Yarn.

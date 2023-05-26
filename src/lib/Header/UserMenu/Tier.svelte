@@ -9,14 +9,9 @@
         class="group flex items-center justify-between gap-4 px-4 py-2 duration-200 outline-inset hover:text-white"
         href="/tiers/{tier.id}"
     >
-        <div class="flex items-center gap-3">
-            <div
-                class="h-1 w-1 rounded-full bg-gray-500 duration-200 group-hover:bg-white"
-            />
-            <span class="underline">
-                {tier.name}
-            </span>
-        </div>
+        <span class="underline">
+            {tier.name}
+        </span>
         <div>
             {#if $page.data.user.retainedTiers.includes(tier.id) || $page.data.user.invitedUsers.length >= tier.invites}
                 <span>Watch now</span>

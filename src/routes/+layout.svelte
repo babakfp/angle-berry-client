@@ -5,7 +5,7 @@
     import disableDevTools from "$utils/disableBrowserDefaults/disableDevTools.js"
     import disablePrint from "$utils/disableBrowserDefaults/disablePrint.js"
     import disableSourceView from "$utils/disableBrowserDefaults/disableSourceView.js"
-    import LoadingBar from "$lib/LoadingBar.svelte"
+    import { LoadingBar } from "svelte-loading-bar"
     import "../app.postcss"
 
     onMount(() => {
@@ -20,4 +20,5 @@
 </script>
 
 <LoadingBar />
+
 <slot />

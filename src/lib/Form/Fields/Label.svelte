@@ -6,6 +6,7 @@
 {#if label}
     <div>
         <span>{label}</span>
+
         {#if required}
             <span class="text-gray-500">*</span>
         {/if}

@@ -1,12 +1,10 @@
-/node_modules/
-/.svelte-kit/
-/static/
 .DS_Store
+node_modules/
+.svelte-kit/
 .env
 .env.*
 !.env.example
 vite.config.js.timestamp-*
 pnpm-lock.yaml
-.pnpm-debug.log
 tailwind.config.full.cjs
 *.svg

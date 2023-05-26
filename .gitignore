@@ -1,9 +1,8 @@
-/node_modules/
-/.svelte-kit/
 .DS_Store
+node_modules/
+.svelte-kit/
 .env
 .env.*
 !.env.example
 vite.config.js.timestamp-*
 pnpm-lock.yaml
-.pnpm-debug.log

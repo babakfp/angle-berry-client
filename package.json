@@ -13,7 +13,6 @@
 		"@sveltejs/adapter-auto": "2.0.0",
 		"@sveltejs/kit": "1.13.0",
 		"@tailwindcss/line-clamp": "0.4.2",
-		"@trivago/prettier-plugin-sort-imports": "4.1.1",
 		"autoprefixer": "10.4.14",
 		"cssnano": "5.1.15",
 		"pocketbase": "0.12.1",

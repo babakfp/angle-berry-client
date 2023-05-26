@@ -47,34 +47,31 @@ module.exports = {
             2: "2px",
         },
     },
-    plugins: [
-        ({ addUtilities }) => {
-            addUtilities({
-                ".outline-inset": {
-                    "@apply -outline-offset-2": "",
-                },
-            })
-        },
-        ({ addComponents }) => {
-            addComponents({
-                ".link": {
-                    "@apply underline duration-200 hover:text-white": "",
-                },
-            })
-        },
-        ({ addComponents }) => {
-            addComponents({
-                ".btn": {
-                    // prettier-ignore
-                    "@apply relative inline-flex items-center justify-center rounded py-1.5 px-3 text-sm text-white duration-200 drag-none": "",
-                },
-                ".btn-danger": {
-                    "@apply bg-red-600 hover:bg-red-500": "",
-                },
-                ".btn-gray": {
-                    "@apply bg-gray-600 hover:bg-gray-500": "",
-                },
-            })
-        },
-    ],
+    plugins: [outlineInsetUtility(), linkComponents(), buttonComponents()],
+}
+
+function outlineInsetUtility() {
+    return ({ addUtilities }) => {
+        addUtilities({
+            ".outline-inset": {},
+        })
+    }
+}
+
+function linkComponents() {
+    return ({ addComponents }) => {
+        addComponents({
+            ".link": {},
+        })
+    }
+}
+
+function buttonComponents() {
+    return ({ addComponents }) => {
+        addComponents({
+            ".btn": {},
+            ".btn-danger": {},
+            ".btn-gray": {},
+        })
+    }
 }

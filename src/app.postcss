@@ -3,55 +3,55 @@
 @tailwind utilities;
 
 @layer base {
-	:root {
-		--hscreen: 100vh;
-		--hscreen: 100dvh;
-		--wscreen: 100vw;
-		--wscreen: 100dvw;
-		--header-height: theme(spacing.16);
-	}
-	::-webkit-scrollbar {
-		@apply h-0 w-0;
-	}
-	* {
-		@apply select-none outline-none drag-none tap-highlight-white/10;
-	}
-	b,
-	strong,
-	th {
-		@apply font-semibold;
-	}
-	svg:not(.not-svg-icon) {
-		@apply pointer-events-none inline-block h-[1em] w-[1em] fill-current;
-		&[fill="none"] {
-			@apply fill-none;
-		}
-	}
-	.container {
-		@apply !max-w-screen-xl;
-	}
+    :root {
+        --hscreen: 100vh;
+        --hscreen: 100dvh;
+        --wscreen: 100vw;
+        --wscreen: 100dvw;
+        --header-height: theme(spacing.16);
+    }
+    ::-webkit-scrollbar {
+        @apply h-0 w-0;
+    }
+    * {
+        @apply select-none outline-none drag-none tap-highlight-white/10;
+    }
+    b,
+    strong,
+    th {
+        @apply font-semibold;
+    }
+    svg:not(.not-svg-icon) {
+        @apply pointer-events-none inline-block h-[1em] w-[1em] fill-current;
+        &[fill="none"] {
+            @apply fill-none;
+        }
+    }
+    .container {
+        @apply !max-w-screen-xl;
+    }
 }
 
 /* Outline */
 @layer base {
-	* {
-		@apply outline outline-2;
-	}
-	a,
-	input,
-	textarea,
-	button {
-		@apply focus-visible:outline-[orange];
-	}
-	a {
-		@apply outline-dashed;
-	}
+    * {
+        @apply outline outline-2;
+    }
+    a,
+    input,
+    textarea,
+    button {
+        @apply focus-visible:outline-[orange];
+    }
+    a {
+        @apply outline-dashed;
+    }
 }
 
 .toaster .base {
-	@apply !bg-gray-700 !pl-4;
+    @apply !bg-gray-700 !pl-4;
 }
 
 .toaster .message {
-	@apply text-sm !text-gray-300;
+    @apply text-sm !text-gray-300;
 }

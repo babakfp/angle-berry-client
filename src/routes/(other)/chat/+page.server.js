@@ -2,41 +2,41 @@ import { fail } from "@sveltejs/kit"
 import { handlePbConnectionIssue } from "$utils/handlePbConnectionIssue.js"
 
 export const actions = {
-	default: async ({ locals, request }) => {
-		const formData = Object.fromEntries(await request.formData())
-		let { messageContent } = formData
-		if (!messageContent) return
-		if (messageContent) {
-			messageContent = messageContent.trim()
-			messageContent = messageContent.replace(/(?:\r\n|\r|\n)/g, "<br>")
-		}
+    default: async ({ locals, request }) => {
+        const formData = Object.fromEntries(await request.formData())
+        let { messageContent } = formData
+        if (!messageContent) return
+        if (messageContent) {
+            messageContent = messageContent.trim()
+            messageContent = messageContent.replace(/(?:\r\n|\r|\n)/g, "<br>")
+        }
 
-		try {
-			if (!formData?.messageIdToEdit) {
-				await locals.pb.collection("messages").create({
-					content: messageContent,
-					user: locals.user.id,
-					repliedTo: formData?.replyedMessageId || undefined,
-				})
-			} else {
-				await locals.pb
-					.collection("messages")
-					.update(formData.messageIdToEdit, {
-						content: messageContent,
-					})
-			}
-		} catch ({ status, response }) {
-			handlePbConnectionIssue(status)
+        try {
+            if (!formData?.messageIdToEdit) {
+                await locals.pb.collection("messages").create({
+                    content: messageContent,
+                    user: locals.user.id,
+                    repliedTo: formData?.replyedMessageId || undefined,
+                })
+            } else {
+                await locals.pb
+                    .collection("messages")
+                    .update(formData.messageIdToEdit, {
+                        content: messageContent,
+                    })
+            }
+        } catch ({ status, response }) {
+            handlePbConnectionIssue(status)
 
-			response.data.content = {
-				value: messageContent,
-				...(response.data.content || {}),
-			}
+            response.data.content = {
+                value: messageContent,
+                ...(response.data.content || {}),
+            }
 
-			return fail(response.code, {
-				message: response.message,
-				...response.data,
-			})
-		}
-	},
+            return fail(response.code, {
+                message: response.message,
+                ...response.data,
+            })
+        }
+    },
 }

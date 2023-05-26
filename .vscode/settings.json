@@ -1,8 +1,8 @@
 {
-	"editor.formatOnSave": true,
-	"path-intellisense.mappings": {
-		"$utils": "${workspaceFolder}/src/lib/utils",
-		"$stores": "${workspaceFolder}/src/lib/stores",
-		"$icons": "${workspaceFolder}/src/lib/Icons"
-	}
+    "editor.formatOnSave": true,
+    "path-intellisense.mappings": {
+        "$utils": "${workspaceFolder}/src/lib/utils",
+        "$stores": "${workspaceFolder}/src/lib/stores",
+        "$icons": "${workspaceFolder}/src/lib/Icons"
+    }
 }

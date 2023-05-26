@@ -1,53 +1,53 @@
 <script>
-	import OutClick from "svelte-outclick"
-	import { browser } from "$app/environment"
-	import { beforeNavigate } from "$app/navigation"
-	import IconX from "$icons/IconX.svelte"
+    import OutClick from "svelte-outclick"
+    import { browser } from "$app/environment"
+    import { beforeNavigate } from "$app/navigation"
+    import IconX from "$icons/IconX.svelte"
 
-	export let isOpen = false
-	export let toggleButton = null
-	export let id = null
+    export let isOpen = false
+    export let toggleButton = null
+    export let id = null
 
-	beforeNavigate(() => (isOpen = false))
+    beforeNavigate(() => (isOpen = false))
 
-	$: if (browser) {
-		if (isOpen) {
-			document.body.classList.add("overflow-hidden")
-		} else {
-			document.body.classList.remove("overflow-hidden")
-		}
-	}
+    $: if (browser) {
+        if (isOpen) {
+            document.body.classList.add("overflow-hidden")
+        } else {
+            document.body.classList.remove("overflow-hidden")
+        }
+    }
 </script>
 
 <svelte:window
-	on:keydown={e => {
-		if (e.key === "Escape") isOpen = false
-	}}
+    on:keydown={e => {
+        if (e.key === "Escape") isOpen = false
+    }}
 />
 
 <div
-	class="hidden sm:fixed sm:inset-0 sm:top-header-height sm:z-40 sm:block sm:bg-[black]/40 sm:duration-200 sm:hide
+    class="hidden sm:fixed sm:inset-0 sm:top-header-height sm:z-40 sm:block sm:bg-[black]/40 sm:duration-200 sm:hide
 	{isOpen && 'sm:show'}"
 />
 
 <OutClick on:outclick={() => (isOpen = false)} excludeElements={toggleButton}>
-	<div
-		{id}
-		class="fixed inset-0 z-50 grid h-screen translate-x-full grid-rows-[auto_1fr_auto] bg-gray-800 duration-200 hide
+    <div
+        {id}
+        class="fixed inset-0 z-50 grid h-screen translate-x-full grid-rows-[auto_1fr_auto] bg-gray-800 duration-200 hide
 			{isOpen && '!translate-x-0 !show'}
-			sm:top-header-height sm:left-auto sm:z-40 sm:h-[calc(var(--hscreen)-theme(spacing.header-height))] sm:w-96 sm:grid-rows-[1fr_auto]
+			sm:left-auto sm:top-header-height sm:z-40 sm:h-[calc(var(--hscreen)-theme(spacing.header-height))] sm:w-96 sm:grid-rows-[1fr_auto]
 		"
-	>
-		<button
-			class="sticky top-0 z-1 flex h-14 w-full items-center justify-between self-start border-b border-white/5 bg-gray-800 px-4 outline-inset sm:hidden"
-			on:click={() => (isOpen = false)}
-		>
-			<span>Close</span>
-			<IconX class="h-6 w-6" />
-		</button>
+    >
+        <button
+            class="sticky top-0 z-1 flex h-14 w-full items-center justify-between self-start border-b border-white/5 bg-gray-800 px-4 outline-inset sm:hidden"
+            on:click={() => (isOpen = false)}
+        >
+            <span>Close</span>
+            <IconX class="h-6 w-6" />
+        </button>
 
-		<slot />
-	</div>
+        <slot />
+    </div>
 
-	<slot name="outer" />
+    <slot name="outer" />
 </OutClick>

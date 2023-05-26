@@ -1,67 +1,67 @@
 <script>
-	export let position = "top" // top, right, bottom, left
-	export let isVisible = false
-	export let keepAlive = false
-	export let parentElementQuerySelector = ""
+    export let position = "top" // top, right, bottom, left
+    export let isVisible = false
+    export let keepAlive = false
+    export let parentElementQuerySelector = ""
 
-	let tooltip
+    let tooltip
 
-	$: if (tooltip && parentElementQuerySelector && isVisible) {
-		const parentElement = document.querySelector(parentElementQuerySelector)
+    $: if (tooltip && parentElementQuerySelector && isVisible) {
+        const parentElement = document.querySelector(parentElementQuerySelector)
 
-		const rootElementRect = tooltip.getBoundingClientRect()
-		const parentElementRect = parentElement.getBoundingClientRect()
-		let isTopNotFullyVisible = false
-		// let isRightNotFullyVisible = false
-		let isBottomNotFullyVisible = false
-		// let isLeftNotFullyVisible = false
+        const rootElementRect = tooltip.getBoundingClientRect()
+        const parentElementRect = parentElement.getBoundingClientRect()
+        let isTopNotFullyVisible = false
+        // let isRightNotFullyVisible = false
+        let isBottomNotFullyVisible = false
+        // let isLeftNotFullyVisible = false
 
-		if (rootElementRect.top < parentElementRect.top) {
-			isTopNotFullyVisible = true
-		}
-		// if (rootElementRect.right > parentElementRect.right) {
-		// 	isRightNotFullyVisible = true
-		// }
-		if (rootElementRect.bottom > parentElementRect.bottom) {
-			isBottomNotFullyVisible = true
-		}
-		// if (rootElementRect.left < parentElementRect.left) {
-		// 	isLeftNotFullyVisible = true
-		// }
+        if (rootElementRect.top < parentElementRect.top) {
+            isTopNotFullyVisible = true
+        }
+        // if (rootElementRect.right > parentElementRect.right) {
+        // 	isRightNotFullyVisible = true
+        // }
+        if (rootElementRect.bottom > parentElementRect.bottom) {
+            isBottomNotFullyVisible = true
+        }
+        // if (rootElementRect.left < parentElementRect.left) {
+        // 	isLeftNotFullyVisible = true
+        // }
 
-		if (isTopNotFullyVisible) {
-			if (position.includes("-")) {
-				position = position.replace("top", "bottom")
-			} else {
-				position = "bottom"
-			}
-		} else if (isBottomNotFullyVisible) {
-			if (position.includes("-")) {
-				position = position.replace("bottom", "top")
-			} else {
-				position = "top"
-			}
-		}
+        if (isTopNotFullyVisible) {
+            if (position.includes("-")) {
+                position = position.replace("top", "bottom")
+            } else {
+                position = "bottom"
+            }
+        } else if (isBottomNotFullyVisible) {
+            if (position.includes("-")) {
+                position = position.replace("bottom", "top")
+            } else {
+                position = "top"
+            }
+        }
 
-		// if (isTopNotFullyVisible && isRightNotFullyVisible) {
-		// 	position = "bottom-right"
-		// } else if (isTopNotFullyVisible && isLeftNotFullyVisible) {
-		// 	position = "bottom-left"
-		// }
-		// // TODO: Not tested.
-		// else if (isBottomNotFullyVisible && isRightNotFullyVisible) {
-		// 	position = "top-right"
-		// } else if (isBottomNotFullyVisible && isLeftNotFullyVisible) {
-		// 	position = "top-left"
-		// }
-		// // TODO: Not tested.
-		// else {
-		// 	if (isTopNotFullyVisible) position = "bottom"
-		// 	if (isRightNotFullyVisible) position = "left"
-		// 	if (isBottomNotFullyVisible) position = "top"
-		// 	if (isLeftNotFullyVisible) position = "right"
-		// }
-	}
+        // if (isTopNotFullyVisible && isRightNotFullyVisible) {
+        // 	position = "bottom-right"
+        // } else if (isTopNotFullyVisible && isLeftNotFullyVisible) {
+        // 	position = "bottom-left"
+        // }
+        // // TODO: Not tested.
+        // else if (isBottomNotFullyVisible && isRightNotFullyVisible) {
+        // 	position = "top-right"
+        // } else if (isBottomNotFullyVisible && isLeftNotFullyVisible) {
+        // 	position = "top-left"
+        // }
+        // // TODO: Not tested.
+        // else {
+        // 	if (isTopNotFullyVisible) position = "bottom"
+        // 	if (isRightNotFullyVisible) position = "left"
+        // 	if (isBottomNotFullyVisible) position = "top"
+        // 	if (isLeftNotFullyVisible) position = "right"
+        // }
+    }
 </script>
 
 <!-- prettier-ignore -->
@@ -102,32 +102,32 @@
 </div>
 
 <style>
-	:root {
-		--arrow-color: theme(colors.gray.700);
-		--arrow-size: theme(spacing.1);
-	}
-	.arrow-top::after {
-		border-left-width: var(--arrow-size);
-		border-right-width: var(--arrow-size);
-		border-bottom-width: var(--arrow-size);
-		border-bottom-color: var(--arrow-color);
-	}
-	.arrow-bottom::after {
-		border-left-width: var(--arrow-size);
-		border-right-width: var(--arrow-size);
-		border-top-width: var(--arrow-size);
-		border-top-color: var(--arrow-color);
-	}
-	.arrow-right::after {
-		border-top-width: var(--arrow-size);
-		border-bottom-width: var(--arrow-size);
-		border-left-width: var(--arrow-size);
-		border-left-color: var(--arrow-color);
-	}
-	.arrow-left::after {
-		border-top-width: var(--arrow-size);
-		border-bottom-width: var(--arrow-size);
-		border-right-width: var(--arrow-size);
-		border-right-color: var(--arrow-color);
-	}
+    :root {
+        --arrow-color: theme(colors.gray.700);
+        --arrow-size: theme(spacing.1);
+    }
+    .arrow-top::after {
+        border-left-width: var(--arrow-size);
+        border-right-width: var(--arrow-size);
+        border-bottom-width: var(--arrow-size);
+        border-bottom-color: var(--arrow-color);
+    }
+    .arrow-bottom::after {
+        border-left-width: var(--arrow-size);
+        border-right-width: var(--arrow-size);
+        border-top-width: var(--arrow-size);
+        border-top-color: var(--arrow-color);
+    }
+    .arrow-right::after {
+        border-top-width: var(--arrow-size);
+        border-bottom-width: var(--arrow-size);
+        border-left-width: var(--arrow-size);
+        border-left-color: var(--arrow-color);
+    }
+    .arrow-left::after {
+        border-top-width: var(--arrow-size);
+        border-bottom-width: var(--arrow-size);
+        border-right-width: var(--arrow-size);
+        border-right-color: var(--arrow-color);
+    }
 </style>

@@ -1,46 +1,46 @@
 <script>
-	import { page } from "$app/stores"
-	import { copyText } from "svelte-copy"
-	import toast, { Toaster } from "svelte-french-toast"
-	import TextField from "$lib/Form/Fields/TextField.svelte"
+    import { page } from "$app/stores"
+    import { copyText } from "svelte-copy"
+    import toast, { Toaster } from "svelte-french-toast"
+    import TextField from "$lib/Form/Fields/TextField.svelte"
 
-	export let data
+    export let data
 
-	function copyInviteLink() {
-		copyText(`${$page.url.origin}/register?id=${data.user.id}`)
-		toast.success("Your invite link is copied to Clipboard.", {
-			position: "bottom-right",
-		})
-	}
+    function copyInviteLink() {
+        copyText(`${$page.url.origin}/register?id=${data.user.id}`)
+        toast.success("Your invite link is copied to Clipboard.", {
+            position: "bottom-right",
+        })
+    }
 </script>
 
 <svelte:head>
-	<title>How to invite</title>
+    <title>How to invite</title>
 </svelte:head>
 
 <h1 class="text-4xl font-bold text-white">How to invite</h1>
 
 <div class="mt-8 space-y-4">
-	<TextField
-		name="userInviteLink"
-		label="Your invite link"
-		value="{$page.url.origin}/register?id={data.user.id}"
-		readonly
-	>
-		<button
-			slot="buttons"
-			class="btn btn-gray text-2xs"
-			type="button"
-			on:click={copyInviteLink}
-		>
-			Copy
-		</button>
-	</TextField>
-	<p>
-		You can share your invite link with your friends or on social media
-		platforms. When someone registers on our website with your invite link,
-		you will get a point added to your invites.
-	</p>
+    <TextField
+        name="userInviteLink"
+        label="Your invite link"
+        value="{$page.url.origin}/register?id={data.user.id}"
+        readonly
+    >
+        <button
+            slot="buttons"
+            class="btn btn-gray text-2xs"
+            type="button"
+            on:click={copyInviteLink}
+        >
+            Copy
+        </button>
+    </TextField>
+    <p>
+        You can share your invite link with your friends or on social media
+        platforms. When someone registers on our website with your invite link,
+        you will get a point added to your invites.
+    </p>
 </div>
 
 <Toaster />

@@ -1,24 +1,24 @@
 <script>
-	import { page } from "$app/stores"
+    import { page } from "$app/stores"
 </script>
 
 <svelte:head>
-	<title>{$page.status}</title>
+    <title>{$page.status}</title>
 </svelte:head>
 
 <div
-	class="mx-auto grid h-screen max-w-xs content-center items-center text-center"
+    class="mx-auto grid h-screen max-w-xs content-center items-center text-center"
 >
-	<h1 class="text-8xl font-bold text-white">
-		{$page.status}
-	</h1>
+    <h1 class="text-8xl font-bold text-white">
+        {$page.status}
+    </h1>
 
-	<div class="text-gray-400">
-		{#if $page.status === 404}
-			<p>The page that you are looking for couldn't be found!</p>
-			<a class="btn btn-gray mt-4" href="/">Go home</a>
-		{:else}
-			<p>{$page.error.message}</p>
-		{/if}
-	</div>
+    <div class="text-gray-400">
+        {#if $page.status === 404}
+            <p>The page that you are looking for couldn't be found!</p>
+            <a class="btn btn-gray mt-4" href="/">Go home</a>
+        {:else}
+            <p>{$page.error.message}</p>
+        {/if}
+    </div>
 </div>

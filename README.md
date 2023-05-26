@@ -2,6 +2,20 @@
 
 ## Development
 
+### Installing PNPM
+
+If you don't have PNPM installed on your system, you will need to install it before proceeding with the setup. PNPM is required for this repository, and it's an alternative package manager to NPM or Yarn.
+
+To install PNPM, open a terminal and run the following command:
+
+```
+npm i -g pnpm
+```
+
+Once you have PNPM installed, continue with the remaining steps:
+
+### Setup Steps
+
 To set up the development environment for your project, follow these steps:
 
 1. Duplicate the `.env.example` file located in the root of your project and rename the duplicate file to `.env`.

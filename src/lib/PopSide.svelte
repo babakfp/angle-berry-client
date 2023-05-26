@@ -35,7 +35,7 @@
         {id}
         class="fixed inset-0 z-50 grid h-screen translate-x-full grid-rows-[auto_1fr_auto] bg-gray-800 duration-200 hide
 			{isOpen && '!translate-x-0 !show'}
-			sm:left-auto sm:top-header-height sm:z-40 sm:h-[calc(var(--hscreen)-theme(spacing.header-height))] sm:w-96 sm:grid-rows-[1fr_auto]
+			sm:left-auto sm:top-header-height sm:z-40 sm:h-[calc(var(--tw-screen-h)-theme(spacing.header-height))] sm:w-96 sm:grid-rows-[1fr_auto]
 		"
     >
         <button

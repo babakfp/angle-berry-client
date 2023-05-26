@@ -24,7 +24,7 @@
 >
     <ul
         id="UserMenu"
-        class="absolute right-0 top-full max-h-[calc(var(--hscreen)-var(--header-height)-theme(spacing.8))] w-60 translate-x-full overflow-y-auto overscroll-y-contain rounded bg-gray-800 text-sm shadow-[0_4px_16px_0_rgb(0_0_0/0.4)] duration-200 hide
+        class="absolute right-0 top-full max-h-[calc(var(--tw-screen-h)-var(--header-height)-theme(spacing.8))] w-60 translate-x-full overflow-y-auto overscroll-y-contain rounded bg-gray-800 text-sm shadow-[0_4px_16px_0_rgb(0_0_0/0.4)] duration-200 hide
 		{isUserMenuOpen && '!-translate-x-4 !show'}"
     >
         <li>
@@ -49,8 +49,7 @@
                     })}
             >
                 <span>Click to copy your invite link:</span>
-                <!-- Removed `select-text` class because it's buggy -->
-                <p class="mt-1 text-xs leading-4 text-gray-500">
+                <p class="mt-1 select-text text-xs leading-4 text-gray-500">
                     {$page.url.origin}/register?id={$page.data.user.id}
                 </p>
             </button>

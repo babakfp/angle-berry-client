@@ -46,7 +46,7 @@
                 replyTargetMessage={message?.expand?.repliedTo}
             />
 
-            <div>
+            <div class="select-text">
                 {@html message.content}
             </div>
         </div>
@@ -64,9 +64,4 @@
     .message-content-wrapper :global(a) {
         @apply break-all;
     }
-    /* Removed this because it's buggy */
-    /* .message-content-wrapper,
-	.message-content-wrapper :global(*) {
-		@apply select-text;
-	} */
 </style>

@@ -4,17 +4,13 @@
 
 @layer base {
     :root {
-        --hscreen: 100vh;
-        --hscreen: 100dvh;
-        --wscreen: 100vw;
-        --wscreen: 100dvw;
         --header-height: theme(spacing.16);
     }
     ::-webkit-scrollbar {
         @apply h-0 w-0;
     }
     * {
-        @apply select-none outline-none drag-none tap-highlight-white/10;
+        @apply outline-none drag-none tap-highlight-white/10;
     }
     b,
     strong,

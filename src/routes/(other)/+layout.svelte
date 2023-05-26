@@ -105,7 +105,7 @@
 
 {#key $page.url.pathname}
     <main
-        class="container grid min-h-[calc(var(--hscreen)-var(--header-height))] content-start items-start py-12"
+        class="container grid min-h-[calc(var(--tw-screen-h)-var(--header-height))] content-start items-start py-12"
         in:fly={pageTransitionValues}
     >
         <slot />

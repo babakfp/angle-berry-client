@@ -1,22 +1,18 @@
 const colors = require("tailwindcss/colors")
 const defaultTheme = require("tailwindcss/defaultTheme")
-const tailwindcssAddons = require("tailwindcss-addons")
 const {
     default: flattenColorPalette,
 } = require("tailwindcss/lib/util/flattenColorPalette")
+const tailwindcssAddons = require("tailwindcss-addons")
 
 module.exports = {
     content: ["./src/**/*.{html,js,svelte}"],
-    presets: [tailwindcssAddons()],
+    presets: [tailwindcssAddons({ dynamicViewFix: true })],
     theme: {
         extend: {
             spacing: {
                 "header-height": "var(--header-height)",
             },
-            height: { screen: "var(--hscreen)" },
-            maxHeight: { screen: "var(--hscreen)" },
-            minHeight: { screen: "var(--hscreen)" },
-            width: { screen: "var(--wscreen)" },
         },
         colors: {
             current: colors.current,
@@ -52,7 +48,6 @@ module.exports = {
         },
     },
     plugins: [
-        require("@tailwindcss/line-clamp"),
         ({ addUtilities }) => {
             addUtilities({
                 ".outline-inset": {
@@ -71,7 +66,7 @@ module.exports = {
             addComponents({
                 ".btn": {
                     // prettier-ignore
-                    "@apply relative inline-flex select-none items-center justify-center rounded py-1.5 px-3 text-sm text-white duration-200 drag-none": "",
+                    "@apply relative inline-flex items-center justify-center rounded py-1.5 px-3 text-sm text-white duration-200 drag-none": "",
                 },
                 ".btn-danger": {
                     "@apply bg-red-600 hover:bg-red-500": "",

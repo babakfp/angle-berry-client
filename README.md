@@ -1,5 +1,10 @@
 # Angle Berry (Client)
 
+## Todo
+
+- Update `pocketbase`.
+- Add fallback for `svelte-copy`.
+
 ## Development
 
 Before proceeding with the setup, please ensure that you have the latest version of Node.js installed on your system. Node.js is required to run the development environment for this project.

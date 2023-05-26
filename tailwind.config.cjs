@@ -37,7 +37,7 @@ module.exports = {
             full: "9999px",
         },
         fontFamily: {
-            sans: ['"JosefinSans"', defaultTheme.fontFamily.sans],
+            sans: ["JosefinSans", defaultTheme.fontFamily.sans],
         },
         fontWeight: {
             semibold: "600",

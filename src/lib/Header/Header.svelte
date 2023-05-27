@@ -21,7 +21,7 @@
 </script>
 
 <header
-    class="sticky top-0 z-50 h-header-height overflow-x-clip bg-gray-800 shadow"
+    class="sticky top-0 z-50 h-header-height overflow-x-clip bg-gray-900 shadow"
 >
     <div class="container flex h-full justify-between px-0">
         <a

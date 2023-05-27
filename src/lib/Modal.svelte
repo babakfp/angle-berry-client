@@ -10,11 +10,11 @@
 
 {#if isOpen}
     <div
-        class="fixed inset-0 z-50 flex h-screen w-screen items-center justify-center bg-gray-800/50 p-8"
+        class="fixed inset-0 z-50 flex h-screen w-screen items-center justify-center bg-gray-900/50 p-8"
         on:click={() => (isOpen = false)}
     >
         <div
-            class="max-w-md overflow-y-auto overscroll-y-contain rounded bg-gray-700 p-6 drop-shadow"
+            class="max-w-md overflow-y-auto overscroll-y-contain rounded bg-gray-800 p-6 drop-shadow"
         >
             <slot />
         </div>

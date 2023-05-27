@@ -42,7 +42,7 @@
 
         <li use:copy={`${$page.url.origin}/register?id=${$page.data.user.id}`}>
             <button
-                class="bg-gray-900 p-4 outline-inset"
+                class="border-y border-white/5 p-4 outline-inset"
                 on:click={() =>
                     toast.success("Your invite link is copied to Clipboard.", {
                         position: "bottom-right",

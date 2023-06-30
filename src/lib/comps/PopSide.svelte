@@ -33,13 +33,13 @@
 <OutClick on:outclick={() => (isOpen = false)} excludeElements={toggleButton}>
     <div
         {id}
-        class="fixed inset-0 z-50 grid h-screen translate-x-full grid-rows-[auto_1fr_auto] bg-gray-900 duration-200 hide
+        class="fixed inset-0 z-50 grid h-screen translate-x-full grid-rows-[auto_1fr_auto] bg-gray-800 duration-200 hide
 			{isOpen && '!translate-x-0 !show'}
 			sm:left-auto sm:top-header-height sm:z-40 sm:h-[calc(var(--tw-screen-h)-theme(spacing.header-height))] sm:w-96 sm:grid-rows-[1fr_auto]
 		"
     >
         <button
-            class="sticky top-0 z-1 flex h-14 w-full items-center justify-between self-start border-b border-white/5 bg-gray-900 px-4 outline-inset sm:hidden"
+            class="sticky top-0 z-1 flex h-14 w-full items-center justify-between self-start border-b border-white/5 bg-gray-800 px-4 outline-inset sm:hidden"
             on:click={() => (isOpen = false)}
         >
             <span>Close</span>

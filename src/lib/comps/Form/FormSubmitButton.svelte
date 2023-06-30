@@ -5,7 +5,7 @@
 </script>
 
 <button
-    class="{className} block h-14 w-full rounded bg-white text-gray-800"
+    class="{className} block h-14 w-full rounded bg-white text-gray-700"
     {disabled}
 >
     <slot />

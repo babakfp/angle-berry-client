@@ -68,7 +68,7 @@
 <div
 	bind:this={tooltip}
 	class="
-		absolute hide whitespace-nowrap rounded bg-gray-800 px-4 py-3 text-xs drop-shadow z-50 group-hover:show {isVisible && 'show'}
+		absolute hide whitespace-nowrap rounded bg-gray-700 px-4 py-3 text-xs drop-shadow z-50 group-hover:show {isVisible && 'show'}
 		after:absolute after:block after:h-0 after:w-0 after:border-solid after:border-[transparent]
 
 		before:block before:absolute

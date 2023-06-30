@@ -22,7 +22,6 @@ module.exports = {
                 600: colors.zinc[600],
                 700: colors.zinc[700],
                 800: colors.zinc[800],
-                900: colors.zinc[900],
             },
         },
         container: {

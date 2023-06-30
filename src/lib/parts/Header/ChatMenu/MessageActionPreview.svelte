@@ -2,7 +2,7 @@
 
 <script>
     import { createEventDispatcher } from "svelte"
-    import { goToMessage } from "$lib/Header/ChatMenu/goToMessage.js"
+    import { goToMessage } from "$parts/Header/ChatMenu/goToMessage.js"
     import IconX from "$icons/IconX.svelte"
 
     export let title

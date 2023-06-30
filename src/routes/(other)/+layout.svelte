@@ -8,7 +8,7 @@
     import { error } from "@sveltejs/kit"
     import { handlePbConnectionIssue } from "$utils/handlePbConnectionIssue.js"
     import { pb } from "$stores/pb.js"
-    import Header from "$lib/Header/Header.svelte"
+    import Header from "$parts/Header/Header.svelte"
 
     export let data
 

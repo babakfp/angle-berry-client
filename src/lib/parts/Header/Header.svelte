@@ -2,7 +2,7 @@
     import { page } from "$app/stores"
     import { unreadMessagesLength } from "$stores/messages.js"
     import { unseenEventsLength } from "$stores/events.js"
-    import IconThunder from "$icons/IconThunder.svelte"
+    import IconBell from "$icons/IconBell.svelte"
     import IconMessage from "$icons/IconMessage.svelte"
     import Avatar from "$comps/Avatar.svelte"
     import NotificationBlob from "$comps/NotificationBlob.svelte"
@@ -38,7 +38,7 @@
                 bind:this={eventsMenuToggle}
                 on:click={() => (isEventsMenuOpen = !isEventsMenuOpen)}
             >
-                <IconThunder
+                <IconBell
                     class="text-2xl duration-200 group-hover:text-white"
                 />
                 {#if $unseenEventsLength > 0}

@@ -1,14 +1,10 @@
 {
     "editor.formatOnSave": true,
     "path-intellisense.mappings": {
-        "$utils": "${workspaceFolder}/src/lib/utils",
+        "$comps": "${workspaceFolder}/src/lib/comps",
+        "$icons": "${workspaceFolder}/src/lib/comps/icons",
+        "$parts": "${workspaceFolder}/src/lib/parts",
         "$stores": "${workspaceFolder}/src/lib/stores",
-        "$icons": "${workspaceFolder}/src/lib/Icons",
-
-        // "$comps": "${workspaceFolder}/src/lib/comps",
-        // "$icons": "${workspaceFolder}/src/lib/comps/icons",
-        "$parts": "${workspaceFolder}/src/lib/parts"
-        // "$stores": "${workspaceFolder}/src/lib/stores",
-        // "$utils": "${workspaceFolder}/src/lib/utils"
+        "$utils": "${workspaceFolder}/src/lib/utils"
     }
 }

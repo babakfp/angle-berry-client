@@ -1,6 +1,6 @@
 <script>
     import { page } from "$app/stores"
-    import PopSide from "$lib/PopSide.svelte"
+    import PopSide from "$comps/PopSide.svelte"
     import { events, unseenEventsLength } from "$stores/events.js"
     import Event from "./Event.svelte"
 

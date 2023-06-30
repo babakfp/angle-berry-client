@@ -1,6 +1,6 @@
 <script>
     import { page } from "$app/stores"
-    import TierTableRow from "$lib/TierTableRow.svelte"
+    import TierTableRow from "$comps/TierTableRow.svelte"
 
     export let currentTier = null
     export let className = ""

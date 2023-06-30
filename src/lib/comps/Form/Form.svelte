@@ -1,6 +1,6 @@
 <script>
     import { enhance } from "$app/forms"
-    import FormSubmitButton from "$lib/Form/FormSubmitButton.svelte"
+    import FormSubmitButton from "$comps/form/FormSubmitButton.svelte"
     import IconLoading from "$icons/IconLoading.svelte"
     import Error from "./Error.svelte"
 

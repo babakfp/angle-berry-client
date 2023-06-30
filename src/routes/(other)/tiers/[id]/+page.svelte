@@ -1,7 +1,7 @@
 <script>
     import { PUBLIC_POCKETBASE_URL } from "$env/static/public"
-    import TierTable from "$lib/TierTable.svelte"
-    import VideoPlayer from "$lib/VideoPlayer.svelte"
+    import TierTable from "$comps/TierTable.svelte"
+    import VideoPlayer from "$comps/VideoPlayer.svelte"
     export let data
 </script>
 

@@ -3,7 +3,7 @@
     import {
         minPasswordLength,
         maxPasswordLength,
-    } from "$lib/Form/formValidation.js"
+    } from "$comps/form/formValidation.js"
 
     export let value = ""
     export let autocomplete = ""

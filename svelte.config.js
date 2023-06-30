@@ -5,15 +5,11 @@ export default {
     kit: {
         adapter: adapter(),
         alias: {
-            $utils: "src/lib/utils",
-            $stores: "src/lib/stores",
-            $icons: "src/lib/Icons",
-
-            // $comps: "src/lib/comps",
-            // $icons: "src/lib/comps/icons",
+            $comps: "src/lib/comps",
+            $icons: "src/lib/comps/icons",
             $parts: "src/lib/parts",
-            // $stores: "src/lib/stores",
-            // $utils: "src/lib/utils",
+            $stores: "src/lib/stores",
+            $utils: "src/lib/utils",
         },
     },
     preprocess: vitePreprocess(),

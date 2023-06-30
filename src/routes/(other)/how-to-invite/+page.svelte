@@ -2,7 +2,7 @@
     import { page } from "$app/stores"
     import { copyText } from "svelte-copy"
     import toast, { Toaster } from "svelte-french-toast"
-    import TextField from "$lib/Form/Fields/TextField.svelte"
+    import TextField from "$comps/form/fields/TextField.svelte"
 
     export let data
 

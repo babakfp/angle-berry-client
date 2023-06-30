@@ -2,7 +2,7 @@ import { redirect, fail } from "@sveltejs/kit"
 import {
     isUsernameInvalid,
     isPasswordInvalid,
-} from "$lib/Form/formValidation.js"
+} from "$comps/form/formValidation.js"
 import { handlePbConnectionIssue } from "$utils/handlePbConnectionIssue.js"
 import { getPreviewTierId } from "$utils/previewTier.js"
 

@@ -1,6 +1,6 @@
 <script>
     import { getPreviewTierId } from "$utils/previewTier.js"
-    import TierTable from "$lib/TierTable.svelte"
+    import TierTable from "$comps/TierTable.svelte"
 </script>
 
 <svelte:head>

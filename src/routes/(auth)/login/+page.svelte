@@ -1,9 +1,9 @@
 <script>
     import { page } from "$app/stores"
     import AuthWrapper from "../AuthWrapper.svelte"
-    import Form from "$lib/Form/Form.svelte"
-    import UsernameField from "$lib/Form/Fields/UsernameField.svelte"
-    import PasswordField from "$lib/Form/Fields/PasswordField.svelte"
+    import Form from "$comps/form/Form.svelte"
+    import UsernameField from "$comps/form/fields/UsernameField.svelte"
+    import PasswordField from "$comps/form/fields/PasswordField.svelte"
 
     export let form
 

@@ -8,7 +8,7 @@
         isReplying,
     } from "./chatStores.js"
     import IconLoading from "$icons/IconLoading.svelte"
-    import Modal from "$lib/Modal.svelte"
+    import Modal from "$comps/Modal.svelte"
 
     let isDeletingMessage = false
     $: isDeletePopupOpen = !!$messageIdToDelete

@@ -1,6 +1,6 @@
 <script>
-    import Tooltip from "$lib/Tooltip.svelte"
-    import TooltipWrapper from "$lib/TooltipWrapper.svelte"
+    import Tooltip from "$comps/Tooltip.svelte"
+    import TooltipWrapper from "$comps/TooltipWrapper.svelte"
 
     export let user
     let isVisible

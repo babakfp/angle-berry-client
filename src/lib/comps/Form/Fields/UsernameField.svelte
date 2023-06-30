@@ -3,7 +3,7 @@
     import {
         minUsernameLength,
         maxUsernameLength,
-    } from "$lib/Form/formValidation.js"
+    } from "$comps/form/formValidation.js"
 
     export let value = ""
     export let message = ""

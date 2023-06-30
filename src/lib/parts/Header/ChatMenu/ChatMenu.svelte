@@ -192,13 +192,11 @@
                 autocomplete="off"
             />
             <button
-                class="flex items-end outline-inset
+                class="flex items-end outline-inset hover:bg-white/5 hover:text-white
 				{isSendingMessage && 'opacity-50'}"
                 disabled={isSendingMessage}
             >
-                <div
-                    class="flex min-h-14 items-center px-4 text-2xl hover:bg-white/5"
-                >
+                <div class="flex min-h-14 items-center px-4 text-2xl">
                     {#if $messageIdToEdit}
                         <IconCheck />
                     {:else if isSendingMessage}

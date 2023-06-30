@@ -4,7 +4,7 @@ const tailwindcssAddons = require("tailwindcss-addons")
 
 module.exports = {
     content: ["./src/**/*.{html,js,svelte}"],
-    presets: [tailwindcssAddons({ dynamicViewFix: true })],
+    presets: [tailwindcssAddons({ screenSizeFix: true })],
     theme: {
         extend: {
             spacing: {

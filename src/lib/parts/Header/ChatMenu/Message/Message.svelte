@@ -17,8 +17,8 @@
 <li id={message.id} class="w-full {isCurrentUser && 'ml-auto'}">
     <div
         class="relative grid px-4 py-2"
-        in:shrinkHeight|local={{ duration: 200 }}
-        out:shrinkHeight|local={{ duration: 200 }}
+        in:shrinkHeight={{ duration: 200 }}
+        out:shrinkHeight={{ duration: 200 }}
     >
         <div
             class="reply-highlight absolute inset-0 -z-1 bg-white/20 opacity-0 duration-200 ease-in-out"

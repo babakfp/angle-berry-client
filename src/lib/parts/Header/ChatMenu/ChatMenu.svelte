@@ -57,6 +57,7 @@
                 messageInputElement.style.height = null
                 isReplying.set(false)
                 messageIdToEdit.set(null)
+                messageInputElement.setAttribute("rows", 1)
             }
             update()
         }

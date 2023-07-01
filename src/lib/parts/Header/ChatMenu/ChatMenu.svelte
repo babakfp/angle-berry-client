@@ -147,15 +147,6 @@
         action="/chat"
         use:enhance={submitMessage}
         bind:this={formElement}
-        on:keypress={e => {
-            if (
-                !isSendingMessage &&
-                e.ctrlKey &&
-                (e.code === "Enter" || e.key === "Enter")
-            ) {
-                formElement.requestSubmit()
-            }
-        }}
     >
         {#if $isReplying}
             <MessageActionPreview
@@ -190,6 +181,15 @@
                 required
                 rows="1"
                 autocomplete="off"
+                on:keypress={e => {
+                    if (
+                        !isSendingMessage &&
+                        e.ctrlKey &&
+                        (e.code === "Enter" || e.key === "Enter")
+                    ) {
+                        formElement.requestSubmit()
+                    }
+                }}
             />
             <button
                 class="flex items-end outline-inset hover:bg-white/5 hover:text-white

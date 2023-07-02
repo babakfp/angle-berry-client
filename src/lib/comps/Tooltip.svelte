@@ -12,22 +12,14 @@
         const rootElementRect = tooltip.getBoundingClientRect()
         const parentElementRect = parentElement.getBoundingClientRect()
         let isTopNotFullyVisible = false
-        // let isRightNotFullyVisible = false
         let isBottomNotFullyVisible = false
-        // let isLeftNotFullyVisible = false
 
         if (rootElementRect.top < parentElementRect.top) {
             isTopNotFullyVisible = true
         }
-        // if (rootElementRect.right > parentElementRect.right) {
-        // 	isRightNotFullyVisible = true
-        // }
         if (rootElementRect.bottom > parentElementRect.bottom) {
             isBottomNotFullyVisible = true
         }
-        // if (rootElementRect.left < parentElementRect.left) {
-        // 	isLeftNotFullyVisible = true
-        // }
 
         if (isTopNotFullyVisible) {
             if (position.includes("-")) {
@@ -42,25 +34,6 @@
                 position = "top"
             }
         }
-
-        // if (isTopNotFullyVisible && isRightNotFullyVisible) {
-        // 	position = "bottom-right"
-        // } else if (isTopNotFullyVisible && isLeftNotFullyVisible) {
-        // 	position = "bottom-left"
-        // }
-        // // TODO: Not tested.
-        // else if (isBottomNotFullyVisible && isRightNotFullyVisible) {
-        // 	position = "top-right"
-        // } else if (isBottomNotFullyVisible && isLeftNotFullyVisible) {
-        // 	position = "top-left"
-        // }
-        // // TODO: Not tested.
-        // else {
-        // 	if (isTopNotFullyVisible) position = "bottom"
-        // 	if (isRightNotFullyVisible) position = "left"
-        // 	if (isBottomNotFullyVisible) position = "top"
-        // 	if (isLeftNotFullyVisible) position = "right"
-        // }
     }
 </script>
 
@@ -68,23 +41,27 @@
 <div
 	bind:this={tooltip}
 	class="
-		absolute hide whitespace-nowrap rounded bg-gray-700 px-4 py-3 text-xs drop-shadow z-50 group-hover:show {isVisible && 'show'}
+		absolute hide whitespace-nowrap rounded bg-gray-700 px-4 py-3 text-xs drop-shadow z-50 duration-200 group-hover:show {isVisible && 'show'}
 		after:absolute after:block after:h-0 after:w-0 after:border-solid after:border-[transparent]
 
 		before:block before:absolute
-		{((position === 'top' || position === 'top-right' || position === 'top-left') ||
-		(position === 'bottom' || position === 'bottom-right' || position === 'bottom-left')) &&
-		 'before:inset-x-0 before:h-2 before:w-full'}
-		{((position === 'right' || position === 'right-top' || position === 'right-bottom') ||
-		(position === 'left' || position === 'left-top' || position === 'left-bottom')) &&
-		 'before:inset-y-0 before:h-full before:w-2'}
+		{
+			((position === 'top' || position === 'top-right' || position === 'top-left') ||
+			(position === 'bottom' || position === 'bottom-right' || position === 'bottom-left')) &&
+		 	'before:inset-x-0 before:h-2 before:w-full'
+		}
+		{
+			((position === 'right' || position === 'right-top' || position === 'right-bottom') ||
+			(position === 'left' || position === 'left-top' || position === 'left-bottom')) &&
+		 	'before:inset-y-0 before:h-full before:w-2'
+		}
 
 		{!keepAlive && 'before:[all:unset]'}
 
-		{(position === 'top' || position === 'top-right' || position === 'top-left') && 'arrow-bottom bottom-full -translate-y-2 before:top-full after:top-full'}
-		{(position === 'right' || position === 'right-top' || position === 'right-bottom') && 'arrow-left left-full translate-x-2 before:right-full after:right-full'}
-		{(position === 'bottom' || position === 'bottom-right' || position === 'bottom-left') && 'arrow-top top-full translate-y-2 before:bottom-full after:bottom-full'}
-		{(position === 'left' || position === 'left-top' || position === 'left-bottom') && 'arrow-right right-full -translate-x-2 before:left-full after:left-full'}
+		{(position === 'top' || position === 'top-right' || position === 'top-left') && 'arrow-bottom bottom-full -translate-y-4 before:top-full after:top-full group-hover:-translate-y-2'}
+		{(position === 'right' || position === 'right-top' || position === 'right-bottom') && 'arrow-left left-full translate-x-4 before:right-full after:right-full group-hover:translate-x-2'}
+		{(position === 'bottom' || position === 'bottom-right' || position === 'bottom-left') && 'arrow-top top-full translate-y-4 before:bottom-full after:bottom-full group-hover:translate-y-2'}
+		{(position === 'left' || position === 'left-top' || position === 'left-bottom') && 'arrow-right right-full -translate-x-4 before:left-full after:left-full group-hover:-translate-x-2'}
 
 		{position === 'top' && 'inset-x-center after:inset-x-center'}
 		{position === 'right' && 'inset-y-center after:inset-y-center'}

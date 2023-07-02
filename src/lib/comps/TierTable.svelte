@@ -9,7 +9,7 @@
 
 <div class="{className} overflow-x-auto whitespace-nowrap rounded shadow-md">
     <table class="w-full text-left text-sm text-gray-400">
-        <thead class="bg-white/10 text-xs uppercase">
+        <thead class="bg-white/5 text-xs uppercase">
             <tr>
                 <th class="px-6 py-3 pt-3.5">TIER</th>
                 <th class="px-6 py-3 pt-3.5">PRICE</th>

@@ -13,7 +13,7 @@
 <tr
     class="group relative duration-200
 	{!isShowingSingleTier &&
-        'hover:bg-white/5 not-last:border-b not-last:border-white/5'}"
+        'hover:bg-white/10 not-last:border-b not-last:border-white/5'}"
 >
     <th class="px-6 py-4 text-white">
         {currentTier.name}
@@ -37,7 +37,7 @@
                 <span class="px-6 py-4">Have access</span>
             {/if}
         {:else}
-            <div class="flex items-center justify-end px-4">
+            <div class="flex items-center justify-end pl-4">
                 <a
                     class="link relative z-1 block px-2 py-4 outline-inset"
                     href="/how-to-pay"
@@ -46,7 +46,7 @@
                 </a>
                 or
                 <a
-                    class="link relative z-1 block px-2 py-4 outline-inset"
+                    class="link relative z-1 block py-4 pl-2 pr-6 outline-inset"
                     href="/how-to-invite"
                 >
                     Start inviting

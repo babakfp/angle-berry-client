@@ -5,7 +5,7 @@
         "dev": "vite dev",
         "build": "vite build",
         "preview": "vite preview",
-        "format": "prettier --plugin-search-dir . --write ."
+        "format": "prettier --write ."
     },
     "devDependencies": {
         "@sveltejs/adapter-vercel": "3.0.3",

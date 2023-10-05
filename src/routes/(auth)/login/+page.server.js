@@ -9,7 +9,7 @@ import { getPreviewTierId } from "$utils/previewTier.js"
 export const actions = {
     default: async ({ locals, request }) => {
         const { username, password } = Object.fromEntries(
-            await request.formData()
+            await request.formData(),
         )
 
         const _isUsernameInvalid = isUsernameInvalid(username, {

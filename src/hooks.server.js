@@ -8,7 +8,7 @@ export async function handle({ event, resolve }) {
 
     event.locals.pb = new PocketBase(POCKETBASE_URL)
     event.locals.pb.authStore.loadFromCookie(
-        event.request.headers.get("cookie") || ""
+        event.request.headers.get("cookie") || "",
     )
 
     event.locals.user = event.locals.pb.authStore.isValid
@@ -40,7 +40,7 @@ export async function handle({ event, resolve }) {
         event.locals.pb.authStore.exportToCookie({
             secure: false,
             httpOnly: false,
-        })
+        }),
     )
 
     return response

@@ -1,11 +1,11 @@
 <script>
     export let message = ""
-    export let className = ""
-    export { className as class }
+    export let _class = ""
+    export { _class as class }
 </script>
 
 {#if message}
-    <p class="{className} text-xs text-red-500">
+    <p class="{_class} text-xs text-red-400">
         {message}
     </p>
 {/if}

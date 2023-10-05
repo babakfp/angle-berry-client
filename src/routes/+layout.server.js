@@ -1,3 +1,3 @@
-export function load({ locals: { user } }) {
-    return { user }
+export async function load({ locals: { user, tiers, previewTierId } }) {
+    return { user, tiers, previewTierId }
 }

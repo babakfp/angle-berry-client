@@ -1,10 +1,16 @@
+import { error } from "@sveltejs/kit"
 import PocketBase from "pocketbase"
 import { POCKETBASE_URL } from "$env/static/private"
-import { handlePbConnectionIssue } from "$utils/handlePbConnectionIssue.js"
+import {
+    handleCommunicationFailure,
+    getPreviewTierId,
+} from "$utils/pb/helpers.js"
 
 export async function handle({ event, resolve }) {
     if (!POCKETBASE_URL)
-        throw new Error("Missing required Environment Variables!")
+        throw error(500, {
+            message: "Missing REQUIRED Environment Variable POCKETBASE_URL",
+        })
 
     event.locals.pb = new PocketBase(POCKETBASE_URL)
     event.locals.pb.authStore.loadFromCookie(
@@ -17,20 +23,22 @@ export async function handle({ event, resolve }) {
 
     if (event.locals.user) {
         try {
-            const newestData = await event.locals.pb
-                .collection("users")
-                .authRefresh()
-            event.locals.user = newestData.record
-        } catch (error) {
-            handlePbConnectionIssue(error.status)
+            await event.locals.pb.collection("users").authRefresh()
+        } catch ({ status }) {
+            handleCommunicationFailure(status)
 
-            if (error.response.code === 401) {
-                event.locals.pb.authStore.clear()
-                event.locals.user = null
-            } else {
-                throw error
-            }
+            event.locals.pb.authStore.clear()
+            event.locals.user = null
         }
+    }
+
+    try {
+        const tiers = await event.locals.pb.collection("tiers").getFullList()
+        event.locals.tiers = tiers
+        event.locals.previewTierId = getPreviewTierId(tiers)
+    } catch ({ status, response }) {
+        handleCommunicationFailure(status)
+        throw error(status, response.message)
     }
 
     const response = await resolve(event)

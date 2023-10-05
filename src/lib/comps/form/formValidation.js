@@ -1,9 +1,11 @@
 import { fail } from "@sveltejs/kit"
 
-export const minUsernameLength = 4
-export const maxUsernameLength = 12
-export const minPasswordLength = 8
-export const maxPasswordLength = 32
+export {
+    minUsernameLength,
+    maxUsernameLength,
+    minPasswordLength,
+    maxPasswordLength,
+} from "$lib/utils/schema.js"
 
 const validationMessages = {
     required: "Cannot be blank.",

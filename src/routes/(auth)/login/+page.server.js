@@ -1,45 +1,37 @@
 import { redirect, fail } from "@sveltejs/kit"
-import {
-    isUsernameInvalid,
-    isPasswordInvalid,
-} from "$comps/form/formValidation.js"
-import { handlePbConnectionIssue } from "$utils/handlePbConnectionIssue.js"
-import { getPreviewTierId } from "$utils/previewTier.js"
+import { superValidate } from "sveltekit-superforms/server"
+import { handleCommunicationFailure } from "$utils/pb/helpers.js"
+import { schema } from "$lib/utils/schema.js"
+
+export const load = async () => {
+    const form = await superValidate(schema)
+    return { form }
+}
 
 export const actions = {
     default: async ({ locals, request }) => {
-        const { username, password } = Object.fromEntries(
-            await request.formData(),
-        )
-
-        const _isUsernameInvalid = isUsernameInvalid(username, {
-            username: { value: username },
-        })
-        if (_isUsernameInvalid) return _isUsernameInvalid
-
-        const _isPasswordInvalid = isPasswordInvalid(password, {
-            username: { value: username },
-        })
-        if (_isPasswordInvalid) return _isPasswordInvalid
+        const form = await superValidate(request, schema)
+        if (!form.valid) return fail(400, { form })
 
         try {
             await locals.pb
                 .collection("users")
-                .authWithPassword(username, password)
+                .authWithPassword(form.data.username, form.data.password)
         } catch ({ status, response }) {
-            handlePbConnectionIssue(status)
+            handleCommunicationFailure(status)
 
             response.data.identity = {
-                value: username,
+                value: form.data.username,
                 ...(response.data.identity || {}),
             }
 
             return fail(response.code, {
+                form,
                 message: response.message,
-                ...response.data,
+                data: response.data,
             })
         }
 
-        throw redirect(303, `/tiers/${getPreviewTierId()}`)
+        throw redirect(303, `/tiers/${locals.previewTierId}`)
     },
 }

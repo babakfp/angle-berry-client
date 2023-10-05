@@ -1,8 +1,8 @@
 <script>
-    export let className = ""
-    export { className as class }
+    export let _class = ""
+    export { _class as class }
 </script>
 
-<div class="{className} group relative inline-block">
+<div class="{_class} group relative inline-block">
     <slot />
 </div>

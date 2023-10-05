@@ -1,32 +1,27 @@
 <script>
-    import TextField from "./TextField.svelte"
-    import {
-        minPasswordLength,
-        maxPasswordLength,
-    } from "$comps/form/formValidation.js"
+    import Input from "./Input.svelte"
 
     export let value = ""
     export let autocomplete = ""
-    export let message = ""
+    export let error = ""
 
     let isPasswordVisible = false
 </script>
 
-<TextField
+<Input
     type={isPasswordVisible ? "text" : "password"}
     bind:value
     name="password"
     label="Password"
-    placeholder="Something that no one knows."
+    placeholder="Something that no one knows"
     {autocomplete}
-    minlength={minPasswordLength}
-    maxlength={maxPasswordLength}
-    required={true}
-    {message}
+    {...$$restProps}
+    {error}
 >
     <button
         slot="buttons"
         class="btn btn-gray overflow-hidden px-3 text-2xs lowercase"
+        class:hide={!value}
         type="button"
         on:click={() => (isPasswordVisible = !isPasswordVisible)}
     >
@@ -45,4 +40,4 @@
             Hide
         </span>
     </button>
-</TextField>
+</Input>

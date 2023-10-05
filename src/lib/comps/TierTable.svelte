@@ -3,11 +3,11 @@
     import TierTableRow from "$comps/TierTableRow.svelte"
 
     export let currentTier = null
-    export let className = ""
-    export { className as class }
+    export let _class = ""
+    export { _class as class }
 </script>
 
-<div class="{className} overflow-x-auto whitespace-nowrap rounded shadow-md">
+<div class="{_class} overflow-x-auto whitespace-nowrap rounded shadow-md">
     <table class="w-full text-left text-sm text-gray-400">
         <thead class="bg-white/5 text-xs uppercase">
             <tr>

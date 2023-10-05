@@ -1,26 +1,31 @@
 <script>
+    import { superForm } from "sveltekit-superforms/client"
     import AuthWrapper from "../AuthWrapper.svelte"
     import Form from "$comps/form/Form.svelte"
     import UsernameField from "$comps/form/fields/UsernameField.svelte"
     import PasswordField from "$comps/form/fields/PasswordField.svelte"
 
+    export let data
     export let form
 
-    let formData = {
-        username: form?.username?.value || "",
-        password: "",
-    }
-
-    export const snapshot = {
-        capture: () => formData,
-        restore: value => (formData = value),
-    }
+    const {
+        form: _form,
+        capture,
+        restore,
+        errors,
+        constraints,
+    } = superForm(data.form)
+    export const snapshot = { capture, restore }
 
     let isSubmitting = false
+    let isRedirecting = false
     function handleFormSubmit() {
         isSubmitting = true
-        return async ({ update }) => {
+        return async ({ result, update }) => {
             isSubmitting = false
+            if (result.type === "redirect") {
+                isRedirecting = true
+            }
             update()
         }
     }
@@ -42,16 +47,22 @@
         message={form?.message}
         {isSubmitting}
         {handleFormSubmit}
-        submitButtonText="Register & Login"
+        submitButtonText={isRedirecting ? "Redirecting..." : "Register & Login"}
     >
         <UsernameField
-            bind:value={formData.username}
-            message={form?.username?.message}
+            bind:value={$_form.username}
+            error={$errors?.username
+                ? $errors?.username[0]
+                : form?.data?.username?.message}
+            {...$constraints.username}
         />
         <PasswordField
-            bind:value={formData.password}
+            bind:value={$_form.password}
             autocomplete="new-password"
-            message={form?.password?.message}
+            error={$errors?.password
+                ? $errors?.password[0]
+                : form?.data?.password?.message}
+            {...$constraints.password}
         />
     </Form>
 </AuthWrapper>

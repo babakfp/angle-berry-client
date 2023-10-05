@@ -2,7 +2,7 @@
     import { page } from "$app/stores"
     import { copyText } from "svelte-copy"
     import toast, { Toaster } from "svelte-french-toast"
-    import TextField from "$comps/form/fields/TextField.svelte"
+    import Input from "$comps/form/fields/Input.svelte"
 
     export let data
 
@@ -21,7 +21,7 @@
 <h1 class="text-4xl font-bold text-white">How to invite</h1>
 
 <div class="mt-8 space-y-4">
-    <TextField
+    <Input
         name="userInviteLink"
         label="Your invite link"
         value="{$page.url.origin}/register?id={data.user.id}"
@@ -35,7 +35,7 @@
         >
             Copy
         </button>
-    </TextField>
+    </Input>
     <p>
         You can share your invite link with your friends or on social media
         platforms. When someone registers on our website with your invite link,

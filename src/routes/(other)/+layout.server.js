@@ -1,33 +1,27 @@
 import { redirect, error } from "@sveltejs/kit"
-import { handlePbConnectionIssue } from "$utils/handlePbConnectionIssue.js"
+import { handleCommunicationFailure } from "$utils/pb/helpers.js"
 
-export async function load({ locals, url }) {
+export async function load({ locals, parent }) {
+    const data = await parent()
+
     if (!locals.user) throw redirect(303, "/login")
 
     try {
-        const tiersRecords = await locals.pb
-            .collection("tiers")
-            .getFullList({ batch: 10 })
-        const messagesRecords = await locals.pb
-            .collection("messages")
-            .getList(1, 50, {
-                sort: "-created",
-                expand: "user,repliedTo,repliedTo.user",
-            })
-        const eventsRecords = await locals.pb
-            .collection("events")
-            .getList(1, 50, {
-                sort: "-created",
-                expand: "user,user.retainedTiers,inviter,inviter.retainedTiers",
-            })
-
+        const messages = await locals.pb.collection("messages").getList(1, 50, {
+            sort: "-created",
+            expand: "user,repliedTo,repliedTo.user",
+        })
+        const events = await locals.pb.collection("events").getList(1, 50, {
+            sort: "-created",
+            expand: "user,user.retainedTiers,inviter,inviter.retainedTiers",
+        })
         return {
-            tiers: tiersRecords,
-            messages: messagesRecords,
-            events: eventsRecords.items,
+            ...data,
+            messages,
+            events: events.items,
         }
     } catch ({ status, response }) {
-        handlePbConnectionIssue(status)
+        handleCommunicationFailure(status)
         throw error(status, response.message)
     }
 }

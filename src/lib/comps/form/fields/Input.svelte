@@ -13,14 +13,14 @@
     export let minlength = ""
     export let maxlength = ""
     export let readonly = false
+    export let pattern = null
 
-    export let className = ""
-    export { className as class }
+    export let _class = ""
+    export { _class as class }
 
-    export let message = ""
+    export let error = ""
 
-    function fixDynamicTypeTwoWayBindingOfTheValue(e) {
-        // In here, you can switch on type and implement whatever behaviour you need
+    function bindValue(e) {
         if (type.match(/^(number|range)$/)) {
             value = +e.target.value
         } else {
@@ -29,22 +29,24 @@
     }
 </script>
 
-<label class="group">
-    <Label {label} {required} />
+<div class="group grid">
+    <Label {label} {required} for={name} />
 
     <div class="relative">
         <input
-            class="{className} block h-12 w-full rounded bg-gray-700 px-4 placeholder:text-xs placeholder:text-gray-500 [&:focus+div]:show"
+            class="{_class} block h-12 w-full rounded bg-gray-700 px-4 placeholder:text-xs placeholder:text-gray-500 [&:focus+div]:show"
             {type}
             {value}
             {name}
+            id={name}
             {placeholder}
             {minlength}
             {maxlength}
             {autocomplete}
             {required}
             {readonly}
-            on:input={fixDynamicTypeTwoWayBindingOfTheValue}
+            {pattern}
+            on:input={bindValue}
         />
 
         {#if $$slots.buttons}
@@ -56,5 +58,7 @@
         {/if}
     </div>
 
-    <Error class="mt-2" {message} />
-</label>
+    {#if error}
+        <Error class="mt-2" message={error} />
+    {/if}
+</div>

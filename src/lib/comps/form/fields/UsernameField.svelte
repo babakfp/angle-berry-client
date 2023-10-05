@@ -1,27 +1,16 @@
 <script>
-    import TextField from "./TextField.svelte"
-    import {
-        minUsernameLength,
-        maxUsernameLength,
-    } from "$comps/form/formValidation.js"
+    import Input from "./Input.svelte"
 
     export let value = ""
-    export let message = ""
-
-    $: {
-        value = value.toLowerCase()
-        value = value.replace(/[^a-z0-9]+/g, "")
-    }
+    export let error = ""
 </script>
 
-<TextField
+<Input
     bind:value
     name="username"
     label="Username"
-    placeholder="Only lowercase letters and numbers."
+    placeholder="Only lowercase Latin letters"
     autocomplete="username"
-    minlength={minUsernameLength}
-    maxlength={maxUsernameLength}
-    required={true}
-    {message}
+    {...$$restProps}
+    {error}
 />

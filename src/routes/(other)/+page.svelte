@@ -1,5 +1,5 @@
 <script>
-    import { getPreviewTierId } from "$utils/previewTier.js"
+    import { page } from "$app/stores"
     import TierTable from "$comps/TierTable.svelte"
 </script>
 
@@ -8,7 +8,7 @@
 </svelte:head>
 
 <p>
-    You can <a class="link" href="/tiers/{getPreviewTierId()}">
+    You can <a class="link" href="/tiers/{$page.data.previewTierId}">
         watch free content
     </a>
     and for more content, you can get the following tiers:

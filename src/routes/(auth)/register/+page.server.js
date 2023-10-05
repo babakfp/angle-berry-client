@@ -1,87 +1,65 @@
 import { redirect, fail } from "@sveltejs/kit"
-import {
-    isUsernameInvalid,
-    isPasswordInvalid,
-} from "$comps/form/formValidation.js"
-import { handlePbConnectionIssue } from "$utils/handlePbConnectionIssue.js"
-import { getPreviewTierId } from "$utils/previewTier.js"
+import { superValidate } from "sveltekit-superforms/server"
+import { handleCommunicationFailure } from "$utils/pb/helpers.js"
+import { schema } from "$lib/utils/schema.js"
+
+export const load = async () => {
+    const form = await superValidate(schema)
+    return { form }
+}
 
 export const actions = {
     default: async ({ locals, request, url }) => {
-        const { username, password } = Object.fromEntries(
-            await request.formData(),
-        )
+        const form = await superValidate(request, schema)
+        if (!form.valid) return fail(400, { form })
 
-        const _isUsernameInvalid = isUsernameInvalid(username, {
-            username: { value: username },
-        })
-        if (_isUsernameInvalid) return _isUsernameInvalid
-
-        const _isPasswordInvalid = isPasswordInvalid(password, {
-            username: { value: username },
-        })
-        if (_isPasswordInvalid) return _isPasswordInvalid
-
+        let inviter = null
         const inviterId = url.searchParams.get("id")
-        let doesInviterExists
 
         try {
             if (inviterId)
-                doesInviterExists = await locals.pb
-                    .collection("users")
-                    .getOne(inviterId)
+                inviter = await locals.pb.collection("users").getOne(inviterId)
+        } catch {}
 
-            // Registering
-            const newlyCreatedUser = await locals.pb
-                .collection("users")
-                .create({
-                    username,
-                    password,
-                    passwordConfirm: password,
-                    retainedTiers: [getPreviewTierId()],
-                    invitedBy: doesInviterExists ? [inviterId] : null,
-                })
+        try {
+            const newUser = await locals.pb.collection("users").create({
+                username: form.data.username,
+                password: form.data.password,
+                passwordConfirm: form.data.password,
+                retainedTiers: [locals.previewTierId],
+                invitedBy: inviter ? [inviterId] : null,
+            })
 
             // Adding the new user to the list of invited users by the inviter user.
-            if (doesInviterExists && newlyCreatedUser) {
-                await locals.pb.collection("users").update(inviterId, {
-                    invitedUsers: [
-                        newlyCreatedUser.id,
-                        ...doesInviterExists.invitedUsers,
-                    ],
-                })
-            }
+            if (inviter && newUser)
+                await addInvitedUserToInviterList(locals.pb, inviter, newUser)
 
             await locals.pb.collection("events").create({
-                user: newlyCreatedUser.id,
-                inviter: doesInviterExists ? inviterId : null,
-                inviterInvites: doesInviterExists
-                    ? doesInviterExists.invitedUsers.length + 1
-                    : 0,
+                user: newUser.id,
+                inviter: inviter ? inviterId : null,
+                inviterInvites: inviter ? inviter.invitedUsers.length + 1 : 0,
             })
 
             // Logging user in
             await locals.pb
                 .collection("users")
-                .authWithPassword(username, password)
-        } catch ({ status, response }) {
-            handlePbConnectionIssue(status)
-
-            if (response.message === "Failed to create record.")
-                response.message =
-                    "We were unable to create your account. Did you fill in all the fields correctly?"
-
-            response.data.username = {
-                value: username,
-                ...(response.data.username || {}),
-            }
+                .authWithPassword(form.data.username, form.data.password)
+        } catch ({ response }) {
+            handleCommunicationFailure(response.code)
 
             return fail(response.code, {
+                form,
                 message: response.message,
-                ...response.data,
+                data: response.data,
             })
         }
 
-        throw redirect(303, `/tiers/${getPreviewTierId()}`)
+        throw redirect(303, `/tiers/${locals.previewTierId}`)
     },
+}
+
+async function addInvitedUserToInviterList(pb, InviterRecord, newUserRecord) {
+    await pb.collection("users").update(InviterRecord.id, {
+        invitedUsers: [newUserRecord.id, ...InviterRecord.invitedUsers],
+    })
 }

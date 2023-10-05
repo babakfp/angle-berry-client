@@ -8,7 +8,7 @@ export async function load({ locals, params }) {
             expand: "videos",
         })
         if (record) {
-            const tier = structuredClone(record)
+            const tier = record
             if (
                 params.id === getPreviewTierId() ||
                 locals.user.retainedTiers.includes(params.id) ||
@@ -16,13 +16,13 @@ export async function load({ locals, params }) {
             ) {
                 return {
                     hasAccessToThisTier: true,
-                    tier: structuredClone(record),
+                    tier: record,
                 }
             } else {
                 delete tier.file
                 return {
                     hasAccessToThisTier: false,
-                    tier: structuredClone(record),
+                    tier: record,
                 }
             }
         }

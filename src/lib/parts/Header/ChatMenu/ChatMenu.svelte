@@ -95,7 +95,7 @@
                 if (messagesRecords) {
                     messages.update(_messages => [
                         ..._messages,
-                        ...structuredClone(messagesRecords).items,
+                        ...messagesRecords.items,
                     ])
                     isFetchingOlderMessages = false
                     pageNumberFortheNextOlderMessagesToFetch += 1

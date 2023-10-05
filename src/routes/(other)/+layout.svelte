@@ -44,9 +44,9 @@
                                 .getOne(record.repliedTo, { expand: "user" })
                         }
                         record.expand = {
-                            user: structuredClone(userRecord),
+                            user: userRecord,
                             repliedTo: repliedToRecord
-                                ? structuredClone(repliedToRecord)
+                                ? repliedToRecord
                                 : undefined,
                         }
                         messages.update(v => [record, ...v])
@@ -75,9 +75,9 @@
                                     $autoCancel: false,
                                 })
                         record.expand = {
-                            user: structuredClone(userRecord),
+                            user: userRecord,
                             ...(inviterRecord
-                                ? { inviter: structuredClone(inviterRecord) }
+                                ? { inviter: inviterRecord }
                                 : {}),
                         }
                         events.update(v => [record, ...v])

@@ -22,9 +22,9 @@ export async function load({ locals, url }) {
             })
 
         return {
-            tiers: structuredClone(tiersRecords),
-            messages: structuredClone(messagesRecords),
-            events: structuredClone(eventsRecords).items,
+            tiers: tiersRecords,
+            messages: messagesRecords,
+            events: eventsRecords.items,
         }
     } catch ({ status, response }) {
         handlePbConnectionIssue(status)

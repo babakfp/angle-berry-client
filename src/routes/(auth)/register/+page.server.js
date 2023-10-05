@@ -46,17 +46,17 @@ export const actions = {
             if (doesInviterExists && newlyCreatedUser) {
                 await locals.pb.collection("users").update(inviterId, {
                     invitedUsers: [
-                        structuredClone(newlyCreatedUser).id,
-                        ...structuredClone(doesInviterExists).invitedUsers,
+                        newlyCreatedUser.id,
+                        ...doesInviterExists.invitedUsers,
                     ],
                 })
             }
 
             await locals.pb.collection("events").create({
-                user: structuredClone(newlyCreatedUser).id,
+                user: newlyCreatedUser.id,
                 inviter: doesInviterExists ? inviterId : null,
                 inviterInvites: doesInviterExists
-                    ? structuredClone(doesInviterExists).invitedUsers.length + 1
+                    ? doesInviterExists.invitedUsers.length + 1
                     : 0,
             })
 

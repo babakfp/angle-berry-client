@@ -12,7 +12,7 @@ export async function handle({ event, resolve }) {
     )
 
     event.locals.user = event.locals.pb.authStore.isValid
-        ? structuredClone(event.locals.pb.authStore.model)
+        ? event.locals.pb.authStore.model
         : null
 
     if (event.locals.user) {
@@ -20,7 +20,7 @@ export async function handle({ event, resolve }) {
             const newestData = await event.locals.pb
                 .collection("users")
                 .authRefresh()
-            event.locals.user = structuredClone(newestData).record
+            event.locals.user = newestData.record
         } catch (error) {
             handlePbConnectionIssue(error.status)
 

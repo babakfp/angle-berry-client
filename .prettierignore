@@ -6,5 +6,4 @@
 !.env.example
 vite.config.js.timestamp-*
 pnpm-lock.yaml
-tailwind.config.full.cjs
 *.svg

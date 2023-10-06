@@ -1,8 +1,8 @@
-const colors = require("tailwindcss/colors")
-const defaultTheme = require("tailwindcss/defaultTheme")
-const tailwindcssAddons = require("tailwindcss-addons")
+import colors from "tailwindcss/colors"
+import defaultTheme from "tailwindcss/defaultTheme"
+import tailwindcssAddons from "tailwindcss-addons"
 
-module.exports = {
+export default {
     content: ["./src/**/*.{html,js,svelte}"],
     presets: [
         tailwindcssAddons({

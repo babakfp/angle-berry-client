@@ -16,6 +16,11 @@ export default {
             spacing: {
                 "header-height": "var(--header-height)",
             },
+            // TODO: FIX: tailwindcss-addons NOT WORKING FOR SOME REASON!
+            minWidth: ({ theme }) => theme("spacing"),
+            maxWidth: ({ theme }) => theme("spacing"),
+            minHeight: ({ theme }) => theme("spacing"),
+            maxHeight: ({ theme }) => theme("spacing"),
         },
         colors: {
             current: colors.current,

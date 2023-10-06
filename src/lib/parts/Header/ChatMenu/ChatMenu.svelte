@@ -41,8 +41,8 @@
         messageInputValue.set(
             $messages
                 .filter(msg => msg.id === id)[0]
-                ?.content.replaceAll("<br>", "\n") || ""
-        )
+                ?.content.replaceAll("<br>", "\n") || "",
+        ),
     )
 
     $: isEditingMessage = !!$messageIdToEdit
@@ -134,10 +134,7 @@
             {/if}
         </ol>
     {:else}
-        <p class="px-4 py-6">
-            No messages have been found here. You can be the one that sends the
-            first message in this chat room.
-        </p>
+        <p class="px-4 py-6 text-center">No messages found!</p>
     {/if}
 
     <form
@@ -197,7 +194,7 @@
 				{isSendingMessage && 'opacity-50'}"
                 disabled={isSendingMessage}
             >
-                <div class="flex min-h-14 items-center px-4 text-2xl">
+                <div class="min-h-14 flex items-center px-4 text-2xl">
                     {#if $messageIdToEdit}
                         <IconCheck />
                     {:else if isSendingMessage}

@@ -35,7 +35,8 @@
 </script>
 
 <form
-    class="grid gap-4 {isSubmitting && 'pointer-events-none'}"
+    class="grid gap-4"
+    class:pointer-events-none={isSubmitting || isRedirecting}
     {method}
     use:enhance={handleFormSubmit}
     novalidate

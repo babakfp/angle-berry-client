@@ -21,6 +21,7 @@
 <OutClick
     on:outclick={() => (isUserMenuOpen = false)}
     excludeElements={userMenuToggle}
+    tag="nav"
 >
     <ul
         id="UserMenu"

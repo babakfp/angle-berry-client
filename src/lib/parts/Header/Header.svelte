@@ -68,7 +68,6 @@
                     bind:this={userMenuToggle}
                 >
                     <Avatar class="w-8 rounded-full" />
-                    {$page.data.user.username}
                 </button>
                 <UserMenu {userMenuToggle} bind:isUserMenuOpen />
             </div>

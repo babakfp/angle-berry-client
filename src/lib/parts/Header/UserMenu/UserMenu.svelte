@@ -12,7 +12,7 @@
 
     beforeNavigate(() => (isUserMenuOpen = false))
     onMount(() =>
-        document.addEventListener("mouseleave", () => (isUserMenuOpen = false))
+        document.addEventListener("mouseleave", () => (isUserMenuOpen = false)),
     )
 </script>
 
@@ -55,13 +55,11 @@
             </button>
         </li>
 
-        <nav class="max-h-64 overflow-y-auto">
-            <ol>
-                {#each $page.data.tiers as tier}
-                    <Tier {tier} />
-                {/each}
-            </ol>
-        </nav>
+        <ol>
+            {#each $page.data.tiers as tier}
+                <Tier {tier} />
+            {/each}
+        </ol>
 
         <li class="border-t border-white/5">
             <form action="/logout" method="POST">

@@ -2,8 +2,6 @@
 
 ## Todo
 
--   Update `pocketbase`.
--   Add fallback for `svelte-copy`.
 -   BUG: When sending a new message in the chat and immediately attempting to edit it, the message content is not automatically written in the input box. This issue seems to be related to the "bind" keyword. However, it is important to note that this functionality works fine for old messages.
 -   Added esLint
 

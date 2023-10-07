@@ -6,7 +6,7 @@
 
 <li class="relative">
     <a
-        class="group flex items-center justify-between gap-4 px-4 py-2 duration-200 outline-inset hover:text-white"
+        class="group flex justify-between gap-4 px-4 py-2 duration-200 outline-inset hover:text-white"
         href="/tiers/{tier.id}"
     >
         <span class="underline">

@@ -28,9 +28,14 @@
         class="absolute right-0 top-full max-h-[calc(var(--tw-screen-h)-var(--header-height)-theme(spacing.8))] w-60 translate-x-full overflow-y-auto overscroll-y-contain rounded bg-gray-800 text-sm shadow-[0_4px_16px_0_rgb(0_0_0/0.4)] duration-200 hide
 		{isUserMenuOpen && '!-translate-x-4 !show'}"
     >
+        <li class="flex justify-between p-4">
+            <span>Signed in as</span>
+            <span>{$page.data.user.username}</span>
+        </li>
+
         <li>
             <a
-                class="flex items-center justify-between rounded-t p-4 duration-200 outline-inset hover:text-white"
+                class="flex justify-between border-t border-white/5 p-4 duration-200 outline-inset hover:text-white"
                 href="/how-to-invite"
                 type="button"
             >
@@ -62,10 +67,10 @@
             {/each}
         </ol>
 
-        <li class="border-t border-white/5">
+        <li>
             <form action="/logout" method="POST">
                 <button
-                    class="w-full rounded-b p-4 text-left duration-200 outline-inset hover:text-white"
+                    class="w-full rounded-b border-t border-white/5 p-4 text-left duration-200 outline-inset hover:text-white"
                 >
                     Logout
                 </button>

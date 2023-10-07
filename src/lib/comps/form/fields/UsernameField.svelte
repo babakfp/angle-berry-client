@@ -9,7 +9,7 @@
     bind:value
     name="username"
     label="Username"
-    placeholder="Only lowercase Latin letters"
+    placeholder="A unique username"
     autocomplete="username"
     {...$$restProps}
     {error}

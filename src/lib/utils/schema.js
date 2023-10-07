@@ -11,7 +11,7 @@ export const schema = z.object({
         .string()
         .min(minUsernameLength)
         .max(maxUsernameLength)
-        .regex(usernamePattern, "Only lowercase Latin letters are allowed.")
+        .regex(usernamePattern, "Only lowercase Latin letters are allowed")
         .default(""),
     password: z
         .string()

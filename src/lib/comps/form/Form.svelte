@@ -6,21 +6,47 @@
 
     export let message
     export let method
-    export let isSubmitting
     export let submitButtonText
-    export let handleFormSubmit
+    export let errors
+    export let validate
+
+    let isSubmitting = false
+    let isRedirecting = false
+
+    async function handleFormSubmit({ cancel }) {
+        isSubmitting = true
+
+        const submitionResult = await validate()
+
+        if (!submitionResult.valid) {
+            cancel()
+            $errors = submitionResult.errors
+            isSubmitting = false
+        }
+
+        return async ({ result, update }) => {
+            isSubmitting = false
+            if (result.type === "redirect") {
+                isRedirecting = true
+            }
+            update()
+        }
+    }
 </script>
 
 <form
     class="grid gap-4 {isSubmitting && 'pointer-events-none'}"
     {method}
     use:enhance={handleFormSubmit}
+    novalidate
 >
     <slot />
 
     <FormSubmitButton disabled={isSubmitting}>
         {#if isSubmitting}
             <IconLoading class="text-2xl" />
+        {:else if isRedirecting}
+            isRedirecting
         {:else}
             {submitButtonText}
         {/if}

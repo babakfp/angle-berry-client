@@ -1,6 +1,7 @@
 <script>
     import { page } from "$app/stores"
     import { superForm } from "sveltekit-superforms/client"
+    import { schema } from "$lib/utils/schema.js"
     import AuthWrapper from "../AuthWrapper.svelte"
     import Form from "$comps/form/Form.svelte"
     import UsernameField from "$comps/form/fields/UsernameField.svelte"
@@ -15,7 +16,8 @@
         restore,
         errors,
         constraints,
-    } = superForm(data.form)
+        validate,
+    } = superForm(data.form, { validators: schema })
     export const snapshot = { capture, restore }
 
     // TODO
@@ -26,19 +28,6 @@
         form.update(prevValue => {
             console.log(prevValue)
         })
-    }
-
-    let isSubmitting = false
-    let isRedirecting = false
-    function handleFormSubmit() {
-        isSubmitting = true
-        return async ({ result, update }) => {
-            isSubmitting = false
-            if (result.type === "redirect") {
-                isRedirecting = true
-            }
-            update()
-        }
     }
 </script>
 
@@ -56,9 +45,9 @@
     <Form
         method="POST"
         message={form?.message}
-        {isSubmitting}
-        {handleFormSubmit}
-        submitButtonText={isRedirecting ? "Redirecting..." : "Login"}
+        submitButtonText="Login"
+        {errors}
+        {validate}
     >
         <UsernameField
             bind:value={$_form.username}

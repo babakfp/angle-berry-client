@@ -46,7 +46,7 @@
         {#if isSubmitting}
             <IconLoading class="text-2xl" />
         {:else if isRedirecting}
-            isRedirecting
+            Redirecting...
         {:else}
             {submitButtonText}
         {/if}

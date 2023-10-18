@@ -46,9 +46,6 @@ export default {
             semibold: "600",
             bold: "700",
         },
-        outlineWidth: {
-            2: "2px",
-        },
     },
     plugins: [outlineInsetUtility(), linkComponents(), buttonComponents()],
 }

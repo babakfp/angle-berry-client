@@ -194,7 +194,7 @@
 				{isSendingMessage && 'opacity-50'}"
                 disabled={isSendingMessage}
             >
-                <div class="min-h-14 flex items-center px-4 text-2xl">
+                <div class="flex min-h-14 items-center px-4 text-2xl">
                     {#if $messageIdToEdit}
                         <IconCheck />
                     {:else if isSendingMessage}

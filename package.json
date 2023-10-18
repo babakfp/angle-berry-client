@@ -3,8 +3,10 @@
     "private": true,
     "scripts": {
         "dev": "vite dev",
+        "dev:host": "vite dev --host",
         "build": "vite build",
         "preview": "vite preview",
+        "preview:host": "vite preview --host",
         "format": "prettier --write ."
     },
     "devDependencies": {

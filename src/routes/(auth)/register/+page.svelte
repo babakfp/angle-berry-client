@@ -2,9 +2,9 @@
     import { superForm } from "sveltekit-superforms/client"
     import { schema } from "$utilities/schema.js"
     import AuthWrapper from "../AuthWrapper.svelte"
-    import Form from "$comps/form/Form.svelte"
-    import UsernameField from "$comps/form/fields/UsernameField.svelte"
-    import PasswordField from "$comps/form/fields/PasswordField.svelte"
+    import Form from "$components/form/Form.svelte"
+    import UsernameField from "$components/form/fields/UsernameField.svelte"
+    import PasswordField from "$components/form/fields/PasswordField.svelte"
 
     export let data
     export let form

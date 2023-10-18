@@ -12,7 +12,7 @@
     import IconLoading from "$icons/IconLoading.svelte"
     import IconCheck from "$icons/IconCheck.svelte"
     import IconSend from "$icons/IconSend.svelte"
-    import PopSide from "$comps/PopSide.svelte"
+    import PopSide from "$components/PopSide.svelte"
     import Message from "./Message/Message.svelte"
     import MessageActionPreview from "./MessageActionPreview.svelte"
     import ContextMenu from "./ContextMenu.svelte"

@@ -5,8 +5,8 @@ export default {
     kit: {
         adapter: adapter(),
         alias: {
-            $comps: "src/lib/comps",
-            $icons: "src/lib/comps/icons",
+            $components: "src/lib/components",
+            $icons: "src/lib/components/icons",
             $parts: "src/lib/parts",
             $stores: "src/lib/stores",
             $utilities: "src/lib/utilities",

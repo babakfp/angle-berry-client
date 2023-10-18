@@ -1,8 +1,8 @@
 {
     "editor.formatOnSave": true,
     "path-intellisense.mappings": {
-        "$comps": "${workspaceFolder}/src/lib/comps",
-        "$icons": "${workspaceFolder}/src/lib/comps/icons",
+        "$components": "${workspaceFolder}/src/lib/components",
+        "$icons": "${workspaceFolder}/src/lib/components/icons",
         "$parts": "${workspaceFolder}/src/lib/parts",
         "$stores": "${workspaceFolder}/src/lib/stores",
         "$utilities": "${workspaceFolder}/src/lib/utilities"

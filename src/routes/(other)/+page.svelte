@@ -1,6 +1,6 @@
 <script>
     import { page } from "$app/stores"
-    import TierTable from "$comps/TierTable.svelte"
+    import TierTable from "$components/TierTable.svelte"
 </script>
 
 <svelte:head>

@@ -12,7 +12,7 @@
         disabled={isDisabled}
         on:click
     >
-        <div class="flex text-sm">
+        <div class="flex text-sm sm:text-base">
             <slot />
         </div>
         <!-- Remove the styles if you change the font -->

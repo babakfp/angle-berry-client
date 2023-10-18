@@ -3,7 +3,7 @@
     "path-intellisense.mappings": {
         "$components": "${workspaceFolder}/src/lib/components",
         "$icons": "${workspaceFolder}/src/lib/components/icons",
-        "$parts": "${workspaceFolder}/src/lib/parts",
+        "$parts": "${workspaceFolder}/src/lib/components/parts",
         "$stores": "${workspaceFolder}/src/lib/stores",
         "$utilities": "${workspaceFolder}/src/lib/utilities"
     }

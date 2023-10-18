@@ -7,7 +7,7 @@ export default {
         alias: {
             $components: "src/lib/components",
             $icons: "src/lib/components/icons",
-            $parts: "src/lib/parts",
+            $parts: "src/lib/components/parts",
             $stores: "src/lib/stores",
             $utilities: "src/lib/utilities",
         },

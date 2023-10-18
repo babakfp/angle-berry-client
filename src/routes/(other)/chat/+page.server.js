@@ -1,5 +1,5 @@
 import { fail } from "@sveltejs/kit"
-import { handleCommunicationFailure } from "$utils/pb/helpers.js"
+import { handleCommunicationFailure } from "$utilities/pb/helpers.js"
 
 export const actions = {
     default: async ({ locals, request }) => {

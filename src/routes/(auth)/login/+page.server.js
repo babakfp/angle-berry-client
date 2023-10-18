@@ -1,7 +1,7 @@
 import { redirect, fail } from "@sveltejs/kit"
 import { superValidate } from "sveltekit-superforms/server"
-import { handleCommunicationFailure } from "$utils/pb/helpers.js"
-import { schema } from "$lib/utils/schema.js"
+import { handleCommunicationFailure } from "$utilities/pb/helpers.js"
+import { schema } from "$utilities/schema.js"
 
 export const load = async () => {
     const form = await superValidate(schema)

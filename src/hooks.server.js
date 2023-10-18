@@ -4,7 +4,7 @@ import { POCKETBASE_URL } from "$env/static/private"
 import {
     handleCommunicationFailure,
     getPreviewTierId,
-} from "$utils/pb/helpers.js"
+} from "$utilities/pb/helpers.js"
 
 export async function handle({ event, resolve }) {
     if (!POCKETBASE_URL)

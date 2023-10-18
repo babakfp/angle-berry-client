@@ -9,7 +9,7 @@ export default {
             $icons: "src/lib/comps/icons",
             $parts: "src/lib/parts",
             $stores: "src/lib/stores",
-            $utils: "src/lib/utils",
+            $utilities: "src/lib/utilities",
         },
     },
     preprocess: vitePreprocess(),

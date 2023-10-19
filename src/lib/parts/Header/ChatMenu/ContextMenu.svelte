@@ -20,6 +20,34 @@
     import MessageContextMenuItem from "./MessageContextMenuItem.svelte"
 
     let copyTimeoutId
+
+    function replyMessage() {
+        isContextMenuOpen.set(false)
+        isReplying.set(true)
+        replyTargetMessage.set($contextMenuTargetMessage)
+        messageIdToEdit.set(null)
+        if ($messageInputElement) $messageInputElement.focus()
+    }
+
+    function editMessage() {
+        isContextMenuOpen.set(false)
+        messageIdToEdit.set($contextMenuTargetMessage.id)
+        isReplying.set(false)
+        if ($messageInputElement) $messageInputElement.focus()
+    }
+
+    function copyMessage() {
+        copyText($contextMenuTargetMessage.content.replaceAll("<br>", "\n"))
+        copyTimeoutId = setTimeout(() => {
+            isContextMenuOpen.set(false)
+            copyTimeoutId = null
+        }, 1000)
+    }
+
+    function deleteMessage() {
+        isContextMenuOpen.set(false)
+        messageIdToDelete.set($contextMenuTargetMessage.id)
+    }
 </script>
 
 <OutClick
@@ -33,50 +61,27 @@
         <MessageContextMenuItem
             title="Reply"
             icon={IconReply}
-            on:click={() => {
-                isContextMenuOpen.set(false)
-                isReplying.set(true)
-                replyTargetMessage.set($contextMenuTargetMessage)
-                messageIdToEdit.set(null)
-                if ($messageInputElement) $messageInputElement.focus()
-            }}
+            on:click={replyMessage}
         />
         {#if $contextMenuTargetMessage.expand?.user.id === $page.data.user.id}
             <MessageContextMenuItem
                 title="Edit"
                 icon={IconPen}
-                on:click={() => {
-                    isContextMenuOpen.set(false)
-                    messageIdToEdit.set($contextMenuTargetMessage.id)
-                    isReplying.set(false)
-                    if ($messageInputElement) $messageInputElement.focus()
-                }}
+                on:click={editMessage}
             />
         {/if}
         <MessageContextMenuItem
             title={copyTimeoutId ? "Copied" : "Copy"}
             icon={IconClipboard}
             isDisabled={!!copyTimeoutId}
-            on:click={() => {
-                copyText(
-                    $contextMenuTargetMessage.content.replaceAll("<br>", "\n"),
-                )
-
-                copyTimeoutId = setTimeout(() => {
-                    isContextMenuOpen.set(false)
-                    copyTimeoutId = null
-                }, 1000)
-            }}
+            on:click={copyMessage}
         />
         {#if $contextMenuTargetMessage.expand.user.id === $page.data.user.id}
             <MessageContextMenuItem
                 class="text-red-500"
                 title="Delete"
                 icon={IconTrash}
-                on:click={() => {
-                    isContextMenuOpen.set(false)
-                    messageIdToDelete.set($contextMenuTargetMessage.id)
-                }}
+                on:click={deleteMessage}
             />
         {/if}
     </MessageContextMenu>

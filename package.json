@@ -7,7 +7,7 @@
         "build": "vite build",
         "preview": "vite preview",
         "preview:host": "vite preview --host",
-        "format": "prettier --write ."
+        "format": "prettier -w ."
     },
     "devDependencies": {
         "@sveltejs/adapter-vercel": "3.0.3",

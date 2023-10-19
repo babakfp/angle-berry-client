@@ -10,3 +10,4 @@ export const messageIdToEdit = writable(null)
 
 export const isReplying = writable(false)
 export const replyTargetMessage = writable({})
+export const messageInputElement = writable(undefined)

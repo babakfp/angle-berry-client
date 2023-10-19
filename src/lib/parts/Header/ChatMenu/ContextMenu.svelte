@@ -10,6 +10,7 @@
         replyTargetMessage,
         messageIdToDelete,
         messageIdToEdit,
+        messageInputElement,
     } from "./chatStores.js"
     import IconReply from "$icons/IconReply.svelte"
     import IconPen from "$icons/IconPen.svelte"
@@ -17,8 +18,6 @@
     import IconTrash from "$icons/IconTrash.svelte"
     import MessageContextMenu from "./MessageContextMenu.svelte"
     import MessageContextMenuItem from "./MessageContextMenuItem.svelte"
-
-    export let messageInputElement = null
 
     let copyTimeoutId
 </script>
@@ -39,7 +38,7 @@
                 isReplying.set(true)
                 replyTargetMessage.set($contextMenuTargetMessage)
                 messageIdToEdit.set(null)
-                if (messageInputElement) messageInputElement.focus()
+                if ($messageInputElement) $messageInputElement.focus()
             }}
         />
         {#if $contextMenuTargetMessage.expand?.user.id === $page.data.user.id}
@@ -50,7 +49,7 @@
                     isContextMenuOpen.set(false)
                     messageIdToEdit.set($contextMenuTargetMessage.id)
                     isReplying.set(false)
-                    if (messageInputElement) messageInputElement.focus()
+                    if ($messageInputElement) $messageInputElement.focus()
                 }}
             />
         {/if}

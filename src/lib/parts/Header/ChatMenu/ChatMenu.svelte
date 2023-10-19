@@ -8,6 +8,7 @@
         isReplying,
         replyTargetMessage,
         messageIdToEdit,
+        messageInputElement,
     } from "./chatStores.js"
     import IconLoading from "$icons/IconLoading.svelte"
     import IconCheck from "$icons/IconCheck.svelte"
@@ -27,14 +28,16 @@
     $: if (!isOpen && $messageIdToEdit) messageIdToEdit.set(null)
     $: if (isOpen && $unreadMessagesLength) unreadMessagesLength.set(0)
 
-    let messageInputElement
     const messageInputValue = writable("")
 
     messageInputValue.subscribe(() => {
-        if (!messageInputElement) return
-        messageInputElement.setAttribute("rows", 1)
-        const lineCount = getTextareaLineCount(messageInputElement)
-        messageInputElement.setAttribute("rows", lineCount <= 4 ? lineCount : 4)
+        if (!$messageInputElement) return
+        $messageInputElement.setAttribute("rows", 1)
+        const lineCount = getTextareaLineCount($messageInputElement)
+        $messageInputElement.setAttribute(
+            "rows",
+            lineCount <= 4 ? lineCount : 4,
+        )
     })
 
     messageIdToEdit.subscribe(id =>
@@ -50,14 +53,14 @@
     let isSendingMessage = false
     function submitMessage() {
         isSendingMessage = true
-        messageInputElement.focus()
+        $messageInputElement.focus()
         return async ({ result, update }) => {
             isSendingMessage = false
             if (result.type === "success") {
-                messageInputElement.style.height = null
+                $messageInputElement.style.height = null
                 isReplying.set(false)
                 messageIdToEdit.set(null)
-                messageInputElement.setAttribute("rows", 1)
+                $messageInputElement.setAttribute("rows", 1)
             }
             update()
         }
@@ -172,7 +175,7 @@
         >
             <textarea
                 class="block w-full resize-none bg-gray-800 p-4 outline-inset placeholder:text-gray-500"
-                bind:this={messageInputElement}
+                bind:this={$messageInputElement}
                 bind:value={$messageInputValue}
                 name="messageContent"
                 placeholder="Write your message..."
@@ -218,7 +221,7 @@
     </form>
 
     <svelte:fragment slot="outer">
-        <ContextMenu bind:messageInputElement />
+        <ContextMenu />
         <MessageDeleteModal />
     </svelte:fragment>
 </PopSide>

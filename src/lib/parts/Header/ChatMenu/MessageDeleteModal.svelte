@@ -17,7 +17,7 @@
 
 <Modal bind:isOpen={isDeletePopupOpen}>
     <h3>Are you sure you want to delete this message?</h3>
-    <div class="mt-4 flex justify-end gap-2">
+    <div class="mt-4 flex justify-center gap-2">
         <button
             class="btn btn-gray"
             on:click={() => {
@@ -55,7 +55,7 @@
                                     msg.expand.repliedTo = null
                                 }
                                 return msg
-                            })
+                            }),
                         )
                     }
                 } catch (error) {

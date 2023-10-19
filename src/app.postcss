@@ -17,12 +17,6 @@
     th {
         @apply font-semibold;
     }
-    svg:not(.not-svg-icon) {
-        @apply pointer-events-none inline-block h-[1em] w-[1em] fill-current;
-        &[fill="none"] {
-            @apply fill-none;
-        }
-    }
     .container {
         @apply !max-w-screen-xl;
     }
@@ -41,6 +35,15 @@
     }
     a {
         @apply outline-dashed;
+    }
+}
+
+@layer utilities {
+    svg.icon {
+        @apply pointer-events-none inline-block h-[1em] w-[1em];
+        &:not([fill="none"]) {
+            @apply fill-current;
+        }
     }
 }
 

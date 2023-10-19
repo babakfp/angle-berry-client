@@ -78,7 +78,6 @@
         />
         {#if $contextMenuTargetMessage.expand.user.id === $page.data.user.id}
             <MessageContextMenuItem
-                class="text-red-500"
                 title="Delete"
                 icon={IconTrash}
                 on:click={deleteMessage}

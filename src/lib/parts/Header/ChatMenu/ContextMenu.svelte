@@ -33,6 +33,7 @@
     >
         <MessageContextMenuItem
             title="Reply"
+            icon={IconReply}
             on:click={() => {
                 isContextMenuOpen.set(false)
                 isReplying.set(true)
@@ -40,28 +41,26 @@
                 messageIdToEdit.set(null)
                 if (messageInputElement) messageInputElement.focus()
             }}
-        >
-            <IconReply />
-        </MessageContextMenuItem>
+        />
         {#if $contextMenuTargetMessage.expand?.user.id === $page.data.user.id}
             <MessageContextMenuItem
                 title="Edit"
+                icon={IconPen}
                 on:click={() => {
                     isContextMenuOpen.set(false)
                     messageIdToEdit.set($contextMenuTargetMessage.id)
                     isReplying.set(false)
                     if (messageInputElement) messageInputElement.focus()
                 }}
-            >
-                <IconPen />
-            </MessageContextMenuItem>
+            />
         {/if}
         <MessageContextMenuItem
             title={copyTimeoutId ? "Copied" : "Copy"}
+            icon={IconClipboard}
             isDisabled={!!copyTimeoutId}
             on:click={() => {
                 copyText(
-                    $contextMenuTargetMessage.content.replaceAll("<br>", "\n")
+                    $contextMenuTargetMessage.content.replaceAll("<br>", "\n"),
                 )
 
                 copyTimeoutId = setTimeout(() => {
@@ -69,20 +68,17 @@
                     copyTimeoutId = null
                 }, 1000)
             }}
-        >
-            <IconClipboard />
-        </MessageContextMenuItem>
+        />
         {#if $contextMenuTargetMessage.expand.user.id === $page.data.user.id}
             <MessageContextMenuItem
                 class="text-red-500"
                 title="Delete"
+                icon={IconTrash}
                 on:click={() => {
                     isContextMenuOpen.set(false)
                     messageIdToDelete.set($contextMenuTargetMessage.id)
                 }}
-            >
-                <IconTrash />
-            </MessageContextMenuItem>
+            />
         {/if}
     </MessageContextMenu>
 </OutClick>

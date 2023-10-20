@@ -53,7 +53,7 @@
                                 if (
                                     msg.repliedTo &&
                                     msg.repliedTo ===
-                                        $contextMenuTargetMessage.id
+                                        $contextMenuTargetMessage?.id
                                 ) {
                                     msg.repliedTo = ""
                                     msg.expand.repliedTo = null

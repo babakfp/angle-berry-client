@@ -29,6 +29,8 @@ export default {
                 700: colors.zinc[700],
                 800: colors.zinc[800],
             },
+            blue: colors.blue,
+            green: colors.green,
         },
         container: {
             center: true,

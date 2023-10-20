@@ -34,7 +34,7 @@
             on:contextmenu|preventDefault
         />
         <ul
-            class="max-h-56 w-36 overflow-y-auto overscroll-y-contain rounded bg-gray-600 p-1 text-xs shadow"
+            class="max-h-56 min-w-36 max-w-48 overflow-y-auto overscroll-y-contain rounded bg-gray-600 p-1 text-xs shadow"
         >
             <slot />
         </ul>

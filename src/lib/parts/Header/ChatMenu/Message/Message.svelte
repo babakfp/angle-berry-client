@@ -5,9 +5,12 @@
         isContextMenuOpen,
         contextMenuTargetEvent,
         contextMenuTargetMessage,
+        selectedMessageIds,
     } from "../chatStores.js"
     import MessageDateAndTime from "./MessageDateAndTime.svelte"
     import MessageReplyPreview from "./MessageReplyPreview.svelte"
+    import IconCircle from "$icons/IconCircle.svelte"
+    import IconCheckCircle from "$icons/IconCheckCircle.svelte"
 
     export let message
 
@@ -16,9 +19,24 @@
 
 <li id={message.id} class="w-full {isCurrentUser && 'ml-auto'}">
     <div
-        class="relative grid px-4 py-2"
+        class="relative grid px-4 py-2
+        {$selectedMessageIds.includes(message.id) && 'bg-blue-400/10'}
+        {$selectedMessageIds.length > 0 && 'cursor-pointer'}"
         in:shrinkHeight={{ duration: 200 }}
         out:shrinkHeight={{ duration: 200 }}
+        on:click={() => {
+            if (!$selectedMessageIds.length) return
+            if ($selectedMessageIds.includes(message.id)) {
+                selectedMessageIds.update(currentValue =>
+                    currentValue.filter(v => v !== message.id),
+                )
+            } else {
+                selectedMessageIds.update(currentValue => [
+                    ...currentValue,
+                    message.id,
+                ])
+            }
+        }}
     >
         <div
             class="reply-highlight absolute inset-0 -z-1 bg-white/20 opacity-0 duration-200 ease-in-out"
@@ -56,6 +74,16 @@
             created={message.created}
             updated={message.updated}
         />
+
+        {#if $selectedMessageIds.length > 0}
+            <div class="absolute bottom-6 left-4 flex text-xl">
+                {#if $selectedMessageIds.includes(message.id)}
+                    <IconCheckCircle class="text-green-400" />
+                {:else}
+                    <IconCircle />
+                {/if}
+            </div>
+        {/if}
     </div>
 </li>
 

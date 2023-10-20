@@ -8,14 +8,17 @@
         contextMenuTargetMessage,
         isReplying,
         replyTargetMessage,
-        messageIdToDelete,
+        messageIdsToDelete,
         messageIdToEdit,
         messageInputElement,
+        selectedMessageIds,
     } from "./chatStores.js"
+    import { messages } from "$stores/messages.js"
     import IconReply from "$icons/IconReply.svelte"
     import IconPen from "$icons/IconPen.svelte"
     import IconClipboard from "$icons/IconClipboard.svelte"
     import IconTrash from "$icons/IconTrash.svelte"
+    import IconCheckCircle from "$icons/IconCheckCircle.svelte"
     import MessageContextMenu from "./MessageContextMenu.svelte"
     import MessageContextMenuItem from "./MessageContextMenuItem.svelte"
 
@@ -37,7 +40,23 @@
     }
 
     function copyMessage() {
-        copyText($contextMenuTargetMessage.content.replaceAll("<br>", "\n"))
+        if ($selectedMessageIds.length > 0) {
+            let copiedText = ""
+            const selectedMessages = $messages
+                .filter(msg => $selectedMessageIds.includes(msg.id))
+                .sort((a, b) => new Date(a.created) - new Date(b.created))
+            selectedMessages.forEach((msg, i) => {
+                copiedText += msg.content
+                if (i < selectedMessages.length - 1) {
+                    copiedText += "<br><br>---<br><br>"
+                } else {
+                    copiedText += "<br><br>"
+                }
+            })
+            copyText(copiedText.replaceAll("<br>", "\n"))
+        } else {
+            copyText($contextMenuTargetMessage.content.replaceAll("<br>", "\n"))
+        }
         copyTimeoutId = setTimeout(() => {
             isContextMenuOpen.set(false)
             copyTimeoutId = null
@@ -46,7 +65,24 @@
 
     function deleteMessage() {
         isContextMenuOpen.set(false)
-        messageIdToDelete.set($contextMenuTargetMessage.id)
+        if ($selectedMessageIds.length > 0) {
+            messageIdsToDelete.set($selectedMessageIds)
+        } else {
+            messageIdsToDelete.set([$contextMenuTargetMessage.id])
+        }
+    }
+
+    function selectMessage() {
+        isContextMenuOpen.set(false)
+        selectedMessageIds.update(currentValue => [
+            ...currentValue,
+            $contextMenuTargetMessage.id,
+        ])
+    }
+
+    function clearSelection() {
+        isContextMenuOpen.set(false)
+        selectedMessageIds.set([])
     }
 </script>
 
@@ -58,12 +94,14 @@
         e={$contextMenuTargetEvent}
         bind:isOpen={$isContextMenuOpen}
     >
-        <MessageContextMenuItem
-            title="Reply"
-            icon={IconReply}
-            on:click={replyMessage}
-        />
-        {#if $contextMenuTargetMessage.expand?.user.id === $page.data.user.id}
+        {#if !$selectedMessageIds.length}
+            <MessageContextMenuItem
+                title="Reply"
+                icon={IconReply}
+                on:click={replyMessage}
+            />
+        {/if}
+        {#if $contextMenuTargetMessage.expand?.user.id === $page.data.user.id && !$selectedMessageIds.length}
             <MessageContextMenuItem
                 title="Edit"
                 icon={IconPen}
@@ -71,16 +109,41 @@
             />
         {/if}
         <MessageContextMenuItem
-            title={copyTimeoutId ? "Copied" : "Copy"}
+            title={copyTimeoutId
+                ? "Copied"
+                : $selectedMessageIds.length
+                ? "Copy Selected as Text"
+                : "Copy Text"}
             icon={IconClipboard}
             isDisabled={!!copyTimeoutId}
             on:click={copyMessage}
         />
         {#if $contextMenuTargetMessage.expand.user.id === $page.data.user.id}
+            {#if $selectedMessageIds.length > 0}
+                <MessageContextMenuItem
+                    title="Delete Selected"
+                    icon={IconTrash}
+                    on:click={deleteMessage}
+                />
+            {:else}
+                <MessageContextMenuItem
+                    title="Delete"
+                    icon={IconTrash}
+                    on:click={deleteMessage}
+                />
+            {/if}
+        {/if}
+        {#if !$selectedMessageIds.includes($contextMenuTargetMessage.id)}
             <MessageContextMenuItem
-                title="Delete"
-                icon={IconTrash}
-                on:click={deleteMessage}
+                title="Select"
+                icon={IconCheckCircle}
+                on:click={selectMessage}
+            />
+        {:else}
+            <MessageContextMenuItem
+                title="Clear Selection"
+                icon={IconCheckCircle}
+                on:click={clearSelection}
             />
         {/if}
     </MessageContextMenu>

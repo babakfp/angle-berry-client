@@ -3,7 +3,7 @@
     import { messages } from "$stores/messages.js"
     import {
         contextMenuTargetMessage,
-        messageIdToDelete,
+        messageIdsToDelete,
         messageIdToEdit,
         isReplying,
     } from "./chatStores.js"
@@ -11,8 +11,9 @@
     import Modal from "$components/Modal.svelte"
 
     let isDeletingMessage = false
-    $: isDeletePopupOpen = !!$messageIdToDelete
-    $: if (!isDeletePopupOpen && $messageIdToDelete) messageIdToDelete.set(null)
+    $: isDeletePopupOpen = !!$messageIdsToDelete.length
+    $: if (!isDeletePopupOpen && $messageIdsToDelete.length > 0)
+        messageIdsToDelete.set([])
 </script>
 
 <Modal bind:isOpen={isDeletePopupOpen}>
@@ -21,7 +22,7 @@
         <button
             class="btn btn-gray"
             on:click={() => {
-                messageIdToDelete.set(null)
+                messageIdsToDelete.set([])
             }}
         >
             Cancel
@@ -32,14 +33,17 @@
             disabled={isDeletingMessage}
             on:click={async () => {
                 try {
-                    const isMessageDeleted = await $pb
-                        .collection("messages")
-                        .delete($messageIdToDelete)
+                    const isMessageDeleted = await Promise.all(
+                        $messageIdsToDelete.map(messageId =>
+                            $pb.collection("messages").delete(messageId),
+                        ),
+                    )
 
                     isDeletingMessage = true
+
                     if (isMessageDeleted) {
                         isDeletingMessage = false
-                        messageIdToDelete.set(null)
+                        messageIdsToDelete.set([])
                         messageIdToEdit.set(null)
                         isReplying.set(false)
 
@@ -61,7 +65,7 @@
                 } catch (error) {
                     console.error(error)
                     isDeletingMessage = false
-                    messageIdToDelete.set(null)
+                    messageIdsToDelete.set([])
                     messageIdToEdit.set(null)
                     isReplying.set(false)
                 }

@@ -2,6 +2,7 @@
     export let e
     export let isOpen = false
 
+    /** @type {HTMLDivElement} */
     let contextMenu
 
     $: if (contextMenu && isOpen) {

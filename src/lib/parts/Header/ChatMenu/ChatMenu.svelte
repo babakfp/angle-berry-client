@@ -35,6 +35,7 @@
     messageInputValue.subscribe(() => {
         if (!$messageInputElement) return
         $messageInputElement.setAttribute("rows", 1)
+        $messageInputElement.value = $messageInputValue
         const lineCount = getTextareaLineCount($messageInputElement)
         $messageInputElement.setAttribute(
             "rows",

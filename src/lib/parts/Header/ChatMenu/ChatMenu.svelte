@@ -9,6 +9,8 @@
         replyTargetMessage,
         messageIdToEdit,
         messageInputElement,
+        isContextMenuOpen2,
+        isContextMenuOpen,
     } from "./chatStores.js"
     import IconLoading from "$icons/IconLoading.svelte"
     import IconCheck from "$icons/IconCheck.svelte"
@@ -107,6 +109,11 @@
                 isSomethingWentWrongWhenFetchingOlderMessages = true
                 throw error
             }
+        }
+
+        if ($isContextMenuOpen || $isContextMenuOpen2) {
+            isContextMenuOpen.set(false)
+            isContextMenuOpen2.set(false)
         }
     }
 </script>

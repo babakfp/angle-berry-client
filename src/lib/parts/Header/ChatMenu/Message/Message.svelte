@@ -3,6 +3,7 @@
     import { shrinkHeight } from "$utilities/shrinkHeight.js"
     import {
         isContextMenuOpen,
+        isContextMenuOpen2,
         contextMenuTargetEvent,
         contextMenuTargetMessage,
         selectedMessageIds,
@@ -24,17 +25,29 @@
         {$selectedMessageIds.length > 0 && 'cursor-pointer'}"
         in:shrinkHeight={{ duration: 200 }}
         out:shrinkHeight={{ duration: 200 }}
-        on:click={() => {
-            if (!$selectedMessageIds.length) return
-            if ($selectedMessageIds.includes(message.id)) {
-                selectedMessageIds.update(currentValue =>
-                    currentValue.filter(v => v !== message.id),
-                )
-            } else {
-                selectedMessageIds.update(currentValue => [
-                    ...currentValue,
-                    message.id,
-                ])
+        on:click={e => {
+            if ($selectedMessageIds.length > 0) {
+                if ($selectedMessageIds.includes(message.id)) {
+                    selectedMessageIds.update(currentValue =>
+                        currentValue.filter(v => v !== message.id),
+                    )
+                } else {
+                    selectedMessageIds.update(currentValue => [
+                        ...currentValue,
+                        message.id,
+                    ])
+                }
+            } else if (e.pointerType !== "mouse") {
+                if ($isContextMenuOpen2) {
+                    isContextMenuOpen.set(false)
+                    contextMenuTargetEvent.set(null)
+                    contextMenuTargetMessage.set(null)
+                } else {
+                    isContextMenuOpen.set(true)
+                    contextMenuTargetEvent.set(e)
+                    contextMenuTargetMessage.set(message)
+                }
+                $isContextMenuOpen2 = !$isContextMenuOpen2
             }
         }}
     >
@@ -55,6 +68,7 @@
                 : 'mt-0.5 justify-self-start rounded-tl-[2px]'}
 		"
             on:contextmenu|preventDefault={e => {
+                if (e.pointerType !== "mouse") return
                 isContextMenuOpen.set(true)
                 contextMenuTargetEvent.set(e)
                 contextMenuTargetMessage.set(message)

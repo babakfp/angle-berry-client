@@ -87,7 +87,7 @@
 </script>
 
 <OutClick
-    on:outclick={() => isContextMenuOpen.set(false)}
+    on:outclick={() => $isContextMenuOpen && isContextMenuOpen.set(false)}
     excludeQuerySelectorAll=".MessageContextMenu"
 >
     <MessageContextMenu

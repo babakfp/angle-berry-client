@@ -66,8 +66,8 @@
             Cancel
         </button>
         <button
-            class="btn btn-danger
-			{isDeletingMessage && 'pointer-events-none opacity-50'}"
+            class="btn btn-danger {isDeletingMessage &&
+                'pointer-events-none opacity-50'}"
             disabled={isDeletingMessage}
             on:click={handleDelete}
         >

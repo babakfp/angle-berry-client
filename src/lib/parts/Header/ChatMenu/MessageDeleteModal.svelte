@@ -14,6 +14,45 @@
     $: isDeletePopupOpen = !!$messageIdsToDelete.length
     $: if (!isDeletePopupOpen && $messageIdsToDelete.length > 0)
         messageIdsToDelete.set([])
+
+    async function handleDelete() {
+        try {
+            const isMessageDeleted = await Promise.all(
+                $messageIdsToDelete.map(messageId =>
+                    $pb.collection("messages").delete(messageId),
+                ),
+            )
+
+            isDeletingMessage = true
+
+            if (isMessageDeleted) {
+                isDeletingMessage = false
+                messageIdsToDelete.set([])
+                messageIdToEdit.set(null)
+                isReplying.set(false)
+
+                // Remove other messages reply preview to that deleted message
+                messages.update(msgs =>
+                    msgs.map(msg => {
+                        if (
+                            msg.repliedTo &&
+                            msg.repliedTo === $contextMenuTargetMessage?.id
+                        ) {
+                            msg.repliedTo = ""
+                            msg.expand.repliedTo = null
+                        }
+                        return msg
+                    }),
+                )
+            }
+        } catch (error) {
+            console.error(error)
+            isDeletingMessage = false
+            messageIdsToDelete.set([])
+            messageIdToEdit.set(null)
+            isReplying.set(false)
+        }
+    }
 </script>
 
 <Modal bind:isOpen={isDeletePopupOpen}>
@@ -32,45 +71,7 @@
             class="btn btn-danger
 			{isDeletingMessage && 'pointer-events-none opacity-50'}"
             disabled={isDeletingMessage}
-            on:click={async () => {
-                try {
-                    const isMessageDeleted = await Promise.all(
-                        $messageIdsToDelete.map(messageId =>
-                            $pb.collection("messages").delete(messageId),
-                        ),
-                    )
-
-                    isDeletingMessage = true
-
-                    if (isMessageDeleted) {
-                        isDeletingMessage = false
-                        messageIdsToDelete.set([])
-                        messageIdToEdit.set(null)
-                        isReplying.set(false)
-
-                        // Remove other messages reply preview to that deleted message
-                        messages.update(msgs =>
-                            msgs.map(msg => {
-                                if (
-                                    msg.repliedTo &&
-                                    msg.repliedTo ===
-                                        $contextMenuTargetMessage?.id
-                                ) {
-                                    msg.repliedTo = ""
-                                    msg.expand.repliedTo = null
-                                }
-                                return msg
-                            }),
-                        )
-                    }
-                } catch (error) {
-                    console.error(error)
-                    isDeletingMessage = false
-                    messageIdsToDelete.set([])
-                    messageIdToEdit.set(null)
-                    isReplying.set(false)
-                }
-            }}
+            on:click={handleDelete}
         >
             {#if isDeletingMessage}
                 <IconLoading />

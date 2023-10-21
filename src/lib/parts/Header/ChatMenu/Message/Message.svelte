@@ -20,14 +20,9 @@
     function handleClick(e) {
         if ($selectedMessageIds.length > 0) {
             if ($selectedMessageIds.includes(message.id)) {
-                selectedMessageIds.update(currentValue =>
-                    currentValue.filter(v => v !== message.id),
-                )
+                selectedMessageIds.update(v => v.filter(v => v !== message.id))
             } else {
-                selectedMessageIds.update(currentValue => [
-                    ...currentValue,
-                    message.id,
-                ])
+                selectedMessageIds.update(v => [...v, message.id])
             }
         } else if (e.pointerType !== "mouse") {
             if ($isContextMenuOpen2) {

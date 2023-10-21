@@ -20,14 +20,12 @@
     } = superForm(data.form, { validators: schema })
     export const snapshot = { capture, restore }
 
-    // TODO
     if (
         $page.url.searchParams.get("username") &&
         $page.url.searchParams.get("password")
     ) {
-        form.update(prevValue => {
-            console.log(prevValue)
-        })
+        $_form.username = $page.url.searchParams.get("username")
+        $_form.password = $page.url.searchParams.get("password")
     }
 </script>
 

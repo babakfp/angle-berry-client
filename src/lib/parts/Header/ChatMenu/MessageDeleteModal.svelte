@@ -55,10 +55,12 @@
     }
 </script>
 
-<Modal bind:isOpen={isDeletePopupOpen}>
-    <h6 class="text-lg">Delete message</h6>
-    <p>Are you sure you want to delete this message?</p>
-    <div class="mt-4 flex justify-end gap-2">
+<Modal
+    title="Delete message"
+    description="Are you sure you want to delete this message?"
+    bind:isOpen={isDeletePopupOpen}
+>
+    <svelte:fragment slot="actions">
         <button
             class="btn btn-gray"
             on:click={() => messageIdsToDelete.set([])}
@@ -77,5 +79,5 @@
                 Delete
             {/if}
         </button>
-    </div>
+    </svelte:fragment>
 </Modal>

@@ -1,4 +1,6 @@
 <script>
+    export let title = ""
+    export let description = ""
     export let isOpen = false
 </script>
 
@@ -16,7 +18,11 @@
         <div
             class="max-w-md overflow-y-auto overscroll-y-contain rounded bg-gray-700 p-6 drop-shadow"
         >
-            <slot />
+            <h6 class="text-lg">{title}</h6>
+            <p>{description}</p>
+            <div class="mt-4 flex justify-end gap-2">
+                <slot name="actions" />
+            </div>
         </div>
     </div>
 {/if}

@@ -10,10 +10,10 @@
         let y = e.clientY
 
         if (e.clientX + contextMenu.offsetWidth > window.innerWidth) {
-            x = x - contextMenu.offsetWidth
+            x -= contextMenu.offsetWidth
         }
         if (e.clientY + contextMenu.offsetHeight > window.innerHeight) {
-            y = y - contextMenu.offsetHeight
+            y -= contextMenu.offsetHeight
             contextMenu.style.transform = "translateY(1.25rem)"
         }
 

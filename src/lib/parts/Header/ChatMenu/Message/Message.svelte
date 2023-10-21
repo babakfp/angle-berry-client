@@ -16,6 +16,32 @@
     export let message
 
     const isCurrentUser = message.expand.user.id === $page.data.user.id
+
+    function handleClick(e) {
+        if ($selectedMessageIds.length > 0) {
+            if ($selectedMessageIds.includes(message.id)) {
+                selectedMessageIds.update(currentValue =>
+                    currentValue.filter(v => v !== message.id),
+                )
+            } else {
+                selectedMessageIds.update(currentValue => [
+                    ...currentValue,
+                    message.id,
+                ])
+            }
+        } else if (e.pointerType !== "mouse") {
+            if ($isContextMenuOpen2) {
+                isContextMenuOpen.set(false)
+                contextMenuTargetEvent.set(null)
+                contextMenuTargetMessage.set(null)
+            } else {
+                isContextMenuOpen.set(true)
+                contextMenuTargetEvent.set(e)
+                contextMenuTargetMessage.set(message)
+            }
+            $isContextMenuOpen2 = !$isContextMenuOpen2
+        }
+    }
 </script>
 
 <li id={message.id} class="w-full {isCurrentUser && 'ml-auto'}">
@@ -25,31 +51,7 @@
         {$selectedMessageIds.length > 0 && 'cursor-pointer'}"
         in:shrinkHeight={{ duration: 200 }}
         out:shrinkHeight={{ duration: 200 }}
-        on:click={e => {
-            if ($selectedMessageIds.length > 0) {
-                if ($selectedMessageIds.includes(message.id)) {
-                    selectedMessageIds.update(currentValue =>
-                        currentValue.filter(v => v !== message.id),
-                    )
-                } else {
-                    selectedMessageIds.update(currentValue => [
-                        ...currentValue,
-                        message.id,
-                    ])
-                }
-            } else if (e.pointerType !== "mouse") {
-                if ($isContextMenuOpen2) {
-                    isContextMenuOpen.set(false)
-                    contextMenuTargetEvent.set(null)
-                    contextMenuTargetMessage.set(null)
-                } else {
-                    isContextMenuOpen.set(true)
-                    contextMenuTargetEvent.set(e)
-                    contextMenuTargetMessage.set(message)
-                }
-                $isContextMenuOpen2 = !$isContextMenuOpen2
-            }
-        }}
+        on:click={handleClick}
     >
         <div
             class="reply-highlight absolute inset-0 -z-1 bg-white/20 opacity-0 duration-200 ease-in-out"

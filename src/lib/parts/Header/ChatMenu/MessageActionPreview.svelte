@@ -12,13 +12,10 @@
 
     const dispatch = createEventDispatcher()
 
-    let intervalId
-    let timeoutId
+    let interval
 
     function handleJumpToMessage() {
-        const v = goToMessage(messageId, intervalId, timeoutId)
-        intervalId = v?.intervalId
-        timeoutId = v?.timeoutId
+        interval = goToMessage(messageId, interval)
     }
 
     function handleClosing() {

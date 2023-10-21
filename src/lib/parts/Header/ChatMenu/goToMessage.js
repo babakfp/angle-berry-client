@@ -1,15 +1,9 @@
 /**
  * Scrolls to the message with the specified ID and highlights it.
  * @param {string} messageId - The ID of the message to scroll to.
- * @param {number} intervalId - The ID of the current interval (if any).
- * @param {number} timeoutId - The ID of the current timeout (if any).
- * @returns {object | undefined} - An object containing the IDs of the new interval and timeout.
+ * @param {number | undefined} interval - The ID of the current interval (if any).
  */
-export function goToMessage(messageId, intervalId, timeoutId) {
-    // Clear the current interval and timeout (if any).
-    if (intervalId) clearInterval(intervalId)
-    if (timeoutId) clearTimeout(timeoutId)
-
+export function goToMessage(messageId, interval) {
     // Get the element with the specified ID.
     const messageElement = document.getElementById(messageId)
     if (!messageElement) return
@@ -24,15 +18,28 @@ export function goToMessage(messageId, intervalId, timeoutId) {
                 : "center",
     })
 
-    // Highlight the message element.
-    const messageHighlightElement =
-        messageElement.querySelector(".reply-highlight")
-    messageHighlightElement.style.opacity = 1
-    intervalId = setInterval(() => {
-        messageHighlightElement.style.opacity -= 0.05
-    }, 100)
+    return highlightAnimate(
+        messageElement.querySelector(".reply-highlight"),
+        interval,
+    )
+}
 
-    timeoutId = setTimeout(() => clearInterval(intervalId), 2000)
+/**
+ * @param element {HTMLElement}
+ * @param {number | undefined} interval - The ID of the current interval
+ */
+function highlightAnimate(element, interval) {
+    if (interval) clearInterval(interval)
 
-    return { intervalId, timeoutId }
+    if (element) {
+        element.style.opacity = 1
+        interval = setInterval(() => {
+            element.style.opacity -= 0.05
+            if (element.style.opacity === "0") {
+                clearInterval(interval)
+            }
+        }, 100)
+    }
+
+    return interval
 }

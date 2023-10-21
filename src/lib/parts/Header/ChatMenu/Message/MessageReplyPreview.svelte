@@ -5,13 +5,11 @@
     export let replyTargetMessage
 
     // IDs to keep a track of things.
-    let intervalId, timeoutId
+    let interval
 
     // When clicked, starts scrolling to the message being replied to.
     function handleGoToMessage() {
-        const result = goToMessage(replyTargetMessage.id, intervalId, timeoutId)
-        intervalId = result?.intervalId
-        timeoutId = result?.timeoutId
+        interval = goToMessage(replyTargetMessage.id, interval)
     }
 </script>
 

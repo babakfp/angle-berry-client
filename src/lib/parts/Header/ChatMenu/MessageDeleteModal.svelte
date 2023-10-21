@@ -61,9 +61,7 @@
     <div class="mt-4 flex justify-end gap-2">
         <button
             class="btn btn-gray"
-            on:click={() => {
-                messageIdsToDelete.set([])
-            }}
+            on:click={() => messageIdsToDelete.set([])}
         >
             Cancel
         </button>

@@ -12,10 +12,17 @@
     import MessageReplyPreview from "./MessageReplyPreview.svelte"
     import IconCircle from "$icons/IconCircle.svelte"
     import IconCheckCircle from "$icons/IconCheckCircle.svelte"
+    import { highlightAnimate } from "$utilities/highlightAnimate.js"
 
     export let message
 
     const isCurrentUser = message.expand.user.id === $page.data.user.id
+
+    /** @type {number | undefined} */
+    let interval
+
+    /** @type {HTMLDivElement}*/
+    let highlight
 
     function handleClick(e) {
         if ($selectedMessageIds.length > 0) {
@@ -30,6 +37,7 @@
                 contextMenuTargetEvent.set(null)
                 contextMenuTargetMessage.set(null)
             } else {
+                interval = highlightAnimate(highlight, interval)
                 isContextMenuOpen.set(true)
                 contextMenuTargetEvent.set(e)
                 contextMenuTargetMessage.set(message)
@@ -49,13 +57,15 @@
         on:click={handleClick}
         on:contextmenu|preventDefault={e => {
             if (e.pointerType !== "mouse") return
+            interval = highlightAnimate(highlight, interval)
             isContextMenuOpen.set(true)
             contextMenuTargetEvent.set(e)
             contextMenuTargetMessage.set(message)
         }}
     >
         <div
-            class="reply-highlight absolute inset-0 -z-1 bg-white/20 opacity-0 duration-200 ease-in-out"
+            bind:this={highlight}
+            class="reply-highlight absolute inset-0 -z-1 bg-white/10 opacity-0 duration-200 ease-in-out"
         />
 
         {#if !isCurrentUser}

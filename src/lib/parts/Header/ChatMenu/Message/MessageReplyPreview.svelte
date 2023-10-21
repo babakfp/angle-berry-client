@@ -5,6 +5,7 @@
     export let replyTargetMessage
 
     // IDs to keep a track of things.
+    /** @type {number | undefined} */
     let interval
 
     // When clicked, starts scrolling to the message being replied to.

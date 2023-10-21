@@ -12,6 +12,7 @@
 
     const dispatch = createEventDispatcher()
 
+    /** @type {number | undefined} */
     let interval
 
     function handleJumpToMessage() {

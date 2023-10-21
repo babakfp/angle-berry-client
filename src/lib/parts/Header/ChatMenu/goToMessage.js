@@ -1,3 +1,5 @@
+import { highlightAnimate } from "$utilities/highlightAnimate.js"
+
 /**
  * Scrolls to the message with the specified ID and highlights it.
  * @param {string} messageId - The ID of the message to scroll to.
@@ -22,24 +24,4 @@ export function goToMessage(messageId, interval) {
         messageElement.querySelector(".reply-highlight"),
         interval,
     )
-}
-
-/**
- * @param element {HTMLElement}
- * @param {number | undefined} interval - The ID of the current interval
- */
-function highlightAnimate(element, interval) {
-    if (interval) clearInterval(interval)
-
-    if (element) {
-        element.style.opacity = 1
-        interval = setInterval(() => {
-            element.style.opacity -= 0.05
-            if (element.style.opacity === "0") {
-                clearInterval(interval)
-            }
-        }, 100)
-    }
-
-    return interval
 }

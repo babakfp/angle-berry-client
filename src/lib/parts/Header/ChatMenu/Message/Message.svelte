@@ -47,6 +47,12 @@
         in:shrinkHeight={{ duration: 200 }}
         out:shrinkHeight={{ duration: 200 }}
         on:click={handleClick}
+        on:contextmenu|preventDefault={e => {
+            if (e.pointerType !== "mouse") return
+            isContextMenuOpen.set(true)
+            contextMenuTargetEvent.set(e)
+            contextMenuTargetMessage.set(message)
+        }}
     >
         <div
             class="reply-highlight absolute inset-0 -z-1 bg-white/20 opacity-0 duration-200 ease-in-out"
@@ -59,17 +65,9 @@
         {/if}
 
         <div
-            class="message-content-wrapper relative max-w-80 break-words rounded bg-gray-700 py-2 pl-3 pr-4 shadow
-			{isCurrentUser
+            class="message-content-wrapper relative max-w-80 break-words rounded bg-gray-700 py-2 pl-3 pr-4 shadow {isCurrentUser
                 ? 'justify-self-end rounded-br-[2px] !bg-[#7e6dd1] text-white'
-                : 'mt-0.5 justify-self-start rounded-tl-[2px]'}
-		"
-            on:contextmenu|preventDefault={e => {
-                if (e.pointerType !== "mouse") return
-                isContextMenuOpen.set(true)
-                contextMenuTargetEvent.set(e)
-                contextMenuTargetMessage.set(message)
-            }}
+                : 'mt-0.5 justify-self-start rounded-tl-[2px]'}"
         >
             <MessageReplyPreview
                 replyTargetMessage={message?.expand?.repliedTo}

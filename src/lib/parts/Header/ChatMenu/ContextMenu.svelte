@@ -46,6 +46,7 @@
                 .filter(msg => $selectedMessageIds.includes(msg.id))
                 .sort((a, b) => new Date(a.created) - new Date(b.created))
             selectedMessages.forEach((msg, i) => {
+                copiedText += msg.expand.user.username + "\n"
                 copiedText += msg.content
                 if (i < selectedMessages.length - 1) {
                     copiedText += "<br><br>---<br><br>"

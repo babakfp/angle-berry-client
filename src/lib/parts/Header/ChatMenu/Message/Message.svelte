@@ -85,7 +85,10 @@
         />
 
         {#if $selectedMessageIds.length > 0}
-            <div class="absolute bottom-6 left-4 flex text-xl">
+            <div
+                class="absolute bottom-6 flex text-xl
+                {isCurrentUser ? 'left-4' : 'right-4'}"
+            >
                 {#if $selectedMessageIds.includes(message.id)}
                     <IconCheckCircle class="text-green-400" />
                 {:else}

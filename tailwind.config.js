@@ -2,6 +2,7 @@ import colors from "tailwindcss/colors"
 import defaultTheme from "tailwindcss/defaultTheme"
 import tailwindcssAddons from "tailwindcss-addons"
 
+/** @type {import("tailwindcss").Config} */
 export default {
     content: ["./src/**/*.{html,js,svelte}"],
     presets: [
@@ -14,7 +15,16 @@ export default {
     theme: {
         extend: {
             spacing: {
-                "header-height": "var(--header-height)",
+                header: "var(--header)",
+            },
+            height: {
+                "screen-minus-header": "var(--screen-minus-header)",
+            },
+            minHeight: {
+                "screen-minus-header": "var(--screen-minus-header)",
+            },
+            maxHeight: {
+                "screen-minus-header": "var(--screen-minus-header)",
             },
         },
         colors: {

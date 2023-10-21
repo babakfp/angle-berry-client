@@ -26,7 +26,7 @@
 />
 
 <div
-    class="hidden sm:fixed sm:inset-0 sm:top-header-height sm:z-40 sm:block sm:bg-[black]/40 sm:duration-200 sm:hide
+    class="sm:top-header hidden sm:fixed sm:inset-0 sm:z-40 sm:block sm:bg-[black]/40 sm:duration-200 sm:hide
 	{isOpen && 'sm:show'}"
 />
 
@@ -35,7 +35,7 @@
         {id}
         class="fixed inset-0 z-50 grid h-screen translate-x-full grid-rows-[auto_1fr_auto] bg-gray-800 duration-200 hide
 			{isOpen && '!translate-x-0 !show'}
-			sm:left-auto sm:top-header-height sm:z-40 sm:h-[calc(var(--tw-screen-h)-theme(spacing.header-height))] sm:w-96 sm:grid-rows-[1fr_auto]
+			sm:h-screen-minus-header sm:top-header sm:left-auto sm:z-40 sm:w-96 sm:grid-rows-[1fr_auto]
 		"
     >
         <button

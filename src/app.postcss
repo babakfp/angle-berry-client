@@ -4,7 +4,8 @@
 
 @layer base {
     :root {
-        --header-height: theme(spacing.16);
+        --header: theme(spacing.16);
+        --screen-minus-header: calc(var(--tw-screen-h) - var(--header));
     }
     ::-webkit-scrollbar {
         @apply h-0 w-0;

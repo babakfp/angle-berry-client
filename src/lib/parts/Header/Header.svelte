@@ -20,9 +20,7 @@
     let userMenuToggle
 </script>
 
-<header
-    class="sticky top-0 z-50 h-header-height overflow-x-clip bg-gray-800 shadow"
->
+<header class="h-header sticky top-0 z-50 overflow-x-clip bg-gray-800 shadow">
     <div class="container flex h-full justify-between px-0">
         <a
             class="flex items-center px-4 text-white outline-inset

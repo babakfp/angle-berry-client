@@ -24,7 +24,6 @@
 
 {#if isOpen}
     <div bind:this={contextMenu} class="absolute z-50 -translate-y-5">
-        <!-- Close the menu when moved out of the bunding area -->
         <div
             class="absolute -inset-8 -z-1"
             on:pointerdown={() => (isOpen = false)}

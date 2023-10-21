@@ -79,9 +79,14 @@
                 ? 'justify-self-end rounded-br-[2px] !bg-[#7e6dd1] text-white'
                 : 'mt-0.5 justify-self-start rounded-tl-[2px]'}"
         >
-            <MessageReplyPreview
-                replyTargetMessage={message?.expand?.repliedTo}
-            />
+            {#if message.expand?.repliedTo}
+                {@const msg = message.expand?.repliedTo}
+                <MessageReplyPreview
+                    id={msg.id}
+                    username={msg.expand.user.username}
+                    content={msg.content}
+                />
+            {/if}
 
             <div class="select-text">
                 {@html message.content}

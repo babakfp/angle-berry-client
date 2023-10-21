@@ -1,31 +1,28 @@
 <script>
     import { goToMessage } from "../goToMessage.js"
 
-    // Message that we are replying to.
-    export let replyTargetMessage
+    export let id
+    export let username
+    export let content
 
-    // IDs to keep a track of things.
     /** @type {number | undefined} */
     let interval
 
-    // When clicked, starts scrolling to the message being replied to.
     function handleGoToMessage() {
-        interval = goToMessage(replyTargetMessage.id, interval)
+        interval = goToMessage(id, interval)
     }
 </script>
 
-{#if replyTargetMessage?.content}
-    <button
-        class="-ml-3 mb-2 block border-l-2 pl-2 text-left text-xs text-white/80 hover:text-white/100"
-        on:click={handleGoToMessage}
-    >
-        <div class="flex gap-1">
-            <span class="font-semibold">
-                {replyTargetMessage?.expand?.user?.username}
-            </span>
-            <div class="line-clamp-1">
-                {@html replyTargetMessage?.content}
-            </div>
+<button
+    class="-ml-3 mb-2 block border-l-2 pl-2 text-left text-xs text-white/80 hover:text-white/100"
+    on:click={handleGoToMessage}
+>
+    <div class="flex gap-1">
+        <span class="font-semibold">
+            {username}
+        </span>
+        <div class="line-clamp-1">
+            {@html content}
         </div>
-    </button>
-{/if}
+    </div>
+</button>

@@ -69,15 +69,15 @@
         />
 
         {#if !isCurrentUser}
-            <span class="text-xs font-semibold">
+            <span class="mb-0.5 text-xs font-semibold">
                 {message.expand.user.username}
             </span>
         {/if}
 
         <div
-            class="message-content-wrapper relative max-w-80 break-words rounded bg-gray-700 py-2 pl-3 pr-4 shadow {isCurrentUser
+            class="message-content-wrapper relative max-w-80 break-words rounded bg-gray-700 shadow {isCurrentUser
                 ? 'justify-self-end rounded-br-[2px] !bg-[#7e6dd1] text-white'
-                : 'mt-0.5 justify-self-start rounded-tl-[2px]'}"
+                : 'justify-self-start rounded-tl-[2px]'}"
         >
             {#if message.expand?.repliedTo}
                 {@const msg = message.expand?.repliedTo}
@@ -88,7 +88,7 @@
                 />
             {/if}
 
-            <div class="select-text">
+            <div class="select-text py-2 pl-3 pr-4">
                 {@html message.content}
             </div>
         </div>

@@ -14,7 +14,7 @@
 </script>
 
 <button
-    class="-ml-3 mb-2 block border-l-2 pl-2 text-left text-xs text-white/80 hover:text-white/100"
+    class="block w-full pb-2 pl-3 pr-4 pt-2.5 text-xs text-white/50 duration-150 hover:bg-white/5 hover:text-white"
     on:click={handleGoToMessage}
 >
     <div class="flex gap-1">
@@ -26,3 +26,5 @@
         </div>
     </div>
 </button>
+
+<hr class="border-white/5" />

@@ -23,13 +23,11 @@
 </script>
 
 {#if isOpen}
-    <div bind:this={contextMenu} class="absolute z-50 -translate-y-5">
-        <div
-            class="absolute -inset-8 -z-1"
-            on:pointerdown={() => (isOpen = false)}
-            on:contextmenu|preventDefault
-            on:pointerleave={() => (isOpen = false)}
-        />
+    <div
+        bind:this={contextMenu}
+        class="absolute z-50 -translate-y-5"
+        on:contextmenu|preventDefault
+    >
         <ul
             class="max-h-56 min-w-36 max-w-48 overflow-y-auto overscroll-y-contain rounded bg-gray-600 p-1 text-xs shadow"
         >

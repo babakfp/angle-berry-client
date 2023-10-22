@@ -28,7 +28,7 @@
     }
 </script>
 
-<div class="mt-1.5 text-2xs text-gray-500 {isCurrentUser && 'text-right'}">
+<div class="mt-1 text-2xs text-gray-500 {isCurrentUser && 'text-right'}">
     {#if isToday || isYesterday}
         {isToday ? "Today" : "Yesterday"} {dateToAMPM(date)}
     {:else}

@@ -6,11 +6,11 @@
     let contextMenu = null
 
     $: if (contextMenu && isOpen) {
-        let x = e.clientX
+        let x = e.clientX + 14
         let y = e.clientY
 
         if (e.clientX + contextMenu.offsetWidth > window.innerWidth) {
-            x -= contextMenu.offsetWidth
+            x -= contextMenu.offsetWidth + 26
         }
         if (e.clientY + contextMenu.offsetHeight > window.innerHeight) {
             y -= contextMenu.offsetHeight

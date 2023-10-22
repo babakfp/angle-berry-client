@@ -54,7 +54,6 @@
         {$selectedMessageIds.length > 0 && 'cursor-pointer'}"
         in:shrinkHeight={{ duration: 200 }}
         out:shrinkHeight={{ duration: 200 }}
-        on:click={handleClick}
         on:contextmenu|preventDefault={e => {
             if (e.pointerType !== "mouse") return
             interval = highlightAnimate(highlight, interval)
@@ -75,7 +74,7 @@
         {/if}
 
         <div
-            class="message-content-wrapper relative max-w-80 break-words rounded bg-gray-700 shadow {isCurrentUser
+            class="message-content-wrapper relative z-1 max-w-80 break-words rounded bg-gray-700 shadow {isCurrentUser
                 ? 'justify-self-end rounded-br-[2px] !bg-[#7e6dd1] text-white'
                 : 'justify-self-start rounded-tl-[2px]'}"
         >
@@ -88,7 +87,7 @@
                 />
             {/if}
 
-            <div class="select-text py-2 pl-3 pr-4">
+            <div class="select-text py-2 pl-3 pr-4" on:click={handleClick}>
                 {@html message.content}
             </div>
         </div>
@@ -111,6 +110,8 @@
                 {/if}
             </div>
         {/if}
+
+        <div class="absolute inset-0" on:click={handleClick} />
     </div>
 </li>
 

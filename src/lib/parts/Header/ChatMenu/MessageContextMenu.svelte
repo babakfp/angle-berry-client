@@ -1,18 +1,23 @@
 <script>
-    export let e
-    export let isOpen = false
+    import { contextMenuTargetEvent, isContextMenuOpen } from "./chatStores.js"
 
     /** @type {HTMLDivElement} */
     let contextMenu = null
 
-    $: if (contextMenu && isOpen) {
-        let x = e.clientX + 14
-        let y = e.clientY
+    $: if (contextMenu && $isContextMenuOpen) {
+        let x = $contextMenuTargetEvent.clientX + 14
+        let y = $contextMenuTargetEvent.clientY
 
-        if (e.clientX + contextMenu.offsetWidth > window.innerWidth) {
+        if (
+            $contextMenuTargetEvent.clientX + contextMenu.offsetWidth >
+            window.innerWidth
+        ) {
             x -= contextMenu.offsetWidth + 26
         }
-        if (e.clientY + contextMenu.offsetHeight > window.innerHeight) {
+        if (
+            $contextMenuTargetEvent.clientY + contextMenu.offsetHeight >
+            window.innerHeight
+        ) {
             y -= contextMenu.offsetHeight
             contextMenu.style.transform = "translateY(1.25rem)"
         }
@@ -22,7 +27,7 @@
     }
 </script>
 
-{#if isOpen}
+{#if $isContextMenuOpen}
     <div
         bind:this={contextMenu}
         class="absolute z-50 -translate-y-5"

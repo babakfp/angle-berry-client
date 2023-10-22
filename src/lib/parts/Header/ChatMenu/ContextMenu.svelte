@@ -4,7 +4,6 @@
     import OutClick from "svelte-outclick"
     import {
         isContextMenuOpen,
-        contextMenuTargetEvent,
         contextMenuTargetMessage,
         isReplying,
         replyTargetMessage,
@@ -93,10 +92,7 @@
     on:outclick={() => $isContextMenuOpen && isContextMenuOpen.set(false)}
     excludeQuerySelectorAll=".MessageContextMenu"
 >
-    <MessageContextMenu
-        e={$contextMenuTargetEvent}
-        bind:isOpen={$isContextMenuOpen}
-    >
+    <MessageContextMenu>
         {#if !$selectedMessageIds.length}
             <MessageContextMenuItem
                 title="Reply"

@@ -1,10 +1,7 @@
 import { error } from "@sveltejs/kit"
 import PocketBase from "pocketbase"
 import { POCKETBASE_URL } from "$env/static/private"
-import {
-    handleOfflineFailure,
-    getPreviewTierId,
-} from "$utilities/pb/helpers.js"
+import { handleOfflineFailure, getPreviewTierId } from "$utilities/pb.js"
 
 export async function handle({ event, resolve }) {
     if (!POCKETBASE_URL)

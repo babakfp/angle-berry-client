@@ -6,7 +6,7 @@
     import { messages, unreadMessagesLength } from "$stores/messages.js"
     import { events, unseenEventsLength } from "$stores/events.js"
     import { error } from "@sveltejs/kit"
-    import { handleOfflineFailure } from "$utilities/pb/helpers.js"
+    import { handleOfflineFailure } from "$utilities/pb.js"
     import { pb } from "$stores/pb.js"
     import Header from "$parts/Header/Header.svelte"
 

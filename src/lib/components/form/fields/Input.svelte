@@ -20,6 +20,9 @@
 
     export let error = ""
 
+    /**
+     * @param {InputEvent} e
+     */
     function bindValue(e) {
         if (type.match(/^(number|range)$/)) {
             value = +e.target.value

@@ -1,5 +1,5 @@
 import { redirect, error } from "@sveltejs/kit"
-import { handleCommunicationFailure } from "$utilities/pb/helpers.js"
+import { handleOfflineFailure } from "$utilities/pb/helpers.js"
 
 export async function load({ locals, parent }) {
     const data = await parent()
@@ -21,7 +21,7 @@ export async function load({ locals, parent }) {
             events: events.items,
         }
     } catch ({ status, response }) {
-        handleCommunicationFailure(status)
+        handleOfflineFailure(status)
         throw error(status, response.message)
     }
 }

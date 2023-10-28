@@ -2,7 +2,7 @@ import { error } from "@sveltejs/kit"
 import PocketBase from "pocketbase"
 import { POCKETBASE_URL } from "$env/static/private"
 import {
-    handleCommunicationFailure,
+    handleOfflineFailure,
     getPreviewTierId,
 } from "$utilities/pb/helpers.js"
 
@@ -25,7 +25,7 @@ export async function handle({ event, resolve }) {
         try {
             await event.locals.pb.collection("users").authRefresh()
         } catch ({ status }) {
-            handleCommunicationFailure(status)
+            handleOfflineFailure(status)
 
             event.locals.pb.authStore.clear()
             event.locals.user = null
@@ -37,7 +37,7 @@ export async function handle({ event, resolve }) {
         event.locals.tiers = tiers
         event.locals.previewTierId = getPreviewTierId(tiers)
     } catch ({ status, response }) {
-        handleCommunicationFailure(status)
+        handleOfflineFailure(status)
         throw error(status, response.message)
     }
 

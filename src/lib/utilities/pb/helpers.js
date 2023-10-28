@@ -1,6 +1,6 @@
 import { error } from "@sveltejs/kit"
 
-export function handleCommunicationFailure(status) {
+export function handleOfflineFailure(status) {
     if (status === 0) {
         throw error(500, "Database communication failure!")
     }

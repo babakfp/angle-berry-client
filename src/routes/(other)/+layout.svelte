@@ -6,7 +6,7 @@
     import { messages, unreadMessagesLength } from "$stores/messages.js"
     import { events, unseenEventsLength } from "$stores/events.js"
     import { error } from "@sveltejs/kit"
-    import { handleCommunicationFailure } from "$utilities/pb/helpers.js"
+    import { handleOfflineFailure } from "$utilities/pb/helpers.js"
     import { pb } from "$stores/pb.js"
     import Header from "$parts/Header/Header.svelte"
 
@@ -95,7 +95,7 @@
                     }
                 })
         } catch ({ status, response }) {
-            handleCommunicationFailure(status)
+            handleOfflineFailure(status)
             throw error(status, response.message)
         }
     })
@@ -105,7 +105,7 @@
 
 {#key $page.url.pathname}
     <main
-        class="min-h-screen-minus-header container grid content-start items-start py-12"
+        class="container grid min-h-screen-minus-header content-start items-start py-12"
         in:fly={pageTransitionValues}
     >
         <slot />

@@ -1,5 +1,5 @@
 import { error } from "@sveltejs/kit"
-import { handleCommunicationFailure } from "$utilities/pb/helpers.js"
+import { handleOfflineFailure } from "$utilities/pb/helpers.js"
 
 export async function load({ locals, params }) {
     try {
@@ -26,7 +26,7 @@ export async function load({ locals, params }) {
             }
         }
     } catch ({ status, response }) {
-        handleCommunicationFailure(status)
+        handleOfflineFailure(status)
         if (status === 404) throw error(404)
         throw error(status, response.message)
     }

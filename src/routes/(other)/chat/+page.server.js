@@ -1,5 +1,5 @@
 import { fail } from "@sveltejs/kit"
-import { handleCommunicationFailure } from "$utilities/pb/helpers.js"
+import { handleOfflineFailure } from "$utilities/pb/helpers.js"
 
 export const actions = {
     default: async ({ locals, request }) => {
@@ -26,7 +26,7 @@ export const actions = {
                     })
             }
         } catch ({ status, response }) {
-            handleCommunicationFailure(status)
+            handleOfflineFailure(status)
 
             response.data.content = {
                 value: messageContent,

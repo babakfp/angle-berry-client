@@ -1,6 +1,6 @@
 import { redirect, fail } from "@sveltejs/kit"
 import { superValidate } from "sveltekit-superforms/server"
-import { handleCommunicationFailure } from "$utilities/pb/helpers.js"
+import { handleOfflineFailure } from "$utilities/pb/helpers.js"
 import { schema } from "$utilities/schema.js"
 
 export const load = async () => {
@@ -18,7 +18,7 @@ export const actions = {
                 .collection("users")
                 .authWithPassword(form.data.username, form.data.password)
         } catch ({ status, response }) {
-            handleCommunicationFailure(status)
+            handleOfflineFailure(status)
 
             response.data.identity = {
                 value: form.data.username,

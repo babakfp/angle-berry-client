@@ -3,6 +3,6 @@
     export { _class as class }
 </script>
 
-<td class={_class}>
+<td class="{_class} p-0">
     <slot />
 </td>

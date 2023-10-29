@@ -26,7 +26,7 @@
             ${currentTier.price} or {currentTier.invites} invites
         {/if}
     </Td>
-    <Td class="p-0 text-right">
+    <Td class="text-right">
         {#if hasAccess}
             {#if !isShowingSingleTier}
                 <span

@@ -1,5 +1,6 @@
 <script>
     import { page } from "$app/stores"
+    import { Tr, Th, Td } from "$components/table/index.js"
 
     export let currentTier
     export let isShowingSingleTier = false
@@ -10,22 +11,22 @@
         $page.data.user.invitedUsers.length >= currentTier.invites
 </script>
 
-<tr
+<Tr
     class="group relative duration-200
 	{!isShowingSingleTier &&
         'hover:bg-white/10 not-last:border-b not-last:border-white/5'}"
 >
-    <th class="px-6 py-4 text-white">
+    <Th class="py-4 text-white">
         {currentTier.name}
-    </th>
-    <td class="px-6 py-4">
+    </Th>
+    <Td class="px-6 py-4">
         {#if currentTier.price === 0 && currentTier.invites === 0}
             Free
         {:else}
             ${currentTier.price} or {currentTier.invites} invites
         {/if}
-    </td>
-    <td class="p-0 text-right">
+    </Td>
+    <Td class="p-0 text-right">
         {#if hasAccess}
             {#if !isShowingSingleTier}
                 <span
@@ -53,7 +54,7 @@
                 </a>
             </div>
         {/if}
-    </td>
+    </Td>
 
     {#if !isShowingSingleTier}
         <a
@@ -61,4 +62,4 @@
             href="/tiers/{currentTier.id}"
         />
     {/if}
-</tr>
+</Tr>

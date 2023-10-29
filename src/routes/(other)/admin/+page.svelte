@@ -13,7 +13,7 @@
 
 {#if selectedTierIds.length}
     <div class="flex justify-between">
-        <button class="btn btn-gray" on:click={deleteSelectedTiers}>
+        <button class="btn-brand btn" on:click={deleteSelectedTiers}>
             Delete selected
         </button>
 

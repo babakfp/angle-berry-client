@@ -41,6 +41,7 @@ export default {
             },
             blue: colors.blue,
             green: colors.green,
+            transparent: colors.transparent,
         },
         container: {
             center: true,
@@ -84,6 +85,7 @@ function buttonComponents() {
             ".btn": {},
             ".btn-danger": {},
             ".btn-gray": {},
+            ".btn-brand": {},
         })
     }
 }

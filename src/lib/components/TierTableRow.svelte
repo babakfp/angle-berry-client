@@ -12,9 +12,9 @@
 </script>
 
 <Tr
-    class="group relative duration-200
-	{!isShowingSingleTier &&
-        'hover:bg-white/10 not-last:border-b not-last:border-white/5'}"
+    class="group relative {!isShowingSingleTier
+        ? 'duration-200 hover:bg-white/10 not-last:border-b not-last:border-white/5'
+        : ''}"
 >
     <Th class="py-4 text-white">
         {currentTier.name}

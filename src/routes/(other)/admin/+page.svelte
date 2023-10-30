@@ -6,9 +6,7 @@
 
     let selectedTierIds = []
 
-    function deleteSelectedTiers() {
-        // TODO
-    }
+    function deleteSelectedTiers() {}
 </script>
 
 {#if selectedTierIds.length}
@@ -58,15 +56,8 @@
                     <Checkbox
                         class="relative z-1 items-center px-6 py-4"
                         checked={selectedTierIds.includes(tier.id)}
-                        on:change={e => {
-                            if (e.target.checked) {
-                                selectedTierIds = [...selectedTierIds, tier.id]
-                            } else {
-                                selectedTierIds = selectedTierIds.filter(
-                                    id => id !== tier.id,
-                                )
-                            }
-                        }}
+                        bind:group={selectedTierIds}
+                        value={tier.id}
                     />
                 </Td>
                 <Th class="py-4 text-white">

@@ -13,7 +13,7 @@
 
 {#if selectedTierIds.length}
     <div class="flex justify-between">
-        <button class="btn-brand btn" on:click={deleteSelectedTiers}>
+        <button class="btn btn-brand" on:click={deleteSelectedTiers}>
             Delete selected
         </button>
 
@@ -27,20 +27,17 @@
     <Thead>
         <Tr>
             <Th class="!p-0">
-                <label class="relative z-1 flex items-center px-6 py-3 pt-3.5">
-                    <Checkbox
-                        checked={selectedTierIds.length === data.tiers.length}
-                        on:click={e => {
-                            if (e.target.checked) {
-                                selectedTierIds = data.tiers.map(
-                                    tier => tier.id,
-                                )
-                            } else {
-                                selectedTierIds = []
-                            }
-                        }}
-                    />
-                </label>
+                <Checkbox
+                    class="relative z-1 items-center px-6 py-3 pt-3.5"
+                    checked={selectedTierIds.length === data.tiers.length}
+                    on:click={e => {
+                        if (e.target.checked) {
+                            selectedTierIds = data.tiers.map(tier => tier.id)
+                        } else {
+                            selectedTierIds = []
+                        }
+                    }}
+                />
             </Th>
             <Th>TIER</Th>
             <Th>PRICE</Th>
@@ -58,23 +55,19 @@
                 class="relative duration-200 hover:bg-white/10 not-last:border-b not-last:border-white/5"
             >
                 <Td class="w-16">
-                    <label class="relative z-1 flex items-center px-6 py-4">
-                        <Checkbox
-                            checked={selectedTierIds.includes(tier.id)}
-                            on:click={() => {
-                                if (selectedTierIds.includes(tier.id)) {
-                                    selectedTierIds = selectedTierIds.filter(
-                                        id => id !== tier.id,
-                                    )
-                                } else {
-                                    selectedTierIds = [
-                                        ...selectedTierIds,
-                                        tier.id,
-                                    ]
-                                }
-                            }}
-                        />
-                    </label>
+                    <Checkbox
+                        class="relative z-1 items-center px-6 py-4"
+                        checked={selectedTierIds.includes(tier.id)}
+                        on:click={() => {
+                            if (selectedTierIds.includes(tier.id)) {
+                                selectedTierIds = selectedTierIds.filter(
+                                    id => id !== tier.id,
+                                )
+                            } else {
+                                selectedTierIds = [...selectedTierIds, tier.id]
+                            }
+                        }}
+                    />
                 </Td>
                 <Th class="py-4 text-white">
                     {tier.name}

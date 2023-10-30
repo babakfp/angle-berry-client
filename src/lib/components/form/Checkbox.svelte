@@ -2,10 +2,12 @@
     import IconSquare from "$icons/IconSquare.svelte"
     import IconCheckSquare from "$icons/IconCheckSquare.svelte"
 
+    export let _class = ""
+    export { _class as class }
     export let checked = false
 </script>
 
-<label class="flex text-xl">
+<label class="inline-flex text-xl {_class}">
     <input class="hidden" type="checkbox" bind:checked on:click />
 
     {#if checked}

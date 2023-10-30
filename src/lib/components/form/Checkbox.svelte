@@ -7,6 +7,7 @@
     export let checked = false
     export let value = undefined
     export let group = []
+    export let disabled = false
 
     $: handleGroup(checked)
 
@@ -23,8 +24,19 @@
     }
 </script>
 
-<label class="inline-flex text-xl {_class}">
-    <input class="hidden" type="checkbox" bind:checked on:change {value} />
+<label
+    class="{_class} inline-flex text-xl {disabled
+        ? 'pointer-events-none opacity-50'
+        : ''}"
+>
+    <input
+        class="hidden"
+        type="checkbox"
+        bind:checked
+        on:change
+        {value}
+        {disabled}
+    />
 
     {#if checked}
         <IconCheckSquare />

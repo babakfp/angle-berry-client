@@ -6,7 +6,10 @@
 
     let selectedTierIds = []
 
-    function deleteSelectedTiers() {}
+    function deleteSelectedTiers() {
+        data.tiers = data.tiers.filter(t => !selectedTierIds.includes(t.id))
+        selectedTierIds = []
+    }
 </script>
 
 {#if selectedTierIds.length}
@@ -27,7 +30,8 @@
             <Th class="!p-0">
                 <Checkbox
                     class="relative z-1 items-center px-6 py-3 pt-3.5"
-                    checked={selectedTierIds.length === data.tiers.length}
+                    checked={selectedTierIds.length &&
+                        selectedTierIds.length === data.tiers.length}
                     on:change={e => {
                         if (e.target.checked) {
                             selectedTierIds = data.tiers.map(tier => tier.id)
@@ -35,6 +39,7 @@
                             selectedTierIds = []
                         }
                     }}
+                    disabled={!data.tiers.length}
                 />
             </Th>
             <Th>TIER</Th>

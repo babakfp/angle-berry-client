@@ -30,7 +30,7 @@
                 <Checkbox
                     class="relative z-1 items-center px-6 py-3 pt-3.5"
                     checked={selectedTierIds.length === data.tiers.length}
-                    on:click={e => {
+                    on:change={e => {
                         if (e.target.checked) {
                             selectedTierIds = data.tiers.map(tier => tier.id)
                         } else {
@@ -58,13 +58,13 @@
                     <Checkbox
                         class="relative z-1 items-center px-6 py-4"
                         checked={selectedTierIds.includes(tier.id)}
-                        on:click={() => {
-                            if (selectedTierIds.includes(tier.id)) {
+                        on:change={e => {
+                            if (e.target.checked) {
+                                selectedTierIds = [...selectedTierIds, tier.id]
+                            } else {
                                 selectedTierIds = selectedTierIds.filter(
                                     id => id !== tier.id,
                                 )
-                            } else {
-                                selectedTierIds = [...selectedTierIds, tier.id]
                             }
                         }}
                     />

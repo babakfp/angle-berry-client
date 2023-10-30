@@ -8,7 +8,7 @@
 </script>
 
 <label class="inline-flex text-xl {_class}">
-    <input class="hidden" type="checkbox" bind:checked on:click />
+    <input class="hidden" type="checkbox" bind:checked on:change />
 
     {#if checked}
         <IconCheckSquare />

@@ -1,0 +1,99 @@
+<script>
+    import { Table, Tbody, Thead, Tr, Th, Td } from "$components/table/index.js"
+    import Checkbox from "$components/form/Checkbox.svelte"
+
+    export let data
+
+    let selectedUserIds = []
+
+    function deleteSelectedTiers() {
+        // TODO
+    }
+
+    console.log(data.users)
+</script>
+
+{#if selectedUserIds.length}
+    <div class="flex justify-between">
+        <button class="btn btn-brand" on:click={deleteSelectedTiers}>
+            Delete selected
+        </button>
+
+        <button class="btn btn-gray" on:click={() => (selectedUserIds = [])}>
+            Clear selection
+        </button>
+    </div>
+{/if}
+
+<Table class="mt-4">
+    <Thead>
+        <Tr>
+            <Th class="!p-0">
+                <label class="relative z-1 flex items-center px-6 py-3 pt-3.5">
+                    <Checkbox
+                        checked={selectedUserIds.length === data.users.length}
+                        on:click={e => {
+                            if (e.target.checked) {
+                                selectedUserIds = data.users.map(
+                                    user => user.id,
+                                )
+                            } else {
+                                selectedUserIds = []
+                            }
+                        }}
+                    />
+                </label>
+            </Th>
+            <Th>USERNAME</Th>
+            <Th>TIERS</Th>
+            <Th>INVITES</Th>
+            <Th>ADMIN</Th>
+        </Tr>
+    </Thead>
+    <Tbody>
+        {#each data.users as user}
+            <Tr
+                class="relative duration-200 hover:bg-white/10 not-last:border-b not-last:border-white/5"
+            >
+                <Td class="w-16">
+                    <label class="relative z-1 flex items-center px-6 py-4">
+                        <Checkbox
+                            checked={selectedUserIds.includes(user.id)}
+                            on:click={() => {
+                                if (selectedUserIds.includes(user.id)) {
+                                    selectedUserIds = selectedUserIds.filter(
+                                        id => id !== user.id,
+                                    )
+                                } else {
+                                    selectedUserIds = [
+                                        ...selectedUserIds,
+                                        user.id,
+                                    ]
+                                }
+                            }}
+                        />
+                    </label>
+                </Td>
+                <Th class="py-4 text-white">
+                    {user.username}
+                </Th>
+                <Td class="px-6 py-4">
+                    {data.tiers
+                        .filter(tier => user.retainedTiers.includes(tier.id))
+                        .map(tier => tier.name)
+                        .join(", ")}
+                </Td>
+                <Td class="px-6 py-4">
+                    {user.invitedUsers.length}
+                </Td>
+                <Td class="px-6 py-4">
+                    {user.isAdmin ? "Yes" : "No"}
+                </Td>
+                <a
+                    class="absolute inset-0 outline-inset"
+                    href="/admin/users/{user.id}"
+                />
+            </Tr>
+        {/each}
+    </Tbody>
+</Table>

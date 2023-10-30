@@ -29,8 +29,8 @@
         <Tr>
             <Th class="!p-0">
                 <Checkbox
-                    class="relative z-1 items-center px-6 py-3 pt-3.5"
-                    checked={selectedTierIds.length &&
+                    class="relative z-1 items-center px-6 py-3"
+                    checked={data.tiers.length &&
                         selectedTierIds.length === data.tiers.length}
                     on:change={e => {
                         if (e.target.checked) {

@@ -3,6 +3,7 @@
     import { unreadMessagesLength } from "$stores/messages.js"
     import { unseenEventsLength } from "$stores/events.js"
     import IconBell from "$icons/IconBell.svelte"
+    import IconGauge from "$icons/IconGauge.svelte"
     import IconMessage from "$icons/IconMessage.svelte"
     import Avatar from "$components/Avatar.svelte"
     import NotificationBlob from "$components/NotificationBlob.svelte"
@@ -20,7 +21,7 @@
     let userMenuToggle
 </script>
 
-<header class="h-header sticky top-0 z-50 overflow-x-clip bg-gray-800 shadow">
+<header class="sticky top-0 z-50 h-header overflow-x-clip bg-gray-800 shadow">
     <div class="container flex h-full justify-between px-0">
         <a
             class="flex items-center px-4 text-white outline-inset
@@ -31,6 +32,16 @@
             Angle Berry
         </a>
         <div class="flex">
+            {#if $page.data.user.isAdmin}
+                <a
+                    class="group relative flex items-center px-2 outline-inset"
+                    href="/admin"
+                >
+                    <IconGauge
+                        class="text-2xl duration-200 group-hover:text-white"
+                    />
+                </a>
+            {/if}
             <button
                 class="group relative flex items-center px-2 outline-inset"
                 bind:this={eventsMenuToggle}

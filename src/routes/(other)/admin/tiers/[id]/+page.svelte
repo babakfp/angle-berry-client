@@ -21,6 +21,8 @@
     } = superForm(data.form, { validators: schema })
 
     if (!$_form.name) $_form.name = data.tier.name
+    if (!$_form.price) $_form.price = data.tier.price
+    if (!$_form.invites) $_form.invites = data.tier.invites
     if (!$_form.videos.length) $_form.videos = data.tier.videos
 
     let isShowingAllSelectedVideos = false

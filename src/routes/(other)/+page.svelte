@@ -7,12 +7,14 @@
     <title>Angle Berry</title>
 </svelte:head>
 
-<p>
-    You can <a class="link" href="/tiers/{$page.data.previewTierId}">
-        watch free content
-    </a>
-    and for more content, you can get the following tiers:
-</p>
+{#if $page.data.previewTierId}
+    <p>
+        You can <a class="link" href="/tiers/{$page.data.previewTierId}">
+            watch free content
+        </a>
+        and for more content, you can get the following tiers:
+    </p>
+{/if}
 
 <TierTable class="mt-8" />
 

@@ -32,6 +32,10 @@ export const actions = {
             })
         }
 
-        throw redirect(303, `/tiers/${locals.previewTierId}`)
+        if (locals.previewTierId) {
+            throw redirect(303, `/tiers/${locals.previewTierId}`)
+        } else {
+            throw redirect(303, "/")
+        }
     },
 }

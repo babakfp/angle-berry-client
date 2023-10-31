@@ -26,7 +26,9 @@ export const actions = {
                 username: form.data.username,
                 password: form.data.password,
                 passwordConfirm: form.data.password,
-                retainedTiers: [locals.previewTierId],
+                retainedTiers: [
+                    ...[locals.previewTierId ? locals.previewTierId : []],
+                ],
                 invitedBy: inviter ? [inviterId] : null,
             })
 
@@ -54,7 +56,11 @@ export const actions = {
             })
         }
 
-        throw redirect(303, `/tiers/${locals.previewTierId}`)
+        if (locals.previewTierId) {
+            throw redirect(303, `/tiers/${locals.previewTierId}`)
+        } else {
+            throw redirect(303, "")
+        }
     },
 }
 

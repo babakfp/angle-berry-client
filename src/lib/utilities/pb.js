@@ -8,5 +8,5 @@ export function handleOfflineFailure(status) {
 }
 
 export function getPreviewTierId(tiers) {
-    return tiers.filter(tier => tier.invites === 0 && tier.price === 0)[0].id
+    return tiers.filter(tier => tier.invites === 0 && tier.price === 0)[0]?.id
 }

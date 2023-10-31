@@ -6,11 +6,7 @@
 
     let selectedUserIds = []
 
-    function deleteSelectedTiers() {
-        // TODO
-    }
-
-    console.log(data.users)
+    function deleteSelectedTiers() {}
 </script>
 
 {#if selectedUserIds.length}

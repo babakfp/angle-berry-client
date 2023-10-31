@@ -1,6 +1,8 @@
 <script>
     import Label from "./Label.svelte"
     import Error from "../Error.svelte"
+    import IconPlusCircle from "$icons/IconPlusCircle.svelte"
+    import IconMinusCircle from "$icons/IconMinusCircle.svelte"
 
     export let label = ""
     export let required = false
@@ -9,9 +11,16 @@
     export let name = ""
     export let value = ""
     export let placeholder = ""
-    export let autocomplete = ""
-    export let minlength = ""
-    export let maxlength = ""
+    /** @type {string | null} */
+    export let autocomplete = null
+    /** @type {string | null} */
+    export let minlength = null
+    /** @type {string | null} */
+    export let maxlength = null
+    /** @type {number | null} */
+    export let min = null
+    /** @type {number | null} */
+    export let max = null
     export let readonly = false
     export let pattern = null
 
@@ -30,6 +39,35 @@
             value = e.target.value
         }
     }
+
+    $: if (type === "number") {
+        if (max && value >= max) {
+            value = max
+        }
+        if (min && value <= min) {
+            value = min
+        }
+    }
+
+    function incrementNumber() {
+        if (max) {
+            if (value < max) {
+                value += 1
+            }
+        } else {
+            value += 1
+        }
+    }
+
+    function decrementNumber() {
+        if (min || min === 0) {
+            if (value > min) {
+                value -= 1
+            }
+        } else {
+            value -= 1
+        }
+    }
 </script>
 
 <div class="group grid">
@@ -37,7 +75,8 @@
 
     <div class="relative">
         <input
-            class="{_class} block h-12 w-full rounded bg-gray-700 px-4 placeholder:text-xs placeholder:text-gray-500 [&:focus+div]:show"
+            class="{_class} block h-12 w-full rounded bg-gray-700 px-4 placeholder:text-xs placeholder:text-gray-500 [&:focus+div]:show
+                {type === 'number' ? 'reset-number-input' : ''}"
             {type}
             {value}
             {name}
@@ -49,14 +88,35 @@
             {required}
             {readonly}
             {pattern}
+            {min}
+            {max}
             on:input={bindValue}
         />
 
-        {#if $$slots.buttons}
+        {#if $$slots.buttons || type === "number"}
             <div
                 class="absolute right-0 flex h-full items-center rounded-r px-3 duration-100 ease-in-out hide inset-y-center focus-within:show group-hover:show"
             >
-                <slot name="buttons" />
+                {#if $$slots.buttons}
+                    <slot name="buttons" />
+                {/if}
+
+                {#if type === "number"}
+                    <button
+                        class="h-full px-1"
+                        type="button"
+                        on:click={incrementNumber}
+                    >
+                        <IconPlusCircle class="text-lg" />
+                    </button>
+                    <button
+                        class="-mr-1 h-full px-1"
+                        type="button"
+                        on:click={decrementNumber}
+                    >
+                        <IconMinusCircle class="text-lg" />
+                    </button>
+                {/if}
             </div>
         {/if}
     </div>

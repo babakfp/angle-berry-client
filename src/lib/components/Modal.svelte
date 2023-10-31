@@ -2,6 +2,7 @@
     export let title = ""
     export let description = ""
     export let isOpen = false
+    export let isFullSize = false
 </script>
 
 <svelte:window
@@ -12,15 +13,28 @@
 
 {#if isOpen}
     <div
-        class="fixed inset-0 z-50 flex h-screen w-screen items-center justify-center bg-gray-800/50 p-8"
-        on:click={() => (isOpen = false)}
+        class="fixed inset-0 z-50 flex h-screen w-screen items-center justify-center bg-gray-800/50
+            {isFullSize ? 'p-0 sm:p-8' : 'p-8'}"
+        on:click|self={() => (isOpen = false)}
     >
         <div
-            class="max-w-md overflow-y-auto overscroll-y-contain rounded bg-gray-700 p-6 drop-shadow"
+            class="grid max-w-md gap-6 overflow-y-auto overscroll-y-contain bg-gray-700 drop-shadow
+                {isFullSize ? 'h-full w-full sm:rounded' : 'rounded'}"
         >
-            <h6 class="text-lg">{title}</h6>
-            <p>{description}</p>
-            <div class="mt-4 flex justify-end gap-2">
+            <div class="grid gap-4 p-6 pb-0">
+                {#if title}
+                    <h6 class="text-lg">{title}</h6>
+                {/if}
+                {#if description}
+                    <p>{description}</p>
+                {/if}
+
+                <slot />
+            </div>
+
+            <div
+                class="sticky bottom-0 flex justify-end gap-2 border-t border-gray-600 bg-gray-700 px-6 py-4"
+            >
                 <slot name="actions" />
             </div>
         </div>

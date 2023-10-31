@@ -21,10 +21,12 @@
     } = superForm(data.form, { validators: schema })
 
     if (!$_form.name) $_form.name = data.tier.name
+    if (!$_form.videos.length) $_form.videos = data.tier.videos
 
-    let selectedVideoIds = data.tier.videos
     let isShowingAllSelectedVideos = false
     let maxVisibleVideos = 3
+
+    $: selectedVideos = data.videos.filter(v => $_form.videos.includes(v.id))
 
     // function sortVideosByChecked(videos, tierVideos) {
     //     return videos.sort((a, b) => {
@@ -86,7 +88,7 @@
             {...$constraints.invites}
         />
         <ul class="grid gap-4">
-            {#each data.videos.filter( v => selectedVideoIds.includes(v.id), ) as video, i}
+            {#each selectedVideos as video, i}
                 {#if i + 1 <= maxVisibleVideos || isShowingAllSelectedVideos}
                     <li class="grid gap-1">
                         <VideoPlayer
@@ -97,18 +99,19 @@
                             class="btn flex gap-2 bg-white/5 hover:bg-white/10"
                         >
                             <Checkbox
-                                checked={selectedVideoIds.includes(video.id)}
-                                bind:group={selectedVideoIds}
+                                checked={$_form.videos.includes(video.id)}
+                                bind:group={$_form.videos}
                                 value={video.id}
+                                name="videos"
                             />
-                            {#if selectedVideoIds.includes(video.id)}
+                            {#if $_form.videos.includes(video.id)}
                                 Selected
                             {/if}
                         </label>
                     </li>
                 {/if}
             {/each}
-            {#if selectedVideoIds.length > maxVisibleVideos}
+            {#if $_form.videos.length > maxVisibleVideos}
                 <button
                     class="btn btn-gray"
                     type="button"
@@ -147,11 +150,11 @@
                     />
                     <label class="btn flex gap-2 bg-white/5 hover:bg-white/10">
                         <Checkbox
-                            checked={selectedVideoIds.includes(video.id)}
-                            bind:group={selectedVideoIds}
+                            checked={$_form.videos.includes(video.id)}
+                            bind:group={$_form.videos}
                             value={video.id}
                         />
-                        {#if selectedVideoIds.includes(video.id)}
+                        {#if $_form.videos.includes(video.id)}
                             Selected
                         {/if}
                     </label>

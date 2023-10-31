@@ -1,3 +1,4 @@
+import { redirect, fail } from "@sveltejs/kit"
 import { error } from "@sveltejs/kit"
 import { handleOfflineFailure } from "$utilities/pb.js"
 import { superValidate } from "sveltekit-superforms/server"
@@ -18,30 +19,24 @@ export async function load({ locals, params }) {
 }
 
 export const actions = {
-    default: async ({ locals, request }) => {
+    default: async ({ locals, request, url }) => {
         const form = await superValidate(request, schema)
-        console.log(form.data)
         if (!form.valid) return fail(400, { form })
-        return { form }
-        // try {
-        //     await locals.pb
-        //         .collection("users")
-        //         .authWithPassword(form.data.username, form.data.password)
-        // } catch ({ status, response }) {
-        //     handleOfflineFailure(status)
 
-        //     response.data.identity = {
-        //         value: form.data.username,
-        //         ...(response.data.identity || {}),
-        //     }
+        let currentTierId = url.pathname.split("/").pop()
 
-        //     return fail(response.code, {
-        //         form,
-        //         message: response.message,
-        //         data: response.data,
-        //     })
-        // }
+        try {
+            await locals.pb.collection("tiers").update(currentTierId, form.data)
+        } catch ({ status, response }) {
+            handleOfflineFailure(status)
 
-        // throw redirect(303, `/tiers/${locals.previewTierId}`)
+            return fail(response.code, {
+                form,
+                message: response.message,
+                data: response.data,
+            })
+        }
+
+        throw redirect(303, "/admin/tiers")
     },
 }

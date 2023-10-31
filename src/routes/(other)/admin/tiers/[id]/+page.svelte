@@ -29,21 +29,6 @@
     let maxVisibleVideos = 3
 
     $: selectedVideos = data.videos.filter(v => $_form.videos.includes(v.id))
-
-    // function sortVideosByChecked(videos, tierVideos) {
-    //     return videos.sort((a, b) => {
-    //         const aInTier = tierVideos.includes(a.id)
-    //         const bInTier = tierVideos.includes(b.id)
-
-    //         if (aInTier && !bInTier) {
-    //             return -1 // a should come before b
-    //         } else if (!aInTier && bInTier) {
-    //             return 1 // b should come before a
-    //         } else {
-    //             return 0 // no preference
-    //         }
-    //     })
-    // }
 </script>
 
 <svelte:head>

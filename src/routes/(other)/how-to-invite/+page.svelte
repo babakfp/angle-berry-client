@@ -2,8 +2,8 @@
     import { page } from "$app/stores"
     import { copyText } from "svelte-copy"
     import toast, { Toaster } from "svelte-french-toast"
-    import Input from "$components/form/fields/Input.svelte"
-    import InputTextButton from "$components/form/fields/InputTextButton.svelte"
+    import Input from "$components/form/Input.svelte"
+    import InputTextButton from "$components/form/InputTextButton.svelte"
 
     export let data
 

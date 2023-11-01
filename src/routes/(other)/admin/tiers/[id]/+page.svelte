@@ -1,6 +1,6 @@
 <script>
     import { PUBLIC_POCKETBASE_URL } from "$env/static/public"
-    import Input from "$components/form/fields/Input.svelte"
+    import Input from "$components/form/Input.svelte"
     import { schema } from "../schema.js"
     import { superForm } from "sveltekit-superforms/client"
     import Form from "$components/form/Form.svelte"

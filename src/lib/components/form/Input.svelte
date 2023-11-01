@@ -1,6 +1,6 @@
 <script>
-    import Label from "./Label.svelte"
-    import Error from "../Error.svelte"
+    import Label from "$components/form/Label.svelte"
+    import Error from "$components/form/Error.svelte"
     import IconPlusCircle from "$icons/IconPlusCircle.svelte"
     import IconMinusCircle from "$icons/IconMinusCircle.svelte"
 

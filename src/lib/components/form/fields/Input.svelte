@@ -75,7 +75,7 @@
 
     <div class="relative">
         <input
-            class="{_class} block h-12 w-full rounded bg-gray-700 px-4 placeholder:text-xs placeholder:text-gray-500 [&:focus+div]:show
+            class="{_class} block h-11 w-full rounded border-2 border-gray-700 bg-transparent px-4 placeholder:text-xs placeholder:text-gray-500 [&:focus+div]:show
                 {type === 'number' ? 'reset-number-input' : ''}"
             {type}
             {value}

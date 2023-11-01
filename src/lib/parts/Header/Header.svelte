@@ -3,7 +3,7 @@
     import { unreadMessagesLength } from "$stores/messages.js"
     import { unseenEventsLength } from "$stores/events.js"
     import IconBell from "$icons/IconBell.svelte"
-    import IconGauge from "$icons/IconGauge.svelte"
+    import IconUserCircle from "$icons/IconUserCircle.svelte"
     import IconMessage from "$icons/IconMessage.svelte"
     import Avatar from "$components/Avatar.svelte"
     import NotificationBlob from "$components/NotificationBlob.svelte"
@@ -37,7 +37,7 @@
                     class="group relative flex items-center px-2 outline-inset"
                     href="/admin"
                 >
-                    <IconGauge
+                    <IconUserCircle
                         class="text-2xl duration-200 group-hover:text-white"
                     />
                 </a>

@@ -18,11 +18,9 @@
 
     const isCurrentUser = message.expand.user.id === $page.data.user.id
 
-    /** @type {number | undefined} */
-    let interval
+    let interval: number | undefined
 
-    /** @type {HTMLDivElement}*/
-    let highlight
+    let highlight: HTMLDivElement
 
     function handleClick(e) {
         if ($selectedMessageIds.length > 0) {

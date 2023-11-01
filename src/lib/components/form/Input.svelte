@@ -11,16 +11,11 @@
     export let name = ""
     export let value = ""
     export let placeholder = ""
-    /** @type {string | null} */
-    export let autocomplete = null
-    /** @type {string | null} */
-    export let minlength = null
-    /** @type {string | null} */
-    export let maxlength = null
-    /** @type {number | null} */
-    export let min = null
-    /** @type {number | null} */
-    export let max = null
+    export let autocomplete: string | null = null
+    export let minlength: string | null = null
+    export let maxlength: string | null = null
+    export let min: number | null = null
+    export let max: number | null = null
     export let readonly = false
     export let pattern = null
 

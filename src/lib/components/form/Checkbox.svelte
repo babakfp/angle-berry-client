@@ -8,8 +8,7 @@
     export let value = undefined
     export let group = []
     export let disabled = false
-    /** @type {string | null} */
-    export let name = null
+    export let name: string | null = null
 
     $: handleGroup(checked)
 

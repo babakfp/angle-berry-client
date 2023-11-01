@@ -5,8 +5,7 @@
     export let username
     export let content
 
-    /** @type {number | undefined} */
-    let interval
+    let interval: number | undefined
 
     function handleGoToMessage() {
         interval = goToMessage(id, interval)

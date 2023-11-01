@@ -12,8 +12,7 @@
 
     const dispatch = createEventDispatcher()
 
-    /** @type {number | undefined} */
-    let interval
+    let interval: number | undefined
 
     function handleJumpToMessage() {
         interval = goToMessage(messageId, interval)

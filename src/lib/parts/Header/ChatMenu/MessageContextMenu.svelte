@@ -1,8 +1,7 @@
 <script lang="ts">
     import { contextMenuTargetEvent, isContextMenuOpen } from "./chatStores.js"
 
-    /** @type {HTMLDivElement} */
-    let contextMenu = null
+    let contextMenu: HTMLDivElement = null
 
     $: if (contextMenu && $isContextMenuOpen) {
         let x = $contextMenuTargetEvent.clientX + 14

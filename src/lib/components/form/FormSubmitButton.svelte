@@ -1,12 +1,7 @@
 <script>
     export let disabled = false
-    export let _class = ""
-    export { _class as class }
 </script>
 
-<button
-    class="{_class} block h-14 w-full rounded bg-white text-gray-700 duration-75 active:scale-95"
-    {disabled}
->
+<button class="btn btn-brand h-14 w-full active:scale-95" {disabled}>
     <slot />
 </button>

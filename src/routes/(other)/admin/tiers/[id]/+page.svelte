@@ -82,7 +82,7 @@
                 </li>
             {/each}
             <button
-                class="btn btn-gray"
+                class="btn btn-gray sticky bottom-0"
                 type="button"
                 on:click={() => (isGalleryPopupOpen = true)}
             >
@@ -97,7 +97,7 @@
     bind:isOpen={isGalleryPopupOpen}
     isFullSize={true}
 >
-    <ul class="grid gap-8">
+    <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {#each data.videos as video}
             <li>
                 <VideoGalleryItem

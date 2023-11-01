@@ -1,5 +1,6 @@
 <script>
     import Input from "./Input.svelte"
+    import InputTextButtonToggleable from "./InputTextButtonToggleable.svelte"
 
     export let value = ""
     export let autocomplete = ""
@@ -18,26 +19,14 @@
     {...$$restProps}
     {error}
 >
-    <button
-        slot="buttons"
-        class="btn-gray-light btn overflow-hidden px-3 text-2xs lowercase"
-        class:hide={!value}
-        type="button"
-        on:click={() => (isPasswordVisible = !isPasswordVisible)}
-    >
-        <span
-            class="mt-0.5 duration-100
-				{isPasswordVisible && '-translate-y-4 scale-50 hide'}
-			"
-        >
-            Show
-        </span>
-        <span
-            class="absolute mt-0.5 duration-100
-				{!isPasswordVisible && 'translate-y-4 scale-50 hide'}
-			"
-        >
-            Hide
-        </span>
-    </button>
+    <svelte:fragment slot="buttons">
+        {#if value}
+            <InputTextButtonToggleable
+                isActive={isPasswordVisible}
+                activeText="Show"
+                inActiveText="Hide"
+                on:click={() => (isPasswordVisible = !isPasswordVisible)}
+            />
+        {/if}
+    </svelte:fragment>
 </Input>

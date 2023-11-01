@@ -3,6 +3,7 @@
     import { copyText } from "svelte-copy"
     import toast, { Toaster } from "svelte-french-toast"
     import Input from "$components/form/fields/Input.svelte"
+    import InputTextButton from "$components/form/fields/InputTextButton.svelte"
 
     export let data
 
@@ -27,14 +28,7 @@
         value="{$page.url.origin}/register?id={data.user.id}"
         readonly
     >
-        <button
-            slot="buttons"
-            class="btn-gray-light btn text-2xs"
-            type="button"
-            on:click={copyInviteLink}
-        >
-            Copy
-        </button>
+        <InputTextButton slot="buttons" text="Copy" on:click={copyInviteLink} />
     </Input>
     <p>
         You can share your invite link with your friends or on social media

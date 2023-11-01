@@ -39,6 +39,10 @@ export default {
                 700: colors.zinc[700],
                 800: colors.zinc[800],
             },
+            body: {
+                bg: colors.zinc[800],
+                text: colors.zinc[300],
+            },
             blue: colors.blue,
             green: colors.green,
             transparent: colors.transparent,

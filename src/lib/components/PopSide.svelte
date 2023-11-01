@@ -26,20 +26,20 @@
 />
 
 <div
-    class="sm:top-header hidden sm:fixed sm:inset-0 sm:z-40 sm:block sm:bg-[black]/40 sm:duration-200 sm:hide
+    class="hidden sm:fixed sm:inset-0 sm:top-header sm:z-40 sm:block sm:bg-[black]/40 sm:duration-200 sm:hide
 	{isOpen && 'sm:show'}"
 />
 
 <OutClick on:outclick={() => (isOpen = false)} excludeElements={toggleButton}>
     <div
         {id}
-        class="fixed inset-0 z-50 grid h-screen translate-x-full grid-rows-[auto_1fr_auto] bg-gray-800 duration-200 hide
+        class="bg-body-bg fixed inset-0 z-50 grid h-screen translate-x-full grid-rows-[auto_1fr_auto] duration-200 hide
 			{isOpen && '!translate-x-0 !show'}
-			sm:h-screen-minus-header sm:top-header sm:left-auto sm:z-40 sm:w-96 sm:grid-rows-[1fr_auto]
+			sm:left-auto sm:top-header sm:z-40 sm:h-screen-minus-header sm:w-96 sm:grid-rows-[1fr_auto]
 		"
     >
         <button
-            class="sticky top-0 z-1 flex h-14 w-full items-center justify-between self-start border-b border-white/5 bg-gray-800 px-4 outline-inset sm:hidden"
+            class="bg-body-bg sticky top-0 z-1 flex h-14 w-full items-center justify-between self-start border-b border-white/5 px-4 outline-inset sm:hidden"
             on:click={() => (isOpen = false)}
         >
             <span>Close</span>

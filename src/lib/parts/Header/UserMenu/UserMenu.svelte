@@ -25,7 +25,7 @@
 >
     <ul
         id="UserMenu"
-        class="absolute right-0 top-full max-h-[calc(var(--screen-minus-header)-theme(spacing.8))] w-60 translate-x-full overflow-y-auto overscroll-y-contain rounded bg-gray-800 text-sm shadow-[0_4px_16px_0_rgb(0_0_0/0.4)] duration-200 hide
+        class="bg-body-bg absolute right-0 top-full max-h-[calc(var(--screen-minus-header)-theme(spacing.8))] w-60 translate-x-full overflow-y-auto overscroll-y-contain rounded text-sm shadow-[0_4px_16px_0_rgb(0_0_0/0.4)] duration-200 hide
 		{isUserMenuOpen && '!-translate-x-4 !show'}"
     >
         <li class="flex justify-between p-4">

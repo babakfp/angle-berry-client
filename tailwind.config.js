@@ -87,9 +87,14 @@ function buttonComponents() {
     return ({ addComponents }) => {
         addComponents({
             ".btn": {},
-            ".btn-danger": {},
+            ".btn-gray-light": {},
+            ".btn-gray-light-glass": {},
+            ".btn-gray-light-glass-outline": {},
             ".btn-gray": {},
+            ".btn-gray-glass": {},
+            ".btn-gray-glass-outline": {},
             ".btn-brand": {},
+            ".btn-danger": {},
         })
     }
 }

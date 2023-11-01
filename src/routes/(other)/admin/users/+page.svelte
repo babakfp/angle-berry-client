@@ -15,7 +15,10 @@
             Delete selected
         </button>
 
-        <button class="btn btn-gray" on:click={() => (selectedUserIds = [])}>
+        <button
+            class="btn-gray-light btn"
+            on:click={() => (selectedUserIds = [])}
+        >
             Clear selection
         </button>
     </div>

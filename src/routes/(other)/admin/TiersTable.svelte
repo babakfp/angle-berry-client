@@ -27,7 +27,7 @@
                 {/each}
             </form>
             <button
-                class="btn btn-gray"
+                class="btn-gray-light btn"
                 on:click={() => (selectedTierIds = [])}
             >
                 Clear selection

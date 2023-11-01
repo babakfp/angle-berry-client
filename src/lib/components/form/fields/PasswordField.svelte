@@ -20,7 +20,7 @@
 >
     <button
         slot="buttons"
-        class="btn btn-gray overflow-hidden px-3 text-2xs lowercase"
+        class="btn-gray-light btn overflow-hidden px-3 text-2xs lowercase"
         class:hide={!value}
         type="button"
         on:click={() => (isPasswordVisible = !isPasswordVisible)}

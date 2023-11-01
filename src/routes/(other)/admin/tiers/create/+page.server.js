@@ -2,15 +2,14 @@ import { redirect, fail } from "@sveltejs/kit"
 import { error } from "@sveltejs/kit"
 import { handleOfflineFailure } from "$utilities/pb.js"
 import { superValidate } from "sveltekit-superforms/server"
-import { schema } from "./schema.js"
+import { schema } from "../schema.js"
 
-export async function load({ locals, params }) {
+export async function load({ locals }) {
     const form = await superValidate(schema)
 
     try {
-        const tier = await locals.pb.collection("tiers").getOne(params.id)
         const videos = await locals.pb.collection("videos").getFullList()
-        return { form, tier, videos }
+        return { form, videos }
     } catch ({ status, response }) {
         handleOfflineFailure(status)
         if (status === 404) throw error(404)
@@ -23,10 +22,8 @@ export const actions = {
         const form = await superValidate(request, schema)
         if (!form.valid) return fail(400, { form })
 
-        let currentTierId = url.pathname.split("/").pop()
-
         try {
-            await locals.pb.collection("tiers").update(currentTierId, form.data)
+            await locals.pb.collection("tiers").create(form.data)
         } catch ({ status, response }) {
             handleOfflineFailure(status)
 

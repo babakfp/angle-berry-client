@@ -1,7 +1,7 @@
 <script>
     import { PUBLIC_POCKETBASE_URL } from "$env/static/public"
     import Input from "$components/form/fields/Input.svelte"
-    import { schema } from "./schema.js"
+    import { schema } from "../schema.js"
     import { superForm } from "sveltekit-superforms/client"
     import Form from "$components/form/Form.svelte"
     import Modal from "$components/Modal.svelte"
@@ -18,17 +18,10 @@
         constraints,
         validate,
     } = superForm(data.form, { validators: schema })
-
-    if (!$_form.name) $_form.name = data.tier.name
-    if (!$_form.price) $_form.price = data.tier.price
-    if (!$_form.invites) $_form.invites = data.tier.invites
-    if (!$_form.videos.length) $_form.videos = data.tier.videos
-
-    $: selectedVideos = data.videos.filter(v => $_form.videos.includes(v.id))
 </script>
 
 <svelte:head>
-    <title>Tier: {data.tier.name}</title>
+    <title>Create tier</title>
 </svelte:head>
 
 <div class="mx-auto w-full max-w-xs">
@@ -44,7 +37,6 @@
             label="Name"
             name="name"
             bind:value={$_form.name}
-            placeholder={data.tier.name}
             error={$errors?.name ? $errors?.name[0] : form?.data?.name?.message}
             {...$constraints.name}
         />
@@ -53,7 +45,6 @@
             label="Price"
             name="price"
             bind:value={$_form.price}
-            placeholder={data.tier.price}
             error={$errors?.price
                 ? $errors?.price[0]
                 : form?.data?.price?.message}
@@ -64,14 +55,13 @@
             label="Invites"
             name="invites"
             bind:value={$_form.invites}
-            placeholder={data.tier.invites}
             error={$errors?.invites
                 ? $errors?.invites[0]
                 : form?.data?.invites?.message}
             {...$constraints.invites}
         />
         <ul class="grid gap-8 rounded bg-gray-700 p-2">
-            {#each selectedVideos as video, i}
+            {#each $_form.videos as video, i}
                 <li>
                     <VideoGalleryItem
                         src="{PUBLIC_POCKETBASE_URL}/api/files/{video.collectionName}/{video.id}/{video.file}"

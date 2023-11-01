@@ -37,7 +37,6 @@
             <a
                 class="flex justify-between border-t border-white/5 p-4 duration-200 outline-inset hover:text-white"
                 href="/how-to-invite"
-                type="button"
             >
                 <span>
                     Invites: {$page.data.user.invitedUsers.length}

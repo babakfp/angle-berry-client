@@ -78,7 +78,7 @@
 	<slot />
 </div>
 
-<style>
+<style lang="postcss">
     :root {
         --arrow-color: theme(colors.gray.700);
         --arrow-size: theme(spacing.1);

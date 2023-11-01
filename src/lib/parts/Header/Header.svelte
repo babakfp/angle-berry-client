@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import { page } from "$app/stores"
     import { unreadMessagesLength } from "$stores/messages.js"
     import { unseenEventsLength } from "$stores/events.js"
@@ -21,7 +21,7 @@
     let userMenuToggle
 </script>
 
-<header class="bg-body-bg sticky top-0 z-50 h-header overflow-x-clip shadow">
+<header class="sticky top-0 z-50 h-header overflow-x-clip bg-body-bg shadow">
     <div class="container flex h-full justify-between px-0">
         <a
             class="flex items-center px-4 text-white outline-inset

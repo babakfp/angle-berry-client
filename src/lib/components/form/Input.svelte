@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import Label from "$components/form/Label.svelte"
     import Error from "$components/form/Error.svelte"
     import IconPlusCircle from "$icons/IconPlusCircle.svelte"

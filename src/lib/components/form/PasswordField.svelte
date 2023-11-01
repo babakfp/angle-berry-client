@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import Input from "./Input.svelte"
     import InputTextButtonToggleable from "./InputTextButtonToggleable.svelte"
 

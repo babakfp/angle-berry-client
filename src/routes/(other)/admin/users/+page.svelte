@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import { Table, Tbody, Thead, Tr, Th, Td } from "$components/table/index.js"
     import Checkbox from "$components/form/Checkbox.svelte"
 
@@ -16,7 +16,7 @@
         </button>
 
         <button
-            class="btn-gray-light btn"
+            class="btn btn-gray-light"
             on:click={() => (selectedUserIds = [])}
         >
             Clear selection

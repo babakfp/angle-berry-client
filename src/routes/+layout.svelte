@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import { onMount } from "svelte"
     import disablePageSave from "$utilities/disableBrowserDefaults/disablePageSave.js"
     import disableContextMenu from "$utilities/disableBrowserDefaults/disableContextMenu.js"

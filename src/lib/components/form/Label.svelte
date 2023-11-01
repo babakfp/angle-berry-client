@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     export let _for = ""
     export { _for as for }
     export let label = ""

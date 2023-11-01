@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import VideoPlayer from "$components/VideoPlayer.svelte"
     import Checkbox from "$components/form/Checkbox.svelte"
 

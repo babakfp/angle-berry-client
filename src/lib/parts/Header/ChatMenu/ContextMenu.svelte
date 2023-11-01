@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import { page } from "$app/stores"
     import { copyText } from "svelte-copy"
     import OutClick from "svelte-outclick"

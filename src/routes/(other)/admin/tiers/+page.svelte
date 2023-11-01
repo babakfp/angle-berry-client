@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import TiersTable from "../TiersTable.svelte"
     export let data
 </script>

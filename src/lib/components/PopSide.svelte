@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import OutClick from "svelte-outclick"
     import { browser } from "$app/environment"
     import { beforeNavigate } from "$app/navigation"
@@ -33,13 +33,13 @@
 <OutClick on:outclick={() => (isOpen = false)} excludeElements={toggleButton}>
     <div
         {id}
-        class="bg-body-bg fixed inset-0 z-50 grid h-screen translate-x-full grid-rows-[auto_1fr_auto] duration-200 hide
+        class="fixed inset-0 z-50 grid h-screen translate-x-full grid-rows-[auto_1fr_auto] bg-body-bg duration-200 hide
 			{isOpen && '!translate-x-0 !show'}
 			sm:left-auto sm:top-header sm:z-40 sm:h-screen-minus-header sm:w-96 sm:grid-rows-[1fr_auto]
 		"
     >
         <button
-            class="bg-body-bg sticky top-0 z-1 flex h-14 w-full items-center justify-between self-start border-b border-white/5 px-4 outline-inset sm:hidden"
+            class="sticky top-0 z-1 flex h-14 w-full items-center justify-between self-start border-b border-white/5 bg-body-bg px-4 outline-inset sm:hidden"
             on:click={() => (isOpen = false)}
         >
             <span>Close</span>

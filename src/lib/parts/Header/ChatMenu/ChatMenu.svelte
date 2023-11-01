@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import { page } from "$app/stores"
     import { enhance } from "$app/forms"
     import { writable } from "svelte/store"
@@ -182,7 +182,7 @@
             class="relative grid grid-cols-[1fr_auto] border-t border-white/5 shadow-[0_-1px_3px_0_rgb(0_0_0_/_0.1),_0_-1px_2px_-1px_rgb(0_0_0_/_0.1)]"
         >
             <textarea
-                class="bg-body-bg block w-full resize-none p-4 outline-inset placeholder:text-gray-500"
+                class="block w-full resize-none bg-body-bg p-4 outline-inset placeholder:text-gray-500"
                 bind:this={$messageInputElement}
                 bind:value={$messageInputValue}
                 name="messageContent"

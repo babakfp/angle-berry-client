@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import { PUBLIC_POCKETBASE_URL } from "$env/static/public"
     import TierTable from "$components/TierTable.svelte"
     import VideoPlayer from "$components/VideoPlayer.svelte"

@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import { page } from "$app/stores"
     import { Table, Tbody, Thead, Tr, Th } from "$components/table/index.js"
     import TierTableRow from "$components/TierTableRow.svelte"

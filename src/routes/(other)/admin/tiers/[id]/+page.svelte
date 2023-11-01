@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import { PUBLIC_POCKETBASE_URL } from "$env/static/public"
     import Input from "$components/form/Input.svelte"
     import { schema } from "../schema.js"

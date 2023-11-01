@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import { contextMenuTargetEvent, isContextMenuOpen } from "./chatStores.js"
 
     /** @type {HTMLDivElement} */

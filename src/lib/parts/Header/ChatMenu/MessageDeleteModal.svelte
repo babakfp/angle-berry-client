@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import { pb } from "$stores/pb.js"
     import { messages } from "$stores/messages.js"
     import {

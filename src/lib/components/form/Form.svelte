@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import { enhance } from "$app/forms"
     import FormSubmitButton from "$components/form/FormSubmitButton.svelte"
     import IconLoading from "$icons/IconLoading.svelte"

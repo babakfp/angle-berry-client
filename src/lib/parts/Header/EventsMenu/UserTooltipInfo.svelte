@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import Tooltip from "$components/Tooltip.svelte"
     import TooltipWrapper from "$components/TooltipWrapper.svelte"
 

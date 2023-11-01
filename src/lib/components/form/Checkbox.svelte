@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import IconSquare from "$icons/IconSquare.svelte"
     import IconCheckSquare from "$icons/IconCheckSquare.svelte"
 

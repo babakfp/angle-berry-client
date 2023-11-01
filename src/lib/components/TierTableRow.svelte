@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import { page } from "$app/stores"
     import { Tr, Th, Td } from "$components/table/index.js"
 

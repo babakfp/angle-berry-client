@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     export let position = "top" // top, right, bottom, left
     export let isVisible = false
     export let keepAlive = false

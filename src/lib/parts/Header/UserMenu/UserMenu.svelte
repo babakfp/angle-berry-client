@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import OutClick from "svelte-outclick"
     import { copy } from "svelte-copy"
     import toast, { Toaster } from "svelte-french-toast"
@@ -25,7 +25,7 @@
 >
     <ul
         id="UserMenu"
-        class="bg-body-bg absolute right-0 top-full max-h-[calc(var(--screen-minus-header)-theme(spacing.8))] w-60 translate-x-full overflow-y-auto overscroll-y-contain rounded text-sm shadow-[0_4px_16px_0_rgb(0_0_0/0.4)] duration-200 hide
+        class="absolute right-0 top-full max-h-[calc(var(--screen-minus-header)-theme(spacing.8))] w-60 translate-x-full overflow-y-auto overscroll-y-contain rounded bg-body-bg text-sm shadow-[0_4px_16px_0_rgb(0_0_0/0.4)] duration-200 hide
 		{isUserMenuOpen && '!-translate-x-4 !show'}"
     >
         <li class="flex justify-between p-4">

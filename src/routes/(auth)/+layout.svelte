@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import { fly } from "svelte/transition"
     import { page } from "$app/stores"
     import { pageTransitionValues } from "$stores/pageTransitionValues.js"

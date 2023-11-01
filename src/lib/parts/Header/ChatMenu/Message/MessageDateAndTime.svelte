@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import { dateToAMPM } from "$utilities/dateToAMPM.js"
 
     export let created

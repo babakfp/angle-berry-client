@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import InputTextButton from "./InputTextButton.svelte"
 
     export let isActive = false

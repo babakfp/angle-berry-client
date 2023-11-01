@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     export let title = ""
     export let description = ""
     export let isOpen = false
@@ -13,7 +13,7 @@
 
 {#if isOpen}
     <div
-        class="bg-body-bg/50 fixed inset-0 z-50 flex h-screen w-screen items-center justify-center
+        class="fixed inset-0 z-50 flex h-screen w-screen items-center justify-center bg-body-bg/50
             {isFullSize ? 'p-0 sm:p-8' : 'p-8'}"
         on:click|self={() => (isOpen = false)}
     >

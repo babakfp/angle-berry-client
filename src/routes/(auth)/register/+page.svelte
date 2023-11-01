@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import { superForm } from "sveltekit-superforms/client"
     import { schema } from "$utilities/schema.js"
     import AuthWrapper from "../AuthWrapper.svelte"

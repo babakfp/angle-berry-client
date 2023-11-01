@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import { goToMessage } from "../goToMessage.js"
 
     export let id

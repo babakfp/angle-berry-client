@@ -6,3 +6,7 @@ export const schema = z.object({
     invites: z.number().min(0).max(1000).default(0),
     videos: z.string().array().max(100).default([]),
 })
+
+export const tierDeletionSchema = z.object({
+    ids: z.string().array().default([]),
+})

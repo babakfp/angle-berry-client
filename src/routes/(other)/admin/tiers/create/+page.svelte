@@ -28,7 +28,7 @@
     <Form
         method="POST"
         message={form?.message}
-        submitButtonText="Update"
+        submitButtonText="Create"
         {errors}
         {validate}
     >

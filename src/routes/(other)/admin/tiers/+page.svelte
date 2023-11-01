@@ -1,6 +1,5 @@
 <script>
     import TiersTable from "../TiersTable.svelte"
-
     export let data
 </script>
 

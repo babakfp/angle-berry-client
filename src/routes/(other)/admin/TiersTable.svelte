@@ -6,24 +6,37 @@
     export let users
 
     let selectedTierIds = []
-
-    function deleteSelectedTiers() {
-        tiers = tiers.filter(t => !selectedTierIds.includes(t.id))
-        selectedTierIds = []
-    }
 </script>
 
-{#if selectedTierIds.length}
-    <div class="flex justify-between">
-        <button class="btn btn-brand" on:click={deleteSelectedTiers}>
-            Delete selected
-        </button>
+<div class="flex justify-between">
+    <div class="flex gap-4">
+        {#if selectedTierIds.length}
+            <form method="post" action="?/deletetier">
+                <button class="btn btn-danger" type="submit">
+                    Delete selected
+                </button>
 
-        <button class="btn btn-gray" on:click={() => (selectedTierIds = [])}>
-            Clear selection
-        </button>
+                {#each selectedTierIds as id}
+                    <input
+                        class="hidden"
+                        type="checkbox"
+                        name="ids"
+                        value={id}
+                        checked
+                    />
+                {/each}
+            </form>
+            <button
+                class="btn btn-gray"
+                on:click={() => (selectedTierIds = [])}
+            >
+                Clear selection
+            </button>
+        {/if}
     </div>
-{/if}
+
+    <a class="btn btn-brand" href="/admin/tiers/create">Create</a>
+</div>
 
 <Table class="mt-4">
     <Thead>

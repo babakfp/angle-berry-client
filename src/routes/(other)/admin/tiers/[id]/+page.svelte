@@ -70,7 +70,7 @@
                 : form?.data?.invites?.message}
             {...$constraints.invites}
         />
-        <ul class="grid gap-4">
+        <ul class="grid gap-8 rounded bg-gray-700 p-2">
             {#each selectedVideos as video, i}
                 <li>
                     <VideoGalleryItem
@@ -97,7 +97,7 @@
     bind:isOpen={isGalleryPopupOpen}
     isFullSize={true}
 >
-    <ul class="grid gap-4">
+    <ul class="grid gap-8">
         {#each data.videos as video}
             <li>
                 <VideoGalleryItem

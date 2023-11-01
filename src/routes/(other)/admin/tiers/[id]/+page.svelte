@@ -24,9 +24,6 @@
     if (!$_form.invites) $_form.invites = data.tier.invites
     if (!$_form.videos.length) $_form.videos = data.tier.videos
 
-    let isShowingAllSelectedVideos = false
-    let maxVisibleVideos = 3
-
     $: selectedVideos = data.videos.filter(v => $_form.videos.includes(v.id))
 </script>
 
@@ -75,49 +72,6 @@
         />
         <ul class="grid gap-4">
             {#each selectedVideos as video, i}
-                {#if i + 1 <= maxVisibleVideos || isShowingAllSelectedVideos}
-                    <li>
-                        <VideoGalleryItem
-                            src="{PUBLIC_POCKETBASE_URL}/api/files/{video.collectionName}/{video.id}/{video.file}"
-                            checked={$_form.videos.includes(video.id)}
-                            bind:group={$_form.videos}
-                            value={video.id}
-                        />
-                    </li>
-                {/if}
-            {/each}
-            {#if $_form.videos.length > maxVisibleVideos}
-                <button
-                    class="btn btn-gray"
-                    type="button"
-                    on:click={() =>
-                        (isShowingAllSelectedVideos =
-                            !isShowingAllSelectedVideos)}
-                >
-                    {isShowingAllSelectedVideos ? "Show less" : "Show all"}
-                </button>
-            {/if}
-            {#if data.videos.length > maxVisibleVideos}
-                <button
-                    class="btn btn-gray"
-                    type="button"
-                    on:click={() => (isGalleryPopupOpen = true)}
-                >
-                    Videos gallery
-                </button>
-            {/if}
-        </ul>
-    </Form>
-</div>
-
-{#if data.videos.length > maxVisibleVideos}
-    <Modal
-        title="Videos gallery"
-        bind:isOpen={isGalleryPopupOpen}
-        isFullSize={true}
-    >
-        <ul class="grid gap-4">
-            {#each data.videos as video}
                 <li>
                     <VideoGalleryItem
                         src="{PUBLIC_POCKETBASE_URL}/api/files/{video.collectionName}/{video.id}/{video.file}"
@@ -127,12 +81,38 @@
                     />
                 </li>
             {/each}
-        </ul>
-        <svelte:fragment slot="actions">
             <button
                 class="btn btn-gray"
-                on:click={() => (isGalleryPopupOpen = false)}>Close</button
+                type="button"
+                on:click={() => (isGalleryPopupOpen = true)}
             >
-        </svelte:fragment>
-    </Modal>
-{/if}
+                Videos gallery
+            </button>
+        </ul>
+    </Form>
+</div>
+
+<Modal
+    title="Videos gallery"
+    bind:isOpen={isGalleryPopupOpen}
+    isFullSize={true}
+>
+    <ul class="grid gap-4">
+        {#each data.videos as video}
+            <li>
+                <VideoGalleryItem
+                    src="{PUBLIC_POCKETBASE_URL}/api/files/{video.collectionName}/{video.id}/{video.file}"
+                    checked={$_form.videos.includes(video.id)}
+                    bind:group={$_form.videos}
+                    value={video.id}
+                />
+            </li>
+        {/each}
+    </ul>
+    <svelte:fragment slot="actions">
+        <button
+            class="btn btn-gray"
+            on:click={() => (isGalleryPopupOpen = false)}>Close</button
+        >
+    </svelte:fragment>
+</Modal>

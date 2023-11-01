@@ -75,7 +75,7 @@
 
     <div class="relative">
         <input
-            class="{_class} reset-autofill-input block h-11 w-full rounded border-2 border-gray-700 bg-transparent px-4 placeholder:text-xs placeholder:text-gray-500 [&:focus+div]:show
+            class="{_class} reset-autofill-input peer block h-11 w-full rounded border-2 border-gray-700 bg-transparent px-4 placeholder:text-xs placeholder:text-gray-500
                 {type === 'number' ? 'reset-number-input' : ''}"
             {type}
             {value}
@@ -95,7 +95,7 @@
 
         {#if $$slots.buttons || type === "number"}
             <div
-                class="absolute right-0 flex h-full items-center rounded-r px-2 duration-100 ease-in-out hide inset-y-center focus-within:show group-hover:show"
+                class="absolute right-0 flex h-full items-center rounded-r px-2 duration-200 hide inset-y-center focus-within:show group-hover:show peer-focus:show"
             >
                 {#if $$slots.buttons}
                     <slot name="buttons" />

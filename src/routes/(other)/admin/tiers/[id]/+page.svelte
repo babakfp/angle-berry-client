@@ -1,12 +1,11 @@
 <script>
     import { PUBLIC_POCKETBASE_URL } from "$env/static/public"
-    import VideoPlayer from "$components/VideoPlayer.svelte"
     import Input from "$components/form/fields/Input.svelte"
     import { schema } from "./schema.js"
     import { superForm } from "sveltekit-superforms/client"
     import Form from "$components/form/Form.svelte"
-    import Checkbox from "$components/form/Checkbox.svelte"
     import Modal from "$components/Modal.svelte"
+    import VideoGalleryItem from "../VideoGalleryItem.svelte"
 
     export let data
     export let form
@@ -77,24 +76,13 @@
         <ul class="grid gap-4">
             {#each selectedVideos as video, i}
                 {#if i + 1 <= maxVisibleVideos || isShowingAllSelectedVideos}
-                    <li class="grid gap-1">
-                        <VideoPlayer
+                    <li>
+                        <VideoGalleryItem
                             src="{PUBLIC_POCKETBASE_URL}/api/files/{video.collectionName}/{video.id}/{video.file}"
-                            preload="none"
+                            checked={$_form.videos.includes(video.id)}
+                            bind:group={$_form.videos}
+                            value={video.id}
                         />
-                        <label
-                            class="btn flex gap-2 bg-white/5 hover:bg-white/10"
-                        >
-                            <Checkbox
-                                checked={$_form.videos.includes(video.id)}
-                                bind:group={$_form.videos}
-                                value={video.id}
-                                name="videos"
-                            />
-                            {#if $_form.videos.includes(video.id)}
-                                Selected
-                            {/if}
-                        </label>
                     </li>
                 {/if}
             {/each}
@@ -130,21 +118,13 @@
     >
         <ul class="grid gap-4">
             {#each data.videos as video}
-                <li class="grid gap-1">
-                    <VideoPlayer
+                <li>
+                    <VideoGalleryItem
                         src="{PUBLIC_POCKETBASE_URL}/api/files/{video.collectionName}/{video.id}/{video.file}"
-                        preload="none"
+                        checked={$_form.videos.includes(video.id)}
+                        bind:group={$_form.videos}
+                        value={video.id}
                     />
-                    <label class="btn flex gap-2 bg-white/5 hover:bg-white/10">
-                        <Checkbox
-                            checked={$_form.videos.includes(video.id)}
-                            bind:group={$_form.videos}
-                            value={video.id}
-                        />
-                        {#if $_form.videos.includes(video.id)}
-                            Selected
-                        {/if}
-                    </label>
                 </li>
             {/each}
         </ul>

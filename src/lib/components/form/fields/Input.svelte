@@ -75,7 +75,7 @@
 
     <div class="relative">
         <input
-            class="{_class} block h-11 w-full rounded border-2 border-gray-700 bg-transparent px-4 placeholder:text-xs placeholder:text-gray-500 [&:focus+div]:show
+            class="{_class} reset-autofill-input block h-11 w-full rounded border-2 border-gray-700 bg-transparent px-4 placeholder:text-xs placeholder:text-gray-500 [&:focus+div]:show
                 {type === 'number' ? 'reset-number-input' : ''}"
             {type}
             {value}
@@ -125,3 +125,11 @@
         <Error class="mt-2" message={error} />
     {/if}
 </div>
+
+<style lang="postcss">
+    .reset-autofill-input {
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: theme(colors.body.text);
+        box-shadow: inset 0 0 0 9999px theme(colors.body.bg);
+    }
+</style>

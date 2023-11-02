@@ -2,7 +2,7 @@
     import { page } from "$app/stores"
     import { enhance } from "$app/forms"
     import { writable } from "svelte/store"
-    import { messages, unreadMessagesLength } from "$stores/messages.js"
+    import { messages, unreadMessagesLength } from "$stores/messages"
     import { pb } from "$stores/pb"
     import {
         isReplying,

@@ -1,6 +1,6 @@
 <script lang="ts">
     import { pb } from "$stores/pb"
-    import { messages } from "$stores/messages.js"
+    import { messages } from "$stores/messages"
     import {
         contextMenuTargetMessage,
         messageIdsToDelete,

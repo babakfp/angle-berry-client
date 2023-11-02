@@ -12,7 +12,7 @@
         messageInputElement,
         selectedMessageIds,
     } from "./chatStores.js"
-    import { messages } from "$stores/messages.js"
+    import { messages } from "$stores/messages"
     import IconReply from "$icons/IconReply.svelte"
     import IconPen from "$icons/IconPen.svelte"
     import IconClipboard from "$icons/IconClipboard.svelte"

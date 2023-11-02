@@ -3,7 +3,7 @@
     import { fly } from "svelte/transition"
     import { page } from "$app/stores"
     import { pageTransitionValues } from "$stores/pageTransitionValues.js"
-    import { messages, unreadMessagesLength } from "$stores/messages.js"
+    import { messages, unreadMessagesLength } from "$stores/messages"
     import { events, unseenEventsLength } from "$stores/events"
     import { error } from "@sveltejs/kit"
     import { handleOfflineFailure } from "$utilities/pb"

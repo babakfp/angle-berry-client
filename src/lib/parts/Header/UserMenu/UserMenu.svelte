@@ -7,7 +7,7 @@
     import { beforeNavigate } from "$app/navigation"
     import Tier from "./Tier.svelte"
 
-    export let userMenuToggle
+    export let userMenuToggle: HTMLButtonElement
     export let isUserMenuOpen = false
 
     beforeNavigate(() => (isUserMenuOpen = false))

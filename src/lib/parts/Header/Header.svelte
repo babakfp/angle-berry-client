@@ -11,14 +11,14 @@
     import EventsMenu from "./EventsMenu/EventsMenu.svelte"
     import UserMenu from "./UserMenu/UserMenu.svelte"
 
-    let isEventsMenuOpen
-    let eventsMenuToggle
+    let isEventsMenuOpen = false
+    let eventsMenuToggle: HTMLButtonElement
 
-    let isChatMenuOpen
-    let chatMenuToggle
+    let isChatMenuOpen = false
+    let chatMenuToggle: HTMLButtonElement
 
     let isUserMenuOpen = false
-    let userMenuToggle
+    let userMenuToggle: HTMLButtonElement
 </script>
 
 <header class="sticky top-0 z-50 h-header overflow-x-clip bg-body-bg shadow">

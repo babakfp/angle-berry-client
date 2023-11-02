@@ -6,7 +6,7 @@
 
     export let isOpen = false
     export let toggleButton: HTMLButtonElement
-    export let id = null
+    export let id = ""
 
     beforeNavigate(() => (isOpen = false))
 
@@ -32,7 +32,7 @@
 
 <OutClick on:outclick={() => (isOpen = false)} excludeElements={toggleButton}>
     <div
-        {id}
+        id={id || null}
         class="fixed inset-0 z-50 grid h-screen translate-x-full grid-rows-[auto_1fr_auto] bg-body-bg duration-200 hide
 			{isOpen && '!translate-x-0 !show'}
 			sm:left-auto sm:top-header sm:z-40 sm:h-screen-minus-header sm:w-96 sm:grid-rows-[1fr_auto]

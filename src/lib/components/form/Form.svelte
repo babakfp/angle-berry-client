@@ -53,5 +53,7 @@
         {/if}
     </FormSubmitButton>
 
-    <Error {message} />
+    {#if message}
+        <Error {message} />
+    {/if}
 </form>

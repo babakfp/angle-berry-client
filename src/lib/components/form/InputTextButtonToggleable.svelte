@@ -2,8 +2,8 @@
     import InputTextButton from "./InputTextButton.svelte"
 
     export let isActive = false
-    export let activeText = ""
-    export let inActiveText = ""
+    export let activeText: string
+    export let inActiveText: string
 </script>
 
 <InputTextButton class="overflow-hidden" on:click>

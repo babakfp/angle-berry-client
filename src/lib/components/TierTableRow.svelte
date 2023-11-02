@@ -1,7 +1,7 @@
 <script lang="ts">
     import { page } from "$app/stores"
     import type { TiersResponse } from "$utilities/pb-types"
-    import { Tr, Th, Td } from "$components/table/index.js"
+    import { Tr, Th, Td } from "$components/table/index"
 
     export let currentTier: TiersResponse
     export let isShowingSingleTier = false

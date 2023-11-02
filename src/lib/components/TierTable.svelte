@@ -1,7 +1,7 @@
 <script lang="ts">
     import { page } from "$app/stores"
     import type { TiersResponse } from "$utilities/pb-types"
-    import { Table, Tbody, Thead, Tr, Th } from "$components/table/index.js"
+    import { Table, Tbody, Thead, Tr, Th } from "$components/table/index"
     import TierTableRow from "$components/TierTableRow.svelte"
 
     export let currentTier: TiersResponse | null = null

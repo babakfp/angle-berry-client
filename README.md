@@ -8,7 +8,7 @@
 
 ## Development
 
-Before proceeding with the setup, please ensure that you have the latest version of Node.js installed on your system. Node.js is required to run the development environment for this project.
+Before proceeding with the setup, please ensure that you have the latest version of NodeJS installed on your system. NodeJS is required to run the development environment for this project.
 
 ### Installing PNPM
 

@@ -1,15 +1,15 @@
 <script lang="ts">
     import { dateToAMPM } from "$utilities/dateToAMPM"
 
-    export let created
-    export let updated
-    export let isCurrentUser
+    export let created: string
+    export let updated: string
+    export let isCurrentUser: boolean
 
     $: date = new Date(updated)
     $: isToday = isDateToday(date)
     $: isYesterday = isDateYesterday(date)
 
-    function isDateToday(someDate) {
+    function isDateToday(someDate: Date) {
         const today = new Date()
         return (
             someDate.getDate() === today.getDate() &&
@@ -18,7 +18,7 @@
         )
     }
 
-    function isDateYesterday(someDate) {
+    function isDateYesterday(someDate: Date) {
         const today = new Date()
         return (
             someDate.getDate() === today.getDate() - 1 &&

@@ -1,9 +1,13 @@
 <script lang="ts">
     import { page } from "$app/stores"
     import { fly } from "svelte/transition"
+    import type { EventsResponse, UsersResponse } from "$utilities/pb-types"
     import UserTooltipInfo from "./UserTooltipInfo.svelte"
 
-    export let event
+    export let event: EventsResponse<{
+        user: UsersResponse
+        inviter: UsersResponse
+    }>
 
     let eventType = "userJoined"
     if (event.inviter) eventType = "userJoinedByAnInvite"

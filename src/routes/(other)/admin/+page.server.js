@@ -1,7 +1,7 @@
 import { fail, error } from "@sveltejs/kit"
 import { handleOfflineFailure } from "$utilities/pb"
 import { superValidate } from "sveltekit-superforms/server"
-import { tierDeletionSchema } from "./tiers/schema.js"
+import { tierDeletionSchema } from "./tiers/schema"
 
 export async function load({ locals }) {
     const form = await superValidate(tierDeletionSchema)

@@ -69,7 +69,7 @@
         }
     }
 
-    let formElement
+    let formElement: HTMLFormElement
 
     $: replyedMessageId = $isReplying ? $replyTargetMessage.id : ""
 

@@ -13,8 +13,12 @@
     import IconCircle from "$icons/IconCircle.svelte"
     import IconCheckCircle from "$icons/IconCheckCircle.svelte"
     import { highlightAnimate } from "$utilities/highlightAnimate"
+    import type { MessagesResponse, UsersResponse } from "$utilities/pb-types"
 
-    export let message
+    export let message: MessagesResponse<{
+        user: UsersResponse
+        repliedTo: MessagesResponse
+    }>
 
     const isCurrentUser = message.expand.user.id === $page.data.user.id
 
@@ -22,7 +26,7 @@
 
     let highlight: HTMLDivElement
 
-    function handleClick(e) {
+    function handleClick(e: MouseEvent) {
         if ($selectedMessageIds.length > 0) {
             if ($selectedMessageIds.includes(message.id)) {
                 selectedMessageIds.update(v => v.filter(v => v !== message.id))

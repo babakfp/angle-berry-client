@@ -2,12 +2,12 @@
 
 <script lang="ts">
     import { createEventDispatcher } from "svelte"
-    import { goToMessage } from "$parts/Header/ChatMenu/goToMessage.js"
+    import { goToMessage } from "$parts/Header/ChatMenu/goToMessage"
     import IconX from "$icons/IconX.svelte"
 
-    export let title
-    export let content
-    export let messageId
+    export let title: string
+    export let content: string
+    export let messageId: string
     export let isOpen = false
 
     const dispatch = createEventDispatcher()

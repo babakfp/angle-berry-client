@@ -1,9 +1,10 @@
 <script lang="ts">
+    import type { UsersResponse, TiersResponse } from "$utilities/pb-types"
     import Tooltip from "$components/Tooltip.svelte"
     import TooltipWrapper from "$components/TooltipWrapper.svelte"
 
-    export let user
-    let isVisible
+    export let user: UsersResponse<{ retainedTiers: TiersResponse[] }>
+    let isVisible = false
 </script>
 
 <TooltipWrapper>

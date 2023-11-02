@@ -1,6 +1,6 @@
 <script lang="ts">
     import { superForm } from "sveltekit-superforms/client"
-    import { schema } from "../schema.js"
+    import { schema } from "../schema"
     import AuthWrapper from "../AuthWrapper.svelte"
     import Form from "$components/form/Form.svelte"
     import UsernameField from "$components/form/UsernameField.svelte"

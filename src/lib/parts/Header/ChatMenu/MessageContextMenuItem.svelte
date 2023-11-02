@@ -1,9 +1,9 @@
 <script lang="ts">
-    export let title
+    export let title: string
     export let isDisabled = false
     export let _class = ""
     export { _class as class }
-    export let icon
+    export let icon: ConstructorOfATypedSvelteComponent
 </script>
 
 <li class="flex">

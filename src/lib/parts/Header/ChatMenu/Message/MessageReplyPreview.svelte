@@ -1,9 +1,9 @@
 <script lang="ts">
-    import { goToMessage } from "../goToMessage.js"
+    import { goToMessage } from "../goToMessage"
 
-    export let id
-    export let username
-    export let content
+    export let id: string
+    export let username: string
+    export let content: string
 
     let interval: number | undefined
 

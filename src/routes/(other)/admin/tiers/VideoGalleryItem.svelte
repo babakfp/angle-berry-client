@@ -2,10 +2,10 @@
     import VideoPlayer from "$components/VideoPlayer.svelte"
     import Checkbox from "$components/form/Checkbox.svelte"
 
-    export let src
-    export let checked
-    export let group
-    export let value
+    export let src: string
+    export let checked: boolean
+    export let group: string[]
+    export let value: string
 </script>
 
 <div class="grid gap-1">

@@ -1,7 +1,8 @@
 <script lang="ts">
     import { page } from "$app/stores"
+    import type { TiersResponse } from "$utilities/pb-types"
 
-    export let tier
+    export let tier: TiersResponse
 </script>
 
 <li class="relative">

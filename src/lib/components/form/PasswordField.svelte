@@ -14,7 +14,7 @@
     bind:value
     name="password"
     label="Password"
-    placeholder="Something that no one knows"
+    placeholder="A secret that remains undiscovered"
     {autocomplete}
     {...$$restProps}
     {error}

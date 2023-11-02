@@ -6,7 +6,7 @@
         messageIdsToDelete,
         messageIdToEdit,
         isReplying,
-    } from "./chatStores.js"
+    } from "./chatStores"
     import IconLoading from "$icons/IconLoading.svelte"
     import Modal from "$components/Modal.svelte"
 

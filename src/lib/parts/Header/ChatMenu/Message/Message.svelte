@@ -7,7 +7,7 @@
         contextMenuTargetEvent,
         contextMenuTargetMessage,
         selectedMessageIds,
-    } from "../chatStores.js"
+    } from "../chatStores"
     import MessageDateAndTime from "./MessageDateAndTime.svelte"
     import MessageReplyPreview from "./MessageReplyPreview.svelte"
     import IconCircle from "$icons/IconCircle.svelte"

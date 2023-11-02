@@ -11,7 +11,7 @@
         messageInputElement,
         isContextMenuOpen2,
         isContextMenuOpen,
-    } from "./chatStores.js"
+    } from "./chatStores"
     import IconLoading from "$icons/IconLoading.svelte"
     import IconCheck from "$icons/IconCheck.svelte"
     import IconSend from "$icons/IconSend.svelte"

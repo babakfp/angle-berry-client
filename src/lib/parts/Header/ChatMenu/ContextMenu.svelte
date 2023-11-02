@@ -11,7 +11,7 @@
         messageIdToEdit,
         messageInputElement,
         selectedMessageIds,
-    } from "./chatStores.js"
+    } from "./chatStores"
     import { messages } from "$stores/messages"
     import IconReply from "$icons/IconReply.svelte"
     import IconPen from "$icons/IconPen.svelte"

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { contextMenuTargetEvent, isContextMenuOpen } from "./chatStores.js"
+    import { contextMenuTargetEvent, isContextMenuOpen } from "./chatStores"
 
     let contextMenu: HTMLDivElement = null
 

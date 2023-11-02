@@ -63,7 +63,9 @@
 </script>
 
 <div class="group grid">
-    <Label {label} {required} for={name} />
+    {#if label}
+        <Label {label} {required} for={name} />
+    {/if}
 
     <div class="relative">
         <input

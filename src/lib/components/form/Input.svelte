@@ -12,22 +12,19 @@
     export let value = ""
     export let placeholder = ""
     export let autocomplete: string | null = null
-    export let minlength: string | null = null
-    export let maxlength: string | null = null
+    export let minlength: number | null = null
+    export let maxlength: number | null = null
     export let min: number | null = null
     export let max: number | null = null
     export let readonly = false
-    export let pattern = null
+    export let pattern: string | null = null
 
     export let _class = ""
     export { _class as class }
 
     export let error = ""
 
-    /**
-     * @param {InputEvent} e
-     */
-    function bindValue(e) {
+    function bindValue(e: InputEvent) {
         if (type.match(/^(number|range)$/)) {
             value = +e.target.value
         } else {
@@ -36,17 +33,17 @@
     }
 
     $: if (type === "number") {
-        if (max && value >= max) {
-            value = max
+        if (max && parseInt(value) >= max) {
+            value = String(max)
         }
-        if (min && value <= min) {
-            value = min
+        if (min && parseInt(value) <= min) {
+            value = String(min)
         }
     }
 
     function incrementNumber() {
         if (max) {
-            if (value < max) {
+            if (parseInt(value) < max) {
                 value += 1
             }
         } else {
@@ -56,11 +53,11 @@
 
     function decrementNumber() {
         if (min || min === 0) {
-            if (value > min) {
-                value -= 1
+            if (parseInt(value) > min) {
+                value = String(parseInt(value) - 1)
             }
         } else {
-            value -= 1
+            value = String(parseInt(value) - 1)
         }
     }
 </script>

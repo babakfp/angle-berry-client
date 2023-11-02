@@ -12,7 +12,7 @@
     import MessageReplyPreview from "./MessageReplyPreview.svelte"
     import IconCircle from "$icons/IconCircle.svelte"
     import IconCheckCircle from "$icons/IconCheckCircle.svelte"
-    import { highlightAnimate } from "$utilities/highlightAnimate.js"
+    import { highlightAnimate } from "$utilities/highlightAnimate"
 
     export let message
 

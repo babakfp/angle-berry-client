@@ -4,7 +4,7 @@
     export let keepAlive = false
     export let parentElementQuerySelector = ""
 
-    let tooltip
+    let tooltip: HTMLDivElement
 
     $: if (tooltip && parentElementQuerySelector && isVisible) {
         const parentElement = document.querySelector(parentElementQuerySelector)

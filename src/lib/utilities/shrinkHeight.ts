@@ -1,4 +1,10 @@
-export function shrinkHeight(node, { delay = 0, duration = 400 }) {
+type Options = {
+    delay?: number
+    duration?: number
+    easing?: (t: number) => number
+}
+
+export function shrinkHeight(node: HTMLElement, options?: Options) {
     node.style.overflow = "hidden"
 
     const style = getComputedStyle(node)
@@ -9,9 +15,10 @@ export function shrinkHeight(node, { delay = 0, duration = 400 }) {
     const borderBottomWidth = parseFloat(style.borderBottomWidth)
 
     return {
-        delay,
-        duration,
-        css: t => `
+        delay: options?.delay || 0,
+        duration: options?.duration || 500,
+        easing: options?.easing || undefined,
+        css: (t: number) => `
 			height: ${t * height}px;
 			padding-top: ${t * paddingTop}px;
 			padding-bottom: ${t * paddingBottom}px;

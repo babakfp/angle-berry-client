@@ -1,6 +1,6 @@
 <script lang="ts">
     import { page } from "$app/stores"
-    import { shrinkHeight } from "$utilities/shrinkHeight.js"
+    import { shrinkHeight } from "$utilities/shrinkHeight"
     import {
         isContextMenuOpen,
         isContextMenuOpen2,

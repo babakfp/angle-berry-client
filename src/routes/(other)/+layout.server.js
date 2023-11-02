@@ -1,5 +1,5 @@
 import { redirect, error } from "@sveltejs/kit"
-import { handleOfflineFailure } from "$utilities/pb.js"
+import { handleOfflineFailure } from "$utilities/pb"
 
 export async function load({ locals, parent }) {
     const data = await parent()

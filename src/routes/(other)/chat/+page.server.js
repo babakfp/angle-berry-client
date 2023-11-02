@@ -1,5 +1,5 @@
 import { fail } from "@sveltejs/kit"
-import { handleOfflineFailure } from "$utilities/pb.js"
+import { handleOfflineFailure } from "$utilities/pb"
 
 export const actions = {
     default: async ({ locals, request }) => {

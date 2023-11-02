@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { pb } from "$stores/pb.js"
+    import { pb } from "$stores/pb"
     import { messages } from "$stores/messages.js"
     import {
         contextMenuTargetMessage,

@@ -1,6 +1,6 @@
 import { redirect, fail } from "@sveltejs/kit"
 import { error } from "@sveltejs/kit"
-import { handleOfflineFailure } from "$utilities/pb.js"
+import { handleOfflineFailure } from "$utilities/pb"
 import { superValidate } from "sveltekit-superforms/server"
 import { schema } from "../schema.js"
 

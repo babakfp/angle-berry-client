@@ -7,7 +7,7 @@
     import { events, unseenEventsLength } from "$stores/events.js"
     import { error } from "@sveltejs/kit"
     import { handleOfflineFailure } from "$utilities/pb.js"
-    import { pb } from "$stores/pb.js"
+    import { pb } from "$stores/pb"
     import Header from "$parts/Header/Header.svelte"
 
     export let data

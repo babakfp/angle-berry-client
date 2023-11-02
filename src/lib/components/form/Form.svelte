@@ -5,8 +5,8 @@
     import Error from "./Error.svelte"
 
     export let message
-    export let method
-    export let submitButtonText
+    export let method: "post"
+    export let submitButtonText: string
     export let errors
     export let validate
 

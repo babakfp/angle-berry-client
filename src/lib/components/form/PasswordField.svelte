@@ -3,7 +3,7 @@
     import InputTextButtonToggleable from "./InputTextButtonToggleable.svelte"
 
     export let value = ""
-    export let autocomplete = ""
+    export let autocomplete: string
     export let error = ""
 
     let isPasswordVisible = false

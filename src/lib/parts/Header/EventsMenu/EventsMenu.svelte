@@ -7,7 +7,7 @@
     events.set($page.data.events || [])
 
     export let isOpen
-    export let toggleButton
+    export let toggleButton: HTMLButtonElement
 
     $: if (isOpen && $unseenEventsLength) unseenEventsLength.set(0)
 </script>

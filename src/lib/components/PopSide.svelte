@@ -5,7 +5,7 @@
     import IconX from "$icons/IconX.svelte"
 
     export let isOpen = false
-    export let toggleButton = null
+    export let toggleButton: HTMLButtonElement
     export let id = null
 
     beforeNavigate(() => (isOpen = false))

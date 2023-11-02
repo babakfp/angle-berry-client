@@ -23,7 +23,7 @@
     import { getTextareaLineCount } from "$utilities/getTextareaLineCount"
 
     export let isOpen = false
-    export let toggleButton
+    export let toggleButton: HTMLButtonElement
 
     messages.set($page.data.messages.items || [])
 

@@ -41,7 +41,7 @@
     otherAuthPageLink="/register"
 >
     <Form
-        method="POST"
+        method="post"
         message={form?.message}
         submitButtonText="Login"
         {errors}

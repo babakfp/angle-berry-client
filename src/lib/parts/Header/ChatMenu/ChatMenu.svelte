@@ -152,7 +152,7 @@
         class="sticky bottom-0 self-end
 		{isSendingMessage && 'pointer-events-none'}
 		"
-        method="POST"
+        method="post"
         action="/chat"
         use:enhance={submitMessage}
         bind:this={formElement}

@@ -67,7 +67,7 @@
         </ol>
 
         <li>
-            <form action="/logout" method="POST">
+            <form action="/logout" method="post">
                 <button
                     class="w-full rounded-b border-t border-white/5 p-4 text-left duration-200 outline-inset hover:text-white"
                 >

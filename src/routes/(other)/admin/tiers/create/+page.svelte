@@ -26,7 +26,7 @@
 
 <div class="mx-auto w-full max-w-xs">
     <Form
-        method="POST"
+        method="post"
         message={form?.message}
         submitButtonText="Create"
         {errors}

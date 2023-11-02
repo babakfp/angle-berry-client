@@ -1,7 +1,7 @@
 <script lang="ts">
     import { fly } from "svelte/transition"
     import { page } from "$app/stores"
-    import { pageTransitionValues } from "$stores/pageTransitionValues.js"
+    import { pageTransitionValues } from "$utilities/pageTransitionValues"
 </script>
 
 {#key $page.url.pathname}

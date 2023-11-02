@@ -1,7 +1,4 @@
-/**
- * @param element {HTMLTextAreaElement}
- */
-export function getTextareaLineCount(element) {
+export function getTextareaLineCount(element: HTMLTextAreaElement) {
     const scrollHeight = element.scrollHeight
     const style = getComputedStyle(element)
     const lineHeight = parseInt(style.lineHeight)

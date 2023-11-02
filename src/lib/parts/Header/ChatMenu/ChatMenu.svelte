@@ -20,7 +20,7 @@
     import MessageActionPreview from "./MessageActionPreview.svelte"
     import ContextMenu from "./ContextMenu.svelte"
     import MessageDeleteModal from "./MessageDeleteModal.svelte"
-    import { getTextareaLineCount } from "$utilities/getTextareaLineCount.js"
+    import { getTextareaLineCount } from "$utilities/getTextareaLineCount"
 
     export let isOpen = false
     export let toggleButton

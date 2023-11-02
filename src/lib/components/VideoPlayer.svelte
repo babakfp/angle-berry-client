@@ -1,6 +1,6 @@
 <script lang="ts">
-    export let src
-    export let preload = "metadata"
+    export let src: string
+    export let preload: "metadata" | "none" = "metadata"
 
     // When 1 video player volume changes, make other video player volume change too.
     function handleVolumeChange(e) {

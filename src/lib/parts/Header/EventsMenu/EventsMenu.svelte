@@ -1,7 +1,7 @@
 <script lang="ts">
     import { page } from "$app/stores"
     import PopSide from "$components/PopSide.svelte"
-    import { events, unseenEventsLength } from "$stores/events.js"
+    import { events, unseenEventsLength } from "$stores/events"
     import Event from "./Event.svelte"
 
     events.set($page.data.events || [])

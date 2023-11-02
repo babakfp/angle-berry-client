@@ -1,7 +1,7 @@
 <script lang="ts">
     import { page } from "$app/stores"
     import { unreadMessagesLength } from "$stores/messages.js"
-    import { unseenEventsLength } from "$stores/events.js"
+    import { unseenEventsLength } from "$stores/events"
     import IconBell from "$icons/IconBell.svelte"
     import IconUserCircle from "$icons/IconUserCircle.svelte"
     import IconMessage from "$icons/IconMessage.svelte"

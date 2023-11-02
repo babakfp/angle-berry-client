@@ -5,14 +5,14 @@
     export let _class = ""
     export { _class as class }
     export let checked = false
-    export let value = undefined
-    export let group = []
+    export let value = ""
+    export let group: string[] = []
     export let disabled = false
-    export let name: string | null = null
+    export let name = ""
 
     $: handleGroup(checked)
 
-    function handleGroup(checked) {
+    function handleGroup(checked: boolean) {
         if (checked) {
             if (!group.includes(value)) {
                 group = [...group, value]
@@ -26,18 +26,17 @@
 </script>
 
 <label
-    class="{_class} inline-flex text-xl {disabled
-        ? 'pointer-events-none opacity-50'
-        : ''}"
+    class="{_class} inline-flex text-xl
+        {disabled ? 'pointer-events-none opacity-50' : ''}"
 >
     <input
         class="hidden"
         type="checkbox"
         bind:checked
         on:change
-        {value}
+        value={value || null}
         {disabled}
-        {name}
+        name={name || null}
     />
 
     {#if checked}

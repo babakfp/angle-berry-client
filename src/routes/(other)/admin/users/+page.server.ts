@@ -1,12 +1,14 @@
-import { error } from "@sveltejs/kit"
-import { handleOfflineFailure } from "$utilities/pb"
+import type { UsersRecord } from "$utilities/pb-types"
+import { pbHandleClientResponseError } from "$utilities/pb"
+import type { ClientResponseError } from "pocketbase"
 
 export async function load({ locals }) {
     try {
-        const users = await locals.pb.collection("users").getFullList()
+        const users: UsersRecord[] = await locals.pb
+            .collection("users")
+            .getFullList()
         return { users }
-    } catch ({ status, response }) {
-        handleOfflineFailure(status)
-        throw error(status, response.message)
+    } catch (e) {
+        pbHandleClientResponseError(e as ClientResponseError)
     }
 }

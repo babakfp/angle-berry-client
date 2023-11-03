@@ -1,18 +1,23 @@
-import { redirect, fail, error } from "@sveltejs/kit"
-import { handleOfflineFailure } from "$utilities/pb"
+import { redirect, fail } from "@sveltejs/kit"
+import {
+    handleOfflineFailure,
+    pbHandleClientResponseError,
+} from "$utilities/pb"
 import { superValidate } from "sveltekit-superforms/server"
 import { schema } from "../schema"
+import type { VideosResponse } from "$utilities/pb-types"
+import type { ClientResponseError } from "pocketbase"
 
 export async function load({ locals }) {
     const form = await superValidate(schema)
 
     try {
-        const videos = await locals.pb.collection("videos").getFullList()
+        const videos: VideosResponse[] = await locals.pb
+            .collection("videos")
+            .getFullList()
         return { form, videos }
-    } catch ({ status, response }) {
-        handleOfflineFailure(status)
-        if (status === 404) throw error(404)
-        throw error(status, response.message)
+    } catch (e) {
+        pbHandleClientResponseError(e as ClientResponseError)
     }
 }
 

@@ -1,9 +1,11 @@
-import { fail, error } from "@sveltejs/kit"
-import { handleOfflineFailure } from "$utilities/pb"
+import { fail } from "@sveltejs/kit"
+import {
+    handleOfflineFailure,
+    pbHandleClientResponseError,
+} from "$utilities/pb"
 import { superValidate } from "sveltekit-superforms/server"
 import { tierDeletionSchema } from "./tiers/schema"
 import type { TiersRecord, UsersRecord } from "$utilities/pb-types"
-import { pbHandleClientResponseError } from "$utilities/pb"
 import type { ClientResponseError } from "pocketbase"
 
 export async function load({ locals }) {

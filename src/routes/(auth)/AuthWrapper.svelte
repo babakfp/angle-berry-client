@@ -1,9 +1,9 @@
 <script lang="ts">
-    export let title
-    export let description
-    export let otherAuthPageTitle
-    export let otherAuthPageLinkTitle
-    export let otherAuthPageLink
+    export let title: string
+    export let description: string
+    export let otherAuthPageTitle: string
+    export let otherAuthPageLinkTitle: string
+    export let otherAuthPageLink: string
 </script>
 
 <h1 class="text-4xl font-bold text-white">{title}</h1>

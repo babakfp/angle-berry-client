@@ -70,10 +70,10 @@ export const actions = {
 
 async function addInvitedUserToInviterList(
     pb: PocketBase,
-    InviterRecord: UsersResponse,
-    newUserRecord: UsersResponse,
+    Inviter: UsersResponse,
+    newUser: UsersResponse,
 ) {
-    await pb.collection("users").update(InviterRecord.id, {
-        invitedUsers: [newUserRecord.id, ...InviterRecord.invitedUsers],
+    await pb.collection("users").update(Inviter.id, {
+        invitedUsers: [newUser.id, ...Inviter.invitedUsers],
     })
 }

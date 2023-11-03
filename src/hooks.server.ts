@@ -1,11 +1,7 @@
 import { error } from "@sveltejs/kit"
 import PocketBase from "pocketbase"
 import { POCKETBASE_URL } from "$env/static/private"
-import {
-    pbHandleClientResponseError,
-    handleOfflineFailure,
-    getPreviewTierId,
-} from "$utilities/pb"
+import { pbHandleClientResponseError, getPreviewTierId } from "$utilities/pb"
 import type { UsersResponse, TiersResponse } from "$utilities/pb-types"
 import type { ClientResponseError } from "pocketbase"
 
@@ -27,11 +23,12 @@ export async function handle({ event, resolve }) {
     if (event.locals.user) {
         try {
             await event.locals.pb.collection("users").authRefresh()
-        } catch ({ status }) {
-            handleOfflineFailure(status)
-
+        } catch (e) {
             event.locals.pb.authStore.clear()
             event.locals.user = null
+            if ((e as ClientResponseError).status !== 401) {
+                pbHandleClientResponseError(e as ClientResponseError)
+            }
         }
     }
 

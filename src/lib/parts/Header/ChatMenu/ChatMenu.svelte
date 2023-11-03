@@ -56,14 +56,14 @@
     let isSendingMessage = false
     function submitMessage() {
         isSendingMessage = true
-        $messageInputElement.focus()
+        $messageInputElement!.focus()
         return async ({ result, update }) => {
             isSendingMessage = false
             if (result.type === "success") {
-                $messageInputElement.style.height = null
+                $messageInputElement!.style.height = ""
                 isReplying.set(false)
                 messageIdToEdit.set(null)
-                $messageInputElement.setAttribute("rows", 1)
+                $messageInputElement!.setAttribute("rows", "1")
             }
             update()
         }

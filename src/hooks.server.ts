@@ -33,7 +33,7 @@ export async function handle({ event, resolve }) {
     try {
         const tiers = (await event.locals.pb
             .collection("tiers")
-            .getFullList()) as TiersResponse[]
+            .getFullList()) as TiersResponse[] | []
         event.locals.previewTierId = getPreviewTierId(tiers)
         event.locals.tiers = tiers
     } catch ({ status, response }) {

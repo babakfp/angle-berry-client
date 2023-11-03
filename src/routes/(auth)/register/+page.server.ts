@@ -1,9 +1,13 @@
 import { redirect, fail } from "@sveltejs/kit"
 import { superValidate } from "sveltekit-superforms/server"
-import { handleOfflineFailure } from "$utilities/pb"
+import {
+    pbHandleClientResponseError,
+    handleOfflineFailure,
+} from "$utilities/pb"
 import { schema } from "../schema"
 import type PocketBase from "pocketbase"
 import type { UsersResponse } from "$utilities/pb-types"
+import type { ClientResponseError } from "pocketbase"
 
 export const load = async () => {
     const form = await superValidate(schema)
@@ -21,8 +25,10 @@ export const actions = {
         try {
             if (inviterId)
                 inviter = await locals.pb.collection("users").getOne(inviterId)
-        } catch {
-            // TODO
+        } catch (e) {
+            if ((e as ClientResponseError).status !== 404) {
+                pbHandleClientResponseError(e as ClientResponseError)
+            }
         }
 
         try {

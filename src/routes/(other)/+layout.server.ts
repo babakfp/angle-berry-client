@@ -18,6 +18,7 @@ export async function load({ locals, parent }) {
         })
         return {
             ...data,
+            user: locals.user, // Note: Yes, `locals.user` is not `null` after the `if` statment, however we are uisng `data` and `user` is `null` inside it!
             messages,
             events: events.items,
         }

@@ -2,6 +2,7 @@ import { error } from "@sveltejs/kit"
 import PocketBase from "pocketbase"
 import { POCKETBASE_URL } from "$env/static/private"
 import { handleOfflineFailure, getPreviewTierId } from "$utilities/pb"
+import type { UsersResponse } from "$utilities/pb-types"
 
 export async function handle({ event, resolve }) {
     if (!POCKETBASE_URL)
@@ -15,7 +16,7 @@ export async function handle({ event, resolve }) {
     )
 
     event.locals.user = event.locals.pb.authStore.isValid
-        ? event.locals.pb.authStore.model
+        ? (event.locals.pb.authStore.model as UsersResponse)
         : null
 
     if (event.locals.user) {

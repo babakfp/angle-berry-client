@@ -24,8 +24,8 @@
         $page.url.searchParams.get("username") &&
         $page.url.searchParams.get("password")
     ) {
-        $_form.username = $page.url.searchParams.get("username")
-        $_form.password = $page.url.searchParams.get("password")
+        $_form.username = $page.url.searchParams.get("username")!
+        $_form.password = $page.url.searchParams.get("password")!
     }
 </script>
 

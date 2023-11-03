@@ -2,17 +2,23 @@ import { fail, error } from "@sveltejs/kit"
 import { handleOfflineFailure } from "$utilities/pb"
 import { superValidate } from "sveltekit-superforms/server"
 import { tierDeletionSchema } from "./tiers/schema"
+import type { TiersRecord, UsersRecord } from "$utilities/pb-types"
+import { pbHandleClientResponseError } from "$utilities/pb"
+import type { ClientResponseError } from "pocketbase"
 
 export async function load({ locals }) {
     const form = await superValidate(tierDeletionSchema)
 
     try {
-        const tiers = await locals.pb.collection("tiers").getFullList()
-        const users = await locals.pb.collection("users").getFullList()
+        const tiers: TiersRecord[] = await locals.pb
+            .collection("tiers")
+            .getFullList()
+        const users: UsersRecord[] = await locals.pb
+            .collection("users")
+            .getFullList()
         return { form, tiers, users }
-    } catch ({ status, response }) {
-        handleOfflineFailure(status)
-        throw error(status, response.message)
+    } catch (e) {
+        pbHandleClientResponseError(e as ClientResponseError)
     }
 }
 

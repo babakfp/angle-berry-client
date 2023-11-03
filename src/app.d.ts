@@ -6,7 +6,7 @@ declare global {
         interface Locals {
             pb: PocketBase
             user: UsersResponse | null
-            tiers: TiersResponse[] | []
+            tiers: TiersResponse[]
             previewTierId: string | undefined
         }
     }

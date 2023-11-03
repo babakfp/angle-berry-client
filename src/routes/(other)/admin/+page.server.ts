@@ -21,6 +21,7 @@ export async function load({ locals }) {
         return { form, tiers, users }
     } catch (e) {
         pbHandleClientResponseError(e as ClientResponseError)
+        throw e
     }
 }
 

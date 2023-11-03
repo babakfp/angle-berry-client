@@ -18,6 +18,7 @@ export async function load({ locals }) {
         return { form, videos }
     } catch (e) {
         pbHandleClientResponseError(e as ClientResponseError)
+        throw e
     }
 }
 

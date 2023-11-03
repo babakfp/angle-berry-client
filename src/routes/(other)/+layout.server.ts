@@ -23,5 +23,6 @@ export async function load({ locals, parent }) {
         }
     } catch (e) {
         pbHandleClientResponseError(e as ClientResponseError)
+        throw e
     }
 }

@@ -27,6 +27,7 @@ export const actions = {
         } catch (e) {
             if ((e as ClientResponseError).status !== 404) {
                 pbHandleClientResponseError(e as ClientResponseError)
+                throw e
             }
         }
 

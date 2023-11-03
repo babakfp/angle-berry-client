@@ -10,5 +10,6 @@ export async function load({ locals }) {
         return { users }
     } catch (e) {
         pbHandleClientResponseError(e as ClientResponseError)
+        throw e
     }
 }

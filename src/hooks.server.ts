@@ -29,6 +29,7 @@ export async function handle({ event, resolve }) {
                 event.locals.user = null
             } else {
                 pbHandleClientResponseError(e as ClientResponseError)
+                throw e
             }
         }
     }
@@ -41,6 +42,7 @@ export async function handle({ event, resolve }) {
         event.locals.tiers = tiers
     } catch (e) {
         pbHandleClientResponseError(e as ClientResponseError)
+        throw e
     }
 
     const response = await resolve(event)

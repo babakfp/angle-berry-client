@@ -24,9 +24,10 @@ export async function handle({ event, resolve }) {
         try {
             await event.locals.pb.collection("users").authRefresh()
         } catch (e) {
-            event.locals.pb.authStore.clear()
-            event.locals.user = null
-            if ((e as ClientResponseError).status !== 401) {
+            if ((e as ClientResponseError).status === 401) {
+                event.locals.pb.authStore.clear()
+                event.locals.user = null
+            } else {
                 pbHandleClientResponseError(e as ClientResponseError)
             }
         }

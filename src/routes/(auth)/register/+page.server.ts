@@ -2,6 +2,7 @@ import { redirect, fail } from "@sveltejs/kit"
 import { superValidate } from "sveltekit-superforms/server"
 import { handleOfflineFailure } from "$utilities/pb"
 import { schema } from "../schema"
+import type PocketBase from "pocketbase"
 
 export const load = async () => {
     const form = await superValidate(schema)
@@ -64,7 +65,11 @@ export const actions = {
     },
 }
 
-async function addInvitedUserToInviterList(pb, InviterRecord, newUserRecord) {
+async function addInvitedUserToInviterList(
+    pb: PocketBase,
+    InviterRecord,
+    newUserRecord,
+) {
     await pb.collection("users").update(InviterRecord.id, {
         invitedUsers: [newUserRecord.id, ...InviterRecord.invitedUsers],
     })

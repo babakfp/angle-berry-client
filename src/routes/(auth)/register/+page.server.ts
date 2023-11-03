@@ -5,7 +5,6 @@ import {
     handleOfflineFailure,
 } from "$utilities/pb"
 import { schema } from "../schema"
-import type PocketBase from "pocketbase"
 import type { UsersResponse } from "$utilities/pb-types"
 import type { ClientResponseError } from "pocketbase"
 

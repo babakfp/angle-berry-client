@@ -46,7 +46,9 @@ export const actions = {
 
             // Adding the new user to the list of invited users by the inviter user.
             if (inviter && newUser)
-                await addInvitedUserToInviterList(locals.pb, inviter, newUser)
+                await locals.pb.collection("users").update(inviter.id, {
+                    invitedUsers: [newUser.id, ...inviter.invitedUsers],
+                })
 
             await locals.pb.collection("events").create({
                 user: newUser.id,
@@ -75,14 +77,4 @@ export const actions = {
             throw redirect(303, "")
         }
     },
-}
-
-async function addInvitedUserToInviterList(
-    pb: PocketBase,
-    Inviter: UsersResponse,
-    newUser: UsersResponse,
-) {
-    await pb.collection("users").update(Inviter.id, {
-        invitedUsers: [newUser.id, ...Inviter.invitedUsers],
-    })
 }

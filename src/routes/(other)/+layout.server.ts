@@ -1,5 +1,6 @@
-import { redirect, error } from "@sveltejs/kit"
-import { handleOfflineFailure } from "$utilities/pb"
+import { redirect } from "@sveltejs/kit"
+import { pbHandleClientResponseError } from "$utilities/pb"
+import type { ClientResponseError } from "pocketbase"
 
 export async function load({ locals, parent }) {
     const data = await parent()
@@ -20,8 +21,7 @@ export async function load({ locals, parent }) {
             messages,
             events: events.items,
         }
-    } catch ({ status, response }) {
-        handleOfflineFailure(status)
-        throw error(status, response.message)
+    } catch (e) {
+        pbHandleClientResponseError(e as ClientResponseError)
     }
 }

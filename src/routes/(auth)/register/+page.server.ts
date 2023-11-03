@@ -21,7 +21,9 @@ export const actions = {
         try {
             if (inviterId)
                 inviter = await locals.pb.collection("users").getOne(inviterId)
-        } catch {}
+        } catch {
+            // TODO
+        }
 
         try {
             const newUser: UsersResponse = await locals.pb
@@ -51,6 +53,7 @@ export const actions = {
                 .collection("users")
                 .authWithPassword(form.data.username, form.data.password)
         } catch ({ response }) {
+            // TODO
             handleOfflineFailure(response.code)
 
             return fail(response.code, {

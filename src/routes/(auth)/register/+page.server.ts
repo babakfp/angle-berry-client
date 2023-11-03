@@ -3,6 +3,7 @@ import { superValidate } from "sveltekit-superforms/server"
 import { handleOfflineFailure } from "$utilities/pb"
 import { schema } from "../schema"
 import type PocketBase from "pocketbase"
+import type { UsersResponse } from "$utilities/pb-types"
 
 export const load = async () => {
     const form = await superValidate(schema)
@@ -14,7 +15,7 @@ export const actions = {
         const form = await superValidate(request, schema)
         if (!form.valid) return fail(400, { form })
 
-        let inviter = null
+        let inviter: UsersResponse | null = null
         const inviterId = url.searchParams.get("id")
 
         try {
@@ -23,15 +24,17 @@ export const actions = {
         } catch {}
 
         try {
-            const newUser = await locals.pb.collection("users").create({
-                username: form.data.username,
-                password: form.data.password,
-                passwordConfirm: form.data.password,
-                retainedTiers: [
-                    ...[locals.previewTierId ? locals.previewTierId : []],
-                ],
-                invitedBy: inviter ? [inviterId] : null,
-            })
+            const newUser: UsersResponse = await locals.pb
+                .collection("users")
+                .create({
+                    username: form.data.username,
+                    password: form.data.password,
+                    passwordConfirm: form.data.password,
+                    retainedTiers: [
+                        ...[locals.previewTierId ? locals.previewTierId : []],
+                    ],
+                    invitedBy: inviter ? [inviterId] : null,
+                })
 
             // Adding the new user to the list of invited users by the inviter user.
             if (inviter && newUser)
@@ -67,8 +70,8 @@ export const actions = {
 
 async function addInvitedUserToInviterList(
     pb: PocketBase,
-    InviterRecord,
-    newUserRecord,
+    InviterRecord: UsersResponse,
+    newUserRecord: UsersResponse,
 ) {
     await pb.collection("users").update(InviterRecord.id, {
         invitedUsers: [newUserRecord.id, ...InviterRecord.invitedUsers],

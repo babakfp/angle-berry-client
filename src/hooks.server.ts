@@ -1,8 +1,13 @@
 import { error } from "@sveltejs/kit"
 import PocketBase from "pocketbase"
 import { POCKETBASE_URL } from "$env/static/private"
-import { handleOfflineFailure, getPreviewTierId } from "$utilities/pb"
+import {
+    pbHandleClientResponseError,
+    handleOfflineFailure,
+    getPreviewTierId,
+} from "$utilities/pb"
 import type { UsersResponse, TiersResponse } from "$utilities/pb-types"
+import type { ClientResponseError } from "pocketbase"
 
 export async function handle({ event, resolve }) {
     if (!POCKETBASE_URL)
@@ -33,12 +38,11 @@ export async function handle({ event, resolve }) {
     try {
         const tiers = (await event.locals.pb
             .collection("tiers")
-            .getFullList()) as TiersResponse[] | []
+            .getFullList()) as TiersResponse[]
         event.locals.previewTierId = getPreviewTierId(tiers)
         event.locals.tiers = tiers
-    } catch ({ status, response }) {
-        handleOfflineFailure(status)
-        throw error(status, response.message)
+    } catch (e) {
+        pbHandleClientResponseError(e as ClientResponseError)
     }
 
     const response = await resolve(event)

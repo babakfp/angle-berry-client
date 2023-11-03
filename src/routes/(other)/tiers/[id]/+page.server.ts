@@ -1,5 +1,5 @@
-import { error } from "@sveltejs/kit"
-import { handleOfflineFailure } from "$utilities/pb"
+import { pbHandleClientResponseError } from "$utilities/pb"
+import type { ClientResponseError } from "pocketbase"
 
 export async function load({ locals, params }) {
     try {
@@ -25,9 +25,7 @@ export async function load({ locals, params }) {
                 }
             }
         }
-    } catch ({ status, response }) {
-        handleOfflineFailure(status)
-        if (status === 404) throw error(404)
-        throw error(status, response.message)
+    } catch (e) {
+        pbHandleClientResponseError(e as ClientResponseError)
     }
 }

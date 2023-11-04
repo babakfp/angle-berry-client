@@ -64,7 +64,12 @@ export default {
             bold: "700",
         },
     },
-    plugins: [outlineInsetUtility(), linkComponents(), buttonComponents()],
+    plugins: [
+        outlineInsetUtility(),
+        linkComponents(),
+        buttonComponents(),
+        resetAutofillInput(),
+    ],
 }
 
 function outlineInsetUtility() {
@@ -95,6 +100,19 @@ function buttonComponents() {
             ".btn-gray-glass-outline": {},
             ".btn-brand": {},
             ".btn-danger": {},
+        })
+    }
+}
+
+function resetAutofillInput() {
+    return ({ addUtilities }) => {
+        addUtilities({
+            ".reset-autofill-input": {
+                "-webkit-background-clip": "text",
+                "-webkit-text-fill-color": "theme(colors.body.text)",
+                "box-shadow": "inset 0 0 0 9999px theme(colors.body.bg)",
+                "caret-color": "theme(colors.body.text)",
+            },
         })
     }
 }

@@ -21,11 +21,12 @@
     import ContextMenu from "./ContextMenu.svelte"
     import MessageDeleteModal from "./MessageDeleteModal.svelte"
     import { getTextareaLineCount } from "$utilities/getTextareaLineCount"
+    import type { ListResultMessagesResponse } from "$utilities/pb"
 
     export let isOpen = false
     export let toggleButton: HTMLButtonElement
 
-    messages.set($page.data.messages.items || [])
+    messages.set($page.data.messages)
 
     $: if (!isOpen && $messageIdToEdit) messageIdToEdit.set(null)
     $: if (isOpen && $unreadMessagesLength) unreadMessagesLength.set(0)
@@ -45,7 +46,7 @@
 
     messageIdToEdit.subscribe(id =>
         messageInputValue.set(
-            $messages
+            $messages.items
                 .filter(msg => msg.id === id)[0]
                 ?.content.replaceAll("<br>", "\n") || "",
         ),
@@ -89,20 +90,20 @@
                 isFetchingOlderMessages = true
                 isSomethingWentWrongWhenFetchingOlderMessages = false
 
-                const messagesRecords = await $pb
+                const messagesRecords: ListResultMessagesResponse = await $pb
                     .collection("messages")
                     .getList(pageNumberFortheNextOlderMessagesToFetch, 50, {
                         sort: "-created",
                         expand: "user,repliedTo,repliedTo.user",
                         filter: `created < "${
-                            $messages[$messages.length - 1].created
+                            $messages.items[$messages.items.length - 1].created
                         }"`,
                     })
                 if (messagesRecords) {
-                    messages.update(_messages => [
+                    messages.update(_messages => ({
                         ..._messages,
-                        ...messagesRecords.items,
-                    ])
+                        items: [..._messages.items, ...messagesRecords.items],
+                    }))
                     isFetchingOlderMessages = false
                     pageNumberFortheNextOlderMessagesToFetch += 1
                 }
@@ -120,13 +121,13 @@
 </script>
 
 <PopSide bind:isOpen {toggleButton}>
-    {#if $messages.length > 0}
+    {#if $messages.items.length > 0}
         <ol
             id="messages-wrapper"
             class="flex flex-col-reverse content-start items-start overflow-y-auto overscroll-y-contain py-4 sm:text-sm"
             on:scroll={handleScroll}
         >
-            {#each $messages as message (message.id)}
+            {#each $messages.items as message (message.id)}
                 <Message {message} />
             {/each}
             {#if isFetchingOlderMessages}
@@ -170,8 +171,9 @@
         {#if $messageIdToEdit}
             <MessageActionPreview
                 title="Editing message"
-                content={$messages.filter(msg => msg.id === $messageIdToEdit)[0]
-                    ?.content}
+                content={$messages.items.filter(
+                    msg => msg.id === $messageIdToEdit,
+                )[0]?.content}
                 messageId={$messageIdToEdit}
                 on:close={() => messageIdToEdit.set(null)}
                 bind:isOpen={isEditingMessage}

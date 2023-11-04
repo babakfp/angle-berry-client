@@ -1,5 +1,5 @@
 import { writable } from "svelte/store"
-import type { MessagesResponse } from "$utilities/pb-types"
+import type { ListResultMessagesResponse } from "$utilities/pb"
 
-export const messages = writable<MessagesResponse[]>([])
+export const messages = writable<ListResultMessagesResponse>()
 export const unreadMessagesLength = writable(0)

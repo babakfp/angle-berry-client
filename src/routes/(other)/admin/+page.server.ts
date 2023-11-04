@@ -1,4 +1,4 @@
-import { fail } from "@sveltejs/kit"
+import { redirect, error, fail } from "@sveltejs/kit"
 import {
     handleOfflineFailure,
     pbHandleClientResponseError,
@@ -9,6 +9,10 @@ import type { TiersResponse, UsersResponse } from "$utilities/pb-types"
 import type { ClientResponseError } from "pocketbase"
 
 export async function load({ locals }) {
+    if (!locals.user) throw redirect(303, "/login")
+    if (!locals.user.isAdmin)
+        throw error(401, "You are not authorized to see this page!")
+
     const form = await superValidate(tierDeletionSchema)
 
     try {
@@ -27,6 +31,10 @@ export async function load({ locals }) {
 
 export const actions = {
     deletetier: async ({ locals, request }) => {
+        if (!locals.user) throw redirect(303, "/login")
+        if (!locals.user.isAdmin)
+            throw error(401, "You are not authorized to see this page!")
+
         const form = await superValidate(request, tierDeletionSchema)
         if (!form.valid) return fail(400, { form })
 

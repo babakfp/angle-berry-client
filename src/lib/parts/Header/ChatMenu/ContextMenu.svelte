@@ -21,7 +21,7 @@
     import MessageContextMenu from "./MessageContextMenu.svelte"
     import MessageContextMenuItem from "./MessageContextMenuItem.svelte"
 
-    let copyTimeoutId
+    let copyTimeoutId: number | undefined
 
     function replyMessage() {
         isContextMenuOpen.set(false)
@@ -41,9 +41,13 @@
     function copyMessage() {
         if ($selectedMessageIds.length > 0) {
             let copiedText = ""
-            const selectedMessages = $messages
+            const selectedMessages = $messages.items
                 .filter(msg => $selectedMessageIds.includes(msg.id))
-                .sort((a, b) => new Date(a.created) - new Date(b.created))
+                .sort(
+                    (a, b) =>
+                        new Date(a.created).getTime() -
+                        new Date(b.created).getTime(),
+                )
             selectedMessages.forEach((msg, i) => {
                 copiedText += msg.expand.user.username + "\n"
                 copiedText += msg.content
@@ -61,7 +65,7 @@
         }
         copyTimeoutId = setTimeout(() => {
             isContextMenuOpen.set(false)
-            copyTimeoutId = null
+            copyTimeoutId = undefined
         }, 1000)
     }
 

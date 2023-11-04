@@ -10,7 +10,7 @@ export const contextMenuTargetMessage = writable<MessagesResponse<{
     user: UsersResponse
 }> | null>(null)
 export const messageIdsToDelete = writable<string[]>([])
-export const messageIdToEdit = writable<string | null>(null)
+export const messageIdToEdit = writable<string | null | undefined>(null)
 export const isReplying = writable(false)
 export const replyTargetMessage = writable<MessagesResponse<{
     user: UsersResponse

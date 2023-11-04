@@ -8,13 +8,16 @@ import { schema } from "../schema"
 import type { UsersResponse } from "$utilities/pb-types"
 import type { ClientResponseError } from "pocketbase"
 
-export const load = async () => {
+export const load = async ({ locals }) => {
+    if (locals.user) throw redirect(303, "/")
     const form = await superValidate(schema)
     return { form }
 }
 
 export const actions = {
     default: async ({ locals, request, url }) => {
+        if (locals.user) throw redirect(303, "/")
+
         const form = await superValidate(request, schema)
         if (!form.valid) return fail(400, { form })
 

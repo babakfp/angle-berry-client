@@ -9,6 +9,12 @@
     import { handleOfflineFailure } from "$utilities/pb"
     import { pb } from "$stores/pb"
     import Header from "$parts/Header/Header.svelte"
+    import type { RecordSubscription } from "pocketbase"
+    import type {
+        CustomMessagesResponse,
+        CustomEventsResponse,
+    } from "$utilities/pb.js"
+    import type { MessagesResponse, EventsResponse } from "$utilities/pb-types"
 
     export let data
 
@@ -16,85 +22,125 @@
         try {
             await $pb
                 .collection("messages")
-                .subscribe("*", async ({ action, record }) => {
-                    if (action === "update") {
-                        messages.update(msgs => {
-                            msgs.map(msg => {
-                                if (msg.id === record.id) {
-                                    msg.content = record.content
-                                    msg.updated = record.updated
-                                }
-                                if (msg.expand?.repliedTo?.id === record.id) {
-                                    msg.expand.repliedTo.content =
-                                        record.content
-                                    msg.expand.repliedTo.updated =
-                                        record.updated
-                                }
+                .subscribe(
+                    "*",
+                    async (_data: RecordSubscription<MessagesResponse>) => {
+                        if (_data.action === "update") {
+                            messages.update(_messages => {
+                                _messages.items = _messages.items.map(msg => {
+                                    if (msg.id === _data.record.id) {
+                                        msg.content = _data.record.content
+                                        msg.updated = _data.record.updated
+                                    }
+                                    if (
+                                        msg.expand?.repliedTo?.id ===
+                                        _data.record.id
+                                    ) {
+                                        msg.expand.repliedTo.content =
+                                            _data.record.content
+                                        msg.expand.repliedTo.updated =
+                                            _data.record.updated
+                                    }
+                                    return msg
+                                })
+                                return _messages
                             })
-                            return msgs
-                        })
-                    } else if (action === "create") {
-                        const userRecord = await $pb
-                            .collection("users")
-                            .getOne(record.user)
-                        let repliedToRecord
-                        if (record.repliedTo) {
-                            repliedToRecord = await $pb
-                                .collection("messages")
-                                .getOne(record.repliedTo, { expand: "user" })
+                        } else if (_data.action === "create") {
+                            const userRecord = await $pb
+                                .collection("users")
+                                .getOne(_data.record.user)
+                            let repliedToRecord
+                            if (_data.record.repliedTo) {
+                                repliedToRecord = await $pb
+                                    .collection("messages")
+                                    .getOne(_data.record.repliedTo, {
+                                        expand: "user",
+                                    })
+                            }
+                            _data.record.expand = {
+                                user: userRecord,
+                                repliedTo: repliedToRecord
+                                    ? repliedToRecord
+                                    : "",
+                            }
+
+                            messages.update(_messages => {
+                                _messages.items = [
+                                    _data.record as CustomMessagesResponse,
+                                    ..._messages.items,
+                                ]
+                                return _messages
+                            })
+                            unreadMessagesLength.update(v => (v += 1))
+                        } else if (_data.action === "delete") {
+                            messages.update(_messages => {
+                                _messages.items = _messages.items.filter(
+                                    m => m.id !== _data.record.id,
+                                )
+                                return _messages
+                            })
+                            unreadMessagesLength.update(v => (v -= 1))
                         }
-                        record.expand = {
-                            user: userRecord,
-                            repliedTo: repliedToRecord
-                                ? repliedToRecord
-                                : undefined,
-                        }
-                        messages.update(v => [record, ...v])
-                        unreadMessagesLength.update(v => (v += 1))
-                    } else if (action === "delete") {
-                        messages.update(v => v.filter(m => m.id !== record.id))
-                        unreadMessagesLength.update(v => (v -= 1))
-                    }
-                })
+                    },
+                )
             await $pb
                 .collection("events")
-                .subscribe("*", async ({ action, record }) => {
-                    if (action === "create") {
-                        const userRecord = await $pb
-                            .collection("users")
-                            .getOne(record.user, {
-                                expand: "retainedTiers",
-                                $autoCancel: false,
-                            })
-                        let inviterRecord
-                        if (record.inviter)
-                            inviterRecord = await $pb
+                .subscribe(
+                    "*",
+                    async (_data: RecordSubscription<EventsResponse>) => {
+                        if (_data.action === "create") {
+                            const userRecord = await $pb
                                 .collection("users")
-                                .getOne(record.inviter, {
+                                .getOne(_data.record.user, {
                                     expand: "retainedTiers",
                                     $autoCancel: false,
                                 })
-                        record.expand = {
-                            user: userRecord,
-                            ...(inviterRecord
-                                ? { inviter: inviterRecord }
-                                : {}),
-                        }
-                        events.update(v => [record, ...v])
-                        unseenEventsLength.update(v => (v += 1))
+                            let inviterRecord
+                            if (_data.record.inviter)
+                                inviterRecord = await $pb
+                                    .collection("users")
+                                    .getOne(_data.record.inviter, {
+                                        expand: "retainedTiers",
+                                        $autoCancel: false,
+                                    })
+                            _data.record.expand = {
+                                user: userRecord,
+                                ...(inviterRecord
+                                    ? { inviter: inviterRecord }
+                                    : {}),
+                            }
+                            events.update(_events => {
+                                _events.items = [
+                                    _data.record as CustomEventsResponse,
+                                    ..._events.items,
+                                ]
+                                return _events
+                            })
+                            unseenEventsLength.update(v => (v += 1))
 
-                        if (record.expand.inviter.id === data.user.id) {
-                            data.user.invitedUsers = [
-                                ...data.user.invitedUsers,
-                                record.expand.user.id,
-                            ]
+                            if (
+                                (_data.record as CustomEventsResponse).expand
+                                    .inviter.id === data.user.id
+                            ) {
+                                data.user.invitedUsers = [
+                                    ...data.user.invitedUsers,
+                                    (_data.record as CustomEventsResponse)
+                                        .expand.user.id,
+                                ]
+                            }
+                        } else if (_data.action === "delete") {
+                            events.update(_events => {
+                                _events.items = _events.items.filter(
+                                    m => m.id !== _data.record.id,
+                                )
+                                return _events
+                            })
+                            unseenEventsLength.update(v => (v -= 1))
                         }
-                    } else if (action === "delete") {
-                        events.update(v => v.filter(m => m.id !== record.id))
-                        unseenEventsLength.update(v => (v -= 1))
-                    }
-                })
+                    },
+                )
         } catch ({ status, response }) {
+            // TODO!!!
             handleOfflineFailure(status)
             throw error(status, response.message)
         }

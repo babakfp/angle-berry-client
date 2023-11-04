@@ -1,8 +1,10 @@
-import { fail } from "@sveltejs/kit"
+import { redirect, fail } from "@sveltejs/kit"
 import { handleOfflineFailure } from "$utilities/pb"
 
 export const actions = {
     default: async ({ locals, request }) => {
+        if (!locals.user) throw redirect(303, "/login")
+
         const formData = Object.fromEntries(await request.formData())
         let { messageContent } = formData
         if (!messageContent) return

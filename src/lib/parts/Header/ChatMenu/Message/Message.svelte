@@ -15,10 +15,16 @@
     import { highlightAnimate } from "$utilities/highlightAnimate"
     import type { MessagesResponse, UsersResponse } from "$utilities/pb-types"
 
-    export let message: MessagesResponse<{
-        user: UsersResponse
-        repliedTo: MessagesResponse
-    }>
+    export let message: MessagesResponse & {
+        expand: {
+            user: UsersResponse
+            repliedTo?: MessagesResponse & {
+                expand: {
+                    user: UsersResponse
+                }
+            }
+        }
+    }
 
     const isCurrentUser = message.expand.user.id === $page.data.user.id
 

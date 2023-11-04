@@ -1,7 +1,6 @@
 <script lang="ts">
-    import Label from "$components/form/Label.svelte"
-    import Description from "$components/form/Description.svelte"
     import InputNumberButtons from "$components/form/InputNumberButtons.svelte"
+    import InputWrapper from "$components/form/InputWrapper.svelte"
 
     export let label = ""
     export let required = false
@@ -32,47 +31,31 @@
     }
 </script>
 
-<div class="group grid">
-    {#if label}
-        <Label {label} {required} for={name} />
-    {/if}
-
-    <div class="relative">
-        <input
-            class="{_class} peer block h-11 w-full rounded border-2 border-gray-700 bg-transparent px-4 reset-autofill-input placeholder:text-xs placeholder:text-gray-500
+<InputWrapper {label} {required} for={name} {error}>
+    <input
+        class="{_class} peer block h-11 w-full rounded border-2 border-gray-700 bg-transparent px-4 reset-autofill-input placeholder:text-xs placeholder:text-gray-500
                 {type === 'number' ? 'reset-number-input' : ''}"
-            {type}
-            {value}
-            {name}
-            id={name}
-            {placeholder}
-            {minlength}
-            {maxlength}
-            {autocomplete}
-            {required}
-            {readonly}
-            {pattern}
-            {min}
-            {max}
-            on:input={bindValue}
-        />
+        {type}
+        {value}
+        {name}
+        id={name}
+        {placeholder}
+        {minlength}
+        {maxlength}
+        {autocomplete}
+        {required}
+        {readonly}
+        {pattern}
+        {min}
+        {max}
+        on:input={bindValue}
+    />
 
-        {#if $$slots.buttons || type === "number"}
-            <div
-                class="absolute right-0 flex h-full items-center rounded-r px-2 duration-200 hide inset-y-center focus-within:show group-hover:show peer-focus:show"
-            >
-                {#if $$slots.buttons}
-                    <slot name="buttons" />
-                {/if}
-
-                {#if type === "number"}
-                    <InputNumberButtons bind:value {min} {max} />
-                {/if}
-            </div>
+    <svelte:fragment slot="buttons">
+        {#if type === "number"}
+            <InputNumberButtons bind:value {min} {max} />
+        {:else if $$slots.buttons}
+            <slot name="buttons" />
         {/if}
-    </div>
-
-    {#if error}
-        <Description class="mt-2" type="error" text={error} />
-    {/if}
-</div>
+    </svelte:fragment>
+</InputWrapper>

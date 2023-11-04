@@ -4,7 +4,7 @@
 
     export let data
 
-    let selectedUserIds = []
+    let selectedUserIds: string[] = []
 
     function deleteSelectedTiers() {}
 </script>

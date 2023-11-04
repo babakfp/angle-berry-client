@@ -5,17 +5,17 @@ import {
 } from "$utilities/pb"
 import { superValidate } from "sveltekit-superforms/server"
 import { tierDeletionSchema } from "./tiers/schema"
-import type { TiersRecord, UsersRecord } from "$utilities/pb-types"
+import type { TiersResponse, UsersResponse } from "$utilities/pb-types"
 import type { ClientResponseError } from "pocketbase"
 
 export async function load({ locals }) {
     const form = await superValidate(tierDeletionSchema)
 
     try {
-        const tiers: TiersRecord[] = await locals.pb
+        const tiers: TiersResponse[] = await locals.pb
             .collection("tiers")
             .getFullList()
-        const users: UsersRecord[] = await locals.pb
+        const users: UsersResponse[] = await locals.pb
             .collection("users")
             .getFullList()
         return { form, tiers, users }

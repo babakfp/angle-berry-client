@@ -3,13 +3,13 @@ import { error } from "@sveltejs/kit"
 import { handleOfflineFailure } from "$utilities/pb"
 import { superValidate } from "sveltekit-superforms/server"
 import { schema } from "../schema"
-import type { TiersRecord, VideosResponse } from "$utilities/pb-types"
+import type { TiersResponse, VideosResponse } from "$utilities/pb-types"
 
 export async function load({ locals, params }) {
     const form = await superValidate(schema)
 
     try {
-        const tier: TiersRecord[] = await locals.pb
+        const tier: TiersResponse[] = await locals.pb
             .collection("tiers")
             .getOne(params.id)
         const videos: VideosResponse[] = await locals.pb

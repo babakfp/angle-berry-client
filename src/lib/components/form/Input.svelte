@@ -125,5 +125,6 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: theme(colors.body.text);
         box-shadow: inset 0 0 0 9999px theme(colors.body.bg);
+        caret-color: theme(colors.body.text);
     }
 </style>

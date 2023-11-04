@@ -14,7 +14,7 @@ export async function load({ locals, params }) {
     const form = await superValidate(schema)
 
     try {
-        const tier: TiersResponse[] = await locals.pb
+        const tier: TiersResponse = await locals.pb
             .collection("tiers")
             .getOne(params.id)
         const videos: VideosResponse[] = await locals.pb

@@ -19,7 +19,7 @@
 
         {#if $$slots.buttons}
             <div
-                class="absolute right-0 flex h-full items-center rounded-r px-2 duration-200 hide inset-y-center focus-within:show group-hover:show peer-focus:show"
+                class="absolute bottom-0.5 right-0.5 top-0.5 flex h-[calc(calc(100%-4px))] items-center rounded-r bg-gray-800 px-2 duration-200 hide inset-y-center focus-within:show group-hover:show peer-focus:show"
             >
                 <slot name="buttons" />
             </div>

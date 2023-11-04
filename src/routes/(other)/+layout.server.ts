@@ -4,8 +4,6 @@ import type { ListResult, ClientResponseError } from "pocketbase"
 import type { MessagesResponse, EventsResponse } from "$utilities/pb-types"
 
 export async function load({ locals, parent }) {
-    const data = await parent()
-
     if (!locals.user) throw redirect(303, "/login")
 
     try {
@@ -22,7 +20,7 @@ export async function load({ locals, parent }) {
                 expand: "user,user.retainedTiers,inviter,inviter.retainedTiers",
             })
         return {
-            ...data,
+            ...(await parent()),
             user: locals.user, // Note: Yes, `locals.user` is not `null` after the `if` statment, however we are uisng `data` and `user` is `null` inside it!
             messages,
             events: events.items,

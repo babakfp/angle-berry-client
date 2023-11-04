@@ -1,8 +1,7 @@
 <script lang="ts">
     import Label from "$components/form/Label.svelte"
     import Description from "$components/form/Description.svelte"
-    import IconPlusCircle from "$icons/IconPlusCircle.svelte"
-    import IconMinusCircle from "$icons/IconMinusCircle.svelte"
+    import InputNumberButtons from "$components/form/InputNumberButtons.svelte"
 
     export let label = ""
     export let required = false
@@ -11,13 +10,13 @@
     export let name = ""
     export let value = ""
     export let placeholder = ""
-    export let autocomplete: string | null = null
-    export let minlength: number | null = null
-    export let maxlength: number | null = null
-    export let min: number | null = null
-    export let max: number | null = null
+    export let autocomplete: string | undefined = undefined
+    export let minlength: number | undefined = undefined
+    export let maxlength: number | undefined = undefined
+    export let min: number | undefined = undefined
+    export let max: number | undefined = undefined
     export let readonly = false
-    export let pattern: string | null = null
+    export let pattern: string | undefined = undefined
 
     export let _class = ""
     export { _class as class }
@@ -29,35 +28,6 @@
             value = +e.target.value
         } else {
             value = e.target.value
-        }
-    }
-
-    $: if (type === "number") {
-        if (max && parseInt(value) >= max) {
-            value = String(max)
-        }
-        if (min && parseInt(value) <= min) {
-            value = String(min)
-        }
-    }
-
-    function incrementNumber() {
-        if (max) {
-            if (parseInt(value) < max) {
-                value += 1
-            }
-        } else {
-            value += 1
-        }
-    }
-
-    function decrementNumber() {
-        if (min || min === 0) {
-            if (parseInt(value) > min) {
-                value = String(parseInt(value) - 1)
-            }
-        } else {
-            value = String(parseInt(value) - 1)
         }
     }
 </script>
@@ -96,20 +66,7 @@
                 {/if}
 
                 {#if type === "number"}
-                    <button
-                        class="h-full px-1"
-                        type="button"
-                        on:click={incrementNumber}
-                    >
-                        <IconPlusCircle class="text-lg" />
-                    </button>
-                    <button
-                        class="-mr-1 h-full px-1"
-                        type="button"
-                        on:click={decrementNumber}
-                    >
-                        <IconMinusCircle class="text-lg" />
-                    </button>
+                    <InputNumberButtons bind:value {min} {max} />
                 {/if}
             </div>
         {/if}

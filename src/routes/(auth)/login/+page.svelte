@@ -51,7 +51,7 @@
             bind:value={$_form.username}
             error={$errors?.username
                 ? $errors?.username[0]
-                : form?.data?.username?.message}
+                : form?.pb?.username?.message}
             {...$constraints.username}
         />
         <PasswordField
@@ -59,7 +59,7 @@
             autocomplete="current-password"
             error={$errors?.password
                 ? $errors?.password[0]
-                : form?.data?.password?.message}
+                : form?.pb?.password?.message}
             {...$constraints.password}
         />
     </Form>

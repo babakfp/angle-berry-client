@@ -1,7 +1,7 @@
 import { redirect, error, fail } from "@sveltejs/kit"
 import {
-    handleOfflineFailure,
     pbHandleClientResponseError,
+    pbHandleFormActionError,
 } from "$utilities/pb"
 import { superValidate } from "sveltekit-superforms/server"
 import { tierDeletionSchema } from "./tiers/schema"
@@ -44,14 +44,10 @@ export const actions = {
 
         try {
             await Promise.all(deletePromises)
-        } catch ({ status, response }) {
-            handleOfflineFailure(status)
-
-            return fail(response.code, {
-                form,
-                message: response.message,
-                data: response.data,
-            })
+        } catch (e) {
+            const e2 = pbHandleFormActionError(e, form)
+            if (e2) return e2
+            throw e
         }
     },
 }

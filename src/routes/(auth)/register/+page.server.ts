@@ -2,7 +2,7 @@ import { redirect, fail } from "@sveltejs/kit"
 import { superValidate } from "sveltekit-superforms/server"
 import {
     pbHandleClientResponseError,
-    handleOfflineFailure,
+    pbHandleFormActionError,
 } from "$utilities/pb"
 import { schema } from "../schema"
 import type { UsersResponse } from "$utilities/pb-types"
@@ -63,15 +63,10 @@ export const actions = {
             await locals.pb
                 .collection("users")
                 .authWithPassword(form.data.username, form.data.password)
-        } catch ({ response }) {
-            // TODO
-            handleOfflineFailure(response.code)
-
-            return fail(response.code, {
-                form,
-                message: response.message,
-                data: response.data,
-            })
+        } catch (e) {
+            const e2 = pbHandleFormActionError(e, form)
+            if (e2) return e2
+            throw e
         }
 
         if (locals.previewTierId) {

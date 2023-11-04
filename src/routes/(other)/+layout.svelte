@@ -5,11 +5,10 @@
     import { pageTransitionValues } from "$utilities/pageTransitionValues"
     import { messages, unreadMessagesLength } from "$stores/messages"
     import { events, unseenEventsLength } from "$stores/events"
-    import { error } from "@sveltejs/kit"
-    import { handleOfflineFailure } from "$utilities/pb"
+    import { pbHandleClientResponseError } from "$utilities/pb"
     import { pb } from "$stores/pb"
     import Header from "$parts/Header/Header.svelte"
-    import type { RecordSubscription } from "pocketbase"
+    import type { RecordSubscription, ClientResponseError } from "pocketbase"
     import type {
         CustomMessagesResponse,
         CustomEventsResponse,
@@ -139,10 +138,8 @@
                         }
                     },
                 )
-        } catch ({ status, response }) {
-            // TODO!!!
-            handleOfflineFailure(status)
-            throw error(status, response.message)
+        } catch (e) {
+            pbHandleClientResponseError(e as ClientResponseError)
         }
     })
 </script>

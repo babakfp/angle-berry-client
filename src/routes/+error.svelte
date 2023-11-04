@@ -15,7 +15,11 @@
 
     <div class="text-gray-400">
         {#if $page.status === 404}
-            <p>The page that you are looking for couldn't be found!</p>
+            {#if $page.error?.message}
+                <p>{$page.error.message}</p>
+            {:else}
+                <p>The page that you are looking for couldn't be found!</p>
+            {/if}
         {:else if $page.error}
             <p>{$page.error.message}</p>
         {/if}

@@ -1,8 +1,10 @@
 import { redirect, error, fail } from "@sveltejs/kit"
-import { handleOfflineFailure } from "$utilities/pb"
+import { pbHandleFormActionError } from "$utilities/pb"
 import { superValidate } from "sveltekit-superforms/server"
-import { schema } from "../schema"
 import type { TiersResponse, VideosResponse } from "$utilities/pb-types"
+import { pbHandleClientResponseError } from "$utilities/pb"
+import type { ClientResponseError } from "pocketbase"
+import { schema } from "../schema"
 
 export async function load({ locals, params }) {
     if (!locals.user) throw redirect(303, "/login")
@@ -19,10 +21,9 @@ export async function load({ locals, params }) {
             .collection("videos")
             .getFullList()
         return { form, tier, videos }
-    } catch ({ status, response }) {
-        handleOfflineFailure(status)
-        if (status === 404) throw error(404)
-        throw error(status, response.message)
+    } catch (e) {
+        pbHandleClientResponseError(e as ClientResponseError)
+        throw e
     }
 }
 
@@ -37,14 +38,10 @@ export const actions = {
 
         try {
             await locals.pb.collection("tiers").update(params.id, form.data)
-        } catch ({ status, response }) {
-            handleOfflineFailure(status)
-
-            return fail(response.code, {
-                form,
-                message: response.message,
-                data: response.data,
-            })
+        } catch (e) {
+            const e2 = pbHandleFormActionError(e, form)
+            if (e2) return e2
+            throw e
         }
 
         throw redirect(303, "/admin/tiers")

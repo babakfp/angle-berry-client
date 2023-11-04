@@ -2,13 +2,14 @@
     import { enhance } from "$app/forms"
     import FormSubmitButton from "$components/form/FormSubmitButton.svelte"
     import IconLoading from "$icons/IconLoading.svelte"
-    import Error from "./Error.svelte"
+    import Description from "$components/form/Description.svelte"
 
-    export let message
+    export let message: string
     export let method: "post"
     export let submitButtonText: string
     export let errors
     export let validate
+    export let successMessage = ""
 
     let isSubmitting = false
     let isRedirecting = false
@@ -22,12 +23,14 @@
             cancel()
             $errors = submitionResult.errors
             isSubmitting = false
+            message = ""
         }
 
         return async ({ result, update }) => {
             isSubmitting = false
             if (result.type === "redirect") {
                 isRedirecting = true
+                message = successMessage
             }
             update()
         }
@@ -54,6 +57,10 @@
     </FormSubmitButton>
 
     {#if message}
-        <Error {message} />
+        {#if isRedirecting}
+            <Description type="success" text={message} />
+        {:else}
+            <Description type="error" text={message} />
+        {/if}
     {/if}
 </form>

@@ -1,6 +1,6 @@
 <script lang="ts">
     import Label from "$components/form/Label.svelte"
-    import Error from "$components/form/Error.svelte"
+    import Description from "$components/form/Description.svelte"
     import IconPlusCircle from "$icons/IconPlusCircle.svelte"
     import IconMinusCircle from "$icons/IconMinusCircle.svelte"
 
@@ -116,7 +116,7 @@
     </div>
 
     {#if error}
-        <Error class="mt-2" message={error} />
+        <Description class="mt-2" type="error" text={error} />
     {/if}
 </div>
 

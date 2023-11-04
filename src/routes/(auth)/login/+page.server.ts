@@ -1,6 +1,6 @@
 import { redirect, fail } from "@sveltejs/kit"
 import { superValidate } from "sveltekit-superforms/server"
-import { handleOfflineFailure } from "$utilities/pb"
+import { pbHandleFormActionError } from "$utilities/pb"
 import { schema } from "../schema"
 
 export const load = async ({ locals }) => {
@@ -20,19 +20,10 @@ export const actions = {
             await locals.pb
                 .collection("users")
                 .authWithPassword(form.data.username, form.data.password)
-        } catch ({ status, response }) {
-            handleOfflineFailure(status)
-
-            response.data.identity = {
-                value: form.data.username,
-                ...(response.data.identity || {}),
-            }
-
-            return fail(response.code, {
-                form,
-                message: response.message,
-                data: response.data,
-            })
+        } catch (e) {
+            const e2 = pbHandleFormActionError(e, form)
+            if (e2) return e2
+            throw e
         }
 
         if (locals.previewTierId) {

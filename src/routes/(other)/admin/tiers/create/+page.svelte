@@ -61,7 +61,8 @@
             {...$constraints.invites}
         />
         <ul class="grid gap-8 rounded bg-gray-700 p-2">
-            {#each $_form.videos as video}
+            {#each $_form.videos as id}
+                {@const video = data.videos.filter(video => video.id === id)[0]}
                 <li>
                     <VideoGalleryItem
                         src="{PUBLIC_POCKETBASE_URL}/api/files/{video.collectionName}/{video.id}/{video.file}"

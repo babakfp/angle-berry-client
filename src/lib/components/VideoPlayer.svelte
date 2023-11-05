@@ -3,9 +3,9 @@
     export let preload: "metadata" | "none" = "metadata"
 
     // When 1 video player volume changes, make other video player volume change too.
-    function handleVolumeChange(e) {
+    function handleVolumeChange(e: Event) {
         document.querySelectorAll("video").forEach(videoElement => {
-            videoElement.volume = e.target.volume
+            videoElement.volume = (e.target as HTMLVideoElement).volume
         })
     }
 

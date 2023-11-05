@@ -7,7 +7,7 @@
 
     export let type = "text"
     export let name = ""
-    export let value = ""
+    export let value: string | number = ""
     export let placeholder = ""
     export let autocomplete: string | undefined = undefined
     export let minlength: number | undefined = undefined
@@ -23,10 +23,10 @@
     export let error = ""
 
     function bindValue(e: InputEvent) {
-        if (type.match(/^(number|range)$/)) {
-            value = +e.target.value
+        if (["number", "range"].includes(type)) {
+            value = +(e.target as HTMLInputElement).value
         } else {
-            value = e.target.value
+            value = (e.target as HTMLInputElement).value
         }
     }
 </script>

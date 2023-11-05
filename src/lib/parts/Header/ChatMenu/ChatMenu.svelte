@@ -58,7 +58,7 @@
     function submitMessage() {
         isSendingMessage = true
         $messageInputElement!.focus()
-        return async ({ result, update }) => {
+        return async ({ result, update }: { result: any; update: any }) => {
             isSendingMessage = false
             if (result.type === "success") {
                 $messageInputElement!.style.height = ""

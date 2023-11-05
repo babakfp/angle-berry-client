@@ -30,6 +30,7 @@
             } else {
                 selectedMessageIds.update(v => [...v, message.id])
             }
+            // @ts-ignore
         } else if (e.pointerType !== "mouse") {
             if ($isContextMenuOpen2) {
                 isContextMenuOpen.set(false)
@@ -54,6 +55,7 @@
         in:shrinkHeight={{ duration: 200 }}
         out:shrinkHeight={{ duration: 200 }}
         on:contextmenu|preventDefault={e => {
+            // @ts-ignore
             if (e.pointerType !== "mouse") return
             interval = highlightAnimate(highlight, interval)
             isContextMenuOpen.set(true)

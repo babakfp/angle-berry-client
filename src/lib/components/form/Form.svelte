@@ -7,14 +7,14 @@
     export let message: string
     export let method: "post"
     export let submitButtonText: string
-    export let errors
-    export let validate
+    export let errors: any
+    export let validate: any
     export let successMessage = ""
 
     let isSubmitting = false
     let isRedirecting = false
 
-    async function handleFormSubmit({ cancel }) {
+    async function handleFormSubmit({ cancel }: { cancel: any }) {
         isSubmitting = true
 
         const submitionResult = await validate()
@@ -26,7 +26,7 @@
             message = ""
         }
 
-        return async ({ result, update }) => {
+        return async ({ result, update }: { result: any; update: any }) => {
             isSubmitting = false
             if (result.type === "redirect") {
                 isRedirecting = true

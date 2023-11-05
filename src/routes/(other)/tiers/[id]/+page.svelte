@@ -21,9 +21,9 @@
         had enough invites, please refresh the page and it will unlock
         automatically.
     </p>
-{:else if data?.tier?.expand?.videos?.length > 0}
+{:else if data.tier.expand?.videos.length}
     <ul class="mt-8 grid gap-8">
-        {#each data?.tier?.expand?.videos as video}
+        {#each data.tier.expand?.videos as video}
             <li>
                 <VideoPlayer
                     src="{PUBLIC_POCKETBASE_URL}/api/files/{video.collectionName}/{video.id}/{video.file}"

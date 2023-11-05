@@ -14,22 +14,19 @@ export async function load({ locals, params }) {
         } = await locals.pb
             .collection("tiers")
             .getOne(params.id, { expand: "videos" })
-        if (
+
+        let hasAccessToThisTier =
             params.id === locals.previewTierId ||
             locals.user.retainedTiers.includes(params.id) ||
             locals.user.invitedUsers.length >= tier.invites
-        ) {
-            return {
-                hasAccessToThisTier: true,
-                tier,
-            }
-        } else {
-            tier.expand?.videos.map(video => (video.file = ""))
 
-            return {
-                hasAccessToThisTier: false,
-                tier,
-            }
+        if (!hasAccessToThisTier) {
+            tier.expand?.videos.map(video => (video.file = ""))
+        }
+
+        return {
+            hasAccessToThisTier,
+            tier,
         }
     } catch (e) {
         pbHandleClientResponseError(e as ClientResponseError)

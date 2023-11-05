@@ -8,6 +8,10 @@
             videoElement.volume = e.target.volume
         })
     }
+
+    function handleLoadStart(e: Event) {
+        ;(e.target as HTMLVideoElement).volume = 0.25
+    }
 </script>
 
 <div class="relative">
@@ -17,7 +21,7 @@
         {src}
         controls
         {preload}
-        onloadstart="this.volume=0.25"
+        on:loadstart={handleLoadStart}
         controlsList="noplaybackrate"
         disablePictureInPicture
     />

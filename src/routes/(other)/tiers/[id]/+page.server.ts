@@ -7,10 +7,13 @@ export async function load({ locals, params }) {
     if (!locals.user) throw redirect(303, "/login")
 
     try {
-        const tier: TiersResponse & { expand: { videos: VideosResponse[] } } =
-            await locals.pb
-                .collection("tiers")
-                .getOne(params.id, { expand: "videos" })
+        const tier: TiersResponse & {
+            expand?: {
+                videos: VideosResponse[]
+            }
+        } = await locals.pb
+            .collection("tiers")
+            .getOne(params.id, { expand: "videos" })
         if (
             params.id === locals.previewTierId ||
             locals.user.retainedTiers.includes(params.id) ||
@@ -21,7 +24,8 @@ export async function load({ locals, params }) {
                 tier,
             }
         } else {
-            delete tier.file
+            tier.expand?.videos.map(video => (video.file = ""))
+
             return {
                 hasAccessToThisTier: false,
                 tier,

@@ -10,14 +10,14 @@
     export let data
     export let form
 
-    let isGalleryPopupOpen = false
-
     const {
         form: _form,
         errors,
         constraints,
         validate,
     } = superForm(data.form, { validators: schema })
+
+    let isGalleryPopupOpen = false
 </script>
 
 <svelte:head>

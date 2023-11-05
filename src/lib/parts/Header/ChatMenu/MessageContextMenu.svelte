@@ -4,17 +4,17 @@
     let contextMenu: HTMLDivElement
 
     $: if (contextMenu && $isContextMenuOpen) {
-        let x = $contextMenuTargetEvent.clientX + 14
-        let y = $contextMenuTargetEvent.clientY
+        let x = $contextMenuTargetEvent!.clientX + 14
+        let y = $contextMenuTargetEvent!.clientY
 
         if (
-            $contextMenuTargetEvent.clientX + contextMenu.offsetWidth >
+            $contextMenuTargetEvent!.clientX + contextMenu.offsetWidth >
             window.innerWidth
         ) {
             x -= contextMenu.offsetWidth + 26
         }
         if (
-            $contextMenuTargetEvent.clientY + contextMenu.offsetHeight >
+            $contextMenuTargetEvent!.clientY + contextMenu.offsetHeight >
             window.innerHeight
         ) {
             y -= contextMenu.offsetHeight

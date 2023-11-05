@@ -136,7 +136,7 @@
                 />
             {/if}
         {/if}
-        {#if !$selectedMessageIds.includes($contextMenuTargetMessage?.id)}
+        {#if !$selectedMessageIds.includes($contextMenuTargetMessage?.id || "")}
             <MessageContextMenuItem
                 title="Select"
                 icon={IconCheckCircle}

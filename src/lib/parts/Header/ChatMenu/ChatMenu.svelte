@@ -152,8 +152,7 @@
 
     <form
         class="sticky bottom-0 self-end
-		{isSendingMessage && 'pointer-events-none'}
-		"
+		{isSendingMessage && 'pointer-events-none'}"
         method="post"
         action="/chat"
         use:enhance={submitMessage}

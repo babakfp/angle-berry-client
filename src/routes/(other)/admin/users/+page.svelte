@@ -7,6 +7,14 @@
     let selectedUserIds: string[] = []
 
     function deleteSelectedTiers() {}
+
+    function handleAllCheck(e: Event) {
+        if ((e.target as HTMLInputElement).checked) {
+            selectedUserIds = data.users.map(user => user.id)
+        } else {
+            selectedUserIds = []
+        }
+    }
 </script>
 
 {#if selectedUserIds.length}
@@ -31,15 +39,7 @@
                 <label class="relative z-1 flex items-center px-6 py-3 pt-3.5">
                     <Checkbox
                         checked={selectedUserIds.length === data.users.length}
-                        on:click={e => {
-                            if (e.target.checked) {
-                                selectedUserIds = data.users.map(
-                                    user => user.id,
-                                )
-                            } else {
-                                selectedUserIds = []
-                            }
-                        }}
+                        on:change={handleAllCheck}
                     />
                 </label>
             </Th>

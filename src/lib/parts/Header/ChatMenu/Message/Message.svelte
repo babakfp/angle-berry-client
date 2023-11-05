@@ -13,18 +13,9 @@
     import IconCircle from "$icons/IconCircle.svelte"
     import IconCheckCircle from "$icons/IconCheckCircle.svelte"
     import { highlightAnimate } from "$utilities/highlightAnimate"
-    import type { MessagesResponse, UsersResponse } from "$utilities/pb-types"
+    import type { CustomMessagesResponse } from "$utilities/pb"
 
-    export let message: MessagesResponse & {
-        expand: {
-            user: UsersResponse
-            repliedTo?: MessagesResponse & {
-                expand: {
-                    user: UsersResponse
-                }
-            }
-        }
-    }
+    export let message: CustomMessagesResponse
 
     const isCurrentUser = message.expand.user.id === $page.data.user.id
 
@@ -43,7 +34,7 @@
             if ($isContextMenuOpen2) {
                 isContextMenuOpen.set(false)
                 contextMenuTargetEvent.set(null)
-                contextMenuTargetMessage.set(null)
+                contextMenuTargetMessage.set(undefined)
             } else {
                 interval = highlightAnimate(highlight, interval)
                 isContextMenuOpen.set(true)

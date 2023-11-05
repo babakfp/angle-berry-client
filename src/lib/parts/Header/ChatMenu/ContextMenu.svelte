@@ -27,13 +27,13 @@
         isContextMenuOpen.set(false)
         isReplying.set(true)
         replyTargetMessage.set($contextMenuTargetMessage)
-        messageIdToEdit.set(null)
+        messageIdToEdit.set("")
         if ($messageInputElement) $messageInputElement.focus()
     }
 
     function editMessage() {
         isContextMenuOpen.set(false)
-        messageIdToEdit.set($contextMenuTargetMessage?.id)
+        messageIdToEdit.set($contextMenuTargetMessage!?.id)
         isReplying.set(false)
         if ($messageInputElement) $messageInputElement.focus()
     }
@@ -60,7 +60,7 @@
             copyText(copiedText.replaceAll("<br>", "\n"))
         } else {
             copyText(
-                $contextMenuTargetMessage?.content.replaceAll("<br>", "\n"),
+                $contextMenuTargetMessage!?.content.replaceAll("<br>", "\n"),
             )
         }
         copyTimeoutId = setTimeout(() => {
@@ -74,7 +74,7 @@
         if ($selectedMessageIds.length > 0) {
             messageIdsToDelete.set($selectedMessageIds)
         } else {
-            messageIdsToDelete.set([$contextMenuTargetMessage?.id])
+            messageIdsToDelete.set([$contextMenuTargetMessage!?.id])
         }
     }
 
@@ -82,7 +82,7 @@
         isContextMenuOpen.set(false)
         selectedMessageIds.update(currentValue => [
             ...currentValue,
-            $contextMenuTargetMessage?.id,
+            $contextMenuTargetMessage!?.id,
         ])
     }
 

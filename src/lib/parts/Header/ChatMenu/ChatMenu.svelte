@@ -28,7 +28,7 @@
 
     messages.set($page.data.messages)
 
-    $: if (!isOpen && $messageIdToEdit) messageIdToEdit.set(null)
+    $: if (!isOpen && $messageIdToEdit) messageIdToEdit.set("")
     $: if (isOpen && $unreadMessagesLength) unreadMessagesLength.set(0)
 
     const messageInputValue = writable("")
@@ -63,7 +63,7 @@
             if (result.type === "success") {
                 $messageInputElement!.style.height = ""
                 isReplying.set(false)
-                messageIdToEdit.set(null)
+                messageIdToEdit.set("")
                 $messageInputElement!.setAttribute("rows", "1")
             }
             update()
@@ -72,19 +72,20 @@
 
     let formElement: HTMLFormElement
 
-    $: replyedMessageId = $isReplying ? $replyTargetMessage.id : ""
+    $: replyedMessageId = $isReplying ? $replyTargetMessage?.id : ""
 
     let isFetchingOlderMessages = false
     let isSomethingWentWrongWhenFetchingOlderMessages = false
     let pageNumberFortheNextOlderMessagesToFetch = 2
-    const handleScroll = async e => {
+    const handleScroll = async (e: Event) => {
         // Is reached the top of the scrollable?
         // Added + 200 to fetch the data earlier for a better UX
         if (
             pageNumberFortheNextOlderMessagesToFetch <=
                 $page.data.messages.totalPages &&
-            Math.abs(e.target.scrollTop) + 200 >=
-                e.target.scrollHeight - e.target.clientHeight
+            Math.abs((e.target as HTMLOListElement).scrollTop) + 200 >=
+                (e.target as HTMLOListElement).scrollHeight -
+                    (e.target as HTMLOListElement).clientHeight
         ) {
             try {
                 isFetchingOlderMessages = true
@@ -160,9 +161,9 @@
     >
         {#if $isReplying}
             <MessageActionPreview
-                title="Replying to {$replyTargetMessage.expand.user.username}"
-                content={$replyTargetMessage.content}
-                messageId={$replyTargetMessage.id}
+                title="Replying to {$replyTargetMessage?.expand.user.username}"
+                content={$replyTargetMessage?.content || ""}
+                messageId={$replyTargetMessage?.id || ""}
                 on:close={() => isReplying.set(false)}
                 bind:isOpen={$isReplying}
             />
@@ -175,7 +176,7 @@
                     msg => msg.id === $messageIdToEdit,
                 )[0]?.content}
                 messageId={$messageIdToEdit}
-                on:close={() => messageIdToEdit.set(null)}
+                on:close={() => messageIdToEdit.set("")}
                 bind:isOpen={isEditingMessage}
             />
         {/if}

@@ -2,36 +2,36 @@
     import IconPlusCircle from "$icons/IconPlusCircle.svelte"
     import IconMinusCircle from "$icons/IconMinusCircle.svelte"
 
-    export let value: number
+    export let value: number | string
     export let min: number | undefined = undefined
     export let max: number | undefined = undefined
 
     $: {
-        if (max && value >= max) {
+        if (max && Number(value) >= max) {
             value = max
         }
-        if (min && value <= min) {
+        if (min && Number(value) <= min) {
             value = min
         }
     }
 
     function incrementNumber() {
         if (max) {
-            if (value < max) {
-                value += 1
+            if (Number(value) < max) {
+                value = Number(value) + 1
             }
         } else {
-            value += 1
+            value = Number(value) + 1
         }
     }
 
     function decrementNumber() {
         if (min || min === 0) {
-            if (value > min) {
-                value = value - 1
+            if (Number(value) > min) {
+                value = Number(value) - 1
             }
         } else {
-            value = value - 1
+            value = Number(value) - 1
         }
     }
 </script>

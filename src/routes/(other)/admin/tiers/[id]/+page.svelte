@@ -53,7 +53,7 @@
             label="Price"
             name="price"
             bind:value={$_form.price}
-            placeholder={data.tier.price}
+            placeholder={`${data.tier.price}`}
             error={$errors?.price
                 ? $errors?.price[0]
                 : form?.pb?.price?.message}
@@ -64,7 +64,7 @@
             label="Invites"
             name="invites"
             bind:value={$_form.invites}
-            placeholder={data.tier.invites}
+            placeholder={`${data.tier.invites}`}
             error={$errors?.invites
                 ? $errors?.invites[0]
                 : form?.pb?.invites?.message}

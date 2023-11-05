@@ -29,7 +29,7 @@
      * @param {KeyboardEvent} e
      * @param {string} keyLetter
      */
-    const isKey = (e, keyLetter) => {
+    const isKey = (e: KeyboardEvent, keyLetter: string) => {
         return (
             e.key.toLowerCase() === keyLetter ||
             e.code === `Key${keyLetter.toUpperCase()}`

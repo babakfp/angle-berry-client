@@ -3,8 +3,12 @@
     import Tooltip from "$components/Tooltip.svelte"
     import TooltipWrapper from "$components/TooltipWrapper.svelte"
 
-    export let user: UsersResponse<{ retainedTiers: TiersResponse[] }>
     let isVisible = false
+    export let user: UsersResponse & {
+        expand: {
+            retainedTiers: TiersResponse[]
+        }
+    }
 </script>
 
 <TooltipWrapper>

@@ -2,10 +2,10 @@ import { highlightAnimate } from "$utilities/highlightAnimate"
 
 /**
  * Scrolls to the message with the specified ID and highlights it.
- * @param {string} messageId - The ID of the message to scroll to.
- * @param {number | undefined} interval - The ID of the current interval (if any).
+ * @param messageId - The ID of the message to scroll to.
+ * @param interval - The ID of the current interval (if any).
  */
-export function goToMessage(messageId, interval) {
+export function goToMessage(messageId: string, interval: number | undefined) {
     // Get the element with the specified ID.
     const messageElement = document.getElementById(messageId)
     if (!messageElement) return
@@ -15,13 +15,13 @@ export function goToMessage(messageId, interval) {
         behavior: "smooth",
         block:
             messageElement.clientHeight >
-            document.getElementById("messages-wrapper").clientHeight
+            document.getElementById("messages-wrapper")!.clientHeight
                 ? "start"
                 : "center",
     })
 
     return highlightAnimate(
-        messageElement.querySelector(".reply-highlight"),
+        messageElement.querySelector(".reply-highlight")!,
         interval,
     )
 }

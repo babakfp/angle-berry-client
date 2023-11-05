@@ -10,7 +10,7 @@
         const parentElement = document.querySelector(parentElementQuerySelector)
 
         const rootElementRect = tooltip.getBoundingClientRect()
-        const parentElementRect = parentElement.getBoundingClientRect()
+        const parentElementRect = parentElement!.getBoundingClientRect()
         let isTopNotFullyVisible = false
         let isBottomNotFullyVisible = false
 

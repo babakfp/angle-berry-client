@@ -15,17 +15,17 @@ export async function load({ locals, params }) {
             .collection("tiers")
             .getOne(params.id, { expand: "videos" })
 
-        let hasAccessToThisTier =
+        let tierAccessGranted =
             params.id === locals.previewTierId ||
             locals.user.retainedTiers.includes(params.id) ||
             locals.user.invitedUsers.length >= tier.invites
 
-        if (!hasAccessToThisTier) {
+        if (!tierAccessGranted) {
             tier.expand?.videos.map(video => (video.file = ""))
         }
 
         return {
-            hasAccessToThisTier,
+            tierAccessGranted,
             tier,
         }
     } catch (e) {

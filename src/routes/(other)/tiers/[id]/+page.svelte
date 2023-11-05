@@ -13,7 +13,7 @@
 
 <TierTable class="mt-8" currentTier={data.tier} />
 
-{#if !data.hasAccessToThisTier}
+{#if !data.tierAccessGranted}
     <p class="mt-8">
         You don't have access to this tier. You can invite {data?.tier.invites} users
         to get the access. You currently have {data?.user.invitedUsers.length} invites.

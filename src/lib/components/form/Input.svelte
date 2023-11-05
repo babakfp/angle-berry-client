@@ -12,8 +12,8 @@
     export let autocomplete: string | undefined = undefined
     export let minlength: number | undefined = undefined
     export let maxlength: number | undefined = undefined
-    export let min: number | undefined = undefined
-    export let max: number | undefined = undefined
+    export let min: string | number | undefined = undefined
+    export let max: string | number | undefined = undefined
     export let readonly = false
     export let pattern: string | undefined = undefined
 

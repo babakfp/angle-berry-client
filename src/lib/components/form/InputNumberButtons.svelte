@@ -3,21 +3,21 @@
     import IconMinusCircle from "$icons/IconMinusCircle.svelte"
 
     export let value: number | string
-    export let min: number | undefined = undefined
-    export let max: number | undefined = undefined
+    export let min: string | number | undefined = undefined
+    export let max: string | number | undefined = undefined
 
     $: {
-        if (max && Number(value) >= max) {
+        if (max && Number(value) >= Number(max)) {
             value = max
         }
-        if (min && Number(value) <= min) {
+        if (min && Number(value) <= Number(min)) {
             value = min
         }
     }
 
     function incrementNumber() {
         if (max) {
-            if (Number(value) < max) {
+            if (Number(value) < Number(max)) {
                 value = Number(value) + 1
             }
         } else {
@@ -27,7 +27,7 @@
 
     function decrementNumber() {
         if (min || min === 0) {
-            if (Number(value) > min) {
+            if (Number(value) > Number(min)) {
                 value = Number(value) - 1
             }
         } else {

@@ -1,11 +1,20 @@
 <script lang="ts">
     import { Table, Tbody, Thead, Tr, Th, Td } from "$components/table/index"
     import Checkbox from "$components/form/Checkbox.svelte"
+    import type { TiersResponse, UsersResponse } from "$utilities/pb-types"
 
-    export let tiers
-    export let users
+    export let tiers: TiersResponse[]
+    export let users: UsersResponse[]
 
-    let selectedTierIds = []
+    let selectedTierIds: string[] = []
+
+    function checkAllCheckboxes(e: Event) {
+        if ((e.target as HTMLInputElement).checked) {
+            selectedTierIds = tiers.map(tier => tier.id)
+        } else {
+            selectedTierIds = []
+        }
+    }
 </script>
 
 <div class="flex justify-between">
@@ -44,15 +53,8 @@
             <Th class="!p-0">
                 <Checkbox
                     class="relative z-1 items-center px-6 py-3"
-                    checked={tiers.length &&
-                        selectedTierIds.length === tiers.length}
-                    on:change={e => {
-                        if (e.target.checked) {
-                            selectedTierIds = tiers.map(tier => tier.id)
-                        } else {
-                            selectedTierIds = []
-                        }
-                    }}
+                    checked={selectedTierIds.length === tiers.length}
+                    on:change={checkAllCheckboxes}
                     disabled={!tiers.length}
                 />
             </Th>

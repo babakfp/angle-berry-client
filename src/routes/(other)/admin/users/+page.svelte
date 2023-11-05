@@ -8,7 +8,7 @@
 
     function deleteSelectedTiers() {}
 
-    function handleAllCheck(e: Event) {
+    function checkAllCheckboxes(e: Event) {
         if ((e.target as HTMLInputElement).checked) {
             selectedUserIds = data.users.map(user => user.id)
         } else {
@@ -39,7 +39,7 @@
                 <label class="relative z-1 flex items-center px-6 py-3 pt-3.5">
                     <Checkbox
                         checked={selectedUserIds.length === data.users.length}
-                        on:change={handleAllCheck}
+                        on:change={checkAllCheckboxes}
                     />
                 </label>
             </Th>
@@ -55,23 +55,12 @@
                 class="relative duration-200 hover:bg-white/10 not-last:border-b not-last:border-white/5"
             >
                 <Td class="w-16">
-                    <label class="relative z-1 flex items-center px-6 py-4">
-                        <Checkbox
-                            checked={selectedUserIds.includes(user.id)}
-                            on:click={() => {
-                                if (selectedUserIds.includes(user.id)) {
-                                    selectedUserIds = selectedUserIds.filter(
-                                        id => id !== user.id,
-                                    )
-                                } else {
-                                    selectedUserIds = [
-                                        ...selectedUserIds,
-                                        user.id,
-                                    ]
-                                }
-                            }}
-                        />
-                    </label>
+                    <Checkbox
+                        class="relative z-1 items-center px-6 py-4"
+                        checked={selectedUserIds.includes(user.id)}
+                        bind:group={selectedUserIds}
+                        value={user.id}
+                    />
                 </Td>
                 <Th class="py-4 text-white">
                     {user.username}

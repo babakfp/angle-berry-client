@@ -1,4 +1,5 @@
-import type { PocketBase, UsersResponse } from "$utilities/pb-types"
+import type PocketBase from "pocketbase"
+import type { UsersResponse } from "$utilities/pb-types"
 
 declare global {
     namespace App {

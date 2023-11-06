@@ -19,17 +19,15 @@ export async function handle({ event, resolve }) {
         event.request.headers.get("cookie") || "",
     )
 
-    event.locals.user = event.locals.pb.authStore.isValid
-        ? (event.locals.pb.authStore.model as UsersResponse)
-        : null
-
-    if (event.locals.user) {
+    if (event.locals.pb.authStore.isValid) {
         try {
-            await event.locals.pb.collection("users").authRefresh()
+            const { record } = await event.locals.pb
+                .collection("users")
+                .authRefresh()
+            event.locals.user = record as UsersResponse
         } catch (e) {
             if ((e as ClientResponseError).status === 401) {
                 event.locals.pb.authStore.clear()
-                event.locals.user = null
             } else {
                 pbHandleClientResponseError(e as ClientResponseError)
                 throw e

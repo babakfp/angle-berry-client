@@ -5,7 +5,7 @@ declare global {
     namespace App {
         interface Locals {
             pb: PocketBase
-            user: UsersResponse | null
+            user: UsersResponse | undefined
             tiers: TiersResponse[]
             previewTierId: string | undefined
         }

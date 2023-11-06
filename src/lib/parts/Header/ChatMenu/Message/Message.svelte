@@ -13,7 +13,7 @@
     import IconCircle from "$icons/IconCircle.svelte"
     import IconCheckCircle from "$icons/IconCheckCircle.svelte"
     import { highlightAnimate } from "$utilities/highlightAnimate"
-    import type { CustomMessagesResponse } from "$utilities/pb"
+    import type { CustomMessagesResponse } from "$utilities/pb-types"
 
     export let message: CustomMessagesResponse
 

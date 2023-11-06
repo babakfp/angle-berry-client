@@ -5,8 +5,7 @@ import {
     pbHandleFormActionError,
 } from "$utilities/pb"
 import { schema } from "../schema"
-import type { UsersResponse } from "$utilities/pb-types"
-import type { ClientResponseError } from "pocketbase"
+import type { UsersResponse, ClientResponseError } from "$utilities/pb-types"
 
 export const load = async ({ locals }) => {
     if (locals.user) throw redirect(303, "/")

@@ -1,6 +1,5 @@
 import { writable } from "svelte/store"
-import type { MessagesResponse, UsersResponse } from "$utilities/pb-types"
-import type { CustomMessagesResponse } from "$utilities/pb"
+import type { CustomMessagesResponse } from "$utilities/pb-types"
 
 export const isContextMenuOpen = writable(false)
 export const isContextMenuOpen2 = writable(false)

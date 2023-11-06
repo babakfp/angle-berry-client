@@ -1,10 +1,10 @@
 import { redirect } from "@sveltejs/kit"
 import { pbHandleClientResponseError } from "$utilities/pb"
-import type { ClientResponseError } from "pocketbase"
 import type {
     ListResultMessagesResponse,
     ListResultEventsResponse,
-} from "$utilities/pb"
+    ClientResponseError,
+} from "$utilities/pb-types"
 
 export async function load({ locals, parent }) {
     if (!locals.user) throw redirect(303, "/login")

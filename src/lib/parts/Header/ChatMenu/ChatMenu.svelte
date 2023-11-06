@@ -21,7 +21,7 @@
     import ContextMenu from "./ContextMenu.svelte"
     import MessageDeleteModal from "./MessageDeleteModal.svelte"
     import { getTextareaLineCount } from "$utilities/getTextareaLineCount"
-    import type { ListResultMessagesResponse } from "$utilities/pb"
+    import type { ListResultMessagesResponse } from "$utilities/pb-types"
 
     export let isOpen = false
     export let toggleButton: HTMLButtonElement

@@ -8,12 +8,14 @@
     import { pbHandleClientResponseError } from "$utilities/pb"
     import { pb } from "$stores/pb"
     import Header from "$parts/Header/Header.svelte"
-    import type { RecordSubscription, ClientResponseError } from "pocketbase"
     import type {
+        RecordSubscription,
         CustomMessagesResponse,
         CustomEventsResponse,
-    } from "$utilities/pb.js"
-    import type { MessagesResponse, EventsResponse } from "$utilities/pb-types"
+        MessagesResponse,
+        EventsResponse,
+        ClientResponseError,
+    } from "$utilities/pb-types"
 
     export let data
 

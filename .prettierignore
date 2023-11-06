@@ -8,4 +8,4 @@
 vite.config.ts.timestamp-*
 pnpm-lock.yaml
 *.svg
-pb-types.ts
+pb-typegen.ts

@@ -2,8 +2,11 @@ import { error } from "@sveltejs/kit"
 import PocketBase from "pocketbase"
 import { POCKETBASE_URL } from "$env/static/private"
 import { pbHandleClientResponseError, getPreviewTierId } from "$utilities/pb"
-import type { UsersResponse, TiersResponse } from "$utilities/pb-types"
-import type { ClientResponseError } from "pocketbase"
+import type {
+    UsersResponse,
+    TiersResponse,
+    ClientResponseError,
+} from "$utilities/pb-types"
 
 export async function handle({ event, resolve }) {
     if (!POCKETBASE_URL)

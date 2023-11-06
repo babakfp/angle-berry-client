@@ -5,8 +5,11 @@ import {
 } from "$utilities/pb"
 import { superValidate } from "sveltekit-superforms/server"
 import { tierDeletionSchema } from "./tiers/schema"
-import type { TiersResponse, UsersResponse } from "$utilities/pb-types"
-import type { ClientResponseError } from "pocketbase"
+import type {
+    TiersResponse,
+    UsersResponse,
+    ClientResponseError,
+} from "$utilities/pb-types"
 
 export async function load({ locals }) {
     if (!locals.user) throw redirect(303, "/login")

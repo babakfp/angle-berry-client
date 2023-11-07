@@ -5,7 +5,7 @@
     export let _class = ""
     export { _class as class }
     export let checked = false
-    export let value = ""
+    export let value = "on"
     export let group: string[] = []
     export let disabled = false
     export let name = ""
@@ -34,7 +34,7 @@
         type="checkbox"
         bind:checked
         on:change
-        value={value || "on"}
+        {value}
         {disabled}
         name={name || null}
     />

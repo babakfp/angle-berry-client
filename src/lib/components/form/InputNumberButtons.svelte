@@ -7,10 +7,10 @@
     export let max: string | number | undefined = undefined
 
     $: {
-        if (max && Number(value) >= Number(max)) {
+        if (max && Number(value) > Number(max)) {
             value = max
         }
-        if (min && Number(value) <= Number(min)) {
+        if ((min || min === 0) && Number(value) < Number(min)) {
             value = min
         }
     }
@@ -37,7 +37,10 @@
 </script>
 
 <button
-    class="h-full pl-1 pr-0.5 text-gray-500 duration-200 outline-inset hover:text-gray-300"
+    class="h-full pl-1 pr-0.5 text-gray-500 duration-200 outline-inset hover:text-gray-300
+        {(min || min === 0) && Number(value) <= Number(min)
+        ? 'pointer-events-none text-gray-600'
+        : ''}"
     type="button"
     on:click={decrementNumber}
 >
@@ -45,7 +48,10 @@
 </button>
 
 <button
-    class="-mr-2 h-full pl-0.5 pr-2 text-gray-500 duration-200 outline-inset hover:text-gray-300"
+    class="-mr-2 h-full pl-0.5 pr-2 text-gray-500 duration-200 outline-inset hover:text-gray-300
+        {max && Number(value) >= Number(max)
+        ? 'pointer-events-none text-gray-600'
+        : ''}"
     type="button"
     on:click={incrementNumber}
 >

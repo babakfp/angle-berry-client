@@ -6,6 +6,7 @@
     import Form from "$components/form/Form.svelte"
     import Modal from "$components/Modal.svelte"
     import VideoGalleryItem from "../VideoGalleryItem.svelte"
+    import { fade } from "svelte/transition"
 
     export let data
     export let form
@@ -63,7 +64,7 @@
         <ul class="grid gap-8 rounded bg-gray-700 p-2">
             {#each $_form.videos as id (id)}
                 {@const video = data.videos.filter(video => video.id === id)[0]}
-                <li>
+                <li transition:fade>
                     <VideoGalleryItem
                         src="{PUBLIC_POCKETBASE_URL}/api/files/{video.collectionName}/{video.id}/{video.file}"
                         checked={$_form.videos.includes(video.id)}

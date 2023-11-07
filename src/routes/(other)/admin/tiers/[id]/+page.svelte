@@ -71,7 +71,7 @@
             {...$constraints.invites}
         />
         <ul class="grid gap-8 rounded bg-gray-700 p-2">
-            {#each selectedVideos as video, i}
+            {#each selectedVideos as video (video.id)}
                 <li>
                     <VideoGalleryItem
                         src="{PUBLIC_POCKETBASE_URL}/api/files/{video.collectionName}/{video.id}/{video.file}"
@@ -98,7 +98,7 @@
     isFullSize={true}
 >
     <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-        {#each data.videos as video}
+        {#each data.videos as video (video.id)}
             <li>
                 <VideoGalleryItem
                     src="{PUBLIC_POCKETBASE_URL}/api/files/{video.collectionName}/{video.id}/{video.file}"

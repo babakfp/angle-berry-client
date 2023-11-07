@@ -34,7 +34,7 @@
         type="checkbox"
         bind:checked
         on:change
-        value={value || null}
+        value={value || "on"}
         {disabled}
         name={name || null}
     />

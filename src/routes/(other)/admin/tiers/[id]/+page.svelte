@@ -71,7 +71,7 @@
                 : form?.pb?.invites?.message}
             {...$constraints.invites}
         />
-        <ul class="grid gap-8 rounded bg-gray-700 p-2">
+        <ul class="grid gap-4 rounded bg-gray-700 p-2">
             {#each selectedVideos as video (video.id)}
                 <li transition:fade>
                     <VideoGalleryItem

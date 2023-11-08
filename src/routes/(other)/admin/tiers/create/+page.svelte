@@ -61,7 +61,7 @@
                 : form?.pb?.invites?.message}
             {...$constraints.invites}
         />
-        <ul class="grid gap-8 rounded bg-gray-700 p-2">
+        <ul class="grid gap-4 rounded bg-gray-700 p-2">
             {#each $_form.videos as id (id)}
                 {@const video = data.videos.filter(video => video.id === id)[0]}
                 <li transition:fade>

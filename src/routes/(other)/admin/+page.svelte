@@ -1,5 +1,14 @@
-<ul class="list-inside list-disc">
-    <li>
-        <a class="link" href="/admin/tiers">Tiers</a>
-    </li>
+<script>
+    const collections = ["Tiers", "Users"]
+</script>
+
+<ul class="mx-auto grid w-full max-w-xs gap-2">
+    {#each collections as item}
+        <li>
+            <a
+                class="link btn btn-gray-light-glass-outline w-full"
+                href="/admin/{item.toLowerCase()}">{item}</a
+            >
+        </li>
+    {/each}
 </ul>

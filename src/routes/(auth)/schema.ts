@@ -9,6 +9,7 @@ export const maxPasswordLength = 32
 export const schema = z.object({
     username: z
         .string()
+        .trim()
         .min(minUsernameLength)
         .max(maxUsernameLength)
         .regex(usernamePattern, "Only lowercase Latin letters are allowed")

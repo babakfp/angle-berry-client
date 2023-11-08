@@ -11,8 +11,6 @@
     export let data
     export let form
 
-    let isGalleryPopupOpen = false
-
     const {
         form: _form,
         errors,
@@ -26,6 +24,8 @@
     if (!$_form.videos.length) $_form.videos = data.tier.videos
 
     $: selectedVideos = data.videos.filter(v => $_form.videos.includes(v.id))
+
+    let isGalleryPopupOpen = false
 </script>
 
 <svelte:head>

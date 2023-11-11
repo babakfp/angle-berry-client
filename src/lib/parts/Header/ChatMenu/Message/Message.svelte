@@ -52,8 +52,7 @@
         class="relative grid px-4 py-2
         {$selectedMessageIds.includes(message.id) && 'bg-blue-400/10'}
         {$selectedMessageIds.length > 0 && 'cursor-pointer'}"
-        in:shrinkHeight={{ duration: 200 }}
-        out:shrinkHeight={{ duration: 200 }}
+        transition:shrinkHeight={{ duration: 200 }}
         on:contextmenu|preventDefault={e => {
             // @ts-ignore
             if (e.pointerType !== "mouse") return

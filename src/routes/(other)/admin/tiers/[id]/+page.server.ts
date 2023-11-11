@@ -33,7 +33,7 @@ export async function load({ locals, params }) {
 }
 
 export const actions = {
-    default: async ({ locals, request, url, params }) => {
+    default: async ({ locals, request, params }) => {
         if (!locals.user) throw redirect(303, "/login")
         if (!locals.user.isAdmin)
             throw error(401, "You are not authorized to see this page!")

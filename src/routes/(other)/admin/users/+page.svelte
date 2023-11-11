@@ -23,7 +23,7 @@
         class="flex items-end justify-between"
         transition:shrinkHeight={{ duration: 200 }}
     >
-        <button class="btn btn-brand" on:click={deleteSelectedTiers}>
+        <button class="btn btn-danger" on:click={deleteSelectedTiers}>
             Delete selected
         </button>
 

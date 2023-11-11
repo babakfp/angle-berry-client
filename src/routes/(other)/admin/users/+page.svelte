@@ -1,6 +1,7 @@
 <script lang="ts">
     import { Table, Tbody, Thead, Tr, Th, Td } from "$components/table/index"
     import Checkbox from "$components/form/Checkbox.svelte"
+    import { shrinkHeight } from "$utilities/shrinkHeight"
 
     export let data
 
@@ -18,7 +19,10 @@
 </script>
 
 {#if selectedUserIds.length}
-    <div class="flex justify-between">
+    <div
+        class="flex items-end justify-between"
+        transition:shrinkHeight={{ duration: 200 }}
+    >
         <button class="btn btn-brand" on:click={deleteSelectedTiers}>
             Delete selected
         </button>

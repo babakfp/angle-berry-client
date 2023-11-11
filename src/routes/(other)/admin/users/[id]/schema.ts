@@ -1,9 +1,8 @@
 import { z } from "zod"
 
-// password
-// passwordConfirm
+// TODO: For user dashbaord: add changing password feature.
 export const schema = z.object({
     isAdmin: z.boolean(),
     retainedTiers: z.string().array().default([]),
 })
-// Banning users
+// TODO: Banning users

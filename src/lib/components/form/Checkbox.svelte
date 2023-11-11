@@ -37,6 +37,7 @@
         {value}
         {disabled}
         name={name || null}
+        {...$$restProps}
     />
 
     {#if checked}

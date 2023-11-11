@@ -151,7 +151,7 @@
     {/if}
 
     <form
-        class="sticky bottom-0 self-end
+        class="sticky bottom-0 z-1 self-end bg-body-bg
 		{isSendingMessage && 'pointer-events-none'}"
         method="post"
         action="/chat"

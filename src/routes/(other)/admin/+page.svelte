@@ -1,5 +1,5 @@
 <script>
-    const collections = ["Tiers", "Users"]
+    const collections = ["Tiers", "Users", "Videos"]
 </script>
 
 <ul class="mx-auto grid w-full max-w-xs gap-2">

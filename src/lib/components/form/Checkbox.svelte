@@ -9,6 +9,7 @@
     export let group: string[] = []
     export let disabled = false
     export let name = ""
+    export let label = ""
 
     $: handleGroup(checked)
 
@@ -26,7 +27,7 @@
 </script>
 
 <label
-    class="{_class} inline-flex text-xl
+    class="{_class} inline-flex gap-2
         {disabled ? 'pointer-events-none opacity-50' : ''}"
 >
     <input
@@ -41,8 +42,12 @@
     />
 
     {#if checked}
-        <IconCheckSquare />
+        <IconCheckSquare class="text-xl" />
     {:else}
-        <IconSquare />
+        <IconSquare class="text-xl" />
+    {/if}
+
+    {#if label}
+        <span>{label}</span>
     {/if}
 </label>

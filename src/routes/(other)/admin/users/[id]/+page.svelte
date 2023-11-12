@@ -85,14 +85,12 @@
             />
         {/each}
 
-        <label class="inline-flex gap-2">
-            <Checkbox
-                bind:checked={$_form.isAdmin}
-                name="isAdmin"
-                {...$constraints.isAdmin}
-            />
-            Is admin? {$_form.isAdmin ? "Yes ⚒️" : "No"}
-        </label>
+        <Checkbox
+            bind:checked={$_form.isAdmin}
+            name="isAdmin"
+            {...$constraints.isAdmin}
+            label="Is admin? {$_form.isAdmin ? 'Yes ⚒️' : 'No'}"
+        />
     </Form>
 </div>
 

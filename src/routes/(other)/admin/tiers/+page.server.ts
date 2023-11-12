@@ -41,12 +41,12 @@ export const actions = {
         const form = await superValidate(request, tierDeletionSchema)
         if (!form.valid) return fail(400, { form })
 
-        const deletePromises = form.data.ids.map(id =>
-            locals.pb.collection("tiers").delete(id),
-        )
-
         try {
-            await Promise.all(deletePromises)
+            await Promise.all(
+                form.data.ids.map(id =>
+                    locals.pb.collection("tiers").delete(id),
+                ),
+            )
         } catch (e) {
             const e2 = pbHandleFormActionError(e, form)
             if (e2) return e2

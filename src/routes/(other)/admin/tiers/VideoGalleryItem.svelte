@@ -10,10 +10,13 @@
 
 <div class="grid gap-1">
     <VideoPlayer {src} preload="none" />
-    <label class="btn flex gap-2 bg-white/5 hover:bg-white/10">
-        <Checkbox {checked} bind:group {value} name="videos" />
-        {#if checked}
-            Selected
-        {/if}
+    <label class="btn btn-gray-glass-outline">
+        <Checkbox
+            {checked}
+            bind:group
+            {value}
+            name="videos"
+            label={checked ? "Selected" : ""}
+        />
     </label>
 </div>

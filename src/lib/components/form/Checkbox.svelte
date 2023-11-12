@@ -28,7 +28,7 @@
 
 <label
     class="{_class} inline-flex gap-2
-        {disabled ? 'pointer-events-none opacity-50' : ''}"
+        {disabled && 'pointer-events-none opacity-50'}"
 >
     <input
         class="hidden"

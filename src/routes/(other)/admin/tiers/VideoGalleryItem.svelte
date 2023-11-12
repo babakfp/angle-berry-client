@@ -10,13 +10,12 @@
 
 <div class="grid gap-1">
     <VideoPlayer {src} preload="none" />
-    <label class="btn btn-gray-glass-outline">
-        <Checkbox
-            {checked}
-            bind:group
-            {value}
-            name="videos"
-            label={checked ? "Selected" : ""}
-        />
-    </label>
+    <Checkbox
+        class="btn btn-gray-glass-outline"
+        {checked}
+        bind:group
+        {value}
+        name="videos"
+        label={checked ? "Selected" : ""}
+    />
 </div>

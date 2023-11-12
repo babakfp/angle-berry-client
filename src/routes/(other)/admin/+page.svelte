@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     const collections = ["Tiers", "Users", "Videos"]
 </script>
 

@@ -14,15 +14,13 @@
     }
 </script>
 
-<div class="relative">
-    <video
-        on:volumechange={handleVolumeChange}
-        class="aspect-video w-full rounded"
-        {src}
-        controls
-        {preload}
-        on:loadstart={handleLoadStart}
-        controlsList="noplaybackrate"
-        disablePictureInPicture
-    />
-</div>
+<video
+    on:volumechange={handleVolumeChange}
+    class="aspect-video w-full rounded"
+    {src}
+    controls
+    {preload}
+    on:loadstart={handleLoadStart}
+    controlsList="noplaybackrate"
+    disablePictureInPicture
+/>

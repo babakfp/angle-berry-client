@@ -1,6 +1,5 @@
 <script lang="ts">
     export let src: string
-    export let preload: "metadata" | "none" = "metadata"
 
     // When 1 video player volume changes, make other video player volume change too.
     function handleVolumeChange(e: Event) {
@@ -19,7 +18,6 @@
     class="aspect-video w-full rounded"
     {src}
     controls
-    {preload}
     on:loadstart={handleLoadStart}
     controlsList="noplaybackrate"
     disablePictureInPicture

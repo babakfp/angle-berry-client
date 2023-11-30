@@ -9,7 +9,7 @@
 </script>
 
 <div class="grid gap-1">
-    <VideoPlayer {src} preload="none" />
+    <VideoPlayer {src} />
     <Checkbox
         class="btn btn-gray-glass-outline"
         {checked}

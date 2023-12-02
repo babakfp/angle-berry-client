@@ -40,13 +40,7 @@
     otherAuthPageLinkTitle="Register hero"
     otherAuthPageLink="/register"
 >
-    <Form
-        method="post"
-        message={form?.message}
-        submitButtonText="Login"
-        {errors}
-        {validate}
-    >
+    <Form message={form?.message} submitButtonText="Login" {errors} {validate}>
         <UsernameField
             bind:value={$_form.username}
             error={$errors?.username

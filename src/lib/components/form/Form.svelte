@@ -5,7 +5,6 @@
     import Description from "$components/form/Description.svelte"
 
     export let message: string
-    export let method: "post"
     export let submitButtonText: string
     export let errors: any
     export let validate: any
@@ -40,7 +39,7 @@
 <form
     class="grid gap-4"
     class:pointer-events-none={isSubmitting || isRedirecting}
-    {method}
+    method="post"
     use:enhance={handleFormSubmit}
     novalidate
 >

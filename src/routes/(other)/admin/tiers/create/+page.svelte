@@ -26,13 +26,7 @@
 </svelte:head>
 
 <div class="mx-auto w-full max-w-xs">
-    <Form
-        method="post"
-        message={form?.message}
-        submitButtonText="Create"
-        {errors}
-        {validate}
-    >
+    <Form message={form?.message} submitButtonText="Create" {errors} {validate}>
         <Input
             type="text"
             label="Name"

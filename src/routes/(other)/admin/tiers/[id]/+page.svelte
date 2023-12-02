@@ -33,13 +33,7 @@
 </svelte:head>
 
 <div class="mx-auto w-full max-w-xs">
-    <Form
-        method="post"
-        message={form?.message}
-        submitButtonText="Update"
-        {errors}
-        {validate}
-    >
+    <Form message={form?.message} submitButtonText="Update" {errors} {validate}>
         <Input
             type="text"
             label="Name"

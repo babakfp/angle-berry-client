@@ -19,8 +19,19 @@
     $: console.log("$_form.videos", $_form.videos)
 </script>
 
+<Form
+    message={form?.message}
+    doesUpload={true}
+    action="?/upload"
+    submitButtonText="Upload"
+    {errors}
+    {validate}
+>
+    <DropZone name="videos" accept=".mp4,.avi,.mkv" multiple />
+</Form>
+
 {#if $_form.videos.length}
-    <div class="mb-8 flex gap-4">
+    <div class="mt-8 flex gap-4">
         <form method="post" action="?/delete">
             <button class="btn btn-danger" type="submit">
                 Delete selected
@@ -45,18 +56,7 @@
     </div>
 {/if}
 
-<Form
-    message={form?.message}
-    doesUpload={true}
-    action="?/upload"
-    submitButtonText="Upload"
-    {errors}
-    {validate}
->
-    <DropZone name="videos" accept=".mp4,.avi,.mkv" multiple />
-</Form>
-
-<ul class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+<ul class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
     {#each data.videos as video}
         <li>
             <VideoGalleryItem

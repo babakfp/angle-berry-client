@@ -17,34 +17,30 @@
     $: console.log("$_form.videos", $_form.videos)
 </script>
 
-<div class="flex justify-between">
-    <div class="flex gap-4">
-        {#if $_form.videos.length}
-            <form method="post" action="?/delete">
-                <button class="btn btn-danger" type="submit">
-                    Delete selected
-                </button>
-
-                {#each $_form.videos as id}
-                    <input
-                        class="hidden"
-                        type="checkbox"
-                        name="videos"
-                        value={id}
-                        checked
-                    />
-                {/each}
-            </form>
-            <button
-                class="btn btn-gray-light"
-                on:click={() => ($_form.videos = [])}
-            >
-                Clear selection
+<div class="flex gap-4">
+    {#if $_form.videos.length}
+        <form method="post" action="?/delete">
+            <button class="btn btn-danger" type="submit">
+                Delete selected
             </button>
-        {/if}
-    </div>
 
-    <!-- <a class="btn btn-brand" href="/admin/tiers/create">Create</a> -->
+            {#each $_form.videos as id}
+                <input
+                    class="hidden"
+                    type="checkbox"
+                    name="videos"
+                    value={id}
+                    checked
+                />
+            {/each}
+        </form>
+        <button
+            class="btn btn-gray-light"
+            on:click={() => ($_form.videos = [])}
+        >
+            Clear selection
+        </button>
+    {/if}
 </div>
 
 <form method="post" enctype="multipart/form-data" action="?/upload">

@@ -1,9 +1,9 @@
 <script lang="ts">
     import { PUBLIC_POCKETBASE_URL } from "$env/static/public"
-    import VideoGalleryItem from "../tiers/VideoGalleryItem.svelte"
     import { deleteSchema } from "./schema.js"
     import { superForm } from "sveltekit-superforms/client"
     import DropZone from "$components/form/DropZone.svelte"
+    import VideoPlayer from "$components/VideoPlayer.svelte"
 
     export let data
     export let form
@@ -16,8 +16,6 @@
     } = superForm(data.form, { validators: deleteSchema })
 
     $: console.log("$_form.videos", $_form.videos)
-
-    let files: FileList
 </script>
 
 <div class="flex gap-4">
@@ -47,18 +45,15 @@
 </div>
 
 <form method="post" enctype="multipart/form-data" action="?/upload">
-    <DropZone name="videos" accept=".mp4,.avi,.mkv" multiple bind:files />
+    <DropZone name="videos" accept=".mp4,.avi,.mkv" multiple />
     <button type="submit">Submit</button>
 </form>
 
 <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
     {#each data.videos as video}
         <li>
-            <VideoGalleryItem
+            <VideoPlayer
                 src="{PUBLIC_POCKETBASE_URL}/api/files/{video.collectionName}/{video.id}/{video.file}"
-                checked={$_form.videos.includes(video.id)}
-                bind:group={$_form.videos}
-                value={video.id}
             />
         </li>
     {/each}

@@ -39,22 +39,14 @@ export const actions = {
         // if (!form.valid) return fail(400, { form })
 
         try {
-            console.log("videos", videos)
-
             await Promise.all(
-                videos.map(video => {
-                    console.log("video", video)
-
-                    return locals.pb
+                videos.map(video =>
+                    locals.pb
                         .collection("videos")
-                        .create({ file: video }, { requestKey: null })
-                }),
+                        .create({ file: video }, { requestKey: null }),
+                ),
             )
         } catch (e) {
-            console.log("e", e)
-
-            console.log(JSON.stringify(e, null, 4))
-
             const e2 = pbHandleFormActionError(e, {})
             if (e2) return e2
             throw e
@@ -67,7 +59,6 @@ export const actions = {
 
         const form = await superValidate(request, deleteSchema)
         if (!form.valid) return fail(400, { form })
-        console.log("form2", form)
 
         try {
             await Promise.all(
@@ -76,8 +67,6 @@ export const actions = {
                 }),
             )
         } catch (e) {
-            console.log(e)
-
             const e2 = pbHandleFormActionError(e, {})
             if (e2) return e2
             throw e

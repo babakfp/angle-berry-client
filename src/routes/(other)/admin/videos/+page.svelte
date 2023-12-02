@@ -3,6 +3,7 @@
     import VideoGalleryItem from "../tiers/VideoGalleryItem.svelte"
     import { deleteSchema } from "./schema.js"
     import { superForm } from "sveltekit-superforms/client"
+    import DropZone from "$components/form/DropZone.svelte"
 
     export let data
     export let form
@@ -15,6 +16,8 @@
     } = superForm(data.form, { validators: deleteSchema })
 
     $: console.log("$_form.videos", $_form.videos)
+
+    let files: FileList
 </script>
 
 <div class="flex gap-4">
@@ -44,14 +47,7 @@
 </div>
 
 <form method="post" enctype="multipart/form-data" action="?/upload">
-    <label for="file">Choose file to upload</label>
-    <input
-        type="file"
-        name="videos"
-        accept=".mp4,.avi,.mkv"
-        id="videos"
-        multiple
-    />
+    <DropZone name="videos" accept=".mp4,.avi,.mkv" multiple bind:files />
     <button type="submit">Submit</button>
 </form>
 

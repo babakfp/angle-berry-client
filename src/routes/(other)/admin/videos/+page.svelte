@@ -4,6 +4,7 @@
     import { superForm } from "sveltekit-superforms/client"
     import DropZone from "$components/form/DropZone.svelte"
     import VideoPlayer from "$components/VideoPlayer.svelte"
+    import Form from "$components/form/Form.svelte"
 
     export let data
     export let form
@@ -44,12 +45,18 @@
     {/if}
 </div>
 
-<form method="post" enctype="multipart/form-data" action="?/upload">
+<Form
+    message={form?.message}
+    doesUpload={true}
+    action="?/upload"
+    submitButtonText="Upload"
+    {errors}
+    {validate}
+>
     <DropZone name="videos" accept=".mp4,.avi,.mkv" multiple />
-    <button type="submit">Submit</button>
-</form>
+</Form>
 
-<ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+<ul class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
     {#each data.videos as video}
         <li>
             <VideoPlayer

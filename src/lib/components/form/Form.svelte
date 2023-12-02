@@ -9,6 +9,8 @@
     export let errors: any
     export let validate: any
     export let successMessage = ""
+    export let action = ""
+    export let doesUpload = false
 
     let isSubmitting = false
     let isRedirecting = false
@@ -42,6 +44,8 @@
     method="post"
     use:enhance={handleFormSubmit}
     novalidate
+    {action}
+    enctype={doesUpload ? "multipart/form-data" : undefined}
 >
     <slot />
 

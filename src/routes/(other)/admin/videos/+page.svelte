@@ -3,8 +3,8 @@
     import { deleteSchema } from "./schema.js"
     import { superForm } from "sveltekit-superforms/client"
     import DropZone from "$components/form/DropZone.svelte"
-    import VideoPlayer from "$components/VideoPlayer.svelte"
     import Form from "$components/form/Form.svelte"
+    import VideoGalleryItem from "../tiers/VideoGalleryItem.svelte"
 
     export let data
     export let form
@@ -59,8 +59,11 @@
 <ul class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
     {#each data.videos as video}
         <li>
-            <VideoPlayer
+            <VideoGalleryItem
                 src="{PUBLIC_POCKETBASE_URL}/api/files/{video.collectionName}/{video.id}/{video.file}"
+                checked={$_form.videos.includes(video.id)}
+                bind:group={$_form.videos}
+                value={video.id}
             />
         </li>
     {/each}

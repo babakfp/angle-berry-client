@@ -19,8 +19,8 @@
     $: console.log("$_form.videos", $_form.videos)
 </script>
 
-<div class="flex gap-4">
-    {#if $_form.videos.length}
+{#if $_form.videos.length}
+    <div class="mb-8 flex gap-4">
         <form method="post" action="?/delete">
             <button class="btn btn-danger" type="submit">
                 Delete selected
@@ -42,8 +42,8 @@
         >
             Clear selection
         </button>
-    {/if}
-</div>
+    </div>
+{/if}
 
 <Form
     message={form?.message}

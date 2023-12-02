@@ -56,7 +56,10 @@
     </div>
 {/if}
 
-<ul class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+<ul
+    class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3
+    {$_form.videos.length ? 'mt-4' : 'mt-8'}"
+>
     {#each data.videos as video}
         <li>
             <VideoGalleryItem

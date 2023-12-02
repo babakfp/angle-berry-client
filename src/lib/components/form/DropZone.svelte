@@ -23,7 +23,7 @@
     </p>
 
     {#if files}
-        <ul class="mt-4 space-y-2 break-all text-left text-xs">
+        <ul class="space-y-2 break-all text-left text-xs">
             {#each files as file}
                 <li>
                     {file.name} ({formatBytes(file.size)})

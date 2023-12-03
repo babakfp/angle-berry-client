@@ -1,10 +1,11 @@
 <script lang="ts">
     import { PUBLIC_POCKETBASE_URL } from "$env/static/public"
-    import { deleteSchema } from "./schema.js"
+    import { deleteSchema, uploadSchema } from "./schema.js"
     import { superForm } from "sveltekit-superforms/client"
     import DropZone from "$components/form/DropZone.svelte"
     import Form from "$components/form/Form.svelte"
     import VideoGalleryItem from "../tiers/VideoGalleryItem.svelte"
+    import { videoFormats } from "./schema"
 
     export let data
     export let form
@@ -16,7 +17,14 @@
         validate,
     } = superForm(data.form, { validators: deleteSchema })
 
-    $: console.log("$_form.videos", $_form.videos)
+    const {
+        form: uploadForm,
+        errors: uploadFormErrors,
+        constraints: uploadFormConstraints,
+        validate: uploadFormValidate,
+    } = superForm(data.uploadForm, {
+        validators: uploadSchema,
+    })
 </script>
 
 <Form
@@ -24,10 +32,18 @@
     doesUpload={true}
     action="?/upload"
     submitButtonText="Upload"
-    {errors}
-    {validate}
+    errors={uploadFormErrors}
+    validate={uploadFormValidate}
 >
-    <DropZone name="videos" accept=".mp4,.avi,.mkv" multiple />
+    <DropZone
+        bind:files={$uploadForm.videos}
+        name="videos"
+        accept={videoFormats}
+        multiple
+        error={$uploadFormErrors?.videos
+            ? $uploadFormErrors?.videos[0]
+            : form?.pb?.videos?.message}
+    />
 </Form>
 
 {#if $_form.videos.length}

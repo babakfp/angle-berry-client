@@ -18,11 +18,11 @@
     async function handleFormSubmit({ cancel }: { cancel: any }) {
         isSubmitting = true
 
-        const submitionResult = await validate()
+        const validation = await validate()
 
-        if (!submitionResult.valid) {
+        if (!validation.valid) {
             cancel()
-            $errors = submitionResult.errors
+            errors.set(validation.errors)
             isSubmitting = false
             message = ""
         }

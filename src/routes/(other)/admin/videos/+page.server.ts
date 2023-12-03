@@ -5,7 +5,7 @@ import {
 } from "$utilities/pb"
 import type { VideosResponse, ClientResponseError } from "$utilities/pb-types"
 import { superValidate } from "sveltekit-superforms/server"
-import { deleteSchema, uploadedVideosSchema } from "./schema.js"
+import { deleteSchema, uploadSchema } from "./schema.js"
 
 export async function load({ locals }) {
     if (!locals.user) throw redirect(303, "/login")
@@ -13,12 +13,13 @@ export async function load({ locals }) {
         throw error(401, "You are not authorized to see this page!")
 
     const form = await superValidate(deleteSchema)
+    const uploadForm = await superValidate(uploadSchema)
 
     try {
         const videos: VideosResponse[] = await locals.pb
             .collection("videos")
             .getFullList()
-        return { form, videos }
+        return { form, uploadForm, videos }
     } catch (e) {
         pbHandleClientResponseError(e as ClientResponseError)
         throw e
@@ -32,22 +33,12 @@ export const actions = {
             throw error(401, "You are not authorized to see this page!")
 
         const formData = await request.formData()
+
+        const form = await superValidate(formData, uploadSchema)
+        // form.data.videos = form.data.videos.filter(video => video !== undefined)
+        if (!form.valid) return fail(400, { form })
+
         const videos = formData.getAll("videos")
-
-        try {
-            uploadedVideosSchema.parse(videos)
-        } catch {
-            return fail(400, { message: "File is not valid!" })
-        }
-
-        videos.forEach(video => {
-            if (!(video instanceof File)) {
-                return fail(400, { message: "Something went wrong!" })
-            }
-            if (video.name === "undefined") {
-                return fail(400, { message: "No file is provided!" })
-            }
-        })
 
         try {
             await Promise.all(

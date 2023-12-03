@@ -13,14 +13,14 @@
 <div>
     <label
         for={name}
-        class="grid cursor-pointer justify-center justify-items-center gap-2 rounded border-2 border-dashed border-gray-600 bg-gray-700/20 p-4 pt-6 text-center"
+        class="grid cursor-pointer justify-center justify-items-center gap-2 rounded border-2 border-dashed border-gray-600 bg-gray-700/20 p-4 pt-6 text-center text-gray-400"
     >
         <IconUpload class="text-2xl" />
 
-        <p class="mt-2 text-sm text-gray-500">
+        <p class="mt-2 text-sm">
             <span class="font-semibold">Click to upload</span> or drag and drop
         </p>
-        <p class="text-xs text-gray-500">
+        <p class="text-xs sm:text-sm">
             {accept.split(",").join(", ")}
         </p>
 

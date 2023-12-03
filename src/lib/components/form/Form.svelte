@@ -6,8 +6,8 @@
 
     export let message: string
     export let submitButtonText: string
-    export let errors: any
-    export let validate: any
+    export let errors: any = undefined
+    export let validate: any = undefined
     export let successMessage = ""
     export let action = ""
     export let doesUpload = false
@@ -17,22 +17,27 @@
 
     async function handleFormSubmit({ cancel }: { cancel: any }) {
         isSubmitting = true
+        message = ""
 
-        const validation = await validate()
+        if (validate !== undefined && errors !== undefined) {
+            const validation = await validate()
 
-        if (!validation.valid) {
-            cancel()
-            errors.set(validation.errors)
-            isSubmitting = false
-            message = ""
+            if (!validation.valid) {
+                cancel()
+                errors.set(validation.errors)
+                isSubmitting = false
+                message = ""
+            }
         }
 
         return async ({ result, update }: { result: any; update: any }) => {
             isSubmitting = false
+
             if (result.type === "redirect") {
                 isRedirecting = true
                 message = successMessage
             }
+
             update()
         }
     }

@@ -1,14 +1,13 @@
 <script lang="ts">
     import IconUpload from "$icons/IconUpload.svelte"
     import { formatBytes } from "$utilities/formatBytes"
-    import type { FileServer } from "$utilities/FileServer"
     import Description from "$components/form/Description.svelte"
 
     export let name: string
     export let accept: string
     export let multiple = false
-    export let files: FileList | FileServer[]
     export let error = ""
+    export let files: FileList
 </script>
 
 <div>

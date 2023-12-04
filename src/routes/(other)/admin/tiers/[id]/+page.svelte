@@ -15,7 +15,7 @@
         form: formUpdate,
         errors: formUpdateErrors,
         constraints: formUpdateConstraints,
-        validate,
+        validate: formUpdateValidate,
     } = superForm(data.formUpdate, { validators: formSchemaUpdateTier })
 
     if (!$formUpdate.name) $formUpdate.name = data.tier.name
@@ -40,7 +40,7 @@
         message={form?.message}
         submitButtonText="Update"
         errors={$formUpdateErrors}
-        {validate}
+        validate={formUpdateValidate}
     >
         <Input
             type="text"

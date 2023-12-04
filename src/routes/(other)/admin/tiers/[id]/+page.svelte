@@ -1,7 +1,7 @@
 <script lang="ts">
     import { PUBLIC_POCKETBASE_URL } from "$env/static/public"
     import Input from "$components/form/Input.svelte"
-    import { schemaUpdateTier } from "../schema"
+    import { formSchemaUpdateTier } from "../schema"
     import { superForm } from "sveltekit-superforms/client"
     import Form from "$components/form/Form.svelte"
     import Modal from "$components/Modal.svelte"
@@ -16,7 +16,7 @@
         errors,
         constraints,
         validate,
-    } = superForm(data.formUpdate, { validators: schemaUpdateTier })
+    } = superForm(data.formUpdate, { validators: formSchemaUpdateTier })
 
     if (!$formUpdate.name) $formUpdate.name = data.tier.name
     if (!$formUpdate.price) $formUpdate.price = data.tier.price

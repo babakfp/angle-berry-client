@@ -4,7 +4,7 @@ import {
     pbHandleFormActionError,
 } from "$utilities/pb"
 import { superValidate } from "sveltekit-superforms/server"
-import { schemaDeleteTier } from "./schema"
+import { formSchemaDeleteTier } from "./schema"
 import type {
     TiersResponse,
     UsersResponse,
@@ -16,7 +16,7 @@ export async function load({ locals }) {
     if (!locals.user.isAdmin)
         throw error(401, "You are not authorized to see this page!")
 
-    const form = await superValidate(schemaDeleteTier)
+    const form = await superValidate(formSchemaDeleteTier)
 
     try {
         const tiers: TiersResponse[] = await locals.pb
@@ -38,7 +38,7 @@ export const actions = {
         if (!locals.user.isAdmin)
             throw error(401, "You are not authorized to see this page!")
 
-        const form = await superValidate(request, schemaDeleteTier)
+        const form = await superValidate(request, formSchemaDeleteTier)
         if (!form.valid) return fail(400, { form })
 
         try {

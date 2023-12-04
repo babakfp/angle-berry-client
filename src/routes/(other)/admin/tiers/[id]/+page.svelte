@@ -14,7 +14,7 @@
     const {
         form: formUpdate,
         errors: formUpdateErrors,
-        constraints,
+        constraints: formUpdateConstraints,
         validate,
     } = superForm(data.formUpdate, { validators: formSchemaUpdateTier })
 
@@ -51,7 +51,7 @@
             error={$formUpdateErrors?.name
                 ? $formUpdateErrors?.name[0]
                 : form?.pb?.name?.message}
-            {...$constraints.name}
+            {...$formUpdateConstraints.name}
         />
         <Input
             type="number"
@@ -62,7 +62,7 @@
             error={$formUpdateErrors?.price
                 ? $formUpdateErrors?.price[0]
                 : form?.pb?.price?.message}
-            {...$constraints.price}
+            {...$formUpdateConstraints.price}
         />
         <Input
             type="number"
@@ -73,7 +73,7 @@
             error={$formUpdateErrors?.invites
                 ? $formUpdateErrors?.invites[0]
                 : form?.pb?.invites?.message}
-            {...$constraints.invites}
+            {...$formUpdateConstraints.invites}
         />
         <ul class="grid gap-4 rounded bg-gray-700 p-2">
             {#each selectedVideos as video (video.id)}

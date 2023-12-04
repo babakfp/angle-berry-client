@@ -25,7 +25,7 @@
         </p>
 
         {#if files}
-            <ul class="mt-2 space-y-2 break-all text-left text-xs">
+            <ul class="mt-2 space-y-2 break-all text-left text-xs text-white">
                 {#each files as file}
                     <li>
                         {file.name} ({formatBytes(file.size)})

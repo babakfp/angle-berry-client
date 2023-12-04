@@ -30,7 +30,9 @@
 </Form>
 
 {#if $deleteForm.videos.length}
-    <div class="mt-8 flex gap-4">
+    <div
+        class="sticky top-header z-1 mt-8 flex gap-4 bg-gray-800/95 p-4 backdrop-blur"
+    >
         <form method="post" action="?/delete">
             <button class="btn btn-danger" type="submit">
                 Delete selected

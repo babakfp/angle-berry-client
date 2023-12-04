@@ -9,6 +9,6 @@ export const formSchemaCreateTier = z.object({
 
 export const formSchemaUpdateTier = formSchemaCreateTier
 
-export const formSchemaDeleteTier = z.object({
+export const formSchemaDeleteTiers = z.object({
     ids: z.string().array().default([]),
 })

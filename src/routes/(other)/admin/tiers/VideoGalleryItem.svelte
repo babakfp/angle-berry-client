@@ -11,7 +11,7 @@
 <div class="grid gap-1">
     <VideoPlayer {src} />
     <Checkbox
-        class="btn btn-gray-glass-outline"
+        class="btn {checked ? 'btn-gray' : 'btn-gray-glass-outline'}"
         {checked}
         bind:group
         {value}

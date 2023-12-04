@@ -13,7 +13,7 @@
 
     const {
         form: formUpdate,
-        errors,
+        errors: formUpdateErrors,
         constraints,
         validate,
     } = superForm(data.formUpdate, { validators: formSchemaUpdateTier })
@@ -39,7 +39,7 @@
         action="?/update"
         message={form?.message}
         submitButtonText="Update"
-        {errors}
+        errors={$formUpdateErrors}
         {validate}
     >
         <Input
@@ -48,7 +48,9 @@
             name="name"
             bind:value={$formUpdate.name}
             placeholder={data.tier.name}
-            error={$errors?.name ? $errors?.name[0] : form?.pb?.name?.message}
+            error={$formUpdateErrors?.name
+                ? $formUpdateErrors?.name[0]
+                : form?.pb?.name?.message}
             {...$constraints.name}
         />
         <Input
@@ -57,8 +59,8 @@
             name="price"
             bind:value={$formUpdate.price}
             placeholder={`${data.tier.price}`}
-            error={$errors?.price
-                ? $errors?.price[0]
+            error={$formUpdateErrors?.price
+                ? $formUpdateErrors?.price[0]
                 : form?.pb?.price?.message}
             {...$constraints.price}
         />
@@ -68,8 +70,8 @@
             name="invites"
             bind:value={$formUpdate.invites}
             placeholder={`${data.tier.invites}`}
-            error={$errors?.invites
-                ? $errors?.invites[0]
+            error={$formUpdateErrors?.invites
+                ? $formUpdateErrors?.invites[0]
                 : form?.pb?.invites?.message}
             {...$constraints.invites}
         />

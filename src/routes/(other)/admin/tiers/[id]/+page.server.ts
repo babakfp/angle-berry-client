@@ -16,7 +16,7 @@ export async function load({ locals, params }) {
     if (!locals.user.isAdmin)
         throw error(401, "You are not authorized to see this page!")
 
-    const form = await superValidate(schema)
+    const formUpdate = await superValidate(schema)
 
     try {
         const tier: TiersResponse = await locals.pb
@@ -25,7 +25,7 @@ export async function load({ locals, params }) {
         const videos: VideosResponse[] = await locals.pb
             .collection("videos")
             .getFullList()
-        return { form, tier, videos }
+        return { formUpdate, tier, videos }
     } catch (e) {
         pbHandleClientResponseError(e as ClientResponseError)
         throw e
@@ -33,7 +33,7 @@ export async function load({ locals, params }) {
 }
 
 export const actions = {
-    default: async ({ locals, request, params }) => {
+    update: async ({ locals, request, params }) => {
         if (!locals.user) throw redirect(303, "/login")
         if (!locals.user.isAdmin)
             throw error(401, "You are not authorized to see this page!")

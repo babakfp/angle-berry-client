@@ -12,18 +12,20 @@
     export let form
 
     const {
-        form: _form,
+        form: formUpdate,
         errors,
         constraints,
         validate,
-    } = superForm(data.form, { validators: schema })
+    } = superForm(data.formUpdate, { validators: schema })
 
-    if (!$_form.name) $_form.name = data.tier.name
-    if (!$_form.price) $_form.price = data.tier.price
-    if (!$_form.invites) $_form.invites = data.tier.invites
-    if (!$_form.videos.length) $_form.videos = data.tier.videos
+    if (!$formUpdate.name) $formUpdate.name = data.tier.name
+    if (!$formUpdate.price) $formUpdate.price = data.tier.price
+    if (!$formUpdate.invites) $formUpdate.invites = data.tier.invites
+    if (!$formUpdate.videos.length) $formUpdate.videos = data.tier.videos
 
-    $: selectedVideos = data.videos.filter(v => $_form.videos.includes(v.id))
+    $: selectedVideos = data.videos.filter(v =>
+        $formUpdate.videos.includes(v.id),
+    )
 
     let isGalleryPopupOpen = false
 </script>
@@ -33,12 +35,18 @@
 </svelte:head>
 
 <div class="mx-auto w-full max-w-xs">
-    <Form message={form?.message} submitButtonText="Update" {errors} {validate}>
+    <Form
+        action="?/update"
+        message={form?.message}
+        submitButtonText="Update"
+        {errors}
+        {validate}
+    >
         <Input
             type="text"
             label="Name"
             name="name"
-            bind:value={$_form.name}
+            bind:value={$formUpdate.name}
             placeholder={data.tier.name}
             error={$errors?.name ? $errors?.name[0] : form?.pb?.name?.message}
             {...$constraints.name}
@@ -47,7 +55,7 @@
             type="number"
             label="Price"
             name="price"
-            bind:value={$_form.price}
+            bind:value={$formUpdate.price}
             placeholder={`${data.tier.price}`}
             error={$errors?.price
                 ? $errors?.price[0]
@@ -58,7 +66,7 @@
             type="number"
             label="Invites"
             name="invites"
-            bind:value={$_form.invites}
+            bind:value={$formUpdate.invites}
             placeholder={`${data.tier.invites}`}
             error={$errors?.invites
                 ? $errors?.invites[0]
@@ -70,8 +78,8 @@
                 <li transition:fade>
                     <VideoGalleryItem
                         src="{PUBLIC_POCKETBASE_URL}/api/files/{video.collectionName}/{video.id}/{video.file}"
-                        checked={$_form.videos.includes(video.id)}
-                        bind:group={$_form.videos}
+                        checked={$formUpdate.videos.includes(video.id)}
+                        bind:group={$formUpdate.videos}
                         value={video.id}
                     />
                 </li>
@@ -97,8 +105,8 @@
             <li>
                 <VideoGalleryItem
                     src="{PUBLIC_POCKETBASE_URL}/api/files/{video.collectionName}/{video.id}/{video.file}"
-                    checked={$_form.videos.includes(video.id)}
-                    bind:group={$_form.videos}
+                    checked={$formUpdate.videos.includes(video.id)}
+                    bind:group={$formUpdate.videos}
                     value={video.id}
                 />
             </li>

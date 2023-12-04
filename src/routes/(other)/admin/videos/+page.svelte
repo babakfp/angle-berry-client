@@ -6,6 +6,7 @@
     import Form from "$components/form/Form.svelte"
     import VideoGalleryItem from "../tiers/VideoGalleryItem.svelte"
     import { videoFormats } from "./schema"
+    import { shrinkHeight } from "$utilities/shrinkHeight"
 
     export let data
     export let form
@@ -16,6 +17,7 @@
 </script>
 
 <Form
+    class="mb-8"
     message={form?.message}
     doesUpload={true}
     action="?/upload"
@@ -29,38 +31,35 @@
     />
 </Form>
 
-{#if $deleteForm.videos.length}
-    <div
-        class="sticky top-header z-1 mt-8 flex gap-4 bg-gray-800/95 p-4 backdrop-blur"
-    >
-        <form method="post" action="?/delete">
-            <button class="btn btn-danger" type="submit">
-                Delete selected
+<div class="sticky top-header z-1 -mt-4 bg-gray-800">
+    {#if $deleteForm.videos.length}
+        <div class="flex items-end gap-4 py-4" transition:shrinkHeight>
+            <form method="post" action="?/delete">
+                <button class="btn btn-danger" type="submit">
+                    Delete selected
+                </button>
+
+                {#each $deleteForm.videos as id}
+                    <input
+                        class="hidden"
+                        type="checkbox"
+                        name="videos"
+                        value={id}
+                        checked
+                    />
+                {/each}
+            </form>
+            <button
+                class="btn btn-gray-light"
+                on:click={() => ($deleteForm.videos = [])}
+            >
+                Clear selection
             </button>
+        </div>
+    {/if}
+</div>
 
-            {#each $deleteForm.videos as id}
-                <input
-                    class="hidden"
-                    type="checkbox"
-                    name="videos"
-                    value={id}
-                    checked
-                />
-            {/each}
-        </form>
-        <button
-            class="btn btn-gray-light"
-            on:click={() => ($deleteForm.videos = [])}
-        >
-            Clear selection
-        </button>
-    </div>
-{/if}
-
-<ul
-    class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3
-    {$deleteForm.videos.length ? 'mt-4' : 'mt-8'}"
->
+<ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
     {#each data.videos as video}
         <li>
             <VideoGalleryItem

@@ -11,6 +11,8 @@
     export let successMessage = ""
     export let action = ""
     export let doesUpload = false
+    export let _class = ""
+    export { _class as class }
 
     let isSubmitting = false
     let isRedirecting = false
@@ -44,7 +46,7 @@
 </script>
 
 <form
-    class="grid gap-4"
+    class="grid gap-4 {_class}"
     class:pointer-events-none={isSubmitting || isRedirecting}
     method="post"
     use:enhance={handleFormSubmit}

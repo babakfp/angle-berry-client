@@ -37,7 +37,7 @@ export const actions = {
     update: async ({ locals, request, params }) => {
         if (!locals.user) throw redirect(303, "/login")
         if (!locals.user.isAdmin)
-            throw error(401, "You are not authorized to see this page!")
+            throw error(401, "You are not authorized to perform this action!")
 
         const formUpdate = await superValidate(request, formSchemaUpdateTier)
         if (!formUpdate.valid) return fail(400, { formUpdate })
@@ -57,7 +57,7 @@ export const actions = {
     delete: async ({ locals, request, params }) => {
         if (!locals.user) throw redirect(303, "/login")
         if (!locals.user.isAdmin)
-            throw error(401, "You are not authorized to see this page!")
+            throw error(401, "You are not authorized to perform this action!")
 
         const formDelete = await superValidate(request, formSchemaDeleteTier)
         if (!formDelete.valid) return fail(400, { formDelete })

@@ -3,11 +3,11 @@ import type { TiersResponse, ClientResponseError } from "$utilities/pb-types"
 
 export const pbHandleFormActionError = (
     e: unknown | ClientResponseError,
-    form: any,
+    formData: any,
 ) => {
     if ((e as ClientResponseError).status === 0) {
         return fail(500, {
-            form,
+            ...formData,
             message: "Database communication failure!",
         })
     }
@@ -16,7 +16,7 @@ export const pbHandleFormActionError = (
         (e as ClientResponseError).response.message
     ) {
         return fail((e as ClientResponseError).response.code, {
-            form,
+            ...formData,
             message: (e as ClientResponseError).response.message,
             pb: (e as ClientResponseError).response.data,
         })

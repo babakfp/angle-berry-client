@@ -6,6 +6,7 @@
 
     export let message: string
     export let submitButtonText: string
+    export let submitButtonClass = ""
     export let errors: any = undefined
     export let validate: any = undefined
     export let successMessage = ""
@@ -56,7 +57,7 @@
 >
     <slot />
 
-    <FormSubmitButton disabled={isSubmitting}>
+    <FormSubmitButton class={submitButtonClass} disabled={isSubmitting}>
         {#if isSubmitting}
             <IconLoading class="text-2xl" />
         {:else if isRedirecting}

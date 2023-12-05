@@ -1,7 +1,7 @@
 <script lang="ts">
     import { PUBLIC_POCKETBASE_URL } from "$env/static/public"
     import Input from "$components/form/Input.svelte"
-    import { formSchemaUpdateTier } from "../schema"
+    import { formSchemaUpdateTier, formSchemaDeleteTier } from "../schema"
     import { superForm } from "sveltekit-superforms/client"
     import Form from "$components/form/Form.svelte"
     import Modal from "$components/Modal.svelte"
@@ -16,6 +16,7 @@
         errors: formUpdateErrors,
         constraints: formUpdateConstraints,
         validate: formUpdateValidate,
+        formId: formUpdateFormId,
     } = superForm(data.formUpdate, { validators: formSchemaUpdateTier })
 
     if (!$formUpdateForm.name) $formUpdateForm.name = data.tier.name
@@ -29,6 +30,14 @@
     )
 
     let isGalleryPopupOpen = false
+
+    const {
+        form: formDeleteForm,
+        errors: formDeleteErrors,
+        constraints: formDeleteConstraints,
+        validate: formDeleteValidate,
+        formId: formDeleteFormId,
+    } = superForm(data.formDelete, { validators: formSchemaDeleteTier })
 </script>
 
 <svelte:head>
@@ -38,7 +47,7 @@
 <div class="mx-auto w-full max-w-xs">
     <Form
         action="?/update"
-        message={form?.message}
+        message={form?.id === $formUpdateFormId && form?.message}
         submitButtonText="Update"
         errors={$formUpdateErrors}
         validate={formUpdateValidate}
@@ -91,6 +100,17 @@
             </button>
         </ul>
     </Form>
+
+    <hr class="my-4 border-gray-700" />
+
+    <Form
+        action="?/delete"
+        message={form?.id === $formDeleteFormId && form?.message}
+        submitButtonText="Delete"
+        submitButtonClass="btn-danger"
+        errors={$formUpdateErrors}
+        validate={formDeleteValidate}
+    ></Form>
 </div>
 
 <Modal

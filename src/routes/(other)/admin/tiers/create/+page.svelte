@@ -32,7 +32,7 @@
             label="Name"
             name="name"
             bind:value={$_form.name}
-            error={$errors?.name ? $errors?.name[0] : form?.pb?.name?.message}
+            error={$errors?.name?.[0] ?? form?.pb?.name?.message}
             {...$constraints.name}
         />
         <Input
@@ -40,9 +40,7 @@
             label="Price"
             name="price"
             bind:value={$_form.price}
-            error={$errors?.price
-                ? $errors?.price[0]
-                : form?.pb?.price?.message}
+            error={$errors?.price?.[0] ?? form?.pb?.price?.message}
             {...$constraints.price}
         />
         <Input
@@ -50,9 +48,7 @@
             label="Invites"
             name="invites"
             bind:value={$_form.invites}
-            error={$errors?.invites
-                ? $errors?.invites[0]
-                : form?.pb?.invites?.message}
+            error={$errors?.invites?.[0] ?? form?.pb?.invites?.message}
             {...$constraints.invites}
         />
         <ul class="grid gap-4 rounded bg-gray-700 p-2">

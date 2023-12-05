@@ -48,9 +48,7 @@
             name="name"
             bind:value={$formUpdate.name}
             placeholder={data.tier.name}
-            error={$formUpdateErrors?.name
-                ? $formUpdateErrors?.name[0]
-                : form?.pb?.name?.message}
+            error={$formUpdateErrors?.name?.[0] ?? form?.pb?.name?.message}
             {...$formUpdateConstraints.name}
         />
         <Input
@@ -59,9 +57,7 @@
             name="price"
             bind:value={$formUpdate.price}
             placeholder={`${data.tier.price}`}
-            error={$formUpdateErrors?.price
-                ? $formUpdateErrors?.price[0]
-                : form?.pb?.price?.message}
+            error={$formUpdateErrors?.price?.[0] ?? form?.pb?.price?.message}
             {...$formUpdateConstraints.price}
         />
         <Input
@@ -70,9 +66,8 @@
             name="invites"
             bind:value={$formUpdate.invites}
             placeholder={`${data.tier.invites}`}
-            error={$formUpdateErrors?.invites
-                ? $formUpdateErrors?.invites[0]
-                : form?.pb?.invites?.message}
+            error={$formUpdateErrors?.invites?.[0] ??
+                form?.pb?.invites?.message}
             {...$formUpdateConstraints.invites}
         />
         <ul class="grid gap-4 rounded bg-gray-700 p-2">

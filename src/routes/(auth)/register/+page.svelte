@@ -39,17 +39,13 @@
     >
         <UsernameField
             bind:value={$_form.username}
-            error={$errors?.username
-                ? $errors?.username[0]
-                : form?.pb?.username?.message}
+            error={$errors?.username?.[0] ?? form?.pb?.username?.message}
             {...$constraints.username}
         />
         <PasswordField
             bind:value={$_form.password}
             autocomplete="new-password"
-            error={$errors?.password
-                ? $errors?.password[0]
-                : form?.pb?.password?.message}
+            error={$errors?.password?.[0] ?? form?.pb?.password?.message}
             {...$constraints.password}
         />
     </Form>

@@ -32,9 +32,7 @@
     let isGalleryPopupOpen = false
 
     const {
-        form: formDeleteForm,
         errors: formDeleteErrors,
-        constraints: formDeleteConstraints,
         validate: formDeleteValidate,
         formId: formDeleteFormId,
     } = superForm(data.formDelete, { validators: formSchemaDeleteTier })
@@ -108,7 +106,7 @@
         message={form?.id === $formDeleteFormId && form?.message}
         submitButtonText="Delete"
         submitButtonClass="btn-danger"
-        errors={$formUpdateErrors}
+        errors={$formDeleteErrors}
         validate={formDeleteValidate}
     ></Form>
 </div>

@@ -1,13 +1,13 @@
-export const formatBytes = (sizeInBytes:number) =>{
-    let size = sizeInBytes;
-    const units = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+export const formatBytes = (sizeInBytes: number) => {
+    let size = sizeInBytes
+    const units = ["Bytes", "KB", "MB", "GB", "TB"]
 
-    let unitIndex = 0;
+    let unitIndex = 0
 
     while (size >= 1024 && unitIndex < units.length - 1) {
-        size /= 1024;
-        unitIndex++;
+        size /= 1024
+        unitIndex++
     }
 
-    return size.toFixed(2) + ' ' + units[unitIndex];
+    return size.toFixed(2) + " " + units[unitIndex]
 }

@@ -113,7 +113,9 @@
     <svelte:fragment slot="actions">
         <button
             class="btn btn-gray"
-            on:click={() => (isGalleryPopupOpen = false)}>Close</button
+            on:click={() => (isGalleryPopupOpen = false)}
         >
+            Close
+        </button>
     </svelte:fragment>
 </Modal>

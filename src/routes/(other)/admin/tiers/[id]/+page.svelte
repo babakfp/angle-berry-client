@@ -12,19 +12,20 @@
     export let form
 
     const {
-        form: formUpdate,
+        form: formUpdateForm,
         errors: formUpdateErrors,
         constraints: formUpdateConstraints,
         validate: formUpdateValidate,
     } = superForm(data.formUpdate, { validators: formSchemaUpdateTier })
 
-    if (!$formUpdate.name) $formUpdate.name = data.tier.name
-    if (!$formUpdate.price) $formUpdate.price = data.tier.price
-    if (!$formUpdate.invites) $formUpdate.invites = data.tier.invites
-    if (!$formUpdate.videos.length) $formUpdate.videos = data.tier.videos
+    if (!$formUpdateForm.name) $formUpdateForm.name = data.tier.name
+    if (!$formUpdateForm.price) $formUpdateForm.price = data.tier.price
+    if (!$formUpdateForm.invites) $formUpdateForm.invites = data.tier.invites
+    if (!$formUpdateForm.videos.length)
+        $formUpdateForm.videos = data.tier.videos
 
     $: selectedVideos = data.videos.filter(v =>
-        $formUpdate.videos.includes(v.id),
+        $formUpdateForm.videos.includes(v.id),
     )
 
     let isGalleryPopupOpen = false
@@ -46,7 +47,7 @@
             type="text"
             label="Name"
             name="name"
-            bind:value={$formUpdate.name}
+            bind:value={$formUpdateForm.name}
             placeholder={data.tier.name}
             error={$formUpdateErrors?.name?.[0] ?? form?.pb?.name?.message}
             {...$formUpdateConstraints.name}
@@ -55,7 +56,7 @@
             type="number"
             label="Price"
             name="price"
-            bind:value={$formUpdate.price}
+            bind:value={$formUpdateForm.price}
             placeholder={`${data.tier.price}`}
             error={$formUpdateErrors?.price?.[0] ?? form?.pb?.price?.message}
             {...$formUpdateConstraints.price}
@@ -64,7 +65,7 @@
             type="number"
             label="Invites"
             name="invites"
-            bind:value={$formUpdate.invites}
+            bind:value={$formUpdateForm.invites}
             placeholder={`${data.tier.invites}`}
             error={$formUpdateErrors?.invites?.[0] ??
                 form?.pb?.invites?.message}
@@ -75,8 +76,8 @@
                 <li transition:fade>
                     <VideoGalleryItem
                         src="{PUBLIC_POCKETBASE_URL}/api/files/{video.collectionName}/{video.id}/{video.file}"
-                        checked={$formUpdate.videos.includes(video.id)}
-                        bind:group={$formUpdate.videos}
+                        checked={$formUpdateForm.videos.includes(video.id)}
+                        bind:group={$formUpdateForm.videos}
                         value={video.id}
                     />
                 </li>
@@ -102,8 +103,8 @@
             <li>
                 <VideoGalleryItem
                     src="{PUBLIC_POCKETBASE_URL}/api/files/{video.collectionName}/{video.id}/{video.file}"
-                    checked={$formUpdate.videos.includes(video.id)}
-                    bind:group={$formUpdate.videos}
+                    checked={$formUpdateForm.videos.includes(video.id)}
+                    bind:group={$formUpdateForm.videos}
                     value={video.id}
                 />
             </li>

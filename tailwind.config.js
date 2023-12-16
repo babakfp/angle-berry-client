@@ -65,54 +65,28 @@ export default {
         },
     },
     plugins: [
-        outlineInsetUtility(),
-        linkComponents(),
-        buttonComponents(),
-        resetAutofillInput(),
+        ({ addUtilities, addComponents }) => [
+            addUtilities({ ".outline-inset": {} }),
+            addComponents({ ".link": {} }),
+            addComponents({
+                ".btn": {},
+                ".btn-gray-light": {},
+                ".btn-gray-light-glass": {},
+                ".btn-gray-light-glass-outline": {},
+                ".btn-gray": {},
+                ".btn-gray-glass": {},
+                ".btn-gray-glass-outline": {},
+                ".btn-brand": {},
+                ".btn-danger": {},
+            }),
+            addUtilities({
+                ".reset-autofill-input": {
+                    "-webkit-background-clip": "text",
+                    "-webkit-text-fill-color": "theme(colors.body.text)",
+                    "box-shadow": "inset 0 0 0 9999px theme(colors.body.bg)",
+                    "caret-color": "theme(colors.body.text)",
+                },
+            }),
+        ],
     ],
-}
-
-function outlineInsetUtility() {
-    return ({ addUtilities }) => {
-        addUtilities({
-            ".outline-inset": {},
-        })
-    }
-}
-
-function linkComponents() {
-    return ({ addComponents }) => {
-        addComponents({
-            ".link": {},
-        })
-    }
-}
-
-function buttonComponents() {
-    return ({ addComponents }) => {
-        addComponents({
-            ".btn": {},
-            ".btn-gray-light": {},
-            ".btn-gray-light-glass": {},
-            ".btn-gray-light-glass-outline": {},
-            ".btn-gray": {},
-            ".btn-gray-glass": {},
-            ".btn-gray-glass-outline": {},
-            ".btn-brand": {},
-            ".btn-danger": {},
-        })
-    }
-}
-
-function resetAutofillInput() {
-    return ({ addUtilities }) => {
-        addUtilities({
-            ".reset-autofill-input": {
-                "-webkit-background-clip": "text",
-                "-webkit-text-fill-color": "theme(colors.body.text)",
-                "box-shadow": "inset 0 0 0 9999px theme(colors.body.bg)",
-                "caret-color": "theme(colors.body.text)",
-            },
-        })
-    }
 }

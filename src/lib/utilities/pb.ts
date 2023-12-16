@@ -25,10 +25,10 @@ export const pbHandleFormActionError = (
 
 export const pbHandleClientResponseError = (e: ClientResponseError) => {
     if (e.status === 0) {
-        throw error(500, "Database communication failure!")
+        error(500, "Database communication failure!")
     }
     if (e.response.code && e.response.message) {
-        throw error(e.response.code, e.response.message)
+        error(e.response.code, e.response.message)
     }
 }
 

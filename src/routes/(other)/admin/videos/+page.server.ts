@@ -16,9 +16,9 @@ import { formatBytes } from "$utilities/formatBytes"
 import type { FileServer } from "$utilities/FileServer"
 
 export async function load({ locals }) {
-    if (!locals.user) throw redirect(303, "/login")
+    if (!locals.user) redirect(303, "/login")
     if (!locals.user.isAdmin)
-        throw error(401, "You are not authorized to see this page!")
+        error(401, "You are not authorized to see this page!")
 
     const deleteForm = await superValidate(deleteSchema)
 
@@ -39,9 +39,9 @@ export async function load({ locals }) {
 
 export const actions = {
     upload: async ({ locals, request }) => {
-        if (!locals.user) throw redirect(303, "/login")
+        if (!locals.user) redirect(303, "/login")
         if (!locals.user.isAdmin)
-            throw error(401, "You are not authorized to perform this action!")
+            error(401, "You are not authorized to perform this action!")
 
         const formData = await request.formData()
         const videos = formData.getAll("videos")
@@ -99,9 +99,9 @@ export const actions = {
         }
     },
     delete: async ({ locals, request }) => {
-        if (!locals.user) throw redirect(303, "/login")
+        if (!locals.user) redirect(303, "/login")
         if (!locals.user.isAdmin)
-            throw error(401, "You are not authorized to perform this action!")
+            error(401, "You are not authorized to perform this action!")
 
         const deleteForm = await superValidate(request, deleteSchema)
         if (!deleteForm.valid) return fail(400, { deleteForm })

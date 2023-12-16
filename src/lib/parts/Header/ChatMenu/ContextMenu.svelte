@@ -115,8 +115,8 @@
             title={copyTimeoutId
                 ? "Copied"
                 : $selectedMessageIds.length
-                ? "Copy Selected as Text"
-                : "Copy Text"}
+                  ? "Copy Selected as Text"
+                  : "Copy Text"}
             icon={IconClipboard}
             isDisabled={!!copyTimeoutId}
             on:click={copyMessage}

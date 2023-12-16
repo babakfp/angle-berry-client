@@ -8,14 +8,14 @@ import { schema } from "../schema"
 import type { UsersResponse, ClientResponseError } from "$utilities/pb-types"
 
 export const load = async ({ locals }) => {
-    if (locals.user) throw redirect(303, "/")
+    if (locals.user) redirect(303, "/")
     const form = await superValidate(schema)
     return { form }
 }
 
 export const actions = {
     default: async ({ locals, request, url }) => {
-        if (locals.user) throw redirect(303, "/")
+        if (locals.user) redirect(303, "/")
 
         const form = await superValidate(request, schema)
         if (!form.valid) return fail(400, { form })
@@ -69,9 +69,9 @@ export const actions = {
         }
 
         if (locals.previewTierId) {
-            throw redirect(303, `/tiers/${locals.previewTierId}`)
-        } else {
-            throw redirect(303, "")
+            redirect(303, `/tiers/${locals.previewTierId}`)
         }
+
+        redirect(303, "")
     },
 }

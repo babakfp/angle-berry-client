@@ -50,7 +50,7 @@
         <Tr>
             <Th class="!p-0">
                 <Checkbox
-                    class="relative z-1 items-center px-6 py-3"
+                    class="px-6 py-3"
                     checked={selectedTierIds.length === data.tiers.length}
                     on:change={checkAllCheckboxes}
                     disabled={!data.tiers.length}
@@ -73,7 +73,7 @@
             >
                 <Td class="w-16">
                     <Checkbox
-                        class="relative z-1 items-center px-6 py-4"
+                        class="relative z-1 px-6 py-4"
                         checked={selectedTierIds.includes(tier.id)}
                         bind:group={selectedTierIds}
                         value={tier.id}
@@ -97,6 +97,7 @@
                 <a
                     class="absolute inset-0 outline-inset"
                     href="/admin/tiers/{tier.id}"
+                    aria-label="View"
                 />
             </Tr>
         {/each}

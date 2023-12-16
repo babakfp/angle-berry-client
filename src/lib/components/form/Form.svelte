@@ -1,4 +1,5 @@
 <script lang="ts">
+    import type { SubmitFunction } from "@sveltejs/kit"
     import { enhance } from "$app/forms"
     import FormSubmitButton from "$components/form/FormSubmitButton.svelte"
     import IconLoading from "$icons/IconLoading.svelte"
@@ -18,7 +19,7 @@
     let isSubmitting = false
     let isRedirecting = false
 
-    async function handleFormSubmit({ cancel }: { cancel: any }) {
+    const handleFormSubmit: SubmitFunction = async ({ cancel }) => {
         isSubmitting = true
         message = ""
 
@@ -33,7 +34,7 @@
             }
         }
 
-        return async ({ result, update }: { result: any; update: any }) => {
+        return async ({ result, update }) => {
             isSubmitting = false
 
             if (result.type === "redirect") {

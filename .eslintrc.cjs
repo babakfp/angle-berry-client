@@ -27,4 +27,7 @@ module.exports = {
             },
         },
     ],
+    rules: {
+        "svelte/no-at-html-tags": 0,
+    },
 }

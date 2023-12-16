@@ -1,4 +1,5 @@
 <script lang="ts">
+    import type { SubmitFunction } from "@sveltejs/kit"
     import { page } from "$app/stores"
     import { enhance } from "$app/forms"
     import { writable } from "svelte/store"
@@ -55,10 +56,10 @@
     $: isEditingMessage = !!$messageIdToEdit
 
     let isSendingMessage = false
-    function submitMessage() {
+    const submitMessage: SubmitFunction = () => {
         isSendingMessage = true
         $messageInputElement!.focus()
-        return async ({ result, update }: { result: any; update: any }) => {
+        return async ({ result, update }) => {
             isSendingMessage = false
             if (result.type === "success") {
                 $messageInputElement!.style.height = ""

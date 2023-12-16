@@ -7,7 +7,7 @@ import type {
 } from "$utilities/pb-types"
 
 export async function load({ locals, params }) {
-    if (!locals.user) throw redirect(303, "/login")
+    if (!locals.user) redirect(303, "/login")
 
     try {
         const tier: TiersResponse & {
@@ -18,7 +18,7 @@ export async function load({ locals, params }) {
             .collection("tiers")
             .getOne(params.id, { expand: "videos" })
 
-        let tierAccessGranted =
+        const tierAccessGranted =
             params.id === locals.previewTierId ||
             locals.user.retainedTiers.includes(params.id) ||
             locals.user.invitedUsers.length >= tier.invites

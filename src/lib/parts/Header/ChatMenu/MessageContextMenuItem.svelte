@@ -1,9 +1,11 @@
 <script lang="ts">
+    import type { ComponentType } from "svelte"
+
     export let title: string
     export let isDisabled = false
     export let _class = ""
     export { _class as class }
-    export let icon: ConstructorOfATypedSvelteComponent
+    export let icon: ComponentType
 </script>
 
 <li class="flex">

@@ -5,7 +5,7 @@ import { chatSchema } from "$utilities/chatSchema"
 
 export const actions = {
     default: async ({ locals, request }) => {
-        if (!locals.user) throw redirect(303, "/login")
+        if (!locals.user) redirect(303, "/login")
 
         const form = await superValidate(request, chatSchema)
         if (!form.valid) return fail(400, { form })

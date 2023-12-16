@@ -27,7 +27,7 @@ export type ClientResponseErrorCustom = ClientResponseError & {
         | (typeof PB_RESPONSE_CODES)[404]
     response: {
         data:
-            | {}
+            | Record<string, never>
             | {
                   [key: string]: any
               }

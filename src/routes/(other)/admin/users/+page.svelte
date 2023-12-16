@@ -40,12 +40,11 @@
     <Thead>
         <Tr>
             <Th class="!p-0">
-                <label class="relative z-1 flex items-center px-6 py-3 pt-3.5">
-                    <Checkbox
-                        checked={selectedUserIds.length === data.users.length}
-                        on:change={checkAllCheckboxes}
-                    />
-                </label>
+                <Checkbox
+                    class="px-6 py-3"
+                    checked={selectedUserIds.length === data.users.length}
+                    on:change={checkAllCheckboxes}
+                />
             </Th>
             <Th>USERNAME</Th>
             <Th>TIERS</Th>
@@ -60,7 +59,7 @@
             >
                 <Td class="w-16">
                     <Checkbox
-                        class="relative z-1 items-center px-6 py-4"
+                        class="relative z-1 px-6 py-4"
                         checked={selectedUserIds.includes(user.id)}
                         bind:group={selectedUserIds}
                         value={user.id}
@@ -84,6 +83,7 @@
                 <a
                     class="absolute inset-0 outline-inset"
                     href="/admin/users/{user.id}"
+                    aria-label="View"
                 />
             </Tr>
         {/each}

@@ -61,6 +61,7 @@
         <a
             class="absolute inset-0 outline-inset"
             href="/tiers/{currentTier.id}"
+            aria-label="View"
         />
     {/if}
 </Tr>

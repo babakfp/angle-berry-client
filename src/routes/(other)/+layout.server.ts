@@ -7,7 +7,7 @@ import type {
 } from "$utilities/pb-types"
 
 export async function load({ locals, parent }) {
-    if (!locals.user) throw redirect(303, "/login")
+    if (!locals.user) redirect(303, "/login")
 
     try {
         const messages: ListResultMessagesResponse = await locals.pb

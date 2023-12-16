@@ -10,7 +10,7 @@ import type {
 
 export async function handle({ event, resolve }) {
     if (!POCKETBASE_URL)
-        throw error(500, {
+        error(500, {
             message: "Missing REQUIRED Environment Variable POCKETBASE_URL",
         })
 

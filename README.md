@@ -5,6 +5,67 @@ This project consists of two repositories:
 -   [Angle Berry Client](https://github.com/babakfp/angle-berry-client) (current)
 -   [Angle Berry Server](https://github.com/babakfp/angle-berry-server)
 
+## Tech stack
+
+### Front-end
+
+-   [Svelte](https://svelte.dev)
+-   [TailwindCSS](https://tailwindcss.com)
+-   [TypeScript](https://typescriptlang.org)
+
+### Back-end
+
+-   [SvelteKit](https://kit.svelte.dev)
+-   [TypeScript](https://typescriptlang.org)
+
+### Database
+
+-   [PocketBase](https://pocketbase.io)
+
+### Dependencies
+
+#### Angle Berry Client
+
+-   [@sveltejs/adapter-vercel](https://npmjs.com/package/@sveltejs/adapter-vercel)
+-   [@sveltejs/kit](https://npmjs.com/package/@sveltejs/kit)
+-   [@sveltejs/vite-plugin-svelte](https://npmjs.com/package/@sveltejs/vite-plugin-svelte)
+-   [@typescript-eslint/eslint-plugin](https://npmjs.com/package/@typescript-eslint/eslint-plugin)
+-   [@typescript-eslint/parser](https://npmjs.com/package/@typescript-eslint/parser)
+-   [autoprefixer](https://npmjs.com/package/autoprefixer)
+-   [cssnano](https://npmjs.com/package/cssnano)
+-   [eslint](https://npmjs.com/package/eslint)
+-   [eslint-config-prettier](https://npmjs.com/package/eslint-config-prettier)
+-   [eslint-plugin-svelte](https://npmjs.com/package/eslint-plugin-svelte)
+-   [pocketbase](https://npmjs.com/package/pocketbase)
+-   [postcss](https://npmjs.com/package/postcss)
+-   [postcss-load-config](https://npmjs.com/package/postcss-load-config)
+-   [prettier](https://npmjs.com/package/prettier)
+-   [prettier-plugin-svelte](https://npmjs.com/package/prettier-plugin-svelte)
+-   [prettier-plugin-tailwindcss](https://npmjs.com/package/prettier-plugin-tailwindcss)
+-   [svelte](https://npmjs.com/package/svelte)
+-   [svelte-check](https://npmjs.com/package/svelte-check)
+-   [svelte-copy](https://npmjs.com/package/svelte-copy)
+-   [svelte-french-toast](https://npmjs.com/package/svelte-french-toast)
+-   [svelte-loading-bar](https://npmjs.com/package/svelte-loading-bar)
+-   [svelte-outclick](https://npmjs.com/package/svelte-outclick)
+-   [svelte-select](https://npmjs.com/package/svelte-select)
+-   [sveltekit-superforms](https://npmjs.com/package/sveltekit-superforms)
+-   [tailwindcss](https://npmjs.com/package/tailwindcss)
+-   [tailwindcss-addons](https://npmjs.com/package/tailwindcss-addons)
+-   [tslib](https://npmjs.com/package/tslib)
+-   [typescript](https://npmjs.com/package/typescript)
+-   [vite](https://npmjs.com/package/vite)
+-   [zod](https://npmjs.com/package/zod)
+
+#### Angle Berry Server
+
+-   [pocketbase-typegen](https://npmjs.com/package/pocketbase-typegen)
+
+### Hosting
+
+-   Client: [Vercel](https://vercel.com)
+-   Database: [Hop](https://hop.io)
+
 ## Development
 
 -   Install [NodeJS](https://nodejs.org) (v20.10.0 stable).

@@ -2,9 +2,9 @@
     import { page } from "$app/stores"
     import { unreadMessagesLength } from "$stores/messages"
     import { unseenEventsLength } from "$stores/events"
-    import IconBell from "$icons/IconBell.svelte"
-    import IconUserCircle from "$icons/IconUserCircle.svelte"
-    import IconMessage from "$icons/IconMessage.svelte"
+    import IconBellSimpleRegular from "phosphor-icons-svelte/IconBellSimpleRegular.svelte"
+    import IconUserCircleRegular from "phosphor-icons-svelte/IconUserCircleRegular.svelte"
+    import IconChatCenteredRegular from "phosphor-icons-svelte/IconChatCenteredRegular.svelte"
     import Avatar from "$components/Avatar.svelte"
     import NotificationBlob from "$components/NotificationBlob.svelte"
     import ChatMenu from "./ChatMenu/ChatMenu.svelte"
@@ -37,7 +37,7 @@
                     class="group relative flex items-center px-2 outline-inset"
                     href="/admin"
                 >
-                    <IconUserCircle
+                    <IconUserCircleRegular
                         class="text-2xl duration-200 group-hover:text-white"
                     />
                 </a>
@@ -47,7 +47,7 @@
                 bind:this={eventsMenuToggle}
                 on:click={() => (isEventsMenuOpen = !isEventsMenuOpen)}
             >
-                <IconBell
+                <IconBellSimpleRegular
                     class="text-2xl duration-200 group-hover:text-white"
                 />
                 {#if $unseenEventsLength > 0}
@@ -61,7 +61,7 @@
                 bind:this={chatMenuToggle}
                 on:click={() => (isChatMenuOpen = !isChatMenuOpen)}
             >
-                <IconMessage
+                <IconChatCenteredRegular
                     class="text-2xl duration-200 group-hover:text-white"
                 />
                 {#if $unreadMessagesLength > 0}

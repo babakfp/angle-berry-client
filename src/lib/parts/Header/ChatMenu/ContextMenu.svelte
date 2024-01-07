@@ -13,11 +13,11 @@
         selectedMessageIds,
     } from "./chatStores"
     import { messages } from "$stores/messages"
-    import IconReply from "$icons/IconReply.svelte"
-    import IconPen from "$icons/IconPen.svelte"
-    import IconClipboard from "$icons/IconClipboard.svelte"
-    import IconTrash from "$icons/IconTrash.svelte"
-    import IconCheckCircle from "$icons/IconCheckCircle.svelte"
+    import IconArrowUUpLeftRegular from "phosphor-icons-svelte/IconArrowUUpLeftRegular.svelte"
+    import IconPencilSimpleRegular from "phosphor-icons-svelte/IconPencilSimpleRegular.svelte"
+    import IconCopySimpleRegular from "phosphor-icons-svelte/IconCopySimpleRegular.svelte"
+    import IconTrashSimpleRegular from "phosphor-icons-svelte/IconTrashSimpleRegular.svelte"
+    import IconCheckCircleRegular from "phosphor-icons-svelte/IconCheckCircleRegular.svelte"
     import MessageContextMenu from "./MessageContextMenu.svelte"
     import MessageContextMenuItem from "./MessageContextMenuItem.svelte"
 
@@ -100,14 +100,14 @@
         {#if !$selectedMessageIds.length}
             <MessageContextMenuItem
                 title="Reply"
-                icon={IconReply}
+                icon={IconArrowUUpLeftRegular}
                 on:click={replyMessage}
             />
         {/if}
         {#if $contextMenuTargetMessage?.expand.user.id === $page.data.user.id && !$selectedMessageIds.length}
             <MessageContextMenuItem
                 title="Edit"
-                icon={IconPen}
+                icon={IconPencilSimpleRegular}
                 on:click={editMessage}
             />
         {/if}
@@ -117,7 +117,7 @@
                 : $selectedMessageIds.length
                   ? "Copy Selected as Text"
                   : "Copy Text"}
-            icon={IconClipboard}
+            icon={IconCopySimpleRegular}
             isDisabled={!!copyTimeoutId}
             on:click={copyMessage}
         />
@@ -125,13 +125,13 @@
             {#if $selectedMessageIds.length > 0}
                 <MessageContextMenuItem
                     title="Delete Selected"
-                    icon={IconTrash}
+                    icon={IconTrashSimpleRegular}
                     on:click={deleteMessage}
                 />
             {:else}
                 <MessageContextMenuItem
                     title="Delete"
-                    icon={IconTrash}
+                    icon={IconTrashSimpleRegular}
                     on:click={deleteMessage}
                 />
             {/if}
@@ -139,13 +139,13 @@
         {#if !$selectedMessageIds.includes($contextMenuTargetMessage?.id || "")}
             <MessageContextMenuItem
                 title="Select"
-                icon={IconCheckCircle}
+                icon={IconCheckCircleRegular}
                 on:click={selectMessage}
             />
         {:else}
             <MessageContextMenuItem
                 title="Clear Selection"
-                icon={IconCheckCircle}
+                icon={IconCheckCircleRegular}
                 on:click={clearSelection}
             />
         {/if}

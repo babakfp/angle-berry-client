@@ -1,6 +1,6 @@
 <script lang="ts">
-    import IconSquare from "$icons/IconSquare.svelte"
-    import IconCheckSquare from "$icons/IconCheckSquare.svelte"
+    import IconSquareRegular from "phosphor-icons-svelte/IconSquareRegular.svelte"
+    import IconCheckSquareRegular from "phosphor-icons-svelte/IconCheckSquareRegular.svelte"
 
     export let _class = ""
     export { _class as class }
@@ -42,9 +42,9 @@
     />
 
     {#if checked}
-        <IconCheckSquare class="text-xl" />
+        <IconCheckSquareRegular class="text-xl" />
     {:else}
-        <IconSquare class="text-xl" />
+        <IconSquareRegular class="text-xl" />
     {/if}
 
     {#if label}

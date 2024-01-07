@@ -4,8 +4,8 @@
     import Form from "$components/form/Form.svelte"
     import Checkbox from "$components/form/Checkbox.svelte"
     import Select from "svelte-select"
-    import IconX from "$icons/IconX.svelte"
-    import IconXCircle from "$icons/IconXCircle.svelte"
+    import IconXRegular from "phosphor-icons-svelte/IconXRegular.svelte"
+    import IconXCircleRegular from "phosphor-icons-svelte/IconXCircleRegular.svelte"
 
     export let data
     export let form
@@ -67,10 +67,10 @@
             --multi-item-gap="0"
         >
             <svelte:fragment slot="clear-icon">
-                <IconX class="text-lg" />
+                <IconXRegular class="text-lg" />
             </svelte:fragment>
             <svelte:fragment slot="multi-clear-icon">
-                <IconXCircle />
+                <IconXCircleRegular />
             </svelte:fragment>
         </Select>
 

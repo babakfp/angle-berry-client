@@ -13,9 +13,9 @@
         isContextMenuOpen2,
         isContextMenuOpen,
     } from "./chatStores"
-    import IconLoading from "$icons/IconLoading.svelte"
-    import IconCheck from "$icons/IconCheck.svelte"
-    import IconSend from "$icons/IconSend.svelte"
+    import IconSpinnerRegular from "phosphor-icons-svelte/IconSpinnerRegular.svelte"
+    import IconCheckRegular from "phosphor-icons-svelte/IconCheckRegular.svelte"
+    import IconPaperPlaneRightRegular from "phosphor-icons-svelte/IconPaperPlaneRightRegular.svelte"
     import PopSide from "$components/PopSide.svelte"
     import Message from "./Message/Message.svelte"
     import MessageActionPreview from "./MessageActionPreview.svelte"
@@ -141,7 +141,7 @@
                         </p>
                         <button>Try again</button>
                     {:else}
-                        <IconLoading class="text-xl" />
+                        <IconSpinnerRegular class="text-xl" />
                         <p>Fetching older messages...</p>
                     {/if}
                 </div>
@@ -210,11 +210,11 @@
             >
                 <div class="flex min-h-14 items-center px-4 text-2xl">
                     {#if $messageIdToEdit}
-                        <IconCheck />
+                        <IconCheckRegular />
                     {:else if isSendingMessage}
-                        <IconLoading />
+                        <IconSpinnerRegular />
                     {:else}
-                        <IconSend />
+                        <IconPaperPlaneRightRegular />
                     {/if}
                 </div>
             </button>

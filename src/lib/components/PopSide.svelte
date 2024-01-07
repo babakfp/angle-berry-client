@@ -2,7 +2,7 @@
     import OutClick from "svelte-outclick"
     import { browser } from "$app/environment"
     import { beforeNavigate } from "$app/navigation"
-    import IconX from "$icons/IconX.svelte"
+    import IconXRegular from "phosphor-icons-svelte/IconXRegular.svelte"
 
     export let isOpen = false
     export let toggleButton: HTMLButtonElement
@@ -43,7 +43,7 @@
             on:click={() => (isOpen = false)}
         >
             <span>Close</span>
-            <IconX class="h-6 w-6" />
+            <IconXRegular class="text-2xl" />
         </button>
 
         <slot />

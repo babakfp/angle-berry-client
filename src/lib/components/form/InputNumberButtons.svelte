@@ -1,6 +1,6 @@
 <script lang="ts">
-    import IconPlusCircle from "$icons/IconPlusCircle.svelte"
-    import IconMinusCircle from "$icons/IconMinusCircle.svelte"
+    import IconPlusCircleRegular from "phosphor-icons-svelte/IconPlusCircleRegular.svelte"
+    import IconMinusCircleRegular from "phosphor-icons-svelte/IconMinusCircleRegular.svelte"
 
     export let value: number | string
     export let min: string | number | undefined = undefined
@@ -44,7 +44,7 @@
     type="button"
     on:click={decrementNumber}
 >
-    <IconMinusCircle class="text-lg" />
+    <IconMinusCircleRegular class="text-lg" />
 </button>
 
 <button
@@ -55,5 +55,5 @@
     type="button"
     on:click={incrementNumber}
 >
-    <IconPlusCircle class="text-lg" />
+    <IconPlusCircleRegular class="text-lg" />
 </button>

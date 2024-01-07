@@ -2,7 +2,7 @@
     import type { SubmitFunction } from "@sveltejs/kit"
     import { enhance } from "$app/forms"
     import FormSubmitButton from "$components/form/FormSubmitButton.svelte"
-    import IconLoading from "$icons/IconLoading.svelte"
+    import IconSpinnerRegular from "phosphor-icons-svelte/IconSpinnerRegular.svelte"
     import Description from "$components/form/Description.svelte"
 
     export let message: string
@@ -60,7 +60,7 @@
 
     <FormSubmitButton class={submitButtonClass} disabled={isSubmitting}>
         {#if isSubmitting}
-            <IconLoading class="text-2xl" />
+            <IconSpinnerRegular class="text-2xl" />
         {:else if isRedirecting}
             Redirecting...
         {:else}

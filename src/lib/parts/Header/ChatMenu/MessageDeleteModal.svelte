@@ -7,7 +7,7 @@
         messageIdToEdit,
         isReplying,
     } from "./chatStores"
-    import IconLoading from "$icons/IconLoading.svelte"
+    import IconSpinnerRegular from "phosphor-icons-svelte/IconSpinnerRegular.svelte"
     import Modal from "$components/Modal.svelte"
 
     let isDeletingMessage = false
@@ -75,7 +75,7 @@
             on:click={handleDelete}
         >
             {#if isDeletingMessage}
-                <IconLoading />
+                <IconSpinnerRegular />
             {:else}
                 Delete
             {/if}

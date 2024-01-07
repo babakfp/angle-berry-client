@@ -6,6 +6,7 @@
         messageIdsToDelete,
         messageIdToEdit,
         isReplying,
+        selectedMessageIds,
     } from "./chatStores"
     import IconSpinnerRegular from "phosphor-icons-svelte/IconSpinnerRegular.svelte"
     import Modal from "$components/Modal.svelte"
@@ -28,6 +29,7 @@
             if (isMessageDeleted) {
                 isDeletingMessage = false
                 messageIdsToDelete.set([])
+                selectedMessageIds.set([])
                 messageIdToEdit.set("")
                 isReplying.set(false)
 

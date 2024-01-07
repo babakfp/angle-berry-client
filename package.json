@@ -24,6 +24,7 @@
         "eslint": "8.56.0",
         "eslint-config-prettier": "9.1.0",
         "eslint-plugin-svelte": "2.35.1",
+        "phosphor-icons-svelte": "1.1.5",
         "pocketbase": "0.20.1",
         "postcss": "8.4.33",
         "postcss-load-config": "5.0.2",

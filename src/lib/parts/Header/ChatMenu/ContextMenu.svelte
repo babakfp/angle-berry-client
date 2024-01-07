@@ -109,16 +109,23 @@
                 on:click={editMessage}
             />
         {/if}
-        <MessageContextMenuItem
-            title={copyTimeoutId
-                ? "Copied"
-                : $selectedMessageIds.length
-                  ? "Copy Selected as Text"
-                  : "Copy Text"}
-            icon={IconCopySimpleRegular}
-            isDisabled={!!copyTimeoutId}
-            on:click={copyMessage}
-        />
+        {#if $selectedMessageIds.length}
+            {#if $contextMenuTargetMessage && $selectedMessageIds.includes($contextMenuTargetMessage?.id)}
+                <MessageContextMenuItem
+                    title={copyTimeoutId ? "Copied" : "Copy Selected as Text"}
+                    icon={IconCopySimpleRegular}
+                    isDisabled={!!copyTimeoutId}
+                    on:click={copyMessage}
+                />
+            {/if}
+        {:else}
+            <MessageContextMenuItem
+                title={copyTimeoutId ? "Copied" : "Copy Text"}
+                icon={IconCopySimpleRegular}
+                isDisabled={!!copyTimeoutId}
+                on:click={copyMessage}
+            />
+        {/if}
         {#if $contextMenuTargetMessage?.expand.user.id === $page.data.user.id}
             {#if $selectedMessageIds.length > 0}
                 {#if $contextMenuTargetMessage && $selectedMessageIds.includes($contextMenuTargetMessage?.id)}

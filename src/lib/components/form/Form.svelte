@@ -58,13 +58,13 @@
 >
     <slot />
 
-    <FormSubmitButton class={submitButtonClass} disabled={isSubmitting}>
-        {#if isSubmitting}
-            <IconSpinnerRegular class="text-2xl" />
-        {:else if isRedirecting}
-            Redirecting...
-        {:else}
-            {submitButtonText}
+    <FormSubmitButton
+        class={submitButtonClass}
+        disabled={isSubmitting || isRedirecting}
+    >
+        <span>{isRedirecting ? "Redirecting" : submitButtonText}</span>
+        {#if isSubmitting || isRedirecting}
+            <IconSpinnerRegular class="ml-2 animate-spin text-2xl" />
         {/if}
     </FormSubmitButton>
 

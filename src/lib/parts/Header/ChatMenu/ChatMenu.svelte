@@ -141,8 +141,8 @@
                         </p>
                         <button>Try again</button>
                     {:else}
-                        <IconSpinnerRegular class="text-xl" />
-                        <p>Fetching older messages...</p>
+                        <p>Fetching older messages</p>
+                        <IconSpinnerRegular class="ml-2 animate-spin text-xl" />
                     {/if}
                 </div>
             {/if}
@@ -212,7 +212,7 @@
                     {#if $messageIdToEdit}
                         <IconCheckRegular />
                     {:else if isSendingMessage}
-                        <IconSpinnerRegular />
+                        <IconSpinnerRegular class="animate-spin" />
                     {:else}
                         <IconPaperPlaneRightRegular />
                     {/if}

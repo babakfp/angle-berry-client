@@ -74,10 +74,9 @@
             disabled={isDeletingMessage}
             on:click={handleDelete}
         >
+            <span>{isDeletingMessage ? "Deleting" : "Delete"}</span>
             {#if isDeletingMessage}
-                <IconSpinnerRegular />
-            {:else}
-                Delete
+                <IconSpinnerRegular class="ml-2 animate-spin" />
             {/if}
         </button>
     </svelte:fragment>

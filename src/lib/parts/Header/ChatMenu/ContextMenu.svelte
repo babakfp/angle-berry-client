@@ -73,8 +73,6 @@
         isContextMenuOpen.set(false)
         if ($selectedMessageIds.length > 0) {
             messageIdsToDelete.set($selectedMessageIds)
-        } else {
-            messageIdsToDelete.set([$contextMenuTargetMessage!?.id])
         }
     }
 

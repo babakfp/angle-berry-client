@@ -2,7 +2,6 @@
     "editor.formatOnSave": true,
     "path-intellisense.mappings": {
         "$components": "${workspaceFolder}/src/lib/components",
-        "$icons": "${workspaceFolder}/src/lib/icons",
         "$parts": "${workspaceFolder}/src/lib/parts",
         "$stores": "${workspaceFolder}/src/lib/stores",
         "$utilities": "${workspaceFolder}/src/lib/utilities"

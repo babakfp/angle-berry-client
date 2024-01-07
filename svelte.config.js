@@ -6,7 +6,6 @@ export default {
         adapter: adapter(),
         alias: {
             $components: "src/lib/components",
-            $icons: "src/lib/icons",
             $parts: "src/lib/parts",
             $stores: "src/lib/stores",
             $utilities: "src/lib/utilities",

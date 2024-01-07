@@ -8,6 +8,6 @@ export function POST({ locals }) {
     if (!locals.user) redirect(303, "/")
 
     locals.pb.authStore.clear()
-    locals.user = null
+    locals.user = undefined
     redirect(303, "/login")
 }

@@ -1,47 +1,32 @@
 # Angle Berry Client
 
+This project consists of two repositories:
+
+-   [Angle Berry Client](https://github.com/babakfp/angle-berry-client) (current)
+-   [Angle Berry Server](https://github.com/babakfp/angle-berry-server)
+
 ## Development
 
-This is a step-by-step guide on how to set up and run this project on your computer.
+-   Install [NodeJS](https://nodejs.org) (v20.10.0 stable).
+-   Install [PNPM](https://pnpm.io/installation) (v8.14.0 stable).
+-   Install [Git](https://www.git-scm.com/downloads) (v2.40.1.windows.1 stable).
+-   Install [vsCode](https://code.visualstudio.com/download) - Optional.
 
-### 1. Installing NodeJS
+### Clone the repositories
 
-Ensure that you have the latest (LTS) version (20) of [NodeJS](https://nodejs.org) installed on your system. [NodeJS](https://nodejs.org) is required to run the development environment for this project.
+-   Run `git clone --depth 1 https://github.com/babakfp/angle-berry-client.git`.
+-   Run `git clone --depth 1 https://github.com/babakfp/angle-berry-server.git`.
 
-### 2. Installing PNPM
+### Setup
 
-If you don't have PNPM installed on your system, you will need to install it before proceeding with the setup. PNPM is required for this repository, and it's an alternative package manager to NPM or Yarn.
+Open the projects in two separate vsCode instances, and:
 
-To install PNPM, open a terminal and run the following command:
-
-```cmd
-npm i -g pnpm
-```
-
-Once you have PNPM installed, continue with the remaining steps:
-
-### 3. Installing Git
-
-https://www.git-scm.com/downloads
-
-### 3. Clone the projects
-
-1. Run this in your terminal: `git clone --depth 1 https://github.com/babakfp/angle-berry-client.git`
-2. Run this in your terminal: `git clone --depth 1 https://github.com/babakfp/angle-berry-server.git`
-
-### 3. Setup Steps
-
-Open the projects in two separate vsCode instances.
-
-To set up the development environment for your project, follow these steps:
-
-1. Duplicate the [`.env.example`](./.env.example) file located in the root of your project and rename the duplicate file to `.env`.
-2. In the [`angle-berry-server`](https://github.com/babakfp/angle-berry-server) directory, open a terminal and run the following command to start the server: `pnpm serve`.
-3. Once the server is running, copy the domain address displayed in the terminal. For example, it might be `http://127.0.0.1:8090`.
+1. In the `angle-berry-server` directory, open a terminal and run the following command to start the server: `pnpm serve`.
+2. Once the server is running, copy the domain address displayed in the terminal. For example, it might be `http://127.0.0.1:8090`.
+3. In the `angle-berry-server` directory, duplicate the [`.env.example`](./.env.example) file located in the root of your project and rename the duplicate file to `.env`.
 4. Update the value for `PUBLIC_POCKETBASE_URL` in the [`.env`](./.env) file with the copied domain address.
 5. Run `pnpm i` and `pnpm dev`.
-
-You have now completed all steps 🎉.
+6. Good job 🎉.
 
 ## Todo
 

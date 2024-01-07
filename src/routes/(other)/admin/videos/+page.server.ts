@@ -3,7 +3,7 @@ import {
     pbHandleClientResponseError,
     pbHandleFormActionError,
 } from "$utilities/pb"
-import type { VideosResponse, ClientResponseError } from "$utilities/pb-types"
+import { type VideosResponse, ClientResponseError } from "$utilities/pb-types"
 import { superValidate } from "sveltekit-superforms/server"
 import {
     deleteSchema,
@@ -32,7 +32,9 @@ export async function load({ locals }) {
             uploadForm: { videos: undefined as any },
         }
     } catch (e) {
-        pbHandleClientResponseError(e as ClientResponseError)
+        if (e instanceof ClientResponseError) {
+            pbHandleClientResponseError(e)
+        }
         throw e
     }
 }

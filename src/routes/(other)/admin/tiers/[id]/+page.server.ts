@@ -4,9 +4,9 @@ import {
     pbHandleFormActionError,
 } from "$utilities/pb"
 import { superValidate } from "sveltekit-superforms/server"
-import type {
-    TiersResponse,
-    VideosResponse,
+import {
+    type TiersResponse,
+    type VideosResponse,
     ClientResponseError,
 } from "$utilities/pb-types"
 import { formSchemaUpdateTier, formSchemaDeleteTier } from "../schema"
@@ -28,7 +28,9 @@ export async function load({ locals, params }) {
             .getFullList()
         return { formUpdate, formDelete, tier, videos }
     } catch (e) {
-        pbHandleClientResponseError(e as ClientResponseError)
+        if (e instanceof ClientResponseError) {
+            pbHandleClientResponseError(e)
+        }
         throw e
     }
 }

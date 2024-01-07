@@ -5,7 +5,7 @@ import {
     pbHandleFormActionError,
 } from "$utilities/pb"
 import { schema } from "../schema"
-import type { UsersResponse, ClientResponseError } from "$utilities/pb-types"
+import { type UsersResponse, ClientResponseError } from "$utilities/pb-types"
 
 export const load = async ({ locals }) => {
     if (locals.user) redirect(303, "/")
@@ -27,8 +27,11 @@ export const actions = {
             if (inviterId)
                 inviter = await locals.pb.collection("users").getOne(inviterId)
         } catch (e) {
-            if ((e as ClientResponseError).status !== 404) {
-                pbHandleClientResponseError(e as ClientResponseError)
+            if (e instanceof ClientResponseError) {
+                if (e.status !== 404) {
+                    pbHandleClientResponseError(e)
+                }
+            } else {
                 throw e
             }
         }

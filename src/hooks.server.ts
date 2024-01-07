@@ -2,9 +2,9 @@ import { error } from "@sveltejs/kit"
 import PocketBase from "pocketbase"
 import { PUBLIC_POCKETBASE_URL } from "$env/static/public"
 import { pbHandleClientResponseError, getPreviewTierId } from "$utilities/pb"
-import type {
-    UsersResponse,
-    TiersResponse,
+import {
+    type UsersResponse,
+    type TiersResponse,
     ClientResponseError,
 } from "$utilities/pb-types"
 
@@ -27,10 +27,13 @@ export async function handle({ event, resolve }) {
                 .authRefresh()
             event.locals.user = record as UsersResponse
         } catch (e) {
-            if ((e as ClientResponseError).status === 401) {
-                event.locals.pb.authStore.clear()
+            if (e instanceof ClientResponseError) {
+                if (e.status === 401) {
+                    event.locals.pb.authStore.clear()
+                } else {
+                    pbHandleClientResponseError(e)
+                }
             } else {
-                pbHandleClientResponseError(e as ClientResponseError)
                 throw e
             }
         }
@@ -43,7 +46,9 @@ export async function handle({ event, resolve }) {
         event.locals.previewTierId = getPreviewTierId(tiers)
         event.locals.tiers = tiers
     } catch (e) {
-        pbHandleClientResponseError(e as ClientResponseError)
+        if (e instanceof ClientResponseError) {
+            pbHandleClientResponseError(e)
+        }
         throw e
     }
 

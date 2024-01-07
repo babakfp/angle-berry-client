@@ -5,7 +5,7 @@ import {
 } from "$utilities/pb"
 import { superValidate } from "sveltekit-superforms/server"
 import { formSchemaCreateTier } from "../schema"
-import type { VideosResponse, ClientResponseError } from "$utilities/pb-types"
+import { type VideosResponse, ClientResponseError } from "$utilities/pb-types"
 
 export async function load({ locals }) {
     if (!locals.user) redirect(303, "/login")
@@ -20,7 +20,9 @@ export async function load({ locals }) {
             .getFullList()
         return { form, videos }
     } catch (e) {
-        pbHandleClientResponseError(e as ClientResponseError)
+        if (e instanceof ClientResponseError) {
+            pbHandleClientResponseError(e)
+        }
         throw e
     }
 }

@@ -5,9 +5,9 @@ import {
 } from "$utilities/pb"
 import { superValidate } from "sveltekit-superforms/server"
 import { formSchemaDeleteTiers } from "./schema"
-import type {
-    TiersResponse,
-    UsersResponse,
+import {
+    type TiersResponse,
+    type UsersResponse,
     ClientResponseError,
 } from "$utilities/pb-types"
 
@@ -27,7 +27,9 @@ export async function load({ locals }) {
             .getFullList()
         return { form, tiers, users }
     } catch (e) {
-        pbHandleClientResponseError(e as ClientResponseError)
+        if (e instanceof ClientResponseError) {
+            pbHandleClientResponseError(e)
+        }
         throw e
     }
 }

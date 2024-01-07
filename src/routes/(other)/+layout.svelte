@@ -8,12 +8,12 @@
     import { pbHandleClientResponseError } from "$utilities/pb"
     import { pb } from "$stores/pb"
     import Header from "$parts/Header/Header.svelte"
-    import type {
-        RecordSubscription,
-        CustomMessagesResponse,
-        CustomEventsResponse,
-        MessagesResponse,
-        EventsResponse,
+    import {
+        type RecordSubscription,
+        type CustomMessagesResponse,
+        type CustomEventsResponse,
+        type MessagesResponse,
+        type EventsResponse,
         ClientResponseError,
     } from "$utilities/pb-types"
 
@@ -137,7 +137,9 @@
                 { requestKey: "events-subscribe" },
             )
         } catch (e) {
-            pbHandleClientResponseError(e as ClientResponseError)
+            if (e instanceof ClientResponseError) {
+                pbHandleClientResponseError(e)
+            }
             throw e
         }
     })

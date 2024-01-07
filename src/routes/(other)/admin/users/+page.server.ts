@@ -1,5 +1,5 @@
 import { redirect, error } from "@sveltejs/kit"
-import type { UsersResponse, ClientResponseError } from "$utilities/pb-types"
+import { type UsersResponse, ClientResponseError } from "$utilities/pb-types"
 import { pbHandleClientResponseError } from "$utilities/pb"
 
 export async function load({ locals }) {
@@ -13,7 +13,9 @@ export async function load({ locals }) {
             .getFullList()
         return { users }
     } catch (e) {
-        pbHandleClientResponseError(e as ClientResponseError)
+        if (e instanceof ClientResponseError) {
+            pbHandleClientResponseError(e)
+        }
         throw e
     }
 }

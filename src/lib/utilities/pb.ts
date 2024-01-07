@@ -1,25 +1,24 @@
 import { error, fail } from "@sveltejs/kit"
-import type { TiersResponse, ClientResponseError } from "$utilities/pb-types"
+import { type TiersResponse, ClientResponseError } from "$utilities/pb-types"
 
 export const pbHandleFormActionError = (
     e: unknown | ClientResponseError,
     formData: any,
 ) => {
-    if ((e as ClientResponseError).status === 0) {
-        return fail(500, {
-            ...formData,
-            message: "Database communication failure!",
-        })
-    }
-    if (
-        (e as ClientResponseError).response.code &&
-        (e as ClientResponseError).response.message
-    ) {
-        return fail((e as ClientResponseError).response.code, {
-            ...formData,
-            message: (e as ClientResponseError).response.message,
-            pb: (e as ClientResponseError).response.data,
-        })
+    if (e instanceof ClientResponseError) {
+        if (e.status === 0) {
+            return fail(500, {
+                ...formData,
+                message: "Database communication failure!",
+            })
+        }
+        if (e.response.code && e.response.message) {
+            return fail(e.response.code, {
+                ...formData,
+                message: e.response.message,
+                pb: e.response.data,
+            })
+        }
     }
 }
 
@@ -30,6 +29,7 @@ export const pbHandleClientResponseError = (e: ClientResponseError) => {
     if (e.response.code && e.response.message) {
         error(e.response.code, e.response.message)
     }
+    throw e
 }
 
 export function getPreviewTierId(tiers: TiersResponse[]) {

@@ -1,8 +1,8 @@
 import { redirect } from "@sveltejs/kit"
 import { pbHandleClientResponseError } from "$utilities/pb"
-import type {
-    ListResultMessagesResponse,
-    ListResultEventsResponse,
+import {
+    type ListResultMessagesResponse,
+    type ListResultEventsResponse,
     ClientResponseError,
 } from "$utilities/pb-types"
 
@@ -30,7 +30,9 @@ export async function load({ locals, parent }) {
             events,
         }
     } catch (e) {
-        pbHandleClientResponseError(e as ClientResponseError)
+        if (e instanceof ClientResponseError) {
+            pbHandleClientResponseError(e)
+        }
         throw e
     }
 }

@@ -1,6 +1,6 @@
 import { error } from "@sveltejs/kit"
 import PocketBase from "pocketbase"
-import { POCKETBASE_URL } from "$env/static/private"
+import { PUBLIC_POCKETBASE_URL } from "$env/static/public"
 import { pbHandleClientResponseError, getPreviewTierId } from "$utilities/pb"
 import type {
     UsersResponse,
@@ -9,12 +9,13 @@ import type {
 } from "$utilities/pb-types"
 
 export async function handle({ event, resolve }) {
-    if (!POCKETBASE_URL)
+    if (!PUBLIC_POCKETBASE_URL)
         error(500, {
-            message: "Missing REQUIRED Environment Variable POCKETBASE_URL",
+            message:
+                "Missing REQUIRED Environment Variable PUBLIC_POCKETBASE_URL",
         })
 
-    event.locals.pb = new PocketBase(POCKETBASE_URL)
+    event.locals.pb = new PocketBase(PUBLIC_POCKETBASE_URL)
     event.locals.pb.authStore.loadFromCookie(
         event.request.headers.get("cookie") || "",
     )

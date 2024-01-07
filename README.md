@@ -87,7 +87,7 @@ Open the projects in two separate vsCode instances, and:
 3. In the `angle-berry-server` directory, duplicate the [`.env.example`](./.env.example) file located in the root of your project and rename the duplicate file to `.env`.
 4. Update the value for `PUBLIC_POCKETBASE_URL` in the [`.env`](./.env) file with the copied domain address.
 5. Run `pnpm i` and `pnpm dev`.
-6. Good job 🎉.
+6. Done 🎉.
 
 ## Todo
 

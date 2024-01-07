@@ -18,6 +18,7 @@
     import IconCopySimpleRegular from "phosphor-icons-svelte/IconCopySimpleRegular.svelte"
     import IconTrashSimpleRegular from "phosphor-icons-svelte/IconTrashSimpleRegular.svelte"
     import IconCheckCircleRegular from "phosphor-icons-svelte/IconCheckCircleRegular.svelte"
+    import IconCheckRegular from "phosphor-icons-svelte/IconCheckRegular.svelte"
     import MessageContextMenu from "./MessageContextMenu.svelte"
     import MessageContextMenuItem from "./MessageContextMenuItem.svelte"
 
@@ -113,7 +114,9 @@
             {#if $contextMenuTargetMessage && $selectedMessageIds.includes($contextMenuTargetMessage?.id)}
                 <MessageContextMenuItem
                     title={copyTimeoutId ? "Copied" : "Copy Selected as Text"}
-                    icon={IconCopySimpleRegular}
+                    icon={copyTimeoutId
+                        ? IconCheckRegular
+                        : IconCopySimpleRegular}
                     isDisabled={!!copyTimeoutId}
                     on:click={copyMessage}
                 />
@@ -121,7 +124,7 @@
         {:else}
             <MessageContextMenuItem
                 title={copyTimeoutId ? "Copied" : "Copy Text"}
-                icon={IconCopySimpleRegular}
+                icon={copyTimeoutId ? IconCheckRegular : IconCopySimpleRegular}
                 isDisabled={!!copyTimeoutId}
                 on:click={copyMessage}
             />

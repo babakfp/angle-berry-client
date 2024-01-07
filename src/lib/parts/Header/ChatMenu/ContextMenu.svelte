@@ -95,7 +95,7 @@
     excludeQuerySelectorAll=".MessageContextMenu"
 >
     <MessageContextMenu>
-        {#if !$selectedMessageIds.length}
+        {#if !$selectedMessageIds.length || ($contextMenuTargetMessage && !$selectedMessageIds.includes($contextMenuTargetMessage?.id))}
             <MessageContextMenuItem
                 title="Reply"
                 icon={IconArrowUUpLeftRegular}
@@ -121,11 +121,13 @@
         />
         {#if $contextMenuTargetMessage?.expand.user.id === $page.data.user.id}
             {#if $selectedMessageIds.length > 0}
-                <MessageContextMenuItem
-                    title="Delete Selected"
-                    icon={IconTrashSimpleRegular}
-                    on:click={deleteMessage}
-                />
+                {#if $contextMenuTargetMessage && $selectedMessageIds.includes($contextMenuTargetMessage?.id)}
+                    <MessageContextMenuItem
+                        title="Delete Selected"
+                        icon={IconTrashSimpleRegular}
+                        on:click={deleteMessage}
+                    />
+                {/if}
             {:else}
                 <MessageContextMenuItem
                     title="Delete"

@@ -49,7 +49,7 @@
 
 <li id={message.id} class="w-full {isCurrentUser && 'ml-auto'}">
     <div
-        class="relative grid px-4 py-2
+        class="relative grid gap-1.5 px-4 py-2
         {$selectedMessageIds.includes(message.id) && 'bg-blue-400/10'}
         {$selectedMessageIds.length > 0 && 'cursor-pointer'}"
         transition:shrinkHeight={{ duration: 200 }}
@@ -68,7 +68,7 @@
         />
 
         {#if !isCurrentUser}
-            <span class="mb-0.5 text-2xs font-semibold text-gray-500">
+            <span class="text-2xs font-semibold uppercase text-gray-500">
                 {message.expand.user.username}
                 {message.expand.user.isAdmin ? "- admin" : ""}
             </span>

@@ -18,7 +18,6 @@
         <div class="flex text-sm sm:text-base">
             <svelte:component this={icon} />
         </div>
-        <!-- Remove the styles if you change the font -->
-        <span class="pt-1">{title}</span>
+        <span>{title}</span>
     </button>
 </li>

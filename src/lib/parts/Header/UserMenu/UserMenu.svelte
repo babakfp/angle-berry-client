@@ -54,7 +54,7 @@
                     })}
             >
                 <span>Click to copy your invite link:</span>
-                <p class="mt-1 select-text text-xs leading-4 text-gray-500">
+                <p class="mt-1 select-text text-xs text-gray-500">
                     {$page.url.origin}/register?id={$page.data.user.id}
                 </p>
             </button>

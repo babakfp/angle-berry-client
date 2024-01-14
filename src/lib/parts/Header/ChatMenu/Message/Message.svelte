@@ -70,6 +70,7 @@
         {#if !isCurrentUser}
             <span class="mb-0.5 text-2xs font-semibold text-gray-500">
                 {message.expand.user.username}
+                {message.expand.user.isAdmin ? "- admin" : ""}
             </span>
         {/if}
 

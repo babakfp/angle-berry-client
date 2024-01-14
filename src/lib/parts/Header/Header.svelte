@@ -36,6 +36,7 @@
                 <a
                     class="group relative flex items-center px-2 outline-inset"
                     href="/admin"
+                    title="Admin dashboard"
                 >
                     <IconCrownSimpleRegular
                         class="text-2xl duration-200 group-hover:text-white"
@@ -46,6 +47,7 @@
                 class="group relative flex items-center px-2 outline-inset"
                 bind:this={eventsMenuToggle}
                 on:click={() => (isEventsMenuOpen = !isEventsMenuOpen)}
+                title="Notifications"
             >
                 <IconBellSimpleRegular
                     class="text-2xl duration-200 group-hover:text-white"
@@ -60,6 +62,7 @@
                 class="group relative flex items-center px-2 outline-inset"
                 bind:this={chatMenuToggle}
                 on:click={() => (isChatMenuOpen = !isChatMenuOpen)}
+                title="Chat"
             >
                 <IconChatCenteredRegular
                     class="text-2xl duration-200 group-hover:text-white"
@@ -75,6 +78,7 @@
                     class="flex items-center gap-2 pl-2 pr-4 duration-200 outline-inset hover:text-white"
                     on:click={() => (isUserMenuOpen = !isUserMenuOpen)}
                     bind:this={userMenuToggle}
+                    title="User menu"
                 >
                     <Avatar class="w-8 rounded-full" />
                 </button>

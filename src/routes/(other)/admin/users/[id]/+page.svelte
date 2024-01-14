@@ -32,7 +32,6 @@
 
 <div class="mx-auto w-full max-w-xs">
     <Form message={form?.message} submitButtonText="Update" {errors} {validate}>
-        <div class="bg-gray-600"></div>
         <Select
             items={data.tiers.map(tier => ({
                 value: tier.id,

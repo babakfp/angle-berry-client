@@ -57,7 +57,7 @@ export default {
             full: "9999px",
         },
         fontFamily: {
-            sans: ["JosefinSans", defaultTheme.fontFamily.sans],
+            sans: ["TitilliumWeb", defaultTheme.fontFamily.sans],
         },
         fontWeight: {
             semibold: "600",

@@ -4,15 +4,48 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width" />
         <link rel="icon" href="%sveltekit.assets%/favicon.png" />
-        <!-- prettier-ignore -->
-        <link rel="preload" href="/JosefinSans-VariableFont_wght.woff2" as="font" type="font/woff2" crossorigin />
+
+        <link
+            rel="preload"
+            href="/fonts/TitilliumWeb/TitilliumWeb-Regular.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
+        <link
+            rel="preload"
+            href="/fonts/TitilliumWeb/TitilliumWeb-SemiBold.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
+        <link
+            rel="preload"
+            href="/fonts/TitilliumWeb/TitilliumWeb-Bold.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
         <style>
             @font-face {
-                font-family: "JosefinSans";
-                /* prettier-ignore */
-                src: url("/JosefinSans-VariableFont_wght.woff2") format("woff2 supports variations"),
-					 url("/JosefinSans-VariableFont_wght.woff2") format("woff2-variations");
-                font-weight: 100 700;
+                font-family: "TitilliumWeb";
+                src: url("/fonts/TitilliumWeb/TitilliumWeb-Regular.woff2")
+                    format("woff2");
+                font-weight: 400;
+                font-display: block;
+            }
+            @font-face {
+                font-family: "TitilliumWeb";
+                src: url("/fonts/TitilliumWeb/TitilliumWeb-SemiBold.woff2")
+                    format("woff2");
+                font-weight: 600;
+                font-display: block;
+            }
+            @font-face {
+                font-family: "TitilliumWeb";
+                src: url("/fonts/TitilliumWeb/TitilliumWeb-Bold.woff2")
+                    format("woff2");
+                font-weight: 700;
                 font-display: block;
             }
         </style>

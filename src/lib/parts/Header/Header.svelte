@@ -3,7 +3,7 @@
     import { unreadMessagesLength } from "$stores/messages"
     import { unseenEventsLength } from "$stores/events"
     import IconBellSimpleRegular from "phosphor-icons-svelte/IconBellSimpleRegular.svelte"
-    import IconUserCircleRegular from "phosphor-icons-svelte/IconUserCircleRegular.svelte"
+    import IconCrownSimpleRegular from "phosphor-icons-svelte/IconCrownSimpleRegular.svelte"
     import IconChatCenteredRegular from "phosphor-icons-svelte/IconChatCenteredRegular.svelte"
     import Avatar from "$components/Avatar.svelte"
     import NotificationBlob from "$components/NotificationBlob.svelte"
@@ -37,7 +37,7 @@
                     class="group relative flex items-center px-2 outline-inset"
                     href="/admin"
                 >
-                    <IconUserCircleRegular
+                    <IconCrownSimpleRegular
                         class="text-2xl duration-200 group-hover:text-white"
                     />
                 </a>

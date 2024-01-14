@@ -42,3 +42,9 @@
         <IconXCircleRegular />
     </svelte:fragment>
 </Select>
+
+<style lang="postcss">
+    :global(.svelte-select .clear-select) {
+        @apply hover:!bg-gray-700;
+    }
+</style>

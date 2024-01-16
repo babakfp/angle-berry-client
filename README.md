@@ -2,23 +2,19 @@
 
 This project consists of two repositories:
 
--   [Angle Berry Client](https://github.com/babakfp/angle-berry-client) (current)
+-   [Angle Berry Client](https://github.com/babakfp/angle-berry-client) (Current)
 -   [Angle Berry Server](https://github.com/babakfp/angle-berry-server)
 
-## Tech stack
+## Technology stack
 
-### Front-end
+### Client
 
+-   [TypeScript](https://typescriptlang.org)
 -   [Svelte](https://svelte.dev)
--   [TailwindCSS](https://tailwindcss.com)
--   [TypeScript](https://typescriptlang.org)
-
-### Back-end
-
 -   [SvelteKit](https://kit.svelte.dev)
--   [TypeScript](https://typescriptlang.org)
+-   [TailwindCSS](https://tailwindcss.com)
 
-### Database
+### Server
 
 -   [PocketBase](https://pocketbase.io)
 
@@ -36,7 +32,9 @@ This project consists of two repositories:
 -   [eslint](https://npmjs.com/package/eslint)
 -   [eslint-config-prettier](https://npmjs.com/package/eslint-config-prettier)
 -   [eslint-plugin-svelte](https://npmjs.com/package/eslint-plugin-svelte)
+-   [phosphor-icons-svelte](https://npmjs.com/package/phosphor-icons-svelte)
 -   [pocketbase](https://npmjs.com/package/pocketbase)
+-   [pocketbase-typegen](https://npmjs.com/package/pocketbase-typegen)
 -   [postcss](https://npmjs.com/package/postcss)
 -   [postcss-load-config](https://npmjs.com/package/postcss-load-config)
 -   [prettier](https://npmjs.com/package/prettier)
@@ -59,12 +57,12 @@ This project consists of two repositories:
 
 #### Angle Berry Server
 
--   [pocketbase-typegen](https://npmjs.com/package/pocketbase-typegen)
+-   [PocketBase](https://pocketbase.io)
 
-### Hosting
+## Hosting
 
--   Client: [Vercel](https://vercel.com)
--   Database: [Hop](https://hop.io)
+-   [Angle Berry Client](https://github.com/babakfp/angle-berry-client) is hosted on [Vercel](https://vercel.com)
+-   [Angle Berry Server](https://github.com/babakfp/angle-berry-server) is hosted on [Hop](https://hop.io)
 
 ## Development
 
@@ -88,6 +86,18 @@ Open the projects in two separate vsCode instances, and:
 4. Update the value for `PUBLIC_POCKETBASE_URL` in the [`.env`](./.env) file with the copied domain address.
 5. Run `pnpm i` and `pnpm dev`.
 6. Done 🎉.
+
+### Commands
+
+-   `dev`: Run SvelteKit project.
+-   `build`: Build SvelteKit project.
+-   `preview`: Preview the build of SvelteKit project.
+-   `prepare`: Nothing important (you don't need to run this).
+-   `check`: Check for issues in the code.
+-   `check:watch`: Check for issues in the code.
+-   `lint`: Check for issues in the code.
+-   `format`: Format and make the code look good.
+-   `typegen`: Generate PocketBase schema types.
 
 ## Todo
 

@@ -61,8 +61,8 @@ This project consists of two repositories:
 
 ## Hosting
 
--   [Angle Berry Client](https://github.com/babakfp/angle-berry-client) is hosted on [Vercel](https://vercel.com)
--   [Angle Berry Server](https://github.com/babakfp/angle-berry-server) is hosted on [Hop](https://hop.io)
+-   [Angle Berry Client](https://github.com/babakfp/angle-berry-client) is hosted on [Vercel](https://vercel.com).
+-   [Angle Berry Server](https://github.com/babakfp/angle-berry-server) is hosted on [Hop](https://hop.io).
 
 ## Development
 

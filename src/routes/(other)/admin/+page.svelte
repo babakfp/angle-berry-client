@@ -6,7 +6,7 @@
     {#each collections as item}
         <li>
             <a
-                class="link btn btn-gray-light-glass-outline w-full"
+                class="btn-gray-light-outline link btn w-full"
                 href="/admin/{item.toLowerCase()}">{item}</a
             >
         </li>

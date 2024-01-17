@@ -18,6 +18,10 @@
     }
 </script>
 
+<svelte:head>
+    <title>Users</title>
+</svelte:head>
+
 {#if selectedUserIds.length}
     <div
         class="flex items-end justify-between"

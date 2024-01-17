@@ -15,6 +15,10 @@
     }
 </script>
 
+<svelte:head>
+    <title>Tier</title>
+</svelte:head>
+
 <div class="flex justify-between">
     <div class="flex gap-4">
         {#if selectedTierIds.length}

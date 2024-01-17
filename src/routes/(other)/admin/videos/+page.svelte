@@ -16,6 +16,10 @@
     })
 </script>
 
+<svelte:head>
+    <title>Videos</title>
+</svelte:head>
+
 <Form
     class="mb-8"
     message={form?.message}

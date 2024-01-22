@@ -2,12 +2,12 @@ import { redirect } from "@sveltejs/kit"
 
 const auth = {
     user: {
-        username: "demo",
-        password: "demodemo",
+        username: "user",
+        password: "useruser",
     },
     admin: {
-        username: "babakfp",
-        password: "th_&filter=&sort=-cr",
+        username: "admin",
+        password: "adminadmin",
     },
 }
 

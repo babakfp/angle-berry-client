@@ -6,6 +6,8 @@
     import { page } from "$app/stores"
     import { beforeNavigate } from "$app/navigation"
     import Tier from "./Tier.svelte"
+    import IconUserRegular from "phosphor-icons-svelte/IconUserRegular.svelte"
+    import IconCrownSimpleRegular from "phosphor-icons-svelte/IconCrownSimpleRegular.svelte"
 
     export let userMenuToggle: HTMLButtonElement
     export let isUserMenuOpen = false
@@ -67,15 +69,19 @@
         </ol>
 
         <li>
-            <form action="/login-as" method="post">
-                <button
-                    class="w-full rounded-b border-t border-white/5 p-4 text-left duration-200 outline-inset hover:text-white"
-                    name="as"
-                    value={$page.data.user.isAdmin ? "a-user" : "an-admin"}
-                >
+            <a
+                class="flex w-full items-center justify-between rounded-b border-t border-white/5 p-4 text-left duration-200 outline-inset hover:text-white"
+                href="/login-as"
+            >
+                <span>
                     Login as {$page.data.user.isAdmin ? "a User" : "an Admin"}
-                </button>
-            </form>
+                </span>
+                {#if $page.data.user.isAdmin}
+                    <IconUserRegular class="text-xl" />
+                {:else}
+                    <IconCrownSimpleRegular class="text-xl" />
+                {/if}
+            </a>
         </li>
 
         <li>

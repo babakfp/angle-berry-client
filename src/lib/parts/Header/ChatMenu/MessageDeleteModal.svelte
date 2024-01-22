@@ -16,7 +16,7 @@
     $: if (!isDeletePopupOpen && $messageIdsToDelete.length > 0)
         messageIdsToDelete.set([])
 
-    async function handleDelete() {
+    const handleDelete = async () => {
         try {
             const isMessageDeleted = await Promise.all(
                 $messageIdsToDelete.map(messageId =>

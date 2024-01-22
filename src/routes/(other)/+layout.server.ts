@@ -6,7 +6,7 @@ import {
     ClientResponseError,
 } from "$utilities/pb-types"
 
-export async function load({ locals, parent }) {
+export const load = async ({ locals, parent }) => {
     if (!locals.user) redirect(303, "/login")
 
     try {

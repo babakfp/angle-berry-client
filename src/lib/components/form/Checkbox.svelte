@@ -13,7 +13,7 @@
 
     $: handleGroup(checked)
 
-    function handleGroup(checked: boolean) {
+    const handleGroup = (checked: boolean) => {
         if (checked) {
             if (!group.includes(value)) {
                 group = [...group, value]

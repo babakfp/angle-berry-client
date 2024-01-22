@@ -24,7 +24,7 @@
 
     let copyTimeoutId: number | undefined
 
-    function replyMessage() {
+    const replyMessage = () => {
         isContextMenuOpen.set(false)
         isReplying.set(true)
         replyTargetMessage.set($contextMenuTargetMessage)
@@ -32,14 +32,14 @@
         if ($messageInputElement) $messageInputElement.focus()
     }
 
-    function editMessage() {
+    const editMessage = () => {
         isContextMenuOpen.set(false)
         messageIdToEdit.set($contextMenuTargetMessage!?.id)
         isReplying.set(false)
         if ($messageInputElement) $messageInputElement.focus()
     }
 
-    function copyMessage() {
+    const copyMessage = () => {
         if ($selectedMessageIds.length > 0) {
             let copiedText = ""
             const selectedMessages = $messages.items
@@ -70,14 +70,14 @@
         }, 1000)
     }
 
-    function deleteMessage() {
+    const deleteMessage = () => {
         isContextMenuOpen.set(false)
         if ($selectedMessageIds.length > 0) {
             messageIdsToDelete.set($selectedMessageIds)
         }
     }
 
-    function selectMessage() {
+    const selectMessage = () => {
         isContextMenuOpen.set(false)
         selectedMessageIds.update(currentValue => [
             ...currentValue,
@@ -85,7 +85,7 @@
         ])
     }
 
-    function clearSelection() {
+    const clearSelection = () => {
         isContextMenuOpen.set(false)
         selectedMessageIds.set([])
     }

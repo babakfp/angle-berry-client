@@ -14,11 +14,11 @@
 
     let interval: number | undefined
 
-    function handleJumpToMessage() {
+    const handleJumpToMessage = () => {
         interval = goToMessage(messageId, interval)
     }
 
-    function handleClosing() {
+    const handleClosing = () => {
         isOpen = false
         dispatch("close")
     }

@@ -4,7 +4,7 @@ type Options = {
     easing?: (t: number) => number
 }
 
-export function shrinkHeight(node: HTMLElement, options?: Options) {
+export const shrinkHeight = (node: HTMLElement, options?: Options) => {
     node.style.overflow = "hidden"
 
     const style = getComputedStyle(node)

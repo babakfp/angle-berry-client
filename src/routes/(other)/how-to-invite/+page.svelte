@@ -7,7 +7,7 @@
 
     export let data
 
-    function copyInviteLink() {
+    const copyInviteLink = () => {
         copyText(`${$page.url.origin}/register?id=${data.user.id}`)
         toast.success("Your invite link is copied to Clipboard.", {
             position: "bottom-right",

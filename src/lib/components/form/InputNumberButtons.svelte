@@ -15,7 +15,7 @@
         }
     }
 
-    function incrementNumber() {
+    const incrementNumber = () => {
         if (max) {
             if (Number(value) < Number(max)) {
                 value = Number(value) + 1
@@ -25,7 +25,7 @@
         }
     }
 
-    function decrementNumber() {
+    const decrementNumber = () => {
         if (min || min === 0) {
             if (Number(value) > Number(min)) {
                 value = Number(value) - 1

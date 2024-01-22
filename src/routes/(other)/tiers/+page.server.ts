@@ -1,6 +1,6 @@
 import { redirect } from "@sveltejs/kit"
 
-export function load({ locals }) {
+export const load = ({ locals }) => {
     if (!locals.user) redirect(303, "/login")
     redirect(303, "/")
 }

@@ -1,7 +1,7 @@
-export function highlightAnimate(
+export const highlightAnimate = (
     element: HTMLElement,
     interval: number | undefined,
-) {
+) => {
     if (interval) clearInterval(interval)
 
     if (!element) return

@@ -22,7 +22,7 @@
 
     export let error = ""
 
-    function bindValue(e: Event) {
+    const bindValue = (e: Event) => {
         if (["number", "range"].includes(type)) {
             value = +(e.target as HTMLInputElement).value
         } else {

@@ -5,7 +5,10 @@ import { highlightAnimate } from "$utilities/highlightAnimate"
  * @param messageId - The ID of the message to scroll to.
  * @param interval - The ID of the current interval (if any).
  */
-export function goToMessage(messageId: string, interval: number | undefined) {
+export const goToMessage = (
+    messageId: string,
+    interval: number | undefined,
+) => {
     // Get the element with the specified ID.
     const messageElement = document.getElementById(messageId)
     if (!messageElement) return

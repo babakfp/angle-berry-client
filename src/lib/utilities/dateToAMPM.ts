@@ -1,4 +1,4 @@
-export function dateToAMPM(date: Date) {
+export const dateToAMPM = (date: Date) => {
     const hours = date.getHours()
     const minutes = date.getMinutes()
     const amPm = hours >= 12 ? "PM" : "AM"

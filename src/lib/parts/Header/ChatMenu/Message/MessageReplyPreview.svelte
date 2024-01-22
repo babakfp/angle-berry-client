@@ -7,7 +7,7 @@
 
     let interval: number | undefined
 
-    function handleGoToMessage() {
+    const handleGoToMessage = () => {
         interval = goToMessage(id, interval)
     }
 </script>

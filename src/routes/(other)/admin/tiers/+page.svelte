@@ -6,7 +6,7 @@
 
     let selectedTierIds: string[] = []
 
-    function checkAllCheckboxes(e: Event) {
+    const checkAllCheckboxes = (e: Event) => {
         if ((e.target as HTMLInputElement).checked) {
             selectedTierIds = data.tiers.map(tier => tier.id)
         } else {

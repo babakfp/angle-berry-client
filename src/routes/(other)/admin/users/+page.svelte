@@ -7,9 +7,9 @@
 
     let selectedUserIds: string[] = []
 
-    function deleteSelectedTiers() {}
+    const deleteSelectedTiers = () => {}
 
-    function checkAllCheckboxes(e: Event) {
+    const checkAllCheckboxes = (e: Event) => {
         if ((e.target as HTMLInputElement).checked) {
             selectedUserIds = data.users.map(user => user.id)
         } else {

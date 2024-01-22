@@ -23,7 +23,7 @@
 
     let highlight: HTMLDivElement
 
-    function handleClick(e: MouseEvent) {
+    const handleClick = (e: MouseEvent) => {
         if ($selectedMessageIds.length > 0) {
             if ($selectedMessageIds.includes(message.id)) {
                 selectedMessageIds.update(v => v.filter(v => v !== message.id))

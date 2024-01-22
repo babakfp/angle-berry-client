@@ -8,7 +8,7 @@ import {
     ClientResponseError,
 } from "$utilities/pb-types"
 
-export async function handle({ event, resolve }) {
+export const handle = async ({ event, resolve }) => {
     if (!PUBLIC_POCKETBASE_URL)
         error(500, {
             message:

@@ -9,7 +9,7 @@
     $: isToday = isDateToday(date)
     $: isYesterday = isDateYesterday(date)
 
-    function isDateToday(someDate: Date) {
+    const isDateToday = (someDate: Date) => {
         const today = new Date()
         return (
             someDate.getDate() === today.getDate() &&
@@ -18,7 +18,7 @@
         )
     }
 
-    function isDateYesterday(someDate: Date) {
+    const isDateYesterday = (someDate: Date) => {
         const today = new Date()
         return (
             someDate.getDate() === today.getDate() - 1 &&

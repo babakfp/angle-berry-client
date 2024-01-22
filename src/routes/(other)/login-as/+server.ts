@@ -11,11 +11,11 @@ const auth = {
     },
 }
 
-export function GET() {
+export const GET = () => {
     redirect(303, "/")
 }
 
-export async function POST({ locals }) {
+export const POST = async ({ locals }) => {
     if (!locals.user) redirect(303, "/login")
 
     if (locals.user.isAdmin) {

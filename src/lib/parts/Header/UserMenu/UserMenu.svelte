@@ -67,6 +67,18 @@
         </ol>
 
         <li>
+            <form action="/login-as" method="post">
+                <button
+                    class="w-full rounded-b border-t border-white/5 p-4 text-left duration-200 outline-inset hover:text-white"
+                    name="as"
+                    value={$page.data.user.isAdmin ? "a-user" : "an-admin"}
+                >
+                    Login as {$page.data.user.isAdmin ? "a User" : "an Admin"}
+                </button>
+            </form>
+        </li>
+
+        <li>
             <form action="/logout" method="post">
                 <button
                     class="w-full rounded-b border-t border-white/5 p-4 text-left duration-200 outline-inset hover:text-white"

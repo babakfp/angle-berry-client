@@ -32,16 +32,14 @@ export default {
             white: colors.white,
             red: colors.red,
             gray: {
-                300: colors.zinc[300],
                 400: colors.zinc[400],
                 500: colors.zinc[500],
                 600: colors.zinc[600],
                 700: colors.zinc[700],
-                800: colors.zinc[800],
             },
             body: {
-                bg: colors.zinc[800],
                 text: colors.zinc[300],
+                bg: colors.zinc[800],
             },
             blue: colors.blue,
             green: colors.green,

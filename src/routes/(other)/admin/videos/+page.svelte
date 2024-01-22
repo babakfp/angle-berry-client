@@ -35,7 +35,7 @@
     />
 </Form>
 
-<div class="sticky top-header z-1 -mt-4 bg-gray-800">
+<div class="sticky top-header z-1 -mt-4 bg-body-bg">
     {#if $deleteForm.videos.length}
         <div class="flex items-end gap-4 py-4" transition:shrinkHeight>
             <form method="post" action="?/delete">

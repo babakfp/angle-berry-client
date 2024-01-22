@@ -36,7 +36,7 @@
                     Watch now
                 </span>
             {:else}
-                <span class="px-6 py-4">Have access</span>
+                <span class="px-6 py-4">Accessed</span>
             {/if}
         {:else}
             <div class="flex items-center justify-end pl-4">

@@ -70,13 +70,14 @@
         }, 1000)
     }
 
-    const deleteMessage = () => {
+    const setSelectedMessagesForDeletion = () => {
         isContextMenuOpen.set(false)
-        if ($selectedMessageIds.length > 0) {
-            messageIdsToDelete.set($selectedMessageIds)
-        } else {
-            messageIdsToDelete.set([$contextMenuTargetMessage!?.id])
-        }
+        messageIdsToDelete.set($selectedMessageIds)
+    }
+
+    const setAMessageForDeletion = () => {
+        isContextMenuOpen.set(false)
+        messageIdsToDelete.set([$contextMenuTargetMessage!?.id])
     }
 
     const selectMessage = () => {
@@ -137,14 +138,14 @@
                     <MessageContextMenuItem
                         title="Delete Selected"
                         icon={IconTrashSimpleRegular}
-                        on:click={deleteMessage}
+                        on:click={setSelectedMessagesForDeletion}
                     />
                 {/if}
             {:else}
                 <MessageContextMenuItem
                     title="Delete"
                     icon={IconTrashSimpleRegular}
-                    on:click={deleteMessage}
+                    on:click={setAMessageForDeletion}
                 />
             {/if}
         {/if}

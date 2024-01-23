@@ -1,7 +1,7 @@
 <script lang="ts">
     import { page } from "$app/stores"
     import { copyText } from "svelte-copy"
-    import toast, { Toaster } from "svelte-french-toast"
+    import toast from "svelte-french-toast"
     import Input from "$components/form/Input.svelte"
     import InputTextButton from "$components/form/InputTextButton.svelte"
 
@@ -36,5 +36,3 @@
         you will get a point added to your invites.
     </p>
 </div>
-
-<Toaster />

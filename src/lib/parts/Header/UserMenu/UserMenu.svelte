@@ -1,7 +1,7 @@
 <script lang="ts">
     import OutClick from "svelte-outclick"
     import { copy } from "svelte-copy"
-    import toast, { Toaster } from "svelte-french-toast"
+    import toast from "svelte-french-toast"
     import { onMount } from "svelte"
     import { page } from "$app/stores"
     import { beforeNavigate } from "$app/navigation"
@@ -94,5 +94,3 @@
         </li>
     </ul>
 </OutClick>
-
-<Toaster />

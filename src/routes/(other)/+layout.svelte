@@ -116,7 +116,7 @@
 
                         if (
                             (_data.record as CustomEventsResponse).expand
-                                .inviter.id === data.user.id
+                                ?.inviter?.id === data.user.id
                         ) {
                             data.user.invitedUsers = [
                                 ...data.user.invitedUsers,

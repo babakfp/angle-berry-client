@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { onMount } from "svelte"
+    import { onDestroy, onMount } from "svelte"
     import { fly } from "svelte/transition"
     import { page } from "$app/stores"
     import { pageTransitionValues } from "$utilities/pageTransitionValues"
@@ -142,6 +142,11 @@
             }
             throw e
         }
+    })
+
+    onDestroy(async () => {
+        await $pb.collection("messages").unsubscribe()
+        await $pb.collection("events").unsubscribe()
     })
 </script>
 

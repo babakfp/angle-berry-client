@@ -87,6 +87,24 @@ Open the projects in two separate vsCode instances, and:
 5. Run `pnpm i` and `pnpm dev`.
 6. Done 🎉.
 
+#### `angle-berry-client` auth credentials
+
+There are two users that you can switch between by the user menu:
+
+-   User
+-   -   Username: `user`
+-   -   Password: `useruser`
+-   Admin
+-   -   Username: `admin`
+-   -   Password: `adminadmin`
+
+#### `angle-berry-server` admin credentials
+
+Use this to log in to the PocketBase dashboard:
+
+-   Email: `admin@example.com`
+-   Password: `admin@example.com`
+
 ### Commands
 
 -   `dev`: Run SvelteKit project.

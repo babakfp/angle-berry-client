@@ -16,6 +16,7 @@
         type EventsResponse,
         type UsersResponse,
         ClientResponseError,
+        type TiersResponse,
     } from "$utilities/pb-types"
 
     export let data
@@ -96,49 +97,56 @@
                 "*",
                 async (_data: RecordSubscription<EventsResponse>) => {
                     if (_data.action === "create") {
-                        const userRecord = await $pb
+                        const createdEvent =
+                            _data.record as CustomEventsResponse
+                        const userRecord: UsersResponse & {
+                            expand: { retainedTiers: TiersResponse[] }
+                        } = await $pb
                             .collection("users")
-                            .getOne(_data.record.user, {
+                            .getOne(createdEvent.user, {
                                 expand: "retainedTiers",
                                 $autoCancel: false,
                             })
-                        let inviterRecord
-                        if (_data.record.inviter)
+                        let inviterRecord:
+                            | (UsersResponse & {
+                                  expand: { retainedTiers: TiersResponse[] }
+                              })
+                            | undefined
+                        if (createdEvent.inviter)
                             inviterRecord = await $pb
                                 .collection("users")
-                                .getOne(_data.record.inviter, {
+                                .getOne(createdEvent.inviter, {
                                     expand: "retainedTiers",
                                     $autoCancel: false,
                                 })
-                        _data.record.expand = {
-                            user: userRecord,
-                            ...(inviterRecord
-                                ? { inviter: inviterRecord }
-                                : {}),
-                        }
                         events.update(_events => {
                             _events.items = [
-                                _data.record as CustomEventsResponse,
+                                {
+                                    ...createdEvent,
+                                    expand: {
+                                        user: userRecord,
+                                        ...(inviterRecord
+                                            ? { inviter: inviterRecord }
+                                            : {}),
+                                    },
+                                },
                                 ..._events.items,
                             ]
                             return _events
                         })
                         unseenEventsLength.update(v => (v += 1))
 
-                        if (
-                            (_data.record as CustomEventsResponse).expand
-                                ?.inviter?.id === data.user.id
-                        ) {
+                        if (createdEvent.expand?.inviter?.id === data.user.id) {
                             data.user.invitedUsers = [
                                 ...data.user.invitedUsers,
-                                (_data.record as CustomEventsResponse).expand
-                                    .user.id,
+                                createdEvent.expand.user.id,
                             ]
                         }
                     } else if (_data.action === "delete") {
+                        const deletedEvent = _data.record as EventsResponse
                         events.update(_events => {
                             _events.items = _events.items.filter(
-                                m => m.id !== _data.record.id,
+                                m => m.id !== deletedEvent.id,
                             )
                             return _events
                         })

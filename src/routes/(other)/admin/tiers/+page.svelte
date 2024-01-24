@@ -99,7 +99,7 @@
                     {usersWithThisTier.length}
                 </Td>
                 <a
-                    class="absolute inset-0 outline-inset"
+                    class="absolute inset-0 rounded-b outline-inset"
                     href="/admin/tiers/{tier.id}"
                     aria-label="View"
                 />

@@ -85,7 +85,7 @@
                     {user.isAdmin ? "Yes" : "No"}
                 </Td>
                 <a
-                    class="absolute inset-0 outline-inset"
+                    class="absolute inset-0 rounded-b outline-inset"
                     href="/admin/users/{user.id}"
                     aria-label="View"
                 />

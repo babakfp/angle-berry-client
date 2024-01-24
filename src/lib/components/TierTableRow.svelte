@@ -59,7 +59,7 @@
 
     {#if !isShowingSingleTier}
         <a
-            class="absolute inset-0 outline-inset"
+            class="absolute inset-0 rounded-b outline-inset"
             href="/tiers/{currentTier.id}"
             aria-label="View"
         />

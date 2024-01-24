@@ -30,22 +30,26 @@
     class="{_class} inline-flex items-center gap-2 hover:text-white
         {disabled && 'pointer-events-none opacity-50'}"
 >
-    <input
-        class="hidden"
-        type="checkbox"
-        bind:checked
-        on:change
-        {value}
-        {disabled}
-        name={name || null}
-        {...$$restProps}
-    />
+    <div
+        class="inline-flex [&:has(input:focus-visible)]:outline [&:has(input:focus-visible)]:outline-2 [&:has(input:focus-visible)]:outline-[orange]"
+    >
+        <input
+            class="pointer-events-none absolute opacity-0"
+            type="checkbox"
+            bind:checked
+            on:change
+            {value}
+            {disabled}
+            name={name || null}
+            {...$$restProps}
+        />
 
-    {#if checked}
-        <IconCheckSquareRegular class="text-xl" />
-    {:else}
-        <IconSquareRegular class="text-xl" />
-    {/if}
+        {#if checked}
+            <IconCheckSquareRegular class="text-xl" />
+        {:else}
+            <IconSquareRegular class="text-xl" />
+        {/if}
+    </div>
 
     {#if label}
         <span>{label}</span>

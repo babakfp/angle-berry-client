@@ -27,7 +27,7 @@
 </script>
 
 <label
-    class="{_class} inline-flex items-center gap-2 hover:text-body-text
+    class="{_class} inline-flex items-center gap-2 hover:text-white
         {disabled && 'pointer-events-none opacity-50'}"
 >
     <input

@@ -37,7 +37,7 @@
 </script>
 
 <button
-    class="h-full pl-1 pr-0.5 text-gray-500 duration-200 outline-inset hover:text-body-text
+    class="h-full pl-1 pr-0.5 text-gray-500 duration-200 outline-inset hover:text-white
         {(min || min === 0) && Number(value) <= Number(min)
         ? 'pointer-events-none text-gray-600'
         : ''}"
@@ -48,7 +48,7 @@
 </button>
 
 <button
-    class="-mr-2 h-full pl-0.5 pr-2 text-gray-500 duration-200 outline-inset hover:text-body-text
+    class="-mr-2 h-full pl-0.5 pr-2 text-gray-500 duration-200 outline-inset hover:text-white
         {max && Number(value) >= Number(max)
         ? 'pointer-events-none text-gray-600'
         : ''}"

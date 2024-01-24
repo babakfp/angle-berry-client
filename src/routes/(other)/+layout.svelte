@@ -11,7 +11,7 @@
     import {
         type RecordSubscription,
         type RealtimeMessagesResponse,
-        type CustomEventsResponse,
+        type RealtimeEventsResponse,
         type MessagesResponse,
         type EventsResponse,
         type UsersResponse,
@@ -100,7 +100,7 @@
                 async (_data: RecordSubscription<EventsResponse>) => {
                     if (_data.action === "create") {
                         const createdEvent =
-                            _data.record as CustomEventsResponse
+                            _data.record as RealtimeEventsResponse
                         const userRecord: UsersResponse & {
                             expand: { retainedTiers: TiersResponse[] }
                         } = await $pb

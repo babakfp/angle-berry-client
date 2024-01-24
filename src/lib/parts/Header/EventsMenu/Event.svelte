@@ -1,10 +1,10 @@
 <script lang="ts">
     import { page } from "$app/stores"
     import { fly } from "svelte/transition"
-    import type { CustomEventsResponse } from "$utilities/pb-types"
+    import type { RealtimeEventsResponse } from "$utilities/pb-types"
     import UserTooltipInfo from "./UserTooltipInfo.svelte"
 
-    export let event: CustomEventsResponse
+    export let event: RealtimeEventsResponse
 </script>
 
 <li

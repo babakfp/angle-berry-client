@@ -34,7 +34,7 @@ export type ClientResponseErrorCustom = ClientResponseError & {
     }
 }
 
-export type CustomEventsResponse = EventsResponse & {
+export type RealtimeEventsResponse = EventsResponse & {
     expand: {
         user: UsersResponse & {
             expand: {
@@ -60,4 +60,4 @@ export type RealtimeMessagesResponse = MessagesResponse & {
     }
 }
 
-export type ListResultEventsResponse = ListResult<CustomEventsResponse>
+export type ListResultEventsResponse = ListResult<RealtimeEventsResponse>

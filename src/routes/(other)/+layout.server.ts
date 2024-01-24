@@ -1,9 +1,9 @@
 import { redirect } from "@sveltejs/kit"
 import { pbHandleClientResponseError } from "$utilities/pb"
 import {
-    type ListResultEventsResponse,
     ClientResponseError,
     type ListResult,
+    type RealtimeEventsResponse,
     type RealtimeMessagesResponse,
 } from "$utilities/pb-types"
 
@@ -17,7 +17,7 @@ export const load = async ({ locals, parent }) => {
                 sort: "-created",
                 expand: "user,repliedTo,repliedTo.user",
             })
-        const events: ListResultEventsResponse = await locals.pb
+        const events: ListResult<RealtimeEventsResponse> = await locals.pb
             .collection("events")
             .getList(1, 50, {
                 sort: "-created",

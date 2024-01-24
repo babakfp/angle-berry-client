@@ -59,5 +59,3 @@ export type RealtimeMessagesResponse = MessagesResponse & {
         }
     }
 }
-
-export type ListResultEventsResponse = ListResult<RealtimeEventsResponse>

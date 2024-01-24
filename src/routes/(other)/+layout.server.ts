@@ -1,16 +1,17 @@
 import { redirect } from "@sveltejs/kit"
 import { pbHandleClientResponseError } from "$utilities/pb"
 import {
-    type ListResultMessagesResponse,
     type ListResultEventsResponse,
     ClientResponseError,
+    type ListResult,
+    type RealtimeMessagesResponse,
 } from "$utilities/pb-types"
 
 export const load = async ({ locals, parent }) => {
     if (!locals.user) redirect(303, "/login")
 
     try {
-        const messages: ListResultMessagesResponse = await locals.pb
+        const messages: ListResult<RealtimeMessagesResponse> = await locals.pb
             .collection("messages")
             .getList(1, 50, {
                 sort: "-created",

@@ -8,7 +8,7 @@
     export let value = "on"
     export let group: string[] = []
     export let disabled = false
-    export let name = crypto.randomUUID()
+    export let name: string = crypto.randomUUID()
     export let label = ""
 
     $: handleGroup(checked)

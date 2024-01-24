@@ -14,6 +14,7 @@
         type CustomEventsResponse,
         type MessagesResponse,
         type EventsResponse,
+        type UsersResponse,
         ClientResponseError,
     } from "$utilities/pb-types"
 
@@ -23,56 +24,66 @@
         try {
             await $pb.collection("messages").subscribe(
                 "*",
-                async (_data: RecordSubscription<MessagesResponse>) => {
+                async (
+                    _data: RecordSubscription<
+                        MessagesResponse | CustomMessagesResponse
+                    >,
+                ) => {
                     if (_data.action === "update") {
+                        const updatedMessage = _data.record as MessagesResponse
                         messages.update(_messages => {
                             _messages.items = _messages.items.map(msg => {
-                                if (msg.id === _data.record.id) {
-                                    msg.content = _data.record.content
-                                    msg.updated = _data.record.updated
+                                if (msg.id === updatedMessage.id) {
+                                    msg.content = updatedMessage.content
+                                    msg.updated = updatedMessage.updated
                                 }
                                 if (
                                     msg.expand?.repliedTo?.id ===
-                                    _data.record.id
+                                    updatedMessage.id
                                 ) {
                                     msg.expand.repliedTo.content =
-                                        _data.record.content
+                                        updatedMessage.content
                                     msg.expand.repliedTo.updated =
-                                        _data.record.updated
+                                        updatedMessage.updated
                                 }
                                 return msg
                             })
                             return _messages
                         })
                     } else if (_data.action === "create") {
-                        const userRecord = await $pb
+                        const createdMessage =
+                            _data.record as CustomMessagesResponse
+                        const userRecord: UsersResponse = await $pb
                             .collection("users")
-                            .getOne(_data.record.user)
-                        let repliedToRecord
-                        if (_data.record.repliedTo) {
+                            .getOne(createdMessage.user)
+                        let repliedToRecord: CustomMessagesResponse | undefined
+                        if (createdMessage.repliedTo) {
                             repliedToRecord = await $pb
                                 .collection("messages")
-                                .getOne(_data.record.repliedTo, {
+                                .getOne(createdMessage.repliedTo, {
                                     expand: "user",
                                 })
-                        }
-                        _data.record.expand = {
-                            user: userRecord,
-                            repliedTo: repliedToRecord ? repliedToRecord : "",
                         }
 
                         messages.update(_messages => {
                             _messages.items = [
-                                _data.record as CustomMessagesResponse,
+                                {
+                                    ...createdMessage,
+                                    expand: {
+                                        user: userRecord,
+                                        repliedTo: repliedToRecord,
+                                    },
+                                },
                                 ..._messages.items,
                             ]
                             return _messages
                         })
                         unreadMessagesLength.update(v => (v += 1))
                     } else if (_data.action === "delete") {
+                        const deletedMessage = _data.record as MessagesResponse
                         messages.update(_messages => {
                             _messages.items = _messages.items.filter(
-                                m => m.id !== _data.record.id,
+                                m => m.id !== deletedMessage.id,
                             )
                             return _messages
                         })

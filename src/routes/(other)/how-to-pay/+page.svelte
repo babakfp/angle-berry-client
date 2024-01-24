@@ -7,8 +7,8 @@
 <div class="mt-8">
     <p>
         You can contact us via Telegram
-        <a class="link" href="https://t.me/adminTelegramUsername"
-            >@adminTelegramUsername</a
-        >.
+        <a class="link" href="https://t.me/adminTelegramUsername">
+            @adminTelegramUsername
+        </a>.
     </p>
 </div>

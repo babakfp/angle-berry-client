@@ -13,9 +13,9 @@
     import IconCircleRegular from "phosphor-icons-svelte/IconCircleRegular.svelte"
     import IconCheckCircleRegular from "phosphor-icons-svelte/IconCheckCircleRegular.svelte"
     import { highlightAnimate } from "$utilities/highlightAnimate"
-    import type { CustomMessagesResponse } from "$utilities/pb-types"
+    import type { RealtimeMessagesResponse } from "$utilities/pb-types"
 
-    export let message: CustomMessagesResponse
+    export let message: RealtimeMessagesResponse
 
     const isCurrentUser = message.expand.user.id === $page.data.user.id
 

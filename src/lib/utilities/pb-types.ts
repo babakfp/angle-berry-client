@@ -49,7 +49,7 @@ export type CustomEventsResponse = EventsResponse & {
     }
 }
 
-export type CustomMessagesResponse = MessagesResponse & {
+export type RealtimeMessagesResponse = MessagesResponse & {
     expand: {
         user: UsersResponse
         repliedTo?: MessagesResponse & {
@@ -61,4 +61,4 @@ export type CustomMessagesResponse = MessagesResponse & {
 }
 
 export type ListResultEventsResponse = ListResult<CustomEventsResponse>
-export type ListResultMessagesResponse = ListResult<CustomMessagesResponse>
+export type ListResultMessagesResponse = ListResult<RealtimeMessagesResponse>

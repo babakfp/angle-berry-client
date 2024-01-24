@@ -10,7 +10,7 @@
     import Header from "$parts/Header/Header.svelte"
     import {
         type RecordSubscription,
-        type CustomMessagesResponse,
+        type RealtimeMessagesResponse,
         type CustomEventsResponse,
         type MessagesResponse,
         type EventsResponse,
@@ -27,7 +27,7 @@
                 "*",
                 async (
                     _data: RecordSubscription<
-                        MessagesResponse | CustomMessagesResponse
+                        MessagesResponse | RealtimeMessagesResponse
                     >,
                 ) => {
                     if (_data.action === "update") {
@@ -53,11 +53,13 @@
                         })
                     } else if (_data.action === "create") {
                         const createdMessage =
-                            _data.record as CustomMessagesResponse
+                            _data.record as RealtimeMessagesResponse
                         const userRecord: UsersResponse = await $pb
                             .collection("users")
                             .getOne(createdMessage.user)
-                        let repliedToRecord: CustomMessagesResponse | undefined
+                        let repliedToRecord:
+                            | RealtimeMessagesResponse
+                            | undefined
                         if (createdMessage.repliedTo) {
                             repliedToRecord = await $pb
                                 .collection("messages")

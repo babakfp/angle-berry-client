@@ -41,7 +41,7 @@ export type CustomEventsResponse = EventsResponse & {
                 retainedTiers: TiersResponse[]
             }
         }
-        inviter: UsersResponse & {
+        inviter?: UsersResponse & {
             expand: {
                 retainedTiers: TiersResponse[]
             }

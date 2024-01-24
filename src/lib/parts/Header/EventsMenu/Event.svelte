@@ -5,16 +5,13 @@
     import UserTooltipInfo from "./UserTooltipInfo.svelte"
 
     export let event: CustomEventsResponse
-
-    let eventType = "userJoined"
-    if (event.inviter) eventType = "userJoinedByAnInvite"
 </script>
 
 <li
     class="border-b border-white/5 p-4"
     transition:fly={{ x: 64, duration: 500 }}
 >
-    {#if eventType === "userJoined"}
+    {#if !event.expand?.inviter}
         {#if event.expand.user.id === $page.data.user.id}
             <p>
                 Welcome <UserTooltipInfo user={event.expand.user} />. You have
@@ -27,7 +24,8 @@
                 has successfully joined this website.
             </p>
         {/if}
-    {:else if eventType === "userJoinedByAnInvite"}
+    {:else}
+        <!-- NOTE: THIS COMMENT PREVENTS PRETTIER FROM COMBINING THE BELOW IF STATEMENT WITH THE ABOVE ELSE STATEMENT -->
         {#if event.expand.user.id === $page.data.user.id}
             <p>
                 Welcome, <UserTooltipInfo user={event.expand.user} />. You have

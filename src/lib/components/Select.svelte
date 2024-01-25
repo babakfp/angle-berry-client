@@ -50,9 +50,18 @@
     ) => {
         return !!selectedOptions.filter(option => option.value === value)[0]
     }
+
+    const handleMenuCloseOnEsxape = (e: KeyboardEvent) => {
+        if (e.key === "Escape") {
+            handleTriggerClose()
+        }
+    }
 </script>
 
-<svelte:window on:scroll={handleTriggerClose} />
+<svelte:window
+    on:scroll={handleTriggerClose}
+    on:keydown={handleMenuCloseOnEsxape}
+/>
 <svelte:document on:mouseleave={handleTriggerClose} />
 
 <div class="relative grid gap-2">
@@ -102,7 +111,7 @@
             {#each selectedOptions as option}
                 <li class="flex items-center rounded bg-gray-700">
                     <button
-                        class="flex p-1 text-gray-500 duration-150 hover:text-white"
+                        class="flex p-1 text-gray-500 duration-150 outline-inset hover:text-white"
                         type="button"
                         on:click={() => handleDeselect(option.value)}
                     >

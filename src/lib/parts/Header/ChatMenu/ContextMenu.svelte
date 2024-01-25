@@ -94,6 +94,15 @@
     }
 </script>
 
+<svelte:window
+    on:keydown={e => {
+        if (e.key === "Escape") {
+            $isContextMenuOpen = false
+        }
+    }}
+/>
+<svelte:document on:mouseleave={() => ($isContextMenuOpen = false)} />
+
 <OutClick
     on:outclick={() => $isContextMenuOpen && isContextMenuOpen.set(false)}
     excludeQuerySelectorAll=".MessageContextMenu"

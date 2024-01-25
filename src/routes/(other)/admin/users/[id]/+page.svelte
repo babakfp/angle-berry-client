@@ -33,18 +33,12 @@
 <div class="mx-auto w-full max-w-xs">
     <Form message={form?.message} submitButtonText="Update" {errors} {validate}>
         <Select
-            items={data.tiers.map(tier => ({
+            label="Select tiers"
+            options={data.tiers.map(tier => ({
                 value: tier.id,
                 label: tier.name,
             }))}
-            value={selectedRetainedTiers}
-            multiple={true}
-            on:input={e => {
-                selectedRetainedTiers = e.detail || []
-            }}
-            placeholder="Add tiers"
-            placeholderAlwaysShow={$_form.retainedTiers.length !==
-                data.tiers.length}
+            bind:selectedOptions={selectedRetainedTiers}
         />
 
         {#each $_form.retainedTiers as t}
@@ -65,23 +59,3 @@
         />
     </Form>
 </div>
-
-<style lang="postcss">
-    :global(.multi-item-text) {
-        @apply inline-flex items-center text-sm;
-    }
-    :global(.value-container) {
-        @apply !gap-2;
-    }
-    :global(.svelte-select) {
-        --placeholder-color: theme(colors.gray.600);
-        --list-empty-color: theme(colors.gray.500);
-        --font-size: theme(fontSize.sm);
-    }
-    :global(.svelte-select .multi-item-clear) {
-        @apply cursor-pointer px-1 text-base hover:text-white;
-    }
-    :global(.svelte-select .multi-item-text) {
-        @apply order-2;
-    }
-</style>

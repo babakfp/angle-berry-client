@@ -25,10 +25,6 @@
         })
     })
 
-    /**
-     * @param {KeyboardEvent} e
-     * @param {string} keyLetter
-     */
     const isKey = (e: KeyboardEvent, keyLetter: string) => {
         return (
             e.key.toLowerCase() === keyLetter ||

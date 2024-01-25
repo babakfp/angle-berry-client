@@ -67,7 +67,7 @@
 <div class="relative grid gap-2">
     <button
         bind:this={trigger}
-        class="z-40 flex h-11 w-full items-center justify-between rounded bg-gray-700 px-4 hover:bg-gray-600"
+        class="z-30 flex h-11 w-full items-center justify-between rounded bg-gray-700 px-4 hover:bg-gray-600"
         type="button"
         on:click={handleTriggerToggle}
     >
@@ -77,7 +77,7 @@
 
     <OutClick on:outclick={handleTriggerClose} excludeElements={trigger}>
         <div
-            class="absolute top-11 z-30 w-full -translate-y-2 duration-150
+            class="absolute top-11 z-20 w-full -translate-y-2 duration-150
             {isOpen ? '!translate-y-2' : 'hide'}"
         >
             {#if options.length}

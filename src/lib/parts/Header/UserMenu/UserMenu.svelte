@@ -85,12 +85,13 @@
         </li>
 
         <li>
-            <a
-                class="block w-full rounded-b border-t border-white/5 p-4 text-left duration-200 outline-inset hover:text-white"
-                href="/logout"
-            >
-                Logout
-            </a>
+            <form action="/logout" method="post">
+                <button
+                    class="w-full rounded-b border-t border-white/5 p-4 text-left duration-200 outline-inset hover:text-white"
+                >
+                    Logout
+                </button>
+            </form>
         </li>
     </ul>
 </OutClick>

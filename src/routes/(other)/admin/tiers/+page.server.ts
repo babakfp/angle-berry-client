@@ -5,11 +5,7 @@ import {
 } from "$utilities/pb"
 import { superValidate } from "sveltekit-superforms/server"
 import { formSchemaDeleteTiers } from "./schema"
-import {
-    type TiersResponse,
-    type UsersResponse,
-    ClientResponseError,
-} from "$utilities/pb-types"
+import { type UsersResponse, ClientResponseError } from "$utilities/pb-types"
 
 export const load = async ({ locals }) => {
     if (!locals.user) redirect(303, "/login")
@@ -19,13 +15,10 @@ export const load = async ({ locals }) => {
     const form = await superValidate(formSchemaDeleteTiers)
 
     try {
-        const tiers: TiersResponse[] = await locals.pb
-            .collection("tiers")
-            .getFullList()
         const users: UsersResponse[] = await locals.pb
             .collection("users")
             .getFullList()
-        return { form, tiers, users }
+        return { form, users }
     } catch (e) {
         if (e instanceof ClientResponseError) {
             pbHandleClientResponseError(e)

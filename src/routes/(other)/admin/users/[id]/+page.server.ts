@@ -4,11 +4,7 @@ import {
     pbHandleFormActionError,
 } from "$utilities/pb"
 import { superValidate } from "sveltekit-superforms/server"
-import {
-    type UsersResponse,
-    type TiersResponse,
-    ClientResponseError,
-} from "$utilities/pb-types"
+import { type UsersResponse, ClientResponseError } from "$utilities/pb-types"
 import { schema } from "./schema"
 
 export const load = async ({ locals, params }) => {
@@ -22,10 +18,7 @@ export const load = async ({ locals, params }) => {
         const user: UsersResponse = await locals.pb
             .collection("users")
             .getOne(params.id)
-        const tiers: TiersResponse[] = await locals.pb
-            .collection("tiers")
-            .getFullList()
-        return { form, userToEdit: user, tiers }
+        return { form, userToEdit: user }
     } catch (e) {
         if (e instanceof ClientResponseError) {
             pbHandleClientResponseError(e)

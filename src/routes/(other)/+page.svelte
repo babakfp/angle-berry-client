@@ -1,5 +1,6 @@
 <script lang="ts">
     import TiersTable from "$components/TiersTable.svelte"
+    import TiersTableRow from "$components/TiersTableRow.svelte"
     export let data
 </script>
 
@@ -16,7 +17,11 @@
     </p>
 {/if}
 
-<TiersTable class="mt-8" tiers={data.tiers} />
+<TiersTable class="mt-8">
+    {#each data.tiers as tier}
+        <TiersTableRow {tier} />
+    {/each}
+</TiersTable>
 
 <div class="mt-8">
     <!-- prettier-ignore -->

@@ -119,4 +119,5 @@ Use this to log in to the PocketBase dashboard:
 ## Todo
 
 -   BUG: When sending a new message in the chat and immediately attempting to edit it, the message content is not automatically written in the input box. This issue seems to be related to the "bind" keyword. However, it is important to note that this functionality works fine for old messages.
--   BUG: HELP WANTED: https://github.com/pocketbase/pocketbase/discussions/4231
+-   BUG: HELP WANTED: https://github.com/pocketbase/pocketbase/discussions/4231 (This is fixed now by using form actions instead).
+-   Login as (a user/an admin) does not work anymore!

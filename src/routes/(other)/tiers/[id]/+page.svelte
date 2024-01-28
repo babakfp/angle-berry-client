@@ -1,5 +1,6 @@
 <script lang="ts">
     import { PUBLIC_POCKETBASE_URL } from "$env/static/public"
+    import { page } from "$app/stores"
     import TierTable from "$components/TierTable.svelte"
     import VideoPlayer from "$components/VideoPlayer.svelte"
     export let data
@@ -11,7 +12,7 @@
 
 <h1 class="text-4xl font-bold text-white">{data?.tier.name}</h1>
 
-<TierTable class="mt-8" currentTier={data.tier} />
+<TierTable class="mt-8" tiers={$page.data.tiers} currentTier={data.tier} />
 
 {#if !data.tierAccessGranted}
     <p class="mt-8">

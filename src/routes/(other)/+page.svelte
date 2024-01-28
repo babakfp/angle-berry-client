@@ -16,7 +16,7 @@
     </p>
 {/if}
 
-<TierTable class="mt-8" />
+<TierTable class="mt-8" tiers={$page.data.tiers} />
 
 <div class="mt-8">
     <!-- prettier-ignore -->

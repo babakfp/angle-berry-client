@@ -1,7 +1,7 @@
 export * from "pocketbase"
 export * from "$utilities/pb-typegen"
 
-import type { ListResult, ClientResponseError } from "pocketbase"
+import type { ClientResponseError } from "pocketbase"
 import type {
     EventsResponse,
     UsersResponse,

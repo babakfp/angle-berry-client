@@ -55,7 +55,7 @@
             bind:checked={$_form.isAdmin}
             name="isAdmin"
             {...$constraints.isAdmin}
-            label="Is admin? {$_form.isAdmin ? 'Yes' : 'No'}"
+            label="Role admin"
             disabled={data.userToEdit.isAdmin}
         />
     </Form>

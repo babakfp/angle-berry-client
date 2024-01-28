@@ -1,22 +1,22 @@
 <script lang="ts">
-    import { page } from "$app/stores"
     import TiersTable from "$components/TiersTable.svelte"
+    export let data
 </script>
 
 <svelte:head>
     <title>Angle Berry</title>
 </svelte:head>
 
-{#if $page.data.previewTierId}
+{#if data.previewTierId}
     <p>
-        You can <a class="link" href="/tiers/{$page.data.previewTierId}">
+        You can <a class="link" href="/tiers/{data.previewTierId}">
             watch free content
         </a>
         and for more content, you can get the following tiers:
     </p>
 {/if}
 
-<TiersTable class="mt-8" tiers={$page.data.tiers} />
+<TiersTable class="mt-8" tiers={data.tiers} />
 
 <div class="mt-8">
     <!-- prettier-ignore -->

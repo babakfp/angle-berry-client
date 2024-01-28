@@ -5,6 +5,7 @@ import {
     type ListResult,
     type RealtimeEventsResponse,
     type RealtimeMessagesResponse,
+    type TiersResponse,
 } from "$utilities/pb-types"
 
 export const load = async ({ locals, parent }) => {
@@ -23,12 +24,16 @@ export const load = async ({ locals, parent }) => {
                 sort: "-created",
                 expand: "user,user.retainedTiers,inviter,inviter.retainedTiers",
             })
+        const tiers: TiersResponse[] = await locals.pb
+            .collection("tiers")
+            .getFullList()
 
         return {
             ...(await parent()),
             user: locals.user, // Note: Yes, `locals.user` is not `null` after the `if` statment, however we are uisng `data` and `user` is `null` inside it!
             messages,
             events,
+            tiers,
         }
     } catch (e) {
         if (e instanceof ClientResponseError) {

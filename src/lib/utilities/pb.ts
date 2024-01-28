@@ -31,7 +31,3 @@ export const pbHandleClientResponseError = (e: ClientResponseError) => {
     }
     throw e
 }
-
-export const getPreviewTierId = (tiers: TiersResponse[]) => {
-    return tiers.filter(tier => tier.invites === 0 && tier.price === 0)[0]?.id
-}

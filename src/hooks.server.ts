@@ -1,7 +1,7 @@
 import { error } from "@sveltejs/kit"
 import PocketBase from "pocketbase"
 import { PUBLIC_POCKETBASE_URL } from "$env/static/public"
-import { pbHandleClientResponseError, getPreviewTierId } from "$utilities/pb"
+import { pbHandleClientResponseError } from "$utilities/pb"
 import {
     type UsersResponse,
     type TiersResponse,
@@ -40,11 +40,12 @@ export const handle = async ({ event, resolve }) => {
     }
 
     try {
-        const tiers = (await event.locals.pb
-            .collection("tiers")
-            .getFullList()) as TiersResponse[]
-        event.locals.previewTierId = getPreviewTierId(tiers)
-        event.locals.tiers = tiers
+        const previewTierId = (
+            (await event.locals.pb.collection("tiers").getFullList({
+                filter: "price = 0 && invites = 0",
+            })) as TiersResponse[]
+        ).at(0)?.id
+        event.locals.previewTierId = previewTierId
     } catch (e) {
         if (e instanceof ClientResponseError) {
             pbHandleClientResponseError(e)

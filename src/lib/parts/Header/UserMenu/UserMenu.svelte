@@ -69,19 +69,22 @@
         </ol>
 
         <li>
-            <a
-                class="flex w-full items-center justify-between rounded-b border-t border-white/5 p-4 text-left duration-200 outline-inset hover:text-white"
-                href="/login-as"
-            >
-                <span>
-                    Login as {$page.data.user.isAdmin ? "a User" : "an Admin"}
-                </span>
-                {#if $page.data.user.isAdmin}
-                    <IconUserRegular class="text-xl" />
-                {:else}
-                    <IconCrownSimpleRegular class="text-xl" />
-                {/if}
-            </a>
+            <form action="/login-as" method="post">
+                <button
+                    class="flex w-full items-center justify-between rounded-b border-t border-white/5 p-4 text-left duration-200 outline-inset hover:text-white"
+                >
+                    <span>
+                        Login as {$page.data.user.isAdmin
+                            ? "a User"
+                            : "an Admin"}
+                    </span>
+                    {#if $page.data.user.isAdmin}
+                        <IconUserRegular class="text-xl" />
+                    {:else}
+                        <IconCrownSimpleRegular class="text-xl" />
+                    {/if}
+                </button>
+            </form>
         </li>
 
         <li>

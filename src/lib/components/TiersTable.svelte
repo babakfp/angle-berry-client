@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { TiersResponse } from "$utilities/pb-types"
     import { Table, Tbody, Thead, Tr, Th } from "$components/table/index"
-    import TierTableRow from "$components/TierTableRow.svelte"
+    import TiersTableRow from "$components/TiersTableRow.svelte"
 
     export let tiers: TiersResponse[] = []
     export let currentTier: TiersResponse | null = null
@@ -19,10 +19,10 @@
     </Thead>
     <Tbody>
         {#if !!currentTier}
-            <TierTableRow {currentTier} isShowingSingleTier={true} />
+            <TiersTableRow {currentTier} isShowingSingleTier={true} />
         {:else}
             {#each tiers as tier}
-                <TierTableRow currentTier={tier} />
+                <TiersTableRow currentTier={tier} />
             {/each}
         {/if}
     </Tbody>

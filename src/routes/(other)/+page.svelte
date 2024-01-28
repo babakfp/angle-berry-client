@@ -1,6 +1,6 @@
 <script lang="ts">
     import { page } from "$app/stores"
-    import TierTable from "$components/TierTable.svelte"
+    import TiersTable from "$components/TiersTable.svelte"
 </script>
 
 <svelte:head>
@@ -16,7 +16,7 @@
     </p>
 {/if}
 
-<TierTable class="mt-8" tiers={$page.data.tiers} />
+<TiersTable class="mt-8" tiers={$page.data.tiers} />
 
 <div class="mt-8">
     <!-- prettier-ignore -->

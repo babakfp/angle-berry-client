@@ -56,6 +56,7 @@
             name="isAdmin"
             {...$constraints.isAdmin}
             label="Is admin? {$_form.isAdmin ? 'Yes' : 'No'}"
+            disabled={data.user.isAdmin}
         />
     </Form>
 </div>

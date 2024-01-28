@@ -19,10 +19,10 @@
     </Thead>
     <Tbody>
         {#if !!currentTier}
-            <TiersTableRow {currentTier} isShowingSingleTier={true} />
+            <TiersTableRow tier={currentTier} isShowingSingleTier={true} />
         {:else}
             {#each tiers as tier}
-                <TiersTableRow currentTier={tier} />
+                <TiersTableRow {tier} />
             {/each}
         {/if}
     </Tbody>

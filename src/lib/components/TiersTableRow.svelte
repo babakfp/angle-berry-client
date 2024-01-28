@@ -3,13 +3,13 @@
     import type { TiersResponse } from "$utilities/pb-types"
     import { Tr, Th, Td } from "$components/table/index"
 
-    export let currentTier: TiersResponse
+    export let tier: TiersResponse
     export let isShowingSingleTier = false
 
     // Does current user has access to this tier
     const hasAccess =
-        $page.data.user.retainedTiers.includes(currentTier.id) ||
-        $page.data.user.invitedUsers.length >= currentTier.invites
+        $page.data.user.retainedTiers.includes(tier.id) ||
+        $page.data.user.invitedUsers.length >= tier.invites
 </script>
 
 <Tr
@@ -18,13 +18,13 @@
         : ''}"
 >
     <Th class="py-4 text-white">
-        {currentTier.name}
+        {tier.name}
     </Th>
     <Td class="px-6 py-4">
-        {#if currentTier.price === 0 && currentTier.invites === 0}
+        {#if tier.price === 0 && tier.invites === 0}
             Free
         {:else}
-            ${currentTier.price} or {currentTier.invites} invites
+            ${tier.price} or {tier.invites} invites
         {/if}
     </Td>
     <Td class="text-right">
@@ -60,7 +60,7 @@
     {#if !isShowingSingleTier}
         <a
             class="absolute inset-0 rounded-b outline-inset"
-            href="/tiers/{currentTier.id}"
+            href="/tiers/{tier.id}"
             aria-label="View"
         />
     {/if}

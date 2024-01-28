@@ -15,9 +15,9 @@
         validate,
     } = superForm(data.form, { validators: schema })
 
-    if (!$_form.isAdmin) $_form.isAdmin = data.user.isAdmin
+    if (!$_form.isAdmin) $_form.isAdmin = data.userToEdit.isAdmin
     if (!$_form.retainedTiers.length)
-        $_form.retainedTiers = data.user.retainedTiers
+        $_form.retainedTiers = data.userToEdit.retainedTiers
 
     let selectedRetainedTiers = data.tiers
         .filter(tier => $_form.retainedTiers.includes(tier.id))
@@ -27,7 +27,7 @@
 </script>
 
 <svelte:head>
-    <title>User: {data.user.username}</title>
+    <title>User: {data.userToEdit.username}</title>
 </svelte:head>
 
 <div class="mx-auto w-full max-w-xs">
@@ -56,7 +56,7 @@
             name="isAdmin"
             {...$constraints.isAdmin}
             label="Is admin? {$_form.isAdmin ? 'Yes' : 'No'}"
-            disabled={data.user.isAdmin}
+            disabled={data.userToEdit.isAdmin}
         />
     </Form>
 </div>

@@ -25,7 +25,7 @@ export const load = async ({ locals, params }) => {
         const tiers: TiersResponse[] = await locals.pb
             .collection("tiers")
             .getFullList()
-        return { form, user, tiers }
+        return { form, userToEdit: user, tiers }
     } catch (e) {
         if (e instanceof ClientResponseError) {
             pbHandleClientResponseError(e)

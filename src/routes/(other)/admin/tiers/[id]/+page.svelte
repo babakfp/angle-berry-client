@@ -90,7 +90,7 @@
                 </li>
             {/each}
             <button
-                class="btn btn-gray sticky bottom-0"
+                class="btn btn-gray sticky bottom-2"
                 type="button"
                 on:click={() => (isGalleryPopupOpen = true)}
             >

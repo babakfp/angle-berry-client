@@ -22,10 +22,9 @@ export const handle = async ({ event, resolve }) => {
 
     if (event.locals.pb.authStore.isValid) {
         try {
-            const { record } = await event.locals.pb
-                .collection("users")
-                .authRefresh()
-            event.locals.user = record as UsersResponse
+            event.locals.user = (
+                await event.locals.pb.collection("users").authRefresh()
+            ).record as UsersResponse
         } catch (e) {
             if (e instanceof ClientResponseError) {
                 if (e.status === 401) {

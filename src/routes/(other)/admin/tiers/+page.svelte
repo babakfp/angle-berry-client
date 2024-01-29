@@ -93,7 +93,7 @@
                     {tier.invites}
                 </Td>
                 <Td class="px-6 py-4">
-                    {tier.videos.length} items
+                    {tier.videos.length}
                 </Td>
                 <Td class="px-6 py-4">
                     {usersWithThisTier.length}

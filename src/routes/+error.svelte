@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-    <title>{$page.status}</title>
+    <title>Angle Berry - {$page.status}</title>
 </svelte:head>
 
 <div

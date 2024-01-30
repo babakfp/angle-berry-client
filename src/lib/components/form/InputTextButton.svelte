@@ -4,7 +4,7 @@
     export let text = ""
 </script>
 
-<button class="btn btn-gray-light h-7 text-2xs {_class}" type="button" on:click>
+<button type="button" class="btn btn-gray-light h-7 text-2xs {_class}" on:click>
     {#if $$slots.default}
         <slot />
     {:else}

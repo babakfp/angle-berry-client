@@ -44,6 +44,7 @@
                 </a>
             {/if}
             <button
+                type="button"
                 class="group relative flex items-center px-2 outline-inset"
                 bind:this={eventsMenuToggle}
                 on:click={() => (isEventsMenuOpen = !isEventsMenuOpen)}
@@ -59,6 +60,7 @@
                 {/if}
             </button>
             <button
+                type="button"
                 class="group relative flex items-center px-2 outline-inset"
                 bind:this={chatMenuToggle}
                 on:click={() => (isChatMenuOpen = !isChatMenuOpen)}
@@ -75,6 +77,7 @@
             </button>
             <div class="relative flex">
                 <button
+                    type="button"
                     class="flex items-center gap-2 pl-2 pr-4 duration-200 outline-inset hover:text-white"
                     on:click={() => (isUserMenuOpen = !isUserMenuOpen)}
                     bind:this={userMenuToggle}

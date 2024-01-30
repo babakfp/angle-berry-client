@@ -13,6 +13,7 @@
 </script>
 
 <button
+    type="button"
     class="flex w-full gap-1 pb-2 pl-3 pr-4 pt-2.5 text-2xs text-white/50 duration-150 hover:bg-white/5 hover:text-white"
     on:click={handleGoToMessage}
 >

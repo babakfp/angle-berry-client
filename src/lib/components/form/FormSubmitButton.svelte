@@ -5,6 +5,7 @@
 </script>
 
 <button
+    type="submit"
     class="{_class || 'btn-brand'} btn h-14 w-full active:scale-95"
     {disabled}
 >

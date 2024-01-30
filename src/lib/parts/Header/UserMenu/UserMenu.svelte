@@ -49,6 +49,7 @@
 
         <li use:copy={`${$page.url.origin}/register?id=${$page.data.user.id}`}>
             <button
+                type="button"
                 class="border-y border-white/5 p-4 outline-inset"
                 on:click={() =>
                     toast.success("Your invite link is copied to Clipboard.", {
@@ -71,6 +72,7 @@
         <li>
             <form action="/login-as" method="post">
                 <button
+                    type="submit"
                     class="flex w-full items-center justify-between rounded-b border-t border-white/5 p-4 text-left duration-200 outline-inset hover:text-white"
                 >
                     <span>
@@ -90,6 +92,7 @@
         <li>
             <form action="/logout" method="post">
                 <button
+                    type="submit"
                     class="w-full rounded-b border-t border-white/5 p-4 text-left duration-200 outline-inset hover:text-white"
                 >
                     Logout

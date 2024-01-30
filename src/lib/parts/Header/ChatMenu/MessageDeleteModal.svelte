@@ -65,12 +65,14 @@
 >
     <svelte:fragment slot="actions">
         <button
+            type="button"
             class="btn btn-gray"
             on:click={() => messageIdsToDelete.set([])}
         >
             Cancel
         </button>
         <button
+            type="button"
             class="btn btn-danger {isDeletingMessage &&
                 'pointer-events-none opacity-50'}"
             disabled={isDeletingMessage}

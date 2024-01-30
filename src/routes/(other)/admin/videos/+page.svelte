@@ -39,7 +39,7 @@
     {#if $deleteForm.videos.length}
         <div class="flex items-end gap-4 py-4" transition:shrinkHeight>
             <form method="post" action="?/delete">
-                <button class="btn btn-danger" type="submit">
+                <button type="submit" class="btn btn-danger">
                     Delete selected
                 </button>
 
@@ -54,6 +54,7 @@
                 {/each}
             </form>
             <button
+                type="button"
                 class="btn btn-gray-light"
                 on:click={() => ($deleteForm.videos = [])}
             >

@@ -39,6 +39,7 @@
 		"
     >
         <button
+            type="button"
             class="sticky top-0 z-1 flex h-14 w-full items-center justify-between self-start border-b border-white/5 bg-body-bg px-4 outline-inset sm:hidden"
             on:click={() => (isOpen = false)}
         >

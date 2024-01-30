@@ -66,9 +66,9 @@
 
 <div class="relative grid gap-2">
     <button
+        type="button"
         bind:this={trigger}
         class="z-30 flex h-11 w-full items-center justify-between rounded bg-gray-700 px-4 hover:bg-gray-600"
-        type="button"
         on:click={handleTriggerToggle}
     >
         <span>{label}</span>
@@ -85,8 +85,8 @@
                     {#each options as option}
                         <li class="group">
                             <button
-                                class="flex w-full items-center gap-2 bg-gray-700 px-4 py-2 text-sm outline-inset hover:bg-gray-600 group-first:rounded-t group-first:pt-3 group-last:rounded-b group-last:pb-3"
                                 type="button"
+                                class="flex w-full items-center gap-2 bg-gray-700 px-4 py-2 text-sm outline-inset hover:bg-gray-600 group-first:rounded-t group-first:pt-3 group-last:rounded-b group-last:pb-3"
                                 on:click={() =>
                                     handleSelectToggle(option.value)}
                             >
@@ -111,8 +111,8 @@
             {#each selectedOptions as option}
                 <li class="flex items-center rounded bg-gray-700">
                     <button
-                        class="flex p-1 text-gray-500 duration-150 outline-inset hover:text-white"
                         type="button"
+                        class="flex p-1 text-gray-500 duration-150 outline-inset hover:text-white"
                         on:click={() => handleDeselect(option.value)}
                     >
                         <IconXSquareRegular />

@@ -37,22 +37,22 @@
 </script>
 
 <button
+    type="button"
     class="h-full pl-1 pr-0.5 text-gray-500 duration-200 outline-inset hover:text-white
         {(min || min === 0) && Number(value) <= Number(min)
         ? 'pointer-events-none text-gray-600'
         : ''}"
-    type="button"
     on:click={decrementNumber}
 >
     <IconMinusCircleRegular class="text-lg" />
 </button>
 
 <button
+    type="button"
     class="-mr-2 h-full pl-0.5 pr-2 text-gray-500 duration-200 outline-inset hover:text-white
         {max && Number(value) >= Number(max)
         ? 'pointer-events-none text-gray-600'
         : ''}"
-    type="button"
     on:click={incrementNumber}
 >
     <IconPlusCircleRegular class="text-lg" />

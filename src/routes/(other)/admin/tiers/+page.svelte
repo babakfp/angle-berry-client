@@ -23,7 +23,7 @@
     <div class="flex gap-4">
         {#if selectedTierIds.length}
             <form method="post" action="?/deletetier">
-                <button class="btn btn-danger" type="submit">
+                <button type="submit" class="btn btn-danger">
                     Delete selected
                 </button>
 
@@ -38,6 +38,7 @@
                 {/each}
             </form>
             <button
+                type="button"
                 class="btn btn-gray-light"
                 on:click={() => (selectedTierIds = [])}
             >

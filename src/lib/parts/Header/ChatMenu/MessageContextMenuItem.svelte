@@ -10,6 +10,7 @@
 
 <li class="flex">
     <button
+        type="button"
         class="{_class} flex h-8.5 w-full items-center gap-2 rounded px-3 hover:bg-gray-700
 		{isDisabled && 'pointer-events-none opacity-25'}"
         disabled={isDisabled}

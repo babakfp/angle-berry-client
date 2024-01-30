@@ -144,7 +144,7 @@
                             Something went wrong! Maybe refreshing the page can
                             solve the problem.
                         </p>
-                        <button>Try again</button>
+                        <button type="button">Try again</button>
                     {:else}
                         <p>Fetching older messages</p>
                         <IconSpinnerRegular class="ml-2 animate-spin text-xl" />
@@ -209,6 +209,7 @@
                 }}
             />
             <button
+                type="button"
                 class="flex items-end outline-inset hover:bg-white/5 hover:text-white
 				{isSendingMessage && 'opacity-50'}"
                 disabled={isSendingMessage}

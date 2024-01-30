@@ -64,8 +64,8 @@
                 </li>
             {/each}
             <button
-                class="btn btn-gray sticky bottom-2"
                 type="button"
+                class="btn btn-gray sticky bottom-2"
                 on:click={() => (isGalleryPopupOpen = true)}
             >
                 Videos gallery
@@ -93,6 +93,7 @@
     </ul>
     <svelte:fragment slot="actions">
         <button
+            type="button"
             class="btn btn-gray"
             on:click={() => (isGalleryPopupOpen = false)}>Close</button
         >

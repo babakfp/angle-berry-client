@@ -74,7 +74,7 @@
                 user.retainedTiers.includes(tier.id),
             )}
             <Tr
-                class="relative duration-200 hover:bg-white/10 not-last:border-b not-last:border-white/5"
+                class="group relative duration-200 hover:bg-white/10 not-last:border-b not-last:border-white/5"
             >
                 <Td class="w-16">
                     <Checkbox
@@ -100,7 +100,7 @@
                     {usersWithThisTier.length}
                 </Td>
                 <a
-                    class="absolute inset-0 rounded-b outline-inset"
+                    class="absolute inset-0 outline-inset group-last:rounded-b"
                     href="/admin/tiers/{tier.id}"
                     aria-label="View"
                 />

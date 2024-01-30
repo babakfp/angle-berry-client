@@ -64,7 +64,7 @@
     <Tbody>
         {#each data.users as user}
             <Tr
-                class="relative duration-200 hover:bg-white/10 not-last:border-b not-last:border-white/5"
+                class="group relative duration-200 hover:bg-white/10 not-last:border-b not-last:border-white/5"
             >
                 <Td class="w-16">
                     <Checkbox
@@ -90,7 +90,7 @@
                     {user.isAdmin ? "Yes" : "No"}
                 </Td>
                 <a
-                    class="absolute inset-0 rounded-b outline-inset"
+                    class="absolute inset-0 outline-inset group-last:rounded-b"
                     href="/admin/users/{user.id}"
                     aria-label="View"
                 />

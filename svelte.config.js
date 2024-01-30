@@ -13,7 +13,11 @@ export default {
     },
     preprocess: vitePreprocess(),
     onwarn: (warning, handler) => {
-        if (warning.code.startsWith("a11y-")) return
+        if (
+            warning.code.startsWith("a11y-") ||
+            warning.code === "avoid-mouse-events-on-document"
+        )
+            return
         handler(warning)
     },
 }

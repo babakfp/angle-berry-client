@@ -4,7 +4,7 @@ import defaultTheme from "tailwindcss/defaultTheme"
 import tailwindcssAddons from "tailwindcss-addons"
 
 export default {
-    content: ["./src/**/*.{html,js,svelte}"],
+    content: ["./src/**/*.{html,svelte}"],
     presets: [
         tailwindcssAddons({
             presets: {

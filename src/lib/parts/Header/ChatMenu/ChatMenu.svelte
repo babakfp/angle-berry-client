@@ -10,7 +10,7 @@
         replyTargetMessage,
         messageIdToEdit,
         messageInputElement,
-        isContextMenuOpen2,
+        isTouchDeviceContextMenuOpen,
         isContextMenuOpen,
     } from "./chatStores"
     import IconSpinnerRegular from "phosphor-icons-svelte/IconSpinnerRegular.svelte"
@@ -120,9 +120,9 @@
             }
         }
 
-        if ($isContextMenuOpen || $isContextMenuOpen2) {
+        if ($isContextMenuOpen || $isTouchDeviceContextMenuOpen) {
             isContextMenuOpen.set(false)
-            isContextMenuOpen2.set(false)
+            isTouchDeviceContextMenuOpen.set(false)
         }
     }
 </script>

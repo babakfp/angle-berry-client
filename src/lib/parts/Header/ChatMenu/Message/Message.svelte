@@ -3,7 +3,7 @@
     import { shrinkHeight } from "$utilities/shrinkHeight"
     import {
         isContextMenuOpen,
-        isContextMenuOpen2,
+        isTouchDeviceContextMenuOpen,
         contextMenuTargetEvent,
         contextMenuTargetMessage,
         selectedMessageIds,
@@ -32,7 +32,7 @@
             }
             // @ts-ignore
         } else if (e.pointerType !== "mouse") {
-            if ($isContextMenuOpen2) {
+            if ($isTouchDeviceContextMenuOpen) {
                 isContextMenuOpen.set(false)
                 contextMenuTargetEvent.set(null)
                 contextMenuTargetMessage.set(undefined)
@@ -42,7 +42,7 @@
                 contextMenuTargetEvent.set(e)
                 contextMenuTargetMessage.set(message)
             }
-            $isContextMenuOpen2 = !$isContextMenuOpen2
+            $isTouchDeviceContextMenuOpen = !$isTouchDeviceContextMenuOpen
         }
     }
 </script>

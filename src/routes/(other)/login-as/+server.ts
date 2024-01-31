@@ -22,10 +22,16 @@ export const POST = async ({ locals }) => {
     if (!locals.user) redirect(303, "/login")
 
     if (locals.user.isAdmin) {
+        locals.pb.authStore.clear()
+        locals.user = undefined
+
         await locals.pb
             .collection("users")
             .authWithPassword(auth.user.username, auth.user.password)
     } else {
+        locals.pb.authStore.clear()
+        locals.user = undefined
+
         await locals.pb
             .collection("users")
             .authWithPassword(auth.admin.username, auth.admin.password)

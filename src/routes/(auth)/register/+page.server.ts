@@ -20,7 +20,7 @@ export const actions = {
         const form = await superValidate(request, schema)
         if (!form.valid) return fail(400, { form })
 
-        let inviter: UsersResponse | null = null
+        let inviter: UsersResponse | undefined = undefined
         const inviterId = url.searchParams.get("id")
 
         try {
@@ -46,7 +46,7 @@ export const actions = {
                     retainedTiers: [
                         ...[locals.previewTierId ? locals.previewTierId : []],
                     ],
-                    invitedBy: inviter ? [inviterId] : null,
+                    invitedBy: inviter ? [inviterId] : undefined,
                 })
 
             // Adding the new user to the list of invited users by the inviter user.
@@ -57,7 +57,7 @@ export const actions = {
 
             await locals.pb.collection("events").create({
                 user: newUser.id,
-                inviter: inviter ? inviterId : null,
+                inviter: inviter ? inviterId : undefined,
                 inviterInvites: inviter ? inviter.invitedUsers.length + 1 : 0,
             })
 

@@ -32,7 +32,7 @@
 
 <OutClick on:outclick={() => (isOpen = false)} excludeElements={toggleButton}>
     <div
-        id={id || null}
+        id={id || undefined}
         class="fixed inset-0 z-50 grid h-screen translate-x-full grid-rows-[auto_1fr_auto] bg-body-bg duration-200 hide
 			{isOpen && '!translate-x-0 !show'}
 			sm:left-auto sm:top-header sm:z-40 sm:h-screen-minus-header sm:w-96 sm:grid-rows-[1fr_auto]

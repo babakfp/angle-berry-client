@@ -40,7 +40,7 @@
             on:change
             {value}
             {disabled}
-            name={name || null}
+            name={name || undefined}
             {...$$restProps}
         />
 

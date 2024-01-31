@@ -34,7 +34,7 @@
         } else if (e.pointerType !== "mouse") {
             if ($isTouchDeviceContextMenuOpen) {
                 isContextMenuOpen.set(false)
-                contextMenuTargetEvent.set(null)
+                contextMenuTargetEvent.set(undefined)
                 contextMenuTargetMessage.set(undefined)
             } else {
                 interval = highlightAnimate(highlight, interval)

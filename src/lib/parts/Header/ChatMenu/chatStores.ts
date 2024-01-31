@@ -4,8 +4,8 @@ import type { RealtimeMessagesResponse } from "$utilities/pb-types"
 export const isContextMenuOpen = writable(false)
 export const isTouchDeviceContextMenuOpen = writable(false)
 export const contextMenuTargetEvent = writable<
-    MouseEvent | PointerEvent | null
->(null)
+    MouseEvent | PointerEvent | undefined
+>(undefined)
 export const contextMenuTargetMessage = writable<
     RealtimeMessagesResponse | undefined
 >(undefined)

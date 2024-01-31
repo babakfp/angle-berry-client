@@ -91,7 +91,7 @@ export const actions = {
                 files.map(file =>
                     locals.pb
                         .collection("videos")
-                        .create({ file }, { requestKey: null }),
+                        .create({ file }, { requestKey: undefined }),
                 ),
             )
         } catch (e) {

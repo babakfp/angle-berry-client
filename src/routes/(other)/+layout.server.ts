@@ -30,7 +30,7 @@ export const load = async ({ locals, parent }) => {
 
         return {
             ...(await parent()),
-            user: locals.user, // Note: Yes, `locals.user` is not `null` after the `if` statment, however we are uisng `data` and `user` is `null` inside it!
+            user: locals.user, // Note: Yes, `locals.user` is not `undefined` after the `if` statment, however we are uisng `data` and `user` is `undefined` inside it!
             messages,
             events,
             tiers,

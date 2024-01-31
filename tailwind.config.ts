@@ -1,8 +1,8 @@
+import type { Config } from "tailwindcss"
 import colors from "tailwindcss/colors"
 import defaultTheme from "tailwindcss/defaultTheme"
 import tailwindcssAddons from "tailwindcss-addons"
 
-/** @type {import("tailwindcss").Config} */
 export default {
     content: ["./src/**/*.{html,js,svelte}"],
     presets: [
@@ -55,7 +55,7 @@ export default {
             full: "9999px",
         },
         fontFamily: {
-            sans: ["TitilliumWeb", defaultTheme.fontFamily.sans],
+            sans: ["TitilliumWeb", ...defaultTheme.fontFamily.sans],
         },
         fontWeight: {
             semibold: "600",
@@ -87,4 +87,4 @@ export default {
             }),
         ],
     ],
-}
+} satisfies Config

@@ -52,6 +52,7 @@
         {/each}
 
         <Checkbox
+            class="place-self-start"
             bind:checked={$_form.isAdmin}
             name="isAdmin"
             {...$constraints.isAdmin}

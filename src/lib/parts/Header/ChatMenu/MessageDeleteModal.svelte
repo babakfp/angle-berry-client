@@ -8,7 +8,7 @@
         isReplying,
         selectedMessageIds,
     } from "./chatStores"
-    import IconSpinnerRegular from "phosphor-icons-svelte/IconSpinnerRegular.svelte"
+    import IconSpinnerDuotone from "phosphor-icons-svelte/IconSpinnerDuotone.svelte"
     import Modal from "$components/Modal.svelte"
 
     let isDeletingMessage = false
@@ -80,7 +80,7 @@
         >
             <span>{isDeletingMessage ? "Deleting" : "Delete"}</span>
             {#if isDeletingMessage}
-                <IconSpinnerRegular class="ml-2 animate-spin" />
+                <IconSpinnerDuotone class="ml-2 animate-spin" />
             {/if}
         </button>
     </svelte:fragment>

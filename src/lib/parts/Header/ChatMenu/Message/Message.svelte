@@ -10,8 +10,8 @@
     } from "../chatStores"
     import MessageDateAndTime from "./MessageDateAndTime.svelte"
     import MessageReplyPreview from "./MessageReplyPreview.svelte"
-    import IconCircleRegular from "phosphor-icons-svelte/IconCircleRegular.svelte"
-    import IconCheckCircleRegular from "phosphor-icons-svelte/IconCheckCircleRegular.svelte"
+    import IconCircleDuotone from "phosphor-icons-svelte/IconCircleDuotone.svelte"
+    import IconCheckCircleDuotone from "phosphor-icons-svelte/IconCheckCircleDuotone.svelte"
     import { highlightAnimate } from "$utilities/highlightAnimate"
     import type { RealtimeMessagesResponse } from "$utilities/pb-types"
 
@@ -105,9 +105,9 @@
                 {isCurrentUser ? 'left-4' : 'right-4'}"
             >
                 {#if $selectedMessageIds.includes(message.id)}
-                    <IconCheckCircleRegular class="text-green-400" />
+                    <IconCheckCircleDuotone class="text-green-400" />
                 {:else}
-                    <IconCircleRegular />
+                    <IconCircleDuotone />
                 {/if}
             </div>
         {/if}

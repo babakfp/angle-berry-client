@@ -1,5 +1,5 @@
 <script lang="ts">
-    import IconUploadSimpleRegular from "phosphor-icons-svelte/IconUploadSimpleRegular.svelte"
+    import IconUploadSimpleDuotone from "phosphor-icons-svelte/IconUploadSimpleDuotone.svelte"
     import { formatBytes } from "$utilities/formatBytes"
     import Description from "$components/form/Description.svelte"
 
@@ -15,7 +15,7 @@
         for={name}
         class="grid cursor-pointer justify-center justify-items-center gap-2 rounded border-2 border-dashed border-gray-600 bg-gray-700/20 p-4 pt-6 text-center text-gray-400"
     >
-        <IconUploadSimpleRegular class="text-2xl" />
+        <IconUploadSimpleDuotone class="text-2xl" />
 
         <p class="mt-2 text-sm">
             <span class="font-semibold">Click to upload</span> or drag and drop

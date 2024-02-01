@@ -13,12 +13,12 @@
         selectedMessageIds,
     } from "./chatStores"
     import { messages } from "$stores/messages"
-    import IconArrowUUpLeftRegular from "phosphor-icons-svelte/IconArrowUUpLeftRegular.svelte"
-    import IconPencilSimpleRegular from "phosphor-icons-svelte/IconPencilSimpleRegular.svelte"
-    import IconCopySimpleRegular from "phosphor-icons-svelte/IconCopySimpleRegular.svelte"
-    import IconTrashSimpleRegular from "phosphor-icons-svelte/IconTrashSimpleRegular.svelte"
-    import IconCheckCircleRegular from "phosphor-icons-svelte/IconCheckCircleRegular.svelte"
-    import IconCheckRegular from "phosphor-icons-svelte/IconCheckRegular.svelte"
+    import IconArrowUUpLeftDuotone from "phosphor-icons-svelte/IconArrowUUpLeftDuotone.svelte"
+    import IconPencilSimpleDuotone from "phosphor-icons-svelte/IconPencilSimpleDuotone.svelte"
+    import IconCopySimpleDuotone from "phosphor-icons-svelte/IconCopySimpleDuotone.svelte"
+    import IconTrashSimpleDuotone from "phosphor-icons-svelte/IconTrashSimpleDuotone.svelte"
+    import IconCheckCircleDuotone from "phosphor-icons-svelte/IconCheckCircleDuotone.svelte"
+    import IconCheckDuotone from "phosphor-icons-svelte/IconCheckDuotone.svelte"
     import MessageContextMenu from "./MessageContextMenu.svelte"
     import MessageContextMenuItem from "./MessageContextMenuItem.svelte"
 
@@ -111,14 +111,14 @@
         {#if !$selectedMessageIds.length || ($contextMenuTargetMessage && !$selectedMessageIds.includes($contextMenuTargetMessage?.id))}
             <MessageContextMenuItem
                 title="Reply"
-                icon={IconArrowUUpLeftRegular}
+                icon={IconArrowUUpLeftDuotone}
                 on:click={replyMessage}
             />
         {/if}
         {#if $contextMenuTargetMessage?.expand.user.id === $page.data.user.id && !$selectedMessageIds.length}
             <MessageContextMenuItem
                 title="Edit"
-                icon={IconPencilSimpleRegular}
+                icon={IconPencilSimpleDuotone}
                 on:click={editMessage}
             />
         {/if}
@@ -127,8 +127,8 @@
                 <MessageContextMenuItem
                     title={copyTimeoutId ? "Copied" : "Copy Selected as Text"}
                     icon={copyTimeoutId
-                        ? IconCheckRegular
-                        : IconCopySimpleRegular}
+                        ? IconCheckDuotone
+                        : IconCopySimpleDuotone}
                     isDisabled={!!copyTimeoutId}
                     on:click={copyMessage}
                 />
@@ -136,7 +136,7 @@
         {:else}
             <MessageContextMenuItem
                 title={copyTimeoutId ? "Copied" : "Copy Text"}
-                icon={copyTimeoutId ? IconCheckRegular : IconCopySimpleRegular}
+                icon={copyTimeoutId ? IconCheckDuotone : IconCopySimpleDuotone}
                 isDisabled={!!copyTimeoutId}
                 on:click={copyMessage}
             />
@@ -146,14 +146,14 @@
                 {#if $contextMenuTargetMessage && $selectedMessageIds.includes($contextMenuTargetMessage?.id)}
                     <MessageContextMenuItem
                         title="Delete Selected"
-                        icon={IconTrashSimpleRegular}
+                        icon={IconTrashSimpleDuotone}
                         on:click={setSelectedMessagesForDeletion}
                     />
                 {/if}
             {:else}
                 <MessageContextMenuItem
                     title="Delete"
-                    icon={IconTrashSimpleRegular}
+                    icon={IconTrashSimpleDuotone}
                     on:click={setAMessageForDeletion}
                 />
             {/if}
@@ -161,13 +161,13 @@
         {#if !$selectedMessageIds.includes($contextMenuTargetMessage?.id || "")}
             <MessageContextMenuItem
                 title="Select"
-                icon={IconCheckCircleRegular}
+                icon={IconCheckCircleDuotone}
                 on:click={selectMessage}
             />
         {:else}
             <MessageContextMenuItem
                 title="Clear Selection"
-                icon={IconCheckCircleRegular}
+                icon={IconCheckCircleDuotone}
                 on:click={clearSelection}
             />
         {/if}

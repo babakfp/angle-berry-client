@@ -27,7 +27,7 @@
 </script>
 
 <label
-    class="{_class} inline-flex items-center gap-2 hover:text-white
+    class="{_class} inline-flex cursor-pointer items-center gap-2 hover:text-white
         {disabled && 'pointer-events-none opacity-50'}"
 >
     <div

@@ -75,7 +75,7 @@
             <form action="/login-as" method="post">
                 <button
                     type="submit"
-                    class="flex w-full items-center justify-between rounded-b border-t border-white/5 p-4 text-left duration-200 outline-inset hover:text-white"
+                    class="flex w-full items-center justify-between border-t border-white/5 p-4 text-left duration-200 outline-inset hover:text-white"
                 >
                     <span>
                         Login as {$page.data.user.isAdmin

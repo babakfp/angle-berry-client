@@ -26,16 +26,14 @@
 /* Outline */
 @layer base {
     * {
-        @apply outline outline-2;
-    }
-    a,
-    input,
-    textarea,
-    button {
-        @apply focus-visible:outline-[orange];
+        @apply outline outline-2 focus-visible:outline-[orange];
     }
     a {
         @apply outline-dashed;
+    }
+    input,
+    textarea {
+        @apply -outline-offset-2;
     }
 }
 

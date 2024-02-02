@@ -36,8 +36,6 @@ export const actions = {
         const form = await superValidate(request, schema)
         if (!form.valid) return fail(400, { form })
 
-        console.log("form.data.isAdmin", form.data.isAdmin)
-
         if (!form.data.isAdmin) {
             return setError(
                 form,

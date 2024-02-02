@@ -1,6 +1,7 @@
 <script lang="ts">
     import IconSquareDuotone from "phosphor-icons-svelte/IconSquareDuotone.svelte"
     import IconCheckSquareDuotone from "phosphor-icons-svelte/IconCheckSquareDuotone.svelte"
+    import Description from "./Description.svelte"
 
     export let _class = ""
     export { _class as class }
@@ -10,6 +11,7 @@
     export let disabled = false
     export let name: string = crypto.randomUUID()
     export let label = ""
+    export let error = ""
 
     $: handleGroup(checked)
 
@@ -26,32 +28,38 @@
     }
 </script>
 
-<label
-    class="{_class} inline-flex cursor-pointer items-center gap-2 hover:text-white
-        {disabled && 'pointer-events-none opacity-50'}"
->
-    <div
-        class="inline-flex [&:has(input:focus-visible)]:outline [&:has(input:focus-visible)]:outline-2 [&:has(input:focus-visible)]:outline-[orange]"
+<div class="grid">
+    <label
+        class="{_class} inline-flex cursor-pointer items-center gap-2 hover:text-white
+    {disabled && 'pointer-events-none opacity-50'}"
     >
-        <input
-            class="pointer-events-none absolute opacity-0"
-            type="checkbox"
-            bind:checked
-            on:change
-            {value}
-            {disabled}
-            name={name || undefined}
-            {...$$restProps}
-        />
+        <div
+            class="inline-flex [&:has(input:focus-visible)]:outline [&:has(input:focus-visible)]:outline-2 [&:has(input:focus-visible)]:outline-[orange]"
+        >
+            <input
+                class="pointer-events-none absolute opacity-0"
+                type="checkbox"
+                bind:checked
+                on:change
+                {value}
+                {disabled}
+                name={name || undefined}
+                {...$$restProps}
+            />
 
-        {#if checked}
-            <IconCheckSquareDuotone class="text-xl" />
-        {:else}
-            <IconSquareDuotone class="text-xl" />
+            {#if checked}
+                <IconCheckSquareDuotone class="text-xl" />
+            {:else}
+                <IconSquareDuotone class="text-xl" />
+            {/if}
+        </div>
+
+        {#if label}
+            <span>{label}</span>
         {/if}
-    </div>
+    </label>
 
-    {#if label}
-        <span>{label}</span>
+    {#if error}
+        <Description type="error" text={error} />
     {/if}
-</label>
+</div>

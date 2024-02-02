@@ -52,12 +52,11 @@
         {/each}
 
         <Checkbox
-            class="place-self-start"
             bind:checked={$_form.isAdmin}
             name="isAdmin"
             {...$constraints.isAdmin}
             label="Role admin"
-            disabled={data.userToEdit.isAdmin}
+            error={$errors?.isAdmin?.[0] ?? form?.pb?.isAdmin?.message}
         />
     </Form>
 </div>

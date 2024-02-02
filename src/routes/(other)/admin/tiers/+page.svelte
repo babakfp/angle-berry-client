@@ -66,7 +66,7 @@
                     class="px-6 py-3"
                     checked={selectedTierIds.length === data.tiers.length}
                     on:change={checkAllCheckboxes}
-                    disabled={!data.tiers.length}
+                    readonly={!data.tiers.length}
                 />
             </Th>
             <Th>TIER</Th>

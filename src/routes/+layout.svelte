@@ -1,8 +1,8 @@
 <script lang="ts">
-    import PreventSomeDefaultEvents from "./PreventSomeDefaultEvents.svelte"
-    import { LoadingBar } from "svelte-loading-bar"
-    import "../app.postcss"
     import { Toaster } from "svelte-french-toast"
+    import { LoadingBar } from "svelte-loading-bar"
+    import PreventSomeDefaultEvents from "$components/PreventSomeDefaultEvents.svelte"
+    import "../app.postcss"
 </script>
 
 <PreventSomeDefaultEvents />

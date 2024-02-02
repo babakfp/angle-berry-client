@@ -10,6 +10,17 @@
     import ChatMenu from "./ChatMenu/ChatMenu.svelte"
     import EventsMenu from "./EventsMenu/EventsMenu.svelte"
     import UserMenu from "./UserMenu/UserMenu.svelte"
+    import type { TiersResponse, UsersResponse } from "$utilities/pb-typegen"
+    import type { ListResult } from "pocketbase"
+    import type {
+        RealtimeEventsResponse,
+        RealtimeMessagesResponse,
+    } from "$utilities/pb-types"
+
+    export let user: UsersResponse
+    export let tiers: TiersResponse[]
+    export let pbEvents: ListResult<RealtimeEventsResponse>
+    export let pbMessages: ListResult<RealtimeMessagesResponse>
 
     let isEventsMenuOpen = false
     let eventsMenuToggle: HTMLButtonElement
@@ -32,7 +43,7 @@
             Angle Berry
         </a>
         <div class="flex">
-            {#if $page.data.user.isAdmin}
+            {#if user.isAdmin}
                 <a
                     class="group relative flex items-center px-2 outline-inset"
                     href="/admin"
@@ -85,11 +96,21 @@
                 >
                     <Avatar class="w-8 rounded-full" />
                 </button>
-                <UserMenu {userMenuToggle} bind:isUserMenuOpen />
+                <UserMenu {user} {tiers} {userMenuToggle} bind:isUserMenuOpen />
             </div>
         </div>
     </div>
 </header>
 
-<EventsMenu bind:isOpen={isEventsMenuOpen} toggleButton={eventsMenuToggle} />
-<ChatMenu bind:isOpen={isChatMenuOpen} toggleButton={chatMenuToggle} />
+<EventsMenu
+    {user}
+    {pbEvents}
+    bind:isOpen={isEventsMenuOpen}
+    toggleButton={eventsMenuToggle}
+/>
+<ChatMenu
+    {user}
+    {pbMessages}
+    bind:isOpen={isChatMenuOpen}
+    toggleButton={chatMenuToggle}
+/>

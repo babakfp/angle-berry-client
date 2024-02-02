@@ -21,6 +21,9 @@
     import IconCheckRegular from "phosphor-icons-svelte/IconCheckRegular.svelte"
     import MessageContextMenu from "./MessageContextMenu.svelte"
     import MessageContextMenuItem from "./MessageContextMenuItem.svelte"
+    import type { UsersResponse } from "$utilities/pb-typegen"
+
+    export let user: UsersResponse
 
     let copyTimeoutId: number | undefined
 
@@ -115,7 +118,7 @@
                 on:click={replyMessage}
             />
         {/if}
-        {#if $contextMenuTargetMessage?.expand.user.id === $page.data.user.id && !$selectedMessageIds.length}
+        {#if $contextMenuTargetMessage?.expand.user.id === user.id && !$selectedMessageIds.length}
             <MessageContextMenuItem
                 title="Edit"
                 icon={IconPencilSimpleRegular}
@@ -141,7 +144,7 @@
                 on:click={copyMessage}
             />
         {/if}
-        {#if $contextMenuTargetMessage?.expand.user.id === $page.data.user.id}
+        {#if $contextMenuTargetMessage?.expand.user.id === user.id}
             {#if $selectedMessageIds.length > 0}
                 {#if $contextMenuTargetMessage && $selectedMessageIds.includes($contextMenuTargetMessage?.id)}
                     <MessageContextMenuItem

@@ -8,7 +8,10 @@
     import Tier from "./Tier.svelte"
     import IconUserRegular from "phosphor-icons-svelte/IconUserRegular.svelte"
     import IconCrownSimpleRegular from "phosphor-icons-svelte/IconCrownSimpleRegular.svelte"
+    import type { TiersResponse, UsersResponse } from "$utilities/pb-typegen"
 
+    export let user: UsersResponse
+    export let tiers: TiersResponse[]
     export let userMenuToggle: HTMLButtonElement
     export let isUserMenuOpen = false
 
@@ -32,7 +35,7 @@
     >
         <li class="flex justify-between p-4">
             <span>Signed in as</span>
-            <span>{$page.data.user.username}</span>
+            <span>{user.username}</span>
         </li>
 
         <li>
@@ -41,13 +44,13 @@
                 href="/how-to-invite"
             >
                 <span>
-                    Invites: {$page.data.user.invitedUsers.length}
+                    Invites: {user.invitedUsers.length}
                 </span>
                 <span class="underline">Start inviting</span>
             </a>
         </li>
 
-        <li use:copy={`${$page.url.origin}/register?id=${$page.data.user.id}`}>
+        <li use:copy={`${$page.url.origin}/register?id=${user.id}`}>
             <button
                 type="button"
                 class="group border-y border-white/5 p-4 outline-inset"
@@ -60,14 +63,14 @@
                     Click to copy your invite link:
                 </span>
                 <p class="mt-1 select-text text-xs text-gray-500">
-                    {$page.url.origin}/register?id={$page.data.user.id}
+                    {$page.url.origin}/register?id={user.id}
                 </p>
             </button>
         </li>
 
         <ol>
-            {#each $page.data.tiers as tier}
-                <Tier {tier} />
+            {#each tiers as tier}
+                <Tier {user} {tier} />
             {/each}
         </ol>
 
@@ -78,11 +81,9 @@
                     class="flex w-full items-center justify-between border-t border-white/5 p-4 text-left duration-200 outline-inset hover:text-white"
                 >
                     <span>
-                        Login as {$page.data.user.isAdmin
-                            ? "a User"
-                            : "an Admin"}
+                        Login as {user.isAdmin ? "a User" : "an Admin"}
                     </span>
-                    {#if $page.data.user.isAdmin}
+                    {#if user.isAdmin}
                         <IconUserRegular class="text-xl" />
                     {:else}
                         <IconCrownSimpleRegular class="text-xl" />

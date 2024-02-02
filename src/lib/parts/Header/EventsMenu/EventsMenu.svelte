@@ -1,11 +1,16 @@
 <script lang="ts">
-    import { page } from "$app/stores"
     import PopSide from "$components/PopSide.svelte"
     import { events, unseenEventsLength } from "$stores/events"
+    import type { UsersResponse } from "$utilities/pb-typegen"
+    import type { ListResult } from "pocketbase"
     import Event from "./Event.svelte"
+    import type { RealtimeEventsResponse } from "$utilities/pb-types"
 
-    events.set($page.data.events)
+    export let pbEvents: ListResult<RealtimeEventsResponse>
 
+    events.set(pbEvents)
+
+    export let user: UsersResponse
     export let isOpen = false
     export let toggleButton: HTMLButtonElement
 
@@ -16,7 +21,7 @@
     {#if $events.items.length > 0}
         <ol class="overflow-y-auto overscroll-y-contain sm:text-sm">
             {#each $events.items as event (event.id)}
-                <Event {event} />
+                <Event {user} {event} />
             {/each}
             <p class="p-4 text-center text-xs text-gray-500">
                 No more events found!

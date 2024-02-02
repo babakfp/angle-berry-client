@@ -14,7 +14,7 @@
 
 <!-- I don't need "tiers" here becaus we only use currentTier -->
 <TiersTable class="mt-8">
-    <TiersTableRow tier={data.tier} isCurrent={true} />
+    <TiersTableRow user={data.user} tier={data.tier} isCurrent={true} />
 </TiersTable>
 
 {#if !data.tierAccessGranted}

@@ -171,7 +171,12 @@
     })
 </script>
 
-<Header />
+<Header
+    user={data.user}
+    tiers={data.tiers}
+    pbEvents={data.events}
+    pbMessages={data.messages}
+/>
 
 {#key $page.url.pathname}
     <main

@@ -25,12 +25,15 @@
     import type {
         ListResult,
         RealtimeMessagesResponse,
+        UsersResponse,
     } from "$utilities/pb-types"
 
+    export let user: UsersResponse
+    export let pbMessages: ListResult<RealtimeMessagesResponse>
     export let isOpen = false
     export let toggleButton: HTMLButtonElement
 
-    messages.set($page.data.messages)
+    messages.set(pbMessages)
 
     $: if (!isOpen && $messageIdToEdit) messageIdToEdit.set("")
     $: if (isOpen && $unreadMessagesLength) unreadMessagesLength.set(0)
@@ -85,8 +88,7 @@
         // Is reached the top of the scrollable?
         // Added + 200 to fetch the data earlier for a better UX
         if (
-            pageNumberFortheNextOlderMessagesToFetch <=
-                $page.data.messages.totalPages &&
+            pageNumberFortheNextOlderMessagesToFetch <= pbMessages.totalPages &&
             Math.abs((e.target as HTMLOListElement).scrollTop) + 200 >=
                 (e.target as HTMLOListElement).scrollHeight -
                     (e.target as HTMLOListElement).clientHeight
@@ -135,7 +137,7 @@
             on:scroll={handleScroll}
         >
             {#each $messages.items as message (message.id)}
-                <Message {message} />
+                <Message {user} {message} />
             {/each}
             {#if isFetchingOlderMessages}
                 <div class="mx-auto flex items-center gap-2 px-4 text-gray-500">
@@ -238,7 +240,7 @@
     </form>
 
     <svelte:fragment slot="outer">
-        <ContextMenu />
+        <ContextMenu {user} />
         <MessageDeleteModal />
     </svelte:fragment>
 </PopSide>

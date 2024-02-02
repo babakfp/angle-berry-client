@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { page } from "$app/stores"
     import { shrinkHeight } from "$utilities/shrinkHeight"
     import {
         isContextMenuOpen,
@@ -13,11 +12,15 @@
     import IconCircleRegular from "phosphor-icons-svelte/IconCircleRegular.svelte"
     import IconCheckCircleRegular from "phosphor-icons-svelte/IconCheckCircleRegular.svelte"
     import { highlightAnimate } from "$utilities/highlightAnimate"
-    import type { RealtimeMessagesResponse } from "$utilities/pb-types"
+    import type {
+        RealtimeMessagesResponse,
+        UsersResponse,
+    } from "$utilities/pb-types"
 
+    export let user: UsersResponse
     export let message: RealtimeMessagesResponse
 
-    const isCurrentUser = message.expand.user.id === $page.data.user.id
+    const isCurrentUser = message.expand.user.id === user.id
 
     let interval: number | undefined
 

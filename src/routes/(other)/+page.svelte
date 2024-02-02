@@ -19,7 +19,7 @@
 
 <TiersTable class="mt-8">
     {#each data.tiers as tier}
-        <TiersTableRow {tier} />
+        <TiersTableRow user={data.user} {tier} />
     {/each}
 </TiersTable>
 

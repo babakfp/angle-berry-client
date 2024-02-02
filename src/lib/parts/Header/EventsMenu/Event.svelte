@@ -1,9 +1,12 @@
 <script lang="ts">
-    import { page } from "$app/stores"
     import { fly } from "svelte/transition"
-    import type { RealtimeEventsResponse } from "$utilities/pb-types"
+    import type {
+        RealtimeEventsResponse,
+        UsersResponse,
+    } from "$utilities/pb-types"
     import UserTooltipInfo from "./UserTooltipInfo.svelte"
 
+    export let user: UsersResponse
     export let event: RealtimeEventsResponse
 </script>
 
@@ -12,7 +15,7 @@
     transition:fly={{ x: 64, duration: 500 }}
 >
     {#if !event.expand?.inviter}
-        {#if event.expand.user.id === $page.data.user.id}
+        {#if event.expand.user.id === user.id}
             <p>
                 Welcome <UserTooltipInfo user={event.expand.user} />. You have
                 successfully joined this fantastic website. We hope you have a
@@ -26,7 +29,7 @@
         {/if}
     {:else}
         <!-- NOTE: THIS COMMENT PREVENTS PRETTIER FROM COMBINING THE BELOW IF STATEMENT WITH THE ABOVE ELSE STATEMENT -->
-        {#if event.expand.user.id === $page.data.user.id}
+        {#if event.expand.user.id === user.id}
             <p>
                 Welcome, <UserTooltipInfo user={event.expand.user} />. You have
                 successfully joined this fantastic website. We hope you have a

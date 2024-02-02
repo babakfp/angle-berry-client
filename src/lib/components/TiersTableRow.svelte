@@ -1,15 +1,15 @@
 <script lang="ts">
-    import { page } from "$app/stores"
-    import type { TiersResponse } from "$utilities/pb-types"
+    import type { TiersResponse, UsersResponse } from "$utilities/pb-types"
     import { Tr, Th, Td } from "$components/table/index"
 
+    export let user: UsersResponse
     export let tier: TiersResponse
     export let isCurrent = false
 
     // Does current user has access to this tier
     const hasAccess =
-        $page.data.user.retainedTiers.includes(tier.id) ||
-        $page.data.user.invitedUsers.length >= tier.invites
+        user.retainedTiers.includes(tier.id) ||
+        user.invitedUsers.length >= tier.invites
 </script>
 
 <Tr

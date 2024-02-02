@@ -52,7 +52,10 @@
                 label: tier.name,
             }))}
             bind:selectedOptions={selectedRetainedTiers}
+            error={$errors?.retainedTiers?.[0] ??
+                form?.pb?.retainedTiers?.message}
         />
+        <!-- TODO: I don't remember what this form?.pb?.retainedTiers?.message is about, also, form?.pb is type of any! -->
 
         {#each $_form.retainedTiers as t}
             <input

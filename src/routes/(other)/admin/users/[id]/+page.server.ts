@@ -15,10 +15,10 @@ export const load = async ({ locals, params }) => {
     const form = await superValidate(schema)
 
     try {
-        const user: UsersResponse = await locals.pb
+        const userToEdit: UsersResponse = await locals.pb
             .collection("users")
             .getOne(params.id)
-        return { form, userToEdit: user }
+        return { form, userToEdit }
     } catch (e) {
         if (e instanceof ClientResponseError) {
             pbHandleClientResponseError(e)

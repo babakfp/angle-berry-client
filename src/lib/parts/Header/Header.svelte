@@ -11,8 +11,8 @@
     import EventsMenu from "./EventsMenu/EventsMenu.svelte"
     import UserMenu from "./UserMenu/UserMenu.svelte"
     import type { TiersResponse, UsersResponse } from "$utilities/pb-typegen"
-    import type { ListResult } from "pocketbase"
     import type {
+        ListResult,
         RealtimeEventsResponse,
         RealtimeMessagesResponse,
     } from "$utilities/pb-types"

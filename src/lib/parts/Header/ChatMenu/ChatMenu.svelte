@@ -1,6 +1,5 @@
 <script lang="ts">
     import type { SubmitFunction } from "@sveltejs/kit"
-    import { page } from "$app/stores"
     import { enhance } from "$app/forms"
     import { writable } from "svelte/store"
     import { messages, unreadMessagesLength } from "$stores/messages"

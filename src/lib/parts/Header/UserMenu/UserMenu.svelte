@@ -50,13 +50,15 @@
         <li use:copy={`${$page.url.origin}/register?id=${$page.data.user.id}`}>
             <button
                 type="button"
-                class="border-y border-white/5 p-4 outline-inset"
+                class="group border-y border-white/5 p-4 outline-inset"
                 on:click={() =>
                     toast.success("Your invite link is copied to Clipboard.", {
                         position: "bottom-right",
                     })}
             >
-                <span>Click to copy your invite link:</span>
+                <span class="group-hover:text-white">
+                    Click to copy your invite link:
+                </span>
                 <p class="mt-1 select-text text-xs text-gray-500">
                     {$page.url.origin}/register?id={$page.data.user.id}
                 </p>

@@ -91,9 +91,9 @@
                                     handleSelectToggle(option.value)}
                             >
                                 {#if isSelected(option.value, selectedOptions)}
-                                    <IconCheckSquareDuotone class="text-base" />
+                                    <IconCheckSquareDuotone class="text-lg" />
                                 {:else}
-                                    <IconSquareDuotone class="text-base" />
+                                    <IconSquareDuotone class="text-lg" />
                                 {/if}
                                 <span>{option.label}</span>
                             </button>

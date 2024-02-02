@@ -2,9 +2,9 @@
     import { page } from "$app/stores"
     import { unreadMessagesLength } from "$stores/messages"
     import { unseenEventsLength } from "$stores/events"
-    import IconBellSimpleDuotone from "phosphor-icons-svelte/IconBellSimpleDuotone.svelte"
-    import IconCrownSimpleDuotone from "phosphor-icons-svelte/IconCrownSimpleDuotone.svelte"
-    import IconChatCenteredDuotone from "phosphor-icons-svelte/IconChatCenteredDuotone.svelte"
+    import IconBellSimpleRegular from "phosphor-icons-svelte/IconBellSimpleRegular.svelte"
+    import IconCrownSimpleRegular from "phosphor-icons-svelte/IconCrownSimpleRegular.svelte"
+    import IconChatCenteredRegular from "phosphor-icons-svelte/IconChatCenteredRegular.svelte"
     import Avatar from "$components/Avatar.svelte"
     import NotificationBlob from "$components/NotificationBlob.svelte"
     import ChatMenu from "./ChatMenu/ChatMenu.svelte"
@@ -38,7 +38,7 @@
                     href="/admin"
                     title="Admin dashboard"
                 >
-                    <IconCrownSimpleDuotone
+                    <IconCrownSimpleRegular
                         class="text-2xl duration-200 group-hover:text-white"
                     />
                 </a>
@@ -50,7 +50,7 @@
                 on:click={() => (isEventsMenuOpen = !isEventsMenuOpen)}
                 title="Notifications"
             >
-                <IconBellSimpleDuotone
+                <IconBellSimpleRegular
                     class="text-2xl duration-200 group-hover:text-white"
                 />
                 {#if $unseenEventsLength > 0}
@@ -66,7 +66,7 @@
                 on:click={() => (isChatMenuOpen = !isChatMenuOpen)}
                 title="Chat"
             >
-                <IconChatCenteredDuotone
+                <IconChatCenteredRegular
                     class="text-2xl duration-200 group-hover:text-white"
                 />
                 {#if $unreadMessagesLength > 0}

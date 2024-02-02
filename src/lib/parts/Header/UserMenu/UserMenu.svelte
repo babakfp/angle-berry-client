@@ -6,8 +6,8 @@
     import { page } from "$app/stores"
     import { beforeNavigate } from "$app/navigation"
     import Tier from "./Tier.svelte"
-    import IconUserDuotone from "phosphor-icons-svelte/IconUserDuotone.svelte"
-    import IconCrownSimpleDuotone from "phosphor-icons-svelte/IconCrownSimpleDuotone.svelte"
+    import IconUserRegular from "phosphor-icons-svelte/IconUserRegular.svelte"
+    import IconCrownSimpleRegular from "phosphor-icons-svelte/IconCrownSimpleRegular.svelte"
 
     export let userMenuToggle: HTMLButtonElement
     export let isUserMenuOpen = false
@@ -83,9 +83,9 @@
                             : "an Admin"}
                     </span>
                     {#if $page.data.user.isAdmin}
-                        <IconUserDuotone class="text-xl" />
+                        <IconUserRegular class="text-xl" />
                     {:else}
-                        <IconCrownSimpleDuotone class="text-xl" />
+                        <IconCrownSimpleRegular class="text-xl" />
                     {/if}
                 </button>
             </form>

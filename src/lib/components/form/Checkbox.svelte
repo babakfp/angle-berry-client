@@ -1,6 +1,6 @@
 <script lang="ts">
-    import IconSquareDuotone from "phosphor-icons-svelte/IconSquareDuotone.svelte"
-    import IconCheckSquareDuotone from "phosphor-icons-svelte/IconCheckSquareDuotone.svelte"
+    import IconSquareRegular from "phosphor-icons-svelte/IconSquareRegular.svelte"
+    import IconCheckSquareRegular from "phosphor-icons-svelte/IconCheckSquareRegular.svelte"
     import Description from "./Description.svelte"
 
     export let _class = ""
@@ -50,9 +50,9 @@
             />
 
             {#if checked}
-                <IconCheckSquareDuotone class="text-xl" />
+                <IconCheckSquareRegular class="text-xl" />
             {:else}
-                <IconSquareDuotone class="text-xl" />
+                <IconSquareRegular class="text-xl" />
             {/if}
         </div>
 

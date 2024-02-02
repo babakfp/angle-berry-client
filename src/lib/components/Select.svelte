@@ -1,8 +1,8 @@
 <script lang="ts">
-    import IconCaretDownDuotone from "phosphor-icons-svelte/IconCaretDownDuotone.svelte"
-    import IconCheckSquareDuotone from "phosphor-icons-svelte/IconCheckSquareDuotone.svelte"
-    import IconSquareDuotone from "phosphor-icons-svelte/IconSquareDuotone.svelte"
-    import IconXSquareDuotone from "phosphor-icons-svelte/IconXSquareDuotone.svelte"
+    import IconCaretDownRegular from "phosphor-icons-svelte/IconCaretDownRegular.svelte"
+    import IconCheckSquareRegular from "phosphor-icons-svelte/IconCheckSquareRegular.svelte"
+    import IconSquareRegular from "phosphor-icons-svelte/IconSquareRegular.svelte"
+    import IconXSquareRegular from "phosphor-icons-svelte/IconXSquareRegular.svelte"
     import OutClick from "svelte-outclick"
     import Description from "./form/Description.svelte"
 
@@ -73,7 +73,7 @@
         on:click={handleTriggerToggle}
     >
         <span>{label}</span>
-        <IconCaretDownDuotone class="text-gray-500" />
+        <IconCaretDownRegular class="text-gray-500" />
     </button>
 
     <OutClick on:outclick={handleTriggerClose} excludeElements={trigger}>
@@ -92,9 +92,9 @@
                                     handleSelectToggle(option.value)}
                             >
                                 {#if isSelected(option.value, selectedOptions)}
-                                    <IconCheckSquareDuotone class="text-lg" />
+                                    <IconCheckSquareRegular class="text-lg" />
                                 {:else}
-                                    <IconSquareDuotone class="text-lg" />
+                                    <IconSquareRegular class="text-lg" />
                                 {/if}
                                 <span>{option.label}</span>
                             </button>
@@ -116,7 +116,7 @@
                         class="flex p-1 text-gray-500 duration-150 outline-inset hover:text-white"
                         on:click={() => handleDeselect(option.value)}
                     >
-                        <IconXSquareDuotone />
+                        <IconXSquareRegular />
                     </button>
                     <span class="pr-2 text-xs">{option.label}</span>
                 </li>

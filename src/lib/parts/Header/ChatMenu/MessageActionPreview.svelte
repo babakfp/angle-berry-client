@@ -3,7 +3,7 @@
 <script lang="ts">
     import { createEventDispatcher } from "svelte"
     import { goToMessage } from "$parts/Header/ChatMenu/goToMessage"
-    import IconXDuotone from "phosphor-icons-svelte/IconXDuotone.svelte"
+    import IconXRegular from "phosphor-icons-svelte/IconXRegular.svelte"
 
     export let title: string
     export let content: string
@@ -41,7 +41,7 @@
             class="flex p-4 outline-inset hover:bg-white/5"
             on:click={handleClosing}
         >
-            <IconXDuotone />
+            <IconXRegular />
         </button>
     </div>
 {/if}

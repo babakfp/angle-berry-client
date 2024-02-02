@@ -13,9 +13,9 @@
         isTouchDeviceContextMenuOpen,
         isContextMenuOpen,
     } from "./chatStores"
-    import IconSpinnerDuotone from "phosphor-icons-svelte/IconSpinnerDuotone.svelte"
-    import IconCheckDuotone from "phosphor-icons-svelte/IconCheckDuotone.svelte"
-    import IconPaperPlaneRightDuotone from "phosphor-icons-svelte/IconPaperPlaneRightDuotone.svelte"
+    import IconSpinnerRegular from "phosphor-icons-svelte/IconSpinnerRegular.svelte"
+    import IconCheckRegular from "phosphor-icons-svelte/IconCheckRegular.svelte"
+    import IconPaperPlaneRightRegular from "phosphor-icons-svelte/IconPaperPlaneRightRegular.svelte"
     import PopSide from "$components/PopSide.svelte"
     import Message from "./Message/Message.svelte"
     import MessageActionPreview from "./MessageActionPreview.svelte"
@@ -147,7 +147,7 @@
                         <button type="button">Try again</button>
                     {:else}
                         <p>Fetching older messages</p>
-                        <IconSpinnerDuotone class="ml-2 animate-spin text-xl" />
+                        <IconSpinnerRegular class="ml-2 animate-spin text-xl" />
                     {/if}
                 </div>
             {/if}
@@ -216,11 +216,11 @@
             >
                 <div class="flex min-h-14 items-center px-4 text-2xl">
                     {#if $messageIdToEdit}
-                        <IconCheckDuotone />
+                        <IconCheckRegular />
                     {:else if isSendingMessage}
-                        <IconSpinnerDuotone class="animate-spin" />
+                        <IconSpinnerRegular class="animate-spin" />
                     {:else}
-                        <IconPaperPlaneRightDuotone />
+                        <IconPaperPlaneRightRegular />
                     {/if}
                 </div>
             </button>

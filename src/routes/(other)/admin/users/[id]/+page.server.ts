@@ -3,7 +3,7 @@ import {
     pbHandleClientResponseError,
     pbHandleFormActionError,
 } from "$utilities/pb"
-import { superValidate } from "sveltekit-superforms/server"
+import { superValidate, setError } from "sveltekit-superforms/server"
 import { type UsersResponse, ClientResponseError } from "$utilities/pb-types"
 import { schema } from "./schema"
 
@@ -35,6 +35,16 @@ export const actions = {
 
         const form = await superValidate(request, schema)
         if (!form.valid) return fail(400, { form })
+
+        console.log("form.data.isAdmin", form.data.isAdmin)
+
+        if (!form.data.isAdmin) {
+            return setError(
+                form,
+                "isAdmin",
+                "Admins cannot modify their own (or other admins') admin status!",
+            )
+        }
 
         try {
             await locals.pb.collection("users").update(params.id, form.data)

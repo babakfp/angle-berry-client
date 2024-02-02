@@ -1,3 +1,4 @@
-export const load = async ({ locals: { user, tiers, previewTierId } }) => {
-    return { user, tiers, previewTierId }
-}
+export const load = async ({ locals }) => ({
+    user: locals.user,
+    previewTierId: locals.previewTierId,
+})

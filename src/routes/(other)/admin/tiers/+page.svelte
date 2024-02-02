@@ -22,7 +22,7 @@
 <div class="flex justify-between">
     <div class="flex gap-4">
         {#if selectedTierIds.length}
-            <form method="post" action="?/deletetier">
+            <form method="post" action="?/delete">
                 <button type="submit" class="btn btn-danger">
                     Delete selected
                 </button>

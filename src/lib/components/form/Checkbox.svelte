@@ -9,6 +9,7 @@
     export let value = "on"
     export let group: string[] = []
     export let disabled = false
+    export let readonly = false
     export let name: string = crypto.randomUUID()
     export let label = ""
     export let error = ""
@@ -31,7 +32,7 @@
 <div class="grid">
     <label
         class="{_class} inline-flex cursor-pointer items-center gap-2 hover:text-white
-    {disabled && 'pointer-events-none opacity-50'}"
+    {(disabled || readonly) && 'pointer-events-none opacity-50'}"
     >
         <div
             class="inline-flex [&:has(input:focus-visible)]:outline [&:has(input:focus-visible)]:outline-2 [&:has(input:focus-visible)]:outline-[orange]"
@@ -45,6 +46,7 @@
                 {disabled}
                 name={name || undefined}
                 {...$$restProps}
+                tabindex={readonly ? -1 : undefined}
             />
 
             {#if checked}

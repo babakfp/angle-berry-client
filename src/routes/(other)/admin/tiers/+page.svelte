@@ -1,8 +1,16 @@
 <script lang="ts">
     import { Table, Tbody, Thead, Tr, Th, Td } from "$components/table/index"
     import Checkbox from "$components/form/Checkbox.svelte"
+    import toast from "svelte-french-toast"
 
     export let data
+    export let form
+
+    $: if (form?.message) {
+        toast.error(form.message, {
+            position: "bottom-right",
+        })
+    }
 
     let selectedTierIds: string[] = []
 

@@ -1,11 +1,15 @@
 <script lang="ts">
+    import { onMount } from "svelte"
     import { Toaster } from "svelte-french-toast"
     import { LoadingBar } from "svelte-loading-bar"
-    import PreventSomeDefaultEvents from "$components/PreventSomeDefaultEvents.svelte"
+    import { preventSomeDefaultEvents } from "$utilities/preventSomeDefaultEvents"
     import "../app.postcss"
+
+    onMount(() => {
+        preventSomeDefaultEvents()
+    })
 </script>
 
-<PreventSomeDefaultEvents />
 <LoadingBar />
 <slot />
 <Toaster />

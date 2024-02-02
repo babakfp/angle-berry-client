@@ -36,7 +36,11 @@ export const actions = {
         const form = await superValidate(request, schema)
         if (!form.valid) return fail(400, { form })
 
-        if (!form.data.isAdmin) {
+        const userToEdit: UsersResponse = await locals.pb
+            .collection("users")
+            .getOne(params.id)
+
+        if (userToEdit.isAdmin && !form.data.isAdmin) {
             return setError(
                 form,
                 "isAdmin",

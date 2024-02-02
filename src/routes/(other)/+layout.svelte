@@ -5,7 +5,7 @@
     import { pageTransitionValues } from "$utilities/pageTransitionValues"
     import { messages, unreadMessagesLength } from "$stores/messages"
     import { events, unseenEventsLength } from "$stores/events"
-    import { pbHandleClientResponseError } from "$utilities/pb"
+    import { pbHandleClientResponseError } from "$utilities/pb/helpers"
     import { pb } from "$stores/pb"
     import Header from "$parts/Header/Header.svelte"
     import {
@@ -17,7 +17,7 @@
         type UsersResponse,
         ClientResponseError,
         type TiersResponse,
-    } from "$utilities/pb-types"
+    } from "$utilities/pb/types"
 
     export let data
 

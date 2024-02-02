@@ -3,7 +3,7 @@
     import type {
         RealtimeEventsResponse,
         UsersResponse,
-    } from "$utilities/pb-types"
+    } from "$utilities/pb/types"
     import UserTooltipInfo from "./UserTooltipInfo.svelte"
 
     export let user: UsersResponse

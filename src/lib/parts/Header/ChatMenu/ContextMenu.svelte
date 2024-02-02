@@ -21,7 +21,7 @@
     import IconCheckRegular from "phosphor-icons-svelte/IconCheckRegular.svelte"
     import MessageContextMenu from "./MessageContextMenu.svelte"
     import MessageContextMenuItem from "./MessageContextMenuItem.svelte"
-    import type { UsersResponse } from "$utilities/pb-typegen"
+    import type { UsersResponse } from "$utilities/pb/types"
 
     export let user: UsersResponse
 

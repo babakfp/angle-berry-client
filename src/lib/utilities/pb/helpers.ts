@@ -1,5 +1,5 @@
 import { error, fail } from "@sveltejs/kit"
-import { ClientResponseError } from "$utilities/pb-types"
+import { ClientResponseError } from "$utilities/pb/types"
 
 export const pbHandleFormActionError = (
     e: unknown | ClientResponseError,

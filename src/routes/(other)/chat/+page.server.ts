@@ -1,6 +1,6 @@
 import { redirect, fail } from "@sveltejs/kit"
 import { superValidate } from "sveltekit-superforms/server"
-import { pbHandleFormActionError } from "$utilities/pb"
+import { pbHandleFormActionError } from "$utilities/pb/helpers"
 import { chatSchema } from "$utilities/chatSchema"
 
 export const actions = {

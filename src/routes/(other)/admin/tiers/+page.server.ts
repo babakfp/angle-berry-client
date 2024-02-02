@@ -2,10 +2,10 @@ import { redirect, error, fail } from "@sveltejs/kit"
 import {
     pbHandleClientResponseError,
     pbHandleFormActionError,
-} from "$utilities/pb"
+} from "$utilities/pb/helpers"
 import { superValidate } from "sveltekit-superforms/server"
 import { formSchemaDeleteTiers } from "./schema"
-import { type UsersResponse, ClientResponseError } from "$utilities/pb-types"
+import { type UsersResponse, ClientResponseError } from "$utilities/pb/types"
 
 export const load = async ({ locals }) => {
     if (!locals.user) redirect(303, "/login")

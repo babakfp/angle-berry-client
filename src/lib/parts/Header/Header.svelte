@@ -10,12 +10,13 @@
     import ChatMenu from "./ChatMenu/ChatMenu.svelte"
     import EventsMenu from "./EventsMenu/EventsMenu.svelte"
     import UserMenu from "./UserMenu/UserMenu.svelte"
-    import type { TiersResponse, UsersResponse } from "$utilities/pb-typegen"
     import type {
+        TiersResponse,
+        UsersResponse,
         ListResult,
         RealtimeEventsResponse,
         RealtimeMessagesResponse,
-    } from "$utilities/pb-types"
+    } from "$utilities/pb/types"
 
     export let user: UsersResponse
     export let tiers: TiersResponse[]

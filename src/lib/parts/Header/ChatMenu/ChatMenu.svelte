@@ -26,7 +26,7 @@
         ListResult,
         RealtimeMessagesResponse,
         UsersResponse,
-    } from "$utilities/pb-types"
+    } from "$utilities/pb/types"
 
     export let user: UsersResponse
     export let pbMessages: ListResult<RealtimeMessagesResponse>

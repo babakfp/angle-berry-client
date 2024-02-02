@@ -2,13 +2,13 @@ import { redirect, error, fail } from "@sveltejs/kit"
 import {
     pbHandleClientResponseError,
     pbHandleFormActionError,
-} from "$utilities/pb"
+} from "$utilities/pb/helpers"
 import { superValidate } from "sveltekit-superforms/server"
 import {
     type TiersResponse,
     type VideosResponse,
     ClientResponseError,
-} from "$utilities/pb-types"
+} from "$utilities/pb/types"
 import { formSchemaUpdateTier, formSchemaDeleteTier } from "../schema"
 
 export const load = async ({ locals, params }) => {

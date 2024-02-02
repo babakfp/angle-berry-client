@@ -15,7 +15,7 @@
     import type {
         RealtimeMessagesResponse,
         UsersResponse,
-    } from "$utilities/pb-types"
+    } from "$utilities/pb/types"
 
     export let user: UsersResponse
     export let message: RealtimeMessagesResponse

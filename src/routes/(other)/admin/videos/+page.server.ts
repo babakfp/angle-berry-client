@@ -2,8 +2,8 @@ import { redirect, error, fail } from "@sveltejs/kit"
 import {
     pbHandleClientResponseError,
     pbHandleFormActionError,
-} from "$utilities/pb"
-import { type VideosResponse, ClientResponseError } from "$utilities/pb-types"
+} from "$utilities/pb/helpers"
+import { type VideosResponse, ClientResponseError } from "$utilities/pb/types"
 import { superValidate } from "sveltekit-superforms/server"
 import {
     deleteSchema,

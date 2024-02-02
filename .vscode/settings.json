@@ -5,5 +5,8 @@
         "$parts": "${workspaceFolder}/src/lib/parts",
         "$stores": "${workspaceFolder}/src/lib/stores",
         "$utilities": "${workspaceFolder}/src/lib/utilities"
+    },
+    "files.readonlyInclude": {
+        "src/lib/utilities/pb/types-auto-generated.ts": true
     }
 }

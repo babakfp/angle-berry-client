@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { UsersResponse, TiersResponse } from "$utilities/pb-types"
+    import type { UsersResponse, TiersResponse } from "$utilities/pb/types"
     import Tooltip from "$components/Tooltip.svelte"
     import TooltipWrapper from "$components/TooltipWrapper.svelte"
 

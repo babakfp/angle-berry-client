@@ -1,2 +1,2 @@
 *.svg
-pb-typegen.ts
+/src/lib/utilities/pb/types-auto-generated.ts

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { TiersResponse, UsersResponse } from "$utilities/pb-types"
+    import type { TiersResponse, UsersResponse } from "$utilities/pb/types"
     import { Tr, Th, Td } from "$components/table/index"
 
     export let user: UsersResponse

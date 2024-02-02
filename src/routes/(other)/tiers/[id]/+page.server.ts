@@ -1,10 +1,10 @@
 import { redirect } from "@sveltejs/kit"
-import { pbHandleClientResponseError } from "$utilities/pb"
+import { pbHandleClientResponseError } from "$utilities/pb/helpers"
 import {
     type TiersResponse,
     type VideosResponse,
     ClientResponseError,
-} from "$utilities/pb-types"
+} from "$utilities/pb/types"
 
 export const load = async ({ locals, params }) => {
     if (!locals.user) redirect(303, "/login")

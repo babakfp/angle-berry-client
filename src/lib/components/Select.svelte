@@ -4,13 +4,14 @@
     import IconSquareDuotone from "phosphor-icons-svelte/IconSquareDuotone.svelte"
     import IconXSquareDuotone from "phosphor-icons-svelte/IconXSquareDuotone.svelte"
     import OutClick from "svelte-outclick"
+    import Description from "./form/Description.svelte"
 
     type Option = { value: string; label: string }
 
     export let label: string
     export let options: Option[] = []
     export let selectedOptions: Option[] = []
-    // export let value: any
+    export let error = ""
 
     let trigger: HTMLButtonElement
     let isOpen = false
@@ -121,5 +122,9 @@
                 </li>
             {/each}
         </ul>
+    {/if}
+
+    {#if error}
+        <Description type="error" text={error} />
     {/if}
 </div>

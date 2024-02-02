@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss"
+import tailwindcssAddons from "tailwindcss-addons"
 import colors from "tailwindcss/colors"
 import defaultTheme from "tailwindcss/defaultTheme"
-import tailwindcssAddons from "tailwindcss-addons"
 
 export default {
     content: ["./src/**/*.{html,svelte}"],

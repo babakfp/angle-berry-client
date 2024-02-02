@@ -1,15 +1,15 @@
-import { redirect, error, fail } from "@sveltejs/kit"
+import { error, fail, redirect } from "@sveltejs/kit"
+import { superValidate } from "sveltekit-superforms/server"
 import {
     pbHandleClientResponseError,
     pbHandleFormActionError,
 } from "$utilities/pb/helpers"
-import { superValidate } from "sveltekit-superforms/server"
 import {
+    ClientResponseError,
     type TiersResponse,
     type VideosResponse,
-    ClientResponseError,
 } from "$utilities/pb/types"
-import { formSchemaUpdateTier, formSchemaDeleteTier } from "../schema"
+import { formSchemaDeleteTier, formSchemaUpdateTier } from "../schema"
 
 export const load = async ({ locals, params }) => {
     if (!locals.user) redirect(303, "/login")

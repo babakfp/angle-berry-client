@@ -3,9 +3,9 @@ import PocketBase from "pocketbase"
 import { PUBLIC_POCKETBASE_URL } from "$env/static/public"
 import { pbHandleClientResponseError } from "$utilities/pb/helpers"
 import {
-    type UsersResponse,
-    type TiersResponse,
     ClientResponseError,
+    type TiersResponse,
+    type UsersResponse,
 } from "$utilities/pb/types"
 
 export const handle = async ({ event, resolve }) => {

@@ -1,19 +1,19 @@
-import { redirect, error, fail } from "@sveltejs/kit"
+import { error, fail, redirect } from "@sveltejs/kit"
+import { superValidate } from "sveltekit-superforms/server"
+import type { FileServer } from "$utilities/FileServer"
+import { formatBytes } from "$utilities/formatBytes"
 import {
     pbHandleClientResponseError,
     pbHandleFormActionError,
 } from "$utilities/pb/helpers"
-import { type VideosResponse, ClientResponseError } from "$utilities/pb/types"
-import { superValidate } from "sveltekit-superforms/server"
+import { ClientResponseError, type VideosResponse } from "$utilities/pb/types"
 import {
     deleteSchema,
-    isFilesSchemaValid,
     isFileListValid,
-    videoMaxSizeLimitBytes,
+    isFilesSchemaValid,
     videoFormats,
+    videoMaxSizeLimitBytes,
 } from "./schema.js"
-import { formatBytes } from "$utilities/formatBytes"
-import type { FileServer } from "$utilities/FileServer"
 
 export const load = async ({ locals }) => {
     if (!locals.user) redirect(303, "/login")

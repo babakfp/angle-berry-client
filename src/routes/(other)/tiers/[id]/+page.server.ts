@@ -1,9 +1,9 @@
 import { redirect } from "@sveltejs/kit"
 import { pbHandleClientResponseError } from "$utilities/pb/helpers"
 import {
+    ClientResponseError,
     type TiersResponse,
     type VideosResponse,
-    ClientResponseError,
 } from "$utilities/pb/types"
 
 export const load = async ({ locals, params }) => {

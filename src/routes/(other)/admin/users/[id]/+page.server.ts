@@ -1,10 +1,10 @@
-import { redirect, error, fail } from "@sveltejs/kit"
+import { error, fail, redirect } from "@sveltejs/kit"
+import { setError, superValidate } from "sveltekit-superforms/server"
 import {
     pbHandleClientResponseError,
     pbHandleFormActionError,
 } from "$utilities/pb/helpers"
-import { superValidate, setError } from "sveltekit-superforms/server"
-import { type UsersResponse, ClientResponseError } from "$utilities/pb/types"
+import { ClientResponseError, type UsersResponse } from "$utilities/pb/types"
 import { schema } from "./schema"
 
 export const load = async ({ locals, params }) => {

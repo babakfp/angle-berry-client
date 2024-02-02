@@ -3,6 +3,7 @@
     import { superForm } from "sveltekit-superforms/client"
     import Form from "$components/form/Form.svelte"
     import Checkbox from "$components/form/Checkbox.svelte"
+    import Input from "$components/form/Input.svelte"
     import Select from "$components/Select.svelte"
 
     export let data
@@ -31,7 +32,19 @@
 </svelte:head>
 
 <div class="mx-auto w-full max-w-xs">
-    <Form message={form?.message} submitButtonText="Update" {errors} {validate}>
+    <Form
+        class="mt-4"
+        message={form?.message}
+        submitButtonText="Update"
+        {errors}
+        {validate}
+    >
+        <Input
+            label="username"
+            value={data.userToEdit.username}
+            readonly={true}
+        />
+
         <Select
             label="Select tiers"
             options={data.tiers.map(tier => ({

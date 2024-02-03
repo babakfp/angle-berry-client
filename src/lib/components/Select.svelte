@@ -3,7 +3,7 @@
     import IconCheckSquareRegular from "phosphor-icons-svelte/IconCheckSquareRegular.svelte"
     import IconSquareRegular from "phosphor-icons-svelte/IconSquareRegular.svelte"
     import IconXSquareRegular from "phosphor-icons-svelte/IconXSquareRegular.svelte"
-    import IconCheckRegular from "phosphor-icons-svelte/IconCheckRegular.svelte"
+    import IconCheckCircleRegular from "phosphor-icons-svelte/IconCheckCircleRegular.svelte"
     import OutClick from "svelte-outclick"
     import Description from "$components/form/Description.svelte"
 
@@ -116,7 +116,7 @@
                         <li class="group">
                             <button
                                 type="button"
-                                class="flex w-full items-center gap-2 bg-gray-700 px-4 py-2 text-sm outline-inset hover:bg-gray-600 group-first:rounded-t group-first:pt-3 group-last:rounded-b group-last:pb-3"
+                                class="flex w-full items-center gap-2 bg-gray-700 px-4 py-2 text-sm outline-inset hover:bg-gray-600 group-first:rounded-t group-first:pt-4 group-last:rounded-b group-last:pb-4"
                                 on:click={() => {
                                     if (isMultiple) {
                                         handleSelectToggle(option.value)
@@ -129,14 +129,14 @@
                                 {#if isMultiple}
                                     {#if isSelected(option.value, selectedOptions)}
                                         <IconCheckSquareRegular
-                                            class="text-lg"
+                                            class="text-xl"
                                         />
                                     {:else}
-                                        <IconSquareRegular class="text-lg" />
+                                        <IconSquareRegular class="text-xl" />
                                     {/if}
                                 {:else}
-                                    <IconCheckRegular
-                                        class="text-lg {!isSingleSelected(
+                                    <IconCheckCircleRegular
+                                        class="text-xl {!isSingleSelected(
                                             option.value,
                                             selectedOption,
                                         ) && 'hide'}"

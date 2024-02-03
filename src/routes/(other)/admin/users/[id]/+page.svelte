@@ -4,7 +4,7 @@
     import Form from "$components/form/Form.svelte"
     import Checkbox from "$components/form/Checkbox.svelte"
     import Input from "$components/form/Input.svelte"
-    import Select from "$components/Select.svelte"
+    import Select from "$components/form/Select.svelte"
     import Label from "$components/form/Label.svelte"
 
     export let data
@@ -46,29 +46,18 @@
             readonly={true}
         />
 
-        <div>
-            <Label label="Tiers" />
-            <Select
-                label="Select tiers"
-                options={data.tiers.map(tier => ({
-                    value: tier.id,
-                    label: tier.name,
-                }))}
-                bind:selectedOptions={selectedRetainedTiers}
-                error={$errors?.retainedTiers?.[0] ??
-                    form?.pb?.retainedTiers?.message}
-            />
-        </div>
-
-        {#each $_form.retainedTiers as t}
-            <input
-                class="hidden"
-                type="checkbox"
-                checked
-                name="retainedTiers"
-                value={t}
-            />
-        {/each}
+        <Select
+            label="Tiers"
+            placeholder="Select tiers"
+            options={data.tiers.map(tier => ({
+                value: tier.id,
+                label: tier.name,
+            }))}
+            bind:selectedOptions={selectedRetainedTiers}
+            error={$errors?.retainedTiers?.[0] ??
+                form?.pb?.retainedTiers?.message}
+            name="retainedTiers"
+        />
 
         <Checkbox
             bind:checked={$_form.isAdmin}

@@ -7,7 +7,7 @@
     import Modal from "$components/Modal.svelte"
     import VideoGalleryItem from "../VideoGalleryItem.svelte"
     import { fade } from "svelte/transition"
-    import Select from "$components/Select.svelte"
+    import Select from "$components/form/Select.svelte"
     import { TiersVisibilityOptions } from "$utilities/pb/types"
     import { capitalizeFirstLetter } from "$utilities/capitalizeFirstLetter"
     import Label from "$components/form/Label.svelte"
@@ -98,25 +98,17 @@
                 form?.pb?.invites?.message}
             {...$formUpdateConstraints.invites}
         />
-        <div>
-            <Label label="Visibility" required={true} />
-            <Select
-                label="Select visibility"
-                options={visibilityOptions}
-                bind:selectedOption={selectedVisibility}
-                isMultiple={false}
-                error={$formUpdateErrors?.visibility?.[0] ??
-                    form?.pb?.visibility?.message}
-            />
-        </div>
-        <div class="hidden">
-            <Input
-                type="text"
-                name="visibility"
-                value={$formUpdateForm.visibility}
-                {...$formUpdateConstraints.visibility}
-            />
-        </div>
+        <Select
+            label="Visibility"
+            placeholder="Select visibility"
+            options={visibilityOptions}
+            bind:selectedOption={selectedVisibility}
+            isMultiple={false}
+            error={$formUpdateErrors?.visibility?.[0] ??
+                form?.pb?.visibility?.message}
+            {...$formUpdateConstraints.visibility}
+            name="visibility"
+        />
         <ul class="grid gap-4 rounded bg-gray-700 p-2">
             {#each selectedVideos as video (video.id)}
                 <li transition:fade>

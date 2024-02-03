@@ -7,7 +7,7 @@
     import Modal from "$components/Modal.svelte"
     import VideoGalleryItem from "../VideoGalleryItem.svelte"
     import { fade } from "svelte/transition"
-    import Select from "$components/Select.svelte"
+    import Select from "$components/form/Select.svelte"
     import { TiersVisibilityOptions } from "$utilities/pb/types"
     import { capitalizeFirstLetter } from "$utilities/capitalizeFirstLetter"
     import Label from "$components/form/Label.svelte"
@@ -55,28 +55,19 @@
             error={$errors?.invites?.[0] ?? form?.pb?.invites?.message}
             {...$constraints.invites}
         />
-        <data>
-            <Label label="Visibility" required={true} />
-            <Select
-                label="Select visibility"
-                options={Object.values(TiersVisibilityOptions).map(value => ({
-                    value,
-                    label: capitalizeFirstLetter(value),
-                }))}
-                bind:selectedOptionValue={$_form.visibility}
-                isMultiple={false}
-                error={$errors?.visibility?.[0] ??
-                    form?.pb?.visibility?.message}
-            />
-        </data>
-        <div class="hidden">
-            <Input
-                type="text"
-                name="visibility"
-                value={$_form.visibility}
-                {...$constraints.visibility}
-            />
-        </div>
+        <Select
+            label="Visibility"
+            placeholder="Select visibility"
+            options={Object.values(TiersVisibilityOptions).map(value => ({
+                value,
+                label: capitalizeFirstLetter(value),
+            }))}
+            bind:selectedOptionValue={$_form.visibility}
+            isMultiple={false}
+            error={$errors?.visibility?.[0] ?? form?.pb?.visibility?.message}
+            {...$constraints.visibility}
+            name="visibility"
+        />
         <ul class="grid gap-4 rounded bg-gray-700 p-2">
             {#each $_form.videos as id (id)}
                 {@const video = data.videos.filter(video => video.id === id)[0]}

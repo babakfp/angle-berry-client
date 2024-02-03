@@ -10,7 +10,7 @@
     import Select from "$components/form/Select.svelte"
     import { TiersVisibilityOptions } from "$utilities/pb/types"
     import { capitalizeFirstLetter } from "$utilities/capitalizeFirstLetter"
-    import Label from "$components/form/Label.svelte"
+    import toast from "svelte-french-toast"
 
     export let data
     export let form
@@ -69,6 +69,11 @@
         submitButtonText="Update"
         errors={$formUpdateErrors}
         validate={formUpdateValidate}
+        on:redirect={() => {
+            toast.success("Tier updated successfully!", {
+                position: "bottom-right",
+            })
+        }}
     >
         <Input
             type="text"
@@ -139,7 +144,12 @@
         submitButtonClass="btn-danger"
         errors={$formDeleteErrors}
         validate={formDeleteValidate}
-    ></Form>
+        on:redirect={() => {
+            toast.success("Tier deleted successfully!", {
+                position: "bottom-right",
+            })
+        }}
+    />
 </div>
 
 <Modal

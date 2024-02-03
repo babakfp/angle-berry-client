@@ -5,7 +5,7 @@
     import Checkbox from "$components/form/Checkbox.svelte"
     import Input from "$components/form/Input.svelte"
     import Select from "$components/form/Select.svelte"
-    import Label from "$components/form/Label.svelte"
+    import toast from "svelte-french-toast"
 
     export let data
     export let form
@@ -39,6 +39,11 @@
         submitButtonText="Update"
         {errors}
         {validate}
+        on:redirect={() => {
+            toast.success("User updated successfully!", {
+                position: "bottom-right",
+            })
+        }}
     >
         <Input
             label="username"

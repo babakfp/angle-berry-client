@@ -10,7 +10,7 @@
     import Select from "$components/form/Select.svelte"
     import { TiersVisibilityOptions } from "$utilities/pb/types"
     import { capitalizeFirstLetter } from "$utilities/capitalizeFirstLetter"
-    import Label from "$components/form/Label.svelte"
+    import toast from "svelte-french-toast"
 
     export let data
     export let form
@@ -30,7 +30,17 @@
 </svelte:head>
 
 <div class="mx-auto w-full max-w-xs">
-    <Form message={form?.message} submitButtonText="Create" {errors} {validate}>
+    <Form
+        message={form?.message}
+        submitButtonText="Create"
+        {errors}
+        {validate}
+        on:redirect={() => {
+            toast.success("Tier created successfully!", {
+                position: "bottom-right",
+            })
+        }}
+    >
         <Input
             type="text"
             label="Name"

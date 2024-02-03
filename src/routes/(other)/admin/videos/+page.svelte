@@ -7,6 +7,7 @@
     import VideoGalleryItem from "../tiers/VideoGalleryItem.svelte"
     import { videoFormats } from "./schema"
     import { shrinkHeight } from "$utilities/shrinkHeight"
+    import toast from "svelte-french-toast"
 
     export let data
     export let form
@@ -26,6 +27,11 @@
     doesUpload={true}
     action="?/upload"
     submitButtonText="Upload"
+    on:success={() => {
+        toast.success("Your files uploaded successfully!", {
+            position: "bottom-right",
+        })
+    }}
 >
     <DropZone
         bind:files={data.uploadForm.videos}

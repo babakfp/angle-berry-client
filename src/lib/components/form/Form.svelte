@@ -4,6 +4,9 @@
     import FormSubmitButton from "$components/form/FormSubmitButton.svelte"
     import IconSpinnerRegular from "phosphor-icons-svelte/IconSpinnerRegular.svelte"
     import Description from "$components/form/Description.svelte"
+    import { createEventDispatcher } from "svelte"
+
+    const dispatch = createEventDispatcher()
 
     export let message: string
     export let submitButtonText: string
@@ -35,6 +38,8 @@
         }
 
         return async ({ result, update }) => {
+            dispatch(result.type)
+
             isSubmitting = false
 
             if (result.type === "redirect") {

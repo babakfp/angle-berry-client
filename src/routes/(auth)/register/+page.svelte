@@ -5,6 +5,7 @@
     import Form from "$components/form/Form.svelte"
     import UsernameField from "$components/form/UsernameField.svelte"
     import PasswordField from "$components/form/PasswordField.svelte"
+    import toast from "svelte-french-toast"
 
     export let data
     export let form
@@ -36,6 +37,11 @@
         submitButtonText="Register & Login"
         {errors}
         {validate}
+        on:redirect={() => {
+            toast.success("You have registered successfully!", {
+                position: "bottom-right",
+            })
+        }}
     >
         <UsernameField
             bind:value={$_form.username}

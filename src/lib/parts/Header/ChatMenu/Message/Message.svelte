@@ -120,7 +120,7 @@
 </li>
 
 <style lang="postcss">
-    /* TODO: This is for when we add markdown support */
+    /* NOTE: This is for when we add markdown support */
     .message-content-wrapper :global(a) {
         @apply break-all;
     }

@@ -55,7 +55,6 @@
             error={$errors?.retainedTiers?.[0] ??
                 form?.pb?.retainedTiers?.message}
         />
-        <!-- TODO: I don't remember what this form?.pb?.retainedTiers?.message is about, also, form?.pb is type of any! -->
 
         {#each $_form.retainedTiers as t}
             <input
@@ -75,6 +74,5 @@
             error={$errors?.isAdmin?.[0] ?? form?.pb?.isAdmin?.message}
             readonly={data.userToEdit.isAdmin}
         />
-        <!-- TODO: I don't remember what this form?.pb?.isAdmin?.message is about, also, form?.pb is type of any! -->
     </Form>
 </div>

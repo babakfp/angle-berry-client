@@ -23,10 +23,7 @@
 </svelte:head>
 
 {#if selectedUserIds.length}
-    <div
-        class="flex items-end justify-between"
-        transition:shrinkHeight={{ duration: 200 }}
-    >
+    <div class="flex justify-between">
         <button
             type="button"
             class="btn btn-danger"

@@ -8,6 +8,7 @@
     import { videoFormats } from "./schema"
     import { shrinkHeight } from "$utilities/shrinkHeight"
     import toast from "svelte-french-toast"
+    import { slide } from "svelte/transition"
 
     export let data
     export let form
@@ -41,34 +42,32 @@
     />
 </Form>
 
-<div class="sticky top-header z-1 -mt-4 bg-body-bg">
-    {#if $deleteForm.videos.length}
-        <div class="flex items-end gap-4 py-4" transition:shrinkHeight>
-            <form method="post" action="?/delete">
-                <button type="submit" class="btn btn-danger">
-                    Delete selected
-                </button>
-
-                {#each $deleteForm.videos as id}
-                    <input
-                        class="hidden"
-                        type="checkbox"
-                        name="videos"
-                        value={id}
-                        checked
-                    />
-                {/each}
-            </form>
-            <button
-                type="button"
-                class="btn btn-gray-light"
-                on:click={() => ($deleteForm.videos = [])}
-            >
-                Clear selection
+{#if $deleteForm.videos.length}
+    <div class="sticky top-header z-1 mb-4 flex gap-4 bg-body-bg">
+        <form method="post" action="?/delete">
+            <button type="submit" class="btn btn-danger">
+                Delete selected
             </button>
-        </div>
-    {/if}
-</div>
+
+            {#each $deleteForm.videos as id}
+                <input
+                    class="hidden"
+                    type="checkbox"
+                    name="videos"
+                    value={id}
+                    checked
+                />
+            {/each}
+        </form>
+        <button
+            type="button"
+            class="btn btn-gray-light"
+            on:click={() => ($deleteForm.videos = [])}
+        >
+            Clear selection
+        </button>
+    </div>
+{/if}
 
 <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
     {#each data.videos as video}

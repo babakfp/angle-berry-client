@@ -73,7 +73,7 @@
             {...$constraints.isAdmin}
             label="Role admin"
             error={$errors?.isAdmin?.[0] ?? form?.pb?.isAdmin?.message}
-            readonly={$_form.isAdmin}
+            readonly={data.userToEdit.isAdmin}
         />
         <!-- TODO: I don't remember what this form?.pb?.isAdmin?.message is about, also, form?.pb is type of any! -->
     </Form>

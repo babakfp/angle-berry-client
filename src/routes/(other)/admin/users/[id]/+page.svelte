@@ -5,6 +5,7 @@
     import Checkbox from "$components/form/Checkbox.svelte"
     import Input from "$components/form/Input.svelte"
     import Select from "$components/Select.svelte"
+    import Label from "$components/form/Label.svelte"
 
     export let data
     export let form
@@ -45,16 +46,19 @@
             readonly={true}
         />
 
-        <Select
-            label="Select tiers"
-            options={data.tiers.map(tier => ({
-                value: tier.id,
-                label: tier.name,
-            }))}
-            bind:selectedOptions={selectedRetainedTiers}
-            error={$errors?.retainedTiers?.[0] ??
-                form?.pb?.retainedTiers?.message}
-        />
+        <div>
+            <Label label="Tiers" />
+            <Select
+                label="Select tiers"
+                options={data.tiers.map(tier => ({
+                    value: tier.id,
+                    label: tier.name,
+                }))}
+                bind:selectedOptions={selectedRetainedTiers}
+                error={$errors?.retainedTiers?.[0] ??
+                    form?.pb?.retainedTiers?.message}
+            />
+        </div>
 
         {#each $_form.retainedTiers as t}
             <input

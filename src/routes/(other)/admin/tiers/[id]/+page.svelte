@@ -10,6 +10,7 @@
     import Select from "$components/Select.svelte"
     import { TiersVisibilityOptions } from "$utilities/pb/types"
     import { capitalizeFirstLetter } from "$utilities/capitalizeFirstLetter"
+    import Label from "$components/form/Label.svelte"
 
     export let data
     export let form
@@ -97,14 +98,17 @@
                 form?.pb?.invites?.message}
             {...$formUpdateConstraints.invites}
         />
-        <Select
-            label="Select visibility"
-            options={visibilityOptions}
-            bind:selectedOption={selectedVisibility}
-            isMultiple={false}
-            error={$formUpdateErrors?.visibility?.[0] ??
-                form?.pb?.visibility?.message}
-        />
+        <div>
+            <Label label="Visibility" required={true} />
+            <Select
+                label="Select visibility"
+                options={visibilityOptions}
+                bind:selectedOption={selectedVisibility}
+                isMultiple={false}
+                error={$formUpdateErrors?.visibility?.[0] ??
+                    form?.pb?.visibility?.message}
+            />
+        </div>
         <div class="hidden">
             <Input
                 type="text"

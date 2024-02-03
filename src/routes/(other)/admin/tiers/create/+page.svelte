@@ -7,6 +7,9 @@
     import Modal from "$components/Modal.svelte"
     import VideoGalleryItem from "../VideoGalleryItem.svelte"
     import { fade } from "svelte/transition"
+    import Select from "$components/Select.svelte"
+    import { TiersVisibilityOptions } from "$utilities/pb/types"
+    import { capitalizeFirstLetter } from "$utilities/capitalizeFirstLetter"
 
     export let data
     export let form
@@ -51,6 +54,24 @@
             error={$errors?.invites?.[0] ?? form?.pb?.invites?.message}
             {...$constraints.invites}
         />
+        <Select
+            label="Select visibility"
+            options={Object.values(TiersVisibilityOptions).map(value => ({
+                value,
+                label: capitalizeFirstLetter(value),
+            }))}
+            bind:selectedOptionValue={$_form.visibility}
+            isMultiple={false}
+            error={$errors?.visibility?.[0] ?? form?.pb?.visibility?.message}
+        />
+        <div class="hidden">
+            <Input
+                type="text"
+                name="visibility"
+                value={$_form.visibility}
+                {...$constraints.visibility}
+            />
+        </div>
         <ul class="grid gap-4 rounded bg-gray-700 p-2">
             {#each $_form.videos as id (id)}
                 {@const video = data.videos.filter(video => video.id === id)[0]}

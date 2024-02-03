@@ -1,3 +1,4 @@
+import { TiersVisibilityOptions } from "$utilities/pb/types"
 import { z } from "zod"
 
 export const formSchemaCreateTier = z.object({
@@ -5,6 +6,9 @@ export const formSchemaCreateTier = z.object({
     price: z.number().min(0).max(1000).default(0),
     invites: z.number().min(0).max(1000).default(0),
     videos: z.string().array().max(100).default([]),
+    visibility: z
+        .nativeEnum(TiersVisibilityOptions)
+        .default(TiersVisibilityOptions.public),
 })
 
 export const formSchemaUpdateTier = formSchemaCreateTier

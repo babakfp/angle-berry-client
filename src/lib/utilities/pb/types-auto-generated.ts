@@ -46,11 +46,16 @@ export type MessagesRecord = {
 	user: RecordIdString
 }
 
+export enum TiersVisibilityOptions {
+	"public" = "public",
+	"private" = "private",
+}
 export type TiersRecord = {
 	invites?: number
 	name: string
 	price?: number
 	videos?: RecordIdString[]
+	visibility: TiersVisibilityOptions
 }
 
 export type UsersRecord = {

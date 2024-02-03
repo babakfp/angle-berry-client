@@ -4,7 +4,11 @@ import {
     pbHandleClientResponseError,
     pbHandleFormActionError,
 } from "$utilities/pb/helpers"
-import { ClientResponseError, type UsersResponse } from "$utilities/pb/types"
+import {
+    ClientResponseError,
+    type TiersResponse,
+    type UsersResponse,
+} from "$utilities/pb/types"
 import { formSchemaDeleteTiers } from "./schema"
 
 export const load = async ({ locals }) => {
@@ -15,10 +19,13 @@ export const load = async ({ locals }) => {
     const form = await superValidate(formSchemaDeleteTiers)
 
     try {
+        const tiers: TiersResponse[] = await locals.pb
+            .collection("tiers")
+            .getFullList()
         const users: UsersResponse[] = await locals.pb
             .collection("users")
             .getFullList()
-        return { form, users }
+        return { form, tiers, users }
     } catch (e) {
         if (e instanceof ClientResponseError) {
             pbHandleClientResponseError(e)

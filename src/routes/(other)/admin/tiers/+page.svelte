@@ -2,6 +2,7 @@
     import { Table, Tbody, Thead, Tr, Th, Td } from "$components/table/index"
     import Checkbox from "$components/form/Checkbox.svelte"
     import toast from "svelte-french-toast"
+    import { capitalizeFirstLetter } from "$utilities/capitalizeFirstLetter"
 
     export let data
     export let form
@@ -74,6 +75,7 @@
             <Th>INVITES</Th>
             <Th>VIDEOS</Th>
             <Th>USERS</Th>
+            <Th>VISIBILITY</Th>
         </Tr>
     </Thead>
     <Tbody>
@@ -106,6 +108,9 @@
                 </Td>
                 <Td class="px-6 py-4">
                     {usersWithThisTier.length}
+                </Td>
+                <Td class="px-6 py-4">
+                    {capitalizeFirstLetter(tier.visibility)}
                 </Td>
                 <a
                     class="absolute inset-0 outline-inset group-last:rounded-b"

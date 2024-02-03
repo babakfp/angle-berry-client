@@ -3,18 +3,32 @@
     import IconCheckSquareRegular from "phosphor-icons-svelte/IconCheckSquareRegular.svelte"
     import IconSquareRegular from "phosphor-icons-svelte/IconSquareRegular.svelte"
     import IconXSquareRegular from "phosphor-icons-svelte/IconXSquareRegular.svelte"
+    import IconCheckRegular from "phosphor-icons-svelte/IconCheckRegular.svelte"
     import OutClick from "svelte-outclick"
-    import Description from "./form/Description.svelte"
+    import Description from "$components/form/Description.svelte"
 
     type Option = { value: string; label: string }
 
     export let label: string
     export let options: Option[] = []
+    export let selectedOptionValue: Option["value"] | undefined = undefined
+    export let selectedOption: Option | undefined = undefined
     export let selectedOptions: Option[] = []
     export let error = ""
+    export let isMultiple = true
 
     let trigger: HTMLButtonElement
     let isOpen = false
+
+    $: if (selectedOption) {
+        selectedOptionValue = selectedOption.value
+    }
+
+    if (selectedOptionValue) {
+        selectedOption = options.find(
+            option => option.value === selectedOptionValue,
+        )
+    }
 
     const handleTriggerToggle = () => {
         isOpen = !isOpen
@@ -29,6 +43,10 @@
             ...selectedOptions,
             ...options.filter(option => option.value === value),
         ]
+    }
+
+    const handleSingleSelect = (value: Option["value"]) => {
+        selectedOption = options.filter(option => option.value === value)[0]
     }
 
     const handleDeselect = (value: Option["value"]) => {
@@ -52,6 +70,13 @@
         return !!selectedOptions.filter(option => option.value === value)[0]
     }
 
+    const isSingleSelected = (
+        value: Option["value"],
+        _selectedOption?: Option,
+    ) => {
+        return selectedOption?.value === value
+    }
+
     const handleMenuCloseOnEsxape = (e: KeyboardEvent) => {
         if (e.key === "Escape") {
             handleTriggerClose()
@@ -72,7 +97,11 @@
         class="z-30 flex h-11 w-full items-center justify-between rounded bg-gray-700 px-4 hover:bg-gray-600"
         on:click={handleTriggerToggle}
     >
-        <span>{label}</span>
+        {#if selectedOption?.value}
+            <span>{selectedOption.label}</span>
+        {:else}
+            <span>{label}</span>
+        {/if}
         <IconCaretDownRegular class="text-gray-500" />
     </button>
 
@@ -88,13 +117,30 @@
                             <button
                                 type="button"
                                 class="flex w-full items-center gap-2 bg-gray-700 px-4 py-2 text-sm outline-inset hover:bg-gray-600 group-first:rounded-t group-first:pt-3 group-last:rounded-b group-last:pb-3"
-                                on:click={() =>
-                                    handleSelectToggle(option.value)}
+                                on:click={() => {
+                                    if (isMultiple) {
+                                        handleSelectToggle(option.value)
+                                    } else {
+                                        handleSingleSelect(option.value)
+                                        handleTriggerClose()
+                                    }
+                                }}
                             >
-                                {#if isSelected(option.value, selectedOptions)}
-                                    <IconCheckSquareRegular class="text-lg" />
+                                {#if isMultiple}
+                                    {#if isSelected(option.value, selectedOptions)}
+                                        <IconCheckSquareRegular
+                                            class="text-lg"
+                                        />
+                                    {:else}
+                                        <IconSquareRegular class="text-lg" />
+                                    {/if}
                                 {:else}
-                                    <IconSquareRegular class="text-lg" />
+                                    <IconCheckRegular
+                                        class="text-lg {!isSingleSelected(
+                                            option.value,
+                                            selectedOption,
+                                        ) && 'hide'}"
+                                    />
                                 {/if}
                                 <span>{option.label}</span>
                             </button>
@@ -107,7 +153,7 @@
         </div>
     </OutClick>
 
-    {#if selectedOptions.length}
+    {#if selectedOptions.length && isMultiple}
         <ul class="flex flex-wrap gap-2">
             {#each selectedOptions as option}
                 <li class="flex items-center rounded bg-gray-700">

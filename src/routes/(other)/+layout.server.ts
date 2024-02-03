@@ -26,7 +26,7 @@ export const load = async ({ locals, parent }) => {
             })
         const tiers: TiersResponse[] = await locals.pb
             .collection("tiers")
-            .getFullList()
+            .getFullList({ filter: 'visibility = "public"' })
 
         return {
             ...(await parent()),

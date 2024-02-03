@@ -7,6 +7,9 @@
     import Modal from "$components/Modal.svelte"
     import VideoGalleryItem from "../VideoGalleryItem.svelte"
     import { fade } from "svelte/transition"
+    import Select from "$components/Select.svelte"
+    import { TiersVisibilityOptions } from "$utilities/pb/types"
+    import { capitalizeFirstLetter } from "$utilities/capitalizeFirstLetter"
 
     export let data
     export let form
@@ -28,6 +31,22 @@
     $: selectedVideos = data.videos.filter(v =>
         $formUpdateForm.videos.includes(v.id),
     )
+
+    const visibilityOptions = Object.values(TiersVisibilityOptions).map(
+        value => ({
+            value,
+            label: capitalizeFirstLetter(value),
+        }),
+    )
+
+    let selectedVisibility = {
+        value: data.tier.visibility,
+        label: capitalizeFirstLetter(data.tier.visibility),
+    }
+
+    $: {
+        $formUpdateForm.visibility = selectedVisibility.value
+    }
 
     let isGalleryPopupOpen = false
 
@@ -78,6 +97,22 @@
                 form?.pb?.invites?.message}
             {...$formUpdateConstraints.invites}
         />
+        <Select
+            label="Select visibility"
+            options={visibilityOptions}
+            bind:selectedOption={selectedVisibility}
+            isMultiple={false}
+            error={$formUpdateErrors?.visibility?.[0] ??
+                form?.pb?.visibility?.message}
+        />
+        <div class="hidden">
+            <Input
+                type="text"
+                name="visibility"
+                value={$formUpdateForm.visibility}
+                {...$formUpdateConstraints.visibility}
+            />
+        </div>
         <ul class="grid gap-4 rounded bg-gray-700 p-2">
             {#each selectedVideos as video (video.id)}
                 <li transition:fade>

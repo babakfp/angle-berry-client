@@ -6,9 +6,7 @@
     import Form from "$components/form/Form.svelte"
     import VideoGalleryItem from "../tiers/VideoGalleryItem.svelte"
     import { videoFormats } from "./schema"
-    import { shrinkHeight } from "$utilities/shrinkHeight"
     import toast from "svelte-french-toast"
-    import { slide } from "svelte/transition"
 
     export let data
     export let form

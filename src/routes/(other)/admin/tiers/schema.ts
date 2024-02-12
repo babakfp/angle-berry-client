@@ -1,5 +1,5 @@
-import { TiersVisibilityOptions } from "$utilities/pb/types"
 import { z } from "zod"
+import { TiersVisibilityOptions } from "$utilities/pb/types"
 
 export const formSchemaCreateTier = z.object({
     name: z.string().trim().min(4).max(14).default(""),

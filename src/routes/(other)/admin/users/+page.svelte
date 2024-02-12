@@ -1,7 +1,6 @@
 <script lang="ts">
     import { Table, Tbody, Thead, Tr, Th, Td } from "$components/table/index"
     import Checkbox from "$components/form/Checkbox.svelte"
-    import { shrinkHeight } from "$utilities/shrinkHeight"
 
     export let data
 

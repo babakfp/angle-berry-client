@@ -25,7 +25,7 @@
         {/if}
 
         {#if $page.status === 404 || $page.status === 401}
-            <a class="btn btn-gray-light mt-4" href="/">Go home</a>
+            <a class="link btn btn-gray-light mt-4" href="/">Go home</a>
         {/if}
     </div>
 </div>

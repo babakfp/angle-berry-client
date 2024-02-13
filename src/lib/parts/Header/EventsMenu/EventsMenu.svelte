@@ -30,6 +30,6 @@
             </p>
         </ol>
     {:else}
-        <p class="p-4">No events have been found here.</p>
+        <p class="px-4 py-6 text-center">No events found!</p>
     {/if}
 </PopSide>

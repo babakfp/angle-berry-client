@@ -11,10 +11,9 @@
 
 {#if data.previewTierId}
     <p>
-        You can <a class="link" href="/tiers/{data.previewTierId}">
-            watch free content
-        </a>
-        and for more content, you can get the following tiers:
+        Watch <a class="link" href="/tiers/{data.previewTierId}">free</a>
+        content, and <a class="link" href="/how-to-pay">pay</a> or
+        <a class="link" href="/how-to-invite">invite</a> to access premium tiers.
     </p>
 {/if}
 
@@ -25,18 +24,5 @@
 </TiersTable>
 
 <div class="mt-8">
-    <p>
-        You can get the premium tiers by
-        <a class="link" href="/how-to-pay">paying</a>
-        or
-        <a class="link" href="/how-to-invite">inviting</a>
-        new users to this website.
-    </p>
-
-    <p>
-        You can contact us via Telegram
-        <a class="link" href="https://t.me/adminTelegramUsername">
-            @adminTelegramUsername</a
-        >.
-    </p>
+    <a class="link" href="https://t.me/adminTelegramUsername">Contact</a>
 </div>

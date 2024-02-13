@@ -68,11 +68,13 @@
             </button>
         </li>
 
-        <ol>
-            {#each tiers as tier}
-                <Tier {user} {tier} />
-            {/each}
-        </ol>
+        {#if tiers.length}
+            <ol>
+                {#each tiers as tier}
+                    <Tier {user} {tier} />
+                {/each}
+            </ol>
+        {/if}
 
         <li>
             <form action="/login-as" method="post">

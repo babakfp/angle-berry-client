@@ -16,7 +16,7 @@ export const actions = {
         )
 
         try {
-            if (!form.data?.messageIdToEdit) {
+            if (!form.data.messageIdToEdit) {
                 await locals.pb.collection("messages").create({
                     content: form.data.messageContent,
                     user: locals.user.id,

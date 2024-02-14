@@ -30,7 +30,7 @@
         isContextMenuOpen.set(false)
         isReplying.set(true)
         replyTargetMessage.set($contextMenuTargetMessage)
-        messageIdToEdit.set("")
+        messageIdToEdit.set(undefined)
         if ($messageInputElement) $messageInputElement.focus()
     }
 

@@ -30,7 +30,7 @@
                 isDeletingMessage = false
                 messageIdsToDelete.set([])
                 selectedMessageIds.set([])
-                messageIdToEdit.set("")
+                messageIdToEdit.set(undefined)
                 isReplying.set(false)
 
                 // Remove other messages reply preview to that deleted message
@@ -52,7 +52,7 @@
             console.error(error)
             isDeletingMessage = false
             messageIdsToDelete.set([])
-            messageIdToEdit.set("")
+            messageIdToEdit.set(undefined)
             isReplying.set(false)
         }
     }

@@ -34,7 +34,7 @@
 
     messages.set(pbMessages)
 
-    $: if (!isOpen && $messageIdToEdit) messageIdToEdit.set("")
+    $: if (!isOpen && $messageIdToEdit) messageIdToEdit.set(undefined)
     $: if (isOpen && $unreadMessagesLength) unreadMessagesLength.set(0)
 
     const messageInputValue = writable("")
@@ -53,7 +53,7 @@
     messageIdToEdit.subscribe(id =>
         messageInputValue.set(
             $messages.items
-                .filter(msg => msg.id === id)[0]
+                .find(msg => msg.id === id)
                 ?.content.replaceAll("<br>", "\n") || "",
         ),
     )
@@ -69,7 +69,7 @@
             if (result.type === "success") {
                 $messageInputElement!.style.height = ""
                 isReplying.set(false)
-                messageIdToEdit.set("")
+                messageIdToEdit.set(undefined)
                 $messageInputElement!.setAttribute("rows", "1")
             }
             update()
@@ -182,7 +182,7 @@
                     msg => msg.id === $messageIdToEdit,
                 )[0]?.content}
                 messageId={$messageIdToEdit}
-                on:close={() => messageIdToEdit.set("")}
+                on:close={() => messageIdToEdit.set(undefined)}
                 bind:isOpen={isEditingMessage}
             />
         {/if}
@@ -210,7 +210,7 @@
                 }}
             />
             <button
-                type="button"
+                type="submit"
                 class="flex items-end outline-inset hover:bg-white/5 hover:text-white
 				{isSendingMessage && 'opacity-50'}"
                 disabled={isSendingMessage}

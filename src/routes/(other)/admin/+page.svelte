@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-    <title>Admin</title>
+    <title>Admin dashboard</title>
 </svelte:head>
 
 <ul class="mx-auto grid w-full max-w-xs gap-2">
@@ -11,8 +11,10 @@
         <li>
             <a
                 class="link btn btn-gray-light-outline w-full"
-                href="/admin/{item.toLowerCase()}">{item}</a
+                href="/admin/{item.toLowerCase()}"
             >
+                {item}
+            </a>
         </li>
     {/each}
 </ul>

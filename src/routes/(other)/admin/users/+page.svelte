@@ -55,8 +55,10 @@
             <Th class="!p-0">
                 <Checkbox
                     class="px-6 py-3"
-                    checked={selectedUserIds.length === data.users.length}
+                    checked={!!data.tiers.length &&
+                        selectedUserIds.length === data.users.length}
                     on:change={checkAllCheckboxes}
+                    readonly={!data.tiers.length}
                 />
             </Th>
             <Th>USERNAME</Th>

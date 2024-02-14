@@ -6,7 +6,7 @@
 </script>
 
 <svelte:head>
-    <title>Angle Berry</title>
+    <title>Home</title>
 </svelte:head>
 
 {#if data.previewTierId}

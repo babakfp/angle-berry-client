@@ -27,21 +27,18 @@
                 has successfully joined this website.
             </p>
         {/if}
+    {:else if event.expand.user.id === user.id}
+        <p>
+            Welcome, <UserTooltipInfo user={event.expand.user} />. You have
+            successfully joined this fantastic website. We hope you have a
+            fabulous time here. User <UserTooltipInfo
+                user={event.expand.inviter}
+            /> has invited you.
+        </p>
     {:else}
-        <!-- NOTE: THIS COMMENT PREVENTS PRETTIER FROM COMBINING THE BELOW IF STATEMENT WITH THE ABOVE ELSE STATEMENT -->
-        {#if event.expand.user.id === user.id}
-            <p>
-                Welcome, <UserTooltipInfo user={event.expand.user} />. You have
-                successfully joined this fantastic website. We hope you have a
-                fabulous time here. User <UserTooltipInfo
-                    user={event.expand.inviter}
-                /> has invited you.
-            </p>
-        {:else}
-            <p>
-                User <UserTooltipInfo user={event.expand.inviter} /> has invited
-                <UserTooltipInfo user={event.expand.user} />.
-            </p>
-        {/if}
+        <p>
+            User <UserTooltipInfo user={event.expand.inviter} /> has invited
+            <UserTooltipInfo user={event.expand.user} />.
+        </p>
     {/if}
 </li>

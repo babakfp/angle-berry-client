@@ -46,7 +46,7 @@ export const actions = {
                     retainedTiers: [
                         ...[locals.previewTierId ? locals.previewTierId : []],
                     ],
-                    invitedBy: inviter ? [inviterId] : undefined,
+                    invitedBy: inviter?.id,
                 })
 
             // Adding the new user to the list of invited users by the inviter user.
@@ -57,7 +57,7 @@ export const actions = {
 
             await locals.pb.collection("events").create({
                 user: newUser.id,
-                inviter: inviter ? inviterId : undefined,
+                inviter: inviter?.id,
                 inviterInvites: inviter ? inviter.invitedUsers.length + 1 : 0,
             })
 

@@ -1,5 +1,13 @@
 <script lang="ts">
-    import { Table, Tbody, Thead, Tr, Th, Td } from "$components/table/index"
+    import {
+        Table,
+        Tbody,
+        Thead,
+        Tr,
+        Th,
+        Td,
+        TrOverlayAnchor,
+    } from "$components/table/index"
     import Checkbox from "$components/form/Checkbox.svelte"
 
     export let data
@@ -85,11 +93,7 @@
                 <Td class="px-6 py-4">
                     {user.isAdmin ? "Yes" : "No"}
                 </Td>
-                <a
-                    class="absolute inset-0 outline-inset group-last:rounded-b"
-                    href="/admin/users/{user.id}"
-                    aria-label="View"
-                />
+                <TrOverlayAnchor href="/admin/users/{user.id}" />
             </Tr>
         {/each}
     </Tbody>

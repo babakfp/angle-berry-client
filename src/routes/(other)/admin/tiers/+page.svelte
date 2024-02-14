@@ -1,5 +1,13 @@
 <script lang="ts">
-    import { Table, Tbody, Thead, Tr, Th, Td } from "$components/table/index"
+    import {
+        Table,
+        Tbody,
+        Thead,
+        Tr,
+        Th,
+        Td,
+        TrOverlayAnchor,
+    } from "$components/table/index"
     import Checkbox from "$components/form/Checkbox.svelte"
     import toast from "svelte-french-toast"
     import { capitalizeFirstLetter } from "$utilities/capitalizeFirstLetter"
@@ -112,11 +120,7 @@
                 <Td class="px-6 py-4">
                     {capitalizeFirstLetter(tier.visibility)}
                 </Td>
-                <a
-                    class="absolute inset-0 outline-inset group-last:rounded-b"
-                    href="/admin/tiers/{tier.id}"
-                    aria-label="View"
-                />
+                <TrOverlayAnchor href="/admin/tiers/{tier.id}" />
             </Tr>
         {/each}
     </Tbody>

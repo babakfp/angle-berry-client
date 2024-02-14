@@ -78,7 +78,7 @@
 
     let formElement: HTMLFormElement
 
-    $: replyedMessageId = $isReplying ? $replyTargetMessage?.id : ""
+    $: replyedMessageId = $isReplying ? $replyTargetMessage?.id : undefined
 
     let isFetchingOlderMessages = false
     let isSomethingWentWrongWhenFetchingOlderMessages = false

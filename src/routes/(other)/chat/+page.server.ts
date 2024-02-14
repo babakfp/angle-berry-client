@@ -20,7 +20,7 @@ export const actions = {
                 await locals.pb.collection("messages").create({
                     content: form.data.messageContent,
                     user: locals.user.id,
-                    repliedTo: form.data?.replyedMessageId,
+                    repliedTo: form.data.replyedMessageId,
                 })
             } else {
                 await locals.pb

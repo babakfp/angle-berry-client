@@ -35,13 +35,12 @@
                 successfully joined this fantastic website. We hope you have a
                 fabulous time here. User <UserTooltipInfo
                     user={event.expand.inviter}
-                /> has invited you, and now they have 4 invites.
+                /> has invited you.
             </p>
         {:else}
             <p>
                 User <UserTooltipInfo user={event.expand.inviter} /> has invited
-                <UserTooltipInfo user={event.expand.user} />, and now they have
-                4 invites.
+                <UserTooltipInfo user={event.expand.user} />.
             </p>
         {/if}
     {/if}

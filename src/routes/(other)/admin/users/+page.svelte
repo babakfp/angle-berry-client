@@ -56,8 +56,8 @@
             <ThCheckbox
                 checked={!!data.tiers.length &&
                     selectedUserIds.length === data.users.length}
-                on:change={checkAllCheckboxes}
                 readonly={!data.tiers.length}
+                on:change={checkAllCheckboxes}
             />
             <Th>USERNAME</Th>
             <Th>TIERS</Th>

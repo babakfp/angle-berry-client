@@ -74,8 +74,8 @@
             <ThCheckbox
                 checked={!!data.tiers.length &&
                     selectedTierIds.length === data.tiers.length}
-                on:change={checkAllCheckboxes}
                 readonly={!data.tiers.length}
+                on:change={checkAllCheckboxes}
             />
             <Th>TIER</Th>
             <Th>PRICE</Th>

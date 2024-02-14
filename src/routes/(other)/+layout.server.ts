@@ -8,7 +8,7 @@ import {
     type TiersResponse,
 } from "$utilities/pb/types"
 
-export const load = async ({ locals, parent }) => {
+export const load = async ({ locals }) => {
     if (!locals.user) redirect(303, "/login")
 
     try {
@@ -29,8 +29,8 @@ export const load = async ({ locals, parent }) => {
             .getFullList({ filter: 'visibility = "public"' })
 
         return {
-            ...(await parent()),
-            user: locals.user, // Note: Yes, `locals.user` is not `undefined` after the `if` statment, however we are uisng `data` and `user` is `undefined` inside it!
+            user: locals.user,
+            previewTierId: locals.previewTierId,
             messages,
             events,
             tiers,

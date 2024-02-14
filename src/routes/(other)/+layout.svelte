@@ -9,13 +9,13 @@
     import { pb } from "$stores/pb"
     import Header from "$parts/Header/Header.svelte"
     import {
+        ClientResponseError,
         type RecordSubscription,
         type RealtimeMessagesResponse,
         type RealtimeEventsResponse,
         type MessagesResponse,
         type EventsResponse,
         type UsersResponse,
-        ClientResponseError,
         type TiersResponse,
     } from "$utilities/pb/types"
 

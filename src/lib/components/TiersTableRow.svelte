@@ -13,7 +13,7 @@
 </script>
 
 <Tr
-    class="group relative {!isCurrent
+    class="relative {!isCurrent
         ? 'duration-200 hover:bg-white/10 not-last:border-b not-last:border-white/5'
         : ''}"
 >
@@ -31,7 +31,7 @@
         {#if hasAccess}
             {#if !isCurrent}
                 <span
-                    class="px-6 py-4 underline duration-200 group-hover:text-white"
+                    class="px-6 py-4 underline duration-200 group-hover/tr:text-white"
                 >
                     Watch now
                 </span>

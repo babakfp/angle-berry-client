@@ -92,7 +92,7 @@
                 user.retainedTiers.includes(tier.id),
             )}
             <Tr
-                class="group relative duration-200 hover:bg-white/10 not-last:border-b not-last:border-white/5"
+                class="relative duration-200 hover:bg-white/10 not-last:border-b not-last:border-white/5"
             >
                 <Td class="w-16">
                     <Checkbox

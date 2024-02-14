@@ -5,6 +5,7 @@
         Thead,
         Tr,
         Th,
+        ThCheckbox,
         Td,
         TrOverlayAnchor,
     } from "$components/table/index"
@@ -70,15 +71,12 @@
 <Table class="mt-4">
     <Thead>
         <Tr>
-            <Th class="!p-0">
-                <Checkbox
-                    class="px-6 py-3"
-                    checked={!!data.tiers.length &&
-                        selectedTierIds.length === data.tiers.length}
-                    on:change={checkAllCheckboxes}
-                    readonly={!data.tiers.length}
-                />
-            </Th>
+            <ThCheckbox
+                checked={!!data.tiers.length &&
+                    selectedTierIds.length === data.tiers.length}
+                on:change={checkAllCheckboxes}
+                readonly={!data.tiers.length}
+            />
             <Th>TIER</Th>
             <Th>PRICE</Th>
             <Th>INVITES</Th>

@@ -25,14 +25,18 @@ export const zFile = z.object({
     lastModified: z.number(),
 })
 
-export const isFilesSchemaValid = (files: any) => {
-    let isValid = true
+export const isFilesSchemaValid = (files: unknown) => {
+    if (!Array.isArray(files)) {
+        return false
+    }
+
     for (const file of files) {
         try {
             zFile.parse(file)
         } catch (e) {
-            isValid = false
+            return false
         }
     }
-    return isValid
+
+    return true
 }

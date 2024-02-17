@@ -1,7 +1,7 @@
 <script lang="ts">
     import { PUBLIC_POCKETBASE_URL } from "$env/static/public"
     import Input from "$components/form/Input.svelte"
-    import { formSchemaCreateTier } from "../schema"
+    import { schema } from "../schema"
     import { superForm } from "sveltekit-superforms/client"
     import Form from "$components/form/Form.svelte"
     import Modal from "$components/Modal.svelte"
@@ -20,7 +20,7 @@
         errors,
         constraints,
         validate,
-    } = superForm(data.form, { validators: formSchemaCreateTier })
+    } = superForm(data.form, { validators: schema.create })
 
     let isGalleryPopupOpen = false
 </script>
@@ -87,6 +87,7 @@
                         checked={$_form.videos.includes(video.id)}
                         bind:group={$_form.videos}
                         value={video.id}
+                        name="videos"
                     />
                 </li>
             {/each}

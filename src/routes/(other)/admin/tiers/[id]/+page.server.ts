@@ -9,15 +9,15 @@ import {
     type TiersResponse,
     type VideosResponse,
 } from "$utilities/pb/types"
-import { formSchemaDeleteTier, formSchemaUpdateTier } from "../schema"
+import { schema } from "../schema"
 
 export const load = async ({ locals, params }) => {
     if (!locals.user) redirect(303, "/login")
     if (!locals.user.isAdmin)
         error(401, "You are not authorized to see this page!")
 
-    const formUpdate = await superValidate(formSchemaUpdateTier)
-    const formDelete = await superValidate(formSchemaDeleteTier)
+    const formUpdate = await superValidate(schema.update)
+    const formDelete = await superValidate(schema.delete.single)
 
     try {
         const tier: TiersResponse = await locals.pb
@@ -41,7 +41,7 @@ export const actions = {
         if (!locals.user.isAdmin)
             error(401, "You are not authorized to perform this action!")
 
-        const formUpdate = await superValidate(request, formSchemaUpdateTier)
+        const formUpdate = await superValidate(request, schema.update)
         if (!formUpdate.valid) return fail(400, { formUpdate })
 
         try {
@@ -61,7 +61,7 @@ export const actions = {
         if (!locals.user.isAdmin)
             error(401, "You are not authorized to perform this action!")
 
-        const formDelete = await superValidate(request, formSchemaDeleteTier)
+        const formDelete = await superValidate(request, schema.delete.single)
         if (!formDelete.valid) return fail(400, { formDelete })
 
         try {

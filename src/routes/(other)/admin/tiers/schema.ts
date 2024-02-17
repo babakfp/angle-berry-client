@@ -1,7 +1,7 @@
 import { z } from "zod"
 import { TiersVisibilityOptions } from "$utilities/pb/types"
 
-export const formSchemaCreateTier = z.object({
+const create = z.object({
     name: z.string().trim().min(4).max(14).default(""),
     price: z.number().min(0).max(1000).default(0),
     invites: z.number().min(0).max(1000).default(0),
@@ -11,12 +11,15 @@ export const formSchemaCreateTier = z.object({
         .default(TiersVisibilityOptions.public),
 })
 
-export const formSchemaUpdateTier = formSchemaCreateTier
-
-export const formSchemaDeleteTier = z.object({
-    ids: z.string(),
-})
-
-export const formSchemaDeleteTiers = z.object({
-    ids: z.string().array().default([]),
-})
+export const schema = {
+    create,
+    update: create,
+    delete: {
+        single: z.object({
+            id: z.string(),
+        }),
+        multiple: z.object({
+            ids: z.string().array().default([]),
+        }),
+    },
+}

@@ -33,7 +33,7 @@
             } else {
                 selectedMessageIds.update(v => [...v, message.id])
             }
-            // @ts-ignore
+            // @ts-expect-error TODO
         } else if (e.pointerType !== "mouse") {
             if ($isTouchDeviceContextMenuOpen) {
                 isContextMenuOpen.set(false)
@@ -57,7 +57,7 @@
         {$selectedMessageIds.length > 0 && 'cursor-pointer'}"
         transition:shrinkHeight={{ duration: 200 }}
         on:contextmenu|preventDefault={e => {
-            // @ts-ignore
+            // @ts-expect-error TODO
             if (e.pointerType !== "mouse") return
             interval = highlightAnimate(highlight, interval)
             isContextMenuOpen.set(true)

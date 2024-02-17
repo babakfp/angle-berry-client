@@ -5,14 +5,24 @@
     import IconSpinnerRegular from "phosphor-icons-svelte/IconSpinnerRegular.svelte"
     import Description from "$components/form/Description.svelte"
     import { createEventDispatcher } from "svelte"
+    import type { SuperForm } from "sveltekit-superforms/client"
+    import type { SuperValidated, ZodValidation } from "sveltekit-superforms"
+    import type { AnyZodObject } from "zod"
 
     const dispatch = createEventDispatcher()
+
+    type Validate = {
+        (): Promise<SuperValidated<ZodValidation<AnyZodObject>>>
+        (path: string, opts?: unknown): Promise<unknown>
+    }
 
     export let message: string
     export let submitButtonText: string
     export let submitButtonClass = ""
-    export let errors: any = undefined
-    export let validate: any = undefined
+    export let errors:
+        | SuperForm<ZodValidation<AnyZodObject>>["errors"]
+        | undefined = undefined
+    export let validate: Validate | undefined = undefined
     export let successMessage = ""
     export let action = ""
     export let doesUpload = false

@@ -1,7 +1,7 @@
 <script lang="ts">
     import { PUBLIC_POCKETBASE_URL } from "$env/static/public"
     import Input from "$components/form/Input.svelte"
-    import { formSchemaUpdateTier, formSchemaDeleteTier } from "../schema"
+    import { schema } from "../schema"
     import { superForm } from "sveltekit-superforms/client"
     import Form from "$components/form/Form.svelte"
     import Modal from "$components/Modal.svelte"
@@ -21,7 +21,7 @@
         constraints: formUpdateConstraints,
         validate: formUpdateValidate,
         formId: formUpdateFormId,
-    } = superForm(data.formUpdate, { validators: formSchemaUpdateTier })
+    } = superForm(data.formUpdate, { validators: schema.update })
 
     if (!$formUpdateForm.name) $formUpdateForm.name = data.tier.name
     if (!$formUpdateForm.price) $formUpdateForm.price = data.tier.price
@@ -55,7 +55,7 @@
         errors: formDeleteErrors,
         validate: formDeleteValidate,
         formId: formDeleteFormId,
-    } = superForm(data.formDelete, { validators: formSchemaDeleteTier })
+    } = superForm(data.formDelete, { validators: schema.delete.single })
 </script>
 
 <svelte:head>
@@ -67,7 +67,7 @@
         action="?/update"
         message={form?.id === $formUpdateFormId && form?.message}
         submitButtonText="Update"
-        errors={$formUpdateErrors}
+        errors={formUpdateErrors}
         validate={formUpdateValidate}
         on:redirect={() => {
             toast.success("Tier updated successfully!", {
@@ -122,6 +122,7 @@
                         checked={$formUpdateForm.videos.includes(video.id)}
                         bind:group={$formUpdateForm.videos}
                         value={video.id}
+                        name="videos"
                     />
                 </li>
             {/each}
@@ -142,7 +143,7 @@
         message={form?.id === $formDeleteFormId && form?.message}
         submitButtonText="Delete"
         submitButtonClass="btn-danger"
-        errors={$formDeleteErrors}
+        errors={formDeleteErrors}
         validate={formDeleteValidate}
         on:redirect={() => {
             toast.success("Tier deleted successfully!", {

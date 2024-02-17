@@ -9,14 +9,14 @@ import {
     type TiersResponse,
     type UsersResponse,
 } from "$utilities/pb/types"
-import { formSchemaDeleteTiers } from "./schema"
+import { schema } from "./schema"
 
 export const load = async ({ locals }) => {
     if (!locals.user) redirect(303, "/login")
     if (!locals.user.isAdmin)
         error(401, "You are not authorized to see this page!")
 
-    const form = await superValidate(formSchemaDeleteTiers)
+    const form = await superValidate(schema.delete.multiple)
 
     try {
         const tiers: TiersResponse[] = await locals.pb
@@ -40,7 +40,7 @@ export const actions = {
         if (!locals.user.isAdmin)
             error(401, "You are not authorized to perform this action!")
 
-        const form = await superValidate(request, formSchemaDeleteTiers)
+        const form = await superValidate(request, schema.delete.multiple)
         if (!form.valid) return fail(400, { form })
 
         try {

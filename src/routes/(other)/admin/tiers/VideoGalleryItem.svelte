@@ -6,6 +6,7 @@
     export let checked: boolean
     export let group: string[]
     export let value: string
+    export let name: string | undefined = undefined
 </script>
 
 <div class="grid gap-1">
@@ -15,7 +16,7 @@
         {checked}
         bind:group
         {value}
-        name="videos"
+        {name}
         label={checked ? "Selected" : ""}
     />
 </div>

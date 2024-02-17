@@ -7,9 +7,9 @@
         Th,
         ThCheckbox,
         Td,
+        TdCheckbox,
         TrOverlayAnchor,
     } from "$components/table/index"
-    import Checkbox from "$components/form/Checkbox.svelte"
     import toast from "svelte-french-toast"
     import { capitalizeFirstLetter } from "$utilities/capitalizeFirstLetter"
 
@@ -37,34 +37,7 @@
     <title>Tier</title>
 </svelte:head>
 
-<div class="flex justify-between">
-    <div class="flex gap-4">
-        {#if selectedTierIds.length}
-            <form method="post" action="?/delete">
-                <button type="submit" class="btn btn-danger">
-                    Delete selected
-                </button>
-
-                {#each selectedTierIds as id}
-                    <input
-                        class="hidden"
-                        type="checkbox"
-                        name="ids"
-                        value={id}
-                        checked
-                    />
-                {/each}
-            </form>
-            <button
-                type="button"
-                class="btn btn-gray-light"
-                on:click={() => (selectedTierIds = [])}
-            >
-                Clear selection
-            </button>
-        {/if}
-    </div>
-
+<div class="flex justify-end">
     <a class="btn btn-brand" href="/admin/tiers/create">Create</a>
 </div>
 
@@ -93,14 +66,11 @@
             <Tr
                 class="relative duration-200 hover:bg-white/10 not-last:border-b not-last:border-white/5"
             >
-                <Td class="w-16">
-                    <Checkbox
-                        class="relative z-1 px-6 py-4"
-                        checked={selectedTierIds.includes(tier.id)}
-                        bind:group={selectedTierIds}
-                        value={tier.id}
-                    />
-                </Td>
+                <TdCheckbox
+                    checked={selectedTierIds.includes(tier.id)}
+                    bind:group={selectedTierIds}
+                    value={tier.id}
+                />
                 <Th class="py-4 text-white">
                     {tier.name}
                 </Th>
@@ -124,3 +94,43 @@
         {/each}
     </Tbody>
 </Table>
+
+<div
+    class="fixed inset-x-4 bottom-4 z-50 duration-200 sm:bottom-8
+    {!selectedTierIds.length && 'translate-y-full hide'}"
+>
+    <div
+        class="grid gap-2 rounded bg-gray-700 p-4 sm:mx-auto sm:flex sm:max-w-xl sm:items-center sm:justify-between"
+    >
+        <span class="text-center sm:order-2">
+            Selected <b>{selectedTierIds.length}</b>
+            {selectedTierIds.length > 1 ? "items" : "item"}
+        </span>
+
+        <hr class="my-2 border-t-gray-600 sm:hidden" />
+
+        <button
+            type="button"
+            class="btn btn-gray"
+            on:click={() => (selectedTierIds = [])}
+        >
+            Clear selection
+        </button>
+
+        <form class="sm:order-3" method="post" action="?/delete">
+            <button type="submit" class="btn btn-danger w-full">
+                Delete selected
+            </button>
+
+            {#each selectedTierIds as id}
+                <input
+                    class="hidden"
+                    type="checkbox"
+                    name="ids"
+                    value={id}
+                    checked
+                />
+            {/each}
+        </form>
+    </div>
+</div>

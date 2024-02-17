@@ -29,7 +29,7 @@
     title="Register"
     description="Welcome, please enter your details."
     otherAuthPageTitle="Already have an account?"
-    otherAuthPageLinkTitle="Login hero"
+    otherAuthPageLinkTitle="Login here"
     otherAuthPageLink="/login"
 >
     <Form

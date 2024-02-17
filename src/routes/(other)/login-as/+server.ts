@@ -12,10 +12,8 @@ const auth = {
 }
 
 export const GET = ({ locals }) => {
-    if (locals.user) {
-        redirect(303, "/")
-    }
-    redirect(303, "/login")
+    if (!locals.user) redirect(303, "/login")
+    redirect(303, "/")
 }
 
 export const POST = async ({ locals }) => {

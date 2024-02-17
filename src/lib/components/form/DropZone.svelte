@@ -7,7 +7,7 @@
     export let accept: string
     export let multiple = false
     export let error = ""
-    export let files: FileList
+    export let files: FileList | undefined
 </script>
 
 <div>

@@ -1,9 +1,11 @@
 import { error, fail } from "@sveltejs/kit"
+import type { SuperValidated } from "sveltekit-superforms"
+import type { AnyZodObject } from "zod"
 import { ClientResponseError } from "$utilities/pb/types"
 
 export const pbHandleFormActionError = (
     e: unknown | ClientResponseError,
-    formData: any,
+    formData: SuperValidated<AnyZodObject> | Record<string, never>,
 ) => {
     if (e instanceof ClientResponseError) {
         if (e.status === 0) {

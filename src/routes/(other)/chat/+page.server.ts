@@ -1,13 +1,13 @@
 import { fail, redirect } from "@sveltejs/kit"
 import { superValidate } from "sveltekit-superforms/server"
-import { chatSchema } from "$utilities/chatSchema"
 import { pbHandleFormActionError } from "$utilities/pb/helpers"
+import { schema } from "./schema"
 
 export const actions = {
     default: async ({ locals, request }) => {
         if (!locals.user) redirect(303, "/login")
 
-        const form = await superValidate(request, chatSchema)
+        const form = await superValidate(request, schema)
         if (!form.valid) return fail(400, { form })
 
         form.data.messageContent = form.data.messageContent.replace(

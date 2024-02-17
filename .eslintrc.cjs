@@ -1,9 +1,10 @@
+/** @type { import("eslint").Linter.Config } */
 module.exports = {
     root: true,
     extends: [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
-        "plugin:svelte/recommended",
+        "plugin:svelte/base",
         "prettier",
     ],
     parser: "@typescript-eslint/parser",
@@ -28,6 +29,6 @@ module.exports = {
         },
     ],
     rules: {
-        "svelte/no-at-html-tags": 0,
+        "@typescript-eslint/no-unused-vars": "off",
     },
 }

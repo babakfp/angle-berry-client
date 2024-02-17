@@ -35,8 +35,9 @@
     }
 
     const editMessage = () => {
+        if (!$contextMenuTargetMessage) return
         isContextMenuOpen.set(false)
-        messageIdToEdit.set($contextMenuTargetMessage!?.id)
+        messageIdToEdit.set($contextMenuTargetMessage.id)
         isReplying.set(false)
         if ($messageInputElement) $messageInputElement.focus()
     }
@@ -62,9 +63,8 @@
             })
             copyText(copiedText.replaceAll("<br>", "\n"))
         } else {
-            copyText(
-                $contextMenuTargetMessage!?.content.replaceAll("<br>", "\n"),
-            )
+            if (!$contextMenuTargetMessage) return
+            copyText($contextMenuTargetMessage.content.replaceAll("<br>", "\n"))
         }
         copyTimeoutId = setTimeout(() => {
             isContextMenuOpen.set(false)
@@ -78,16 +78,18 @@
     }
 
     const setAMessageForDeletion = () => {
+        if (!$contextMenuTargetMessage) return
         isContextMenuOpen.set(false)
-        messageIdsToDelete.set([$contextMenuTargetMessage!?.id])
+        messageIdsToDelete.set([$contextMenuTargetMessage.id])
     }
 
     const selectMessage = () => {
+        if (!$contextMenuTargetMessage) return
         isContextMenuOpen.set(false)
-        selectedMessageIds.update(currentValue => [
-            ...currentValue,
-            $contextMenuTargetMessage!?.id,
-        ])
+        $selectedMessageIds = [
+            ...$selectedMessageIds,
+            $contextMenuTargetMessage.id,
+        ]
     }
 
     const clearSelection = () => {

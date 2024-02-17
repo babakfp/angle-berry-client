@@ -1,19 +1,12 @@
 import { error, fail, redirect } from "@sveltejs/kit"
 import { superValidate } from "sveltekit-superforms/server"
-import type { FileServer } from "$utilities/FileServer"
-import { formatBytes } from "$utilities/formatBytes"
 import {
     pbHandleClientResponseError,
     pbHandleFormActionError,
 } from "$utilities/pb/helpers"
 import { ClientResponseError, type VideosResponse } from "$utilities/pb/types"
-import {
-    deleteSchema,
-    isFileListValid,
-    isFilesSchemaValid,
-    videoFormats,
-    videoMaxSizeLimitBytes,
-} from "./schema.js"
+import { validateFiles } from "$utilities/validateFiles.js"
+import { deleteSchema, videoFormats, videoMaxSizeLimitBytes } from "./schema.js"
 
 export const load = async ({ locals }) => {
     if (!locals.user) redirect(303, "/login")
@@ -29,7 +22,7 @@ export const load = async ({ locals }) => {
         return {
             deleteForm,
             videos,
-            uploadForm: { videos: undefined as any },
+            uploadForm: { videos: undefined },
         }
     } catch (e) {
         if (e instanceof ClientResponseError) {
@@ -46,49 +39,22 @@ export const actions = {
             error(401, "You are not authorized to perform this action!")
 
         const formData = await request.formData()
-        const videos = formData.getAll("videos")
 
-        if (
-            !(
-                videos &&
-                Array.isArray(videos) &&
-                isFilesSchemaValid(videos) &&
-                isFileListValid(videos as FileServer[])
-            )
-        ) {
-            return fail(400, { message: "Can't be empty!" })
-        }
-
-        const files = videos as FileServer[]
-
-        const isAnyFileTooLarge = !files.every(
-            file => (file as File).size <= videoMaxSizeLimitBytes,
+        const isVideosValid = validateFiles(
+            formData.getAll("videos"),
+            videoMaxSizeLimitBytes,
+            videoFormats,
         )
 
-        if (isAnyFileTooLarge) {
+        if (!isVideosValid.isValid) {
             return fail(400, {
-                message: `File size can't be above ${formatBytes(
-                    videoMaxSizeLimitBytes,
-                )}`,
-            })
-        }
-
-        const containsInvalidExtensions = files.some(file => {
-            const extension = file.name.split(".").pop()!
-            return !videoFormats.includes(extension)
-        })
-
-        if (containsInvalidExtensions) {
-            return fail(400, {
-                message: `Only formats ${formatBytes(
-                    videoMaxSizeLimitBytes,
-                )} allowed!`,
+                message: isVideosValid.message,
             })
         }
 
         try {
             await Promise.all(
-                files.map(file =>
+                isVideosValid.files.map(file =>
                     locals.pb
                         .collection("videos")
                         .create({ file }, { requestKey: file.name }),

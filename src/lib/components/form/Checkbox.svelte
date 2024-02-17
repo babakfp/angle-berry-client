@@ -10,7 +10,7 @@
     export let group: string[] = []
     export let disabled = false
     export let readonly = false
-    export let name: string = crypto.randomUUID()
+    export let name: string | undefined = undefined
     export let label = ""
     export let error = ""
 
@@ -44,7 +44,7 @@
                 on:change
                 {value}
                 {disabled}
-                name={name || undefined}
+                {name}
                 {...$$restProps}
                 tabindex={readonly ? -1 : undefined}
             />

@@ -5,11 +5,11 @@
 </script>
 
 <div
-    class="fixed inset-x-4 bottom-4 z-50 duration-200 sm:bottom-8
+    class="fixed inset-x-0 bottom-4 z-50 px-4 duration-200 sm:bottom-8 sm:mx-auto sm:max-w-xl
     {!selectedItemIds.length && 'translate-y-full hide'}"
 >
     <div
-        class="grid gap-2 rounded bg-gray-700 p-4 sm:mx-auto sm:flex sm:max-w-xl sm:items-center sm:justify-between"
+        class="grid gap-2 rounded bg-gray-700 p-4 sm:flex sm:items-center sm:justify-between"
     >
         <span class="text-center sm:order-2">
             Selected <b>{selectedItemIds.length}</b>

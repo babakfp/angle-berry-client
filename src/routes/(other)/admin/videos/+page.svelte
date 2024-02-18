@@ -7,6 +7,7 @@
     import VideoGalleryItem from "../tiers/VideoGalleryItem.svelte"
     import { videoFormats } from "./schema"
     import toast from "svelte-french-toast"
+    import FloatingActions from "$components/table/FloatingActions.svelte"
 
     export let data
     export let form
@@ -40,32 +41,11 @@
     />
 </Form>
 
-{#if $deleteForm.videos.length}
-    <div class="sticky top-header z-1 mb-4 flex gap-4 bg-body-bg">
-        <form method="post" action="?/delete">
-            <button type="submit" class="btn btn-danger">
-                Delete selected
-            </button>
-
-            {#each $deleteForm.videos as id}
-                <input
-                    class="hidden"
-                    type="checkbox"
-                    name="videos"
-                    value={id}
-                    checked
-                />
-            {/each}
-        </form>
-        <button
-            type="button"
-            class="btn btn-gray-light"
-            on:click={() => ($deleteForm.videos = [])}
-        >
-            Clear selection
-        </button>
-    </div>
-{/if}
+<FloatingActions
+    bind:selectedItemIds={$deleteForm.videos}
+    deleteActionAttribute="?/delete"
+    deleteInputNameAttribute="videos"
+/>
 
 <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
     {#each data.videos as video}

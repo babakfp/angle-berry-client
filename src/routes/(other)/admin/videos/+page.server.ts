@@ -5,8 +5,7 @@ import {
     pbHandleFormActionError,
 } from "$utilities/pb/helpers"
 import { ClientResponseError, type VideosResponse } from "$utilities/pb/types"
-import { validateFiles } from "$utilities/validateFiles.js"
-import { schema, videoFormats, videoMaxSizeLimitBytes } from "./schema.js"
+import { schema } from "./schema.js"
 
 export const load = async ({ locals }) => {
     if (!locals.user) redirect(303, "/login")
@@ -38,23 +37,12 @@ export const actions = {
         if (!locals.user.isAdmin)
             error(401, "You are not authorized to perform this action!")
 
-        const formData = await request.formData()
-
-        const isVideosValid = validateFiles(
-            formData.getAll("videos"),
-            videoMaxSizeLimitBytes,
-            videoFormats,
-        )
-
-        if (!isVideosValid.isValid) {
-            return fail(400, {
-                message: isVideosValid.message,
-            })
-        }
+        const uploadForm = await superValidate(request, schema.upload)
+        if (!uploadForm.valid) return fail(400, { uploadForm })
 
         try {
             await Promise.all(
-                isVideosValid.files.map(file =>
+                uploadForm.data.videos.map(file =>
                     locals.pb
                         .collection("videos")
                         .create({ file }, { requestKey: file.name }),

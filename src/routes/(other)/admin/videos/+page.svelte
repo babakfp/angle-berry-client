@@ -4,7 +4,7 @@
     import DropZone from "$components/form/DropZone.svelte"
     import Form from "$components/form/Form.svelte"
     import VideoGalleryItem from "../tiers/VideoGalleryItem.svelte"
-    import { schema, videoFormats } from "./schema"
+    import { schema, formats } from "./schema"
     import toast from "svelte-french-toast"
     import FloatingActions from "$components/table/FloatingActions.svelte"
 
@@ -35,7 +35,7 @@
     <DropZone
         bind:files={data.uploadForm.videos}
         name="videos"
-        accept={videoFormats}
+        accept={formats.map(format => `.${format}`).join(",")}
         multiple
     />
 </Form>

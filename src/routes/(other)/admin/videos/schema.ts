@@ -1,10 +1,13 @@
+import { zod } from "sveltekit-superforms/adapters"
 import { z } from "zod"
 import type { FileServer } from "$utilities/FileServer"
 
 export const schema = {
-    delete: z.object({
-        videos: z.string().array().max(100).default([]),
-    }),
+    delete: zod(
+        z.object({
+            videos: z.string().array().max(100).default([]),
+        }),
+    ),
 }
 
 export const videoFormats = ".mp4,.avi,.mkv"

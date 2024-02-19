@@ -6,23 +6,18 @@
     import Description from "$components/form/Description.svelte"
     import { createEventDispatcher } from "svelte"
     import type { SuperForm } from "sveltekit-superforms/client"
-    import type { SuperValidated, ZodValidation } from "sveltekit-superforms"
-    import type { AnyZodObject } from "zod"
 
     const dispatch = createEventDispatcher()
-
-    type Validate = {
-        (): Promise<SuperValidated<ZodValidation<AnyZodObject>>>
-        (path: string, opts?: unknown): Promise<unknown>
-    }
 
     export let message: string
     export let submitButtonText: string
     export let submitButtonClass = ""
     export let errors:
-        | SuperForm<ZodValidation<AnyZodObject>>["errors"]
+        | SuperForm<Record<string, unknown>>["errors"]
         | undefined = undefined
-    export let validate: Validate | undefined = undefined
+    export let validateForm:
+        | SuperForm<Record<string, unknown>>["validateForm"]
+        | undefined = undefined
     export let successMessage = ""
     export let action = ""
     export let doesUpload = false
@@ -36,8 +31,8 @@
         isSubmitting = true
         message = ""
 
-        if (validate !== undefined && errors !== undefined) {
-            const validation = await validate()
+        if (validateForm && errors) {
+            const validation = await validateForm()
 
             if (!validation.valid) {
                 cancel()

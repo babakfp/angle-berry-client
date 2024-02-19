@@ -19,7 +19,7 @@
         form: formUpdateForm,
         errors: formUpdateErrors,
         constraints: formUpdateConstraints,
-        validate: formUpdateValidate,
+        validateForm: formUpdateValidateForm,
         formId: formUpdateFormId,
     } = superForm(data.formUpdate, { validators: schema.update })
 
@@ -53,7 +53,7 @@
 
     const {
         errors: formDeleteErrors,
-        validate: formDeleteValidate,
+        validateForm: formDeleteValidateForm,
         formId: formDeleteFormId,
     } = superForm(data.formDelete, { validators: schema.delete.single })
 </script>
@@ -68,7 +68,7 @@
         message={form?.id === $formUpdateFormId && form?.message}
         submitButtonText="Update"
         errors={formUpdateErrors}
-        validate={formUpdateValidate}
+        validateForm={formUpdateValidateForm}
         on:redirect={() => {
             toast.success("Tier updated successfully!", {
                 position: "bottom-right",
@@ -144,7 +144,7 @@
         submitButtonText="Delete"
         submitButtonClass="btn-danger"
         errors={formDeleteErrors}
-        validate={formDeleteValidate}
+        validateForm={formDeleteValidateForm}
         on:redirect={() => {
             toast.success("Tier deleted successfully!", {
                 position: "bottom-right",

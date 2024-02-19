@@ -19,7 +19,7 @@
         form: _form,
         errors,
         constraints,
-        validate,
+        validateForm,
     } = superForm(data.form, { validators: schema.create })
 
     let isGalleryPopupOpen = false
@@ -34,7 +34,7 @@
         message={form?.message}
         submitButtonText="Create"
         {errors}
-        {validate}
+        {validateForm}
         on:redirect={() => {
             toast.success("Tier created successfully!", {
                 position: "bottom-right",

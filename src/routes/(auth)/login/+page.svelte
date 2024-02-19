@@ -17,7 +17,7 @@
         restore,
         errors,
         constraints,
-        validate,
+        validateForm,
     } = superForm(data.form, { validators: schema })
     export const snapshot = { capture, restore }
 
@@ -47,7 +47,7 @@
         message={form?.message}
         submitButtonText="Login"
         {errors}
-        {validate}
+        {validateForm}
         on:redirect={() => {
             toast.success("You have logged in successfully!", {
                 position: "bottom-right",

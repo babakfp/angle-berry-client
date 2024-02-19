@@ -14,7 +14,7 @@
         form: _form,
         errors,
         constraints,
-        validate,
+        validateForm,
     } = superForm(data.form, { validators: schema })
 
     if (!$_form.isAdmin) $_form.isAdmin = data.userToEdit.isAdmin
@@ -38,7 +38,7 @@
         message={form?.message}
         submitButtonText="Update"
         {errors}
-        {validate}
+        {validateForm}
         on:redirect={() => {
             toast.success("User updated successfully!", {
                 position: "bottom-right",

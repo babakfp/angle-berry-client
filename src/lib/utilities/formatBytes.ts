@@ -1,6 +1,6 @@
 export const formatBytes = (sizeInBytes: number) => {
     let size = sizeInBytes
-    const units = ["Bytes", "KB", "MB", "GB", "TB"]
+    const units = ["Bytes", "KB", "MB", "GB", "TB"] as const
 
     let unitIndex = 0
 
@@ -9,5 +9,5 @@ export const formatBytes = (sizeInBytes: number) => {
         unitIndex++
     }
 
-    return size.toFixed(2) + " " + units[unitIndex]
+    return `${units[unitIndex] === "Bytes" ? size : size.toFixed(2)} ${units[unitIndex]}`
 }

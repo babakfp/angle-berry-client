@@ -1,9 +1,11 @@
 import { z } from "zod"
 import type { FileServer } from "$utilities/FileServer"
 
-export const schemaDelete = z.object({
-    videos: z.string().array().max(100).default([]),
-})
+export const schema = {
+    delete: z.object({
+        videos: z.string().array().max(100).default([]),
+    }),
+}
 
 export const videoFormats = ".mp4,.avi,.mkv"
 export const videoMaxSizeLimitBytes = 1000000000

@@ -1,11 +1,10 @@
 <script lang="ts">
     import { PUBLIC_POCKETBASE_URL } from "$env/static/public"
-    import { schemaDelete } from "./schema.js"
     import { superForm } from "sveltekit-superforms/client"
     import DropZone from "$components/form/DropZone.svelte"
     import Form from "$components/form/Form.svelte"
     import VideoGalleryItem from "../tiers/VideoGalleryItem.svelte"
-    import { videoFormats } from "./schema"
+    import { schema, videoFormats } from "./schema"
     import toast from "svelte-french-toast"
     import FloatingActions from "$components/table/FloatingActions.svelte"
 
@@ -13,7 +12,7 @@
     export let form
 
     const { form: deleteForm } = superForm(data.deleteForm, {
-        validators: schemaDelete,
+        validators: schema.delete,
     })
 </script>
 

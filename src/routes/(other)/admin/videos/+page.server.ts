@@ -6,14 +6,14 @@ import {
 } from "$utilities/pb/helpers"
 import { ClientResponseError, type VideosResponse } from "$utilities/pb/types"
 import { validateFiles } from "$utilities/validateFiles.js"
-import { deleteSchema, videoFormats, videoMaxSizeLimitBytes } from "./schema.js"
+import { schemaDelete, videoFormats, videoMaxSizeLimitBytes } from "./schema.js"
 
 export const load = async ({ locals }) => {
     if (!locals.user) redirect(303, "/login")
     if (!locals.user.isAdmin)
         error(401, "You are not authorized to see this page!")
 
-    const deleteForm = await superValidate(deleteSchema)
+    const deleteForm = await superValidate(schemaDelete)
 
     try {
         const videos: VideosResponse[] = await locals.pb
@@ -71,7 +71,7 @@ export const actions = {
         if (!locals.user.isAdmin)
             error(401, "You are not authorized to perform this action!")
 
-        const deleteForm = await superValidate(request, deleteSchema)
+        const deleteForm = await superValidate(request, schemaDelete)
         if (!deleteForm.valid) return fail(400, { deleteForm })
 
         try {

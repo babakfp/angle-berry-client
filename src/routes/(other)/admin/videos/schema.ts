@@ -1,7 +1,7 @@
 import { z } from "zod"
 import type { FileServer } from "$utilities/FileServer"
 
-export const deleteSchema = z.object({
+export const schemaDelete = z.object({
     videos: z.string().array().max(100).default([]),
 })
 

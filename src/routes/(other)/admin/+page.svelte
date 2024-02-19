@@ -1,5 +1,9 @@
 <script lang="ts">
-    const collections = ["Tiers", "Users", "Videos"]
+    const collections = [
+        { name: "Tiers", slug: "tiers" },
+        { name: "Users", slug: "users" },
+        { name: "Videos", slug: "videos" },
+    ]
 </script>
 
 <svelte:head>
@@ -11,9 +15,9 @@
         <li>
             <a
                 class="link btn btn-gray-light-outline w-full"
-                href="/admin/{item.toLowerCase()}"
+                href="/admin/{item.slug}"
             >
-                {item}
+                {item.name}
             </a>
         </li>
     {/each}

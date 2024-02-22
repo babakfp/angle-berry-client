@@ -3,6 +3,7 @@
     import TiersTable from "$components/TiersTable.svelte"
     import TiersTableRow from "$components/TiersTableRow.svelte"
     import VideoPlayer from "$components/VideoPlayer.svelte"
+
     export let data
 </script>
 

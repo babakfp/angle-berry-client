@@ -22,10 +22,10 @@
         $_form.retainedTiers = data.userToEdit.retainedTiers
 
     let selectedRetainedTiers = data.tiers
-        .filter((tier) => $_form.retainedTiers.includes(tier.id))
-        .map((tier) => ({ value: tier.id, label: tier.name }))
+        .filter(tier => $_form.retainedTiers.includes(tier.id))
+        .map(tier => ({ value: tier.id, label: tier.name }))
 
-    $: $_form.retainedTiers = selectedRetainedTiers.map((tier) => tier.value)
+    $: $_form.retainedTiers = selectedRetainedTiers.map(tier => tier.value)
 </script>
 
 <svelte:head>
@@ -54,7 +54,7 @@
         <Select
             label="Tiers"
             placeholder="Select tiers"
-            options={data.tiers.map((tier) => ({
+            options={data.tiers.map(tier => ({
                 value: tier.id,
                 label: tier.name,
             }))}

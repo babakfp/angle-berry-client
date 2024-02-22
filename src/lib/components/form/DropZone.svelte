@@ -22,7 +22,7 @@
         <IconUploadSimpleRegular class="text-2xl" />
 
         <p class="mt-2 text-sm">
-            <span class="font-semibold">Click to upload</span> or drag and drop
+            <b>Click</b> or <b>Drag</b> and <b>Drop</b> to <b>Upload</b>
         </p>
         <p class="text-xs sm:text-sm">
             {accept.split(",").join(", ")}

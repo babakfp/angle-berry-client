@@ -40,7 +40,7 @@
         {errors}
         {validateForm}
         on:redirect={() => {
-            toast.success("User updated successfully!", {
+            toast.success("Updated successfully!", {
                 position: "bottom-right",
             })
         }}

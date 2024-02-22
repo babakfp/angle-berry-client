@@ -70,7 +70,7 @@
         errors={formUpdateErrors}
         validateForm={formUpdateValidateForm}
         on:redirect={() => {
-            toast.success("Tier updated successfully!", {
+            toast.success("Updated successfully!", {
                 position: "bottom-right",
             })
         }}
@@ -146,7 +146,7 @@
         errors={formDeleteErrors}
         validateForm={formDeleteValidateForm}
         on:redirect={() => {
-            toast.success("Tier deleted successfully!", {
+            toast.success("Deleted successfully!", {
                 position: "bottom-right",
             })
         }}

@@ -36,7 +36,7 @@
         {errors}
         {validateForm}
         on:redirect={() => {
-            toast.success("Tier created successfully!", {
+            toast.success("Created successfully!", {
                 position: "bottom-right",
             })
         }}

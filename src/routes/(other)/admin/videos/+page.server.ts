@@ -12,6 +12,7 @@ export const load = async ({ locals }) => {
     if (!locals.user.isAdmin)
         error(401, "You are not authorized to see this page!")
 
+    const uploadForm = await superValidate(schema.upload)
     const deleteForm = await superValidate(schema.delete)
 
     try {
@@ -19,9 +20,9 @@ export const load = async ({ locals }) => {
             .collection("videos")
             .getFullList()
         return {
+            uploadForm,
             deleteForm,
             videos,
-            uploadForm: { videos: undefined },
         }
     } catch (e) {
         if (e instanceof ClientResponseError) {

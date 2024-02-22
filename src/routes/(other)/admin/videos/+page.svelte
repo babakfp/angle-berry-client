@@ -11,9 +11,21 @@
     export let data
     export let form
 
+    const {
+        form: uploadForm,
+        errors: uploadFormErrors,
+        validateForm: uploadFormValidateForm,
+    } = superForm(data.uploadForm, {
+        validators: schema.upload,
+    })
+
     const { form: deleteForm } = superForm(data.deleteForm, {
         validators: schema.delete,
     })
+
+    let videos: FileList | undefined
+
+    $: $uploadForm.videos = videos ? Array.from(videos) : []
 </script>
 
 <svelte:head>
@@ -26,17 +38,23 @@
     doesUpload={true}
     action="?/upload"
     submitButtonText="Upload"
+    errors={uploadFormErrors}
+    validateForm={uploadFormValidateForm}
     on:success={() => {
+        videos = undefined
         toast.success("Your files uploaded successfully!", {
             position: "bottom-right",
         })
     }}
 >
     <DropZone
-        bind:files={data.uploadForm.videos}
+        bind:files={videos}
         name="videos"
         accept={formats.map(format => `.${format}`).join(",")}
         multiple
+        error={$uploadFormErrors.videos?._errors?.[0] ||
+            $uploadFormErrors.videos?.[0]?.[0] ||
+            $uploadFormErrors.videos?.[1]?.[0]}
     />
 </Form>
 

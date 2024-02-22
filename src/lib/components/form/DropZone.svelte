@@ -14,6 +14,10 @@
     <label
         for={name}
         class="grid cursor-pointer justify-center justify-items-center gap-2 rounded border-2 border-dashed border-gray-600 bg-gray-700/20 p-4 pt-6 text-center text-gray-400"
+        on:dragover|preventDefault
+        on:drop|preventDefault={e => {
+            files = e.dataTransfer?.files
+        }}
     >
         <IconUploadSimpleRegular class="text-2xl" />
 

@@ -38,7 +38,7 @@
         {errors}
         {validateForm}
         on:redirect={() => {
-            toast.success("You have registered successfully!", {
+            toast.success("Registered successfully!", {
                 position: "bottom-right",
             })
         }}

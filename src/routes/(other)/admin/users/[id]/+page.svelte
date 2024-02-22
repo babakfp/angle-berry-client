@@ -29,7 +29,7 @@
 </script>
 
 <svelte:head>
-    <title>User: {data.userToEdit.username}</title>
+    <title>User : {data.userToEdit.username}</title>
 </svelte:head>
 
 <div class="mx-auto w-full max-w-xs">

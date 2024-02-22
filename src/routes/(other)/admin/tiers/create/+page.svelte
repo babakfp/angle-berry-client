@@ -26,7 +26,7 @@
 </script>
 
 <svelte:head>
-    <title>Create tier</title>
+    <title>Tier / Create</title>
 </svelte:head>
 
 <div class="mx-auto w-full max-w-xs">

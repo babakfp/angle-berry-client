@@ -8,7 +8,7 @@
 </script>
 
 <svelte:head>
-    <title>{data?.tier.name}</title>
+    <title>Tier : {data?.tier.name}</title>
 </svelte:head>
 
 <h1 class="text-4xl font-bold text-white">{data?.tier.name}</h1>

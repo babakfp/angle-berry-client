@@ -7,7 +7,7 @@
 </script>
 
 <svelte:head>
-    <title>Admin dashboard</title>
+    <title>Dashboard</title>
 </svelte:head>
 
 <ul class="mx-auto grid w-full max-w-xs gap-2">

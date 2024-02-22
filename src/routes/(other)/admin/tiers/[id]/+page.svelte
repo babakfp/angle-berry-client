@@ -59,7 +59,7 @@
 </script>
 
 <svelte:head>
-    <title>Tier: {data.tier.name}</title>
+    <title>Tier : {data.tier.name}</title>
 </svelte:head>
 
 <div class="mx-auto w-full max-w-xs">

@@ -35,7 +35,7 @@
 </script>
 
 <svelte:head>
-    <title>Tier</title>
+    <title>Tiers</title>
 </svelte:head>
 
 <div class="flex justify-end">

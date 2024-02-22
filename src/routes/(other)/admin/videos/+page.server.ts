@@ -1,5 +1,5 @@
 import { error, fail, redirect } from "@sveltejs/kit"
-import { superValidate } from "sveltekit-superforms/server"
+import { superValidate, withFiles } from "sveltekit-superforms/server"
 import {
     pbHandleClientResponseError,
     pbHandleFormActionError,
@@ -39,7 +39,7 @@ export const actions = {
             error(401, "You are not authorized to perform this action!")
 
         const uploadForm = await superValidate(request, schema.upload)
-        if (!uploadForm.valid) return fail(400, { uploadForm })
+        if (!uploadForm.valid) return fail(400, withFiles({ uploadForm }))
 
         try {
             await Promise.all(

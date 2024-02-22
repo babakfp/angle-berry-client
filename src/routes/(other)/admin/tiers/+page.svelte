@@ -65,7 +65,7 @@
                 user.retainedTiers.includes(tier.id),
             )}
             <Tr
-                class="relative duration-200 hover:bg-white/10 not-last:border-b not-last:border-white/5"
+                class="relative duration-200 [transition-property:background-color] hover:bg-white/10 not-last:border-b not-last:border-white/5"
             >
                 <TdCheckbox
                     checked={selectedTierIds.includes(tier.id)}

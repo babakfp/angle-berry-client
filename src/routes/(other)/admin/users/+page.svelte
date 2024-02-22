@@ -28,7 +28,7 @@
     <Tbody>
         {#each data.users as user}
             <Tr
-                class="relative duration-200 hover:bg-white/10 not-last:border-b not-last:border-white/5"
+                class="relative duration-200 [transition-property:background-color] hover:bg-white/10 not-last:border-b not-last:border-white/5"
             >
                 <Th class="py-4 text-white">
                     {user.username}

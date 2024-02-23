@@ -1,11 +1,10 @@
 <script lang="ts">
-    import type { SubmitFunction } from "@sveltejs/kit"
-    import { enhance } from "$app/forms"
     import FormSubmitButton from "$components/form/FormSubmitButton.svelte"
     import IconSpinnerRegular from "phosphor-icons-svelte/IconSpinnerRegular.svelte"
     import Description from "$components/form/Description.svelte"
     import { createEventDispatcher } from "svelte"
     import type { SuperForm } from "sveltekit-superforms/client"
+    import FormBase from "$components/form/FormBase.svelte"
 
     const dispatch = createEventDispatcher()
 
@@ -18,53 +17,45 @@
     export let validateForm:
         | SuperForm<Record<string, unknown>>["validateForm"]
         | undefined = undefined
-    export let successMessage = ""
     export let action = ""
-    export let doesUpload = false
+    export let canUpload = false
     export let _class = ""
     export { _class as class }
 
     let isSubmitting = false
     let isRedirecting = false
 
-    const handleFormSubmit: SubmitFunction = async ({ cancel }) => {
+    const handleOnSubmit = () => {
         isSubmitting = true
         message = ""
-
-        if (validateForm && errors) {
-            const validation = await validateForm()
-
-            if (!validation.valid) {
-                cancel()
-                errors.set(validation.errors)
-                isSubmitting = false
-                message = ""
-            }
-        }
-
-        return async ({ result, update }) => {
-            dispatch(result.type)
-
-            isSubmitting = false
-
-            if (result.type === "redirect") {
-                isRedirecting = true
-                message = successMessage
-            }
-
-            update()
-        }
+    }
+    const handleOnInvalid = () => {
+        isSubmitting = false
+        message = ""
+    }
+    const handleOnReturn = () => {
+        isSubmitting = false
+    }
+    const handleOnRedirect = () => {
+        dispatch("redirect")
+        isRedirecting = true
     }
 </script>
 
-<form
-    class="grid gap-4 {_class}"
-    class:pointer-events-none={isSubmitting || isRedirecting}
-    method="post"
-    use:enhance={handleFormSubmit}
-    novalidate
+<FormBase
+    class="grid gap-4 {_class} {(isSubmitting || isRedirecting) &&
+        'pointer-events-none'}"
     {action}
-    enctype={doesUpload ? "multipart/form-data" : undefined}
+    {canUpload}
+    {errors}
+    {validateForm}
+    on:submit={handleOnSubmit}
+    on:invalid={handleOnInvalid}
+    on:return={handleOnReturn}
+    on:redirect={handleOnRedirect}
+    on:error
+    on:success
+    on:failure
 >
     <slot />
 
@@ -85,4 +76,4 @@
             <Description type="error" text={message} />
         {/if}
     {/if}
-</form>
+</FormBase>

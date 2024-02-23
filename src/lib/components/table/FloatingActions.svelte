@@ -1,6 +1,8 @@
 <script lang="ts">
     import IconArrowUpRegular from "phosphor-icons-svelte/IconArrowUpRegular.svelte"
     import IconArrowDownRegular from "phosphor-icons-svelte/IconArrowDownRegular.svelte"
+    import FormBase from "$components/form/FormBase.svelte"
+    import toast from "svelte-french-toast"
 
     export let selectedItemIds: string[]
     export let deleteActionAttribute: `?/${string}` | undefined
@@ -47,7 +49,16 @@
             Clear selection
         </button>
 
-        <form class="sm:order-3" method="post" action={deleteActionAttribute}>
+        <FormBase
+            class="sm:order-3"
+            action={deleteActionAttribute}
+            on:success={() => {
+                selectedItemIds = []
+                toast.success("Deleted successfully!", {
+                    position: "bottom-right",
+                })
+            }}
+        >
             <button type="submit" class="btn btn-danger w-full">
                 Delete selected
             </button>
@@ -61,6 +72,6 @@
                     checked
                 />
             {/each}
-        </form>
+        </FormBase>
     </div>
 </div>

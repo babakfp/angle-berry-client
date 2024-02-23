@@ -35,7 +35,7 @@
 <Form
     class="mb-8"
     message={form?.message}
-    doesUpload={true}
+    canUpload={true}
     action="?/upload"
     submitButtonText="Upload"
     errors={uploadFormErrors}

@@ -10,11 +10,10 @@ This project consists of two repositories:
 ### Client
 
 -   [TypeScript](https://typescriptlang.org)
--   [Svelte](https://svelte.dev)
--   [SvelteKit](https://kit.svelte.dev)
+-   [Svelte](https://svelte.dev) & [SvelteKit](https://kit.svelte.dev)
 -   [TailwindCSS](https://tailwindcss.com)
 
-### Server
+### Server (Database)
 
 -   [PocketBase](https://pocketbase.io)
 
@@ -54,7 +53,7 @@ This project consists of two repositories:
 ## Hosting
 
 -   [Angle Berry Client](https://github.com/babakfp/angle-berry-client) is hosted on [Vercel](https://vercel.com).
--   [Angle Berry Server](https://github.com/babakfp/angle-berry-server) is hosted on [Hop](https://hop.io).
+-   [Angle Berry Server](https://github.com/babakfp/angle-berry-server) is hosted on?
 
 ## Development
 
@@ -84,11 +83,11 @@ Open the projects in two separate vsCode instances, and:
 There are two users that you can switch between by the user menu:
 
 -   User
--   -   Username: `user`
--   -   Password: `useruser`
+    -   Username: `user`
+    -   Password: `useruser`
 -   Admin
--   -   Username: `admin`
--   -   Password: `adminadmin`
+    -   Username: `admin`
+    -   Password: `adminadmin`
 
 #### `angle-berry-server` admin credentials
 
@@ -99,13 +98,13 @@ Use this to log in to the PocketBase dashboard:
 
 ### Commands
 
--   `dev`: Run SvelteKit project.
--   `build`: Build SvelteKit project.
--   `preview`: Preview the build of SvelteKit project.
--   `prepare`: Nothing important (you don't need to run this).
--   `format`: Format and make the code look good.
--   `typegen`: Generate PocketBase schema types.
+-   `dev`: This runs the project in development mode.
+-   `build`: This builds the project. You don't need to run this.
+-   `preview`: This previews the built project.
+-   `prepare`: This isn't important. You don't need to run this.
+-   `format`: This makes the code look pretty.
+-   `typegen`: This generates PocketBase TS types. Use this to update the types when the PocketBase schema changes.
 
 ## Todo
 
--   BUG: When sending a new message in the chat and immediately attempting to edit it, the message content is not automatically written in the input box. This issue seems to be related to the "bind" keyword. However, it is important to note that this functionality works fine for old messages.
+-   **Issue**: When sending a new message in the chat and immediately attempting to edit it, the message content is not automatically written in the input box. This issue seems to be related to the "bind" keyword. However, it is important to note that this functionality works fine for old messages.

@@ -25,13 +25,8 @@ This project consists of two repositories:
 -   [@sveltejs/adapter-vercel](https://npmjs.com/package/@sveltejs/adapter-vercel)
 -   [@sveltejs/kit](https://npmjs.com/package/@sveltejs/kit)
 -   [@sveltejs/vite-plugin-svelte](https://npmjs.com/package/@sveltejs/vite-plugin-svelte)
--   [@typescript-eslint/eslint-plugin](https://npmjs.com/package/@typescript-eslint/eslint-plugin)
--   [@typescript-eslint/parser](https://npmjs.com/package/@typescript-eslint/parser)
 -   [autoprefixer](https://npmjs.com/package/autoprefixer)
 -   [cssnano](https://npmjs.com/package/cssnano)
--   [eslint](https://npmjs.com/package/eslint)
--   [eslint-config-prettier](https://npmjs.com/package/eslint-config-prettier)
--   [eslint-plugin-svelte](https://npmjs.com/package/eslint-plugin-svelte)
 -   [phosphor-icons-svelte](https://npmjs.com/package/phosphor-icons-svelte)
 -   [pocketbase](https://npmjs.com/package/pocketbase)
 -   [pocketbase-typegen](https://npmjs.com/package/pocketbase-typegen)
@@ -41,7 +36,6 @@ This project consists of two repositories:
 -   [prettier-plugin-svelte](https://npmjs.com/package/prettier-plugin-svelte)
 -   [prettier-plugin-tailwindcss](https://npmjs.com/package/prettier-plugin-tailwindcss)
 -   [svelte](https://npmjs.com/package/svelte)
--   [svelte-check](https://npmjs.com/package/svelte-check)
 -   [svelte-copy](https://npmjs.com/package/svelte-copy)
 -   [svelte-french-toast](https://npmjs.com/package/svelte-french-toast)
 -   [svelte-loading-bar](https://npmjs.com/package/svelte-loading-bar)
@@ -49,7 +43,6 @@ This project consists of two repositories:
 -   [sveltekit-superforms](https://npmjs.com/package/sveltekit-superforms)
 -   [tailwindcss](https://npmjs.com/package/tailwindcss)
 -   [tailwindcss-addons](https://npmjs.com/package/tailwindcss-addons)
--   [tslib](https://npmjs.com/package/tslib)
 -   [typescript](https://npmjs.com/package/typescript)
 -   [vite](https://npmjs.com/package/vite)
 -   [zod](https://npmjs.com/package/zod)
@@ -110,9 +103,6 @@ Use this to log in to the PocketBase dashboard:
 -   `build`: Build SvelteKit project.
 -   `preview`: Preview the build of SvelteKit project.
 -   `prepare`: Nothing important (you don't need to run this).
--   `check`: Check for issues in the code.
--   `check:watch`: Check for issues in the code.
--   `lint`: Check for issues in the code.
 -   `format`: Format and make the code look good.
 -   `typegen`: Generate PocketBase schema types.
 

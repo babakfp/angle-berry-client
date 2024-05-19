@@ -24,7 +24,7 @@
         class="group grid gap-2 rounded bg-gray-700 p-4 sm:flex sm:items-center sm:justify-between"
     >
         <button
-            class="btn btn-gray-light absolute -top-4 h-8 w-8 rounded-full p-0 duration-200 hide inset-x-center group-hover:show"
+            class="btn btn-gray-light absolute -top-4 h-8 w-8 rounded-full p-0 duration-200 inset-x-center supports-hover:hide supports-hover:group-hover:show"
             on:click={() => (isPartlyVisible = !isPartlyVisible)}
         >
             {#if isPartlyVisible}

@@ -5,13 +5,6 @@ import defaultTheme from "tailwindcss/defaultTheme"
 
 export default {
     content: ["./src/**/*.{html,svelte}"],
-    presets: [
-        tailwindcssAddons({
-            presets: {
-                screenToDynamicScreen: true,
-            },
-        }),
-    ],
     theme: {
         extend: {
             spacing: {
@@ -63,6 +56,7 @@ export default {
         },
     },
     plugins: [
+        ...tailwindcssAddons(),
         ({ addUtilities, addComponents }) => [
             addUtilities({ ".outline-inset": {} }),
             addComponents({ ".link": {} }),

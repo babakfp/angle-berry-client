@@ -29,9 +29,11 @@
     const handleClick = (e: MouseEvent) => {
         if ($selectedMessageIds.length > 0) {
             if ($selectedMessageIds.includes(message.id)) {
-                selectedMessageIds.update(v => v.filter(v => v !== message.id))
+                selectedMessageIds.update((v) =>
+                    v.filter((v) => v !== message.id),
+                )
             } else {
-                selectedMessageIds.update(v => [...v, message.id])
+                selectedMessageIds.update((v) => [...v, message.id])
             }
             // @ts-expect-error TODO
         } else if (e.pointerType !== "mouse") {
@@ -56,7 +58,7 @@
         {$selectedMessageIds.includes(message.id) && 'bg-blue-400/10'}
         {$selectedMessageIds.length > 0 && 'cursor-pointer'}"
         transition:shrinkHeight={{ duration: 200 }}
-        on:contextmenu|preventDefault={e => {
+        on:contextmenu|preventDefault={(e) => {
             // @ts-expect-error TODO
             if (e.pointerType !== "mouse") return
             interval = highlightAnimate(highlight, interval)

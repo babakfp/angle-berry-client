@@ -35,8 +35,8 @@
                 </Th>
                 <Td class="px-6 py-4">
                     {data.tiers
-                        .filter(tier => user.retainedTiers.includes(tier.id))
-                        .map(tier => tier.name)
+                        .filter((tier) => user.retainedTiers.includes(tier.id))
+                        .map((tier) => tier.name)
                         .join(", ")}
                 </Td>
                 <Td class="px-6 py-4">

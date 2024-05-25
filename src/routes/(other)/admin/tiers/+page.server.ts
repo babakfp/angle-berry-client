@@ -45,7 +45,7 @@ export const actions = {
 
         try {
             await Promise.all(
-                form.data.ids.map(id =>
+                form.data.ids.map((id) =>
                     locals.pb.collection("tiers").delete(id),
                 ),
             )

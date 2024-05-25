@@ -29,12 +29,12 @@
     if (!$formUpdateForm.videos.length)
         $formUpdateForm.videos = data.tier.videos
 
-    $: selectedVideos = data.videos.filter(v =>
+    $: selectedVideos = data.videos.filter((v) =>
         $formUpdateForm.videos.includes(v.id),
     )
 
     const visibilityOptions = Object.values(TiersVisibilityOptions).map(
-        value => ({
+        (value) => ({
             value,
             label: capitalizeFirstLetter(value),
         }),

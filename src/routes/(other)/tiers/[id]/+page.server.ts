@@ -24,7 +24,7 @@ export const load = async ({ locals, params }) => {
             locals.user.invitedUsers.length >= tier.invites
 
         if (!isTierAccessed) {
-            tier.expand?.videos.map(video => (video.file = ""))
+            tier.expand?.videos.map((video) => (video.file = ""))
         }
 
         return {

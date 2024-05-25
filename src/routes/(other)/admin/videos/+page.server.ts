@@ -43,7 +43,7 @@ export const actions = {
 
         try {
             await Promise.all(
-                uploadForm.data.videos.map(file =>
+                uploadForm.data.videos.map((file) =>
                     locals.pb
                         .collection("videos")
                         .create({ file }, { requestKey: file.name }),
@@ -65,7 +65,7 @@ export const actions = {
 
         try {
             await Promise.all(
-                deleteForm.data.videos.map(video => {
+                deleteForm.data.videos.map((video) => {
                     return locals.pb.collection("videos").delete(video)
                 }),
             )

@@ -50,7 +50,7 @@
     <DropZone
         bind:files={videos}
         name="videos"
-        accept={formats.map(format => `.${format}`).join(",")}
+        accept={formats.map((format) => `.${format}`).join(",")}
         multiple
         error={$uploadFormErrors.videos?._errors?.[0] ||
             $uploadFormErrors.videos?.[0]?.[0] ||

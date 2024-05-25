@@ -46,7 +46,7 @@
         if ($selectedMessageIds.length > 0) {
             let copiedText = ""
             const selectedMessages = $messages.items
-                .filter(msg => $selectedMessageIds.includes(msg.id))
+                .filter((msg) => $selectedMessageIds.includes(msg.id))
                 .sort(
                     (a, b) =>
                         new Date(a.created).getTime() -
@@ -99,7 +99,7 @@
 </script>
 
 <svelte:window
-    on:keydown={e => {
+    on:keydown={(e) => {
         if (e.key === "Escape") {
             $isContextMenuOpen = false
         }

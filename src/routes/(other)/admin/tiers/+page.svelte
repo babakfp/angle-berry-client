@@ -27,7 +27,7 @@
 
     const checkAllCheckboxes = (e: Event) => {
         if ((e.target as HTMLInputElement).checked) {
-            selectedTierIds = data.tiers.map(tier => tier.id)
+            selectedTierIds = data.tiers.map((tier) => tier.id)
         } else {
             selectedTierIds = []
         }
@@ -61,7 +61,7 @@
     </Thead>
     <Tbody>
         {#each data.tiers as tier}
-            {@const usersWithThisTier = data.users.filter(user =>
+            {@const usersWithThisTier = data.users.filter((user) =>
                 user.retainedTiers.includes(tier.id),
             )}
             <Tr

@@ -50,10 +50,10 @@
         )
     })
 
-    messageIdToEdit.subscribe(id =>
+    messageIdToEdit.subscribe((id) =>
         messageInputValue.set(
             $messages.items
-                .find(msg => msg.id === id)
+                .find((msg) => msg.id === id)
                 ?.content.replaceAll("<br>", "\n") || "",
         ),
     )
@@ -108,7 +108,7 @@
                             }"`,
                         })
                 if (messagesRecords) {
-                    messages.update(_messages => ({
+                    messages.update((_messages) => ({
                         ..._messages,
                         items: [..._messages.items, ...messagesRecords.items],
                     }))
@@ -179,7 +179,7 @@
             <MessageActionPreview
                 title="Editing message"
                 content={$messages.items.filter(
-                    msg => msg.id === $messageIdToEdit,
+                    (msg) => msg.id === $messageIdToEdit,
                 )[0]?.content}
                 messageId={$messageIdToEdit}
                 on:close={() => messageIdToEdit.set(undefined)}
@@ -199,7 +199,7 @@
                 required
                 rows="1"
                 autocomplete="off"
-                on:keypress={e => {
+                on:keypress={(e) => {
                     if (
                         !isSendingMessage &&
                         e.ctrlKey &&

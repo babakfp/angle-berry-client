@@ -32,8 +32,8 @@
                 ) => {
                     if (_data.action === "update") {
                         const updatedMessage = _data.record as MessagesResponse
-                        messages.update(_messages => {
-                            _messages.items = _messages.items.map(msg => {
+                        messages.update((_messages) => {
+                            _messages.items = _messages.items.map((msg) => {
                                 if (msg.id === updatedMessage.id) {
                                     msg.content = updatedMessage.content
                                     msg.updated = updatedMessage.updated
@@ -68,7 +68,7 @@
                                 })
                         }
 
-                        messages.update(_messages => {
+                        messages.update((_messages) => {
                             _messages.items = [
                                 {
                                     ...createdMessage,
@@ -81,16 +81,16 @@
                             ]
                             return _messages
                         })
-                        unreadMessagesLength.update(v => (v += 1))
+                        unreadMessagesLength.update((v) => (v += 1))
                     } else if (_data.action === "delete") {
                         const deletedMessage = _data.record as MessagesResponse
-                        messages.update(_messages => {
+                        messages.update((_messages) => {
                             _messages.items = _messages.items.filter(
-                                m => m.id !== deletedMessage.id,
+                                (m) => m.id !== deletedMessage.id,
                             )
                             return _messages
                         })
-                        unreadMessagesLength.update(v => (v -= 1))
+                        unreadMessagesLength.update((v) => (v -= 1))
                     }
                 },
                 { requestKey: "messages-subscribe" },
@@ -121,7 +121,7 @@
                                     expand: "retainedTiers",
                                     $autoCancel: false,
                                 })
-                        events.update(_events => {
+                        events.update((_events) => {
                             _events.items = [
                                 {
                                     ...createdEvent,
@@ -136,7 +136,7 @@
                             ]
                             return _events
                         })
-                        unseenEventsLength.update(v => (v += 1))
+                        unseenEventsLength.update((v) => (v += 1))
 
                         if (createdEvent.expand?.inviter?.id === data.user.id) {
                             data.user.invitedUsers = [
@@ -146,13 +146,13 @@
                         }
                     } else if (_data.action === "delete") {
                         const deletedEvent = _data.record as EventsResponse
-                        events.update(_events => {
+                        events.update((_events) => {
                             _events.items = _events.items.filter(
-                                m => m.id !== deletedEvent.id,
+                                (m) => m.id !== deletedEvent.id,
                             )
                             return _events
                         })
-                        unseenEventsLength.update(v => (v -= 1))
+                        unseenEventsLength.update((v) => (v -= 1))
                     }
                 },
                 { requestKey: "events-subscribe" },

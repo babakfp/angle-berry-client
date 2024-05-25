@@ -23,7 +23,7 @@
             }
         } else {
             if (group.includes(value)) {
-                group = group.filter(item => item !== value)
+                group = group.filter((item) => item !== value)
             }
         }
     }

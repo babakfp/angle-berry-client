@@ -1,9 +1,9 @@
 export const preventSomeDefaultEvents = () => {
     if (process.env.NODE_ENV === "development") return
 
-    window.addEventListener("contextmenu", e => e.preventDefault())
+    window.addEventListener("contextmenu", (e) => e.preventDefault())
 
-    window.addEventListener("keydown", e => {
+    window.addEventListener("keydown", (e) => {
         if (
             isTryingToOpenDevTools(e) ||
             isTryingToSavePage(e) ||

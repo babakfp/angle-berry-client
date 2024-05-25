@@ -20,7 +20,7 @@
 </script>
 
 <svelte:window
-    on:keydown={e => {
+    on:keydown={(e) => {
         if (e.key === "Escape") isOpen = false
     }}
 />

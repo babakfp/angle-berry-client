@@ -19,7 +19,7 @@
     const handleDelete = async () => {
         try {
             const isMessageDeleted = await Promise.all(
-                $messageIdsToDelete.map(messageId =>
+                $messageIdsToDelete.map((messageId) =>
                     $pb.collection("messages").delete(messageId),
                 ),
             )
@@ -34,8 +34,8 @@
                 isReplying.set(false)
 
                 // Remove other messages reply preview to that deleted message
-                messages.update(_messages => {
-                    _messages.items = _messages.items.map(msg => {
+                messages.update((_messages) => {
+                    _messages.items = _messages.items.map((msg) => {
                         if (
                             msg.repliedTo &&
                             msg.repliedTo === $contextMenuTargetMessage?.id

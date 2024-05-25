@@ -26,7 +26,7 @@
 
     if (selectedOptionValue) {
         selectedOption = options.find(
-            option => option.value === selectedOptionValue,
+            (option) => option.value === selectedOptionValue,
         )
     }
 
@@ -41,17 +41,17 @@
     const handleSelect = (value: Option["value"]) => {
         selectedOptions = [
             ...selectedOptions,
-            ...options.filter(option => option.value === value),
+            ...options.filter((option) => option.value === value),
         ]
     }
 
     const handleSingleSelect = (value: Option["value"]) => {
-        selectedOption = options.filter(option => option.value === value)[0]
+        selectedOption = options.filter((option) => option.value === value)[0]
     }
 
     const handleDeselect = (value: Option["value"]) => {
         selectedOptions = selectedOptions.filter(
-            option => option.value !== value,
+            (option) => option.value !== value,
         )
     }
 
@@ -67,7 +67,7 @@
         value: Option["value"],
         _selectedOptions?: Option[],
     ) => {
-        return !!selectedOptions.filter(option => option.value === value)[0]
+        return !!selectedOptions.filter((option) => option.value === value)[0]
     }
 
     const isSingleSelected = (

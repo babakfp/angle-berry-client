@@ -3,7 +3,7 @@
 
     // When 1 video player volume changes, make other video player volume change too.
     const handleVolumeChange = (e: Event) => {
-        document.querySelectorAll("video").forEach(videoElement => {
+        document.querySelectorAll("video").forEach((videoElement) => {
             videoElement.volume = (e.target as HTMLVideoElement).volume
         })
     }

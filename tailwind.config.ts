@@ -1,5 +1,5 @@
 import type { Config } from "tailwindcss"
-import tailwindcssAddons from "tailwindcss-addons"
+import { allAddons } from "tailwindcss-addons"
 import colors from "tailwindcss/colors"
 import defaultTheme from "tailwindcss/defaultTheme"
 import plugin from "tailwindcss/plugin"
@@ -57,7 +57,7 @@ export default {
         },
     },
     plugins: [
-        ...tailwindcssAddons(),
+        ...allAddons(),
         plugin(({ addVariant }) => {
             addVariant("supports-hover", "@media (hover: hover)")
         }),

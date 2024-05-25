@@ -6,10 +6,7 @@ export default {
     kit: {
         adapter: adapter(),
         alias: {
-            $components: "src/lib/components",
-            $parts: "src/lib/parts",
-            $stores: "src/lib/stores",
-            $utilities: "src/lib/utilities",
+            "@": "./src",
         },
     },
     preprocess: vitePreprocess(),

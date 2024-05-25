@@ -8,7 +8,7 @@
     import Tier from "./Tier.svelte"
     import IconUserRegular from "phosphor-icons-svelte/IconUserRegular.svelte"
     import IconCrownSimpleRegular from "phosphor-icons-svelte/IconCrownSimpleRegular.svelte"
-    import type { TiersResponse, UsersResponse } from "$utilities/pb/types"
+    import type { TiersResponse, UsersResponse } from "@/lib/utilities/pb/types"
 
     export let user: UsersResponse
     export let tiers: TiersResponse[]

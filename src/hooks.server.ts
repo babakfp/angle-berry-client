@@ -1,12 +1,12 @@
-import { error } from "@sveltejs/kit"
-import PocketBase from "pocketbase"
-import { PUBLIC_POCKETBASE_URL } from "$env/static/public"
-import { pbHandleClientResponseError } from "$utilities/pb/helpers"
+import { pbHandleClientResponseError } from "@/lib/utilities/pb/helpers"
 import {
     ClientResponseError,
     type TiersResponse,
     type UsersResponse,
-} from "$utilities/pb/types"
+} from "@/lib/utilities/pb/types"
+import { error } from "@sveltejs/kit"
+import PocketBase from "pocketbase"
+import { PUBLIC_POCKETBASE_URL } from "$env/static/public"
 
 export const handle = async ({ event, resolve }) => {
     if (!PUBLIC_POCKETBASE_URL)

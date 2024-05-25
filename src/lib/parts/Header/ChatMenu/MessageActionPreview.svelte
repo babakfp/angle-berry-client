@@ -2,7 +2,7 @@
 
 <script lang="ts">
     import { createEventDispatcher } from "svelte"
-    import { goToMessage } from "$parts/Header/ChatMenu/goToMessage"
+    import { goToMessage } from "@/lib/parts/Header/ChatMenu/goToMessage"
     import IconXRegular from "phosphor-icons-svelte/IconXRegular.svelte"
 
     export let title: string

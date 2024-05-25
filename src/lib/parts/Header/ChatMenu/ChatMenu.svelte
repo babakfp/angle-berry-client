@@ -2,8 +2,8 @@
     import type { SubmitFunction } from "@sveltejs/kit"
     import { enhance } from "$app/forms"
     import { writable } from "svelte/store"
-    import { messages, unreadMessagesLength } from "$stores/messages"
-    import { pb } from "$stores/pb"
+    import { messages, unreadMessagesLength } from "@/lib/stores/messages"
+    import { pb } from "@/lib/stores/pb"
     import {
         isReplying,
         replyTargetMessage,
@@ -15,17 +15,17 @@
     import IconSpinnerRegular from "phosphor-icons-svelte/IconSpinnerRegular.svelte"
     import IconCheckRegular from "phosphor-icons-svelte/IconCheckRegular.svelte"
     import IconPaperPlaneRightRegular from "phosphor-icons-svelte/IconPaperPlaneRightRegular.svelte"
-    import PopSide from "$components/PopSide.svelte"
+    import PopSide from "@/lib/components/PopSide.svelte"
     import Message from "./Message/Message.svelte"
     import MessageActionPreview from "./MessageActionPreview.svelte"
     import ContextMenu from "./ContextMenu.svelte"
     import MessageDeleteModal from "./MessageDeleteModal.svelte"
-    import { getTextareaLineCount } from "$utilities/getTextareaLineCount"
+    import { getTextareaLineCount } from "@/lib/utilities/getTextareaLineCount"
     import type {
         ListResult,
         RealtimeMessagesResponse,
         UsersResponse,
-    } from "$utilities/pb/types"
+    } from "@/lib/utilities/pb/types"
 
     export let user: UsersResponse
     export let pbMessages: ListResult<RealtimeMessagesResponse>

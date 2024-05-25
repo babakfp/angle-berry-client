@@ -11,7 +11,7 @@
         messageInputElement,
         selectedMessageIds,
     } from "./chatStores"
-    import { messages } from "$stores/messages"
+    import { messages } from "@/lib/stores/messages"
     import IconArrowUUpLeftRegular from "phosphor-icons-svelte/IconArrowUUpLeftRegular.svelte"
     import IconPencilSimpleRegular from "phosphor-icons-svelte/IconPencilSimpleRegular.svelte"
     import IconCopySimpleRegular from "phosphor-icons-svelte/IconCopySimpleRegular.svelte"
@@ -20,7 +20,7 @@
     import IconCheckRegular from "phosphor-icons-svelte/IconCheckRegular.svelte"
     import MessageContextMenu from "./MessageContextMenu.svelte"
     import MessageContextMenuItem from "./MessageContextMenuItem.svelte"
-    import type { UsersResponse } from "$utilities/pb/types"
+    import type { UsersResponse } from "@/lib/utilities/pb/types"
 
     export let user: UsersResponse
 

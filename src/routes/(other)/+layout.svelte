@@ -2,12 +2,12 @@
     import { onDestroy, onMount } from "svelte"
     import { fly } from "svelte/transition"
     import { page } from "$app/stores"
-    import { pageTransitionValues } from "$utilities/pageTransitionValues"
-    import { messages, unreadMessagesLength } from "$stores/messages"
-    import { events, unseenEventsLength } from "$stores/events"
-    import { pbHandleClientResponseError } from "$utilities/pb/helpers"
-    import { pb } from "$stores/pb"
-    import Header from "$parts/Header/Header.svelte"
+    import { pageTransitionValues } from "@/lib/utilities/pageTransitionValues"
+    import { messages, unreadMessagesLength } from "@/lib/stores/messages"
+    import { events, unseenEventsLength } from "@/lib/stores/events"
+    import { pbHandleClientResponseError } from "@/lib/utilities/pb/helpers"
+    import { pb } from "@/lib/stores/pb"
+    import Header from "@/lib/parts/Header/Header.svelte"
     import {
         ClientResponseError,
         type RecordSubscription,
@@ -17,7 +17,7 @@
         type EventsResponse,
         type UsersResponse,
         type TiersResponse,
-    } from "$utilities/pb/types"
+    } from "@/lib/utilities/pb/types"
 
     export let data
 

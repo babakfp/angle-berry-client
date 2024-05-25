@@ -1,6 +1,6 @@
 <script lang="ts">
-    import InputNumberButtons from "$components/form/InputNumberButtons.svelte"
-    import InputWrapper from "$components/form/InputWrapper.svelte"
+    import InputNumberButtons from "@/lib/components/form/InputNumberButtons.svelte"
+    import InputWrapper from "@/lib/components/form/InputWrapper.svelte"
 
     export let label = ""
     export let required = false

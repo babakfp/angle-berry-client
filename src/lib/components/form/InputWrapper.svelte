@@ -1,6 +1,6 @@
 <script lang="ts">
-    import Label from "$components/form/Label.svelte"
-    import Description from "$components/form/Description.svelte"
+    import Label from "@/lib/components/form/Label.svelte"
+    import Description from "@/lib/components/form/Description.svelte"
 
     export let label = ""
     export let required = false

@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { pb } from "$stores/pb"
-    import { messages } from "$stores/messages"
+    import { pb } from "@/lib/stores/pb"
+    import { messages } from "@/lib/stores/messages"
     import {
         contextMenuTargetMessage,
         messageIdsToDelete,
@@ -9,7 +9,7 @@
         selectedMessageIds,
     } from "./chatStores"
     import IconSpinnerRegular from "phosphor-icons-svelte/IconSpinnerRegular.svelte"
-    import Modal from "$components/Modal.svelte"
+    import Modal from "@/lib/components/Modal.svelte"
 
     let isDeletingMessage = false
     $: isDeletePopupOpen = !!$messageIdsToDelete.length

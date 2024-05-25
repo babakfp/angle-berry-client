@@ -1,12 +1,12 @@
 <script lang="ts">
     import { page } from "$app/stores"
-    import { unreadMessagesLength } from "$stores/messages"
-    import { unseenEventsLength } from "$stores/events"
+    import { unreadMessagesLength } from "@/lib/stores/messages"
+    import { unseenEventsLength } from "@/lib/stores/events"
     import IconBellSimpleRegular from "phosphor-icons-svelte/IconBellSimpleRegular.svelte"
     import IconCrownSimpleRegular from "phosphor-icons-svelte/IconCrownSimpleRegular.svelte"
     import IconChatCenteredRegular from "phosphor-icons-svelte/IconChatCenteredRegular.svelte"
-    import Avatar from "$components/Avatar.svelte"
-    import NotificationBlob from "$components/NotificationBlob.svelte"
+    import Avatar from "@/lib/components/Avatar.svelte"
+    import NotificationBlob from "@/lib/components/NotificationBlob.svelte"
     import ChatMenu from "./ChatMenu/ChatMenu.svelte"
     import EventsMenu from "./EventsMenu/EventsMenu.svelte"
     import UserMenu from "./UserMenu/UserMenu.svelte"
@@ -16,7 +16,7 @@
         ListResult,
         RealtimeEventsResponse,
         RealtimeMessagesResponse,
-    } from "$utilities/pb/types"
+    } from "@/lib/utilities/pb/types"
 
     export let user: UsersResponse
     export let tiers: TiersResponse[]

@@ -1,4 +1,4 @@
-import { highlightAnimate } from "$utilities/highlightAnimate"
+import { highlightAnimate } from "@/lib/utilities/highlightAnimate"
 
 /**
  * Scrolls to the message with the specified ID and highlights it.

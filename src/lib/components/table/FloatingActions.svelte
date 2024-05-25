@@ -1,7 +1,7 @@
 <script lang="ts">
     import IconArrowUpRegular from "phosphor-icons-svelte/IconArrowUpRegular.svelte"
     import IconArrowDownRegular from "phosphor-icons-svelte/IconArrowDownRegular.svelte"
-    import FormBase from "$components/form/FormBase.svelte"
+    import FormBase from "@/lib/components/form/FormBase.svelte"
     import toast from "svelte-french-toast"
 
     export let selectedItemIds: string[]

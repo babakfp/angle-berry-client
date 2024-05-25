@@ -1,8 +1,8 @@
 <script lang="ts">
     import { PUBLIC_POCKETBASE_URL } from "$env/static/public"
-    import TiersTable from "$components/TiersTable.svelte"
-    import TiersTableRow from "$components/TiersTableRow.svelte"
-    import VideoPlayer from "$components/VideoPlayer.svelte"
+    import TiersTable from "@/lib/components/TiersTable.svelte"
+    import TiersTableRow from "@/lib/components/TiersTableRow.svelte"
+    import VideoPlayer from "@/lib/components/VideoPlayer.svelte"
 
     export let data
 </script>

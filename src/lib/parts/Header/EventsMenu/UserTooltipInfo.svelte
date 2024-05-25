@@ -1,7 +1,7 @@
 <script lang="ts">
-    import type { UsersResponse, TiersResponse } from "$utilities/pb/types"
-    import Tooltip from "$components/Tooltip.svelte"
-    import TooltipWrapper from "$components/TooltipWrapper.svelte"
+    import type { UsersResponse, TiersResponse } from "@/lib/utilities/pb/types"
+    import Tooltip from "@/lib/components/Tooltip.svelte"
+    import TooltipWrapper from "@/lib/components/TooltipWrapper.svelte"
 
     let isVisible = false
     export let user: UsersResponse & {

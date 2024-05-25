@@ -10,9 +10,9 @@
         TdCheckbox,
         TrOverlayAnchor,
         FloatingActions,
-    } from "$components/table/index"
+    } from "@/lib/components/table/index"
     import toast from "svelte-french-toast"
-    import { capitalizeFirstLetter } from "$utilities/capitalizeFirstLetter"
+    import { capitalizeFirstLetter } from "@/lib/utilities/capitalizeFirstLetter"
 
     export let data
     export let form

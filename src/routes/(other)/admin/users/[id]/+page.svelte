@@ -1,10 +1,10 @@
 <script lang="ts">
     import { schema } from "./schema"
     import { superForm } from "sveltekit-superforms/client"
-    import Form from "$components/form/Form.svelte"
-    import Checkbox from "$components/form/Checkbox.svelte"
-    import Input from "$components/form/Input.svelte"
-    import Select from "$components/form/Select.svelte"
+    import Form from "@/lib/components/form/Form.svelte"
+    import Checkbox from "@/lib/components/form/Checkbox.svelte"
+    import Input from "@/lib/components/form/Input.svelte"
+    import Select from "@/lib/components/form/Select.svelte"
     import toast from "svelte-french-toast"
 
     export let data

@@ -5,7 +5,7 @@
     import IconXSquareRegular from "phosphor-icons-svelte/IconXSquareRegular.svelte"
     import IconCheckCircleRegular from "phosphor-icons-svelte/IconCheckCircleRegular.svelte"
     import OutClick from "svelte-outclick"
-    import Description from "$components/form/Description.svelte"
+    import Description from "@/lib/components/form/Description.svelte"
 
     type Option = { value: string; label: string }
 

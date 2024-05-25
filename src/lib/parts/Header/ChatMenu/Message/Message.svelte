@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { shrinkHeight } from "$utilities/shrinkHeight"
+    import { shrinkHeight } from "@/lib/utilities/shrinkHeight"
     import {
         isContextMenuOpen,
         isTouchDeviceContextMenuOpen,
@@ -11,11 +11,11 @@
     import MessageReplyPreview from "./MessageReplyPreview.svelte"
     import IconCircleRegular from "phosphor-icons-svelte/IconCircleRegular.svelte"
     import IconCheckCircleRegular from "phosphor-icons-svelte/IconCheckCircleRegular.svelte"
-    import { highlightAnimate } from "$utilities/highlightAnimate"
+    import { highlightAnimate } from "@/lib/utilities/highlightAnimate"
     import type {
         RealtimeMessagesResponse,
         UsersResponse,
-    } from "$utilities/pb/types"
+    } from "@/lib/utilities/pb/types"
 
     export let user: UsersResponse
     export let message: RealtimeMessagesResponse

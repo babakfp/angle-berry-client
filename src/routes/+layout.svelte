@@ -3,7 +3,7 @@
     import { Toaster } from "svelte-french-toast"
     import { LoadingBar } from "svelte-loading-bar"
     import { preventSomeDefaultEvents } from "@/lib/utilities/preventSomeDefaultEvents"
-    import "../app.postcss"
+    import "@/app.pcss"
 
     onMount(() => {
         preventSomeDefaultEvents()

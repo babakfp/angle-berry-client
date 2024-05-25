@@ -1,4 +1,4 @@
-/** @type {import("prettier").Config & import("@trivago/prettier-plugin-sort-imports").PluginConfig} */
+/** @type {import("prettier").Config & import("prettier-plugin-svelte").PluginConfig & import("@trivago/prettier-plugin-sort-imports").PluginConfig} */
 export default {
     semi: false,
     tabWidth: 4,

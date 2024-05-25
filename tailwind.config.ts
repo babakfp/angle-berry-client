@@ -58,9 +58,6 @@ export default {
     },
     plugins: [
         ...allAddons(),
-        plugin(({ addVariant }) => {
-            addVariant("supports-hover", "@media (hover: hover)")
-        }),
         ({ addUtilities, addComponents }) => [
             addUtilities({ ".outline-inset": {} }),
             addComponents({ ".link": {} }),

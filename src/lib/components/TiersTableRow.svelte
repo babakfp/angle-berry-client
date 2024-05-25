@@ -14,7 +14,7 @@
 
 <Tr
     class="relative {!isCurrent
-        ? 'duration-200 hover:bg-white/10 not-last:border-b not-last:border-white/5'
+        ? 'duration-200 hover:bg-gray-700 not-last:border-b not-last:border-white/5'
         : ''}"
 >
     <Th class="py-4 text-white">

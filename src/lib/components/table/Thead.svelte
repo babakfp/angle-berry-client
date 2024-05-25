@@ -3,7 +3,7 @@
     export { _class as class }
 </script>
 
-<thead class="{_class} bg-white/5 text-xs uppercase">
+<thead class="{_class} border-b border-white/5 text-xs uppercase">
     <slot />
 </thead>
 

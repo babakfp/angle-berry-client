@@ -22,7 +22,7 @@
 </script>
 
 <h1 class="text-4xl font-bold text-white">{title}</h1>
-<p class="text-gray-400">{description}</p>
+<p class="mt-2 text-gray-400">{description}</p>
 
 <div class="mt-8">
     <slot />

@@ -3,7 +3,7 @@
 </script>
 
 <AnimatePageNavigation
-    class="mx-auto grid min-h-screen w-full max-w-xs content-center items-center py-12"
+    class="container min-h-screen !max-w-sm content-center py-12"
 >
     <slot />
 </AnimatePageNavigation>

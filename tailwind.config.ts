@@ -49,7 +49,7 @@ export default {
             full: "9999px",
         },
         fontFamily: {
-            sans: ["TitilliumWeb", ...defaultTheme.fontFamily.sans],
+            sans: ["Recursive", ...defaultTheme.fontFamily.sans],
         },
         fontWeight: {
             semibold: "600",

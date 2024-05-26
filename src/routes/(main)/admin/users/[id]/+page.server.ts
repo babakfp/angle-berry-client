@@ -1,3 +1,4 @@
+import { isUserACreatedBeforeUserB } from "@/lib/utilities/isUserACreatedBeforeUserB"
 import {
     pbHandleClientResponseError,
     pbHandleFormActionError,
@@ -43,12 +44,27 @@ export const actions = {
             .collection("users")
             .getOne(params.id)
 
-        if (userToEdit.isAdmin && !form.data.isAdmin) {
+        if (
+            locals.user.id !== userToEdit.id &&
+            userToEdit.isAdmin &&
+            !isUserACreatedBeforeUserB(locals.user, userToEdit)
+        ) {
             return setError(
                 form,
-                "isAdmin",
-                "Admins cannot modify their own (or other admins') admin status!",
+                "You cannot modify the data of a super admin account.",
             )
+        }
+
+        // Is admin role changed?
+        if (form.data.isAdmin !== userToEdit.isAdmin) {
+            // Is logged in user the same as the user being edited?
+            if (locals.user.id === userToEdit.id) {
+                return setError(
+                    form,
+                    "isAdmin",
+                    "You cannot modify your own admin role.",
+                )
+            }
         }
 
         try {

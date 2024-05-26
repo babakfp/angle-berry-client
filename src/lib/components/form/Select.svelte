@@ -12,6 +12,7 @@
     export let selectedOptions: Option[] = []
     export let error = ""
     export let isMultiple = true
+    export let readonly = false
     // End
 
     export let name: string
@@ -30,6 +31,7 @@
         bind:selectedOptions
         {error}
         {isMultiple}
+        {readonly}
     />
 </div>
 

@@ -6,6 +6,7 @@
     import Input from "@/lib/components/form/Input.svelte"
     import Select from "@/lib/components/form/Select.svelte"
     import toast from "svelte-french-toast"
+    import { isUserACreatedBeforeUserB } from "@/lib/utilities/isUserACreatedBeforeUserB"
 
     export let data
     export let form
@@ -37,6 +38,11 @@
         class="mt-4"
         message={form?.message}
         submitButtonText="Update"
+        submitButtonClass={data.user.id !== data.userToEdit.id &&
+        data.userToEdit.isAdmin &&
+        !isUserACreatedBeforeUserB(data.user, data.userToEdit)
+            ? "btn-brand pointer-events-none opacity-50"
+            : ""}
         {errors}
         {validateForm}
         on:redirect={() => {
@@ -62,6 +68,9 @@
             error={$errors?.retainedTiers?.[0] ??
                 form?.pb?.retainedTiers?.message}
             name="retainedTiers"
+            readonly={data.user.id !== data.userToEdit.id &&
+                data.userToEdit.isAdmin &&
+                !isUserACreatedBeforeUserB(data.user, data.userToEdit)}
         />
 
         <Checkbox
@@ -71,7 +80,9 @@
             {...$constraints.isAdmin}
             label="Role admin"
             error={$errors?.isAdmin?.[0] ?? form?.pb?.isAdmin?.message}
-            readonly={data.userToEdit.isAdmin}
+            readonly={data.user.id === data.userToEdit.id ||
+                (data.userToEdit.isAdmin &&
+                    !isUserACreatedBeforeUserB(data.user, data.userToEdit))}
         />
     </Form>
 </div>

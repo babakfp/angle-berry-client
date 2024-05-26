@@ -69,6 +69,22 @@
         {/if}
     </FormSubmitButton>
 
+    {#if $errors?._errors?.length}
+        {#if $errors?._errors?.length > 1}
+            <ul class="list-inside list-disc">
+                {#each $errors?._errors as error}
+                    <li class="text-xs text-red-400">
+                        {error}
+                    </li>
+                {/each}
+            </ul>
+        {:else}
+            <p class="text-xs text-red-400">
+                {$errors?._errors[0]}
+            </p>
+        {/if}
+    {/if}
+
     {#if message}
         {#if isRedirecting}
             <Description type="success" text={message} />

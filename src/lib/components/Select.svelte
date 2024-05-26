@@ -16,6 +16,7 @@
     export let selectedOptions: Option[] = []
     export let error = ""
     export let isMultiple = true
+    export let readonly = false
 
     let trigger: HTMLButtonElement
     let isOpen = false
@@ -94,7 +95,9 @@
     <button
         type="button"
         bind:this={trigger}
-        class="z-30 flex h-11 w-full items-center justify-between rounded bg-gray-700 px-4 hover:bg-gray-600"
+        class="z-30 flex h-11 w-full items-center justify-between rounded bg-gray-700 px-4 hover:bg-gray-600 {readonly
+            ? 'pointer-events-none opacity-50'
+            : ''}"
         on:click={handleTriggerToggle}
     >
         {#if selectedOption?.value}
@@ -159,7 +162,9 @@
                 <li class="flex items-center rounded bg-gray-700">
                     <button
                         type="button"
-                        class="flex p-1 text-gray-500 duration-150 outline-inset hover:text-white"
+                        class="flex p-1 text-gray-500 duration-150 outline-inset hover:text-white {readonly
+                            ? 'pointer-events-none opacity-50'
+                            : ''}"
                         on:click={() => handleDeselect(option.value)}
                     >
                         <IconXSquareRegular />

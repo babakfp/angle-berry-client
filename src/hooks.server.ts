@@ -22,7 +22,7 @@ export const handle = async ({ event, resolve }) => {
 
     if (event.locals.pb.authStore.isValid) {
         try {
-            event.locals.user = (
+            event.locals.loggedInUser = (
                 await event.locals.pb.collection("users").authRefresh()
             ).record as UsersResponse
         } catch (e) {

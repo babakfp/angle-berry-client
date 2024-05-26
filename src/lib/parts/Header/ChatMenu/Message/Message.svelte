@@ -17,10 +17,10 @@
         UsersResponse,
     } from "@/lib/utilities/pb/types"
 
-    export let user: UsersResponse
+    export let loggedInUser: UsersResponse
     export let message: RealtimeMessagesResponse
 
-    const isCurrentUser = message.expand.user.id === user.id
+    const isCurrentUser = message.expand.user.id === loggedInUser.id
 
     let interval: number | undefined
 

@@ -12,7 +12,7 @@
 
     events.set(pbEvents)
 
-    export let user: UsersResponse
+    export let loggedInUser: UsersResponse
     export let isOpen = false
     export let toggleButton: HTMLButtonElement
 
@@ -23,7 +23,7 @@
     {#if $events.items.length > 0}
         <ol class="overflow-y-auto overscroll-y-contain sm:text-sm">
             {#each $events.items as event (event.id)}
-                <Event {user} {event} />
+                <Event {loggedInUser} {event} />
             {/each}
             <p class="p-4 text-center text-xs text-gray-500">
                 No more events found!

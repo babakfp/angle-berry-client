@@ -4,14 +4,14 @@ import { superValidate } from "sveltekit-superforms/server"
 import { schema } from "../schema"
 
 export const load = async ({ locals }) => {
-    if (locals.user) redirect(303, "/")
+    if (locals.loggedInUser) redirect(303, "/")
     const form = await superValidate(schema)
     return { form }
 }
 
 export const actions = {
     default: async ({ locals, request }) => {
-        if (locals.user) redirect(303, "/")
+        if (locals.loggedInUser) redirect(303, "/")
 
         const form = await superValidate(request, schema)
         if (!form.valid) return fail(400, { form })

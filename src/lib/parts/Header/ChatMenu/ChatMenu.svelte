@@ -27,7 +27,7 @@
         UsersResponse,
     } from "@/lib/utilities/pb/types"
 
-    export let user: UsersResponse
+    export let loggedInUser: UsersResponse
     export let pbMessages: ListResult<RealtimeMessagesResponse>
     export let isOpen = false
     export let toggleButton: HTMLButtonElement
@@ -136,7 +136,7 @@
             on:scroll={handleScroll}
         >
             {#each $messages.items as message (message.id)}
-                <Message {user} {message} />
+                <Message {loggedInUser} {message} />
             {/each}
             {#if isFetchingOlderMessages}
                 <div class="mx-auto flex items-center gap-2 px-4 text-gray-500">
@@ -239,7 +239,7 @@
     </form>
 
     <svelte:fragment slot="outer">
-        <ContextMenu {user} />
+        <ContextMenu {loggedInUser} />
         <MessageDeleteModal />
     </svelte:fragment>
 </PopSide>

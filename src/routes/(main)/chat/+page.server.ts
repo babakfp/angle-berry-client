@@ -5,7 +5,7 @@ import { schema } from "./schema"
 
 export const actions = {
     default: async ({ locals, request }) => {
-        if (!locals.user) redirect(303, "/login")
+        if (!locals.loggedInUser) redirect(303, "/login")
 
         const form = await superValidate(request, schema)
         if (!form.valid) return fail(400, { form })
@@ -19,7 +19,7 @@ export const actions = {
             if (!form.data.messageIdToEdit) {
                 await locals.pb.collection("messages").create({
                     content: form.data.messageContent,
-                    user: locals.user.id,
+                    user: locals.loggedInUser.id,
                     repliedTo: form.data.replyedMessageId,
                 })
             } else {

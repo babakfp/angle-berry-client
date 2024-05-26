@@ -11,8 +11,8 @@ import { superValidate, withFiles } from "sveltekit-superforms/server"
 import { schema } from "./schema.js"
 
 export const load = async ({ locals }) => {
-    if (!locals.user) redirect(303, "/login")
-    if (!locals.user.isAdmin)
+    if (!locals.loggedInUser) redirect(303, "/login")
+    if (!locals.loggedInUser.isAdmin)
         error(401, "You are not authorized to see this page!")
 
     const uploadForm = await superValidate(schema.upload)
@@ -37,8 +37,8 @@ export const load = async ({ locals }) => {
 
 export const actions = {
     upload: async ({ locals, request }) => {
-        if (!locals.user) redirect(303, "/login")
-        if (!locals.user.isAdmin)
+        if (!locals.loggedInUser) redirect(303, "/login")
+        if (!locals.loggedInUser.isAdmin)
             error(401, "You are not authorized to perform this action!")
 
         const uploadForm = await superValidate(request, schema.upload)
@@ -59,8 +59,8 @@ export const actions = {
         }
     },
     delete: async ({ locals, request }) => {
-        if (!locals.user) redirect(303, "/login")
-        if (!locals.user.isAdmin)
+        if (!locals.loggedInUser) redirect(303, "/login")
+        if (!locals.loggedInUser.isAdmin)
             error(401, "You are not authorized to perform this action!")
 
         const deleteForm = await superValidate(request, schema.delete)

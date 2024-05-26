@@ -22,7 +22,7 @@
     import MessageContextMenuItem from "./MessageContextMenuItem.svelte"
     import type { UsersResponse } from "@/lib/utilities/pb/types"
 
-    export let user: UsersResponse
+    export let loggedInUser: UsersResponse
 
     let copyTimeoutId: number | undefined
 
@@ -119,7 +119,7 @@
                 on:click={replyMessage}
             />
         {/if}
-        {#if $contextMenuTargetMessage?.expand.user.id === user.id && !$selectedMessageIds.length}
+        {#if $contextMenuTargetMessage?.expand.user.id === loggedInUser.id && !$selectedMessageIds.length}
             <MessageContextMenuItem
                 title="Edit"
                 icon={IconPencilSimpleRegular}
@@ -145,7 +145,7 @@
                 on:click={copyMessage}
             />
         {/if}
-        {#if $contextMenuTargetMessage?.expand.user.id === user.id}
+        {#if $contextMenuTargetMessage?.expand.user.id === loggedInUser.id}
             {#if $selectedMessageIds.length > 0}
                 {#if $contextMenuTargetMessage && $selectedMessageIds.includes($contextMenuTargetMessage?.id)}
                     <MessageContextMenuItem

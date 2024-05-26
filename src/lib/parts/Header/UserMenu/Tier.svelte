@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { TiersResponse, UsersResponse } from "@/lib/utilities/pb/types"
 
-    export let user: UsersResponse
+    export let loggedInUser: UsersResponse
     export let tier: TiersResponse
 </script>
 
@@ -14,7 +14,7 @@
             {tier.name}
         </span>
         <div>
-            {#if user.retainedTiers.includes(tier.id) || user.invitedUsers.length >= tier.invites}
+            {#if loggedInUser.retainedTiers.includes(tier.id) || loggedInUser.invitedUsers.length >= tier.invites}
                 <span>Watch now</span>
             {:else}
                 <span class="group-hover:hidden">Locked</span>

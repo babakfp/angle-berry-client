@@ -18,7 +18,7 @@
         RealtimeMessagesResponse,
     } from "@/lib/utilities/pb/types"
 
-    export let user: UsersResponse
+    export let loggedInUser: UsersResponse
     export let tiers: TiersResponse[]
     export let pbEvents: ListResult<RealtimeEventsResponse>
     export let pbMessages: ListResult<RealtimeMessagesResponse>
@@ -44,7 +44,7 @@
             Angle Berry
         </a>
         <div class="flex">
-            {#if user.isAdmin}
+            {#if loggedInUser.isAdmin}
                 <a
                     class="group relative flex items-center px-2 outline-inset"
                     href="/admin"
@@ -97,20 +97,26 @@
                 >
                     <Avatar class="w-8 rounded-full" />
                 </button>
-                <UserMenu {user} {tiers} {userMenuToggle} bind:isUserMenuOpen />
+                <UserMenu
+                    {loggedInUser}
+                    {tiers}
+                    {userMenuToggle}
+                    bind:isUserMenuOpen
+                />
             </div>
         </div>
     </div>
 </header>
 
 <EventsMenu
-    {user}
+    {loggedInUser}
     {pbEvents}
     bind:isOpen={isEventsMenuOpen}
     toggleButton={eventsMenuToggle}
 />
+
 <ChatMenu
-    {user}
+    {loggedInUser}
     {pbMessages}
     bind:isOpen={isChatMenuOpen}
     toggleButton={chatMenuToggle}

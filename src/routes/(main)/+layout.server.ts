@@ -9,7 +9,7 @@ import {
 import { redirect } from "@sveltejs/kit"
 
 export const load = async ({ locals }) => {
-    if (!locals.user) redirect(303, "/login")
+    if (!locals.loggedInUser) redirect(303, "/login")
 
     try {
         const messages: ListResult<RealtimeMessagesResponse> = await locals.pb
@@ -29,7 +29,7 @@ export const load = async ({ locals }) => {
             .getFullList({ filter: 'visibility = "public"' })
 
         return {
-            user: locals.user,
+            loggedInUser: locals.loggedInUser,
             previewTierId: locals.previewTierId,
             messages,
             events,

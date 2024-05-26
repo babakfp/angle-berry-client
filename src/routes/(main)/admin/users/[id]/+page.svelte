@@ -18,9 +18,9 @@
         validateForm,
     } = superForm(data.form, { validators: schema })
 
-    if (!$_form.isAdmin) $_form.isAdmin = data.userToEdit.isAdmin
+    if (!$_form.isAdmin) $_form.isAdmin = data.targetUser.isAdmin
     if (!$_form.retainedTiers.length)
-        $_form.retainedTiers = data.userToEdit.retainedTiers
+        $_form.retainedTiers = data.targetUser.retainedTiers
 
     let selectedRetainedTiers = data.tiers
         .filter((tier) => $_form.retainedTiers.includes(tier.id))
@@ -30,7 +30,7 @@
 </script>
 
 <svelte:head>
-    <title>User : {data.userToEdit.username}</title>
+    <title>User : {data.targetUser.username}</title>
 </svelte:head>
 
 <div class="mx-auto w-full max-w-xs">
@@ -38,9 +38,9 @@
         class="mt-4"
         message={form?.message}
         submitButtonText="Update"
-        submitButtonClass={data.user.id !== data.userToEdit.id &&
-        data.userToEdit.isAdmin &&
-        !isUserACreatedBeforeUserB(data.user, data.userToEdit)
+        submitButtonClass={data.loggedInUser.id !== data.targetUser.id &&
+        data.targetUser.isAdmin &&
+        !isUserACreatedBeforeUserB(data.loggedInUser, data.targetUser)
             ? "btn-brand pointer-events-none opacity-50"
             : ""}
         {errors}
@@ -53,7 +53,7 @@
     >
         <Input
             label="Username"
-            value={data.userToEdit.username}
+            value={data.targetUser.username}
             readonly={true}
         />
 
@@ -68,9 +68,9 @@
             error={$errors?.retainedTiers?.[0] ??
                 form?.pb?.retainedTiers?.message}
             name="retainedTiers"
-            readonly={data.user.id !== data.userToEdit.id &&
-                data.userToEdit.isAdmin &&
-                !isUserACreatedBeforeUserB(data.user, data.userToEdit)}
+            readonly={data.loggedInUser.id !== data.targetUser.id &&
+                data.targetUser.isAdmin &&
+                !isUserACreatedBeforeUserB(data.loggedInUser, data.targetUser)}
         />
 
         <Checkbox
@@ -80,9 +80,12 @@
             {...$constraints.isAdmin}
             label="Role admin"
             error={$errors?.isAdmin?.[0] ?? form?.pb?.isAdmin?.message}
-            readonly={data.user.id === data.userToEdit.id ||
-                (data.userToEdit.isAdmin &&
-                    !isUserACreatedBeforeUserB(data.user, data.userToEdit))}
+            readonly={data.loggedInUser.id === data.targetUser.id ||
+                (data.targetUser.isAdmin &&
+                    !isUserACreatedBeforeUserB(
+                        data.loggedInUser,
+                        data.targetUser,
+                    ))}
         />
     </Form>
 </div>

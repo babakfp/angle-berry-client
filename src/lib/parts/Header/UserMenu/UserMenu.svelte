@@ -10,7 +10,7 @@
     import IconCrownSimpleRegular from "phosphor-icons-svelte/IconCrownSimpleRegular.svelte"
     import type { TiersResponse, UsersResponse } from "@/lib/utilities/pb/types"
 
-    export let user: UsersResponse
+    export let loggedInUser: UsersResponse
     export let tiers: TiersResponse[]
     export let userMenuToggle: HTMLButtonElement
     export let isUserMenuOpen = false
@@ -35,7 +35,7 @@
     >
         <li class="flex justify-between p-4">
             <span>Signed in as</span>
-            <span>{user.username}</span>
+            <span>{loggedInUser.username}</span>
         </li>
 
         <li>
@@ -44,13 +44,13 @@
                 href="/how-to-invite"
             >
                 <span>
-                    Invites: {user.invitedUsers.length}
+                    Invites: {loggedInUser.invitedUsers.length}
                 </span>
                 <span class="underline">Start inviting</span>
             </a>
         </li>
 
-        <li use:copy={`${$page.url.origin}/register?id=${user.id}`}>
+        <li use:copy={`${$page.url.origin}/register?id=${loggedInUser.id}`}>
             <button
                 type="button"
                 class="group border-y border-white/5 p-4 outline-inset"
@@ -63,7 +63,7 @@
                     Click to copy your invite link:
                 </span>
                 <p class="mt-1 select-text text-xs text-gray-500">
-                    {$page.url.origin}/register?id={user.id}
+                    {$page.url.origin}/register?id={loggedInUser.id}
                 </p>
             </button>
         </li>
@@ -71,7 +71,7 @@
         {#if tiers.length}
             <ol>
                 {#each tiers as tier}
-                    <Tier {user} {tier} />
+                    <Tier {loggedInUser} {tier} />
                 {/each}
             </ol>
         {/if}
@@ -83,9 +83,9 @@
                     class="flex w-full items-center justify-between border-t border-white/5 p-4 text-left duration-200 outline-inset hover:text-white"
                 >
                     <span>
-                        Login as {user.isAdmin ? "a User" : "an Admin"}
+                        Login as {loggedInUser.isAdmin ? "a User" : "an Admin"}
                     </span>
-                    {#if user.isAdmin}
+                    {#if loggedInUser.isAdmin}
                         <IconUserRegular class="text-xl" />
                     {:else}
                         <IconCrownSimpleRegular class="text-xl" />

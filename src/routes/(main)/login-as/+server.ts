@@ -12,23 +12,23 @@ const auth = {
 }
 
 export const GET = ({ locals }) => {
-    if (!locals.user) redirect(303, "/login")
+    if (!locals.loggedInUser) redirect(303, "/login")
     redirect(303, "/")
 }
 
 export const POST = async ({ locals }) => {
-    if (!locals.user) redirect(303, "/login")
+    if (!locals.loggedInUser) redirect(303, "/login")
 
-    if (locals.user.isAdmin) {
+    if (locals.loggedInUser.isAdmin) {
         locals.pb.authStore.clear()
-        locals.user = undefined
+        locals.loggedInUser = undefined
 
         await locals.pb
             .collection("users")
             .authWithPassword(auth.user.username, auth.user.password)
     } else {
         locals.pb.authStore.clear()
-        locals.user = undefined
+        locals.loggedInUser = undefined
 
         await locals.pb
             .collection("users")

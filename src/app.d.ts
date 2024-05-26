@@ -5,7 +5,7 @@ declare global {
     namespace App {
         interface Locals {
             pb: PocketBase
-            user?: UsersResponse
+            loggedInUser?: UsersResponse
             previewTierId?: string
         }
     }

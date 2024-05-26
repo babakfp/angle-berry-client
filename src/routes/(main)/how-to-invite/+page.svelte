@@ -8,7 +8,7 @@
     export let data
 
     const copyInviteLink = () => {
-        copyText(`${$page.url.origin}/register?id=${data.user.id}`)
+        copyText(`${$page.url.origin}/register?id=${data.loggedInUser.id}`)
         toast.success("Your invite link is copied to Clipboard.", {
             position: "bottom-right",
         })
@@ -25,7 +25,7 @@
     <Input
         name="userInviteLink"
         label="Your invite link"
-        value="{$page.url.origin}/register?id={data.user.id}"
+        value="{$page.url.origin}/register?id={data.loggedInUser.id}"
         readonly
     >
         <InputTextButton slot="buttons" text="Copy" on:click={copyInviteLink} />

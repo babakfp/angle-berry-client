@@ -1,16 +1,16 @@
 import { redirect } from "@sveltejs/kit"
 
 export const GET = ({ locals }) => {
-    if (locals.user) {
+    if (locals.loggedInUser) {
         redirect(303, "/")
     }
     redirect(303, "/login")
 }
 
 export const POST = ({ locals }) => {
-    if (locals.user) {
+    if (locals.loggedInUser) {
         locals.pb.authStore.clear()
-        locals.user = undefined
+        locals.loggedInUser = undefined
     }
     redirect(303, "/login")
 }

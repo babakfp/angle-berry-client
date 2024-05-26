@@ -138,9 +138,12 @@
                         })
                         unseenEventsLength.update((v) => (v += 1))
 
-                        if (createdEvent.expand?.inviter?.id === data.user.id) {
-                            data.user.invitedUsers = [
-                                ...data.user.invitedUsers,
+                        if (
+                            createdEvent.expand?.inviter?.id ===
+                            data.loggedInUser.id
+                        ) {
+                            data.loggedInUser.invitedUsers = [
+                                ...data.loggedInUser.invitedUsers,
                                 createdEvent.expand.user.id,
                             ]
                         }
@@ -172,7 +175,7 @@
 </script>
 
 <Header
-    user={data.user}
+    loggedInUser={data.loggedInUser}
     tiers={data.tiers}
     pbEvents={data.events}
     pbMessages={data.messages}

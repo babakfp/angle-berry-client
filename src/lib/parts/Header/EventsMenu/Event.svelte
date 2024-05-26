@@ -6,7 +6,7 @@
     } from "@/lib/utilities/pb/types"
     import UserTooltipInfo from "./UserTooltipInfo.svelte"
 
-    export let user: UsersResponse
+    export let loggedInUser: UsersResponse
     export let event: RealtimeEventsResponse
 </script>
 
@@ -15,7 +15,7 @@
     transition:fly={{ x: 64, duration: 500 }}
 >
     {#if !event.expand?.inviter}
-        {#if event.expand.user.id === user.id}
+        {#if event.expand.user.id === loggedInUser.id}
             <p>
                 Welcome <UserTooltipInfo user={event.expand.user} />. You have
                 successfully joined this fantastic website. We hope you have a
@@ -27,7 +27,7 @@
                 has successfully joined this website.
             </p>
         {/if}
-    {:else if event.expand.user.id === user.id}
+    {:else if event.expand.user.id === loggedInUser.id}
         <p>
             Welcome, <UserTooltipInfo user={event.expand.user} />. You have
             successfully joined this fantastic website. We hope you have a

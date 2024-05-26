@@ -12,8 +12,8 @@ import { superValidate } from "sveltekit-superforms/server"
 import { schema } from "../schema"
 
 export const load = async ({ locals, params }) => {
-    if (!locals.user) redirect(303, "/login")
-    if (!locals.user.isAdmin)
+    if (!locals.loggedInUser) redirect(303, "/login")
+    if (!locals.loggedInUser.isAdmin)
         error(401, "You are not authorized to see this page!")
 
     const formUpdate = await superValidate(schema.update)
@@ -37,8 +37,8 @@ export const load = async ({ locals, params }) => {
 
 export const actions = {
     update: async ({ locals, request, params }) => {
-        if (!locals.user) redirect(303, "/login")
-        if (!locals.user.isAdmin)
+        if (!locals.loggedInUser) redirect(303, "/login")
+        if (!locals.loggedInUser.isAdmin)
             error(401, "You are not authorized to perform this action!")
 
         const formUpdate = await superValidate(request, schema.update)
@@ -57,8 +57,8 @@ export const actions = {
         redirect(303, "/admin/tiers")
     },
     delete: async ({ locals, request, params }) => {
-        if (!locals.user) redirect(303, "/login")
-        if (!locals.user.isAdmin)
+        if (!locals.loggedInUser) redirect(303, "/login")
+        if (!locals.loggedInUser.isAdmin)
             error(401, "You are not authorized to perform this action!")
 
         const formDelete = await superValidate(request, schema.delete.single)

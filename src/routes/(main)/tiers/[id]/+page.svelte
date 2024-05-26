@@ -15,13 +15,18 @@
 
 <!-- I don't need "tiers" here becaus we only use currentTier -->
 <TiersTable class="mt-8">
-    <TiersTableRow user={data.user} tier={data.tier} isCurrent={true} />
+    <TiersTableRow
+        loggedInUser={data.loggedInUser}
+        tier={data.tier}
+        isCurrent={true}
+    />
 </TiersTable>
 
 {#if !data.isTierAccessed}
     <p class="mt-8">
         You don't have access to this tier. You can invite {data?.tier.invites} users
-        to get the access. You currently have {data?.user.invitedUsers.length} invites.
+        to get the access. You currently have {data.loggedInUser.invitedUsers
+            .length} invites.
         <a class="link" href="/how-to-invite">Learn how to invite</a>. When you
         had enough invites, please refresh the page and it will unlock
         automatically.

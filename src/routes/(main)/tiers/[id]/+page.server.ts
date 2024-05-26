@@ -7,7 +7,7 @@ import {
 import { redirect } from "@sveltejs/kit"
 
 export const load = async ({ locals, params }) => {
-    if (!locals.user) redirect(303, "/login")
+    if (!locals.loggedInUser) redirect(303, "/login")
 
     try {
         const tier: TiersResponse & {
@@ -20,8 +20,8 @@ export const load = async ({ locals, params }) => {
 
         const isTierAccessed =
             params.id === locals.previewTierId ||
-            locals.user.retainedTiers.includes(params.id) ||
-            locals.user.invitedUsers.length >= tier.invites
+            locals.loggedInUser.retainedTiers.includes(params.id) ||
+            locals.loggedInUser.invitedUsers.length >= tier.invites
 
         if (!isTierAccessed) {
             tier.expand?.videos.map((video) => (video.file = ""))

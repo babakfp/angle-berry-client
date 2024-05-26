@@ -2,14 +2,14 @@
     import type { TiersResponse, UsersResponse } from "@/lib/utilities/pb/types"
     import { Tr, Th, Td } from "@/lib/components/table/index"
 
-    export let user: UsersResponse
+    export let loggedInUser: UsersResponse
     export let tier: TiersResponse
     export let isCurrent = false
 
-    // Does current user has access to this tier
+    // Does the logged-in user has access to this tier
     const hasAccess =
-        user.retainedTiers.includes(tier.id) ||
-        user.invitedUsers.length >= tier.invites
+        loggedInUser.retainedTiers.includes(tier.id) ||
+        loggedInUser.invitedUsers.length >= tier.invites
 </script>
 
 <Tr

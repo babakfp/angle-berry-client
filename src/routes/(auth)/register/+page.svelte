@@ -25,13 +25,7 @@
     <title>Register</title>
 </svelte:head>
 
-<AuthWrapper
-    title="Register"
-    description="Welcome, please enter your details."
-    otherAuthPageTitle="Already have an account?"
-    otherAuthPageLinkTitle="Login here"
-    otherAuthPageLink="/login"
->
+<AuthWrapper title="Register" description="Welcome, please enter your details.">
     <Form
         message={form?.message}
         submitButtonText="Register & Login"

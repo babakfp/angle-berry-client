@@ -39,9 +39,6 @@
 <AuthWrapper
     title="Login"
     description="Welcome back! Please enter your details."
-    otherAuthPageTitle="Don't have an account?"
-    otherAuthPageLinkTitle="Register here"
-    otherAuthPageLink="/register"
 >
     <Form
         message={form?.message}

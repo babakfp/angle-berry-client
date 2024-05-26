@@ -8,7 +8,10 @@ export const actions = {
         if (!locals.loggedInUser) redirect(303, "/login")
 
         const form = await superValidate(request, schema)
-        if (!form.valid) return fail(400, { form })
+
+        if (!form.valid) {
+            return fail(400, { form })
+        }
 
         form.data.messageContent = form.data.messageContent.replace(
             /(?:\r\n|\r|\n)/g,

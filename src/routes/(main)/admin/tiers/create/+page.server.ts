@@ -37,7 +37,10 @@ export const actions = {
             error(401, "You are not authorized to perform this action!")
 
         const form = await superValidate(request, schema.create)
-        if (!form.valid) return fail(400, { form })
+
+        if (!form.valid) {
+            return fail(400, { form })
+        }
 
         try {
             await locals.pb.collection("tiers").create(form.data)

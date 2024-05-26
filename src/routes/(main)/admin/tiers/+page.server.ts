@@ -41,7 +41,10 @@ export const actions = {
             error(401, "You are not authorized to perform this action!")
 
         const form = await superValidate(request, schema.delete.multiple)
-        if (!form.valid) return fail(400, { form })
+
+        if (!form.valid) {
+            return fail(400, { form })
+        }
 
         try {
             await Promise.all(

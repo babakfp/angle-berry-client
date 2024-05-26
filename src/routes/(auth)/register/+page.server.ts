@@ -11,17 +11,26 @@ import { superValidate } from "sveltekit-superforms/server"
 import { schema } from "../(lib)/schema"
 
 export const load = async ({ locals }) => {
-    if (locals.loggedInUser) redirect(303, "/")
-    const form = await superValidate(schema)
-    return { form }
+    if (locals.loggedInUser) {
+        redirect(303, "/")
+    }
+
+    return {
+        form: await superValidate(schema),
+    }
 }
 
 export const actions = {
     default: async ({ locals, request, url }) => {
-        if (locals.loggedInUser) redirect(303, "/")
+        if (locals.loggedInUser) {
+            redirect(303, "/")
+        }
 
         const form = await superValidate(request, schema)
-        if (!form.valid) return fail(400, { form })
+
+        if (!form.valid) {
+            return fail(400, { form })
+        }
 
         let inviter: UsersResponse | undefined = undefined
         const inviterId = url.searchParams.get("id")

@@ -1,12 +1,12 @@
 <script lang="ts">
-    export let _class = ""
-    export { _class as class }
+    export let class_ = ""
+    export { class_ as class }
     export let text: string
     export let type: "error" | "success"
 </script>
 
 <p
-    class="{_class} text-xs"
+    class="{class_} text-xs"
     class:text-red-400={type === "error"}
     class:text-green-400={type === "success"}
 >

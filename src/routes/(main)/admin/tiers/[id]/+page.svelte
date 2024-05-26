@@ -16,21 +16,21 @@
     export let form
 
     const {
-        form: formUpdateForm,
-        errors: formUpdateErrors,
-        constraints: formUpdateConstraints,
-        validateForm: formUpdateValidateForm,
-        formId: formUpdateFormId,
+        form: updateFormData,
+        errors: updateFormErrors,
+        constraints: updateFormConstraints,
+        validateForm: updateFormValidate,
+        formId: updateFormId,
     } = superForm(data.formUpdate, { validators: schema.update })
 
-    if (!$formUpdateForm.name) $formUpdateForm.name = data.tier.name
-    if (!$formUpdateForm.price) $formUpdateForm.price = data.tier.price
-    if (!$formUpdateForm.invites) $formUpdateForm.invites = data.tier.invites
-    if (!$formUpdateForm.videos.length)
-        $formUpdateForm.videos = data.tier.videos
+    if (!$updateFormData.name) $updateFormData.name = data.tier.name
+    if (!$updateFormData.price) $updateFormData.price = data.tier.price
+    if (!$updateFormData.invites) $updateFormData.invites = data.tier.invites
+    if (!$updateFormData.videos.length)
+        $updateFormData.videos = data.tier.videos
 
     $: selectedVideos = data.videos.filter((v) =>
-        $formUpdateForm.videos.includes(v.id),
+        $updateFormData.videos.includes(v.id),
     )
 
     const visibilityOptions = Object.values(TiersVisibilityOptions).map(
@@ -46,15 +46,15 @@
     }
 
     $: {
-        $formUpdateForm.visibility = selectedVisibility.value
+        $updateFormData.visibility = selectedVisibility.value
     }
 
     let isGalleryPopupOpen = false
 
     const {
-        errors: formDeleteErrors,
-        validateForm: formDeleteValidateForm,
-        formId: formDeleteFormId,
+        errors: deleteFormErrors,
+        validateForm: deleteFormValidate,
+        formId: deleteFormId,
     } = superForm(data.formDelete, { validators: schema.delete.single })
 </script>
 
@@ -65,10 +65,10 @@
 <div class="mx-auto w-full max-w-xs">
     <Form
         action="?/update"
-        message={form?.id === $formUpdateFormId && form?.message}
+        message={form?.id === $updateFormId && form?.message}
         submitButtonText="Update"
-        errors={formUpdateErrors}
-        validateForm={formUpdateValidateForm}
+        errors={updateFormErrors}
+        validateForm={updateFormValidate}
         on:redirect={() => {
             toast.success("Updated successfully!", {
                 position: "bottom-right",
@@ -79,29 +79,29 @@
             type="text"
             label="Name"
             name="name"
-            bind:value={$formUpdateForm.name}
+            bind:value={$updateFormData.name}
             placeholder={data.tier.name}
-            error={$formUpdateErrors?.name?.[0] ?? form?.pb?.name?.message}
-            {...$formUpdateConstraints.name}
+            error={$updateFormErrors?.name?.[0] ?? form?.pb?.name?.message}
+            {...$updateFormConstraints.name}
         />
         <Input
             type="number"
             label="Price"
             name="price"
-            bind:value={$formUpdateForm.price}
+            bind:value={$updateFormData.price}
             placeholder={`${data.tier.price}`}
-            error={$formUpdateErrors?.price?.[0] ?? form?.pb?.price?.message}
-            {...$formUpdateConstraints.price}
+            error={$updateFormErrors?.price?.[0] ?? form?.pb?.price?.message}
+            {...$updateFormConstraints.price}
         />
         <Input
             type="number"
             label="Invites"
             name="invites"
-            bind:value={$formUpdateForm.invites}
+            bind:value={$updateFormData.invites}
             placeholder={`${data.tier.invites}`}
-            error={$formUpdateErrors?.invites?.[0] ??
+            error={$updateFormErrors?.invites?.[0] ??
                 form?.pb?.invites?.message}
-            {...$formUpdateConstraints.invites}
+            {...$updateFormConstraints.invites}
         />
         <Select
             label="Visibility"
@@ -109,9 +109,9 @@
             options={visibilityOptions}
             bind:selectedOption={selectedVisibility}
             isMultiple={false}
-            error={$formUpdateErrors?.visibility?.[0] ??
+            error={$updateFormErrors?.visibility?.[0] ??
                 form?.pb?.visibility?.message}
-            {...$formUpdateConstraints.visibility}
+            {...$updateFormConstraints.visibility}
             name="visibility"
         />
         <ul class="grid gap-4 rounded bg-gray-700 p-2">
@@ -119,8 +119,8 @@
                 <li transition:fade>
                     <VideoGalleryItem
                         src="{PUBLIC_POCKETBASE_URL}/api/files/{video.collectionName}/{video.id}/{video.file}"
-                        checked={$formUpdateForm.videos.includes(video.id)}
-                        bind:group={$formUpdateForm.videos}
+                        checked={$updateFormData.videos.includes(video.id)}
+                        bind:group={$updateFormData.videos}
                         value={video.id}
                         name="videos"
                     />
@@ -140,11 +140,11 @@
 
     <Form
         action="?/delete"
-        message={form?.id === $formDeleteFormId && form?.message}
+        message={form?.id === $deleteFormId && form?.message}
         submitButtonText="Delete"
         submitButtonClass="btn-danger"
-        errors={formDeleteErrors}
-        validateForm={formDeleteValidateForm}
+        errors={deleteFormErrors}
+        validateForm={deleteFormValidate}
         on:redirect={() => {
             toast.success("Deleted successfully!", {
                 position: "bottom-right",
@@ -163,8 +163,8 @@
             <li>
                 <VideoGalleryItem
                     src="{PUBLIC_POCKETBASE_URL}/api/files/{video.collectionName}/{video.id}/{video.file}"
-                    checked={$formUpdateForm.videos.includes(video.id)}
-                    bind:group={$formUpdateForm.videos}
+                    checked={$updateFormData.videos.includes(video.id)}
+                    bind:group={$updateFormData.videos}
                     value={video.id}
                 />
             </li>

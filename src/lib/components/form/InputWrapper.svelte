@@ -4,14 +4,14 @@
 
     export let label = ""
     export let required = false
-    export let _for = ""
-    export { _for as for }
+    export let for_ = ""
+    export { for_ as for }
     export let error = ""
 </script>
 
 <div class="group grid">
     {#if label}
-        <Label {label} {required} for={_for} />
+        <Label class="justify-self-start" {label} {required} for={for_} />
     {/if}
 
     <div class="relative">

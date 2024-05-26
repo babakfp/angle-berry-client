@@ -1,8 +1,5 @@
 <script lang="ts">
     import { onDestroy, onMount } from "svelte"
-    import { fly } from "svelte/transition"
-    import { page } from "$app/stores"
-    import { pageTransitionValues } from "@/lib/utilities/pageTransitionValues"
     import { messages, unreadMessagesLength } from "@/lib/stores/messages"
     import { events, unseenEventsLength } from "@/lib/stores/events"
     import { pbHandleClientResponseError } from "@/lib/utilities/pb/helpers"
@@ -18,6 +15,7 @@
         type UsersResponse,
         type TiersResponse,
     } from "@/lib/utilities/pb/types"
+    import AnimatePageNavigation from "@/lib/components/AnimatePageNavigation.svelte"
 
     export let data
 
@@ -26,14 +24,14 @@
             await $pb.collection("messages").subscribe(
                 "*",
                 async (
-                    _data: RecordSubscription<
+                    e: RecordSubscription<
                         MessagesResponse | RealtimeMessagesResponse
                     >,
                 ) => {
-                    if (_data.action === "update") {
-                        const updatedMessage = _data.record as MessagesResponse
-                        messages.update((_messages) => {
-                            _messages.items = _messages.items.map((msg) => {
+                    if (e.action === "update") {
+                        const updatedMessage = e.record as MessagesResponse
+                        messages.update((messages_) => {
+                            messages_.items = messages_.items.map((msg) => {
                                 if (msg.id === updatedMessage.id) {
                                     msg.content = updatedMessage.content
                                     msg.updated = updatedMessage.updated
@@ -49,11 +47,11 @@
                                 }
                                 return msg
                             })
-                            return _messages
+                            return messages_
                         })
-                    } else if (_data.action === "create") {
+                    } else if (e.action === "create") {
                         const createdMessage =
-                            _data.record as RealtimeMessagesResponse
+                            e.record as RealtimeMessagesResponse
                         const userRecord: UsersResponse = await $pb
                             .collection("users")
                             .getOne(createdMessage.user)
@@ -68,8 +66,8 @@
                                 })
                         }
 
-                        messages.update((_messages) => {
-                            _messages.items = [
+                        messages.update((messages_) => {
+                            messages_.items = [
                                 {
                                     ...createdMessage,
                                     expand: {
@@ -77,18 +75,18 @@
                                         repliedTo: repliedToRecord,
                                     },
                                 },
-                                ..._messages.items,
+                                ...messages_.items,
                             ]
-                            return _messages
+                            return messages_
                         })
                         unreadMessagesLength.update((v) => (v += 1))
-                    } else if (_data.action === "delete") {
-                        const deletedMessage = _data.record as MessagesResponse
-                        messages.update((_messages) => {
-                            _messages.items = _messages.items.filter(
+                    } else if (e.action === "delete") {
+                        const deletedMessage = e.record as MessagesResponse
+                        messages.update((messages_) => {
+                            messages_.items = messages_.items.filter(
                                 (m) => m.id !== deletedMessage.id,
                             )
-                            return _messages
+                            return messages_
                         })
                         unreadMessagesLength.update((v) => (v -= 1))
                     }
@@ -97,10 +95,9 @@
             )
             await $pb.collection("events").subscribe(
                 "*",
-                async (_data: RecordSubscription<EventsResponse>) => {
-                    if (_data.action === "create") {
-                        const createdEvent =
-                            _data.record as RealtimeEventsResponse
+                async (e: RecordSubscription<EventsResponse>) => {
+                    if (e.action === "create") {
+                        const createdEvent = e.record as RealtimeEventsResponse
                         const userRecord: UsersResponse & {
                             expand: { retainedTiers: TiersResponse[] }
                         } = await $pb
@@ -121,8 +118,8 @@
                                     expand: "retainedTiers",
                                     $autoCancel: false,
                                 })
-                        events.update((_events) => {
-                            _events.items = [
+                        events.update((events_) => {
+                            events_.items = [
                                 {
                                     ...createdEvent,
                                     expand: {
@@ -132,9 +129,9 @@
                                             : {}),
                                     },
                                 },
-                                ..._events.items,
+                                ...events_.items,
                             ]
-                            return _events
+                            return events_
                         })
                         unseenEventsLength.update((v) => (v += 1))
 
@@ -147,13 +144,13 @@
                                 createdEvent.expand.user.id,
                             ]
                         }
-                    } else if (_data.action === "delete") {
-                        const deletedEvent = _data.record as EventsResponse
-                        events.update((_events) => {
-                            _events.items = _events.items.filter(
+                    } else if (e.action === "delete") {
+                        const deletedEvent = e.record as EventsResponse
+                        events.update((events_) => {
+                            events_.items = events_.items.filter(
                                 (m) => m.id !== deletedEvent.id,
                             )
-                            return _events
+                            return events_
                         })
                         unseenEventsLength.update((v) => (v -= 1))
                     }
@@ -181,11 +178,8 @@
     pbMessages={data.messages}
 />
 
-{#key $page.url.pathname}
-    <main
-        class="container grid min-h-screen-minus-header content-start items-start py-12"
-        in:fly={pageTransitionValues}
-    >
-        <slot />
-    </main>
-{/key}
+<AnimatePageNavigation
+    class="container grid min-h-screen-minus-header content-start items-start py-12"
+>
+    <slot />
+</AnimatePageNavigation>

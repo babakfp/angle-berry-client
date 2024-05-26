@@ -3,8 +3,8 @@
     import IconCheckSquareRegular from "phosphor-icons-svelte/IconCheckSquareRegular.svelte"
     import Description from "./Description.svelte"
 
-    export let _class = ""
-    export { _class as class }
+    export let class_ = ""
+    export { class_ as class }
     export let checked = false
     export let value = "on"
     export let group: string[] = []
@@ -31,7 +31,7 @@
 
 <div class="grid">
     <label
-        class="{_class} inline-flex cursor-pointer items-center gap-2 hover:text-white
+        class="{class_} inline-flex cursor-pointer items-center gap-2 hover:text-white
     {(disabled || readonly) && 'pointer-events-none opacity-50'}"
     >
         <div

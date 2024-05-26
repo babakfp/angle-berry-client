@@ -16,7 +16,7 @@
     export let form
 
     const {
-        form: _form,
+        form: formData,
         errors,
         constraints,
         validateForm,
@@ -45,7 +45,7 @@
             type="text"
             label="Name"
             name="name"
-            bind:value={$_form.name}
+            bind:value={$formData.name}
             error={$errors?.name?.[0] ?? form?.pb?.name?.message}
             {...$constraints.name}
         />
@@ -53,7 +53,7 @@
             type="number"
             label="Price"
             name="price"
-            bind:value={$_form.price}
+            bind:value={$formData.price}
             error={$errors?.price?.[0] ?? form?.pb?.price?.message}
             {...$constraints.price}
         />
@@ -61,7 +61,7 @@
             type="number"
             label="Invites"
             name="invites"
-            bind:value={$_form.invites}
+            bind:value={$formData.invites}
             error={$errors?.invites?.[0] ?? form?.pb?.invites?.message}
             {...$constraints.invites}
         />
@@ -72,22 +72,22 @@
                 value,
                 label: capitalizeFirstLetter(value),
             }))}
-            bind:selectedOptionValue={$_form.visibility}
+            bind:selectedOptionValue={$formData.visibility}
             isMultiple={false}
             error={$errors?.visibility?.[0] ?? form?.pb?.visibility?.message}
             {...$constraints.visibility}
             name="visibility"
         />
         <ul class="grid gap-4 rounded bg-gray-700 p-2">
-            {#each $_form.videos as id (id)}
+            {#each $formData.videos as id (id)}
                 {@const video = data.videos.filter(
                     (video) => video.id === id,
                 )[0]}
                 <li transition:fade>
                     <VideoGalleryItem
                         src="{PUBLIC_POCKETBASE_URL}/api/files/{video.collectionName}/{video.id}/{video.file}"
-                        checked={$_form.videos.includes(video.id)}
-                        bind:group={$_form.videos}
+                        checked={$formData.videos.includes(video.id)}
+                        bind:group={$formData.videos}
                         value={video.id}
                         name="videos"
                     />
@@ -114,8 +114,8 @@
             <li>
                 <VideoGalleryItem
                     src="{PUBLIC_POCKETBASE_URL}/api/files/{video.collectionName}/{video.id}/{video.file}"
-                    checked={$_form.videos.includes(video.id)}
-                    bind:group={$_form.videos}
+                    checked={$formData.videos.includes(video.id)}
+                    bind:group={$formData.videos}
                     value={video.id}
                 />
             </li>

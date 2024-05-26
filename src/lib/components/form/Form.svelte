@@ -19,8 +19,8 @@
         | undefined = undefined
     export let action = ""
     export let canUpload = false
-    export let _class = ""
-    export { _class as class }
+    export let class_ = ""
+    export { class_ as class }
 
     let isSubmitting = false
     let isRedirecting = false
@@ -43,7 +43,7 @@
 </script>
 
 <FormBase
-    class="grid gap-4 {_class} {(isSubmitting || isRedirecting) &&
+    class="grid gap-4 {class_} {(isSubmitting || isRedirecting) &&
         'pointer-events-none'}"
     {action}
     {canUpload}

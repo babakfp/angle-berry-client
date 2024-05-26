@@ -12,7 +12,7 @@
     export let form
 
     const {
-        form: _form,
+        form: formData,
         capture,
         restore,
         errors,
@@ -26,8 +26,8 @@
         const demoPassword = $page.url.searchParams.get("password")
 
         if (demoUsername && demoPassword) {
-            $_form.username = demoUsername
-            $_form.password = demoPassword
+            $formData.username = demoUsername
+            $formData.password = demoPassword
         }
     }
 </script>
@@ -55,12 +55,12 @@
         }}
     >
         <UsernameField
-            bind:value={$_form.username}
+            bind:value={$formData.username}
             error={$errors?.username?.[0] ?? form?.pb?.username?.message}
             {...$constraints.username}
         />
         <PasswordField
-            bind:value={$_form.password}
+            bind:value={$formData.password}
             autocomplete="current-password"
             error={$errors?.password?.[0] ?? form?.pb?.password?.message}
             {...$constraints.password}

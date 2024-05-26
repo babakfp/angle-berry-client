@@ -14,8 +14,8 @@
         | undefined = undefined
     export let action = ""
     export let canUpload = false
-    export let _class = ""
-    export { _class as class }
+    export let class_ = ""
+    export { class_ as class }
 
     const handleFormSubmit: SubmitFunction = async ({ cancel }) => {
         dispatch("submit")
@@ -39,7 +39,7 @@
 </script>
 
 <form
-    class={_class}
+    class={class_}
     method="post"
     use:enhance={handleFormSubmit}
     novalidate

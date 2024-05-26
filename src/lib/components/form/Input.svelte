@@ -17,8 +17,8 @@
     export let readonly = false
     export let pattern: string | undefined = undefined
 
-    export let _class = ""
-    export { _class as class }
+    export let class_ = ""
+    export { class_ as class }
 
     export let error = ""
 
@@ -33,7 +33,7 @@
 
 <InputWrapper {label} {required} for={name} {error}>
     <input
-        class="{_class} peer block h-11 w-full rounded border-2 border-gray-700 bg-transparent px-4 reset-autofill-input placeholder:text-xs placeholder:text-gray-500
+        class="{class_} peer block h-11 w-full rounded border-2 border-gray-700 bg-transparent px-4 reset-autofill-input placeholder:text-xs placeholder:text-gray-500
                 {type === 'number' ? 'reset-number-input' : ''}"
         {type}
         {value}

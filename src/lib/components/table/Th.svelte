@@ -1,8 +1,8 @@
 <script lang="ts">
-    export let _class = ""
-    export { _class as class }
+    export let class_ = ""
+    export { class_ as class }
 </script>
 
-<th class="{_class} px-6">
+<th class="{class_} px-6">
     <slot />
 </th>

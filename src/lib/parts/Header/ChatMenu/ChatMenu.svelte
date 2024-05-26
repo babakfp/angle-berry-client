@@ -108,9 +108,9 @@
                             }"`,
                         })
                 if (messagesRecords) {
-                    messages.update((_messages) => ({
-                        ..._messages,
-                        items: [..._messages.items, ...messagesRecords.items],
+                    messages.update((messages_) => ({
+                        ...messages_,
+                        items: [...messages_.items, ...messagesRecords.items],
                     }))
                     isFetchingOlderMessages = false
                     pageNumberFortheNextOlderMessagesToFetch += 1

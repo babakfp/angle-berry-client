@@ -1,9 +1,9 @@
 <script lang="ts">
-    export let _class = ""
-    export { _class as class }
+    export let class_ = ""
+    export { class_ as class }
 </script>
 
-<thead class="{_class} border-b border-white/5 text-xs uppercase">
+<thead class="{class_} border-b border-white/5 text-xs uppercase">
     <slot />
 </thead>
 

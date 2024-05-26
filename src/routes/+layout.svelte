@@ -11,5 +11,7 @@
 </script>
 
 <LoadingBar />
+
 <slot />
+
 <Toaster />

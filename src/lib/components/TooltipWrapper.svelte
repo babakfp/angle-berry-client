@@ -1,8 +1,8 @@
 <script lang="ts">
-    export let _class = ""
-    export { _class as class }
+    export let class_ = ""
+    export { class_ as class }
 </script>
 
-<div class="{_class} group relative inline-block">
+<div class="{class_} group relative inline-block">
     <slot />
 </div>

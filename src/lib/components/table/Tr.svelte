@@ -1,8 +1,8 @@
 <script lang="ts">
-    export let _class = ""
-    export { _class as class }
+    export let class_ = ""
+    export { class_ as class }
 </script>
 
-<tr class="{_class} group/tr">
+<tr class="{class_} group/tr">
     <slot />
 </tr>

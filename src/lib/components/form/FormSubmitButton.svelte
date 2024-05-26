@@ -1,12 +1,12 @@
 <script lang="ts">
     export let disabled = false
-    export let _class = ""
-    export { _class as class }
+    export let class_ = ""
+    export { class_ as class }
 </script>
 
 <button
     type="submit"
-    class="{_class || 'btn-brand'} btn h-14 w-full active:scale-95"
+    class="{class_ || 'btn-brand'} btn h-14 w-full active:scale-95"
     {disabled}
 >
     <slot />

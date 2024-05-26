@@ -12,21 +12,21 @@
     export let form
 
     const {
-        form: _form,
+        form: formData,
         errors,
         constraints,
         validateForm,
     } = superForm(data.form, { validators: schema })
 
-    if (!$_form.isAdmin) $_form.isAdmin = data.targetUser.isAdmin
-    if (!$_form.retainedTiers.length)
-        $_form.retainedTiers = data.targetUser.retainedTiers
+    if (!$formData.isAdmin) $formData.isAdmin = data.targetUser.isAdmin
+    if (!$formData.retainedTiers.length)
+        $formData.retainedTiers = data.targetUser.retainedTiers
 
     let selectedRetainedTiers = data.tiers
-        .filter((tier) => $_form.retainedTiers.includes(tier.id))
+        .filter((tier) => $formData.retainedTiers.includes(tier.id))
         .map((tier) => ({ value: tier.id, label: tier.name }))
 
-    $: $_form.retainedTiers = selectedRetainedTiers.map((tier) => tier.value)
+    $: $formData.retainedTiers = selectedRetainedTiers.map((tier) => tier.value)
 </script>
 
 <svelte:head>
@@ -75,7 +75,7 @@
 
         <Checkbox
             class="justify-self-start"
-            bind:checked={$_form.isAdmin}
+            bind:checked={$formData.isAdmin}
             name="isAdmin"
             {...$constraints.isAdmin}
             label="Role admin"

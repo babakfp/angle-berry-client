@@ -34,8 +34,8 @@
                 isReplying.set(false)
 
                 // Remove other messages reply preview to that deleted message
-                messages.update((_messages) => {
-                    _messages.items = _messages.items.map((msg) => {
+                messages.update((messages_) => {
+                    messages_.items = messages_.items.map((msg) => {
                         if (
                             msg.repliedTo &&
                             msg.repliedTo === $contextMenuTargetMessage?.id
@@ -45,7 +45,7 @@
                         }
                         return msg
                     })
-                    return _messages
+                    return messages_
                 })
             }
         } catch (error) {

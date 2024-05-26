@@ -1,11 +1,13 @@
 <script lang="ts">
-    export let _for: string | undefined = undefined
-    export { _for as for }
+    export let for_: string | undefined = undefined
+    export { for_ as for }
     export let label: string
     export let required = false
+    export let class_ = ""
+    export { class_ as class }
 </script>
 
-<label for={_for}>
+<label class={class_} for={for_}>
     <span>{label}</span>
 
     {#if required}

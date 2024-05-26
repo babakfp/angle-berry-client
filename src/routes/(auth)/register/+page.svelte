@@ -11,7 +11,7 @@
     export let form
 
     const {
-        form: _form,
+        form: formData,
         capture,
         restore,
         errors,
@@ -44,12 +44,12 @@
         }}
     >
         <UsernameField
-            bind:value={$_form.username}
+            bind:value={$formData.username}
             error={$errors?.username?.[0] ?? form?.pb?.username?.message}
             {...$constraints.username}
         />
         <PasswordField
-            bind:value={$_form.password}
+            bind:value={$formData.password}
             autocomplete="new-password"
             error={$errors?.password?.[0] ?? form?.pb?.password?.message}
             {...$constraints.password}

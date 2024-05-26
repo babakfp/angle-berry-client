@@ -1,11 +1,11 @@
 <script lang="ts">
     import { Table, Tbody, Thead, Tr, Th } from "@/lib/components/table/index"
 
-    export let _class = ""
-    export { _class as class }
+    export let class_ = ""
+    export { class_ as class }
 </script>
 
-<Table class={_class}>
+<Table class={class_}>
     <Thead>
         <Tr>
             <Th>TIER</Th>

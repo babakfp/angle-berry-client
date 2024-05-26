@@ -1,7 +1,7 @@
 <script lang="ts">
     import { superForm } from "sveltekit-superforms/client"
-    import { schema } from "../schema"
-    import AuthWrapper from "../AuthWrapper.svelte"
+    import { schema } from "../(lib)/schema"
+    import Wrapper from "../(lib)/Wrapper.svelte"
     import Form from "@/lib/components/form/Form.svelte"
     import UsernameField from "@/lib/components/form/UsernameField.svelte"
     import PasswordField from "@/lib/components/form/PasswordField.svelte"
@@ -25,7 +25,7 @@
     <title>Register</title>
 </svelte:head>
 
-<AuthWrapper title="Register" description="Welcome, please enter your details.">
+<Wrapper title="Register" description="Welcome, please enter your details.">
     <Form
         message={form?.message}
         submitButtonText="Register & Login"
@@ -49,4 +49,4 @@
             {...$constraints.password}
         />
     </Form>
-</AuthWrapper>
+</Wrapper>

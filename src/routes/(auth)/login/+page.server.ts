@@ -1,7 +1,7 @@
 import { pbHandleFormActionError } from "@/lib/utilities/pb/helpers"
 import { fail, redirect } from "@sveltejs/kit"
 import { superValidate } from "sveltekit-superforms/server"
-import { schema } from "../schema"
+import { schema } from "../(lib)/schema"
 
 export const load = async ({ locals }) => {
     if (locals.loggedInUser) redirect(303, "/")

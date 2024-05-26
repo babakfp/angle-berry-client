@@ -1,8 +1,8 @@
 <script lang="ts">
     import { page } from "$app/stores"
     import { superForm } from "sveltekit-superforms/client"
-    import { schema } from "../schema"
-    import AuthWrapper from "../AuthWrapper.svelte"
+    import { schema } from "../(lib)/schema"
+    import Wrapper from "../(lib)/Wrapper.svelte"
     import Form from "@/lib/components/form/Form.svelte"
     import UsernameField from "@/lib/components/form/UsernameField.svelte"
     import PasswordField from "@/lib/components/form/PasswordField.svelte"
@@ -36,10 +36,7 @@
     <title>Login</title>
 </svelte:head>
 
-<AuthWrapper
-    title="Login"
-    description="Welcome back! Please enter your details."
->
+<Wrapper title="Login" description="Welcome back! Please enter your details.">
     <Form
         message={form?.message}
         submitButtonText="Login"
@@ -63,4 +60,4 @@
             {...$constraints.password}
         />
     </Form>
-</AuthWrapper>
+</Wrapper>

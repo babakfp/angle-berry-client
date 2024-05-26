@@ -14,7 +14,7 @@
         <Label class="justify-self-start" {label} {required} for={for_} />
     {/if}
 
-    <div class="relative">
+    <div class="relative mt-0.5">
         <slot />
 
         {#if $$slots.buttons}

@@ -7,7 +7,7 @@
     export { class_ as class }
 </script>
 
-<label class={class_} for={for_}>
+<label class="{class_} text-sm" for={for_}>
     <span>{label}</span>
 
     {#if required}

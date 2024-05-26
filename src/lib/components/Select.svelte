@@ -17,6 +17,8 @@
     export let error = ""
     export let isMultiple = true
     export let readonly = false
+    export let class_ = ""
+    export { class_ as class }
 
     let trigger: HTMLButtonElement
     let isOpen = false
@@ -91,7 +93,7 @@
 />
 <svelte:document on:mouseleave={handleTriggerClose} />
 
-<div class="relative grid gap-2">
+<div class="relative grid gap-2 {class_}">
     <button
         type="button"
         bind:this={trigger}

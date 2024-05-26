@@ -24,6 +24,7 @@
     <Label {label} {required} />
 
     <Select
+        class="mt-0.5"
         label={placeholder}
         {options}
         bind:selectedOptionValue

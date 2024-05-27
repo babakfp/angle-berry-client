@@ -32,7 +32,7 @@
 
         return async ({ result, update }) => {
             dispatch("return")
-            dispatch(result.type)
+            dispatch(result.type, result)
             update()
         }
     }

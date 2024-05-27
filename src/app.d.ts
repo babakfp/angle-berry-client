@@ -8,6 +8,9 @@ declare global {
             loggedInUser?: UsersResponse
             previewTierId?: string
         }
+        interface Error {
+            type?: "failure"
+        }
     }
 }
 

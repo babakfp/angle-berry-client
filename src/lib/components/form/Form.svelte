@@ -5,6 +5,7 @@
     import { createEventDispatcher } from "svelte"
     import type { SuperForm } from "sveltekit-superforms/client"
     import FormBase from "@/lib/components/form/FormBase.svelte"
+    import toast from "svelte-french-toast"
 
     const dispatch = createEventDispatcher()
 
@@ -55,7 +56,11 @@
     on:redirect={handleOnRedirect}
     on:error
     on:success
-    on:failure
+    on:failure={(e) => {
+        toast.error(e.detail.message, {
+            position: "bottom-right",
+        })
+    }}
 >
     <slot />
 

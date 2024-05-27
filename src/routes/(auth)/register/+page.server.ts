@@ -35,16 +35,17 @@ export const actions = {
         let inviter: UsersResponse | undefined = undefined
         const inviterId = url.searchParams.get("id")
 
-        try {
-            if (inviterId)
+        if (inviterId) {
+            try {
                 inviter = await locals.pb.collection("users").getOne(inviterId)
-        } catch (e) {
-            if (e instanceof ClientResponseError) {
-                if (e.status !== 404) {
-                    pbHandleClientResponseError(e)
+            } catch (e) {
+                if (e instanceof ClientResponseError) {
+                    if (e.status !== 404) {
+                        pbHandleClientResponseError(e)
+                    }
+                } else {
+                    throw e
                 }
-            } else {
-                throw e
             }
         }
 

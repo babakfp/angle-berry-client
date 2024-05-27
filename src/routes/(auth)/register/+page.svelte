@@ -28,7 +28,7 @@
 <Wrapper title="Register" description="Welcome, please enter your details.">
     <Form
         message={form?.message}
-        submitButtonText="Register & Login"
+        submitButtonText="Register"
         {errors}
         {validateForm}
         on:redirect={() => {

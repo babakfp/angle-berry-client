@@ -7,6 +7,7 @@
     import UsernameField from "@/lib/components/form/UsernameField.svelte"
     import PasswordField from "@/lib/components/form/PasswordField.svelte"
     import toast from "svelte-french-toast"
+    import LoginWithoutRegistering from "./(lib)/LoginWithoutRegistering.svelte"
 
     export let data
     export let form
@@ -48,6 +49,8 @@
             })
         }}
     >
+        <LoginWithoutRegistering />
+
         <UsernameField
             bind:value={$formData.username}
             error={$errors?.username?.[0] ??

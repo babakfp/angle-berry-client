@@ -3,6 +3,12 @@
 @tailwind utilities;
 
 @layer base {
+    .font-mono {
+        font-variation-settings: "MONO" 1;
+    }
+}
+
+@layer base {
     :root {
         --header: theme(spacing.16);
         --screen-minus-header: calc(var(--tw-screen-h) - var(--header));

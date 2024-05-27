@@ -50,6 +50,7 @@ export default {
         },
         fontFamily: {
             sans: ["Recursive", ...defaultTheme.fontFamily.sans],
+            mono: ["Recursive", ...defaultTheme.fontFamily.mono],
         },
         fontWeight: {
             semibold: "600",

@@ -2,7 +2,6 @@ import type { Config } from "tailwindcss"
 import { allAddons } from "tailwindcss-addons"
 import colors from "tailwindcss/colors"
 import defaultTheme from "tailwindcss/defaultTheme"
-import plugin from "tailwindcss/plugin"
 
 export default {
     content: ["./src/**/*.{html,svelte}"],

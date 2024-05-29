@@ -10,9 +10,6 @@
         ClientResponseError,
         type EventsResponse,
         type MessagesResponse,
-        type RealtimeEventsResponse,
-        type RealtimeMessagesResponse,
-        type RecordSubscription,
         type TiersResponse,
         type UsersResponse,
     } from "@/lib/utilities/pb/types"
@@ -21,47 +18,39 @@
 
     onMount(async () => {
         try {
-            await $pb.collection("messages").subscribe(
+            await $pb.collection("messages").subscribe<MessagesResponse>(
                 "*",
-                async (
-                    e: RecordSubscription<
-                        MessagesResponse | RealtimeMessagesResponse
-                    >,
-                ) => {
+                async (e) => {
                     if (e.action === "update") {
-                        const updatedMessage = e.record as MessagesResponse
                         messages.update((messages_) => {
                             messages_.items = messages_.items.map((msg) => {
-                                if (msg.id === updatedMessage.id) {
-                                    msg.content = updatedMessage.content
-                                    msg.updated = updatedMessage.updated
+                                if (msg.id === e.record.id) {
+                                    msg.content = e.record.content
+                                    msg.updated = e.record.updated
                                 }
-                                if (
-                                    msg.expand?.repliedTo?.id ===
-                                    updatedMessage.id
-                                ) {
+                                if (msg.expand?.repliedTo?.id === e.record.id) {
                                     msg.expand.repliedTo.content =
-                                        updatedMessage.content
+                                        e.record.content
                                     msg.expand.repliedTo.updated =
-                                        updatedMessage.updated
+                                        e.record.updated
                                 }
                                 return msg
                             })
                             return messages_
                         })
                     } else if (e.action === "create") {
-                        const createdMessage =
-                            e.record as RealtimeMessagesResponse
                         const userRecord: UsersResponse = await $pb
                             .collection("users")
-                            .getOne(createdMessage.user)
+                            .getOne(e.record.user)
                         let repliedToRecord:
-                            | RealtimeMessagesResponse
+                            | (MessagesResponse & {
+                                  expand: { user: UsersResponse }
+                              })
                             | undefined
-                        if (createdMessage.repliedTo) {
+                        if (e.record.repliedTo) {
                             repliedToRecord = await $pb
                                 .collection("messages")
-                                .getOne(createdMessage.repliedTo, {
+                                .getOne(e.record.repliedTo, {
                                     expand: "user",
                                 })
                         }
@@ -69,7 +58,7 @@
                         messages.update((messages_) => {
                             messages_.items = [
                                 {
-                                    ...createdMessage,
+                                    ...e.record,
                                     expand: {
                                         user: userRecord,
                                         repliedTo: repliedToRecord,
@@ -81,10 +70,9 @@
                         })
                         unreadMessagesLength.update((v) => (v += 1))
                     } else if (e.action === "delete") {
-                        const deletedMessage = e.record as MessagesResponse
                         messages.update((messages_) => {
                             messages_.items = messages_.items.filter(
-                                (m) => m.id !== deletedMessage.id,
+                                (m) => m.id !== e.record.id,
                             )
                             return messages_
                         })
@@ -93,16 +81,16 @@
                 },
                 { requestKey: "messages-subscribe" },
             )
-            await $pb.collection("events").subscribe(
+
+            await $pb.collection("events").subscribe<EventsResponse>(
                 "*",
-                async (e: RecordSubscription<EventsResponse>) => {
+                async (e) => {
                     if (e.action === "create") {
-                        const createdEvent = e.record as RealtimeEventsResponse
                         const userRecord: UsersResponse & {
                             expand: { retainedTiers: TiersResponse[] }
                         } = await $pb
                             .collection("users")
-                            .getOne(createdEvent.user, {
+                            .getOne(e.record.user, {
                                 expand: "retainedTiers",
                                 $autoCancel: false,
                             })
@@ -111,44 +99,39 @@
                                   expand: { retainedTiers: TiersResponse[] }
                               })
                             | undefined
-                        if (createdEvent.inviter)
+                        if (e.record.inviter)
                             inviterRecord = await $pb
                                 .collection("users")
-                                .getOne(createdEvent.inviter, {
+                                .getOne(e.record.inviter, {
                                     expand: "retainedTiers",
                                     $autoCancel: false,
                                 })
+                        const newEvent = {
+                            ...e.record,
+                            expand: {
+                                user: userRecord,
+                                inviter: inviterRecord,
+                            },
+                        }
                         events.update((events_) => {
-                            events_.items = [
-                                {
-                                    ...createdEvent,
-                                    expand: {
-                                        user: userRecord,
-                                        ...(inviterRecord
-                                            ? { inviter: inviterRecord }
-                                            : {}),
-                                    },
-                                },
-                                ...events_.items,
-                            ]
+                            events_.items = [newEvent, ...events_.items]
                             return events_
                         })
                         unseenEventsLength.update((v) => (v += 1))
 
                         if (
-                            createdEvent.expand?.inviter?.id ===
+                            newEvent.expand?.inviter?.id ===
                             data.loggedInUser.id
                         ) {
                             data.loggedInUser.invitedUsers = [
                                 ...data.loggedInUser.invitedUsers,
-                                createdEvent.expand.user.id,
+                                newEvent.expand.user.id,
                             ]
                         }
                     } else if (e.action === "delete") {
-                        const deletedEvent = e.record as EventsResponse
                         events.update((events_) => {
                             events_.items = events_.items.filter(
-                                (m) => m.id !== deletedEvent.id,
+                                (m) => m.id !== e.record.id,
                             )
                             return events_
                         })

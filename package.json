@@ -9,10 +9,10 @@
         "typegen": "pocketbase-typegen --no-sdk --db ../angle-berry-server/pb_data/data.db --out src/lib/utilities/pb/types-auto-generated.ts"
     },
     "devDependencies": {
+        "@ianvs/prettier-plugin-sort-imports": "4.2.1",
         "@sveltejs/adapter-vercel": "5.3.0",
         "@sveltejs/kit": "2.5.10",
         "@sveltejs/vite-plugin-svelte": "3.1.0",
-        "@trivago/prettier-plugin-sort-imports": "4.3.0",
         "autoprefixer": "10.4.19",
         "cssnano": "7.0.1",
         "phosphor-icons-svelte": "1.2.0",

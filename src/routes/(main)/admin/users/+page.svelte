@@ -2,10 +2,10 @@
     import {
         Table,
         Tbody,
+        Td,
+        Th,
         Thead,
         Tr,
-        Th,
-        Td,
         TrOverlayAnchor,
     } from "@/lib/components/table/index"
 

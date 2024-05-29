@@ -1,21 +1,21 @@
 <script lang="ts">
-    import { shrinkHeight } from "@/lib/utilities/shrinkHeight"
-    import {
-        isContextMenuOpen,
-        isTouchDeviceContextMenuOpen,
-        contextMenuTargetEvent,
-        contextMenuTargetMessage,
-        selectedMessageIds,
-    } from "../chatStores"
-    import MessageDateAndTime from "./MessageDateAndTime.svelte"
-    import MessageReplyPreview from "./MessageReplyPreview.svelte"
-    import IconCircleRegular from "phosphor-icons-svelte/IconCircleRegular.svelte"
     import IconCheckCircleRegular from "phosphor-icons-svelte/IconCheckCircleRegular.svelte"
+    import IconCircleRegular from "phosphor-icons-svelte/IconCircleRegular.svelte"
     import { highlightAnimate } from "@/lib/utilities/highlightAnimate"
     import type {
         RealtimeMessagesResponse,
         UsersResponse,
     } from "@/lib/utilities/pb/types"
+    import { shrinkHeight } from "@/lib/utilities/shrinkHeight"
+    import {
+        contextMenuTargetEvent,
+        contextMenuTargetMessage,
+        isContextMenuOpen,
+        isTouchDeviceContextMenuOpen,
+        selectedMessageIds,
+    } from "../chatStores"
+    import MessageDateAndTime from "./MessageDateAndTime.svelte"
+    import MessageReplyPreview from "./MessageReplyPreview.svelte"
 
     export let loggedInUser: UsersResponse
     export let message: RealtimeMessagesResponse

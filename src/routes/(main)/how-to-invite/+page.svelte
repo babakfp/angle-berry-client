@@ -1,7 +1,7 @@
 <script lang="ts">
-    import { page } from "$app/stores"
     import { copyText } from "svelte-copy"
     import toast from "svelte-french-toast"
+    import { page } from "$app/stores"
     import Input from "@/lib/components/form/Input.svelte"
     import InputTextButton from "@/lib/components/form/InputTextButton.svelte"
 

@@ -1,16 +1,16 @@
 <script lang="ts">
-    import { PUBLIC_POCKETBASE_URL } from "$env/static/public"
-    import Input from "@/lib/components/form/Input.svelte"
-    import { schema } from "../schema"
-    import { superForm } from "sveltekit-superforms/client"
-    import Form from "@/lib/components/form/Form.svelte"
-    import Modal from "@/lib/components/Modal.svelte"
-    import VideoGalleryItem from "../VideoGalleryItem.svelte"
-    import { fade } from "svelte/transition"
-    import Select from "@/lib/components/form/Select.svelte"
-    import { TiersVisibilityOptions } from "@/lib/utilities/pb/types"
-    import { capitalizeFirstLetter } from "@/lib/utilities/capitalizeFirstLetter"
     import toast from "svelte-french-toast"
+    import { fade } from "svelte/transition"
+    import { superForm } from "sveltekit-superforms/client"
+    import { PUBLIC_POCKETBASE_URL } from "$env/static/public"
+    import Form from "@/lib/components/form/Form.svelte"
+    import Input from "@/lib/components/form/Input.svelte"
+    import Select from "@/lib/components/form/Select.svelte"
+    import Modal from "@/lib/components/Modal.svelte"
+    import { capitalizeFirstLetter } from "@/lib/utilities/capitalizeFirstLetter"
+    import { TiersVisibilityOptions } from "@/lib/utilities/pb/types"
+    import { schema } from "../schema"
+    import VideoGalleryItem from "../VideoGalleryItem.svelte"
 
     export let data
     export let form

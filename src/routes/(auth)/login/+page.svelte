@@ -1,12 +1,12 @@
 <script lang="ts">
-    import { page } from "$app/stores"
+    import toast from "svelte-french-toast"
     import { superForm } from "sveltekit-superforms/client"
+    import { page } from "$app/stores"
+    import Form from "@/lib/components/form/Form.svelte"
+    import PasswordField from "@/lib/components/form/PasswordField.svelte"
+    import UsernameField from "@/lib/components/form/UsernameField.svelte"
     import { schema } from "../(lib)/schema"
     import Wrapper from "../(lib)/Wrapper.svelte"
-    import Form from "@/lib/components/form/Form.svelte"
-    import UsernameField from "@/lib/components/form/UsernameField.svelte"
-    import PasswordField from "@/lib/components/form/PasswordField.svelte"
-    import toast from "svelte-french-toast"
     import LoginWithoutRegistering from "./(lib)/LoginWithoutRegistering.svelte"
 
     export let data

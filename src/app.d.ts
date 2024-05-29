@@ -1,5 +1,5 @@
-import type { UsersResponse } from "@/lib/utilities/pb/types"
 import type PocketBase from "pocketbase"
+import type { UsersResponse } from "@/lib/utilities/pb/types"
 
 declare global {
     namespace App {

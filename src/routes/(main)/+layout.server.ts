@@ -1,3 +1,4 @@
+import { redirect } from "@sveltejs/kit"
 import { pbHandleClientResponseError } from "@/lib/utilities/pb/helpers"
 import {
     ClientResponseError,
@@ -6,7 +7,6 @@ import {
     type RealtimeMessagesResponse,
     type TiersResponse,
 } from "@/lib/utilities/pb/types"
-import { redirect } from "@sveltejs/kit"
 
 export const load = async ({ locals }) => {
     if (!locals.loggedInUser) redirect(303, "/login")

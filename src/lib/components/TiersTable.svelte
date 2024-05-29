@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Table, Tbody, Thead, Tr, Th } from "@/lib/components/table/index"
+    import { Table, Tbody, Th, Thead, Tr } from "@/lib/components/table/index"
 
     export let class_ = ""
     export { class_ as class }

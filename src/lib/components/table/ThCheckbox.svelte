@@ -1,6 +1,6 @@
 <script lang="ts">
-    import Th from "@/lib/components/table/Th.svelte"
     import Checkbox from "@/lib/components/form/Checkbox.svelte"
+    import Th from "@/lib/components/table/Th.svelte"
 
     export let checked: boolean
     export let readonly: boolean

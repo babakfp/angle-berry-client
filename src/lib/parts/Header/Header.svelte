@@ -1,22 +1,22 @@
 <script lang="ts">
-    import { page } from "$app/stores"
-    import { unreadMessagesLength } from "@/lib/stores/messages"
-    import { unseenEventsLength } from "@/lib/stores/events"
     import IconBellSimpleRegular from "phosphor-icons-svelte/IconBellSimpleRegular.svelte"
-    import IconCrownSimpleRegular from "phosphor-icons-svelte/IconCrownSimpleRegular.svelte"
     import IconChatCenteredRegular from "phosphor-icons-svelte/IconChatCenteredRegular.svelte"
+    import IconCrownSimpleRegular from "phosphor-icons-svelte/IconCrownSimpleRegular.svelte"
+    import { page } from "$app/stores"
     import Avatar from "@/lib/components/Avatar.svelte"
     import NotificationBlob from "@/lib/components/NotificationBlob.svelte"
-    import ChatMenu from "./ChatMenu/ChatMenu.svelte"
-    import EventsMenu from "./EventsMenu/EventsMenu.svelte"
-    import UserMenu from "./UserMenu/UserMenu.svelte"
+    import { unseenEventsLength } from "@/lib/stores/events"
+    import { unreadMessagesLength } from "@/lib/stores/messages"
     import type {
-        TiersResponse,
-        UsersResponse,
         ListResult,
         RealtimeEventsResponse,
         RealtimeMessagesResponse,
+        TiersResponse,
+        UsersResponse,
     } from "@/lib/utilities/pb/types"
+    import ChatMenu from "./ChatMenu/ChatMenu.svelte"
+    import EventsMenu from "./EventsMenu/EventsMenu.svelte"
+    import UserMenu from "./UserMenu/UserMenu.svelte"
 
     export let loggedInUser: UsersResponse
     export let tiers: TiersResponse[]

@@ -1,6 +1,6 @@
 <script lang="ts">
+    import { Td, Th, Tr } from "@/lib/components/table/index"
     import type { TiersResponse, UsersResponse } from "@/lib/utilities/pb/types"
-    import { Tr, Th, Td } from "@/lib/components/table/index"
 
     export let loggedInUser: UsersResponse
     export let tier: TiersResponse

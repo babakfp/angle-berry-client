@@ -1,21 +1,21 @@
 <script lang="ts">
     import { onDestroy, onMount } from "svelte"
-    import { messages, unreadMessagesLength } from "@/lib/stores/messages"
-    import { events, unseenEventsLength } from "@/lib/stores/events"
-    import { pbHandleClientResponseError } from "@/lib/utilities/pb/helpers"
-    import { pb } from "@/lib/stores/pb"
+    import AnimatePageNavigation from "@/lib/components/AnimatePageNavigation.svelte"
     import Header from "@/lib/parts/Header/Header.svelte"
+    import { events, unseenEventsLength } from "@/lib/stores/events"
+    import { messages, unreadMessagesLength } from "@/lib/stores/messages"
+    import { pb } from "@/lib/stores/pb"
+    import { pbHandleClientResponseError } from "@/lib/utilities/pb/helpers"
     import {
         ClientResponseError,
-        type RecordSubscription,
-        type RealtimeMessagesResponse,
-        type RealtimeEventsResponse,
-        type MessagesResponse,
         type EventsResponse,
-        type UsersResponse,
+        type MessagesResponse,
+        type RealtimeEventsResponse,
+        type RealtimeMessagesResponse,
+        type RecordSubscription,
         type TiersResponse,
+        type UsersResponse,
     } from "@/lib/utilities/pb/types"
-    import AnimatePageNavigation from "@/lib/components/AnimatePageNavigation.svelte"
 
     export let data
 

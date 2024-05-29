@@ -1,8 +1,8 @@
 <script lang="ts">
-    import IconArrowUpRegular from "phosphor-icons-svelte/IconArrowUpRegular.svelte"
     import IconArrowDownRegular from "phosphor-icons-svelte/IconArrowDownRegular.svelte"
-    import FormBase from "@/lib/components/form/FormBase.svelte"
+    import IconArrowUpRegular from "phosphor-icons-svelte/IconArrowUpRegular.svelte"
     import toast from "svelte-french-toast"
+    import FormBase from "@/lib/components/form/FormBase.svelte"
 
     export let selectedItemIds: string[]
     export let deleteActionAttribute: `?/${string}` | undefined

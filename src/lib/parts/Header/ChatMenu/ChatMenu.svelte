@@ -1,31 +1,31 @@
 <script lang="ts">
     import type { SubmitFunction } from "@sveltejs/kit"
-    import { enhance } from "$app/forms"
-    import { writable } from "svelte/store"
-    import { messages, unreadMessagesLength } from "@/lib/stores/messages"
-    import { pb } from "@/lib/stores/pb"
-    import {
-        isReplying,
-        replyTargetMessage,
-        messageIdToEdit,
-        messageInputElement,
-        isTouchDeviceContextMenuOpen,
-        isContextMenuOpen,
-    } from "./chatStores"
-    import IconSpinnerRegular from "phosphor-icons-svelte/IconSpinnerRegular.svelte"
     import IconCheckRegular from "phosphor-icons-svelte/IconCheckRegular.svelte"
     import IconPaperPlaneRightRegular from "phosphor-icons-svelte/IconPaperPlaneRightRegular.svelte"
+    import IconSpinnerRegular from "phosphor-icons-svelte/IconSpinnerRegular.svelte"
+    import { writable } from "svelte/store"
+    import { enhance } from "$app/forms"
     import PopSide from "@/lib/components/PopSide.svelte"
-    import Message from "./Message/Message.svelte"
-    import MessageActionPreview from "./MessageActionPreview.svelte"
-    import ContextMenu from "./ContextMenu.svelte"
-    import MessageDeleteModal from "./MessageDeleteModal.svelte"
+    import { messages, unreadMessagesLength } from "@/lib/stores/messages"
+    import { pb } from "@/lib/stores/pb"
     import { getTextareaLineCount } from "@/lib/utilities/getTextareaLineCount"
     import type {
         ListResult,
         RealtimeMessagesResponse,
         UsersResponse,
     } from "@/lib/utilities/pb/types"
+    import {
+        isContextMenuOpen,
+        isReplying,
+        isTouchDeviceContextMenuOpen,
+        messageIdToEdit,
+        messageInputElement,
+        replyTargetMessage,
+    } from "./chatStores"
+    import ContextMenu from "./ContextMenu.svelte"
+    import Message from "./Message/Message.svelte"
+    import MessageActionPreview from "./MessageActionPreview.svelte"
+    import MessageDeleteModal from "./MessageDeleteModal.svelte"
 
     export let loggedInUser: UsersResponse
     export let pbMessages: ListResult<RealtimeMessagesResponse>

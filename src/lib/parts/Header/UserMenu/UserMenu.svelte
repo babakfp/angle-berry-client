@@ -1,14 +1,14 @@
 <script lang="ts">
-    import OutClick from "svelte-outclick"
+    import IconCrownSimpleRegular from "phosphor-icons-svelte/IconCrownSimpleRegular.svelte"
+    import IconUserRegular from "phosphor-icons-svelte/IconUserRegular.svelte"
+    import { onMount } from "svelte"
     import { copy } from "svelte-copy"
     import toast from "svelte-french-toast"
-    import { onMount } from "svelte"
-    import { page } from "$app/stores"
+    import OutClick from "svelte-outclick"
     import { beforeNavigate } from "$app/navigation"
-    import Tier from "./Tier.svelte"
-    import IconUserRegular from "phosphor-icons-svelte/IconUserRegular.svelte"
-    import IconCrownSimpleRegular from "phosphor-icons-svelte/IconCrownSimpleRegular.svelte"
+    import { page } from "$app/stores"
     import type { TiersResponse, UsersResponse } from "@/lib/utilities/pb/types"
+    import Tier from "./Tier.svelte"
 
     export let loggedInUser: UsersResponse
     export let tiers: TiersResponse[]

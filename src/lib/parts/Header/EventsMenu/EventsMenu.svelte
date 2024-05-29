@@ -1,12 +1,12 @@
 <script lang="ts">
     import PopSide from "@/lib/components/PopSide.svelte"
     import { events, unseenEventsLength } from "@/lib/stores/events"
-    import Event from "./Event.svelte"
     import type {
-        UsersResponse,
         ListResult,
         RealtimeEventsResponse,
+        UsersResponse,
     } from "@/lib/utilities/pb/types"
+    import Event from "./Event.svelte"
 
     export let pbEvents: ListResult<RealtimeEventsResponse>
 

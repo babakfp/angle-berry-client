@@ -1,8 +1,8 @@
 <script lang="ts">
     import type { SubmitFunction } from "@sveltejs/kit"
-    import { enhance } from "$app/forms"
     import { createEventDispatcher } from "svelte"
     import type { SuperForm } from "sveltekit-superforms/client"
+    import { enhance } from "$app/forms"
 
     const dispatch = createEventDispatcher()
 

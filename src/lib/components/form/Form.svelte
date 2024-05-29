@@ -1,11 +1,11 @@
 <script lang="ts">
-    import FormSubmitButton from "@/lib/components/form/FormSubmitButton.svelte"
     import IconSpinnerRegular from "phosphor-icons-svelte/IconSpinnerRegular.svelte"
-    import Description from "@/lib/components/form/Description.svelte"
     import { createEventDispatcher } from "svelte"
-    import type { SuperForm } from "sveltekit-superforms/client"
-    import FormBase from "@/lib/components/form/FormBase.svelte"
     import toast from "svelte-french-toast"
+    import type { SuperForm } from "sveltekit-superforms/client"
+    import Description from "@/lib/components/form/Description.svelte"
+    import FormBase from "@/lib/components/form/FormBase.svelte"
+    import FormSubmitButton from "@/lib/components/form/FormSubmitButton.svelte"
 
     const dispatch = createEventDispatcher()
 

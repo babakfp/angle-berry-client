@@ -1,17 +1,17 @@
 <script lang="ts">
+    import toast from "svelte-french-toast"
     import {
+        FloatingActions,
         Table,
         Tbody,
-        Thead,
-        Tr,
-        Th,
-        ThCheckbox,
         Td,
         TdCheckbox,
+        Th,
+        ThCheckbox,
+        Thead,
+        Tr,
         TrOverlayAnchor,
-        FloatingActions,
     } from "@/lib/components/table/index"
-    import toast from "svelte-french-toast"
     import { capitalizeFirstLetter } from "@/lib/utilities/capitalizeFirstLetter"
 
     export let data

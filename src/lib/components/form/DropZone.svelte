@@ -1,7 +1,7 @@
 <script lang="ts">
     import IconUploadSimpleRegular from "phosphor-icons-svelte/IconUploadSimpleRegular.svelte"
-    import { formatBytes } from "@/lib/utilities/formatBytes"
     import Description from "@/lib/components/form/Description.svelte"
+    import { formatBytes } from "@/lib/utilities/formatBytes"
 
     export let name: string
     export let accept: string

@@ -1,6 +1,6 @@
 <script lang="ts">
-    import IconPlusCircleRegular from "phosphor-icons-svelte/IconPlusCircleRegular.svelte"
     import IconMinusCircleRegular from "phosphor-icons-svelte/IconMinusCircleRegular.svelte"
+    import IconPlusCircleRegular from "phosphor-icons-svelte/IconPlusCircleRegular.svelte"
 
     export let value: number | string
     export let min: string | number | undefined = undefined

@@ -1,9 +1,9 @@
 <script lang="ts">
     import IconCaretDownRegular from "phosphor-icons-svelte/IconCaretDownRegular.svelte"
+    import IconCheckCircleRegular from "phosphor-icons-svelte/IconCheckCircleRegular.svelte"
     import IconCheckSquareRegular from "phosphor-icons-svelte/IconCheckSquareRegular.svelte"
     import IconSquareRegular from "phosphor-icons-svelte/IconSquareRegular.svelte"
     import IconXSquareRegular from "phosphor-icons-svelte/IconXSquareRegular.svelte"
-    import IconCheckCircleRegular from "phosphor-icons-svelte/IconCheckCircleRegular.svelte"
     import OutClick from "svelte-outclick"
     import Description from "@/lib/components/form/Description.svelte"
 

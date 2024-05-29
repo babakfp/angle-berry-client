@@ -1,6 +1,6 @@
-import { files } from "@/lib/utilities/zod/files.js"
 import { zod } from "sveltekit-superforms/adapters"
 import { z } from "zod"
+import { files } from "@/lib/utilities/zod/files.js"
 
 export const formats = ["mp4", "avi", "mkv"]
 export const maxSizeLimitInBytes = 1000000000

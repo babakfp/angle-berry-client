@@ -1,12 +1,12 @@
 <script lang="ts">
-    import { PUBLIC_POCKETBASE_URL } from "$env/static/public"
+    import toast from "svelte-french-toast"
     import { superForm } from "sveltekit-superforms/client"
+    import { PUBLIC_POCKETBASE_URL } from "$env/static/public"
     import DropZone from "@/lib/components/form/DropZone.svelte"
     import Form from "@/lib/components/form/Form.svelte"
-    import VideoGalleryItem from "../tiers/VideoGalleryItem.svelte"
-    import { schema, formats } from "./schema"
-    import toast from "svelte-french-toast"
     import FloatingActions from "@/lib/components/table/FloatingActions.svelte"
+    import VideoGalleryItem from "../tiers/VideoGalleryItem.svelte"
+    import { formats, schema } from "./schema"
 
     export let data
     export let form

@@ -1,8 +1,8 @@
 <script lang="ts">
+    import IconXRegular from "phosphor-icons-svelte/IconXRegular.svelte"
     import OutClick from "svelte-outclick"
     import { browser } from "$app/environment"
     import { beforeNavigate } from "$app/navigation"
-    import IconXRegular from "phosphor-icons-svelte/IconXRegular.svelte"
 
     export let isOpen = false
     export let toggleButton: HTMLButtonElement

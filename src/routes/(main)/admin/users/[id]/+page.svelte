@@ -1,12 +1,12 @@
 <script lang="ts">
-    import { schema } from "./schema"
+    import toast from "svelte-french-toast"
     import { superForm } from "sveltekit-superforms/client"
-    import Form from "@/lib/components/form/Form.svelte"
     import Checkbox from "@/lib/components/form/Checkbox.svelte"
+    import Form from "@/lib/components/form/Form.svelte"
     import Input from "@/lib/components/form/Input.svelte"
     import Select from "@/lib/components/form/Select.svelte"
-    import toast from "svelte-french-toast"
     import { isUserACreatedBeforeUserB } from "@/lib/utilities/isUserACreatedBeforeUserB"
+    import { schema } from "./schema"
 
     export let data
     export let form

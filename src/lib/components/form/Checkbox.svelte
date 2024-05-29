@@ -1,6 +1,6 @@
 <script lang="ts">
-    import IconSquareRegular from "phosphor-icons-svelte/IconSquareRegular.svelte"
     import IconCheckSquareRegular from "phosphor-icons-svelte/IconCheckSquareRegular.svelte"
+    import IconSquareRegular from "phosphor-icons-svelte/IconSquareRegular.svelte"
     import Description from "./Description.svelte"
 
     export let class_ = ""

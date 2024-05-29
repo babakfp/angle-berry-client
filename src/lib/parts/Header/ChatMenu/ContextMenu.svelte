@@ -1,26 +1,26 @@
 <script lang="ts">
+    import IconArrowUUpLeftRegular from "phosphor-icons-svelte/IconArrowUUpLeftRegular.svelte"
+    import IconCheckCircleRegular from "phosphor-icons-svelte/IconCheckCircleRegular.svelte"
+    import IconCheckRegular from "phosphor-icons-svelte/IconCheckRegular.svelte"
+    import IconCopySimpleRegular from "phosphor-icons-svelte/IconCopySimpleRegular.svelte"
+    import IconPencilSimpleRegular from "phosphor-icons-svelte/IconPencilSimpleRegular.svelte"
+    import IconTrashSimpleRegular from "phosphor-icons-svelte/IconTrashSimpleRegular.svelte"
     import { copyText } from "svelte-copy"
     import OutClick from "svelte-outclick"
+    import { messages } from "@/lib/stores/messages"
+    import type { UsersResponse } from "@/lib/utilities/pb/types"
     import {
-        isContextMenuOpen,
         contextMenuTargetMessage,
+        isContextMenuOpen,
         isReplying,
-        replyTargetMessage,
         messageIdsToDelete,
         messageIdToEdit,
         messageInputElement,
+        replyTargetMessage,
         selectedMessageIds,
     } from "./chatStores"
-    import { messages } from "@/lib/stores/messages"
-    import IconArrowUUpLeftRegular from "phosphor-icons-svelte/IconArrowUUpLeftRegular.svelte"
-    import IconPencilSimpleRegular from "phosphor-icons-svelte/IconPencilSimpleRegular.svelte"
-    import IconCopySimpleRegular from "phosphor-icons-svelte/IconCopySimpleRegular.svelte"
-    import IconTrashSimpleRegular from "phosphor-icons-svelte/IconTrashSimpleRegular.svelte"
-    import IconCheckCircleRegular from "phosphor-icons-svelte/IconCheckCircleRegular.svelte"
-    import IconCheckRegular from "phosphor-icons-svelte/IconCheckRegular.svelte"
     import MessageContextMenu from "./MessageContextMenu.svelte"
     import MessageContextMenuItem from "./MessageContextMenuItem.svelte"
-    import type { UsersResponse } from "@/lib/utilities/pb/types"
 
     export let loggedInUser: UsersResponse
 

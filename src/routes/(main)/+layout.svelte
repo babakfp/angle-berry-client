@@ -8,7 +8,6 @@
     import { pbHandleClientResponseError } from "@/lib/utilities/pb/helpers"
     import {
         ClientResponseError,
-        type EventsResponse,
         type MessagesResponse,
         type TiersResponse,
         type UsersResponse,
@@ -18,7 +17,7 @@
 
     onMount(async () => {
         try {
-            await $pb.collection("messages").subscribe<MessagesResponse>(
+            await $pb.collection("messages").subscribe(
                 "*",
                 async (e) => {
                     if (e.action === "update") {
@@ -82,7 +81,7 @@
                 { requestKey: "messages-subscribe" },
             )
 
-            await $pb.collection("events").subscribe<EventsResponse>(
+            await $pb.collection("events").subscribe(
                 "*",
                 async (e) => {
                     if (e.action === "create") {

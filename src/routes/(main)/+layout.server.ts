@@ -2,7 +2,7 @@ import { redirect } from "@sveltejs/kit"
 import { pbHandleClientResponseError } from "@/utilities/pb/helpers"
 import {
     ClientResponseError,
-    type ListResult,
+    TiersVisibilityOptions,
     type RealtimeEventsResponse,
     type RealtimeMessagesResponse,
     type TiersResponse,
@@ -12,21 +12,26 @@ export const load = async ({ locals }) => {
     if (!locals.loggedInUser) redirect(303, "/login")
 
     try {
-        const messages: ListResult<RealtimeMessagesResponse> = await locals.pb
+        const messages = await locals.pb
             .collection("messages")
-            .getList(1, 50, {
+            .getList<RealtimeMessagesResponse>(1, 50, {
                 sort: "-created",
                 expand: "user,repliedTo,repliedTo.user",
             })
-        const events: ListResult<RealtimeEventsResponse> = await locals.pb
+        const events = await locals.pb
             .collection("events")
-            .getList(1, 50, {
+            .getList<RealtimeEventsResponse>(1, 50, {
                 sort: "-created",
                 expand: "user,user.retainedTiers,inviter,inviter.retainedTiers",
             })
-        const tiers: TiersResponse[] = await locals.pb
-            .collection("tiers")
-            .getFullList({ filter: 'visibility = "public"' })
+        const tiers = await locals.pb.collection("tiers").getFullList<
+            TiersResponse & {
+                visibility: Exclude<
+                    TiersVisibilityOptions,
+                    TiersVisibilityOptions.private
+                >
+            }
+        >({ filter: 'visibility = "public"' })
 
         return {
             loggedInUser: locals.loggedInUser,

@@ -4,7 +4,7 @@ import {
     pbHandleClientResponseError,
     pbHandleFormActionError,
 } from "@/utilities/pb/helpers"
-import { ClientResponseError, type VideosResponse } from "@/utilities/pb/types"
+import { ClientResponseError } from "@/utilities/pb/types"
 import { schema } from "../schema"
 
 export const load = async ({ locals }) => {
@@ -15,9 +15,7 @@ export const load = async ({ locals }) => {
     const form = await superValidate(schema.create)
 
     try {
-        const videos: VideosResponse[] = await locals.pb
-            .collection("videos")
-            .getFullList()
+        const videos = await locals.pb.collection("videos").getFullList()
         return { form, videos }
     } catch (e) {
         if (e instanceof ClientResponseError) {

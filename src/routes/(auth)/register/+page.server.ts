@@ -47,17 +47,15 @@ export const actions = {
         }
 
         try {
-            const newUser: UsersResponse = await locals.pb
-                .collection("users")
-                .create({
-                    username: form.data.username,
-                    password: form.data.password,
-                    passwordConfirm: form.data.password,
-                    retainedTiers: [
-                        ...[locals.previewTierId ? locals.previewTierId : []],
-                    ],
-                    invitedBy: inviter?.id,
-                })
+            const newUser = await locals.pb.collection("users").create({
+                username: form.data.username,
+                password: form.data.password,
+                passwordConfirm: form.data.password,
+                retainedTiers: [
+                    ...[locals.previewTierId ? locals.previewTierId : []],
+                ],
+                invitedBy: inviter?.id,
+            })
 
             // Adding the new user to the list of invited users by the inviter user.
             if (inviter && newUser)

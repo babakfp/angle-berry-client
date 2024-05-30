@@ -4,11 +4,7 @@ import {
     pbHandleClientResponseError,
     pbHandleFormActionError,
 } from "@/utilities/pb/helpers"
-import {
-    ClientResponseError,
-    type TiersResponse,
-    type VideosResponse,
-} from "@/utilities/pb/types"
+import { ClientResponseError } from "@/utilities/pb/types"
 import { schema } from "../schema"
 
 export const load = async ({ locals, params }) => {
@@ -20,12 +16,9 @@ export const load = async ({ locals, params }) => {
     const formDelete = await superValidate(schema.delete.single)
 
     try {
-        const tier: TiersResponse = await locals.pb
-            .collection("tiers")
-            .getOne(params.id)
-        const videos: VideosResponse[] = await locals.pb
-            .collection("videos")
-            .getFullList()
+        const tier = await locals.pb.collection("tiers").getOne(params.id)
+        const videos = await locals.pb.collection("videos").getFullList()
+
         return { formUpdate, formDelete, tier, videos }
     } catch (e) {
         if (e instanceof ClientResponseError) {

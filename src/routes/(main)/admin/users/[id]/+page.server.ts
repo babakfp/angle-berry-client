@@ -5,7 +5,7 @@ import {
     pbHandleClientResponseError,
     pbHandleFormActionError,
 } from "@/utilities/pb/helpers"
-import { ClientResponseError, type UsersResponse } from "@/utilities/pb/types"
+import { ClientResponseError } from "@/utilities/pb/types"
 import { schema } from "./schema"
 
 export const load = async ({ locals, params }) => {
@@ -16,9 +16,7 @@ export const load = async ({ locals, params }) => {
     const form = await superValidate(schema)
 
     try {
-        const targetUser: UsersResponse = await locals.pb
-            .collection("users")
-            .getOne(params.id)
+        const targetUser = await locals.pb.collection("users").getOne(params.id)
         return { form, targetUser }
     } catch (e) {
         if (e instanceof ClientResponseError) {
@@ -40,9 +38,7 @@ export const actions = {
             return fail(400, { form })
         }
 
-        const targetUser: UsersResponse = await locals.pb
-            .collection("users")
-            .getOne(params.id)
+        const targetUser = await locals.pb.collection("users").getOne(params.id)
 
         if (
             locals.loggedInUser.id !== targetUser.id &&

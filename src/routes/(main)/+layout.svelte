@@ -38,7 +38,7 @@
                             return messages_
                         })
                     } else if (e.action === "create") {
-                        const userRecord: UsersResponse = await $pb
+                        const userRecord = await $pb
                             .collection("users")
                             .getOne(e.record.user)
                         let repliedToRecord:

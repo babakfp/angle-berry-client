@@ -3,10 +3,10 @@ import type {
     MessagesResponse,
     TiersResponse,
     UsersResponse,
-} from "@/lib/utilities/pb/types-auto-generated"
+} from "@/utilities/pb/types-auto-generated"
 
 export * from "pocketbase"
-export * from "@/lib/utilities/pb/types-auto-generated"
+export * from "@/utilities/pb/types-auto-generated"
 
 export type RealtimeMessagesResponse = MessagesResponse & {
     expand: {

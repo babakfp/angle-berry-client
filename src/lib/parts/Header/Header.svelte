@@ -3,17 +3,17 @@
     import IconChatCenteredRegular from "phosphor-icons-svelte/IconChatCenteredRegular.svelte"
     import IconCrownSimpleRegular from "phosphor-icons-svelte/IconCrownSimpleRegular.svelte"
     import { page } from "$app/stores"
-    import Avatar from "@/lib/components/Avatar.svelte"
-    import NotificationBlob from "@/lib/components/NotificationBlob.svelte"
-    import { unseenEventsLength } from "@/lib/stores/events"
-    import { unreadMessagesLength } from "@/lib/stores/messages"
+    import Avatar from "@/components/Avatar.svelte"
+    import NotificationBlob from "@/components/NotificationBlob.svelte"
+    import { unseenEventsLength } from "@/stores/events"
+    import { unreadMessagesLength } from "@/stores/messages"
     import type {
         ListResult,
         RealtimeEventsResponse,
         RealtimeMessagesResponse,
         TiersResponse,
         UsersResponse,
-    } from "@/lib/utilities/pb/types"
+    } from "@/utilities/pb/types"
     import ChatMenu from "./ChatMenu/ChatMenu.svelte"
     import EventsMenu from "./EventsMenu/EventsMenu.svelte"
     import UserMenu from "./UserMenu/UserMenu.svelte"

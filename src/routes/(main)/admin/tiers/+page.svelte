@@ -11,8 +11,8 @@
         Thead,
         Tr,
         TrOverlayAnchor,
-    } from "@/lib/components/table/index"
-    import { capitalizeFirstLetter } from "@/lib/utilities/capitalizeFirstLetter"
+    } from "@/components/table/index"
+    import { capitalizeFirstLetter } from "@/utilities/capitalizeFirstLetter"
 
     export let data
     export let form

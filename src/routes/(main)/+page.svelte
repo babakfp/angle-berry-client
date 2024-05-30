@@ -1,6 +1,6 @@
 <script lang="ts">
-    import TiersTable from "@/lib/components/TiersTable.svelte"
-    import TiersTableRow from "@/lib/components/TiersTableRow.svelte"
+    import TiersTable from "@/components/TiersTable.svelte"
+    import TiersTableRow from "@/components/TiersTableRow.svelte"
 
     export let data
 </script>

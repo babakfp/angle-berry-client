@@ -1,17 +1,17 @@
 <script lang="ts">
     import { onDestroy, onMount } from "svelte"
-    import AnimatePageNavigation from "@/lib/components/AnimatePageNavigation.svelte"
-    import Header from "@/lib/parts/Header/Header.svelte"
-    import { events, unseenEventsLength } from "@/lib/stores/events"
-    import { messages, unreadMessagesLength } from "@/lib/stores/messages"
-    import { pb } from "@/lib/stores/pb"
-    import { pbHandleClientResponseError } from "@/lib/utilities/pb/helpers"
+    import AnimatePageNavigation from "@/components/AnimatePageNavigation.svelte"
+    import Header from "@/parts/Header/Header.svelte"
+    import { events, unseenEventsLength } from "@/stores/events"
+    import { messages, unreadMessagesLength } from "@/stores/messages"
+    import { pb } from "@/stores/pb"
+    import { pbHandleClientResponseError } from "@/utilities/pb/helpers"
     import {
         ClientResponseError,
         type MessagesResponse,
         type TiersResponse,
         type UsersResponse,
-    } from "@/lib/utilities/pb/types"
+    } from "@/utilities/pb/types"
 
     export let data
 

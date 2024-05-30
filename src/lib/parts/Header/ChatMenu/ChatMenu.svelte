@@ -5,15 +5,15 @@
     import IconSpinnerRegular from "phosphor-icons-svelte/IconSpinnerRegular.svelte"
     import { writable } from "svelte/store"
     import { enhance } from "$app/forms"
-    import PopSide from "@/lib/components/PopSide.svelte"
-    import { messages, unreadMessagesLength } from "@/lib/stores/messages"
-    import { pb } from "@/lib/stores/pb"
-    import { getTextareaLineCount } from "@/lib/utilities/getTextareaLineCount"
+    import PopSide from "@/components/PopSide.svelte"
+    import { messages, unreadMessagesLength } from "@/stores/messages"
+    import { pb } from "@/stores/pb"
+    import { getTextareaLineCount } from "@/utilities/getTextareaLineCount"
     import type {
         ListResult,
         RealtimeMessagesResponse,
         UsersResponse,
-    } from "@/lib/utilities/pb/types"
+    } from "@/utilities/pb/types"
     import {
         isContextMenuOpen,
         isReplying,

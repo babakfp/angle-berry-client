@@ -1,12 +1,12 @@
 <script lang="ts">
     import IconCheckCircleRegular from "phosphor-icons-svelte/IconCheckCircleRegular.svelte"
     import IconCircleRegular from "phosphor-icons-svelte/IconCircleRegular.svelte"
-    import { highlightAnimate } from "@/lib/utilities/highlightAnimate"
+    import { highlightAnimate } from "@/utilities/highlightAnimate"
     import type {
         RealtimeMessagesResponse,
         UsersResponse,
-    } from "@/lib/utilities/pb/types"
-    import { shrinkHeight } from "@/lib/utilities/shrinkHeight"
+    } from "@/utilities/pb/types"
+    import { shrinkHeight } from "@/utilities/shrinkHeight"
     import {
         contextMenuTargetEvent,
         contextMenuTargetMessage,

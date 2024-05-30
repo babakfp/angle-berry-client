@@ -1,6 +1,6 @@
 <script lang="ts">
-    import Checkbox from "@/lib/components/form/Checkbox.svelte"
-    import VideoPlayer from "@/lib/components/VideoPlayer.svelte"
+    import Checkbox from "@/components/form/Checkbox.svelte"
+    import VideoPlayer from "@/components/VideoPlayer.svelte"
 
     export let src: string
     export let checked: boolean

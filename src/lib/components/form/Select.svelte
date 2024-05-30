@@ -1,8 +1,8 @@
 <script lang="ts">
-    import Select from "@/lib/components/Select.svelte"
+    import Select from "@/components/Select.svelte"
     import Label from "./Label.svelte"
 
-    // Start: From "@/lib/components/Select.svelte"
+    // Start: From "@/components/Select.svelte"
     type Option = { value: string; label: string }
 
     export let label: string

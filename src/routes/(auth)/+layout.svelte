@@ -1,5 +1,5 @@
 <script lang="ts">
-    import AnimatePageNavigation from "@/lib/components/AnimatePageNavigation.svelte"
+    import AnimatePageNavigation from "@/components/AnimatePageNavigation.svelte"
 </script>
 
 <AnimatePageNavigation

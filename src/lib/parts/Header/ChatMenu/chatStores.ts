@@ -1,5 +1,5 @@
 import { writable } from "svelte/store"
-import type { RealtimeMessagesResponse } from "@/lib/utilities/pb/types"
+import type { RealtimeMessagesResponse } from "@/utilities/pb/types"
 
 export const isContextMenuOpen = writable(false)
 export const isTouchDeviceContextMenuOpen = writable(false)

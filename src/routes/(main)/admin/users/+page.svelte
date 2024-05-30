@@ -7,7 +7,7 @@
         Thead,
         Tr,
         TrOverlayAnchor,
-    } from "@/lib/components/table/index"
+    } from "@/components/table/index"
 
     export let data
 </script>

@@ -1,6 +1,6 @@
 import { zod } from "sveltekit-superforms/adapters"
 import { z } from "zod"
-import { TiersVisibilityOptions } from "@/lib/utilities/pb/types"
+import { TiersVisibilityOptions } from "@/utilities/pb/types"
 
 const create = zod(
     z.object({

@@ -1,6 +1,6 @@
 import { fail, redirect } from "@sveltejs/kit"
 import { superValidate } from "sveltekit-superforms/server"
-import { pbHandleFormActionError } from "@/lib/utilities/pb/helpers"
+import { pbHandleFormActionError } from "@/utilities/pb/helpers"
 import { schema } from "../(lib)/schema"
 
 export const load = async ({ locals }) => {

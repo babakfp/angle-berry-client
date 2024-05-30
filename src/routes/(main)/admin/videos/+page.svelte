@@ -2,9 +2,9 @@
     import toast from "svelte-french-toast"
     import { superForm } from "sveltekit-superforms/client"
     import { PUBLIC_POCKETBASE_URL } from "$env/static/public"
-    import DropZone from "@/components/form/DropZone.svelte"
-    import Form from "@/components/form/Form.svelte"
-    import FloatingActions from "@/components/table/FloatingActions.svelte"
+    import DropZone from "$lib/components/form/DropZone.svelte"
+    import Form from "$lib/components/form/Form.svelte"
+    import FloatingActions from "$lib/components/table/FloatingActions.svelte"
     import VideoGalleryItem from "../tiers/VideoGalleryItem.svelte"
     import { formats, schema } from "./schema"
 

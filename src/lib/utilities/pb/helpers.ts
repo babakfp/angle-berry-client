@@ -1,6 +1,6 @@
 import { error, fail } from "@sveltejs/kit"
 import type { SuperValidated } from "sveltekit-superforms"
-import { ClientResponseError } from "@/utilities/pb/types"
+import { ClientResponseError } from "$lib/utilities/pb/types"
 
 export const pbHandleFormActionError = (
     e: unknown | ClientResponseError,

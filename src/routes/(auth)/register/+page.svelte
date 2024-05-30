@@ -1,9 +1,9 @@
 <script lang="ts">
     import toast from "svelte-french-toast"
     import { superForm } from "sveltekit-superforms/client"
-    import Form from "@/components/form/Form.svelte"
-    import PasswordField from "@/components/form/PasswordField.svelte"
-    import UsernameField from "@/components/form/UsernameField.svelte"
+    import Form from "$lib/components/form/Form.svelte"
+    import PasswordField from "$lib/components/form/PasswordField.svelte"
+    import UsernameField from "$lib/components/form/UsernameField.svelte"
     import { schema } from "../(lib)/schema"
     import Wrapper from "../(lib)/Wrapper.svelte"
 

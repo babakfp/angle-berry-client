@@ -5,7 +5,6 @@ import { vitePreprocess } from "@sveltejs/vite-plugin-svelte"
 export default {
     kit: {
         adapter: adapter(),
-        alias: { "@": "./src/lib" },
     },
     preprocess: vitePreprocess(),
     onwarn: (warning, handler) => {

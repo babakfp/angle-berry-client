@@ -7,8 +7,8 @@
     import IconTrashSimpleRegular from "phosphor-icons-svelte/IconTrashSimpleRegular.svelte"
     import { copyText } from "svelte-copy"
     import OutClick from "svelte-outclick"
-    import { messages } from "@/stores/messages"
-    import type { UsersResponse } from "@/utilities/pb/types"
+    import { messages } from "$lib/stores/messages"
+    import type { UsersResponse } from "$lib/utilities/pb/types"
     import {
         contextMenuTargetMessage,
         isContextMenuOpen,

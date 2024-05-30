@@ -3,9 +3,9 @@
     import { createEventDispatcher } from "svelte"
     import toast from "svelte-french-toast"
     import type { SuperForm } from "sveltekit-superforms/client"
-    import Description from "@/components/form/Description.svelte"
-    import FormBase from "@/components/form/FormBase.svelte"
-    import FormSubmitButton from "@/components/form/FormSubmitButton.svelte"
+    import Description from "$lib/components/form/Description.svelte"
+    import FormBase from "$lib/components/form/FormBase.svelte"
+    import FormSubmitButton from "$lib/components/form/FormSubmitButton.svelte"
 
     const dispatch = createEventDispatcher()
 

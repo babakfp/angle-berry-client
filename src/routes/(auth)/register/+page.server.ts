@@ -3,8 +3,11 @@ import { superValidate } from "sveltekit-superforms/server"
 import {
     pbHandleClientResponseError,
     pbHandleFormActionError,
-} from "@/utilities/pb/helpers"
-import { ClientResponseError, type UsersResponse } from "@/utilities/pb/types"
+} from "$lib/utilities/pb/helpers"
+import {
+    ClientResponseError,
+    type UsersResponse,
+} from "$lib/utilities/pb/types"
 import { schema } from "../(lib)/schema"
 
 export const load = async ({ locals }) => {

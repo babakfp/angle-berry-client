@@ -1,4 +1,4 @@
-import type { TypedPocketBase, UsersResponse } from "@/utilities/pb/types"
+import type { TypedPocketBase, UsersResponse } from "$lib/utilities/pb/types"
 
 declare global {
     namespace App {

@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { formatBytes } from "@/utilities/formatBytes"
+import { formatBytes } from "$lib/utilities/formatBytes"
 
 export type Options = {
     formats?: string[]

@@ -1,7 +1,4 @@
 {
-    "path-intellisense.mappings": {
-        "@": "${workspaceFolder}/src/lib"
-    },
     "files.readonlyInclude": {
         "src/lib/utilities/pb/types-auto-generated.ts": true
     }

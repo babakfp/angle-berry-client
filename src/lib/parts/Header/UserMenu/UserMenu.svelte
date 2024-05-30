@@ -7,7 +7,7 @@
     import OutClick from "svelte-outclick"
     import { beforeNavigate } from "$app/navigation"
     import { page } from "$app/stores"
-    import type { TiersResponse, UsersResponse } from "@/utilities/pb/types"
+    import type { TiersResponse, UsersResponse } from "$lib/utilities/pb/types"
     import Tier from "./Tier.svelte"
 
     export let loggedInUser: UsersResponse

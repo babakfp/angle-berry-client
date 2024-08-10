@@ -13,7 +13,7 @@
                     Username: <code class="select-text">admin</code>
                 </li>
                 <li>
-                    Paddword: <code class="select-text">adminadmin</code>
+                    Password: <code class="select-text">adminadmin</code>
                 </li>
             </ul>
         </li>
@@ -22,7 +22,7 @@
             <ul class="list-inside list-disc space-y-1 pl-4">
                 <li>Username: <code class="select-text">user</code></li>
                 <li>
-                    Paddword: <code class="select-text">useruser</code>
+                    Password: <code class="select-text">useruser</code>
                 </li>
             </ul>
         </li>

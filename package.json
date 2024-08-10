@@ -16,7 +16,7 @@
         "autoprefixer": "10.4.20",
         "cssnano": "7.0.5",
         "phosphor-icons-svelte": "1.2.0",
-        "pocketbase": "0.21.4",
+        "pocketbase": "0.21.3",
         "pocketbase-typegen": "1.2.1",
         "postcss": "8.4.41",
         "postcss-load-config": "6.0.1",

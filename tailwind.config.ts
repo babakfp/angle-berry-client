@@ -1,7 +1,6 @@
 import type { Config } from "tailwindcss"
 import { allAddons } from "tailwindcss-addons"
 import colors from "tailwindcss/colors"
-import defaultTheme from "tailwindcss/defaultTheme"
 
 export default {
     content: ["./src/**/*.{html,svelte}"],
@@ -48,8 +47,8 @@ export default {
             full: "9999px",
         },
         fontFamily: {
-            sans: ["Recursive", ...defaultTheme.fontFamily.sans],
-            mono: ["Recursive", ...defaultTheme.fontFamily.mono],
+            sans: ["Recursive"],
+            mono: ["Recursive", { fontVariationSettings: "'MONO' 1" }],
         },
         fontWeight: {
             semibold: "600",

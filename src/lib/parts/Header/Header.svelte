@@ -31,18 +31,22 @@
 
     let isUserMenuOpen = false
     let userMenuToggle: HTMLButtonElement
+
+    $: isHome = $page.url.pathname === "/"
 </script>
 
 <header class="sticky top-0 z-50 h-header overflow-x-clip bg-body-bg shadow">
     <div class="container flex h-full justify-between px-0">
-        <a
-            class="flex items-center px-4 text-gray-50 outline-inset
-				{$page.url.pathname === '/' ? 'pointer-events-none' : 'underline'}
-			"
-            href="/"
+        <svelte:element
+            this={isHome ? "div" : "a"}
+            class="flex items-center px-4 text-gray-50 outline-inset {isHome
+                ? ''
+                : 'underline'}"
+            href={isHome ? undefined : "/"}
         >
             Angle Berry
-        </a>
+        </svelte:element>
+
         <div class="flex">
             {#if loggedInUser.isAdmin}
                 <a

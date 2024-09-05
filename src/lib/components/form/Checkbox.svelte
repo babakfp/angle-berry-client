@@ -31,7 +31,7 @@
 
 <div class="grid">
     <label
-        class="{class_} inline-flex cursor-pointer items-center gap-2 hover:text-white
+        class="{class_} inline-flex cursor-pointer items-center gap-2 hover:text-gray-50
     {(disabled || readonly) && 'pointer-events-none opacity-50'}"
     >
         <div

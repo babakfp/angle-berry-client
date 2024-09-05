@@ -2,7 +2,7 @@
     <title>How to pay</title>
 </svelte:head>
 
-<h1 class="text-4xl font-bold text-white">How to pay</h1>
+<h1 class="text-4xl font-bold text-gray-50">How to pay</h1>
 
 <div class="mt-8">
     <p>

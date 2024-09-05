@@ -21,9 +21,9 @@ export default {
         },
         colors: {
             current: colors.current,
-            white: colors.white,
             red: colors.red,
             gray: {
+                50: colors.zinc[50],
                 400: colors.zinc[400],
                 500: colors.zinc[500],
                 600: colors.zinc[600],

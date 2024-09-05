@@ -9,7 +9,7 @@
 <div
     class="mx-auto grid h-screen max-w-xs content-center items-center text-center"
 >
-    <h1 class="text-8xl font-bold text-white">
+    <h1 class="text-8xl font-bold text-gray-50">
         {$page.status}
     </h1>
 

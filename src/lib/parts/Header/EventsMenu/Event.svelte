@@ -11,7 +11,7 @@
 </script>
 
 <li
-    class="border-b border-white/5 p-4"
+    class="border-b border-gray-50/5 p-4"
     transition:fly={{ x: 64, duration: 500 }}
 >
     {#if !event.expand?.inviter}

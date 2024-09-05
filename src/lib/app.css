@@ -11,7 +11,7 @@
         @apply h-0 w-0;
     }
     * {
-        @apply outline-none drag-none tap-white/5;
+        @apply outline-none drag-none tap-gray-50/5;
     }
     b,
     strong,
@@ -54,13 +54,13 @@
 
 @layer components {
     .link {
-        @apply underline duration-200 hover:text-white;
+        @apply underline duration-200 hover:text-gray-50;
     }
 }
 
 @layer components {
     .btn {
-        @apply relative inline-flex items-center justify-center rounded border-2 border-transparent px-3 py-1.5 text-sm font-semibold text-white duration-200 drag-none;
+        @apply relative inline-flex items-center justify-center rounded border-2 border-transparent px-3 py-1.5 text-sm font-semibold text-gray-50 duration-200 drag-none;
     }
     .btn-gray-light {
         @apply bg-gray-700 hover:bg-gray-600;
@@ -84,7 +84,7 @@
         @apply bg-red-600 hover:bg-red-500;
     }
     .btn-brand {
-        @apply bg-white text-gray-700;
+        @apply bg-gray-50 text-gray-700;
     }
 }
 

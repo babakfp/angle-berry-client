@@ -11,7 +11,7 @@
     <title>Tier : {data?.tier.name}</title>
 </svelte:head>
 
-<h1 class="text-4xl font-bold text-white">{data?.tier.name}</h1>
+<h1 class="text-4xl font-bold text-gray-50">{data?.tier.name}</h1>
 
 <!-- I don't need "tiers" here becaus we only use currentTier -->
 <TiersTable class="mt-8">

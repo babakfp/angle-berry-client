@@ -14,10 +14,10 @@
 
 <Tr
     class="relative {!isCurrent
-        ? 'duration-200 hover:bg-gray-700 not-last:border-b not-last:border-white/5'
+        ? 'duration-200 hover:bg-gray-700 not-last:border-b not-last:border-gray-50/5'
         : ''}"
 >
-    <Th class="py-4 text-white">
+    <Th class="py-4 text-gray-50">
         {tier.name}
     </Th>
     <Td class="px-6 py-4">
@@ -31,7 +31,7 @@
         {#if hasAccess}
             {#if !isCurrent}
                 <span
-                    class="px-6 py-4 underline duration-200 group-hover/tr:text-white"
+                    class="px-6 py-4 underline duration-200 group-hover/tr:text-gray-50"
                 >
                     Watch now
                 </span>

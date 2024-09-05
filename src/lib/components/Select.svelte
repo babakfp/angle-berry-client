@@ -164,7 +164,7 @@
                 <li class="flex items-center rounded bg-gray-700">
                     <button
                         type="button"
-                        class="flex p-1 text-gray-500 duration-150 outline-inset hover:text-white {readonly
+                        class="flex p-1 text-gray-500 duration-150 outline-inset hover:text-gray-50 {readonly
                             ? 'pointer-events-none opacity-50'
                             : ''}"
                         on:click={() => handleDeselect(option.value)}

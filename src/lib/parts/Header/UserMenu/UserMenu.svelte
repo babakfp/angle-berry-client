@@ -40,7 +40,7 @@
 
         <li>
             <a
-                class="flex justify-between border-t border-white/5 p-4 duration-200 outline-inset hover:text-white"
+                class="flex justify-between border-t border-gray-50/5 p-4 duration-200 outline-inset hover:text-gray-50"
                 href="/how-to-invite"
             >
                 <span>
@@ -53,13 +53,13 @@
         <li use:copy={`${$page.url.origin}/register?id=${loggedInUser.id}`}>
             <button
                 type="button"
-                class="group border-y border-white/5 p-4 outline-inset"
+                class="group border-y border-gray-50/5 p-4 outline-inset"
                 on:click={() =>
                     toast.success("Your invite link is copied to Clipboard.", {
                         position: "bottom-right",
                     })}
             >
-                <span class="group-hover:text-white">
+                <span class="group-hover:text-gray-50">
                     Click to copy your invite link:
                 </span>
                 <p class="mt-1 select-text text-xs text-gray-500">
@@ -80,7 +80,7 @@
             <form action="/login-as" method="post">
                 <button
                     type="submit"
-                    class="flex w-full items-center justify-between border-t border-white/5 p-4 text-left duration-200 outline-inset hover:text-white"
+                    class="flex w-full items-center justify-between border-t border-gray-50/5 p-4 text-left duration-200 outline-inset hover:text-gray-50"
                 >
                     <span>
                         Login as {loggedInUser.isAdmin ? "a User" : "an Admin"}
@@ -98,7 +98,7 @@
             <form action="/logout" method="post">
                 <button
                     type="submit"
-                    class="w-full rounded-b border-t border-white/5 p-4 text-left duration-200 outline-inset hover:text-white"
+                    class="w-full rounded-b border-t border-gray-50/5 p-4 text-left duration-200 outline-inset hover:text-gray-50"
                 >
                     Logout
                 </button>

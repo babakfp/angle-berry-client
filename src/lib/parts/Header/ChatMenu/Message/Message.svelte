@@ -69,7 +69,7 @@
     >
         <div
             bind:this={highlight}
-            class="reply-highlight absolute inset-0 -z-1 bg-white/10 opacity-0 duration-200 ease-in-out"
+            class="reply-highlight absolute inset-0 -z-1 bg-gray-50/10 opacity-0 duration-200 ease-in-out"
         />
 
         {#if !isCurrentUser}
@@ -81,7 +81,7 @@
 
         <div
             class="message-content-wrapper relative z-1 max-w-80 break-words rounded bg-gray-700 shadow {isCurrentUser
-                ? 'justify-self-end rounded-br-[2px] !bg-[#7e6dd1] text-white'
+                ? 'justify-self-end rounded-br-[2px] !bg-[#7e6dd1] text-gray-50'
                 : 'justify-self-start rounded-tl-[2px]'}"
         >
             {#if message.expand?.repliedTo}

@@ -19,7 +19,7 @@
     <title>How to invite</title>
 </svelte:head>
 
-<h1 class="text-4xl font-bold text-white">How to invite</h1>
+<h1 class="text-4xl font-bold text-gray-50">How to invite</h1>
 
 <div class="mt-8 space-y-4">
     <Input

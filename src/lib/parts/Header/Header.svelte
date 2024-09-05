@@ -36,7 +36,7 @@
 <header class="sticky top-0 z-50 h-header overflow-x-clip bg-body-bg shadow">
     <div class="container flex h-full justify-between px-0">
         <a
-            class="flex items-center px-4 text-white outline-inset
+            class="flex items-center px-4 text-gray-50 outline-inset
 				{$page.url.pathname === '/' ? 'pointer-events-none' : 'underline'}
 			"
             href="/"
@@ -51,7 +51,7 @@
                     title="Admin dashboard"
                 >
                     <IconCrownSimpleRegular
-                        class="text-2xl duration-200 group-hover:text-white"
+                        class="text-2xl duration-200 group-hover:text-gray-50"
                     />
                 </a>
             {/if}
@@ -63,7 +63,7 @@
                 title="Notifications"
             >
                 <IconBellSimpleRegular
-                    class="text-2xl duration-200 group-hover:text-white"
+                    class="text-2xl duration-200 group-hover:text-gray-50"
                 />
                 {#if $unseenEventsLength > 0}
                     <NotificationBlob>
@@ -79,7 +79,7 @@
                 title="Chat"
             >
                 <IconChatCenteredRegular
-                    class="text-2xl duration-200 group-hover:text-white"
+                    class="text-2xl duration-200 group-hover:text-gray-50"
                 />
                 {#if $unreadMessagesLength > 0}
                     <NotificationBlob>
@@ -90,7 +90,7 @@
             <div class="relative flex">
                 <button
                     type="button"
-                    class="flex items-center gap-2 pl-2 pr-4 duration-200 outline-inset hover:text-white"
+                    class="flex items-center gap-2 pl-2 pr-4 duration-200 outline-inset hover:text-gray-50"
                     on:click={() => (isUserMenuOpen = !isUserMenuOpen)}
                     bind:this={userMenuToggle}
                     title="User menu"

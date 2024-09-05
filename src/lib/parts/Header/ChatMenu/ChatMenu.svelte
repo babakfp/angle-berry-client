@@ -188,7 +188,7 @@
         {/if}
 
         <div
-            class="relative grid grid-cols-[1fr_auto] border-t border-white/5 shadow-[0_-1px_3px_0_rgb(0_0_0_/_0.1),_0_-1px_2px_-1px_rgb(0_0_0_/_0.1)]"
+            class="relative grid grid-cols-[1fr_auto] border-t border-gray-50/5 shadow-[0_-1px_3px_0_rgb(0_0_0_/_0.1),_0_-1px_2px_-1px_rgb(0_0_0_/_0.1)]"
         >
             <textarea
                 class="block w-full resize-none bg-body-bg p-4 outline-inset placeholder:text-gray-500"
@@ -211,7 +211,7 @@
             />
             <button
                 type="submit"
-                class="flex items-end outline-inset hover:bg-white/5 hover:text-white
+                class="flex items-end outline-inset hover:bg-gray-50/5 hover:text-gray-50
 				{isSendingMessage && 'opacity-50'}"
                 disabled={isSendingMessage}
             >

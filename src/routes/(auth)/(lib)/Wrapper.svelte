@@ -21,7 +21,7 @@
     }
 </script>
 
-<h1 class="text-4xl font-bold text-white">{title}</h1>
+<h1 class="text-4xl font-bold text-gray-50">{title}</h1>
 <p class="mt-2 text-gray-400">{description}</p>
 
 <div class="mt-8">
@@ -30,7 +30,7 @@
 
 <p class="mt-8 text-sm text-gray-400">
     {footerText}
-    <a class="text-white underline" href={FooterLinkHref}>
+    <a class="text-gray-50 underline" href={FooterLinkHref}>
         {footerLinkText}
     </a>
 </p>

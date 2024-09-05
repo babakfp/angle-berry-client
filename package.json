@@ -1,5 +1,4 @@
 {
-    "name": "angle-berry-client",
     "scripts": {
         "dev": "svelte-kit sync && vite dev",
         "build": "svelte-kit sync && vite build",

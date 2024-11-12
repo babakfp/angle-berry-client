@@ -1,40 +1,55 @@
 <script lang="ts">
-    export let position = "top" // top, right, bottom, left
-    export let isVisible = false
-    export let keepAlive = false
-    export let parentElementQuerySelector = ""
+    import type { Snippet } from "svelte"
 
-    let tooltip: HTMLDivElement
+    let {
+        position = $bindable("top"),
+        isVisible,
+        keepAlive,
+        parentElementQuerySelector,
+        children,
+    }: {
+        position?: string
+        isVisible?: boolean
+        keepAlive?: boolean
+        parentElementQuerySelector?: string
+        children?: Snippet
+    } = $props()
 
-    $: if (tooltip && parentElementQuerySelector && isVisible) {
-        const parentElement = document.querySelector(parentElementQuerySelector)
+    let tooltip = $state<HTMLDivElement>()
 
-        const rootElementRect = tooltip.getBoundingClientRect()
-        const parentElementRect = parentElement!.getBoundingClientRect()
-        let isTopNotFullyVisible = false
-        let isBottomNotFullyVisible = false
+    $effect(() => {
+        if (tooltip && parentElementQuerySelector && isVisible) {
+            const parentElement = document.querySelector(
+                parentElementQuerySelector,
+            )
 
-        if (rootElementRect.top < parentElementRect.top) {
-            isTopNotFullyVisible = true
-        }
-        if (rootElementRect.bottom > parentElementRect.bottom) {
-            isBottomNotFullyVisible = true
-        }
+            const rootElementRect = tooltip.getBoundingClientRect()
+            const parentElementRect = parentElement!.getBoundingClientRect()
+            let isTopNotFullyVisible = false
+            let isBottomNotFullyVisible = false
 
-        if (isTopNotFullyVisible) {
-            if (position.includes("-")) {
-                position = position.replace("top", "bottom")
-            } else {
-                position = "bottom"
+            if (rootElementRect.top < parentElementRect.top) {
+                isTopNotFullyVisible = true
             }
-        } else if (isBottomNotFullyVisible) {
-            if (position.includes("-")) {
-                position = position.replace("bottom", "top")
-            } else {
-                position = "top"
+            if (rootElementRect.bottom > parentElementRect.bottom) {
+                isBottomNotFullyVisible = true
+            }
+
+            if (isTopNotFullyVisible) {
+                if (position.includes("-")) {
+                    position = position.replace("top", "bottom")
+                } else {
+                    position = "bottom"
+                }
+            } else if (isBottomNotFullyVisible) {
+                if (position.includes("-")) {
+                    position = position.replace("bottom", "top")
+                } else {
+                    position = "top"
+                }
             }
         }
-    }
+    })
 </script>
 
 <!-- prettier-ignore -->
@@ -75,7 +90,7 @@
 		{(position === 'right-bottom' || position === 'left-bottom') && 'bottom-0 after:bottom-4'}
 	"
 >
-	<slot />
+	{@render children?.()}
 </div>
 
 <style lang="postcss">

@@ -1,12 +1,21 @@
 <script lang="ts">
+    import type { MouseEventHandler } from "svelte/elements"
     import InputTextButton from "./InputTextButton.svelte"
 
-    export let isActive = false
-    export let activeText: string
-    export let inActiveText: string
+    let {
+        isActive,
+        activeText,
+        inActiveText,
+        onclick,
+    }: {
+        isActive?: boolean
+        activeText: string
+        inActiveText: string
+        onclick: MouseEventHandler<HTMLButtonElement>
+    } = $props()
 </script>
 
-<InputTextButton class="overflow-hidden" on:click>
+<InputTextButton class="overflow-hidden" {onclick}>
     <span class="duration-200 {isActive && 'scale-50 hide'}">
         {activeText}
     </span>

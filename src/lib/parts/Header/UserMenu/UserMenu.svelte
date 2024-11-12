@@ -3,17 +3,24 @@
     import IconUserRegular from "phosphor-icons-svelte/IconUserRegular.svelte"
     import { onMount } from "svelte"
     import { copy } from "svelte-copy"
-    import toast from "svelte-french-toast"
-    import OutClick from "svelte-outclick"
+    import toast from "svelte-hot-french-toast"
+    import { OutClick } from "svelte-outclick"
     import { beforeNavigate } from "$app/navigation"
     import { page } from "$app/stores"
-    import type { TiersResponse, UsersResponse } from "$lib/utilities/pb/types"
+    import type { TiersResponse, UsersResponse } from "$lib/utilities/pb"
     import Tier from "./Tier.svelte"
 
-    export let loggedInUser: UsersResponse
-    export let tiers: TiersResponse[]
-    export let userMenuToggle: HTMLButtonElement
-    export let isUserMenuOpen = false
+    let {
+        loggedInUser,
+        tiers,
+        userMenuToggle,
+        isUserMenuOpen = $bindable(false),
+    }: {
+        loggedInUser: UsersResponse
+        tiers: TiersResponse[]
+        userMenuToggle: HTMLButtonElement
+        isUserMenuOpen?: boolean
+    } = $props()
 
     beforeNavigate(() => (isUserMenuOpen = false))
     onMount(() =>
@@ -21,10 +28,10 @@
     )
 </script>
 
-<svelte:window on:scroll={() => (isUserMenuOpen = false)} />
+<svelte:window onscroll={() => (isUserMenuOpen = false)} />
 
 <OutClick
-    on:outclick={() => (isUserMenuOpen = false)}
+    onOutClick={() => (isUserMenuOpen = false)}
     excludeElements={userMenuToggle}
     tag="nav"
 >
@@ -54,9 +61,9 @@
             <button
                 type="button"
                 class="group border-y border-gray-50/5 p-4 outline-inset"
-                on:click={() =>
+                onclick={() =>
                     toast.success("Your invite link is copied to Clipboard.", {
-                        position: "bottom-right",
+                        position: "bottom-end",
                     })}
             >
                 <span class="group-hover:text-gray-50">

@@ -2,18 +2,24 @@
     import IconMinusCircleRegular from "phosphor-icons-svelte/IconMinusCircleRegular.svelte"
     import IconPlusCircleRegular from "phosphor-icons-svelte/IconPlusCircleRegular.svelte"
 
-    export let value: number | string
-    export let min: string | number | undefined = undefined
-    export let max: string | number | undefined = undefined
+    let {
+        value = $bindable(),
+        min,
+        max,
+    }: {
+        value: number | string
+        min?: string | number
+        max?: string | number
+    } = $props()
 
-    $: {
+    $effect(() => {
         if (max && Number(value) > Number(max)) {
             value = max
         }
         if ((min || min === 0) && Number(value) < Number(min)) {
             value = min
         }
-    }
+    })
 
     const incrementNumber = () => {
         if (max) {
@@ -42,7 +48,7 @@
         {(min || min === 0) && Number(value) <= Number(min)
         ? 'pointer-events-none text-gray-600'
         : ''}"
-    on:click={decrementNumber}
+    onclick={decrementNumber}
 >
     <IconMinusCircleRegular class="text-lg" />
 </button>
@@ -53,7 +59,7 @@
         {max && Number(value) >= Number(max)
         ? 'pointer-events-none text-gray-600'
         : ''}"
-    on:click={incrementNumber}
+    onclick={incrementNumber}
 >
     <IconPlusCircleRegular class="text-lg" />
 </button>

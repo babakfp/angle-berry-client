@@ -6,9 +6,9 @@
     import IconPencilSimpleRegular from "phosphor-icons-svelte/IconPencilSimpleRegular.svelte"
     import IconTrashSimpleRegular from "phosphor-icons-svelte/IconTrashSimpleRegular.svelte"
     import { copyText } from "svelte-copy"
-    import OutClick from "svelte-outclick"
+    import { OutClick } from "svelte-outclick"
     import { messages } from "$lib/stores/messages"
-    import type { UsersResponse } from "$lib/utilities/pb/types"
+    import type { UsersResponse } from "$lib/utilities/pb"
     import {
         contextMenuTargetMessage,
         isContextMenuOpen,
@@ -22,9 +22,13 @@
     import MessageContextMenu from "./MessageContextMenu.svelte"
     import MessageContextMenuItem from "./MessageContextMenuItem.svelte"
 
-    export let loggedInUser: UsersResponse
+    let {
+        loggedInUser,
+    }: {
+        loggedInUser: UsersResponse
+    } = $props()
 
-    let copyTimeoutId: number | undefined
+    let copyTimeoutId = $state<number>()
 
     const replyMessage = () => {
         isContextMenuOpen.set(false)
@@ -99,16 +103,16 @@
 </script>
 
 <svelte:window
-    on:keydown={(e) => {
+    onkeydown={(e) => {
         if (e.key === "Escape") {
             $isContextMenuOpen = false
         }
     }}
 />
-<svelte:document on:mouseleave={() => ($isContextMenuOpen = false)} />
+<svelte:document onmouseleave={() => ($isContextMenuOpen = false)} />
 
 <OutClick
-    on:outclick={() => $isContextMenuOpen && isContextMenuOpen.set(false)}
+    onOutClick={() => $isContextMenuOpen && isContextMenuOpen.set(false)}
     excludeQuerySelectorAll=".MessageContextMenu"
 >
     <MessageContextMenu>
@@ -116,14 +120,14 @@
             <MessageContextMenuItem
                 title="Reply"
                 icon={IconArrowUUpLeftRegular}
-                on:click={replyMessage}
+                onclick={replyMessage}
             />
         {/if}
         {#if $contextMenuTargetMessage?.expand.user.id === loggedInUser.id && !$selectedMessageIds.length}
             <MessageContextMenuItem
                 title="Edit"
                 icon={IconPencilSimpleRegular}
-                on:click={editMessage}
+                onclick={editMessage}
             />
         {/if}
         {#if $selectedMessageIds.length}
@@ -134,7 +138,7 @@
                         ? IconCheckRegular
                         : IconCopySimpleRegular}
                     isDisabled={!!copyTimeoutId}
-                    on:click={copyMessage}
+                    onclick={copyMessage}
                 />
             {/if}
         {:else}
@@ -142,7 +146,7 @@
                 title={copyTimeoutId ? "Copied" : "Copy Text"}
                 icon={copyTimeoutId ? IconCheckRegular : IconCopySimpleRegular}
                 isDisabled={!!copyTimeoutId}
-                on:click={copyMessage}
+                onclick={copyMessage}
             />
         {/if}
         {#if $contextMenuTargetMessage?.expand.user.id === loggedInUser.id}
@@ -151,14 +155,14 @@
                     <MessageContextMenuItem
                         title="Delete Selected"
                         icon={IconTrashSimpleRegular}
-                        on:click={setSelectedMessagesForDeletion}
+                        onclick={setSelectedMessagesForDeletion}
                     />
                 {/if}
             {:else}
                 <MessageContextMenuItem
                     title="Delete"
                     icon={IconTrashSimpleRegular}
-                    on:click={setAMessageForDeletion}
+                    onclick={setAMessageForDeletion}
                 />
             {/if}
         {/if}
@@ -166,13 +170,13 @@
             <MessageContextMenuItem
                 title="Select"
                 icon={IconCheckCircleRegular}
-                on:click={selectMessage}
+                onclick={selectMessage}
             />
         {:else}
             <MessageContextMenuItem
                 title="Clear Selection"
                 icon={IconCheckCircleRegular}
-                on:click={clearSelection}
+                onclick={clearSelection}
             />
         {/if}
     </MessageContextMenu>

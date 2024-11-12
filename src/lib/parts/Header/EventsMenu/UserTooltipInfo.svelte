@@ -1,21 +1,26 @@
 <script lang="ts">
     import Tooltip from "$lib/components/Tooltip.svelte"
     import TooltipWrapper from "$lib/components/TooltipWrapper.svelte"
-    import type { TiersResponse, UsersResponse } from "$lib/utilities/pb/types"
+    import type { TiersResponse, UsersResponse } from "$lib/utilities/pb"
 
-    let isVisible = false
-    export let user: UsersResponse & {
-        expand: {
-            retainedTiers: TiersResponse[]
+    let isVisible = $state(false)
+
+    let {
+        user,
+    }: {
+        user: UsersResponse & {
+            expand: {
+                retainedTiers: TiersResponse[]
+            }
         }
-    }
+    } = $props()
 </script>
 
 <TooltipWrapper>
     <div
         class="before:absolute before:inset-x-0 before:bottom-0 before:-z-1 before:block before:h-2 before:bg-gray-50/10"
-        on:pointerenter={() => (isVisible = true)}
-        on:pointerleave={() => (isVisible = false)}
+        onpointerenter={() => (isVisible = true)}
+        onpointerleave={() => (isVisible = false)}
     >
         {user.username}
     </div>

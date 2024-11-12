@@ -1,10 +1,17 @@
 <script lang="ts">
-    export let class_ = ""
-    export { class_ as class }
+    import type { Snippet } from "svelte"
+
+    let {
+        class: class_,
+        children,
+    }: {
+        class?: string
+        children?: Snippet
+    } = $props()
 </script>
 
 <thead class="{class_} border-b border-gray-50/5 text-xs uppercase">
-    <slot />
+    {@render children?.()}
 </thead>
 
 <style lang="postcss">

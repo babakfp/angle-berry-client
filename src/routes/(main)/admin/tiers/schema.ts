@@ -1,6 +1,6 @@
 import { zod } from "sveltekit-superforms/adapters"
 import { z } from "zod"
-import { TiersVisibilityOptions } from "$lib/utilities/pb/types"
+import { TIERS_RECORD_VISIBILITY_OPTIONS } from "$lib/utilities/pb"
 
 const create = zod(
     z.object({
@@ -9,8 +9,8 @@ const create = zod(
         invites: z.number().min(0).max(1000).default(0),
         videos: z.string().array().max(100).default([]),
         visibility: z
-            .nativeEnum(TiersVisibilityOptions)
-            .default(TiersVisibilityOptions.public),
+            .nativeEnum(TIERS_RECORD_VISIBILITY_OPTIONS)
+            .default(TIERS_RECORD_VISIBILITY_OPTIONS.public),
     }),
 )
 

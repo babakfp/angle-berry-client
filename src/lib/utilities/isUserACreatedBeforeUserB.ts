@@ -1,4 +1,4 @@
-import type { UsersResponse } from "$lib/utilities/pb/types"
+import type { UsersResponse } from "$lib/utilities/pb"
 
 export const isUserACreatedBeforeUserB = (
     userA: UsersResponse,

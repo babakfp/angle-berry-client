@@ -2,10 +2,10 @@ import { error, fail, redirect } from "@sveltejs/kit"
 import { setError, superValidate } from "sveltekit-superforms/server"
 import { isUserACreatedBeforeUserB } from "$lib/utilities/isUserACreatedBeforeUserB"
 import {
+    ClientResponseError,
     pbHandleClientResponseError,
     pbHandleFormActionError,
-} from "$lib/utilities/pb/helpers"
-import { ClientResponseError } from "$lib/utilities/pb/types"
+} from "$lib/utilities/pb"
 import { schema } from "./schema"
 
 export const load = async ({ locals, params }) => {

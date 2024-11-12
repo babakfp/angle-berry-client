@@ -6,10 +6,9 @@
         Th,
         Thead,
         Tr,
-        TrOverlayAnchor,
     } from "$lib/components/table/index"
 
-    export let data
+    let { data } = $props()
 </script>
 
 <svelte:head>
@@ -27,11 +26,14 @@
     </Thead>
     <Tbody>
         {#each data.users as user}
-            <Tr
-                class="relative duration-200 [transition-property:background-color] hover:bg-gray-50/10 not-last:border-b not-last:border-gray-50/5"
-            >
-                <Th class="py-4 text-gray-50">
-                    {user.username}
+            <Tr class="not-last:border-b not-last:border-gray-50/5">
+                <Th class="text-gray-50" containsAnchor={true}>
+                    <a
+                        class="link inline-block px-6 py-4 outline-inset"
+                        href="/admin/users/{user.id}"
+                    >
+                        {user.username}
+                    </a>
                 </Th>
                 <Td class="px-6 py-4">
                     {data.tiers
@@ -45,7 +47,6 @@
                 <Td class="px-6 py-4">
                     {user.isAdmin ? "Yes" : "No"}
                 </Td>
-                <TrOverlayAnchor href="/admin/users/{user.id}" />
             </Tr>
         {/each}
     </Tbody>

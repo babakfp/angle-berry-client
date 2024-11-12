@@ -1,12 +1,27 @@
 <script lang="ts">
-    export let class_ = ""
-    export { class_ as class }
-    export let text = ""
+    import type { Snippet } from "svelte"
+    import type { MouseEventHandler } from "svelte/elements"
+
+    let {
+        class: class_,
+        text,
+        children,
+        onclick,
+    }: {
+        class?: string
+        text?: string
+        children?: Snippet
+        onclick: MouseEventHandler<HTMLButtonElement>
+    } = $props()
 </script>
 
-<button type="button" class="btn btn-gray-light h-7 text-2xs {class_}" on:click>
-    {#if $$slots.default}
-        <slot />
+<button
+    type="button"
+    class="btn btn-gray-light h-7 text-2xs {class_}"
+    {onclick}
+>
+    {#if children}
+        {@render children?.()}
     {:else}
         {text}
     {/if}

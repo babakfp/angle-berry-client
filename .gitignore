@@ -5,5 +5,5 @@
 /.env
 /.env.*
 /!.env.example
-/vite.config.ts.timestamp-*
+/vite.config.*.timestamp-*
 /pnpm-lock.yaml

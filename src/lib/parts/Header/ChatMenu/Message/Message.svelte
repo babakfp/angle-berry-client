@@ -5,7 +5,7 @@
     import type {
         RealtimeMessagesResponse,
         UsersResponse,
-    } from "$lib/utilities/pb/types"
+    } from "$lib/utilities/pb"
     import { shrinkHeight } from "$lib/utilities/shrinkHeight"
     import {
         contextMenuTargetEvent,
@@ -17,14 +17,19 @@
     import MessageDateAndTime from "./MessageDateAndTime.svelte"
     import MessageReplyPreview from "./MessageReplyPreview.svelte"
 
-    export let loggedInUser: UsersResponse
-    export let message: RealtimeMessagesResponse
+    let {
+        loggedInUser,
+        message,
+    }: {
+        loggedInUser: UsersResponse
+        message: RealtimeMessagesResponse
+    } = $props()
 
     const isCurrentUser = message.expand.user.id === loggedInUser.id
 
-    let interval: number | undefined
+    let interval = $state<number>()
 
-    let highlight: HTMLDivElement
+    let highlight = $state<HTMLDivElement>()
 
     const handleClick = (e: MouseEvent) => {
         if ($selectedMessageIds.length > 0) {
@@ -42,7 +47,9 @@
                 contextMenuTargetEvent.set(undefined)
                 contextMenuTargetMessage.set(undefined)
             } else {
-                interval = highlightAnimate(highlight, interval)
+                if (highlight) {
+                    interval = highlightAnimate(highlight, interval)
+                }
                 isContextMenuOpen.set(true)
                 contextMenuTargetEvent.set(e)
                 contextMenuTargetMessage.set(message)
@@ -58,10 +65,12 @@
         {$selectedMessageIds.includes(message.id) && 'bg-blue-400/10'}
         {$selectedMessageIds.length > 0 && 'cursor-pointer'}"
         transition:shrinkHeight={{ duration: 200 }}
-        on:contextmenu|preventDefault={(e) => {
-            // @ts-expect-error TODO
-            if (e.pointerType !== "mouse") return
-            interval = highlightAnimate(highlight, interval)
+        oncontextmenu={(e) => {
+            e.preventDefault()
+            if ("pointerType" in e && e.pointerType !== "mouse") return
+            if (highlight) {
+                interval = highlightAnimate(highlight, interval)
+            }
             isContextMenuOpen.set(true)
             contextMenuTargetEvent.set(e)
             contextMenuTargetMessage.set(message)
@@ -70,7 +79,7 @@
         <div
             bind:this={highlight}
             class="reply-highlight absolute inset-0 -z-1 bg-gray-50/10 opacity-0 duration-200 ease-in-out"
-        />
+        ></div>
 
         {#if !isCurrentUser}
             <span class="text-2xs font-semibold uppercase text-gray-500">
@@ -93,7 +102,7 @@
                 />
             {/if}
 
-            <div class="select-text py-2 pl-3 pr-4" on:click={handleClick}>
+            <div class="select-text py-2 pl-3 pr-4" onclick={handleClick}>
                 {@html message.content}
             </div>
         </div>
@@ -117,7 +126,7 @@
             </div>
         {/if}
 
-        <div class="absolute inset-0" on:click={handleClick} />
+        <div class="absolute inset-0" onclick={handleClick}></div>
     </div>
 </li>
 

@@ -1,20 +1,34 @@
 <script lang="ts">
     import IconCheckSquareRegular from "phosphor-icons-svelte/IconCheckSquareRegular.svelte"
     import IconSquareRegular from "phosphor-icons-svelte/IconSquareRegular.svelte"
+    import type { ChangeEventHandler } from "svelte/elements"
     import Description from "./Description.svelte"
 
-    export let class_ = ""
-    export { class_ as class }
-    export let checked = false
-    export let value = "on"
-    export let group: string[] = []
-    export let disabled = false
-    export let readonly = false
-    export let name: string | undefined = undefined
-    export let label = ""
-    export let error = ""
-
-    $: handleGroup(checked)
+    let {
+        class: class_,
+        checked = $bindable(),
+        value = "on",
+        group = $bindable([]),
+        disabled,
+        readonly,
+        name,
+        label,
+        error,
+        onchange,
+        ...rest
+    }: {
+        class?: string
+        checked?: boolean
+        value?: string
+        group?: string[]
+        disabled?: boolean
+        readonly?: boolean
+        name?: string
+        label?: string
+        error?: string
+        onchange?: ChangeEventHandler<HTMLInputElement>
+        [key: string]: any
+    } = $props()
 
     const handleGroup = (checked: boolean) => {
         if (checked) {
@@ -27,6 +41,10 @@
             }
         }
     }
+
+    $effect(() => {
+        handleGroup(!!checked)
+    })
 </script>
 
 <div class="grid">
@@ -41,11 +59,11 @@
                 class="pointer-events-none absolute opacity-0"
                 type="checkbox"
                 bind:checked
-                on:change
+                {onchange}
                 {value}
                 {disabled}
                 {name}
-                {...$$restProps}
+                {...rest}
                 tabindex={readonly ? -1 : undefined}
             />
 

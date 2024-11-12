@@ -28,7 +28,7 @@ This project consists of two repositories:
 -   [cssnano](https://npmjs.com/package/cssnano)
 -   [phosphor-icons-svelte](https://npmjs.com/package/phosphor-icons-svelte)
 -   [pocketbase](https://npmjs.com/package/pocketbase)
--   [pocketbase-typegen](https://npmjs.com/package/pocketbase-typegen)
+-   [pocketbase-types](https://npmjs.com/package/pocketbase-types)
 -   [postcss](https://npmjs.com/package/postcss)
 -   [postcss-load-config](https://npmjs.com/package/postcss-load-config)
 -   [prettier](https://npmjs.com/package/prettier)
@@ -36,7 +36,7 @@ This project consists of two repositories:
 -   [prettier-plugin-tailwindcss](https://npmjs.com/package/prettier-plugin-tailwindcss)
 -   [svelte](https://npmjs.com/package/svelte)
 -   [svelte-copy](https://npmjs.com/package/svelte-copy)
--   [svelte-french-toast](https://npmjs.com/package/svelte-french-toast)
+-   [svelte-hot-french-toast](https://npmjs.com/package/svelte-hot-french-toast)
 -   [svelte-loading-bar](https://npmjs.com/package/svelte-loading-bar)
 -   [svelte-outclick](https://npmjs.com/package/svelte-outclick)
 -   [sveltekit-superforms](https://npmjs.com/package/sveltekit-superforms)
@@ -74,7 +74,7 @@ Open the projects in two separate vsCode instances, and:
 1. In the `angle-berry-server` directory, open a terminal and run the following command to start the server: `pnpm serve`.
 2. Once the server is running, copy the domain address displayed in the terminal. For example, it might be `http://127.0.0.1:8090`.
 3. In the `angle-berry-server` directory, duplicate the [`.env.example`](./.env.example) file located in the root of your project and rename the duplicate file to `.env`.
-4. Update the value for `PUBLIC_POCKETBASE_URL` in the [`.env`](./.env) file with the copied domain address.
+4. Update the value for `PUBLIC_PB_URL` in the [`.env`](./.env) file with the copied domain address.
 5. Run `pnpm i` and `pnpm dev`.
 6. Done 🎉.
 

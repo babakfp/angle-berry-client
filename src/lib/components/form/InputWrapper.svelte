@@ -1,12 +1,23 @@
 <script lang="ts">
+    import type { Snippet } from "svelte"
     import Description from "$lib/components/form/Description.svelte"
     import Label from "$lib/components/form/Label.svelte"
 
-    export let label = ""
-    export let required = false
-    export let for_ = ""
-    export { for_ as for }
-    export let error = ""
+    let {
+        label,
+        required,
+        for: for_,
+        error,
+        children,
+        buttons,
+    }: {
+        label?: string
+        required?: boolean
+        for?: string
+        error?: string
+        children?: Snippet
+        buttons: Snippet
+    } = $props()
 </script>
 
 <div class="group grid">
@@ -15,15 +26,13 @@
     {/if}
 
     <div class="relative mt-0.5">
-        <slot />
+        {@render children?.()}
 
-        {#if $$slots.buttons}
-            <div
-                class="absolute bottom-0.5 right-0.5 top-0.5 flex h-[calc(calc(100%-4px))] items-center rounded-r bg-body-bg px-2 duration-200 hide inset-y-center focus-within:show group-hover:show peer-focus:show"
-            >
-                <slot name="buttons" />
-            </div>
-        {/if}
+        <div
+            class="absolute bottom-0.5 right-0.5 top-0.5 flex h-[calc(calc(100%-4px))] items-center rounded-r bg-body-bg px-2 duration-200 hide inset-y-center focus-within:show group-hover:show peer-focus:show"
+        >
+            {@render buttons()}
+        </div>
     </div>
 
     {#if error}

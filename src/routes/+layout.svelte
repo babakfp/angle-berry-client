@@ -1,9 +1,15 @@
 <script lang="ts">
-    import { onMount } from "svelte"
-    import { Toaster } from "svelte-french-toast"
+    import { onMount, type Snippet } from "svelte"
+    import { Toaster } from "svelte-hot-french-toast"
     import { LoadingBar } from "svelte-loading-bar"
     import { preventSomeDefaultEvents } from "$lib/utilities/preventSomeDefaultEvents"
     import "$lib/app.css"
+
+    let {
+        children,
+    }: {
+        children: Snippet
+    } = $props()
 
     onMount(() => {
         preventSomeDefaultEvents()
@@ -12,6 +18,6 @@
 
 <LoadingBar />
 
-<slot />
+{@render children()}
 
 <Toaster />

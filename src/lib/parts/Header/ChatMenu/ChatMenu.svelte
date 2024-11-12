@@ -13,7 +13,7 @@
         ListResult,
         RealtimeMessagesResponse,
         UsersResponse,
-    } from "$lib/utilities/pb/types"
+    } from "$lib/utilities/pb"
     import {
         isContextMenuOpen,
         isReplying,
@@ -27,15 +27,26 @@
     import MessageActionPreview from "./MessageActionPreview.svelte"
     import MessageDeleteModal from "./MessageDeleteModal.svelte"
 
-    export let loggedInUser: UsersResponse
-    export let pbMessages: ListResult<RealtimeMessagesResponse>
-    export let isOpen = false
-    export let toggleButton: HTMLButtonElement
+    let {
+        loggedInUser,
+        pbMessages,
+        isOpen = $bindable(false),
+        toggleButton,
+    }: {
+        loggedInUser: UsersResponse
+        pbMessages: ListResult<RealtimeMessagesResponse>
+        isOpen?: boolean
+        toggleButton: HTMLButtonElement
+    } = $props()
 
     messages.set(pbMessages)
 
-    $: if (!isOpen && $messageIdToEdit) messageIdToEdit.set(undefined)
-    $: if (isOpen && $unreadMessagesLength) unreadMessagesLength.set(0)
+    $effect(() => {
+        if (!isOpen && $messageIdToEdit) messageIdToEdit.set(undefined)
+    })
+    $effect(() => {
+        if (isOpen && $unreadMessagesLength) unreadMessagesLength.set(0)
+    })
 
     const messageInputValue = writable("")
 
@@ -58,9 +69,13 @@
         ),
     )
 
-    $: isEditingMessage = !!$messageIdToEdit
+    let isEditingMessage = $state(false)
 
-    let isSendingMessage = false
+    $effect(() => {
+        isEditingMessage = !!$messageIdToEdit
+    })
+
+    let isSendingMessage = $state(false)
     const submitMessage: SubmitFunction = () => {
         isSendingMessage = true
         $messageInputElement!.focus()
@@ -76,12 +91,15 @@
         }
     }
 
-    let formElement: HTMLFormElement
+    let formElement = $state<HTMLFormElement>()
 
-    $: replyedMessageId = $isReplying ? $replyTargetMessage?.id : undefined
+    let replyedMessageId = $state<string>()
+    $effect(() => {
+        replyedMessageId = $isReplying ? $replyTargetMessage?.id : undefined
+    })
 
-    let isFetchingOlderMessages = false
-    let isSomethingWentWrongWhenFetchingOlderMessages = false
+    let isFetchingOlderMessages = $state(false)
+    let isSomethingWentWrongWhenFetchingOlderMessages = $state(false)
     let pageNumberFortheNextOlderMessagesToFetch = 2
     const handleScroll = async (e: Event) => {
         // Is reached the top of the scrollable?
@@ -133,7 +151,7 @@
         <ol
             id="messages-wrapper"
             class="flex flex-col-reverse content-start items-start overflow-y-auto overscroll-y-contain py-4 sm:text-sm"
-            on:scroll={handleScroll}
+            onscroll={handleScroll}
         >
             {#each $messages.items as message (message.id)}
                 <Message {loggedInUser} {message} />
@@ -170,7 +188,7 @@
                 title="Replying to {$replyTargetMessage?.expand.user.username}"
                 content={$replyTargetMessage?.content || ""}
                 messageId={$replyTargetMessage?.id || ""}
-                on:close={() => isReplying.set(false)}
+                onClose={() => isReplying.set(false)}
                 bind:isOpen={$isReplying}
             />
         {/if}
@@ -182,7 +200,7 @@
                     (msg) => msg.id === $messageIdToEdit,
                 )[0]?.content}
                 messageId={$messageIdToEdit}
-                on:close={() => messageIdToEdit.set(undefined)}
+                onClose={() => messageIdToEdit.set(undefined)}
                 bind:isOpen={isEditingMessage}
             />
         {/if}
@@ -199,16 +217,16 @@
                 required
                 rows="1"
                 autocomplete="off"
-                on:keypress={(e) => {
+                onkeypress={(e) => {
                     if (
                         !isSendingMessage &&
                         e.ctrlKey &&
                         (e.code === "Enter" || e.key === "Enter")
                     ) {
-                        formElement.requestSubmit()
+                        formElement?.requestSubmit()
                     }
                 }}
-            />
+            ></textarea>
             <button
                 type="submit"
                 class="flex items-end outline-inset hover:bg-gray-50/5 hover:text-gray-50
@@ -238,8 +256,8 @@
         />
     </form>
 
-    <svelte:fragment slot="outer">
+    {#snippet outer()}
         <ContextMenu {loggedInUser} />
         <MessageDeleteModal />
-    </svelte:fragment>
+    {/snippet}
 </PopSide>

@@ -2,22 +2,33 @@
     import Select from "$lib/components/Select.svelte"
     import Label from "./Label.svelte"
 
-    // Start: From "$lib/components/Select.svelte"
     type Option = { value: string; label: string }
 
-    export let label: string
-    export let options: Option[] = []
-    export let selectedOptionValue: Option["value"] | undefined = undefined
-    export let selectedOption: Option | undefined = undefined
-    export let selectedOptions: Option[] = []
-    export let error = ""
-    export let isMultiple = true
-    export let readonly = false
-    // End
-
-    export let name: string
-    export let placeholder: string
-    export let required = false
+    let {
+        label,
+        options = [],
+        selectedOptionValue = $bindable(),
+        selectedOption = $bindable(),
+        selectedOptions = $bindable([]),
+        error = "",
+        isMultiple = true,
+        readonly,
+        name,
+        placeholder,
+        required,
+    }: {
+        label: string
+        options?: Option[]
+        selectedOptionValue?: Option["value"]
+        selectedOption?: Option
+        selectedOptions?: Option[]
+        error?: string
+        isMultiple?: boolean
+        readonly?: boolean
+        name: string
+        placeholder: string
+        required?: boolean
+    } = $props()
 </script>
 
 <div>

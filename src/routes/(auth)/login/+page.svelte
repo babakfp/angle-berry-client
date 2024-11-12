@@ -1,5 +1,5 @@
 <script lang="ts">
-    import toast from "svelte-french-toast"
+    import toast from "svelte-hot-french-toast"
     import { superForm } from "sveltekit-superforms/client"
     import { page } from "$app/stores"
     import Form from "$lib/components/form/Form.svelte"
@@ -9,8 +9,7 @@
     import Wrapper from "../(lib)/Wrapper.svelte"
     import LoginWithoutRegistering from "./(lib)/LoginWithoutRegistering.svelte"
 
-    export let data
-    export let form
+    let { data, form } = $props()
 
     const {
         form: formData,
@@ -22,7 +21,7 @@
     } = superForm(data.form, { validators: schema })
     export const snapshot = { capture, restore }
 
-    $: {
+    $effect(() => {
         const demoUsername = $page.url.searchParams.get("username")
         const demoPassword = $page.url.searchParams.get("password")
 
@@ -30,7 +29,7 @@
             $formData.username = demoUsername
             $formData.password = demoPassword
         }
-    }
+    })
 </script>
 
 <svelte:head>
@@ -45,7 +44,7 @@
         {validateForm}
         on:redirect={() => {
             toast.success("Logged in successfully!", {
-                position: "bottom-right",
+                position: "bottom-end",
             })
         }}
     >

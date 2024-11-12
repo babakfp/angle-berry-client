@@ -1,5 +1,5 @@
 <script lang="ts">
-    import toast from "svelte-french-toast"
+    import toast from "svelte-hot-french-toast"
     import { superForm } from "sveltekit-superforms/client"
     import Checkbox from "$lib/components/form/Checkbox.svelte"
     import Form from "$lib/components/form/Form.svelte"
@@ -8,8 +8,7 @@
     import { isUserACreatedBeforeUserB } from "$lib/utilities/isUserACreatedBeforeUserB"
     import { schema } from "./schema"
 
-    export let data
-    export let form
+    let { data, form } = $props()
 
     const {
         form: formData,
@@ -22,11 +21,17 @@
     if (!$formData.retainedTiers.length)
         $formData.retainedTiers = data.targetUser.retainedTiers
 
-    let selectedRetainedTiers = data.tiers
-        .filter((tier) => $formData.retainedTiers.includes(tier.id))
-        .map((tier) => ({ value: tier.id, label: tier.name }))
+    let selectedRetainedTiers = $state(
+        data.tiers
+            .filter((tier) => $formData.retainedTiers.includes(tier.id))
+            .map((tier) => ({ value: tier.id, label: tier.name })),
+    )
 
-    $: $formData.retainedTiers = selectedRetainedTiers.map((tier) => tier.value)
+    $effect(() => {
+        $formData.retainedTiers = selectedRetainedTiers.map(
+            (tier) => tier.value,
+        )
+    })
 </script>
 
 <svelte:head>
@@ -47,7 +52,7 @@
         {validateForm}
         on:redirect={() => {
             toast.success("Updated successfully!", {
-                position: "bottom-right",
+                position: "bottom-end",
             })
         }}
     >

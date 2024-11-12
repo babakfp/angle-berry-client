@@ -11,10 +11,15 @@
         selectedMessageIds,
     } from "./chatStores"
 
-    let isDeletingMessage = false
-    $: isDeletePopupOpen = !!$messageIdsToDelete.length
-    $: if (!isDeletePopupOpen && $messageIdsToDelete.length > 0)
-        messageIdsToDelete.set([])
+    let isDeletingMessage = $state(false)
+    let isDeletePopupOpen = $state(false)
+    $effect(() => {
+        isDeletePopupOpen = !!$messageIdsToDelete.length
+    })
+    $effect(() => {
+        if (!isDeletePopupOpen && $messageIdsToDelete.length > 0)
+            messageIdsToDelete.set([])
+    })
 
     const handleDelete = async () => {
         try {
@@ -63,11 +68,11 @@
     description="Are you sure you want to delete this message?"
     bind:isOpen={isDeletePopupOpen}
 >
-    <svelte:fragment slot="actions">
+    {#snippet actions()}
         <button
             type="button"
             class="btn btn-gray"
-            on:click={() => messageIdsToDelete.set([])}
+            onclick={() => messageIdsToDelete.set([])}
         >
             Cancel
         </button>
@@ -76,12 +81,12 @@
             class="btn btn-danger {isDeletingMessage &&
                 'pointer-events-none opacity-50'}"
             disabled={isDeletingMessage}
-            on:click={handleDelete}
+            onclick={handleDelete}
         >
             <span>{isDeletingMessage ? "Deleting" : "Delete"}</span>
             {#if isDeletingMessage}
                 <IconSpinnerRegular class="ml-2 animate-spin" />
             {/if}
         </button>
-    </svelte:fragment>
+    {/snippet}
 </Modal>

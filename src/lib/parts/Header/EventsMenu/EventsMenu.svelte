@@ -5,18 +5,26 @@
         ListResult,
         RealtimeEventsResponse,
         UsersResponse,
-    } from "$lib/utilities/pb/types"
+    } from "$lib/utilities/pb"
     import Event from "./Event.svelte"
 
-    export let pbEvents: ListResult<RealtimeEventsResponse>
+    let {
+        pbEvents,
+        loggedInUser,
+        isOpen = $bindable(false),
+        toggleButton,
+    }: {
+        pbEvents: ListResult<RealtimeEventsResponse>
+        loggedInUser: UsersResponse
+        isOpen?: boolean
+        toggleButton: HTMLButtonElement
+    } = $props()
 
     events.set(pbEvents)
 
-    export let loggedInUser: UsersResponse
-    export let isOpen = false
-    export let toggleButton: HTMLButtonElement
-
-    $: if (isOpen && $unseenEventsLength) unseenEventsLength.set(0)
+    $effect(() => {
+        if (isOpen && $unseenEventsLength) unseenEventsLength.set(0)
+    })
 </script>
 
 <PopSide id="EventsMenu" bind:isOpen {toggleButton}>

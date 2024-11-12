@@ -1,6 +1,9 @@
 <script lang="ts">
-    export let class_ = ""
-    export { class_ as class }
+    let {
+        class: class_,
+    }: {
+        class?: string
+    } = $props()
 </script>
 
 <!-- prettier-ignore -->

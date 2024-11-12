@@ -1,8 +1,13 @@
 <script lang="ts">
-    export let class_ = ""
-    export { class_ as class }
-    export let text: string
-    export let type: "error" | "success"
+    let {
+        class: class_,
+        text,
+        type,
+    }: {
+        class?: string
+        text: string
+        type: "error" | "success"
+    } = $props()
 </script>
 
 <p

@@ -1,15 +1,14 @@
 <script lang="ts">
-    import toast from "svelte-french-toast"
+    import toast from "svelte-hot-french-toast"
     import { superForm } from "sveltekit-superforms/client"
-    import { PUBLIC_POCKETBASE_URL } from "$env/static/public"
+    import { PUBLIC_PB_URL } from "$env/static/public"
     import DropZone from "$lib/components/form/DropZone.svelte"
     import Form from "$lib/components/form/Form.svelte"
     import FloatingActions from "$lib/components/table/FloatingActions.svelte"
     import VideoGalleryItem from "../tiers/VideoGalleryItem.svelte"
     import { formats, schema } from "./schema"
 
-    export let data
-    export let form
+    let { data, form } = $props()
 
     const {
         form: uploadForm,
@@ -23,9 +22,11 @@
         validators: schema.delete,
     })
 
-    let videos: FileList | undefined
+    let videos = $state<FileList>()
 
-    $: $uploadForm.videos = videos ? Array.from(videos) : []
+    $effect(() => {
+        $uploadForm.videos = videos ? Array.from(videos) : []
+    })
 </script>
 
 <svelte:head>
@@ -43,7 +44,7 @@
     on:success={() => {
         videos = undefined
         toast.success("Uploaded successfully!", {
-            position: "bottom-right",
+            position: "bottom-end",
         })
     }}
 >
@@ -68,7 +69,7 @@
     {#each data.videos as video}
         <li>
             <VideoGalleryItem
-                src="{PUBLIC_POCKETBASE_URL}/api/files/{video.collectionName}/{video.id}/{video.file}"
+                src="{PUBLIC_PB_URL}/api/files/{video.collectionName}/{video.id}/{video.file}"
                 checked={$deleteForm.videos.includes(video.id)}
                 bind:group={$deleteForm.videos}
                 value={video.id}

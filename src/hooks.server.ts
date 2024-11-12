@@ -1,17 +1,18 @@
 import { error } from "@sveltejs/kit"
 import PocketBase from "pocketbase"
-import { PUBLIC_POCKETBASE_URL } from "$env/static/public"
-import { pbHandleClientResponseError } from "$lib/utilities/pb/helpers"
-import { ClientResponseError } from "$lib/utilities/pb/types"
+import { PUBLIC_PB_URL } from "$env/static/public"
+import {
+    ClientResponseError,
+    pbHandleClientResponseError,
+} from "$lib/utilities/pb"
 
 export const handle = async ({ event, resolve }) => {
-    if (!PUBLIC_POCKETBASE_URL)
+    if (!PUBLIC_PB_URL)
         error(500, {
-            message:
-                "Missing REQUIRED Environment Variable PUBLIC_POCKETBASE_URL",
+            message: "Missing REQUIRED Environment Variable PUBLIC_PB_URL",
         })
 
-    event.locals.pb = new PocketBase(PUBLIC_POCKETBASE_URL)
+    event.locals.pb = new PocketBase(PUBLIC_PB_URL)
     event.locals.pb.authStore.loadFromCookie(
         event.request.headers.get("cookie") || "",
     )

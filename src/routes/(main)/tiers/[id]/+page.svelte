@@ -1,10 +1,10 @@
 <script lang="ts">
-    import { PUBLIC_POCKETBASE_URL } from "$env/static/public"
+    import { PUBLIC_PB_URL } from "$env/static/public"
     import TiersTable from "$lib/components/TiersTable.svelte"
     import TiersTableRow from "$lib/components/TiersTableRow.svelte"
     import VideoPlayer from "$lib/components/VideoPlayer.svelte"
 
-    export let data
+    let { data } = $props()
 </script>
 
 <svelte:head>
@@ -36,7 +36,7 @@
         {#each data.tier.expand?.videos as video}
             <li>
                 <VideoPlayer
-                    src="{PUBLIC_POCKETBASE_URL}/api/files/{video.collectionName}/{video.id}/{video.file}"
+                    src="{PUBLIC_PB_URL}/api/files/{video.collectionName}/{video.id}/{video.file}"
                 />
             </li>
         {/each}

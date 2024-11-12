@@ -1,2 +1,2 @@
 *.svg
-/src/lib/utilities/pb/types-auto-generated.ts
+/src/lib/utilities/pb/types/generated.ts

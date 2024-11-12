@@ -1,10 +1,10 @@
 import { error, fail, redirect } from "@sveltejs/kit"
 import { superValidate } from "sveltekit-superforms/server"
 import {
+    ClientResponseError,
     pbHandleClientResponseError,
     pbHandleFormActionError,
-} from "$lib/utilities/pb/helpers"
-import { ClientResponseError } from "$lib/utilities/pb/types"
+} from "$lib/utilities/pb"
 import { schema } from "../schema"
 
 export const load = async ({ locals, params }) => {
@@ -12,12 +12,16 @@ export const load = async ({ locals, params }) => {
     if (!locals.loggedInUser.isAdmin)
         error(401, "You are not authorized to see this page!")
 
-    const formUpdate = await superValidate(schema.update)
-    const formDelete = await superValidate(schema.delete.single)
+    const [formUpdate, formDelete] = await Promise.all([
+        superValidate(schema.update),
+        superValidate(schema.delete.single),
+    ])
 
     try {
-        const tier = await locals.pb.collection("tiers").getOne(params.id)
-        const videos = await locals.pb.collection("videos").getFullList()
+        const [tier, videos] = await Promise.all([
+            locals.pb.collection("tiers").getOne(params.id),
+            locals.pb.collection("videos").getFullList(),
+        ])
 
         return { formUpdate, formDelete, tier, videos }
     } catch (e) {
@@ -55,7 +59,10 @@ export const actions = {
             error(401, "You are not authorized to perform this action!")
 
         const formDelete = await superValidate(request, schema.delete.single)
-        if (!formDelete.valid) return fail(400, { formDelete })
+
+        if (!formDelete.valid) {
+            return fail(400, { formDelete })
+        }
 
         try {
             await locals.pb.collection("tiers").delete(params.id)

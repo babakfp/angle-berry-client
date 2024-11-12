@@ -1,16 +1,21 @@
-<!-- Used for reply and edit preview -->
-
 <script lang="ts">
     import IconXRegular from "phosphor-icons-svelte/IconXRegular.svelte"
-    import { createEventDispatcher } from "svelte"
+    import type { MouseEventHandler } from "svelte/elements"
     import { goToMessage } from "$lib/parts/Header/ChatMenu/goToMessage"
 
-    export let title: string
-    export let content: string
-    export let messageId: string
-    export let isOpen = false
-
-    const dispatch = createEventDispatcher()
+    let {
+        title,
+        content,
+        messageId,
+        isOpen = $bindable(false),
+        onClose,
+    }: {
+        title: string
+        content: string
+        messageId: string
+        isOpen?: boolean
+        onClose: () => void
+    } = $props()
 
     let interval: number | undefined
 
@@ -20,7 +25,7 @@
 
     const handleClosing = () => {
         isOpen = false
-        dispatch("close")
+        onClose()
     }
 </script>
 
@@ -31,7 +36,7 @@
         <button
             type="button"
             class="block w-full py-4 pl-4 text-left outline-inset hover:bg-gray-50/5"
-            on:click={handleJumpToMessage}
+            onclick={handleJumpToMessage}
         >
             <div class="text-xs text-gray-500">{title}</div>
             <div class="line-clamp-1">{@html content}</div>
@@ -39,7 +44,7 @@
         <button
             type="button"
             class="flex p-4 outline-inset hover:bg-gray-50/5"
-            on:click={handleClosing}
+            onclick={handleClosing}
         >
             <IconXRegular />
         </button>

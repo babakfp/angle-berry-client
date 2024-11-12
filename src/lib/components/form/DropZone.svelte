@@ -1,21 +1,36 @@
 <script lang="ts">
     import IconUploadSimpleRegular from "phosphor-icons-svelte/IconUploadSimpleRegular.svelte"
+    import type { DragEventHandler } from "svelte/elements"
     import Description from "$lib/components/form/Description.svelte"
     import { formatBytes } from "$lib/utilities/formatBytes"
 
-    export let name: string
-    export let accept: string
-    export let multiple = false
-    export let error = ""
-    export let files: FileList | undefined
+    let {
+        name,
+        accept,
+        multiple,
+        error,
+        files = $bindable(),
+        ondragover,
+    }: {
+        name: string
+        accept: string
+        multiple?: boolean
+        error?: string
+        files?: FileList
+        ondragover?: DragEventHandler<HTMLLabelElement>
+    } = $props()
 </script>
 
 <div>
     <label
         for={name}
         class="grid cursor-pointer justify-center justify-items-center gap-2 rounded border-2 border-dashed border-gray-600 bg-gray-700/20 px-4 py-6 text-center text-gray-400"
-        on:dragover|preventDefault
-        on:drop|preventDefault={(e) => {
+        ondragover={(e) => {
+            e.preventDefault()
+            ondragover?.(e)
+        }}
+        ondrop={(e) => {
+            e.preventDefault()
             files = e.dataTransfer?.files
         }}
     >

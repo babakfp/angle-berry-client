@@ -1,8 +1,13 @@
 <script lang="ts">
-    import type { TiersResponse, UsersResponse } from "$lib/utilities/pb/types"
+    import type { TiersResponse, UsersResponse } from "$lib/utilities/pb"
 
-    export let loggedInUser: UsersResponse
-    export let tier: TiersResponse
+    let {
+        loggedInUser,
+        tier,
+    }: {
+        loggedInUser: UsersResponse
+        tier: TiersResponse
+    } = $props()
 </script>
 
 <li class="relative">

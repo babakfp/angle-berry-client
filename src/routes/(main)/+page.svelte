@@ -2,7 +2,7 @@
     import TiersTable from "$lib/components/TiersTable.svelte"
     import TiersTableRow from "$lib/components/TiersTableRow.svelte"
 
-    export let data
+    let { data } = $props()
 </script>
 
 <svelte:head>

@@ -1,5 +1,5 @@
 {
     "files.readonlyInclude": {
-        "src/lib/utilities/pb/types-auto-generated.ts": true
+        "src/lib/utilities/pb/types/generated.ts": true
     }
 }

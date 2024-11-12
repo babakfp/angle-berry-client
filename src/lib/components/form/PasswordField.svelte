@@ -1,12 +1,21 @@
 <script lang="ts">
+    import type { FullAutoFill } from "svelte/elements"
     import Input from "./Input.svelte"
     import InputTextButtonToggleable from "./InputTextButtonToggleable.svelte"
 
-    export let value = ""
-    export let autocomplete: string
-    export let error = ""
+    let {
+        value = $bindable(""),
+        autocomplete,
+        error,
+        ...rest
+    }: {
+        value?: string
+        autocomplete: FullAutoFill
+        error?: string
+        [key: string]: any
+    } = $props()
 
-    let isPasswordVisible = false
+    let isPasswordVisible = $state(false)
 </script>
 
 <Input
@@ -16,17 +25,17 @@
     label="Password"
     placeholder="A secret that remains undiscovered"
     {autocomplete}
-    {...$$restProps}
+    {...rest}
     {error}
 >
-    <svelte:fragment slot="buttons">
+    {#snippet buttons()}
         {#if value}
             <InputTextButtonToggleable
                 isActive={isPasswordVisible}
                 activeText="Show"
                 inActiveText="Hide"
-                on:click={() => (isPasswordVisible = !isPasswordVisible)}
+                onclick={() => (isPasswordVisible = !isPasswordVisible)}
             />
         {/if}
-    </svelte:fragment>
+    {/snippet}
 </Input>

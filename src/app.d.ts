@@ -1,9 +1,9 @@
-import type { TypedPocketBase, UsersResponse } from "$lib/utilities/pb/types"
+import type { PocketBaseType, UsersResponse } from "$lib/utilities/pb"
 
 declare global {
     namespace App {
         interface Locals {
-            pb: TypedPocketBase
+            pb: PocketBaseType
             loggedInUser?: UsersResponse
             previewTierId?: string
         }

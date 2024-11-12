@@ -2,9 +2,15 @@
     import Checkbox from "$lib/components/form/Checkbox.svelte"
     import Td from "$lib/components/table/Td.svelte"
 
-    export let checked: boolean
-    export let value: string
-    export let group: string[]
+    let {
+        checked = $bindable(),
+        value,
+        group = $bindable(),
+    }: {
+        checked: boolean
+        value: string
+        group: string[]
+    } = $props()
 </script>
 
 <Td class="w-16">

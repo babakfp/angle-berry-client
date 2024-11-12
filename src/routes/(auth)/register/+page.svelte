@@ -1,5 +1,5 @@
 <script lang="ts">
-    import toast from "svelte-french-toast"
+    import toast from "svelte-hot-french-toast"
     import { superForm } from "sveltekit-superforms/client"
     import Form from "$lib/components/form/Form.svelte"
     import PasswordField from "$lib/components/form/PasswordField.svelte"
@@ -7,8 +7,7 @@
     import { schema } from "../(lib)/schema"
     import Wrapper from "../(lib)/Wrapper.svelte"
 
-    export let data
-    export let form
+    let { data, form } = $props()
 
     const {
         form: formData,
@@ -33,7 +32,7 @@
         {validateForm}
         on:redirect={() => {
             toast.success("Registered successfully!", {
-                position: "bottom-right",
+                position: "bottom-end",
             })
         }}
     >

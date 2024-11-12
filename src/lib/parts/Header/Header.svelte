@@ -13,26 +13,33 @@
         RealtimeMessagesResponse,
         TiersResponse,
         UsersResponse,
-    } from "$lib/utilities/pb/types"
+    } from "$lib/utilities/pb"
     import ChatMenu from "./ChatMenu/ChatMenu.svelte"
     import EventsMenu from "./EventsMenu/EventsMenu.svelte"
     import UserMenu from "./UserMenu/UserMenu.svelte"
 
-    export let loggedInUser: UsersResponse
-    export let tiers: TiersResponse[]
-    export let pbEvents: ListResult<RealtimeEventsResponse>
-    export let pbMessages: ListResult<RealtimeMessagesResponse>
+    let {
+        loggedInUser,
+        tiers,
+        pbEvents,
+        pbMessages,
+    }: {
+        loggedInUser: UsersResponse
+        tiers: TiersResponse[]
+        pbEvents: ListResult<RealtimeEventsResponse>
+        pbMessages: ListResult<RealtimeMessagesResponse>
+    } = $props()
 
-    let isEventsMenuOpen = false
-    let eventsMenuToggle: HTMLButtonElement
+    let isEventsMenuOpen = $state(false)
+    let eventsMenuToggle = $state<HTMLButtonElement>()
 
-    let isChatMenuOpen = false
-    let chatMenuToggle: HTMLButtonElement
+    let isChatMenuOpen = $state(false)
+    let chatMenuToggle = $state<HTMLButtonElement>()
 
-    let isUserMenuOpen = false
-    let userMenuToggle: HTMLButtonElement
+    let isUserMenuOpen = $state(false)
+    let userMenuToggle = $state<HTMLButtonElement>()
 
-    $: isHome = $page.url.pathname === "/"
+    let isHome = $derived($page.url.pathname === "/")
 </script>
 
 <header class="sticky top-0 z-50 h-header overflow-x-clip bg-body-bg shadow">
@@ -63,7 +70,7 @@
                 type="button"
                 class="group relative flex items-center px-2 outline-inset"
                 bind:this={eventsMenuToggle}
-                on:click={() => (isEventsMenuOpen = !isEventsMenuOpen)}
+                onclick={() => (isEventsMenuOpen = !isEventsMenuOpen)}
                 title="Notifications"
             >
                 <IconBellSimpleRegular
@@ -79,7 +86,7 @@
                 type="button"
                 class="group relative flex items-center px-2 outline-inset"
                 bind:this={chatMenuToggle}
-                on:click={() => (isChatMenuOpen = !isChatMenuOpen)}
+                onclick={() => (isChatMenuOpen = !isChatMenuOpen)}
                 title="Chat"
             >
                 <IconChatCenteredRegular
@@ -95,7 +102,7 @@
                 <button
                     type="button"
                     class="flex items-center gap-2 pl-2 pr-4 duration-200 outline-inset hover:text-gray-50"
-                    on:click={() => (isUserMenuOpen = !isUserMenuOpen)}
+                    onclick={() => (isUserMenuOpen = !isUserMenuOpen)}
                     bind:this={userMenuToggle}
                     title="User menu"
                 >

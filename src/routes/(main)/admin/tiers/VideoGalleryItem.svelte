@@ -2,11 +2,19 @@
     import Checkbox from "$lib/components/form/Checkbox.svelte"
     import VideoPlayer from "$lib/components/VideoPlayer.svelte"
 
-    export let src: string
-    export let checked: boolean
-    export let group: string[]
-    export let value: string
-    export let name: string | undefined = undefined
+    let {
+        src,
+        checked,
+        group = $bindable(),
+        value,
+        name = undefined,
+    }: {
+        src: string
+        checked: boolean
+        group: string[]
+        value: string
+        name?: string
+    } = $props()
 </script>
 
 <div class="grid gap-1">

@@ -1,10 +1,15 @@
 <script lang="ts">
-    export let for_: string | undefined = undefined
-    export { for_ as for }
-    export let label: string
-    export let required = false
-    export let class_ = ""
-    export { class_ as class }
+    let {
+        for: for_,
+        label,
+        required,
+        class: class_,
+    }: {
+        for?: string
+        label: string
+        required?: boolean
+        class?: string
+    } = $props()
 </script>
 
 <label class="{class_} text-sm" for={for_}>

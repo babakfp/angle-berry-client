@@ -4,28 +4,41 @@
     import IconCheckSquareRegular from "phosphor-icons-svelte/IconCheckSquareRegular.svelte"
     import IconSquareRegular from "phosphor-icons-svelte/IconSquareRegular.svelte"
     import IconXSquareRegular from "phosphor-icons-svelte/IconXSquareRegular.svelte"
-    import OutClick from "svelte-outclick"
+    import { OutClick } from "svelte-outclick"
     import Description from "$lib/components/form/Description.svelte"
 
     type Option = { value: string; label: string }
 
-    export let label: string
-    export let options: Option[] = []
-    export let selectedOptionValue: Option["value"] | undefined = undefined
-    export let selectedOption: Option | undefined = undefined
-    export let selectedOptions: Option[] = []
-    export let error = ""
-    export let isMultiple = true
-    export let readonly = false
-    export let class_ = ""
-    export { class_ as class }
+    let {
+        label,
+        options = [],
+        selectedOptionValue = $bindable(),
+        selectedOption = $bindable(),
+        selectedOptions = $bindable([]),
+        error,
+        isMultiple = true,
+        readonly,
+        class: class_,
+    }: {
+        label: string
+        options?: Option[]
+        selectedOptionValue?: Option["value"]
+        selectedOption?: Option
+        selectedOptions?: Option[]
+        error?: string
+        isMultiple?: boolean
+        readonly?: boolean
+        class?: string
+    } = $props()
 
-    let trigger: HTMLButtonElement
-    let isOpen = false
+    let trigger = $state<HTMLButtonElement>()
+    let isOpen = $state(false)
 
-    $: if (selectedOption) {
-        selectedOptionValue = selectedOption.value
-    }
+    $effect(() => {
+        if (selectedOption) {
+            selectedOptionValue = selectedOption.value
+        }
+    })
 
     if (selectedOptionValue) {
         selectedOption = options.find(
@@ -88,10 +101,10 @@
 </script>
 
 <svelte:window
-    on:scroll={handleTriggerClose}
-    on:keydown={handleMenuCloseOnEsxape}
+    onscroll={handleTriggerClose}
+    onkeydown={handleMenuCloseOnEsxape}
 />
-<svelte:document on:mouseleave={handleTriggerClose} />
+<svelte:document onmouseleave={handleTriggerClose} />
 
 <div class="relative grid gap-2 {class_}">
     <button
@@ -100,7 +113,7 @@
         class="z-30 flex h-11 w-full items-center justify-between rounded bg-gray-700 px-4 hover:bg-gray-600 {readonly
             ? 'pointer-events-none opacity-50'
             : ''}"
-        on:click={handleTriggerToggle}
+        onclick={handleTriggerToggle}
     >
         {#if selectedOption?.value}
             <span>{selectedOption.label}</span>
@@ -110,7 +123,7 @@
         <IconCaretDownRegular class="text-gray-500" />
     </button>
 
-    <OutClick on:outclick={handleTriggerClose} excludeElements={trigger}>
+    <OutClick onOutClick={handleTriggerClose} excludeElements={trigger}>
         <div
             class="absolute top-11 z-20 w-full -translate-y-2 duration-150
             {isOpen ? '!translate-y-2' : 'hide'}"
@@ -122,7 +135,7 @@
                             <button
                                 type="button"
                                 class="flex w-full items-center gap-2 bg-gray-700 px-4 py-2 text-sm outline-inset hover:bg-gray-600 group-first:rounded-t group-first:pt-4 group-last:rounded-b group-last:pb-4"
-                                on:click={() => {
+                                onclick={() => {
                                     if (isMultiple) {
                                         handleSelectToggle(option.value)
                                     } else {
@@ -167,7 +180,7 @@
                         class="flex p-1 text-gray-500 duration-150 outline-inset hover:text-gray-50 {readonly
                             ? 'pointer-events-none opacity-50'
                             : ''}"
-                        on:click={() => handleDeselect(option.value)}
+                        onclick={() => handleDeselect(option.value)}
                     >
                         <IconXSquareRegular />
                     </button>

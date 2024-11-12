@@ -1,18 +1,26 @@
 <script lang="ts">
     import IconArrowDownRegular from "phosphor-icons-svelte/IconArrowDownRegular.svelte"
     import IconArrowUpRegular from "phosphor-icons-svelte/IconArrowUpRegular.svelte"
-    import toast from "svelte-french-toast"
+    import toast from "svelte-hot-french-toast"
     import FormBase from "$lib/components/form/FormBase.svelte"
 
-    export let selectedItemIds: string[]
-    export let deleteActionAttribute: `?/${string}` | undefined
-    export let deleteInputNameAttribute: string
+    let {
+        selectedItemIds = $bindable(),
+        deleteActionAttribute,
+        deleteInputNameAttribute,
+    }: {
+        selectedItemIds: string[]
+        deleteActionAttribute: `?/${string}`
+        deleteInputNameAttribute: string
+    } = $props()
 
-    let isPartlyVisible = false
+    let isPartlyVisible = $state(false)
 
-    $: if (!selectedItemIds.length) {
-        isPartlyVisible = false
-    }
+    $effect(() => {
+        if (!selectedItemIds.length) {
+            isPartlyVisible = false
+        }
+    })
 </script>
 
 <div
@@ -25,7 +33,7 @@
     >
         <button
             class="btn btn-gray absolute bottom-full right-4 h-8 w-8 -translate-y-2 p-0 duration-200 supports-hover:hide supports-hover:group-hover:show"
-            on:click={() => (isPartlyVisible = !isPartlyVisible)}
+            onclick={() => (isPartlyVisible = !isPartlyVisible)}
         >
             {#if isPartlyVisible}
                 <IconArrowUpRegular />
@@ -44,7 +52,7 @@
         <button
             type="button"
             class="btn btn-gray"
-            on:click={() => (selectedItemIds = [])}
+            onclick={() => (selectedItemIds = [])}
         >
             Clear selection
         </button>
@@ -55,7 +63,7 @@
             on:success={() => {
                 selectedItemIds = []
                 toast.success("Deleted successfully!", {
-                    position: "bottom-right",
+                    position: "bottom-end",
                 })
             }}
         >

@@ -1,10 +1,10 @@
 import { error, fail, redirect } from "@sveltejs/kit"
 import { superValidate, withFiles } from "sveltekit-superforms/server"
 import {
+    ClientResponseError,
     pbHandleClientResponseError,
     pbHandleFormActionError,
-} from "$lib/utilities/pb/helpers"
-import { ClientResponseError } from "$lib/utilities/pb/types"
+} from "$lib/utilities/pb"
 import { schema } from "./schema.js"
 
 export const load = async ({ locals }) => {
@@ -12,8 +12,10 @@ export const load = async ({ locals }) => {
     if (!locals.loggedInUser.isAdmin)
         error(401, "You are not authorized to see this page!")
 
-    const uploadForm = await superValidate(schema.upload)
-    const deleteForm = await superValidate(schema.delete)
+    const [uploadForm, deleteForm] = await Promise.all([
+        superValidate(schema.upload),
+        superValidate(schema.delete),
+    ])
 
     try {
         const videos = await locals.pb.collection("videos").getFullList()
@@ -56,7 +58,10 @@ export const actions = {
             error(401, "You are not authorized to perform this action!")
 
         const deleteForm = await superValidate(request, schema.delete)
-        if (!deleteForm.valid) return fail(400, { deleteForm })
+
+        if (!deleteForm.valid) {
+            return fail(400, { deleteForm })
+        }
 
         try {
             await Promise.all(

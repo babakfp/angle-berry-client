@@ -1,28 +1,46 @@
 <script lang="ts">
+    import type { Snippet } from "svelte"
+    import type { FormEventHandler, FullAutoFill } from "svelte/elements"
     import InputNumberButtons from "$lib/components/form/InputNumberButtons.svelte"
     import InputWrapper from "$lib/components/form/InputWrapper.svelte"
 
-    export let label = ""
-    export let required = false
+    let {
+        label,
+        required,
+        type = "text",
+        name,
+        value = $bindable(""),
+        placeholder,
+        autocomplete,
+        minlength,
+        maxlength,
+        min,
+        max,
+        readonly,
+        pattern,
+        class: class_,
+        error,
+        buttons,
+    }: {
+        label?: string
+        required?: boolean
+        type?: string
+        name?: string
+        value?: string | number
+        placeholder?: string
+        autocomplete?: FullAutoFill
+        minlength?: number
+        maxlength?: number
+        min?: string | number
+        max?: string | number
+        readonly?: boolean
+        pattern?: string
+        class?: string
+        error?: string
+        buttons?: Snippet
+    } = $props()
 
-    export let type = "text"
-    export let name = ""
-    export let value: string | number = ""
-    export let placeholder = ""
-    export let autocomplete: string | undefined = undefined
-    export let minlength: number | undefined = undefined
-    export let maxlength: number | undefined = undefined
-    export let min: string | number | undefined = undefined
-    export let max: string | number | undefined = undefined
-    export let readonly = false
-    export let pattern: string | undefined = undefined
-
-    export let class_ = ""
-    export { class_ as class }
-
-    export let error = ""
-
-    const bindValue = (e: Event) => {
+    const bindValue: FormEventHandler<HTMLInputElement> = (e) => {
         if (["number", "range"].includes(type)) {
             value = +(e.target as HTMLInputElement).value
         } else {
@@ -30,6 +48,14 @@
         }
     }
 </script>
+
+{#snippet buttonsInner()}
+    {#if type === "number"}
+        <InputNumberButtons bind:value {min} {max} />
+    {:else if buttons}
+        {@render buttons()}
+    {/if}
+{/snippet}
 
 <InputWrapper {label} {required} for={name} {error}>
     <input
@@ -48,14 +74,10 @@
         {pattern}
         {min}
         {max}
-        on:input={bindValue}
+        oninput={bindValue}
     />
 
-    <svelte:fragment slot="buttons">
-        {#if type === "number"}
-            <InputNumberButtons bind:value {min} {max} />
-        {:else if $$slots.buttons}
-            <slot name="buttons" />
-        {/if}
-    </svelte:fragment>
+    {#snippet buttons()}
+        {@render buttonsInner()}
+    {/snippet}
 </InputWrapper>

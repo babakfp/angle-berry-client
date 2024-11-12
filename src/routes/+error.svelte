@@ -7,7 +7,7 @@
 </svelte:head>
 
 <main class="mx-auto grid h-screen max-w-xs content-center gap-4 text-center">
-    <h1 class="text-gray-50 text-8xl font-bold">
+    <h1 class="text-8xl font-bold text-gray-50">
         {$page.status}
     </h1>
 

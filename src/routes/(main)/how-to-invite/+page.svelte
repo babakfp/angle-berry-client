@@ -1,16 +1,16 @@
 <script lang="ts">
     import { copyText } from "svelte-copy"
-    import toast from "svelte-french-toast"
+    import toast from "svelte-hot-french-toast"
     import { page } from "$app/stores"
     import Input from "$lib/components/form/Input.svelte"
     import InputTextButton from "$lib/components/form/InputTextButton.svelte"
 
-    export let data
+    let { data } = $props()
 
     const copyInviteLink = () => {
         copyText(`${$page.url.origin}/register?id=${data.loggedInUser.id}`)
         toast.success("Your invite link is copied to Clipboard.", {
-            position: "bottom-right",
+            position: "bottom-end",
         })
     }
 </script>
@@ -28,7 +28,9 @@
         value="{$page.url.origin}/register?id={data.loggedInUser.id}"
         readonly
     >
-        <InputTextButton slot="buttons" text="Copy" on:click={copyInviteLink} />
+        {#snippet buttons()}
+            <InputTextButton text="Copy" onclick={copyInviteLink} />
+        {/snippet}
     </Input>
     <p>
         You can share your invite link with your friends or on social media

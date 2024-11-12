@@ -1,7 +1,7 @@
 <script lang="ts">
     import IconSpinnerRegular from "phosphor-icons-svelte/IconSpinnerRegular.svelte"
-    import { createEventDispatcher } from "svelte"
-    import toast from "svelte-french-toast"
+    import { createEventDispatcher, type Snippet } from "svelte"
+    import toast from "svelte-hot-french-toast"
     import type { SuperForm } from "sveltekit-superforms/client"
     import Description from "$lib/components/form/Description.svelte"
     import FormBase from "$lib/components/form/FormBase.svelte"
@@ -9,22 +9,30 @@
 
     const dispatch = createEventDispatcher()
 
-    export let message: string
-    export let submitButtonText: string
-    export let submitButtonClass = ""
-    export let errors:
-        | SuperForm<Record<string, unknown>>["errors"]
-        | undefined = undefined
-    export let validateForm:
-        | SuperForm<Record<string, unknown>>["validateForm"]
-        | undefined = undefined
-    export let action = ""
-    export let canUpload = false
-    export let class_ = ""
-    export { class_ as class }
+    let {
+        message = $bindable(),
+        submitButtonText,
+        submitButtonClass,
+        errors,
+        validateForm,
+        action,
+        canUpload,
+        class: class_,
+        children,
+    }: {
+        message: string
+        submitButtonText: string
+        submitButtonClass?: string
+        errors?: SuperForm<Record<string, unknown>>["errors"]
+        validateForm?: SuperForm<Record<string, unknown>>["validateForm"]
+        action?: string
+        canUpload?: boolean
+        class?: string
+        children?: Snippet
+    } = $props()
 
-    let isSubmitting = false
-    let isRedirecting = false
+    let isSubmitting = $state(false)
+    let isRedirecting = $state(false)
 
     const handleOnSubmit = () => {
         isSubmitting = true
@@ -58,11 +66,11 @@
     on:success
     on:failure={(e) => {
         toast.error(e.detail.message, {
-            position: "bottom-right",
+            position: "bottom-end",
         })
     }}
 >
-    <slot />
+    {@render children?.()}
 
     <FormSubmitButton
         class={submitButtonClass}

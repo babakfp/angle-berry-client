@@ -1,10 +1,10 @@
 import { error, fail, redirect } from "@sveltejs/kit"
 import { superValidate } from "sveltekit-superforms/server"
 import {
+    ClientResponseError,
     pbHandleClientResponseError,
     pbHandleFormActionError,
-} from "$lib/utilities/pb/helpers"
-import { ClientResponseError } from "$lib/utilities/pb/types"
+} from "$lib/utilities/pb"
 import { schema } from "./schema"
 
 export const load = async ({ locals }) => {
@@ -15,8 +15,10 @@ export const load = async ({ locals }) => {
     const form = await superValidate(schema.delete.multiple)
 
     try {
-        const tiers = await locals.pb.collection("tiers").getFullList()
-        const users = await locals.pb.collection("users").getFullList()
+        const [tiers, users] = await Promise.all([
+            locals.pb.collection("tiers").getFullList(),
+            locals.pb.collection("users").getFullList(),
+        ])
         return { form, tiers, users }
     } catch (e) {
         if (e instanceof ClientResponseError) {

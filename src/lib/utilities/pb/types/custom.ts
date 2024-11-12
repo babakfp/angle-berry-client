@@ -3,10 +3,13 @@ import type {
     MessagesResponse,
     TiersResponse,
     UsersResponse,
-} from "$lib/utilities/pb/types-auto-generated"
+} from "$lib/utilities/pb/types/generated"
 
 export * from "pocketbase"
-export * from "$lib/utilities/pb/types-auto-generated"
+export * from "$lib/utilities/pb/types/generated"
+export type AuthModel = never
+export type BaseModel = never
+export type RecordModel = never
 
 export type RealtimeMessagesResponse = MessagesResponse & {
     expand: {

@@ -1,10 +1,16 @@
 <script lang="ts">
-    import { Td, Th, Tr } from "$lib/components/table/index"
-    import type { TiersResponse, UsersResponse } from "$lib/utilities/pb/types"
+    import { Td, Th, Tr } from "$lib/components/table"
+    import type { TiersResponse, UsersResponse } from "$lib/utilities/pb"
 
-    export let loggedInUser: UsersResponse
-    export let tier: TiersResponse
-    export let isCurrent = false
+    let {
+        loggedInUser,
+        tier,
+        isCurrent,
+    }: {
+        loggedInUser: UsersResponse
+        tier: TiersResponse
+        isCurrent?: boolean
+    } = $props()
 
     // Does the logged-in user has access to this tier
     const hasAccess =
@@ -12,13 +18,21 @@
         loggedInUser.invitedUsers.length >= tier.invites
 </script>
 
-<Tr
-    class="relative {!isCurrent
-        ? 'duration-200 hover:bg-gray-700 not-last:border-b not-last:border-gray-50/5'
-        : ''}"
->
-    <Th class="py-4 text-gray-50">
-        {tier.name}
+<Tr class={!isCurrent ? "not-last:border-b not-last:border-gray-50/5" : ""}>
+    <Th
+        class="text-gray-50 {isCurrent ? 'py-4' : ''}"
+        containsAnchor={!isCurrent}
+    >
+        {#if isCurrent}
+            {tier.name}
+        {:else}
+            <a
+                class="link inline-block px-6 py-4 outline-inset"
+                href="/tiers/{tier.id}"
+            >
+                {tier.name}
+            </a>
+        {/if}
     </Th>
     <Td class="px-6 py-4">
         {#if tier.price === 0 && tier.invites === 0}
@@ -30,25 +44,26 @@
     <Td class="text-right">
         {#if hasAccess}
             {#if !isCurrent}
-                <span
-                    class="px-6 py-4 underline duration-200 group-hover/tr:text-gray-50"
+                <a
+                    class="link inline-block px-6 py-4 outline-inset"
+                    href="/tiers/{tier.id}"
                 >
                     Watch now
-                </span>
+                </a>
             {:else}
                 <span class="px-6 py-4">Accessed</span>
             {/if}
         {:else}
             <div class="flex items-center justify-end pl-4">
                 <a
-                    class="link relative z-1 block px-2 py-4 outline-inset"
+                    class="link inline-block py-4 pl-4 pr-2 outline-inset"
                     href="/how-to-pay"
                 >
                     Pay
                 </a>
                 or
                 <a
-                    class="link relative z-1 block py-4 pl-2 pr-6 outline-inset"
+                    class="link inline-block py-4 pl-2 pr-6 outline-inset"
                     href="/how-to-invite"
                 >
                     Start inviting
@@ -56,12 +71,4 @@
             </div>
         {/if}
     </Td>
-
-    {#if !isCurrent}
-        <a
-            class="absolute inset-0 rounded-b outline-inset"
-            href="/tiers/{tier.id}"
-            aria-label="View"
-        />
-    {/if}
 </Tr>

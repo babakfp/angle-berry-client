@@ -1,8 +1,14 @@
 <script lang="ts">
+    import type { Snippet } from "svelte"
     import { Table, Tbody, Th, Thead, Tr } from "$lib/components/table/index"
 
-    export let class_ = ""
-    export { class_ as class }
+    let {
+        class: class_,
+        children,
+    }: {
+        class?: string
+        children?: Snippet
+    } = $props()
 </script>
 
 <Table class={class_}>
@@ -14,6 +20,6 @@
         </Tr>
     </Thead>
     <Tbody>
-        <slot />
+        {@render children?.()}
     </Tbody>
 </Table>

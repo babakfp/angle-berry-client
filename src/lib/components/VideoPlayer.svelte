@@ -1,5 +1,9 @@
 <script lang="ts">
-    export let src: string
+    let {
+        src,
+    }: {
+        src: string
+    } = $props()
 
     // When 1 video player volume changes, make other video player volume change too.
     const handleVolumeChange = (e: Event) => {
@@ -14,11 +18,11 @@
 </script>
 
 <video
-    on:volumechange={handleVolumeChange}
+    onvolumechange={handleVolumeChange}
     class="aspect-video w-full rounded"
     {src}
     controls
-    on:loadstart={handleLoadStart}
+    onloadstart={handleLoadStart}
     controlsList="noplaybackrate"
     disablePictureInPicture
-/>
+></video>

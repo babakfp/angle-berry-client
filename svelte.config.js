@@ -9,8 +9,8 @@ export default {
     preprocess: vitePreprocess(),
     onwarn: (warning, handler) => {
         if (
-            warning.code.startsWith("a11y-") ||
-            warning.code === "avoid-mouse-events-on-document"
+            warning.code.startsWith("a11y_") ||
+            warning.code === "avoid_mouse_events_on_document"
         )
             return
         handler(warning)

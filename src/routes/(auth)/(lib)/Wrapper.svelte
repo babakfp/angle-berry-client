@@ -1,12 +1,19 @@
 <script lang="ts">
     import { page } from "$app/stores"
 
-    export let title: string
-    export let description: string
+    let {
+        title,
+        description,
+        children,
+    }: {
+        title: string
+        description: string
+        children?: Snippet
+    } = $props()
 
-    let footerText = ""
-    let footerLinkText = ""
-    let FooterLinkHref = ""
+    let footerText = $state("")
+    let footerLinkText = $state("")
+    let FooterLinkHref = $state("")
 
     if ($page.url.pathname === "/login") {
         footerText = "Don't have an account?"
@@ -25,7 +32,7 @@
 <p class="mt-2 text-gray-400">{description}</p>
 
 <div class="mt-8">
-    <slot />
+    {@render children?.()}
 </div>
 
 <p class="mt-8 text-sm text-gray-400">

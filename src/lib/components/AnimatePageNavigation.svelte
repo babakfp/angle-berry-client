@@ -1,16 +1,25 @@
 <script lang="ts">
+    import type { Snippet } from "svelte"
     import { fly } from "svelte/transition"
     import { page } from "$app/stores"
 
-    export let tag: string = "div"
+    let {
+        tag = "div",
+        children,
+        ...rest
+    }: {
+        tag?: string
+        children?: Snippet
+        [key: string]: any
+    } = $props()
 </script>
 
 {#key $page.url.pathname}
     <svelte:element
         this={tag}
-        {...$$restProps}
+        {...rest}
         in:fly={{ y: 32, duration: 1000, delay: 100 }}
     >
-        <slot />
+        {@render children?.()}
     </svelte:element>
 {/key}

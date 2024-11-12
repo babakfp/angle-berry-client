@@ -1,13 +1,15 @@
 <script lang="ts">
     import { dateToAMPM } from "$lib/utilities/dateToAMPM"
 
-    export let created: string
-    export let updated: string
-    export let isCurrentUser: boolean
-
-    $: date = new Date(updated)
-    $: isToday = isDateToday(date)
-    $: isYesterday = isDateYesterday(date)
+    let {
+        created,
+        updated,
+        isCurrentUser,
+    }: {
+        created: string
+        updated: string
+        isCurrentUser: boolean
+    } = $props()
 
     const isDateToday = (someDate: Date) => {
         const today = new Date()
@@ -26,6 +28,9 @@
             someDate.getFullYear() === today.getFullYear()
         )
     }
+    let date = $derived(new Date(updated))
+    let isToday = $derived(isDateToday(date))
+    let isYesterday = $derived(isDateYesterday(date))
 </script>
 
 <div class="text-2xs text-gray-500 {isCurrentUser && 'text-right'}">

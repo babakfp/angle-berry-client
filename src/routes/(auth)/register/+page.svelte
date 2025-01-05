@@ -24,7 +24,13 @@
     <title>Register</title>
 </svelte:head>
 
-<Wrapper title="Register" description="Welcome, please enter your details.">
+<Wrapper
+    title="Register"
+    description="Welcome, please enter your details."
+    footerText="Already have an account?"
+    footerLinkText="Login here"
+    FooterLinkHref="/login"
+>
     <Form
         message={form?.message}
         submitButtonText="Register"

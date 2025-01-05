@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>%sveltekit.status%</title>
+        <link rel="icon" href="/favicon.png" />
+        <link
+            rel="preload"
+            as="font"
+            type="font/woff2"
+            href="/fonts/recursive-latin-mono-normal.woff2"
+            crossorigin="anonymous"
+        />
+        <style>
+            @font-face {
+                font-family: "Recursive";
+                font-style: normal;
+                font-display: block;
+                font-weight: 300 1000;
+                src: url("/fonts/recursive-latin-mono-normal.woff2")
+                    format("woff2-variations");
+            }
+        </style>
+        <link rel="stylesheet" href="/error.css" />
+    </head>
+    <body class="bg-body-bg text-body-text">
+        <div class="contents">
+            <main
+                class="container grid min-h-svh content-center items-center gap-2 py-8 text-center"
+            >
+                <h1 class="text-4xl font-bold">%sveltekit.status%</h1>
+                <p>%sveltekit.error.message%</p>
+            </main>
+        </div>
+    </body>
+</html>

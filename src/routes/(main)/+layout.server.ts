@@ -25,13 +25,11 @@ export const load = async ({ locals }) => {
                     sort: "-created",
                     expand: "user,user.retainedTiers,inviter,inviter.retainedTiers",
                 }),
-            locals.pb
-                .collection("tiers")
-                .getFullList<
-                    TiersResponse & {
-                        visibility: typeof TIERS_RECORD_VISIBILITY_OPTIONS.public
-                    }
-                >({ filter: 'visibility = "public"' }),
+            locals.pb.collection("tiers").getFullList<
+                TiersResponse & {
+                    visibility: typeof TIERS_RECORD_VISIBILITY_OPTIONS.public
+                }
+            >({ filter: 'visibility = "public"' }),
         ])
 
         return {

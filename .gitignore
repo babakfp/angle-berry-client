@@ -6,4 +6,4 @@
 /.env.*
 /!.env.example
 /vite.config.*.timestamp-*
-/pnpm-lock.yaml
+/static/error.css

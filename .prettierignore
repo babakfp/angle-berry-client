@@ -1,2 +1,3 @@
+/pnpm-lock.yaml
 *.svg
 /src/lib/utilities/pb/types/generated.ts

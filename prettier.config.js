@@ -4,8 +4,8 @@ export default {
     tabWidth: 4,
     plugins: [
         "prettier-plugin-svelte",
-        "prettier-plugin-tailwindcss",
         "@ianvs/prettier-plugin-sort-imports",
+        "prettier-plugin-tailwindcss",
     ],
     importOrder: [
         "^@",

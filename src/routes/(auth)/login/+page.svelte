@@ -1,7 +1,6 @@
 <script lang="ts">
     import toast from "svelte-hot-french-toast"
     import { superForm } from "sveltekit-superforms/client"
-    import { page } from "$app/stores"
     import Form from "$lib/components/form/Form.svelte"
     import PasswordField from "$lib/components/form/PasswordField.svelte"
     import UsernameField from "$lib/components/form/UsernameField.svelte"
@@ -19,24 +18,21 @@
         constraints,
         validateForm,
     } = superForm(data.form, { validators: schema })
+
     export const snapshot = { capture, restore }
-
-    $effect(() => {
-        const demoUsername = $page.url.searchParams.get("username")
-        const demoPassword = $page.url.searchParams.get("password")
-
-        if (demoUsername && demoPassword) {
-            $formData.username = demoUsername
-            $formData.password = demoPassword
-        }
-    })
 </script>
 
 <svelte:head>
     <title>Login</title>
 </svelte:head>
 
-<Wrapper title="Login" description="Welcome back! Please enter your details.">
+<Wrapper
+    title="Login"
+    description="Welcome back! Please enter your details."
+    footerText="Don't have an account?"
+    footerLinkText="Register here"
+    FooterLinkHref="/register"
+>
     <Form
         message={form?.message}
         submitButtonText="Login"

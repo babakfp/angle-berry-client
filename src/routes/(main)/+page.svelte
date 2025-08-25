@@ -16,7 +16,7 @@
         <a class="link" href="/how-to-pay">pay</a>
         or
         <a class="link" href="/how-to-invite">invite</a>
-         to access premium tiers.
+        to access premium tiers.
     </p>
 {/if}
 

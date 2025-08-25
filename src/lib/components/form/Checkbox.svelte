@@ -49,8 +49,11 @@
 
 <div class="grid">
     <label
-        class="{class_} inline-flex cursor-pointer items-center gap-2 hover:text-gray-50
-    {(disabled || readonly) && 'pointer-events-none opacity-50'}"
+        class={[
+            class_,
+            "inline-flex cursor-pointer items-center gap-2 hover:text-gray-50",
+            { "pointer-events-none opacity-50": disabled || readonly },
+        ]}
     >
         <div
             class="inline-flex [&:has(input:focus-visible)]:outline [&:has(input:focus-visible)]:outline-2 [&:has(input:focus-visible)]:outline-[orange]"

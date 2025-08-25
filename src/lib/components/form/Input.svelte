@@ -59,8 +59,11 @@
 
 <InputWrapper {label} {required} for={name} {error}>
     <input
-        class="{class_} peer block h-11 w-full rounded border-2 border-gray-700 bg-transparent px-4 reset-autofill-input placeholder:text-xs placeholder:text-gray-500
-                {type === 'number' ? 'reset-number-input' : ''}"
+        class={[
+            class_,
+            "peer block h-11 w-full rounded border-2 border-gray-700 bg-transparent px-4 reset-autofill-input placeholder:text-xs placeholder:text-gray-500",
+            { "reset-number-input": type === "number" },
+        ]}
         {type}
         {value}
         {name}

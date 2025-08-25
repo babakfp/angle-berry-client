@@ -59,7 +59,7 @@
     }
 </script>
 
-<li id={message.id} class="w-full {isCurrentUser && 'ml-auto'}">
+<li id={message.id} class={["w-full", { "ml-auto": isCurrentUser }]}>
     <div
         class="relative grid gap-1.5 px-4 py-2
         {$selectedMessageIds.includes(message.id) && 'bg-blue-400/10'}
@@ -89,11 +89,12 @@
         {/if}
 
         <div
-            class="message-content-wrapper relative z-1 max-w-80 break-words rounded bg-gray-700 shadow {(
-                isCurrentUser
-            ) ?
-                'justify-self-end rounded-br-[2px] !bg-[#7e6dd1] text-gray-50'
-            :   'justify-self-start rounded-tl-[2px]'}"
+            class={[
+                "message-content-wrapper relative z-1 max-w-80 break-words rounded bg-gray-700 shadow",
+                isCurrentUser ?
+                    "justify-self-end rounded-br-[2px] !bg-[#7e6dd1] text-gray-50"
+                :   "justify-self-start rounded-tl-[2px]",
+            ]}
         >
             {#if message.expand?.repliedTo}
                 {@const msg = message.expand?.repliedTo}
@@ -117,8 +118,10 @@
 
         {#if $selectedMessageIds.length > 0}
             <div
-                class="absolute bottom-6 flex text-xl
-                {isCurrentUser ? 'left-4' : 'right-4'}"
+                class={[
+                    "absolute bottom-6 flex text-xl",
+                    isCurrentUser ? "left-4" : "right-4",
+                ]}
             >
                 {#if $selectedMessageIds.includes(message.id)}
                     <IconCheckCircleRegular class="text-green-400" />

@@ -17,7 +17,7 @@
 
 <button
     type="button"
-    class="btn btn-gray-light h-7 text-2xs {class_}"
+    class={["btn btn-gray-light h-7 text-2xs", class_]}
     {onclick}
 >
     {#if children}

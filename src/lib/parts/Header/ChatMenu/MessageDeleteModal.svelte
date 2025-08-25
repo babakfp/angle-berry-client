@@ -78,8 +78,10 @@
         </button>
         <button
             type="button"
-            class="btn btn-danger {isDeletingMessage
-                && 'pointer-events-none opacity-50'}"
+            class={[
+                "btn btn-danger",
+                { "pointer-events-none opacity-50": isDeletingMessage },
+            ]}
             disabled={isDeletingMessage}
             onclick={handleDelete}
         >

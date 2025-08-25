@@ -22,8 +22,11 @@
 <li class="flex">
     <button
         type="button"
-        class="{class_} flex h-8.5 w-full items-center gap-2 rounded px-3 hover:bg-gray-700
-		{isDisabled && 'pointer-events-none opacity-25'}"
+        class={[
+            class_,
+            "flex h-8.5 w-full items-center gap-2 rounded px-3 hover:bg-gray-700",
+            { "pointer-events-none opacity-25": isDisabled },
+        ]}
         disabled={isDisabled}
         {onclick}
     >

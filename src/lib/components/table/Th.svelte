@@ -12,6 +12,6 @@
     } = $props()
 </script>
 
-<th class="{class_} p-0 {!containsAnchor ? 'px-6' : ''}">
+<th class={[class_, "p-0", { "px-6": !containsAnchor }]}>
     {@render children()}
 </th>

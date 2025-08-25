@@ -18,7 +18,7 @@
         || loggedInUser.invitedUsers.length >= tier.invites
 </script>
 
-<Tr class={!isCurrent ? "not-last:border-b not-last:border-gray-50/5" : ""}>
+<Tr class={{ "not-last:border-b not-last:border-gray-50/5": !isCurrent }}>
     <Th
         class="text-gray-50 {isCurrent ? 'py-4' : ''}"
         containsAnchor={!isCurrent}

@@ -28,8 +28,8 @@
         to get the access. You currently have {data.loggedInUser.invitedUsers
             .length} invites.
         <a class="link" href="/how-to-invite">Learn how to invite</a>
-        . When you had enough invites, please refresh the page and it will
-        unlock automatically.
+        . When you had enough invites, please refresh the page and it will unlock
+        automatically.
     </p>
 {:else if data.tier.expand?.videos.length}
     <ul class="mt-8 grid gap-8">

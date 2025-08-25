@@ -52,45 +52,62 @@
     })
 </script>
 
-<!-- prettier-ignore -->
 <div
-	bind:this={tooltip}
-	class="
-		absolute hide whitespace-nowrap rounded bg-gray-700 px-4 py-3 text-xs drop-shadow z-50 duration-200 group-hover:show {isVisible && 'show'}
-		after:absolute after:block after:h-0 after:w-0 after:border-solid after:border-[transparent]
+    bind:this={tooltip}
+    class={[
+        "absolute z-50 whitespace-nowrap rounded bg-gray-700 px-4 py-3 text-xs drop-shadow duration-200 hide group-hover:show",
+        { show: isVisible },
+        "after:absolute after:block after:h-0 after:w-0 after:border-solid after:border-[transparent]",
+        "before:absolute before:block",
+        {
+            "before:inset-x-0 before:h-2 before:w-full": [
+                "top",
+                "top-right",
+                "top-left",
+                "bottom",
+                "bottom-right",
+                "bottom-left",
+            ].includes(position),
+            "before:inset-y-0 before:h-full before:w-2": [
+                "right",
+                "right-top",
+                "right-bottom",
+                "left",
+                "left-top",
+                "left-bottom",
+            ].includes(position),
 
-		before:block before:absolute
-		{
-			((position === 'top' || position === 'top-right' || position === 'top-left') ||
-			(position === 'bottom' || position === 'bottom-right' || position === 'bottom-left')) &&
-		 	'before:inset-x-0 before:h-2 before:w-full'
-		}
-		{
-			((position === 'right' || position === 'right-top' || position === 'right-bottom') ||
-			(position === 'left' || position === 'left-top' || position === 'left-bottom')) &&
-		 	'before:inset-y-0 before:h-full before:w-2'
-		}
+            "before:[all:unset]": !keepAlive,
 
-		{!keepAlive && 'before:[all:unset]'}
+            "arrow-bottom bottom-full -translate-y-4 before:top-full after:top-full group-hover:-translate-y-2":
+                ["top", "top-right", "top-left"].includes(position),
+            "arrow-left left-full translate-x-4 before:right-full after:right-full group-hover:translate-x-2":
+                ["right", "right-top", "right-bottom"].includes(position),
+            "arrow-top top-full translate-y-4 before:bottom-full after:bottom-full group-hover:translate-y-2":
+                ["bottom", "bottom-right", "bottom-left"].includes(position),
+            "arrow-right right-full -translate-x-4 before:left-full after:left-full group-hover:-translate-x-2":
+                ["left", "left-top", "left-bottom"].includes(position),
 
-		{(position === 'top' || position === 'top-right' || position === 'top-left') && 'arrow-bottom bottom-full -translate-y-4 before:top-full after:top-full group-hover:-translate-y-2'}
-		{(position === 'right' || position === 'right-top' || position === 'right-bottom') && 'arrow-left left-full translate-x-4 before:right-full after:right-full group-hover:translate-x-2'}
-		{(position === 'bottom' || position === 'bottom-right' || position === 'bottom-left') && 'arrow-top top-full translate-y-4 before:bottom-full after:bottom-full group-hover:translate-y-2'}
-		{(position === 'left' || position === 'left-top' || position === 'left-bottom') && 'arrow-right right-full -translate-x-4 before:left-full after:left-full group-hover:-translate-x-2'}
+            "inset-x-center after:inset-x-center": position === "top",
+            "inset-y-center after:inset-y-center": position === "right",
+            "inset-x-center after:inset-x-center": position === "bottom",
+            "inset-y-center after:inset-y-center": position === "left",
 
-		{position === 'top' && 'inset-x-center after:inset-x-center'}
-		{position === 'right' && 'inset-y-center after:inset-y-center'}
-		{position === 'bottom' && 'inset-x-center after:inset-x-center'}
-		{position === 'left' && 'inset-y-center after:inset-y-center'}
+            "right-0 after:right-4": ["top-right", "bottom-right"].includes(
+                position,
+            ),
+            "left-0 after:left-4": ["top-left", "bottom-left"].includes(
+                position,
+            ),
 
-		{(position === 'top-right' || position === 'bottom-right') && 'right-0 after:right-4'}
-		{(position === 'top-left' || position === 'bottom-left') && 'left-0 after:left-4'}
-
-		{(position === 'right-top' || position === 'left-top') && 'top-0 after:top-4'}
-		{(position === 'right-bottom' || position === 'left-bottom') && 'bottom-0 after:bottom-4'}
-	"
+            "top-0 after:top-4": ["right-top", "left-top"].includes(position),
+            "bottom-0 after:bottom-4": ["right-bottom", "left-bottom"].includes(
+                position,
+            ),
+        },
+    ]}
 >
-	{@render children?.()}
+    {@render children?.()}
 </div>
 
 <style lang="postcss">

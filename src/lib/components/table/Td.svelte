@@ -10,6 +10,6 @@
     } = $props()
 </script>
 
-<td class="{class_} p-0">
+<td class={[class_, "p-0"]}>
     {@render children?.()}
 </td>

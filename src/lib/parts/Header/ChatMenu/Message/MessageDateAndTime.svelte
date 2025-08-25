@@ -33,7 +33,7 @@
     let isYesterday = $derived(isDateYesterday(date))
 </script>
 
-<div class="text-2xs text-gray-500 {isCurrentUser && 'text-right'}">
+<div class={["text-2xs text-gray-500", { "text-right": isCurrentUser }]}>
     {#if isToday || isYesterday}
         {isToday ? "Today" : "Yesterday"} {dateToAMPM(date)}
     {:else}

@@ -229,8 +229,10 @@
             ></textarea>
             <button
                 type="submit"
-                class="flex items-end outline-inset hover:bg-gray-50/5 hover:text-gray-50
-				{isSendingMessage && 'opacity-50'}"
+                class={[
+                    "flex items-end outline-inset hover:bg-gray-50/5 hover:text-gray-50",
+                    { "opacity-50": isSendingMessage },
+                ]}
                 disabled={isSendingMessage}
             >
                 <div class="flex min-h-14 items-center px-4 text-2xl">

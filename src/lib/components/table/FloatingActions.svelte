@@ -24,9 +24,14 @@
 </script>
 
 <div
-    class="fixed inset-x-0 bottom-4 z-50 px-4 duration-200 sm:bottom-8 sm:mx-auto sm:max-w-xl
-    {!selectedItemIds.length && 'translate-y-full hide'}
-    {isPartlyVisible && 'translate-y-full sm:translate-y-[calc(100%+1rem)]'}"
+    class={[
+        "fixed inset-x-0 bottom-4 z-50 px-4 duration-200 sm:bottom-8 sm:mx-auto sm:max-w-xl",
+        {
+            "translate-y-full hide": !selectedItemIds.length,
+            "translate-y-full sm:translate-y-[calc(100%+1rem)]":
+                isPartlyVisible,
+        },
+    ]}
 >
     <div
         class="group grid gap-2 rounded bg-gray-700 p-4 sm:flex sm:items-center sm:justify-between"

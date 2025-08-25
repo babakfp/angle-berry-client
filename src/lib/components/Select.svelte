@@ -110,11 +110,10 @@
     <button
         type="button"
         bind:this={trigger}
-        class="z-30 flex h-11 w-full items-center justify-between rounded bg-gray-700 px-4 hover:bg-gray-600 {(
-            readonly
-        ) ?
-            'pointer-events-none opacity-50'
-        :   ''}"
+        class={[
+            "z-30 flex h-11 w-full items-center justify-between rounded bg-gray-700 px-4 hover:bg-gray-600",
+            { "pointer-events-none opacity-50": readonly },
+        ]}
         onclick={handleTriggerToggle}
     >
         {#if selectedOption?.value}
@@ -127,8 +126,10 @@
 
     <OutClick onOutClick={handleTriggerClose} excludeElements={trigger}>
         <div
-            class="absolute top-11 z-20 w-full -translate-y-2 duration-150
-            {isOpen ? '!translate-y-2' : 'hide'}"
+            class={[
+                "absolute top-11 z-20 w-full -translate-y-2 duration-150",
+                isOpen ? "!translate-y-2" : "hide",
+            ]}
         >
             {#if options.length}
                 <ul>

@@ -12,7 +12,7 @@
     } = $props()
 </script>
 
-<label class="{class_} text-sm" for={for_}>
+<label class={[class_, "text-sm"]} for={for_}>
     <span>{label}</span>
 
     {#if required}

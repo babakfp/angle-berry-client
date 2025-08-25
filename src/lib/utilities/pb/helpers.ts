@@ -14,8 +14,8 @@ export const pbHandleFormActionError = (
             })
         }
 
-        if (e.response.code && e.response.message) {
-            return fail(e.response.code, {
+        if (e.response.status && e.response.message) {
+            return fail(e.response.status, {
                 ...formData,
                 message: e.response.message,
                 pb: e.response.data,
@@ -32,8 +32,8 @@ export const pbHandleClientResponseError = (e: ClientResponseError) => {
         })
     }
 
-    if (e.response.code && e.response.message) {
-        error(e.response.code, e.response.message)
+    if (e.response.status && e.response.message) {
+        error(e.response.status, e.response.message)
     }
 
     throw e

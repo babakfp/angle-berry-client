@@ -31,81 +31,176 @@ export type AuthModel<T = never> = RecordModel<T> & {
     verified: boolean
 }
 
-export const COLLECTIONS = {
-    "users": "users",
-    "events": "events",
-    "messages": "messages",
-    "tiers": "tiers",
+export const COLLECTIONS = Object.freeze({
     "videos": "videos",
-} as const
+    "tiers": "tiers",
+    "messages": "messages",
+    "events": "events",
+    "users": "users",
+    "_superusers": "_superusers",
+    "_authOrigins": "_authOrigins",
+    "_externalAuths": "_externalAuths",
+    "_mfas": "_mfas",
+    "_otps": "_otps",
+})
 
-export type UsersRecord = {
-    retainedTiers: string[]
-    invitedUsers?: string[]
-    invitedBy?: string
-    isAdmin?: boolean
+export const VIDEOS_RECORD_FILE_MIME_TYPES = Object.freeze({
+    "video/mp4": "video/mp4",
+    "video/x-matroska": "video/x-matroska",
+})
+
+export type VideosRecord = {
+    id: string
+    file: string
+    created?: unknown
+    updated?: unknown
 }
 
-export type EventsRecord = {
-    user: string
-    inviter?: string
-    inviterInvites?: number
-}
-
-export type MessagesRecord = {
-    content: string
-    user: string
-    repliedTo?: string
-}
-
-export const TIERS_RECORD_VISIBILITY_OPTIONS = {
+export const TIERS_RECORD_VISIBILITY_OPTIONS = Object.freeze({
     "public": "public",
     "private": "private",
-} as const
+})
 
 export type TiersRecord = {
+    id: string
     name: string
     price?: number
     invites?: number
     visibility: keyof typeof TIERS_RECORD_VISIBILITY_OPTIONS
     videos?: string[]
+    created?: unknown
+    updated?: unknown
 }
 
-export const VIDEOS_RECORD_FILE_MIME_TYPES = {
-    "video/mp4": "video/mp4",
-    "video/x-matroska": "video/x-matroska",
-} as const
+export type MessagesRecord = {
+    id: string
+    content: string
+    user: string
+    repliedTo?: string
+    created?: unknown
+    updated?: unknown
+}
 
-export type VideosRecord = {
-    file: string
+export type EventsRecord = {
+    id: string
+    user: string
+    inviter?: string
+    inviterInvites?: number
+    created?: unknown
+    updated?: unknown
+}
+
+export type UsersRecord = {
+    id: string
+    password: unknown
+    tokenKey: string
+    email?: string
+    emailVisibility?: boolean
+    verified?: boolean
+    username: string
+    retainedTiers: string[]
+    invitedUsers?: string[]
+    invitedBy?: string
+    isAdmin?: boolean
+    created?: unknown
+    updated?: unknown
+}
+
+export type SuperusersRecord = {
+    id: string
+    password: unknown
+    tokenKey: string
+    email: string
+    emailVisibility?: boolean
+    verified?: boolean
+    created?: unknown
+    updated?: unknown
+}
+
+export type AuthOriginsRecord = {
+    id: string
+    collectionRef: string
+    recordRef: string
+    fingerprint: string
+    created?: unknown
+    updated?: unknown
+}
+
+export type ExternalAuthsRecord = {
+    id: string
+    collectionRef: string
+    recordRef: string
+    provider: string
+    providerId: string
+    created?: unknown
+    updated?: unknown
+}
+
+export type MfasRecord = {
+    id: string
+    collectionRef: string
+    recordRef: string
+    method: string
+    created?: unknown
+    updated?: unknown
+}
+
+export type OtpsRecord = {
+    id: string
+    collectionRef: string
+    recordRef: string
+    password: unknown
+    sentTo?: string
+    created?: unknown
+    updated?: unknown
 }
 
 export type CollectionRecords = {
-    users: UsersRecord
-    events: EventsRecord
-    messages: MessagesRecord
-    tiers: TiersRecord
     videos: VideosRecord
+    tiers: TiersRecord
+    messages: MessagesRecord
+    events: EventsRecord
+    users: UsersRecord
+    _superusers: SuperusersRecord
+    _authOrigins: AuthOriginsRecord
+    _externalAuths: ExternalAuthsRecord
+    _mfas: MfasRecord
+    _otps: OtpsRecord
 }
 
-export type UsersResponse<TExpand = unknown> = Required<UsersRecord> & AuthModel<TExpand>
-export type EventsResponse<TExpand = unknown> = Required<EventsRecord> & RecordModel<TExpand>
-export type MessagesResponse<TExpand = unknown> = Required<MessagesRecord> & RecordModel<TExpand>
-export type TiersResponse<TExpand = unknown> = Required<TiersRecord> & RecordModel<TExpand>
 export type VideosResponse<TExpand = unknown> = Required<VideosRecord> & RecordModel<TExpand>
+export type TiersResponse<TExpand = unknown> = Required<TiersRecord> & RecordModel<TExpand>
+export type MessagesResponse<TExpand = unknown> = Required<MessagesRecord> & RecordModel<TExpand>
+export type EventsResponse<TExpand = unknown> = Required<EventsRecord> & RecordModel<TExpand>
+export type UsersResponse<TExpand = unknown> = Required<UsersRecord> & AuthModel<TExpand>
+export type SuperusersResponse<TExpand = unknown> = Required<SuperusersRecord> & AuthModel<TExpand>
+export type AuthOriginsResponse<TExpand = unknown> = Required<AuthOriginsRecord> & RecordModel<TExpand>
+export type ExternalAuthsResponse<TExpand = unknown> = Required<ExternalAuthsRecord> & RecordModel<TExpand>
+export type MfasResponse<TExpand = unknown> = Required<MfasRecord> & RecordModel<TExpand>
+export type OtpsResponse<TExpand = unknown> = Required<OtpsRecord> & RecordModel<TExpand>
 
 export type CollectionResponses = {
-    users: UsersResponse
-    events: EventsResponse
-    messages: MessagesResponse
-    tiers: TiersResponse
     videos: VideosResponse
+    tiers: TiersResponse
+    messages: MessagesResponse
+    events: EventsResponse
+    users: UsersResponse
+    _superusers: SuperusersResponse
+    _authOrigins: AuthOriginsResponse
+    _externalAuths: ExternalAuthsResponse
+    _mfas: MfasResponse
+    _otps: OtpsResponse
 }
 
 export type PocketBaseType = PocketBase & {
-    collection<TExpand = unknown>(idOrName: "users"): RecordService<UsersResponse<TExpand>>
-    collection<TExpand = unknown>(idOrName: "events"): RecordService<EventsResponse<TExpand>>
-    collection<TExpand = unknown>(idOrName: "messages"): RecordService<MessagesResponse<TExpand>>
-    collection<TExpand = unknown>(idOrName: "tiers"): RecordService<TiersResponse<TExpand>>
     collection<TExpand = unknown>(idOrName: "videos"): RecordService<VideosResponse<TExpand>>
+    collection<TExpand = unknown>(idOrName: "tiers"): RecordService<TiersResponse<TExpand>>
+    collection<TExpand = unknown>(idOrName: "messages"): RecordService<MessagesResponse<TExpand>>
+    collection<TExpand = unknown>(idOrName: "events"): RecordService<EventsResponse<TExpand>>
+    collection<TExpand = unknown>(idOrName: "users"): RecordService<UsersResponse<TExpand>>
+    collection<TExpand = unknown>(idOrName: "_superusers"): RecordService<SuperusersResponse<TExpand>>
+    collection<TExpand = unknown>(idOrName: "_authOrigins"): RecordService<AuthOriginsResponse<TExpand>>
+    collection<TExpand = unknown>(idOrName: "_externalAuths"): RecordService<ExternalAuthsResponse<TExpand>>
+    collection<TExpand = unknown>(idOrName: "_mfas"): RecordService<MfasResponse<TExpand>>
+    collection<TExpand = unknown>(idOrName: "_otps"): RecordService<OtpsResponse<TExpand>>
 }

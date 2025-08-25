@@ -28,7 +28,7 @@
         "prettier-plugin-tailwindcss": "0.6.9",
         "svelte": "5.38.3",
         "svelte-copy": "2.0.0",
-        "svelte-hot-french-toast": "1.0.0",
+        "svelte-hot-french-toast": "3.1.0",
         "svelte-loading-bar": "2.0.4",
         "svelte-outclick": "4.1.2",
         "sveltekit-superforms": "2.22.1",

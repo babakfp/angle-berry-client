@@ -88,10 +88,10 @@
     }
 }
 
-.toaster .base {
+.svelte-hot-french-toast__base {
     @apply !bg-gray-700 !pl-4;
 }
 
-.toaster .message {
+.svelte-hot-french-toast__message {
     @apply text-sm !text-body-text;
 }

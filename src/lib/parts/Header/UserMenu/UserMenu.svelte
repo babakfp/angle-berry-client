@@ -38,7 +38,7 @@
     <ul
         id="UserMenu"
         class={[
-            "absolute right-0 top-full max-h-[calc(var(--screen-minus-header)-theme(spacing.8))] w-60 translate-x-0 overflow-y-auto overscroll-y-contain rounded bg-body-bg text-sm shadow-[0_4px_16px_0_rgb(0_0_0/0.4)] duration-200 hide",
+            "absolute right-0 top-full max-h-[calc(var(--screen-minus-header)-theme(spacing.8))] w-60 translate-x-8 overflow-y-auto overscroll-y-contain rounded bg-body-bg text-sm shadow-[0_4px_16px_0_rgb(0_0_0/0.4)] duration-200 hide",
             { "!-translate-x-4 !show": isUserMenuOpen },
         ]}
     >

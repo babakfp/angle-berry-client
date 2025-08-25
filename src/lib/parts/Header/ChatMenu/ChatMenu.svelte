@@ -8,7 +8,6 @@
     import PopSide from "$lib/components/PopSide.svelte"
     import { messages, unreadMessagesLength } from "$lib/stores/messages"
     import { pb } from "$lib/stores/pb"
-    import { getTextareaLineCount } from "$lib/utilities/getTextareaLineCount"
     import type {
         ListResult,
         RealtimeMessagesResponse,
@@ -50,17 +49,6 @@
 
     const messageInputValue = writable("")
 
-    messageInputValue.subscribe(() => {
-        if (!$messageInputElement) return
-        $messageInputElement.setAttribute("rows", "1")
-        $messageInputElement.value = $messageInputValue
-        const lineCount = getTextareaLineCount($messageInputElement)
-        $messageInputElement.setAttribute(
-            "rows",
-            lineCount <= 4 ? String(lineCount) : "4",
-        )
-    })
-
     messageIdToEdit.subscribe((id) =>
         messageInputValue.set(
             $messages.items
@@ -82,10 +70,8 @@
         return async ({ result, update }) => {
             isSendingMessage = false
             if (result.type === "success") {
-                $messageInputElement!.style.height = ""
                 isReplying.set(false)
                 messageIdToEdit.set(undefined)
-                $messageInputElement!.setAttribute("rows", "1")
             }
             update()
         }
@@ -215,7 +201,6 @@
                 name="messageContent"
                 placeholder="Write your message..."
                 required
-                rows="1"
                 autocomplete="off"
                 onkeypress={(e) => {
                     if (
@@ -226,6 +211,10 @@
                         formElement?.requestSubmit()
                     }
                 }}
+                oninput={(e) => {
+                    messageInputValue.set($messageInputValue.trimStart())
+                }}
+                style="field-sizing: content; max-height: 192px;"
             ></textarea>
             <button
                 type="submit"

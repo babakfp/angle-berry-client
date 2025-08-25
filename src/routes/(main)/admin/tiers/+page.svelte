@@ -73,7 +73,7 @@
                 />
                 <Th class="text-gray-50" containsAnchor={true}>
                     <a
-                        class="link inline-block px-6 py-4 outline-inset"
+                        class="link outline-inset inline-block px-6 py-4"
                         href="/admin/tiers/{tier.id}"
                     >
                         {tier.name}

@@ -1,21 +1,22 @@
 import { exec } from "child_process"
 import { join } from "node:path"
 import { sveltekit } from "@sveltejs/kit/vite"
+import tailwindcss from "@tailwindcss/vite"
 import { defineConfig, type Plugin } from "vite"
 
 export default defineConfig({
-    plugins: [sveltekit(), errorCss()],
+    plugins: [tailwindcss(), sveltekit(), errorDotHTML()],
 })
 
-function errorCss(): Plugin {
+function errorDotHTML(): Plugin {
     const i = join("src", "lib", "app.css")
     const o = join("static", "error.css")
-    const content = join("src", "error.html")
+    const command = `tailwindcss -i ${i} -o ${o} -m`
 
     return {
-        name: "vite-plugin-svelte-error.html-tailwind-css",
+        name: "vite-plugin-sveltekit-error-dot-html-tailwindcss",
         configureServer(server) {
-            exec(`tailwindcss -i ${i} -o ${o} --content ${content} -m -w`)
+            exec(command)
             server.watcher.add(o)
             server.watcher.on("change", (path) => {
                 if (path === o) {
@@ -24,7 +25,7 @@ function errorCss(): Plugin {
             })
         },
         buildStart() {
-            exec(`tailwindcss -i ${i} -o ${o} --content ${content} -m`)
+            exec(command)
         },
     }
 }

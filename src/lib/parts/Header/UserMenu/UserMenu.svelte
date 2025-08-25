@@ -38,8 +38,8 @@
     <ul
         id="UserMenu"
         class={[
-            "absolute right-0 top-full max-h-[calc(var(--screen-minus-header)-theme(spacing.8))] w-60 translate-x-8 overflow-y-auto overscroll-y-contain rounded bg-body-bg text-sm shadow-[0_4px_16px_0_rgb(0_0_0/0.4)] duration-200 hide",
-            { "!-translate-x-4 !show": isUserMenuOpen },
+            "bg-background hide absolute top-full right-0 max-h-[calc(var(--screen-minus-header)-(--spacing(8)))] w-60 translate-x-8 overflow-y-auto overscroll-y-contain rounded text-sm shadow-[0_4px_16px_0_rgb(0_0_0/0.4)] duration-200",
+            { "show! -translate-x-4!": isUserMenuOpen },
         ]}
     >
         <li class="flex justify-between p-4">
@@ -49,7 +49,7 @@
 
         <li>
             <a
-                class="flex justify-between border-t border-gray-50/5 p-4 duration-200 outline-inset hover:text-gray-50"
+                class="outline-inset flex justify-between border-t border-gray-50/5 p-4 duration-200 hover:text-gray-50"
                 href="/how-to-invite"
             >
                 <span>
@@ -62,7 +62,7 @@
         <li use:copy={`${$page.url.origin}/register?id=${loggedInUser.id}`}>
             <button
                 type="button"
-                class="group border-y border-gray-50/5 p-4 outline-inset"
+                class="group outline-inset border-y border-gray-50/5 p-4"
                 onclick={() =>
                     toast.success("Your invite link is copied to Clipboard.", {
                         position: "bottom-end",
@@ -71,7 +71,7 @@
                 <span class="group-hover:text-gray-50">
                     Click to copy your invite link:
                 </span>
-                <p class="mt-1 select-text text-xs text-gray-500">
+                <p class="mt-1 text-xs text-gray-500 select-text">
                     {$page.url.origin}/register?id={loggedInUser.id}
                 </p>
             </button>
@@ -89,7 +89,7 @@
             <form action="/login-as" method="post">
                 <button
                     type="submit"
-                    class="flex w-full items-center justify-between border-t border-gray-50/5 p-4 text-left duration-200 outline-inset hover:text-gray-50"
+                    class="outline-inset flex w-full items-center justify-between border-t border-gray-50/5 p-4 text-left duration-200 hover:text-gray-50"
                 >
                     <span>
                         Login as {loggedInUser.isAdmin ? "a User" : "an Admin"}
@@ -107,7 +107,7 @@
             <form action="/logout" method="post">
                 <button
                     type="submit"
-                    class="w-full rounded-b border-t border-gray-50/5 p-4 text-left duration-200 outline-inset hover:text-gray-50"
+                    class="outline-inset w-full rounded-b border-t border-gray-50/5 p-4 text-left duration-200 hover:text-gray-50"
                 >
                     Logout
                 </button>

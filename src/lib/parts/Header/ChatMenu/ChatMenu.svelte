@@ -162,7 +162,7 @@
     {/if}
 
     <form
-        class="sticky bottom-0 z-1 self-end bg-body-bg
+        class="bg-background sticky bottom-0 z-1 self-end
 		{isSendingMessage && 'pointer-events-none'}"
         method="post"
         action="/chat"
@@ -192,10 +192,10 @@
         {/if}
 
         <div
-            class="relative grid grid-cols-[1fr_auto] border-t border-gray-50/5 shadow-[0_-1px_3px_0_rgb(0_0_0_/_0.1),_0_-1px_2px_-1px_rgb(0_0_0_/_0.1)]"
+            class="relative grid grid-cols-[1fr_auto] border-t border-gray-50/5 shadow-[0_-1px_3px_0_rgb(0_0_0/0.1),0_-1px_2px_-1px_rgb(0_0_0/0.1)]"
         >
             <textarea
-                class="block w-full resize-none bg-body-bg p-4 outline-inset placeholder:text-gray-500"
+                class="bg-background outline-inset block w-full resize-none p-4 placeholder:text-gray-500"
                 bind:this={$messageInputElement}
                 bind:value={$messageInputValue}
                 name="messageContent"
@@ -219,7 +219,7 @@
             <button
                 type="submit"
                 class={[
-                    "flex items-end outline-inset hover:bg-gray-50/5 hover:text-gray-50",
+                    "outline-inset flex items-end hover:bg-gray-50/5 hover:text-gray-50",
                     { "opacity-50": isSendingMessage },
                 ]}
                 disabled={isSendingMessage}

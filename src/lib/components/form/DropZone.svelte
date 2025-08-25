@@ -50,7 +50,7 @@
         </p>
 
         {#if files}
-            <ul class="mt-2 space-y-2 break-all text-left text-xs text-gray-50">
+            <ul class="mt-2 space-y-2 text-left text-xs break-all text-gray-50">
                 {#each files as file}
                     <li>
                         {file.name} ({formatBytes(file.size)})

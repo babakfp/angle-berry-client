@@ -61,7 +61,7 @@
     <input
         class={[
             class_,
-            "peer block h-11 w-full rounded border-2 border-gray-700 bg-transparent px-4 reset-autofill-input placeholder:text-xs placeholder:text-gray-500",
+            "peer reset-autofill-input block h-11 w-full rounded border-2 border-gray-700 bg-transparent px-4 placeholder:text-xs placeholder:text-gray-500",
             { "reset-number-input": type === "number" },
         ]}
         {type}

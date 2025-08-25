@@ -42,12 +42,12 @@
     let isHome = $derived($page.url.pathname === "/")
 </script>
 
-<header class="sticky top-0 z-50 h-header overflow-x-clip bg-body-bg shadow">
+<header class="h-header bg-background sticky top-0 z-50 overflow-x-clip shadow">
     <div class="container flex h-full justify-between px-0">
         <svelte:element
             this={isHome ? "div" : "a"}
             class={[
-                "flex items-center px-4 text-gray-50 outline-inset",
+                "outline-inset flex items-center px-4 text-gray-50",
                 isHome ? "" : "underline",
             ]}
             href={isHome ? undefined : "/"}
@@ -58,7 +58,7 @@
         <div class="flex">
             {#if loggedInUser.isAdmin}
                 <a
-                    class="group relative flex items-center px-2 outline-inset"
+                    class="group outline-inset relative flex items-center px-2"
                     href="/admin"
                     title="Admin dashboard"
                 >
@@ -69,7 +69,7 @@
             {/if}
             <button
                 type="button"
-                class="group relative flex items-center px-2 outline-inset"
+                class="group outline-inset relative flex items-center px-2"
                 bind:this={eventsMenuToggle}
                 onclick={() => (isEventsMenuOpen = !isEventsMenuOpen)}
                 title="Notifications"
@@ -85,7 +85,7 @@
             </button>
             <button
                 type="button"
-                class="group relative flex items-center px-2 outline-inset"
+                class="group outline-inset relative flex items-center px-2"
                 bind:this={chatMenuToggle}
                 onclick={() => (isChatMenuOpen = !isChatMenuOpen)}
                 title="Chat"
@@ -102,7 +102,7 @@
             <div class="relative flex">
                 <button
                     type="button"
-                    class="flex items-center gap-2 pl-2 pr-4 duration-200 outline-inset hover:text-gray-50"
+                    class="outline-inset flex items-center gap-2 pr-4 pl-2 duration-200 hover:text-gray-50"
                     onclick={() => (isUserMenuOpen = !isUserMenuOpen)}
                     bind:this={userMenuToggle}
                     title="User menu"

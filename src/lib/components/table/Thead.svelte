@@ -14,7 +14,9 @@
     {@render children?.()}
 </thead>
 
-<style lang="postcss">
+<style>
+    @reference "../../app.css";
+
     thead :global(th) {
         @apply py-3 pt-3.5;
     }

@@ -55,9 +55,9 @@
 <div
     bind:this={tooltip}
     class={[
-        "absolute z-50 whitespace-nowrap rounded bg-gray-700 px-4 py-3 text-xs drop-shadow duration-200 hide group-hover:show",
+        "hide group-hover:show absolute z-50 rounded bg-gray-700 px-4 py-3 text-xs whitespace-nowrap drop-shadow duration-200",
         { show: isVisible },
-        "after:absolute after:block after:h-0 after:w-0 after:border-solid after:border-[transparent]",
+        "after:absolute after:block after:h-0 after:w-0 after:border-solid after:border-transparent",
         "before:absolute before:block",
         {
             "before:inset-x-0 before:h-2 before:w-full": [
@@ -79,13 +79,13 @@
 
             "before:[all:unset]": !keepAlive,
 
-            "arrow-bottom bottom-full -translate-y-4 before:top-full after:top-full group-hover:-translate-y-2":
+            "arrow-bottom bottom-full -translate-y-4 group-hover:-translate-y-2 before:top-full after:top-full":
                 ["top", "top-right", "top-left"].includes(position),
-            "arrow-left left-full translate-x-4 before:right-full after:right-full group-hover:translate-x-2":
+            "arrow-left left-full translate-x-4 group-hover:translate-x-2 before:right-full after:right-full":
                 ["right", "right-top", "right-bottom"].includes(position),
-            "arrow-top top-full translate-y-4 before:bottom-full after:bottom-full group-hover:translate-y-2":
+            "arrow-top top-full translate-y-4 group-hover:translate-y-2 before:bottom-full after:bottom-full":
                 ["bottom", "bottom-right", "bottom-left"].includes(position),
-            "arrow-right right-full -translate-x-4 before:left-full after:left-full group-hover:-translate-x-2":
+            "arrow-right right-full -translate-x-4 group-hover:-translate-x-2 before:left-full after:left-full":
                 ["left", "left-top", "left-bottom"].includes(position),
 
             "inset-x-center after:inset-x-center": position === "top",
@@ -110,10 +110,12 @@
     {@render children?.()}
 </div>
 
-<style lang="postcss">
+<style>
+    @reference "../app.css";
+
     :root {
-        --arrow-color: theme(colors.gray.700);
-        --arrow-size: theme(spacing.1);
+        --arrow-color: var(--color-gray-700);
+        --arrow-size: var(--spacing-1);
     }
     .arrow-top::after {
         border-left-width: var(--arrow-size);

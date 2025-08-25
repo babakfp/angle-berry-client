@@ -27,7 +27,7 @@
     class={[
         "fixed inset-x-0 bottom-4 z-50 px-4 duration-200 sm:bottom-8 sm:mx-auto sm:max-w-xl",
         {
-            "translate-y-full hide": !selectedItemIds.length,
+            "hide translate-y-full": !selectedItemIds.length,
             "translate-y-full sm:translate-y-[calc(100%+1rem)]":
                 isPartlyVisible,
         },
@@ -37,7 +37,7 @@
         class="group grid gap-2 rounded bg-gray-700 p-4 sm:flex sm:items-center sm:justify-between"
     >
         <button
-            class="btn btn-gray absolute bottom-full right-4 h-8 w-8 -translate-y-2 p-0 duration-200 supports-hover:hide supports-hover:group-hover:show"
+            class="btn btn-gray supports-hover:hide supports-hover:group-hover:show absolute right-4 bottom-full h-8 w-8 -translate-y-2 p-0 duration-200"
             onclick={() => (isPartlyVisible = !isPartlyVisible)}
         >
             {#if isPartlyVisible}

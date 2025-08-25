@@ -12,7 +12,7 @@
 
 <li class="relative">
     <a
-        class="group flex justify-between gap-4 px-4 py-2 duration-200 outline-inset hover:text-gray-50"
+        class="group outline-inset flex justify-between gap-4 px-4 py-2 duration-200 hover:text-gray-50"
         href="/tiers/{tier.id}"
     >
         <span class="underline">
@@ -29,7 +29,9 @@
     </a>
 </li>
 
-<style lang="postcss">
+<style>
+    @reference "../../../app.css";
+
     li:first-of-type a {
         @apply pt-4;
     }

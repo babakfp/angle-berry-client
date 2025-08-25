@@ -29,7 +29,7 @@
         {@render children?.()}
 
         <div
-            class="absolute bottom-0.5 right-0.5 top-0.5 flex h-[calc(calc(100%-4px))] items-center rounded-r bg-body-bg px-2 duration-200 hide inset-y-center focus-within:show group-hover:show peer-focus:show"
+            class="bg-background hide inset-y-center focus-within:show group-hover:show peer-focus:show absolute top-0.5 right-0.5 bottom-0.5 flex h-[calc(calc(100%-4px))] items-center rounded-r px-2 duration-200"
         >
             {@render buttons()}
         </div>

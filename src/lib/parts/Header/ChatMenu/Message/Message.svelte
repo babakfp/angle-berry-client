@@ -82,7 +82,7 @@
         ></div>
 
         {#if !isCurrentUser}
-            <span class="text-2xs font-semibold uppercase text-gray-500">
+            <span class="text-2xs font-semibold text-gray-500 uppercase">
                 {message.expand.user.username}
                 {message.expand.user.isAdmin ? "- admin" : ""}
             </span>
@@ -90,9 +90,9 @@
 
         <div
             class={[
-                "message-content-wrapper relative z-1 max-w-80 break-words rounded bg-gray-700 shadow",
+                "message-content-wrapper relative z-1 max-w-80 rounded bg-gray-700 break-words shadow",
                 isCurrentUser ?
-                    "justify-self-end rounded-br-[2px] !bg-[#7e6dd1] text-gray-50"
+                    "justify-self-end rounded-br-[2px] bg-[#7e6dd1]! text-gray-50"
                 :   "justify-self-start rounded-tl-[2px]",
             ]}
         >
@@ -105,7 +105,7 @@
                 />
             {/if}
 
-            <div class="select-text py-2 pl-3 pr-4" onclick={handleClick}>
+            <div class="py-2 pr-4 pl-3 select-text" onclick={handleClick}>
                 {@html message.content}
             </div>
         </div>
@@ -135,7 +135,9 @@
     </div>
 </li>
 
-<style lang="postcss">
+<style>
+    @reference "../../../../app.css";
+
     /* NOTE: This is for when we add markdown support */
     .message-content-wrapper :global(a) {
         @apply break-all;

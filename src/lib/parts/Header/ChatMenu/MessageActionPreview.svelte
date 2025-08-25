@@ -31,11 +31,11 @@
 
 {#if isOpen}
     <div
-        class="grid grid-cols-[1fr_auto] items-stretch justify-between border-t border-gray-50/5 text-sm shadow-[0_-1px_3px_0_rgb(0_0_0_/_0.1),_0_-1px_2px_-1px_rgb(0_0_0_/_0.1)]"
+        class="grid grid-cols-[1fr_auto] items-stretch justify-between border-t border-gray-50/5 text-sm shadow-[0_-1px_3px_0_rgb(0_0_0/0.1),0_-1px_2px_-1px_rgb(0_0_0/0.1)]"
     >
         <button
             type="button"
-            class="block w-full py-4 pl-4 text-left outline-inset hover:bg-gray-50/5"
+            class="outline-inset block w-full py-4 pl-4 text-left hover:bg-gray-50/5"
             onclick={handleJumpToMessage}
         >
             <div class="text-xs text-gray-500">{title}</div>
@@ -43,7 +43,7 @@
         </button>
         <button
             type="button"
-            class="flex p-4 outline-inset hover:bg-gray-50/5"
+            class="outline-inset flex p-4 hover:bg-gray-50/5"
             onclick={handleClosing}
         >
             <IconXRegular />

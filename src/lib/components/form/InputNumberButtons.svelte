@@ -45,7 +45,7 @@
 <button
     type="button"
     class={[
-        "h-full pl-1 pr-0.5 text-gray-500 duration-200 outline-inset hover:text-gray-50",
+        "outline-inset h-full pr-0.5 pl-1 text-gray-500 duration-200 hover:text-gray-50",
         {
             "pointer-events-none text-gray-600":
                 (min || min === 0) && Number(value) <= Number(min),
@@ -59,7 +59,7 @@
 <button
     type="button"
     class={[
-        "-mr-2 h-full pl-0.5 pr-2 text-gray-500 duration-200 outline-inset hover:text-gray-50",
+        "outline-inset -mr-2 h-full pr-2 pl-0.5 text-gray-500 duration-200 hover:text-gray-50",
         {
             "pointer-events-none text-gray-600":
                 max && Number(value) >= Number(max),

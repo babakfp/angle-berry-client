@@ -27,7 +27,7 @@
             {tier.name}
         {:else}
             <a
-                class="link inline-block px-6 py-4 outline-inset"
+                class="link outline-inset inline-block px-6 py-4"
                 href="/tiers/{tier.id}"
             >
                 {tier.name}
@@ -45,7 +45,7 @@
         {#if hasAccess}
             {#if !isCurrent}
                 <a
-                    class="link inline-block px-6 py-4 outline-inset"
+                    class="link outline-inset inline-block px-6 py-4"
                     href="/tiers/{tier.id}"
                 >
                     Watch now
@@ -56,14 +56,14 @@
         {:else}
             <div class="flex items-center justify-end pl-4">
                 <a
-                    class="link inline-block py-4 pl-4 pr-2 outline-inset"
+                    class="link outline-inset inline-block py-4 pr-2 pl-4"
                     href="/how-to-pay"
                 >
                     Pay
                 </a>
                 or
                 <a
-                    class="link inline-block py-4 pl-2 pr-6 outline-inset"
+                    class="link outline-inset inline-block py-4 pr-6 pl-2"
                     href="/how-to-invite"
                 >
                     Start inviting

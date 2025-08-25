@@ -128,7 +128,7 @@
         <div
             class={[
                 "absolute top-11 z-20 w-full -translate-y-2 duration-150",
-                isOpen ? "!translate-y-2" : "hide",
+                isOpen ? "translate-y-2!" : "hide",
             ]}
         >
             {#if options.length}
@@ -137,7 +137,7 @@
                         <li class="group">
                             <button
                                 type="button"
-                                class="flex w-full items-center gap-2 bg-gray-700 px-4 py-2 text-sm outline-inset hover:bg-gray-600 group-first:rounded-t group-first:pt-4 group-last:rounded-b group-last:pb-4"
+                                class="outline-inset flex w-full items-center gap-2 bg-gray-700 px-4 py-2 text-sm group-first:rounded-t group-first:pt-4 group-last:rounded-b group-last:pb-4 hover:bg-gray-600"
                                 onclick={() => {
                                     if (isMultiple) {
                                         handleSelectToggle(option.value)
@@ -180,7 +180,7 @@
                 <li class="flex items-center rounded bg-gray-700">
                     <button
                         type="button"
-                        class="flex p-1 text-gray-500 duration-150 outline-inset hover:text-gray-50 {(
+                        class="outline-inset flex p-1 text-gray-500 duration-150 hover:text-gray-50 {(
                             readonly
                         ) ?
                             'pointer-events-none opacity-50'

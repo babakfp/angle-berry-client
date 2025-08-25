@@ -14,8 +14,8 @@
 
     // Does the logged-in user has access to this tier
     const hasAccess =
-        loggedInUser.retainedTiers.includes(tier.id) ||
-        loggedInUser.invitedUsers.length >= tier.invites
+        loggedInUser.retainedTiers.includes(tier.id)
+        || loggedInUser.invitedUsers.length >= tier.invites
 </script>
 
 <Tr class={!isCurrent ? "not-last:border-b not-last:border-gray-50/5" : ""}>

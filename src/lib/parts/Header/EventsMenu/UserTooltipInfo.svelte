@@ -36,8 +36,9 @@
                 Tiers:
                 {#each user.expand.retainedTiers as tier, i}
                     <a class="link" href="/tiers/{tier.id}">
-                        {tier.name}</a
-                    >{user.expand.retainedTiers.length - 1 !== i ? " " : ""}
+                        {tier.name}
+                    </a>
+                    {user.expand.retainedTiers.length - 1 !== i ? " " : ""}
                 {/each}
             </li>
         </ul>

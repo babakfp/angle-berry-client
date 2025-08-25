@@ -47,8 +47,8 @@
     <Thead>
         <Tr>
             <ThCheckbox
-                checked={!!data.tiers.length &&
-                    selectedTierIds.length === data.tiers.length}
+                checked={!!data.tiers.length
+                    && selectedTierIds.length === data.tiers.length}
                 readonly={!data.tiers.length}
                 onchange={checkAllCheckboxes}
             />

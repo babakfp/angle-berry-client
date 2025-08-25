@@ -52,8 +52,8 @@
 </script>
 
 <FormBase
-    class="grid gap-4 {class_} {(isSubmitting || isRedirecting) &&
-        'pointer-events-none'}"
+    class="grid gap-4 {class_} {(isSubmitting || isRedirecting)
+        && 'pointer-events-none'}"
     {action}
     {canUpload}
     {errors}

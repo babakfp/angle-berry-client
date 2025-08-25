@@ -53,8 +53,8 @@
                 .filter((msg) => $selectedMessageIds.includes(msg.id))
                 .sort(
                     (a, b) =>
-                        new Date(a.created).getTime() -
-                        new Date(b.created).getTime(),
+                        new Date(a.created).getTime()
+                        - new Date(b.created).getTime(),
                 )
             selectedMessages.forEach((msg, i) => {
                 copiedText += msg.expand.user.username + "\n"
@@ -134,9 +134,9 @@
             {#if $contextMenuTargetMessage && $selectedMessageIds.includes($contextMenuTargetMessage?.id)}
                 <MessageContextMenuItem
                     title={copyTimeoutId ? "Copied" : "Copy Selected as Text"}
-                    icon={copyTimeoutId
-                        ? IconCheckRegular
-                        : IconCopySimpleRegular}
+                    icon={copyTimeoutId ? IconCheckRegular : (
+                        IconCopySimpleRegular
+                    )}
                     isDisabled={!!copyTimeoutId}
                     onclick={copyMessage}
                 />

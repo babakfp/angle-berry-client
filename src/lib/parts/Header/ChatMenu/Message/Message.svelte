@@ -89,9 +89,11 @@
         {/if}
 
         <div
-            class="message-content-wrapper relative z-1 max-w-80 break-words rounded bg-gray-700 shadow {isCurrentUser
-                ? 'justify-self-end rounded-br-[2px] !bg-[#7e6dd1] text-gray-50'
-                : 'justify-self-start rounded-tl-[2px]'}"
+            class="message-content-wrapper relative z-1 max-w-80 break-words rounded bg-gray-700 shadow {(
+                isCurrentUser
+            ) ?
+                'justify-self-end rounded-br-[2px] !bg-[#7e6dd1] text-gray-50'
+            :   'justify-self-start rounded-tl-[2px]'}"
         >
             {#if message.expand?.repliedTo}
                 {@const msg = message.expand?.repliedTo}

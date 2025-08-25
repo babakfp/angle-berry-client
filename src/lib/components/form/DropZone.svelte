@@ -37,7 +37,13 @@
         <IconUploadSimpleRegular class="text-2xl" />
 
         <p class="mt-2 text-sm">
-            <b>Click</b> or <b>Drag</b> and <b>Drop</b> to <b>Upload</b>
+            <b>Click</b>
+            or
+            <b>Drag</b>
+            and
+            <b>Drop</b>
+            to
+            <b>Upload</b>
         </p>
         <p class="text-xs sm:text-sm">
             {accept.split(",").join(", ")}

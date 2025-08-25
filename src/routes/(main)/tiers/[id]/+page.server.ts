@@ -19,9 +19,9 @@ export const load = async ({ locals, params }) => {
             .getOne(params.id, { expand: "videos" })
 
         const isTierAccessed =
-            params.id === locals.previewTierId ||
-            locals.loggedInUser.retainedTiers.includes(params.id) ||
-            locals.loggedInUser.invitedUsers.length >= tier.invites
+            params.id === locals.previewTierId
+            || locals.loggedInUser.retainedTiers.includes(params.id)
+            || locals.loggedInUser.invitedUsers.length >= tier.invites
 
         if (!isTierAccessed) {
             tier.expand?.videos.map((video) => (video.file = ""))

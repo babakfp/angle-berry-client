@@ -126,7 +126,9 @@
         <button
             type="button"
             class="btn btn-gray"
-            onclick={() => (isGalleryPopupOpen = false)}>Close</button
+            onclick={() => (isGalleryPopupOpen = false)}
         >
+            Close
+        </button>
     {/snippet}
 </Modal>

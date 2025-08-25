@@ -20,7 +20,9 @@
         <li class="space-y-1">
             <span class="font-semibold">User</span>
             <ul class="list-inside list-disc space-y-1 pl-4">
-                <li>Username: <code class="select-text">user</code></li>
+                <li>
+                    Username: <code class="select-text">user</code>
+                </li>
                 <li>
                     Password: <code class="select-text">useruser</code>
                 </li>

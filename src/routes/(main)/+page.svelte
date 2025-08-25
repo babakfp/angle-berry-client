@@ -12,8 +12,11 @@
 {#if data.previewTierId}
     <p class="mb-8">
         Watch <a class="link" href="/tiers/{data.previewTierId}">free</a>
-        content, and <a class="link" href="/how-to-pay">pay</a> or
-        <a class="link" href="/how-to-invite">invite</a> to access premium tiers.
+        content, and
+        <a class="link" href="/how-to-pay">pay</a>
+        or
+        <a class="link" href="/how-to-invite">invite</a>
+         to access premium tiers.
     </p>
 {/if}
 

@@ -1,7 +1,10 @@
-/** @type {import("prettier").Config & import("prettier-plugin-svelte").PluginConfig & import("@ianvs/prettier-plugin-sort-imports").PluginConfig} */
+/** @type {import("prettier").Config & import("prettier-plugin-svelte").PluginConfig} */
 export default {
     semi: false,
     tabWidth: 4,
+    htmlWhitespaceSensitivity: "ignore",
+    experimentalTernaries: true,
+    experimentalOperatorPosition: "start",
     plugins: [
         "prettier-plugin-svelte",
         "@ianvs/prettier-plugin-sort-imports",

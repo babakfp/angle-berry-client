@@ -48,9 +48,9 @@
 
         <UsernameField
             bind:value={$formData.username}
-            error={$errors?.username?.[0] ??
-                form?.pb?.username?.message ??
-                form?.pb?.identity?.message}
+            error={$errors?.username?.[0]
+                ?? form?.pb?.username?.message
+                ?? form?.pb?.identity?.message}
             {...$constraints.username}
         />
         <PasswordField

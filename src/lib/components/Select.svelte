@@ -110,9 +110,11 @@
     <button
         type="button"
         bind:this={trigger}
-        class="z-30 flex h-11 w-full items-center justify-between rounded bg-gray-700 px-4 hover:bg-gray-600 {readonly
-            ? 'pointer-events-none opacity-50'
-            : ''}"
+        class="z-30 flex h-11 w-full items-center justify-between rounded bg-gray-700 px-4 hover:bg-gray-600 {(
+            readonly
+        ) ?
+            'pointer-events-none opacity-50'
+        :   ''}"
         onclick={handleTriggerToggle}
     >
         {#if selectedOption?.value}
@@ -177,9 +179,11 @@
                 <li class="flex items-center rounded bg-gray-700">
                     <button
                         type="button"
-                        class="flex p-1 text-gray-500 duration-150 outline-inset hover:text-gray-50 {readonly
-                            ? 'pointer-events-none opacity-50'
-                            : ''}"
+                        class="flex p-1 text-gray-500 duration-150 outline-inset hover:text-gray-50 {(
+                            readonly
+                        ) ?
+                            'pointer-events-none opacity-50'
+                        :   ''}"
                         onclick={() => handleDeselect(option.value)}
                     >
                         <IconXSquareRegular />

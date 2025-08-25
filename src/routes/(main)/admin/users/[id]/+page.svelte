@@ -43,11 +43,13 @@
         class="mt-4"
         message={form?.message}
         submitButtonText="Update"
-        submitButtonClass={data.loggedInUser.id !== data.targetUser.id &&
-        data.targetUser.isAdmin &&
-        !isUserACreatedBeforeUserB(data.loggedInUser, data.targetUser)
-            ? "btn-brand pointer-events-none opacity-50"
-            : ""}
+        submitButtonClass={(
+            data.loggedInUser.id !== data.targetUser.id
+            && data.targetUser.isAdmin
+            && !isUserACreatedBeforeUserB(data.loggedInUser, data.targetUser)
+        ) ?
+            "btn-brand pointer-events-none opacity-50"
+        :   ""}
         {errors}
         {validateForm}
         on:redirect={() => {
@@ -70,12 +72,15 @@
                 label: tier.name,
             }))}
             bind:selectedOptions={selectedRetainedTiers}
-            error={$errors?.retainedTiers?.[0] ??
-                form?.pb?.retainedTiers?.message}
+            error={$errors?.retainedTiers?.[0]
+                ?? form?.pb?.retainedTiers?.message}
             name="retainedTiers"
-            readonly={data.loggedInUser.id !== data.targetUser.id &&
-                data.targetUser.isAdmin &&
-                !isUserACreatedBeforeUserB(data.loggedInUser, data.targetUser)}
+            readonly={data.loggedInUser.id !== data.targetUser.id
+                && data.targetUser.isAdmin
+                && !isUserACreatedBeforeUserB(
+                    data.loggedInUser,
+                    data.targetUser,
+                )}
         />
 
         <Checkbox
@@ -85,9 +90,9 @@
             {...$constraints.isAdmin}
             label="Role admin"
             error={$errors?.isAdmin?.[0] ?? form?.pb?.isAdmin?.message}
-            readonly={data.loggedInUser.id === data.targetUser.id ||
-                (data.targetUser.isAdmin &&
-                    !isUserACreatedBeforeUserB(
+            readonly={data.loggedInUser.id === data.targetUser.id
+                || (data.targetUser.isAdmin
+                    && !isUserACreatedBeforeUserB(
                         data.loggedInUser,
                         data.targetUser,
                     ))}

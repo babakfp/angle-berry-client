@@ -17,10 +17,12 @@ export const goToMessage = (
     messageElement.scrollIntoView({
         behavior: "smooth",
         block:
-            messageElement.clientHeight >
-            document.getElementById("messages-wrapper")!.clientHeight
-                ? "start"
-                : "center",
+            (
+                messageElement.clientHeight
+                > document.getElementById("messages-wrapper")!.clientHeight
+            ) ?
+                "start"
+            :   "center",
     })
 
     return highlightAnimate(

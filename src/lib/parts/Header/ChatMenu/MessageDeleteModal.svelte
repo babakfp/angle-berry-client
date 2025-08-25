@@ -42,8 +42,8 @@
                 messages.update((messages_) => {
                     messages_.items = messages_.items.map((msg) => {
                         if (
-                            msg.repliedTo &&
-                            msg.repliedTo === $contextMenuTargetMessage?.id
+                            msg.repliedTo
+                            && msg.repliedTo === $contextMenuTargetMessage?.id
                         ) {
                             msg.repliedTo = ""
                             msg.expand.repliedTo = undefined
@@ -78,8 +78,8 @@
         </button>
         <button
             type="button"
-            class="btn btn-danger {isDeletingMessage &&
-                'pointer-events-none opacity-50'}"
+            class="btn btn-danger {isDeletingMessage
+                && 'pointer-events-none opacity-50'}"
             disabled={isDeletingMessage}
             onclick={handleDelete}
         >

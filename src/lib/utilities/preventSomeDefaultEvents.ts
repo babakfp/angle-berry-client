@@ -5,10 +5,10 @@ export const preventSomeDefaultEvents = () => {
 
     window.addEventListener("keydown", (e) => {
         if (
-            isTryingToOpenDevTools(e) ||
-            isTryingToSavePage(e) ||
-            isTryingToPrint(e) ||
-            isTryingToOpenSourceView(e)
+            isTryingToOpenDevTools(e)
+            || isTryingToSavePage(e)
+            || isTryingToPrint(e)
+            || isTryingToOpenSourceView(e)
         ) {
             e.preventDefault()
         }
@@ -25,8 +25,8 @@ const isTryingToSavePage = (e: KeyboardEvent) => {
 
 const isTryingToPrint = (e: KeyboardEvent) => {
     return (
-        (e.ctrlKey && e.code === "KeyP") ||
-        (e.ctrlKey && e.shiftKey && e.code === "KeyI")
+        (e.ctrlKey && e.code === "KeyP")
+        || (e.ctrlKey && e.shiftKey && e.code === "KeyI")
     )
 }
 

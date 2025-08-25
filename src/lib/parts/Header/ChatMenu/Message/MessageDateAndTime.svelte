@@ -14,18 +14,18 @@
     const isDateToday = (someDate: Date) => {
         const today = new Date()
         return (
-            someDate.getDate() === today.getDate() &&
-            someDate.getMonth() === today.getMonth() &&
-            someDate.getFullYear() === today.getFullYear()
+            someDate.getDate() === today.getDate()
+            && someDate.getMonth() === today.getMonth()
+            && someDate.getFullYear() === today.getFullYear()
         )
     }
 
     const isDateYesterday = (someDate: Date) => {
         const today = new Date()
         return (
-            someDate.getDate() === today.getDate() - 1 &&
-            someDate.getMonth() === today.getMonth() &&
-            someDate.getFullYear() === today.getFullYear()
+            someDate.getDate() === today.getDate() - 1
+            && someDate.getMonth() === today.getMonth()
+            && someDate.getFullYear() === today.getFullYear()
         )
     }
     let date = $derived(new Date(updated))

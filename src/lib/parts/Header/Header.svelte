@@ -46,9 +46,9 @@
     <div class="container flex h-full justify-between px-0">
         <svelte:element
             this={isHome ? "div" : "a"}
-            class="flex items-center px-4 text-gray-50 outline-inset {isHome
-                ? ''
-                : 'underline'}"
+            class="flex items-center px-4 text-gray-50 outline-inset {isHome ?
+                ''
+            :   'underline'}"
             href={isHome ? undefined : "/"}
         >
             Angle Berry

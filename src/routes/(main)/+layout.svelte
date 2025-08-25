@@ -35,8 +35,8 @@
                                         msg.updated = e.record.updated
                                     }
                                     if (
-                                        msg.expand?.repliedTo?.id ===
-                                        e.record.id
+                                        msg.expand?.repliedTo?.id
+                                        === e.record.id
                                     ) {
                                         msg.expand.repliedTo.content =
                                             e.record.content
@@ -128,8 +128,8 @@
                             unseenEventsLength.update((v) => (v += 1))
 
                             if (
-                                newEvent.expand?.inviter?.id ===
-                                data.loggedInUser.id
+                                newEvent.expand?.inviter?.id
+                                === data.loggedInUser.id
                             ) {
                                 data.loggedInUser.invitedUsers = [
                                     ...data.loggedInUser.invitedUsers,

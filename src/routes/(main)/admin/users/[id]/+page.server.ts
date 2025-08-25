@@ -41,9 +41,9 @@ export const actions = {
         const targetUser = await locals.pb.collection("users").getOne(params.id)
 
         if (
-            locals.loggedInUser.id !== targetUser.id &&
-            targetUser.isAdmin &&
-            !isUserACreatedBeforeUserB(locals.loggedInUser, targetUser)
+            locals.loggedInUser.id !== targetUser.id
+            && targetUser.isAdmin
+            && !isUserACreatedBeforeUserB(locals.loggedInUser, targetUser)
         ) {
             return setError(
                 form,

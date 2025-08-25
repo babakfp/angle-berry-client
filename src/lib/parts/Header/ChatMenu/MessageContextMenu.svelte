@@ -19,18 +19,14 @@
             let y = $contextMenuTargetEvent!.clientY
 
             if (
-                $contextMenuTargetEvent!.clientX +
-                    contextMenu.offsetWidth +
-                    26 >
-                window.innerWidth
+                $contextMenuTargetEvent!.clientX + contextMenu.offsetWidth + 26
+                > window.innerWidth
             ) {
                 x -= contextMenu.offsetWidth + 26
             }
             if (
-                $contextMenuTargetEvent!.clientY +
-                    contextMenu.offsetHeight +
-                    20 >
-                window.innerHeight
+                $contextMenuTargetEvent!.clientY + contextMenu.offsetHeight + 20
+                > window.innerHeight
             ) {
                 y -= contextMenu.offsetHeight
                 contextMenu.style.transform = "translateY(20px)"

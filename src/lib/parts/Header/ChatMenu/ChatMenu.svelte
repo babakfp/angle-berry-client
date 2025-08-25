@@ -105,10 +105,10 @@
         // Is reached the top of the scrollable?
         // Added + 200 to fetch the data earlier for a better UX
         if (
-            pageNumberFortheNextOlderMessagesToFetch <= pbMessages.totalPages &&
-            Math.abs((e.target as HTMLOListElement).scrollTop) + 200 >=
-                (e.target as HTMLOListElement).scrollHeight -
-                    (e.target as HTMLOListElement).clientHeight
+            pageNumberFortheNextOlderMessagesToFetch <= pbMessages.totalPages
+            && Math.abs((e.target as HTMLOListElement).scrollTop) + 200
+                >= (e.target as HTMLOListElement).scrollHeight
+                    - (e.target as HTMLOListElement).clientHeight
         ) {
             try {
                 isFetchingOlderMessages = true
@@ -219,9 +219,9 @@
                 autocomplete="off"
                 onkeypress={(e) => {
                     if (
-                        !isSendingMessage &&
-                        e.ctrlKey &&
-                        (e.code === "Enter" || e.key === "Enter")
+                        !isSendingMessage
+                        && e.ctrlKey
+                        && (e.code === "Enter" || e.key === "Enter")
                     ) {
                         formElement?.requestSubmit()
                     }

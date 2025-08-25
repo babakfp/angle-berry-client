@@ -9,6 +9,7 @@
         You can contact us via Telegram
         <a class="link" href="https://t.me/adminTelegramUsername">
             @adminTelegramUsername
-        </a>.
+        </a>
+        .
     </p>
 </div>

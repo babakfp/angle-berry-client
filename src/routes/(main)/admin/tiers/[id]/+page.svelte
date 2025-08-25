@@ -98,8 +98,8 @@
             name="invites"
             bind:value={$updateFormData.invites}
             placeholder={`${data.tier.invites}`}
-            error={$updateFormErrors?.invites?.[0] ??
-                form?.pb?.invites?.message}
+            error={$updateFormErrors?.invites?.[0]
+                ?? form?.pb?.invites?.message}
             {...$updateFormConstraints.invites}
         />
         <Select
@@ -108,8 +108,8 @@
             options={visibilityOptions}
             bind:selectedOption={selectedVisibility}
             isMultiple={false}
-            error={$updateFormErrors?.visibility?.[0] ??
-                form?.pb?.visibility?.message}
+            error={$updateFormErrors?.visibility?.[0]
+                ?? form?.pb?.visibility?.message}
             {...$updateFormConstraints.visibility}
             name="visibility"
         />

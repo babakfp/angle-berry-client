@@ -1,7 +1,10 @@
 <script lang="ts">
     import type { Snippet } from "svelte"
     import type { MouseEventHandler } from "svelte/elements"
-    import { contextMenuTargetEvent, isContextMenuOpen } from "./chatStores"
+    import {
+        contextMenuTargetEvent,
+        isContextMenuOpen,
+    } from "./chatStores.svelte"
 
     let {
         children,
@@ -14,7 +17,7 @@
     let contextMenu = $state<HTMLDivElement>()
 
     $effect(() => {
-        if (contextMenu && $isContextMenuOpen) {
+        if (contextMenu && isContextMenuOpen.state) {
             let x = $contextMenuTargetEvent!.clientX + 14
             let y = $contextMenuTargetEvent!.clientY
 
@@ -38,7 +41,7 @@
     })
 </script>
 
-{#if $isContextMenuOpen}
+{#if isContextMenuOpen.state}
     <div
         bind:this={contextMenu}
         class="absolute z-50 -translate-y-5"

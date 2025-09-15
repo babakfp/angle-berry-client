@@ -13,7 +13,7 @@
         isContextMenuOpen,
         isTouchDeviceContextMenuOpen,
         selectedMessageIds,
-    } from "../chatStores"
+    } from "../chatStores.svelte"
     import MessageDateAndTime from "./MessageDateAndTime.svelte"
     import MessageReplyPreview from "./MessageReplyPreview.svelte"
 
@@ -43,14 +43,14 @@
             // @ts-expect-error TODO
         } else if (e.pointerType !== "mouse") {
             if ($isTouchDeviceContextMenuOpen) {
-                isContextMenuOpen.set(false)
+                isContextMenuOpen.state = false
                 contextMenuTargetEvent.set(undefined)
                 contextMenuTargetMessage.set(undefined)
             } else {
                 if (highlight) {
                     interval = highlightAnimate(highlight, interval)
                 }
-                isContextMenuOpen.set(true)
+                isContextMenuOpen.state = true
                 contextMenuTargetEvent.set(e)
                 contextMenuTargetMessage.set(message)
             }
@@ -71,7 +71,7 @@
             if (highlight) {
                 interval = highlightAnimate(highlight, interval)
             }
-            isContextMenuOpen.set(true)
+            isContextMenuOpen.state = true
             contextMenuTargetEvent.set(e)
             contextMenuTargetMessage.set(message)
         }}

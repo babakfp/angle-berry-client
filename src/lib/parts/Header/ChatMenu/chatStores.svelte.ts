@@ -1,7 +1,7 @@
 import { writable } from "svelte/store"
 import type { RealtimeMessagesResponse } from "$lib/utilities/pb"
 
-export const isContextMenuOpen = writable(false)
+export const isContextMenuOpen = $state({ state: false })
 export const isTouchDeviceContextMenuOpen = writable(false)
 export const contextMenuTargetEvent = writable<
     MouseEvent | PointerEvent | undefined

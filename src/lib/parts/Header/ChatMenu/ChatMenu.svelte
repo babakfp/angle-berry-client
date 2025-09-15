@@ -20,7 +20,7 @@
         messageIdToEdit,
         messageInputElement,
         replyTargetMessage,
-    } from "./chatStores"
+    } from "./chatStores.svelte"
     import ContextMenu from "./ContextMenu.svelte"
     import Message from "./Message/Message.svelte"
     import MessageActionPreview from "./MessageActionPreview.svelte"
@@ -125,8 +125,8 @@
             }
         }
 
-        if ($isContextMenuOpen || $isTouchDeviceContextMenuOpen) {
-            isContextMenuOpen.set(false)
+        if (isContextMenuOpen.state || $isTouchDeviceContextMenuOpen) {
+            isContextMenuOpen.state = false
             isTouchDeviceContextMenuOpen.set(false)
         }
     }

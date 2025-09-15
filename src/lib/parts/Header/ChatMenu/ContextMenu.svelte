@@ -18,7 +18,7 @@
         messageInputElement,
         replyTargetMessage,
         selectedMessageIds,
-    } from "./chatStores"
+    } from "./chatStores.svelte"
     import MessageContextMenu from "./MessageContextMenu.svelte"
     import MessageContextMenuItem from "./MessageContextMenuItem.svelte"
 
@@ -31,7 +31,7 @@
     let copyTimeoutId = $state<number>()
 
     const replyMessage = () => {
-        isContextMenuOpen.set(false)
+        isContextMenuOpen.state = false
         isReplying.set(true)
         replyTargetMessage.set($contextMenuTargetMessage)
         messageIdToEdit.set(undefined)
@@ -40,7 +40,7 @@
 
     const editMessage = () => {
         if (!$contextMenuTargetMessage) return
-        isContextMenuOpen.set(false)
+        isContextMenuOpen.state = false
         messageIdToEdit.set($contextMenuTargetMessage.id)
         isReplying.set(false)
         if ($messageInputElement) $messageInputElement.focus()
@@ -71,25 +71,25 @@
             copyText($contextMenuTargetMessage.content.replaceAll("<br>", "\n"))
         }
         copyTimeoutId = setTimeout(() => {
-            isContextMenuOpen.set(false)
+            isContextMenuOpen.state = false
             copyTimeoutId = undefined
         }, 1000)
     }
 
     const setSelectedMessagesForDeletion = () => {
-        isContextMenuOpen.set(false)
+        isContextMenuOpen.state = false
         messageIdsToDelete.set($selectedMessageIds)
     }
 
     const setAMessageForDeletion = () => {
         if (!$contextMenuTargetMessage) return
-        isContextMenuOpen.set(false)
+        isContextMenuOpen.state = false
         messageIdsToDelete.set([$contextMenuTargetMessage.id])
     }
 
     const selectMessage = () => {
         if (!$contextMenuTargetMessage) return
-        isContextMenuOpen.set(false)
+        isContextMenuOpen.state = false
         $selectedMessageIds = [
             ...$selectedMessageIds,
             $contextMenuTargetMessage.id,
@@ -97,7 +97,7 @@
     }
 
     const clearSelection = () => {
-        isContextMenuOpen.set(false)
+        isContextMenuOpen.state = false
         selectedMessageIds.set([])
     }
 </script>
@@ -105,14 +105,21 @@
 <svelte:window
     onkeydown={(e) => {
         if (e.key === "Escape") {
-            $isContextMenuOpen = false
+            isContextMenuOpen.state = false
         }
     }}
 />
-<svelte:document onmouseleave={() => ($isContextMenuOpen = false)} />
+<svelte:document
+    onmouseleave={() => {
+        isContextMenuOpen.state = false
+    }}
+/>
 
 <OutClick
-    onOutClick={() => $isContextMenuOpen && isContextMenuOpen.set(false)}
+    onOutClick={() => {
+        if (!isContextMenuOpen.state) return
+        isContextMenuOpen.state = false
+    }}
     excludeQuerySelectorAll=".MessageContextMenu"
 >
     <MessageContextMenu>

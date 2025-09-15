@@ -32,17 +32,15 @@
         gutter: 0,
     }}
 >
-    <Popover.Trigger>
-        <div
-            class="outline-inset flex items-center pr-4 pl-2 text-2xl duration-150 hover:text-gray-50"
-            title="User menu"
-        >
-            {#if loggedInUser.isAdmin}
-                <IconCrownSimpleRegular />
-            {:else}
-                <IconUserRegular />
-            {/if}
-        </div>
+    <Popover.Trigger
+        class="outline-inset flex items-center pr-4 pl-2 text-2xl duration-150 hover:text-gray-50"
+        title="User menu"
+    >
+        {#if loggedInUser.isAdmin}
+            <IconCrownSimpleRegular />
+        {:else}
+            <IconUserRegular />
+        {/if}
     </Popover.Trigger>
     <Popover.Positioner>
         <Popover.Content

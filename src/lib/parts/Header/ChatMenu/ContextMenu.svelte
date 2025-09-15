@@ -18,7 +18,7 @@
         messageInputElement,
         replyTargetMessage,
         selectedMessageIds,
-    } from "./chatStores.svelte"
+    } from "./chatStates.svelte"
     import MessageContextMenu from "./MessageContextMenu.svelte"
     import MessageContextMenuItem from "./MessageContextMenuItem.svelte"
 

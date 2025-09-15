@@ -4,7 +4,7 @@
     import {
         contextMenuTargetEvent,
         isContextMenuOpen,
-    } from "./chatStores.svelte"
+    } from "./chatStates.svelte"
 
     let {
         children,

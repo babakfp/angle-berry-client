@@ -9,7 +9,7 @@
         messageIdsToDelete,
         messageIdToEdit,
         selectedMessageIds,
-    } from "./chatStores.svelte"
+    } from "./chatStates.svelte"
 
     let isDeletingMessage = $state(false)
     let isDeletePopupOpen = $state(false)

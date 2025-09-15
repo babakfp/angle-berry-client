@@ -20,7 +20,7 @@
         messageIdToEdit,
         messageInputElement,
         replyTargetMessage,
-    } from "./chatStores.svelte"
+    } from "./chatStates.svelte"
     import ContextMenu from "./ContextMenu.svelte"
     import Message from "./Message/Message.svelte"
     import MessageActionPreview from "./MessageActionPreview.svelte"

@@ -13,7 +13,7 @@
         isContextMenuOpen,
         isTouchDeviceContextMenuOpen,
         selectedMessageIds,
-    } from "../chatStores.svelte"
+    } from "../chatStates.svelte"
     import MessageDateAndTime from "./MessageDateAndTime.svelte"
     import MessageReplyPreview from "./MessageReplyPreview.svelte"
 

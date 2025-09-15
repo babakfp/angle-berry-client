@@ -1,11 +1,11 @@
 import { valibot } from "sveltekit-superforms/adapters"
 import * as v from "valibot"
 
-export const usernamePattern = /^[a-z]+$/
-export const minUsernameLength = 4
-export const maxUsernameLength = 12
-export const minPasswordLength = 8
-export const maxPasswordLength = 32
+const USERNAME_PATTERN = /^[a-z]+$/
+const MIN_USERNAME_LENGTH = 4
+const MAX_USERNAME_LENGTH = 12
+const MIN_PASSWORD_LENGTH = 8
+const MAX_PASSWORD_LENGTH = 32
 
 export const schema = valibot(
     v.object({
@@ -13,10 +13,10 @@ export const schema = valibot(
             v.pipe(
                 v.string(),
                 v.trim(),
-                v.minLength(minUsernameLength),
-                v.maxLength(maxUsernameLength),
+                v.minLength(MIN_USERNAME_LENGTH),
+                v.maxLength(MAX_USERNAME_LENGTH),
                 v.regex(
-                    usernamePattern,
+                    USERNAME_PATTERN,
                     "Only lowercase Latin letters are allowed",
                 ),
             ),
@@ -25,8 +25,8 @@ export const schema = valibot(
         password: v.optional(
             v.pipe(
                 v.string(),
-                v.minLength(minPasswordLength),
-                v.maxLength(maxPasswordLength),
+                v.minLength(MIN_PASSWORD_LENGTH),
+                v.maxLength(MAX_PASSWORD_LENGTH),
             ),
             "",
         ),

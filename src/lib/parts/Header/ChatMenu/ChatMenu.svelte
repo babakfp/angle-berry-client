@@ -4,7 +4,6 @@
     import IconPaperPlaneRightRegular from "phosphor-icons-svelte/IconPaperPlaneRightRegular.svelte"
     import IconSpinnerRegular from "phosphor-icons-svelte/IconSpinnerRegular.svelte"
     import { untrack } from "svelte"
-    import { writable } from "svelte/store"
     import { enhance } from "$app/forms"
     import PopSide from "$lib/components/PopSide.svelte"
     import { messages, unreadMessagesLength } from "$lib/stores/messages"
@@ -50,16 +49,15 @@
         if (isOpen && $unreadMessagesLength) unreadMessagesLength.set(0)
     })
 
-    const messageInputValue = writable("")
+    let messageInputValue = $state("")
 
     $effect(() => {
         messageIdToEdit
         untrack(() => {
-            messageInputValue.set(
+            messageInputValue =
                 $messages.items
                     .find((msg) => msg.id === messageIdToEdit._)
-                    ?.content.replaceAll("<br>", "\n") || "",
-            )
+                    ?.content.replaceAll("<br>", "\n") || ""
         })
     })
 
@@ -205,7 +203,7 @@
             <textarea
                 class="bg-background outline-inset block field-sizing-content max-h-48 w-full resize-none p-4 placeholder:text-gray-500"
                 bind:this={messageInputElement._}
-                bind:value={$messageInputValue}
+                bind:value={messageInputValue}
                 name="messageContent"
                 placeholder="Write your message..."
                 required
@@ -220,7 +218,7 @@
                     }
                 }}
                 oninput={(e) => {
-                    messageInputValue.set($messageInputValue.trimStart())
+                    messageInputValue = messageInputValue.trimStart()
                 }}
             ></textarea>
             <button

@@ -1,4 +1,4 @@
-import { z } from "zod"
+import * as v from "valibot"
 import { formatBytes } from "$lib/utilities/formatBytes"
 
 export type Options = {
@@ -13,48 +13,50 @@ export type Options = {
  * The `size` argument properties are considered to contain bytes as numbers.
  */
 export const files = (options?: Options) =>
-    z
-        .instanceof(File, { message: "Can't be empty!" })
-        .superRefine((file, ctx) => {
-            const addIssue = (message: string) => {
-                ctx.addIssue({
-                    code: z.ZodIssueCode.custom,
-                    message,
-                    fatal: true,
-                })
+    v.pipe(
+        v.array(
+            v.pipe(
+                v.file("Can't be empty!"),
+                v.rawCheck(({ addIssue, dataset }) => {
+                    if (!dataset.typed) return
 
-                return z.NEVER
-            }
+                    if (options?.formats) {
+                        if (!dataset.value.name.includes(".")) {
+                            return addIssue({
+                                message: `Only formats ${options.formats} allowed! File "${dataset.value.name}" does not contain a format.`,
+                            })
+                        }
 
-            if (options?.formats) {
-                if (!file.name.includes(".")) {
-                    return addIssue(
-                        `Only formats ${options.formats} allowed! File "${file.name}" does not contain a format.`,
-                    )
-                }
+                        const fileNameSegments = dataset.value.name.split(".")
+                        const fileNameExtension =
+                            fileNameSegments[fileNameSegments.length - 1]
 
-                const fileNameSegments = file.name.split(".")
-                const fileNameExtension =
-                    fileNameSegments[fileNameSegments.length - 1]
+                        if (!options.formats.includes(fileNameExtension)) {
+                            return addIssue({
+                                message: `Only (${options.formats.join(", ")}) formats allowed! Got "${fileNameExtension}".`,
+                            })
+                        }
+                    }
 
-                if (!options.formats.includes(fileNameExtension)) {
-                    return addIssue(
-                        `Only (${options.formats.join(", ")}) formats allowed! Got "${fileNameExtension}".`,
-                    )
-                }
-            }
+                    if (
+                        options?.size?.max
+                        && dataset.value.size > options.size.max
+                    ) {
+                        return addIssue({
+                            message: `File size can't be above ${formatBytes(options.size.max)}`,
+                        })
+                    }
 
-            if (options?.size?.max && file.size > options.size.max) {
-                return addIssue(
-                    `File size can't be above ${formatBytes(options.size.max)}`,
-                )
-            }
-
-            if (options?.size?.min && file.size > options.size.min) {
-                return addIssue(
-                    `File size can't be under ${formatBytes(options.size.min)}`,
-                )
-            }
-        })
-        .array()
-        .min(1, "Can't be empty!")
+                    if (
+                        options?.size?.min
+                        && dataset.value.size > options.size.min
+                    ) {
+                        return addIssue({
+                            message: `File size can't be under ${formatBytes(options.size.min)}`,
+                        })
+                    }
+                }),
+            ),
+        ),
+        v.minLength(1, "Can't be empty!"),
+    )

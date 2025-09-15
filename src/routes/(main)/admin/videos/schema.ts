@@ -1,13 +1,13 @@
-import { zod } from "sveltekit-superforms/adapters"
-import { z } from "zod"
-import { files } from "$lib/utilities/zod/files.js"
+import { valibot } from "sveltekit-superforms/adapters"
+import * as v from "valibot"
+import { files } from "$lib/utilities/schema/files.js"
 
 export const formats = ["mp4", "avi", "mkv"]
-export const maxSizeLimitInBytes = 1000000000
+export const maxSizeLimitInBytes = 1_000_000_000
 
 export const schema = {
-    upload: zod(
-        z.object({
+    upload: valibot(
+        v.object({
             videos: files({
                 formats,
                 size: {
@@ -16,9 +16,12 @@ export const schema = {
             }),
         }),
     ),
-    delete: zod(
-        z.object({
-            videos: z.string().array().max(100).default([]),
+    delete: valibot(
+        v.object({
+            videos: v.optional(
+                v.pipe(v.array(v.string()), v.maxLength(100)),
+                [],
+            ),
         }),
     ),
 }

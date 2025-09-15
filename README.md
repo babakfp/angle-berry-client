@@ -41,7 +41,6 @@ This project consists of two repositories:
 - [tailwindcss-addons](https://npmjs.com/package/tailwindcss-addons)
 - [typescript](https://npmjs.com/package/typescript)
 - [vite](https://npmjs.com/package/vite)
-- [zod](https://npmjs.com/package/zod)
 
 #### Angle Berry Server
 

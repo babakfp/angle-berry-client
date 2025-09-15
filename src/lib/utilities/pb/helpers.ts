@@ -28,7 +28,7 @@ export const pbHandleClientResponseError = (e: ClientResponseError) => {
     if (e.status === 0) {
         error(500, {
             type: "failure",
-            message: "Database communication failure!",
+            message: `Database communication failure! ${e.message}`,
         })
     }
 

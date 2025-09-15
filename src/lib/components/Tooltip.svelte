@@ -88,10 +88,10 @@
             "arrow-right right-full -translate-x-4 group-hover:-translate-x-2 before:left-full after:left-full":
                 ["left", "left-top", "left-bottom"].includes(position),
 
-            "inset-x-center after:inset-x-center": position === "top",
-            "inset-y-center after:inset-y-center": position === "right",
-            "inset-x-center after:inset-x-center": position === "bottom",
-            "inset-y-center after:inset-y-center": position === "left",
+            "inset-x-center after:inset-x-center":
+                position === "top" || position === "bottom",
+            "inset-y-center after:inset-y-center":
+                position === "right" || position === "left",
 
             "right-0 after:right-4": ["top-right", "bottom-right"].includes(
                 position,

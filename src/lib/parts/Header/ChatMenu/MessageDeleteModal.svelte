@@ -1,7 +1,7 @@
 <script lang="ts">
     import IconSpinnerRegular from "phosphor-icons-svelte/IconSpinnerRegular.svelte"
     import Modal from "$lib/components/Modal.svelte"
-    import { messages } from "$lib/stores/messages"
+    import { messages } from "$lib/stores/messages.svelte"
     import { pb } from "$lib/stores/pb.svelte"
     import {
         contextMenuTargetMessage,

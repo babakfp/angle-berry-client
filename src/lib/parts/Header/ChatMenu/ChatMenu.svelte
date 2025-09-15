@@ -6,7 +6,7 @@
     import { untrack } from "svelte"
     import { enhance } from "$app/forms"
     import PopSide from "$lib/components/PopSide.svelte"
-    import { messages, unreadMessagesLength } from "$lib/stores/messages"
+    import { messages, unreadMessagesLength } from "$lib/stores/messages.svelte"
     import { pb } from "$lib/stores/pb.svelte"
     import type {
         ListResult,
@@ -46,7 +46,9 @@
         }
     })
     $effect(() => {
-        if (isOpen && $unreadMessagesLength) unreadMessagesLength.set(0)
+        if (isOpen && unreadMessagesLength._) {
+            unreadMessagesLength._ = 0
+        }
     })
 
     let messageInputValue = $state("")

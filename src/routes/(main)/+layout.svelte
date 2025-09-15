@@ -3,7 +3,7 @@
     import AnimatePageNavigation from "$lib/components/AnimatePageNavigation.svelte"
     import Header from "$lib/parts/Header/Header.svelte"
     import { events, unseenEventsLength } from "$lib/stores/events"
-    import { messages, unreadMessagesLength } from "$lib/stores/messages"
+    import { messages, unreadMessagesLength } from "$lib/stores/messages.svelte"
     import { pb } from "$lib/stores/pb.svelte"
     import {
         ClientResponseError,
@@ -77,7 +77,7 @@
                                 ]
                                 return messages_
                             })
-                            unreadMessagesLength.update((v) => (v += 1))
+                            unreadMessagesLength._ += 1
                         } else if (e.action === "delete") {
                             messages.update((messages_) => {
                                 messages_.items = messages_.items.filter(
@@ -85,7 +85,7 @@
                                 )
                                 return messages_
                             })
-                            unreadMessagesLength.update((v) => (v -= 1))
+                            unreadMessagesLength._ -= 1
                         }
                     },
                     { requestKey: "messages-subscribe" },

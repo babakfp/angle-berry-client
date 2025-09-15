@@ -6,7 +6,7 @@
     import Avatar from "$lib/components/Avatar.svelte"
     import NotificationBlob from "$lib/components/NotificationBlob.svelte"
     import { unseenEventsLength } from "$lib/stores/events"
-    import { unreadMessagesLength } from "$lib/stores/messages"
+    import { unreadMessagesLength } from "$lib/stores/messages.svelte"
     import type {
         ListResult,
         RealtimeEventsResponse,
@@ -93,9 +93,9 @@
                 <IconChatCenteredRegular
                     class="text-2xl duration-200 group-hover:text-gray-50"
                 />
-                {#if $unreadMessagesLength > 0}
+                {#if unreadMessagesLength._ > 0}
                     <NotificationBlob>
-                        {$unreadMessagesLength}
+                        {unreadMessagesLength._}
                     </NotificationBlob>
                 {/if}
             </button>

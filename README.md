@@ -21,9 +21,13 @@ This project consists of two repositories:
 
 #### Angle Berry Client
 
+- [@ianvs/prettier-plugin-sort-imports](https://npmjs.com/package/@ianvs/prettier-plugin-sort-imports)
 - [@sveltejs/adapter-vercel](https://npmjs.com/package/@sveltejs/adapter-vercel)
 - [@sveltejs/kit](https://npmjs.com/package/@sveltejs/kit)
 - [@sveltejs/vite-plugin-svelte](https://npmjs.com/package/@sveltejs/vite-plugin-svelte)
+- [@tailwindcss/cli](https://npmjs.com/package/@tailwindcss/cli)
+- [@tailwindcss/vite](https://npmjs.com/package/@tailwindcss/vite)
+- [@types/node](https://npmjs.com/package/@types/node)
 - [autoprefixer](https://npmjs.com/package/autoprefixer)
 - [phosphor-icons-svelte](https://npmjs.com/package/phosphor-icons-svelte)
 - [pocketbase](https://npmjs.com/package/pocketbase)
@@ -40,6 +44,7 @@ This project consists of two repositories:
 - [tailwindcss](https://npmjs.com/package/tailwindcss)
 - [tailwindcss-addons](https://npmjs.com/package/tailwindcss-addons)
 - [typescript](https://npmjs.com/package/typescript)
+- [valibot](https://npmjs.com/package/valibot)
 - [vite](https://npmjs.com/package/vite)
 
 #### Angle Berry Server

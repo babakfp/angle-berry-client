@@ -78,7 +78,7 @@
         @apply h-0 w-0;
     }
     * {
-        @apply drag-none tap-gray-50/5 outline-offset-0 outline-transparent;
+        @apply drag-none outline-offset-0 outline-transparent;
     }
     b,
     strong,

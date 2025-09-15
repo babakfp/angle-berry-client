@@ -71,8 +71,8 @@
 
 @layer base {
     :root {
-        --header: --spacing(16);
-        --screen-minus-header: calc(var(--tw-screen-h) - var(--header));
+        --header: calc(var(--spacing) * 16);
+        --screen-minus-header: calc(100vh - var(--header));
     }
     ::-webkit-scrollbar {
         @apply h-0 w-0;

@@ -36,9 +36,6 @@
     let isChatMenuOpen = $state(false)
     let chatMenuToggle = $state<HTMLButtonElement>()
 
-    let isUserMenuOpen = $state(false)
-    let userMenuToggle = $state<HTMLButtonElement>()
-
     const isHome = $derived(page.url.pathname === "/")
 </script>
 
@@ -84,27 +81,8 @@
                     </NotificationBlob>
                 {/if}
             </button>
-            <div class="relative flex">
-                <button
-                    type="button"
-                    class="outline-inset flex items-center pr-4 pl-2 text-2xl duration-200 hover:text-gray-50"
-                    onclick={() => (isUserMenuOpen = !isUserMenuOpen)}
-                    bind:this={userMenuToggle}
-                    title="User menu"
-                >
-                    {#if loggedInUser.isAdmin}
-                        <IconCrownSimpleRegular />
-                    {:else}
-                        <IconUserRegular />
-                    {/if}
-                </button>
-                <UserMenu
-                    {loggedInUser}
-                    {tiers}
-                    {userMenuToggle}
-                    bind:isUserMenuOpen
-                />
-            </div>
+
+            <UserMenu {loggedInUser} {tiers} />
         </div>
     </div>
 </header>

@@ -1,10 +1,9 @@
 <script lang="ts">
+    import { Popover } from "@ark-ui/svelte/popover"
     import IconCrownSimpleRegular from "phosphor-icons-svelte/IconCrownSimpleRegular.svelte"
     import IconUserRegular from "phosphor-icons-svelte/IconUserRegular.svelte"
-    import { onMount } from "svelte"
     import { copy } from "svelte-copy"
     import toast from "svelte-hot-french-toast"
-    import { OutClick } from "svelte-outclick"
     import { beforeNavigate } from "$app/navigation"
     import { page } from "$app/state"
     import type { TiersResponse, UsersResponse } from "$lib/utilities/pb"
@@ -13,50 +12,56 @@
     let {
         loggedInUser,
         tiers,
-        userMenuToggle,
-        isUserMenuOpen = $bindable(false),
     }: {
         loggedInUser: UsersResponse
         tiers: TiersResponse[]
-        userMenuToggle: HTMLButtonElement
-        isUserMenuOpen?: boolean
     } = $props()
 
+    let isUserMenuOpen = $state(false)
+
     beforeNavigate(() => (isUserMenuOpen = false))
-    onMount(() =>
-        document.addEventListener("mouseleave", () => (isUserMenuOpen = false)),
-    )
 </script>
 
+<svelte:document onmouseleave={() => (isUserMenuOpen = false)} />
 <svelte:window onscroll={() => (isUserMenuOpen = false)} />
 
-<OutClick
-    onOutClick={() => (isUserMenuOpen = false)}
-    excludeElements={userMenuToggle}
-    tag="nav"
+<Popover.Root
+    bind:open={isUserMenuOpen}
+    positioning={{
+        placement: "bottom-end",
+        gutter: 0,
+    }}
 >
-    <ul
-        id="UserMenu"
-        class={[
-            "bg-background hide absolute top-full right-0 max-h-[calc(var(--screen-minus-header)-(--spacing(8)))] w-60 translate-x-8 overflow-y-auto overscroll-y-contain rounded text-sm shadow-[0_4px_16px_0_rgb(0_0_0/0.4)] duration-200",
-            { "show! -translate-x-4!": isUserMenuOpen },
-        ]}
-    >
-        <li class="flex justify-between p-4">
-            <span>Signed in as</span>
-            <span>{loggedInUser.username}</span>
-        </li>
+    <Popover.Trigger>
+        <div
+            class="outline-inset flex items-center pr-4 pl-2 text-2xl duration-200 hover:text-gray-50"
+            title="User menu"
+        >
+            {#if loggedInUser.isAdmin}
+                <IconCrownSimpleRegular />
+            {:else}
+                <IconUserRegular />
+            {/if}
+        </div>
+    </Popover.Trigger>
+    <Popover.Positioner>
+        <Popover.Content
+            class="bg-background max-h-[calc(var(--screen-minus-header)-(--spacing(8)))] w-64 -translate-x-2 overflow-y-auto overscroll-y-contain rounded text-sm shadow-[0_4px_16px_0_rgb(0_0_0/0.4)]"
+        >
+            <div class="flex justify-between p-4">
+                <span>Signed in as</span>
+                <span>{loggedInUser.username}</span>
+            </div>
 
-        {#if loggedInUser.isAdmin}
-            <a
-                class="outline-inset flex justify-between border-t border-gray-50/5 p-4 underline duration-200 hover:text-gray-50"
-                href="/admin"
-            >
-                Admin Dashboard
-            </a>
-        {/if}
+            {#if loggedInUser.isAdmin}
+                <a
+                    class="outline-inset flex justify-between border-t border-gray-50/5 p-4 underline duration-200 hover:text-gray-50"
+                    href="/admin"
+                >
+                    Admin Dashboard
+                </a>
+            {/if}
 
-        <li>
             <a
                 class="outline-inset flex justify-between border-t border-gray-50/5 p-4 duration-200 hover:text-gray-50"
                 href="/how-to-invite"
@@ -66,9 +71,7 @@
                 </span>
                 <span class="underline">Start inviting</span>
             </a>
-        </li>
 
-        <li use:copy={`${page.url.origin}/register?id=${loggedInUser.id}`}>
             <button
                 type="button"
                 class="group outline-inset border-y border-gray-50/5 p-4"
@@ -76,6 +79,7 @@
                     toast.success("Your invite link is copied to Clipboard.", {
                         position: "bottom-end",
                     })}
+                use:copy={`${page.url.origin}/register?id=${loggedInUser.id}`}
             >
                 <span class="group-hover:text-gray-50">
                     Click to copy your invite link:
@@ -84,17 +88,15 @@
                     {page.url.origin}/register?id={loggedInUser.id}
                 </p>
             </button>
-        </li>
 
-        {#if tiers.length}
-            <ol>
-                {#each tiers as tier}
-                    <Tier {loggedInUser} {tier} />
-                {/each}
-            </ol>
-        {/if}
+            {#if tiers.length}
+                <ol>
+                    {#each tiers as tier}
+                        <Tier {loggedInUser} {tier} />
+                    {/each}
+                </ol>
+            {/if}
 
-        <li>
             <form action="/login-as" method="post">
                 <button
                     type="submit"
@@ -110,9 +112,7 @@
                     {/if}
                 </button>
             </form>
-        </li>
 
-        <li>
             <form action="/logout" method="post">
                 <button
                     type="submit"
@@ -121,6 +121,6 @@
                     Logout
                 </button>
             </form>
-        </li>
-    </ul>
-</OutClick>
+        </Popover.Content>
+    </Popover.Positioner>
+</Popover.Root>

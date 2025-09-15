@@ -11,7 +11,7 @@
 
 <div class="container">
     <AnimatePageNavigation
-        class="mx-auto min-h-screen max-w-sm content-center py-12"
+        class="mx-auto min-h-screen max-w-sm content-center pt-8 pb-32"
     >
         {@render children()}
     </AnimatePageNavigation>

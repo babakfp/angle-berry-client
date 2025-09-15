@@ -34,11 +34,11 @@
     const handleClick = (e: MouseEvent) => {
         if (selectedMessageIds._.length) {
             if (selectedMessageIds._.includes(message.id)) {
-                selectedMessageIds.update((v) =>
-                    v.filter((v) => v !== message.id),
+                selectedMessageIds._ = selectedMessageIds._.filter(
+                    (id) => id !== message.id,
                 )
             } else {
-                selectedMessageIds.update((v) => [...v, message.id])
+                selectedMessageIds._.push(message.id)
             }
             // @ts-expect-error TODO
         } else if (e.pointerType !== "mouse") {

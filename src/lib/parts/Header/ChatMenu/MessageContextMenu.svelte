@@ -18,17 +18,21 @@
 
     $effect(() => {
         if (contextMenu && isContextMenuOpen.state) {
-            let x = $contextMenuTargetEvent!.clientX + 14
-            let y = $contextMenuTargetEvent!.clientY
+            let x = contextMenuTargetEvent.state!.clientX + 14
+            let y = contextMenuTargetEvent.state!.clientY
 
             if (
-                $contextMenuTargetEvent!.clientX + contextMenu.offsetWidth + 26
+                contextMenuTargetEvent.state!.clientX
+                    + contextMenu.offsetWidth
+                    + 26
                 > window.innerWidth
             ) {
                 x -= contextMenu.offsetWidth + 26
             }
             if (
-                $contextMenuTargetEvent!.clientY + contextMenu.offsetHeight + 20
+                contextMenuTargetEvent.state!.clientY
+                    + contextMenu.offsetHeight
+                    + 20
                 > window.innerHeight
             ) {
                 y -= contextMenu.offsetHeight

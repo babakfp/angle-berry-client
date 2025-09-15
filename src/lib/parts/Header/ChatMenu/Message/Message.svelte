@@ -44,14 +44,14 @@
         } else if (e.pointerType !== "mouse") {
             if (isTouchDeviceContextMenuOpen.state) {
                 isContextMenuOpen.state = false
-                contextMenuTargetEvent.set(undefined)
+                contextMenuTargetEvent.state = undefined
                 contextMenuTargetMessage.set(undefined)
             } else {
                 if (highlight) {
                     interval = highlightAnimate(highlight, interval)
                 }
                 isContextMenuOpen.state = true
-                contextMenuTargetEvent.set(e)
+                contextMenuTargetEvent.state = e
                 contextMenuTargetMessage.set(message)
             }
             isTouchDeviceContextMenuOpen.state =
@@ -73,7 +73,7 @@
                 interval = highlightAnimate(highlight, interval)
             }
             isContextMenuOpen.state = true
-            contextMenuTargetEvent.set(e)
+            contextMenuTargetEvent.state = e
             contextMenuTargetMessage.set(message)
         }}
     >

@@ -3,9 +3,9 @@ import type { RealtimeMessagesResponse } from "$lib/utilities/pb"
 
 export const isContextMenuOpen = $state({ state: false })
 export const isTouchDeviceContextMenuOpen = $state({ state: false })
-export const contextMenuTargetEvent = writable<
-    MouseEvent | PointerEvent | undefined
->()
+export const contextMenuTargetEvent = $state<{
+    state: MouseEvent | PointerEvent | undefined
+}>({ state: undefined })
 export const contextMenuTargetMessage = writable<
     RealtimeMessagesResponse | undefined
 >()

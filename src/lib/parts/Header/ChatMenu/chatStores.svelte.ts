@@ -1,55 +1,55 @@
 import type { RealtimeMessagesResponse } from "$lib/utilities/pb"
 
 export const isContextMenuOpen = $state({
-    state: false,
+    _: false,
 })
 
 export const isTouchDeviceContextMenuOpen = $state({
-    state: false,
+    _: false,
 })
 
 export const contextMenuTargetEvent = $state<{
-    state: MouseEvent | PointerEvent | undefined
+    _: MouseEvent | PointerEvent | undefined
 }>({
-    state: undefined,
+    _: undefined,
 })
 
 export const contextMenuTargetMessage = $state<{
-    state: RealtimeMessagesResponse | undefined
+    _: RealtimeMessagesResponse | undefined
 }>({
-    state: undefined,
+    _: undefined,
 })
 
 export const messageIdsToDelete = $state<{
-    state: string[]
+    _: string[]
 }>({
-    state: [],
+    _: [],
 })
 
 export const messageIdToEdit = $state<{
-    state: string | undefined
+    _: string | undefined
 }>({
-    state: undefined,
+    _: undefined,
 })
 
 export const isReplying = $state({
-    state: false,
+    _: false,
 })
 
 export const replyTargetMessage = $state<{
-    state: RealtimeMessagesResponse | undefined
+    _: RealtimeMessagesResponse | undefined
 }>({
-    state: undefined,
+    _: undefined,
 })
 
 export const messageInputElement = $state<{
-    state: HTMLTextAreaElement | undefined
+    _: HTMLTextAreaElement | undefined
 }>({
-    state: undefined,
+    _: undefined,
 })
 
 export const selectedMessageIds = $state<{
-    state: string[]
+    _: string[]
 }>({
-    state: [],
+    _: [],
 })

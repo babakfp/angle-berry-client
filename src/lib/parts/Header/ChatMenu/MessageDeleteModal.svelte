@@ -14,17 +14,17 @@
     let isDeletingMessage = $state(false)
     let isDeletePopupOpen = $state(false)
     $effect(() => {
-        isDeletePopupOpen = !!messageIdsToDelete.state.length
+        isDeletePopupOpen = !!messageIdsToDelete._.length
     })
     $effect(() => {
-        if (!isDeletePopupOpen && messageIdsToDelete.state.length > 0)
-            messageIdsToDelete.state = []
+        if (!isDeletePopupOpen && messageIdsToDelete._.length > 0)
+            messageIdsToDelete._ = []
     })
 
     const handleDelete = async () => {
         try {
             const isMessageDeleted = await Promise.all(
-                messageIdsToDelete.state.map((messageId) =>
+                messageIdsToDelete._.map((messageId) =>
                     $pb.collection("messages").delete(messageId),
                 ),
             )
@@ -33,18 +33,17 @@
 
             if (isMessageDeleted) {
                 isDeletingMessage = false
-                messageIdsToDelete.state = []
-                selectedMessageIds.state = []
-                messageIdToEdit.state = undefined
-                isReplying.state = false
+                messageIdsToDelete._ = []
+                selectedMessageIds._ = []
+                messageIdToEdit._ = undefined
+                isReplying._ = false
 
                 // Remove other messages reply preview to that deleted message
                 messages.update((messages_) => {
                     messages_.items = messages_.items.map((msg) => {
                         if (
                             msg.repliedTo
-                            && msg.repliedTo
-                                === contextMenuTargetMessage.state?.id
+                            && msg.repliedTo === contextMenuTargetMessage._?.id
                         ) {
                             msg.repliedTo = ""
                             msg.expand.repliedTo = undefined
@@ -57,9 +56,9 @@
         } catch (error) {
             console.error(error)
             isDeletingMessage = false
-            messageIdsToDelete.state = []
-            messageIdToEdit.state = undefined
-            isReplying.state = false
+            messageIdsToDelete._ = []
+            messageIdToEdit._ = undefined
+            isReplying._ = false
         }
     }
 </script>
@@ -73,7 +72,7 @@
         <button
             type="button"
             class="btn btn-gray"
-            onclick={() => (messageIdsToDelete.state = [])}
+            onclick={() => (messageIdsToDelete._ = [])}
         >
             Cancel
         </button>

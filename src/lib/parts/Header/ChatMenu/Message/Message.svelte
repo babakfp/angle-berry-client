@@ -32,8 +32,8 @@
     let highlight = $state<HTMLDivElement>()
 
     const handleClick = (e: MouseEvent) => {
-        if (selectedMessageIds.state.length > 0) {
-            if (selectedMessageIds.state.includes(message.id)) {
+        if (selectedMessageIds._.length > 0) {
+            if (selectedMessageIds._.includes(message.id)) {
                 selectedMessageIds.update((v) =>
                     v.filter((v) => v !== message.id),
                 )
@@ -42,20 +42,19 @@
             }
             // @ts-expect-error TODO
         } else if (e.pointerType !== "mouse") {
-            if (isTouchDeviceContextMenuOpen.state) {
-                isContextMenuOpen.state = false
-                contextMenuTargetEvent.state = undefined
-                contextMenuTargetMessage.state = undefined
+            if (isTouchDeviceContextMenuOpen._) {
+                isContextMenuOpen._ = false
+                contextMenuTargetEvent._ = undefined
+                contextMenuTargetMessage._ = undefined
             } else {
                 if (highlight) {
                     interval = highlightAnimate(highlight, interval)
                 }
-                isContextMenuOpen.state = true
-                contextMenuTargetEvent.state = e
-                contextMenuTargetMessage.state = message
+                isContextMenuOpen._ = true
+                contextMenuTargetEvent._ = e
+                contextMenuTargetMessage._ = message
             }
-            isTouchDeviceContextMenuOpen.state =
-                !isTouchDeviceContextMenuOpen.state
+            isTouchDeviceContextMenuOpen._ = !isTouchDeviceContextMenuOpen._
         }
     }
 </script>
@@ -63,8 +62,8 @@
 <li id={message.id} class={["w-full", { "ml-auto": isCurrentUser }]}>
     <div
         class="relative grid gap-1.5 px-4 py-2
-        {selectedMessageIds.state.includes(message.id) && 'bg-blue-400/10'}
-        {selectedMessageIds.state.length > 0 && 'cursor-pointer'}"
+        {selectedMessageIds._.includes(message.id) && 'bg-blue-400/10'}
+        {selectedMessageIds._.length > 0 && 'cursor-pointer'}"
         transition:shrinkHeight={{ duration: 200 }}
         oncontextmenu={(e) => {
             e.preventDefault()
@@ -72,9 +71,9 @@
             if (highlight) {
                 interval = highlightAnimate(highlight, interval)
             }
-            isContextMenuOpen.state = true
-            contextMenuTargetEvent.state = e
-            contextMenuTargetMessage.state = message
+            isContextMenuOpen._ = true
+            contextMenuTargetEvent._ = e
+            contextMenuTargetMessage._ = message
         }}
     >
         <div
@@ -117,14 +116,14 @@
             updated={message.updated}
         />
 
-        {#if selectedMessageIds.state.length > 0}
+        {#if selectedMessageIds._.length > 0}
             <div
                 class={[
                     "absolute bottom-6 flex text-xl",
                     isCurrentUser ? "left-4" : "right-4",
                 ]}
             >
-                {#if selectedMessageIds.state.includes(message.id)}
+                {#if selectedMessageIds._.includes(message.id)}
                     <IconCheckCircleRegular class="text-green-400" />
                 {:else}
                     <IconCircleRegular />

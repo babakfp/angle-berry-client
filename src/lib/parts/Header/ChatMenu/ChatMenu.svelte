@@ -42,8 +42,8 @@
     messages.set(pbMessages)
 
     $effect(() => {
-        if (!isOpen && messageIdToEdit.state) {
-            messageIdToEdit.state = undefined
+        if (!isOpen && messageIdToEdit._) {
+            messageIdToEdit._ = undefined
         }
     })
     $effect(() => {
@@ -57,7 +57,7 @@
         untrack(() => {
             messageInputValue.set(
                 $messages.items
-                    .find((msg) => msg.id === messageIdToEdit.state)
+                    .find((msg) => msg.id === messageIdToEdit._)
                     ?.content.replaceAll("<br>", "\n") || "",
             )
         })
@@ -66,18 +66,18 @@
     let isEditingMessage = $state(false)
 
     $effect(() => {
-        isEditingMessage = !!messageIdToEdit.state
+        isEditingMessage = !!messageIdToEdit._
     })
 
     let isSendingMessage = $state(false)
     const submitMessage: SubmitFunction = () => {
         isSendingMessage = true
-        messageInputElement.state!.focus()
+        messageInputElement._!.focus()
         return async ({ result, update }) => {
             isSendingMessage = false
             if (result.type === "success") {
-                isReplying.state = false
-                messageIdToEdit.state = undefined
+                isReplying._ = false
+                messageIdToEdit._ = undefined
             }
             update()
         }
@@ -87,8 +87,7 @@
 
     let replyedMessageId = $state<string>()
     $effect(() => {
-        replyedMessageId =
-            isReplying.state ? replyTargetMessage.state?.id : undefined
+        replyedMessageId = isReplying._ ? replyTargetMessage._?.id : undefined
     })
 
     let isFetchingOlderMessages = $state(false)
@@ -132,9 +131,9 @@
             }
         }
 
-        if (isContextMenuOpen.state || isTouchDeviceContextMenuOpen.state) {
-            isContextMenuOpen.state = false
-            isTouchDeviceContextMenuOpen.state = false
+        if (isContextMenuOpen._ || isTouchDeviceContextMenuOpen._) {
+            isContextMenuOpen._ = false
+            isTouchDeviceContextMenuOpen._ = false
         }
     }
 </script>
@@ -176,25 +175,24 @@
         use:enhance={submitMessage}
         bind:this={formElement}
     >
-        {#if isReplying.state}
+        {#if isReplying._}
             <MessageActionPreview
-                title="Replying to {replyTargetMessage.state?.expand.user
-                    .username}"
-                content={replyTargetMessage.state?.content || ""}
-                messageId={replyTargetMessage.state?.id || ""}
-                onClose={() => (isReplying.state = false)}
-                bind:isOpen={isReplying.state}
+                title="Replying to {replyTargetMessage._?.expand.user.username}"
+                content={replyTargetMessage._?.content || ""}
+                messageId={replyTargetMessage._?.id || ""}
+                onClose={() => (isReplying._ = false)}
+                bind:isOpen={isReplying._}
             />
         {/if}
 
-        {#if messageIdToEdit.state}
+        {#if messageIdToEdit._}
             <MessageActionPreview
                 title="Editing message"
                 content={$messages.items.filter(
-                    (msg) => msg.id === messageIdToEdit.state,
+                    (msg) => msg.id === messageIdToEdit._,
                 )[0]?.content}
-                messageId={messageIdToEdit.state}
-                onClose={() => (messageIdToEdit.state = undefined)}
+                messageId={messageIdToEdit._}
+                onClose={() => (messageIdToEdit._ = undefined)}
                 bind:isOpen={isEditingMessage}
             />
         {/if}
@@ -204,7 +202,7 @@
         >
             <textarea
                 class="bg-background outline-inset block field-sizing-content max-h-48 w-full resize-none p-4 placeholder:text-gray-500"
-                bind:this={messageInputElement.state}
+                bind:this={messageInputElement._}
                 bind:value={$messageInputValue}
                 name="messageContent"
                 placeholder="Write your message..."
@@ -232,7 +230,7 @@
                 disabled={isSendingMessage}
             >
                 <div class="flex min-h-14 items-center px-4 text-2xl">
-                    {#if messageIdToEdit.state}
+                    {#if messageIdToEdit._}
                         <IconCheckRegular />
                     {:else if isSendingMessage}
                         <IconSpinnerRegular class="animate-spin" />
@@ -250,7 +248,7 @@
         <input
             type="hidden"
             name="messageIdToEdit"
-            bind:value={messageIdToEdit.state}
+            bind:value={messageIdToEdit._}
         />
     </form>
 

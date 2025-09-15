@@ -17,20 +17,18 @@
     let contextMenu = $state<HTMLDivElement>()
 
     $effect(() => {
-        if (contextMenu && isContextMenuOpen.state) {
-            let x = contextMenuTargetEvent.state!.clientX + 14
-            let y = contextMenuTargetEvent.state!.clientY
+        if (contextMenu && isContextMenuOpen._) {
+            let x = contextMenuTargetEvent._!.clientX + 14
+            let y = contextMenuTargetEvent._!.clientY
 
             if (
-                contextMenuTargetEvent.state!.clientX
-                    + contextMenu.offsetWidth
-                    + 26
+                contextMenuTargetEvent._!.clientX + contextMenu.offsetWidth + 26
                 > window.innerWidth
             ) {
                 x -= contextMenu.offsetWidth + 26
             }
             if (
-                contextMenuTargetEvent.state!.clientY
+                contextMenuTargetEvent._!.clientY
                     + contextMenu.offsetHeight
                     + 20
                 > window.innerHeight
@@ -45,7 +43,7 @@
     })
 </script>
 
-{#if isContextMenuOpen.state}
+{#if isContextMenuOpen._}
     <div
         bind:this={contextMenu}
         class="absolute z-50 -translate-y-5"

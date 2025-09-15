@@ -16,7 +16,9 @@ export const load = async ({ locals }) => {
 
     try {
         const [tiers, users] = await Promise.all([
-            locals.pb.collection("tiers").getFullList(),
+            locals.pb
+                .collection("tiers")
+                .getFullList({ requestKey: "tiers-get-full-list" }),
             locals.pb.collection("users").getFullList(),
         ])
         return { form, tiers, users }

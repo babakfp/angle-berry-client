@@ -142,7 +142,7 @@
 {#snippet ScrollShadow({ position }: { position: "top" | "bottom" })}
     <div
         class={[
-            "from-background absolute inset-x-0  h-4 bg-gradient-to-b to-transparent",
+            "from-background pointer-events-none absolute inset-x-0  h-4 bg-gradient-to-b to-transparent",
             {
                 "top-0 bg-gradient-to-b": position === "top",
                 "bottom-0 bg-gradient-to-t": position === "bottom",

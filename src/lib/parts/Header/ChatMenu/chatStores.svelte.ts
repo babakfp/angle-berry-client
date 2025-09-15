@@ -6,9 +6,9 @@ export const isTouchDeviceContextMenuOpen = $state({ state: false })
 export const contextMenuTargetEvent = $state<{
     state: MouseEvent | PointerEvent | undefined
 }>({ state: undefined })
-export const contextMenuTargetMessage = writable<
-    RealtimeMessagesResponse | undefined
->()
+export const contextMenuTargetMessage = $state<{
+    state: RealtimeMessagesResponse | undefined
+}>({ state: undefined })
 export const messageIdsToDelete = writable<string[]>([])
 export const messageIdToEdit = writable<string | undefined>()
 export const isReplying = writable(false)

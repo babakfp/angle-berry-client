@@ -43,7 +43,8 @@
                     messages_.items = messages_.items.map((msg) => {
                         if (
                             msg.repliedTo
-                            && msg.repliedTo === $contextMenuTargetMessage?.id
+                            && msg.repliedTo
+                                === contextMenuTargetMessage.state?.id
                         ) {
                             msg.repliedTo = ""
                             msg.expand.repliedTo = undefined

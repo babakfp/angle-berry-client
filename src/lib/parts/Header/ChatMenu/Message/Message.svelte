@@ -45,14 +45,14 @@
             if (isTouchDeviceContextMenuOpen.state) {
                 isContextMenuOpen.state = false
                 contextMenuTargetEvent.state = undefined
-                contextMenuTargetMessage.set(undefined)
+                contextMenuTargetMessage.state = undefined
             } else {
                 if (highlight) {
                     interval = highlightAnimate(highlight, interval)
                 }
                 isContextMenuOpen.state = true
                 contextMenuTargetEvent.state = e
-                contextMenuTargetMessage.set(message)
+                contextMenuTargetMessage.state = message
             }
             isTouchDeviceContextMenuOpen.state =
                 !isTouchDeviceContextMenuOpen.state
@@ -74,7 +74,7 @@
             }
             isContextMenuOpen.state = true
             contextMenuTargetEvent.state = e
-            contextMenuTargetMessage.set(message)
+            contextMenuTargetMessage.state = message
         }}
     >
         <div

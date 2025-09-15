@@ -1,7 +1,7 @@
 <script lang="ts">
     import { fly } from "svelte/transition"
+    import Popover from "$lib/components/Popover.svelte"
     import PopSide from "$lib/components/PopSide.svelte"
-    import Tooltip from "$lib/components/Tooltip.svelte"
     import { events, unseenEventsLength } from "$lib/stores/events.svelte"
     import type {
         ListResult,
@@ -97,7 +97,7 @@
         }
     }
 })}
-    <Tooltip
+    <Popover
         positioning={{
             boundary: ref,
             placement: "top-start",
@@ -123,5 +123,5 @@
                 </li>
             </ul>
         {/snippet}
-    </Tooltip>
+    </Popover>
 {/snippet}

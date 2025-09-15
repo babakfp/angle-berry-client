@@ -64,7 +64,7 @@
                 title="Notifications"
             >
                 <IconBellSimpleRegular />
-                {#if unseenEventsLength._ > 0}
+                {#if unseenEventsLength._}
                     <NotificationBlob>
                         {unseenEventsLength._}
                     </NotificationBlob>
@@ -78,7 +78,7 @@
                 title="Chat"
             >
                 <IconChatCenteredRegular />
-                {#if unreadMessagesLength._ > 0}
+                {#if unreadMessagesLength._}
                     <NotificationBlob>
                         {unreadMessagesLength._}
                     </NotificationBlob>

@@ -35,7 +35,7 @@
 
 <PopSide id="EventsMenu" bind:isOpen {toggleButton}>
     <div bind:this={ref}>
-        {#if events._ && events._.items.length > 0}
+        {#if events._ && events._.items.length}
             <ol class="overflow-y-auto overscroll-y-contain sm:text-sm">
                 {#each events._.items as event (event.id)}
                     {@render Event({ event })}

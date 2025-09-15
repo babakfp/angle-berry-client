@@ -148,7 +148,7 @@
 </script>
 
 <PopSide bind:isOpen {toggleButton}>
-    {#if messages._ && messages._.items.length > 0}
+    {#if messages._ && messages._.items.length}
         <ol
             id="messages-wrapper"
             class="flex flex-col-reverse content-start items-start overflow-y-auto overscroll-y-contain py-4 sm:text-sm"

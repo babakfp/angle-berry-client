@@ -17,7 +17,7 @@
         isDeletePopupOpen = !!messageIdsToDelete._.length
     })
     $effect(() => {
-        if (!isDeletePopupOpen && messageIdsToDelete._.length > 0)
+        if (!isDeletePopupOpen && messageIdsToDelete._.length)
             messageIdsToDelete._ = []
     })
 

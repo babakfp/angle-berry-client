@@ -32,7 +32,7 @@
     let highlight = $state<HTMLDivElement>()
 
     const handleClick = (e: MouseEvent) => {
-        if (selectedMessageIds._.length > 0) {
+        if (selectedMessageIds._.length) {
             if (selectedMessageIds._.includes(message.id)) {
                 selectedMessageIds.update((v) =>
                     v.filter((v) => v !== message.id),
@@ -63,7 +63,7 @@
     <div
         class="relative grid gap-1.5 px-4 py-2
         {selectedMessageIds._.includes(message.id) && 'bg-blue-400/10'}
-        {selectedMessageIds._.length > 0 && 'cursor-pointer'}"
+        {selectedMessageIds._.length && 'cursor-pointer'}"
         transition:shrinkHeight={{ duration: 200 }}
         oncontextmenu={(e) => {
             e.preventDefault()
@@ -116,7 +116,7 @@
             updated={message.updated}
         />
 
-        {#if selectedMessageIds._.length > 0}
+        {#if selectedMessageIds._.length}
             <div
                 class={[
                     "absolute bottom-6 flex text-xl",

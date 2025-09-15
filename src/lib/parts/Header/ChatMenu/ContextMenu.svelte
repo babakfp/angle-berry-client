@@ -48,7 +48,7 @@
 
     const copyMessage = () => {
         if (!messages._) return
-        if (selectedMessageIds._.length > 0) {
+        if (selectedMessageIds._.length) {
             let copiedText = ""
             const selectedMessages = messages._.items
                 .filter((msg) => selectedMessageIds._.includes(msg.id))
@@ -160,7 +160,7 @@
             />
         {/if}
         {#if contextMenuTargetMessage._?.expand.user.id === loggedInUser.id}
-            {#if selectedMessageIds._.length > 0}
+            {#if selectedMessageIds._.length}
                 {#if contextMenuTargetMessage._ && selectedMessageIds._.includes(contextMenuTargetMessage._?.id)}
                     <MessageContextMenuItem
                         title="Delete Selected"

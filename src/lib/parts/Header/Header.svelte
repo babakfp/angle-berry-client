@@ -58,7 +58,7 @@
         <div class="flex">
             <button
                 type="button"
-                class="group outline-inset relative flex items-center px-2 text-2xl duration-200 hover:text-gray-50"
+                class="outline-inset relative flex items-center px-2 text-2xl duration-200 hover:text-gray-50"
                 bind:this={eventsMenuToggle}
                 onclick={() => (isEventsMenuOpen = !isEventsMenuOpen)}
                 title="Notifications"
@@ -72,7 +72,7 @@
             </button>
             <button
                 type="button"
-                class="group outline-inset relative flex items-center px-2 text-2xl duration-200 hover:text-gray-50"
+                class="outline-inset relative flex items-center px-2 text-2xl duration-200 hover:text-gray-50"
                 bind:this={chatMenuToggle}
                 onclick={() => (isChatMenuOpen = !isChatMenuOpen)}
                 title="Chat"
@@ -87,7 +87,7 @@
             <div class="relative flex">
                 <button
                     type="button"
-                    class="outline-inset group flex items-center gap-2 pr-4 pl-2 text-2xl duration-200 hover:text-gray-50"
+                    class="outline-inset flex items-center gap-2 pr-4 pl-2 text-2xl duration-200 hover:text-gray-50"
                     onclick={() => (isUserMenuOpen = !isUserMenuOpen)}
                     bind:this={userMenuToggle}
                     title="User menu"

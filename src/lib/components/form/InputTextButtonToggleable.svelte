@@ -16,10 +16,10 @@
 </script>
 
 <InputTextButton class="overflow-hidden" {onclick}>
-    <span class={["duration-200", { "hide scale-50": isActive }]}>
+    <span class={["duration-150", { "hide scale-50": isActive }]}>
         {activeText}
     </span>
-    <span class={["absolute duration-200", { "hide scale-50": !isActive }]}>
+    <span class={["absolute duration-150", { "hide scale-50": !isActive }]}>
         {inActiveText}
     </span>
 </InputTextButton>

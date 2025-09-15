@@ -19,7 +19,7 @@
     </Popover.Trigger>
     <Popover.Positioner>
         <Popover.Content
-            class="rounded bg-gray-700 px-4 py-3 text-xs whitespace-nowrap drop-shadow duration-200"
+            class="rounded bg-gray-700 px-4 py-3 text-xs whitespace-nowrap drop-shadow duration-150"
         >
             {@render ContentSnippet?.()}
         </Popover.Content>

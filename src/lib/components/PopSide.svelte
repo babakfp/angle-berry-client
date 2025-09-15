@@ -36,14 +36,14 @@
 />
 
 <div
-    class="sm:top-header sm:hide hidden sm:fixed sm:inset-0 sm:z-40 sm:block sm:bg-[black]/40 sm:duration-200
+    class="sm:top-header sm:hide hidden sm:fixed sm:inset-0 sm:z-40 sm:block sm:bg-[black]/40 sm:duration-150
 	{isOpen && 'sm:show'}"
 ></div>
 
 <OutClick onOutClick={() => (isOpen = false)} excludeElements={toggleButton}>
     <div
         id={id || undefined}
-        class="bg-background hide fixed inset-0 z-50 grid h-screen translate-x-8 grid-rows-[auto_1fr_auto] duration-200
+        class="bg-background hide fixed inset-0 z-50 grid h-screen translate-x-8 grid-rows-[auto_1fr_auto] duration-150
 			{isOpen && 'show! translate-x-0!'}
 			sm:top-header sm:h-screen-minus-header sm:left-auto sm:z-40 sm:w-96 sm:grid-rows-[1fr_auto]
 		"

@@ -34,7 +34,7 @@
 >
     <Popover.Trigger>
         <div
-            class="outline-inset flex items-center pr-4 pl-2 text-2xl duration-200 hover:text-gray-50"
+            class="outline-inset flex items-center pr-4 pl-2 text-2xl duration-150 hover:text-gray-50"
             title="User menu"
         >
             {#if loggedInUser.isAdmin}
@@ -46,7 +46,7 @@
     </Popover.Trigger>
     <Popover.Positioner>
         <Popover.Content
-            class="bg-background hide data-[state=open]:show max-h-[calc(var(--screen-minus-header)-(--spacing(8)))] w-64 translate-x-6 overflow-y-auto overscroll-y-contain rounded text-sm shadow-[0_4px_16px_0_rgb(0_0_0/0.4)] duration-200 data-[state=open]:-translate-x-2"
+            class="bg-background hide data-[state=open]:show max-h-[calc(var(--screen-minus-header)-(--spacing(8)))] w-64 translate-x-6 overflow-y-auto overscroll-y-contain rounded text-sm shadow-[0_4px_16px_0_rgb(0_0_0/0.4)] duration-150 data-[state=open]:-translate-x-2"
             hidden={false}
         >
             <div class="flex justify-between p-4">
@@ -56,7 +56,7 @@
 
             {#if loggedInUser.isAdmin}
                 <a
-                    class="outline-inset flex justify-between border-t border-gray-50/5 p-4 underline duration-200 hover:text-gray-50"
+                    class="outline-inset flex justify-between border-t border-gray-50/5 p-4 underline duration-150 hover:text-gray-50"
                     href="/admin"
                 >
                     Admin Dashboard
@@ -64,7 +64,7 @@
             {/if}
 
             <a
-                class="outline-inset flex justify-between border-t border-gray-50/5 p-4 duration-200 hover:text-gray-50"
+                class="outline-inset flex justify-between border-t border-gray-50/5 p-4 duration-150 hover:text-gray-50"
                 href="/how-to-invite"
             >
                 <span>
@@ -101,7 +101,7 @@
             <form action="/login-as" method="post">
                 <button
                     type="submit"
-                    class="outline-inset flex w-full items-center justify-between border-t border-gray-50/5 p-4 text-left duration-200 hover:text-gray-50"
+                    class="outline-inset flex w-full items-center justify-between border-t border-gray-50/5 p-4 text-left duration-150 hover:text-gray-50"
                 >
                     <span>
                         Login as {loggedInUser.isAdmin ? "a User" : "an Admin"}
@@ -117,7 +117,7 @@
             <form action="/logout" method="post">
                 <button
                     type="submit"
-                    class="outline-inset w-full rounded-b border-t border-gray-50/5 p-4 text-left duration-200 hover:text-gray-50"
+                    class="outline-inset w-full rounded-b border-t border-gray-50/5 p-4 text-left duration-150 hover:text-gray-50"
                 >
                     Logout
                 </button>

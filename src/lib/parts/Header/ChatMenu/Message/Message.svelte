@@ -78,7 +78,7 @@
     >
         <div
             bind:this={highlight}
-            class="reply-highlight absolute inset-0 -z-1 bg-gray-50/10 opacity-0 duration-200 ease-in-out"
+            class="reply-highlight absolute inset-0 -z-1 bg-gray-50/10 opacity-0 duration-150 ease-in-out"
         ></div>
 
         {#if !isCurrentUser}

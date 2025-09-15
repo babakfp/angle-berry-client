@@ -30,11 +30,11 @@
 }
 
 @utility link {
-    @apply underline duration-200 hover:text-gray-50;
+    @apply underline duration-150 hover:text-gray-50;
 }
 
 @utility btn {
-    @apply drag-none relative inline-flex items-center justify-center rounded border-2 border-transparent px-3 py-1.5 text-sm font-semibold text-gray-50 duration-200;
+    @apply drag-none relative inline-flex items-center justify-center rounded border-2 border-transparent px-3 py-1.5 text-sm font-semibold text-gray-50 duration-150;
 }
 
 @utility btn-gray-light {

@@ -12,7 +12,7 @@
 
 <li class="relative">
     <a
-        class="group outline-inset flex justify-between gap-4 px-4 py-2 duration-200 hover:text-gray-50"
+        class="group outline-inset flex justify-between gap-4 px-4 py-2 duration-150 hover:text-gray-50"
         href="/tiers/{tier.id}"
     >
         <span class="underline">

@@ -9,8 +9,10 @@
     } = $props()
 </script>
 
-<AnimatePageNavigation
-    class="mx-auto min-h-screen max-w-sm content-center px-4 py-12"
->
-    {@render children()}
-</AnimatePageNavigation>
+<div class="container">
+    <AnimatePageNavigation
+        class="mx-auto min-h-screen max-w-sm content-center py-12"
+    >
+        {@render children()}
+    </AnimatePageNavigation>
+</div>

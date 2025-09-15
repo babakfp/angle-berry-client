@@ -4,7 +4,7 @@
     import Header from "$lib/parts/Header/Header.svelte"
     import { events, unseenEventsLength } from "$lib/stores/events"
     import { messages, unreadMessagesLength } from "$lib/stores/messages"
-    import { pb } from "$lib/stores/pb"
+    import { pb } from "$lib/stores/pb.svelte"
     import {
         ClientResponseError,
         pbHandleClientResponseError,

@@ -2,7 +2,7 @@
     import IconSpinnerRegular from "phosphor-icons-svelte/IconSpinnerRegular.svelte"
     import Modal from "$lib/components/Modal.svelte"
     import { messages } from "$lib/stores/messages"
-    import { pb } from "$lib/stores/pb"
+    import { pb } from "$lib/stores/pb.svelte"
     import {
         contextMenuTargetMessage,
         isReplying,

@@ -7,7 +7,7 @@
     import { enhance } from "$app/forms"
     import PopSide from "$lib/components/PopSide.svelte"
     import { messages, unreadMessagesLength } from "$lib/stores/messages"
-    import { pb } from "$lib/stores/pb"
+    import { pb } from "$lib/stores/pb.svelte"
     import type {
         ListResult,
         RealtimeMessagesResponse,

@@ -47,9 +47,10 @@
     }
 
     const copyMessage = () => {
+        if (!messages._) return
         if (selectedMessageIds._.length > 0) {
             let copiedText = ""
-            const selectedMessages = $messages.items
+            const selectedMessages = messages._.items
                 .filter((msg) => selectedMessageIds._.includes(msg.id))
                 .sort(
                     (a, b) =>

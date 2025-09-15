@@ -1,6 +1,6 @@
 <script lang="ts">
     import PopSide from "$lib/components/PopSide.svelte"
-    import { events, unseenEventsLength } from "$lib/stores/events"
+    import { events, unseenEventsLength } from "$lib/stores/events.svelte"
     import type {
         ListResult,
         RealtimeEventsResponse,

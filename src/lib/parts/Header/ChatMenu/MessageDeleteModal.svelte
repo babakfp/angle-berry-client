@@ -39,8 +39,8 @@
                 isReplying._ = false
 
                 // Remove other messages reply preview to that deleted message
-                messages.update((messages_) => {
-                    messages_.items = messages_.items.map((msg) => {
+                if (messages._) {
+                    messages._.items = messages._.items.map((msg) => {
                         if (
                             msg.repliedTo
                             && msg.repliedTo === contextMenuTargetMessage._?.id
@@ -50,8 +50,7 @@
                         }
                         return msg
                     })
-                    return messages_
-                })
+                }
             }
         } catch (error) {
             console.error(error)

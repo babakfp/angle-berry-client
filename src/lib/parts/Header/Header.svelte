@@ -5,7 +5,7 @@
     import { page } from "$app/state"
     import Avatar from "$lib/components/Avatar.svelte"
     import NotificationBlob from "$lib/components/NotificationBlob.svelte"
-    import { unseenEventsLength } from "$lib/stores/events"
+    import { unseenEventsLength } from "$lib/stores/events.svelte"
     import { unreadMessagesLength } from "$lib/stores/messages.svelte"
     import type {
         ListResult,

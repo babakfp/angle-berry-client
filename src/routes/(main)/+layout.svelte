@@ -2,7 +2,7 @@
     import { onDestroy, onMount, type Snippet } from "svelte"
     import AnimatePageNavigation from "$lib/components/AnimatePageNavigation.svelte"
     import Header from "$lib/parts/Header/Header.svelte"
-    import { events, unseenEventsLength } from "$lib/stores/events"
+    import { events, unseenEventsLength } from "$lib/stores/events.svelte"
     import { messages, unreadMessagesLength } from "$lib/stores/messages.svelte"
     import { pb } from "$lib/stores/pb.svelte"
     import {
@@ -28,25 +28,26 @@
                     "*",
                     async (e) => {
                         if (e.action === "update") {
-                            messages.update((messages_) => {
-                                messages_.items = messages_.items.map((msg) => {
-                                    if (msg.id === e.record.id) {
-                                        msg.content = e.record.content
-                                        msg.updated = e.record.updated
-                                    }
-                                    if (
-                                        msg.expand?.repliedTo?.id
-                                        === e.record.id
-                                    ) {
-                                        msg.expand.repliedTo.content =
-                                            e.record.content
-                                        msg.expand.repliedTo.updated =
-                                            e.record.updated
-                                    }
-                                    return msg
-                                })
-                                return messages_
-                            })
+                            if (messages._) {
+                                messages._.items = messages._.items.map(
+                                    (msg) => {
+                                        if (msg.id === e.record.id) {
+                                            msg.content = e.record.content
+                                            msg.updated = e.record.updated
+                                        }
+                                        if (
+                                            msg.expand?.repliedTo?.id
+                                            === e.record.id
+                                        ) {
+                                            msg.expand.repliedTo.content =
+                                                e.record.content
+                                            msg.expand.repliedTo.updated =
+                                                e.record.updated
+                                        }
+                                        return msg
+                                    },
+                                )
+                            }
                         } else if (e.action === "create") {
                             const userRecord = await pb._.collection(
                                 "users",
@@ -64,8 +65,8 @@
                                 })
                             }
 
-                            messages.update((messages_) => {
-                                messages_.items = [
+                            if (messages._) {
+                                messages._.items = [
                                     {
                                         ...e.record,
                                         expand: {
@@ -73,18 +74,16 @@
                                             repliedTo: repliedToRecord,
                                         },
                                     },
-                                    ...messages_.items,
+                                    ...messages._.items,
                                 ]
-                                return messages_
-                            })
+                            }
                             unreadMessagesLength._ += 1
                         } else if (e.action === "delete") {
-                            messages.update((messages_) => {
-                                messages_.items = messages_.items.filter(
+                            if (messages._) {
+                                messages._.items = messages._.items.filter(
                                     (m) => m.id !== e.record.id,
                                 )
-                                return messages_
-                            })
+                            }
                             unreadMessagesLength._ -= 1
                         }
                     },

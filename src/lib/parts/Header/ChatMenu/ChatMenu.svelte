@@ -38,7 +38,7 @@
         toggleButton: HTMLButtonElement
     } = $props()
 
-    messages.set(pbMessages)
+    messages._ = pbMessages
 
     $effect(() => {
         if (!isOpen && messageIdToEdit._) {
@@ -56,8 +56,9 @@
     $effect(() => {
         messageIdToEdit
         untrack(() => {
+            if (!messages._) return
             messageInputValue =
-                $messages.items
+                messages._.items
                     .find((msg) => msg.id === messageIdToEdit._)
                     ?.content.replaceAll("<br>", "\n") || ""
         })
@@ -114,16 +115,22 @@
                             sort: "-created",
                             expand: "user,repliedTo,repliedTo.user",
                             filter: `created < "${
-                                $messages.items[$messages.items.length - 1]
+                                messages._?.items[messages._.items.length - 1]
                                     .created
                             }"`,
                         },
                     )
                 if (messagesRecords) {
-                    messages.update((messages_) => ({
-                        ...messages_,
-                        items: [...messages_.items, ...messagesRecords.items],
-                    }))
+                    if (messages._) {
+                        messages._ = {
+                            ...messages._,
+                            items: [
+                                ...messages._.items,
+                                ...messagesRecords.items,
+                            ],
+                        }
+                    }
+
                     isFetchingOlderMessages = false
                     pageNumberFortheNextOlderMessagesToFetch += 1
                 }
@@ -141,13 +148,13 @@
 </script>
 
 <PopSide bind:isOpen {toggleButton}>
-    {#if $messages.items.length > 0}
+    {#if messages._ && messages._.items.length > 0}
         <ol
             id="messages-wrapper"
             class="flex flex-col-reverse content-start items-start overflow-y-auto overscroll-y-contain py-4 sm:text-sm"
             onscroll={handleScroll}
         >
-            {#each $messages.items as message (message.id)}
+            {#each messages._?.items ?? [] as message (message.id)}
                 <Message {loggedInUser} {message} />
             {/each}
             {#if isFetchingOlderMessages}
@@ -190,9 +197,9 @@
         {#if messageIdToEdit._}
             <MessageActionPreview
                 title="Editing message"
-                content={$messages.items.filter(
+                content={messages._?.items.filter(
                     (msg) => msg.id === messageIdToEdit._,
-                )[0]?.content}
+                )[0]?.content ?? ""}
                 messageId={messageIdToEdit._}
                 onClose={() => (messageIdToEdit._ = undefined)}
                 bind:isOpen={isEditingMessage}

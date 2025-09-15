@@ -2,7 +2,7 @@
     import IconBellSimpleRegular from "phosphor-icons-svelte/IconBellSimpleRegular.svelte"
     import IconChatCenteredRegular from "phosphor-icons-svelte/IconChatCenteredRegular.svelte"
     import IconCrownSimpleRegular from "phosphor-icons-svelte/IconCrownSimpleRegular.svelte"
-    import { page } from "$app/stores"
+    import { page } from "$app/state"
     import Avatar from "$lib/components/Avatar.svelte"
     import NotificationBlob from "$lib/components/NotificationBlob.svelte"
     import { unseenEventsLength } from "$lib/stores/events"
@@ -39,7 +39,7 @@
     let isUserMenuOpen = $state(false)
     let userMenuToggle = $state<HTMLButtonElement>()
 
-    let isHome = $derived($page.url.pathname === "/")
+    const isHome = $derived(page.url.pathname === "/")
 </script>
 
 <header class="h-header bg-background sticky top-0 z-50 overflow-x-clip shadow">

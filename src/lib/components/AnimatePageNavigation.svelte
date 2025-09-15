@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { Snippet } from "svelte"
     import { fly } from "svelte/transition"
-    import { page } from "$app/stores"
+    import { page } from "$app/state"
 
     let {
         tag = "div",
@@ -14,7 +14,7 @@
     } = $props()
 </script>
 
-{#key $page.url.pathname}
+{#key page.url.pathname}
     <svelte:element
         this={tag}
         {...rest}

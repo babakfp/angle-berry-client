@@ -6,7 +6,7 @@
     import toast from "svelte-hot-french-toast"
     import { OutClick } from "svelte-outclick"
     import { beforeNavigate } from "$app/navigation"
-    import { page } from "$app/stores"
+    import { page } from "$app/state"
     import type { TiersResponse, UsersResponse } from "$lib/utilities/pb"
     import Tier from "./Tier.svelte"
 
@@ -59,7 +59,7 @@
             </a>
         </li>
 
-        <li use:copy={`${$page.url.origin}/register?id=${loggedInUser.id}`}>
+        <li use:copy={`${page.url.origin}/register?id=${loggedInUser.id}`}>
             <button
                 type="button"
                 class="group outline-inset border-y border-gray-50/5 p-4"
@@ -72,7 +72,7 @@
                     Click to copy your invite link:
                 </span>
                 <p class="mt-1 text-xs text-gray-500 select-text">
-                    {$page.url.origin}/register?id={loggedInUser.id}
+                    {page.url.origin}/register?id={loggedInUser.id}
                 </p>
             </button>
         </li>

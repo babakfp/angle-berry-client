@@ -58,14 +58,12 @@
         <div class="flex">
             <button
                 type="button"
-                class="group outline-inset relative flex items-center px-2"
+                class="group outline-inset relative flex items-center px-2 duration-200 hover:text-gray-50"
                 bind:this={eventsMenuToggle}
                 onclick={() => (isEventsMenuOpen = !isEventsMenuOpen)}
                 title="Notifications"
             >
-                <IconBellSimpleRegular
-                    class="text-2xl duration-200 group-hover:text-gray-50"
-                />
+                <IconBellSimpleRegular class="text-2xl" />
                 {#if unseenEventsLength._ > 0}
                     <NotificationBlob>
                         {unseenEventsLength._}
@@ -74,14 +72,12 @@
             </button>
             <button
                 type="button"
-                class="group outline-inset relative flex items-center px-2"
+                class="group outline-inset relative flex items-center px-2 duration-200 hover:text-gray-50"
                 bind:this={chatMenuToggle}
                 onclick={() => (isChatMenuOpen = !isChatMenuOpen)}
                 title="Chat"
             >
-                <IconChatCenteredRegular
-                    class="text-2xl duration-200 group-hover:text-gray-50"
-                />
+                <IconChatCenteredRegular class="text-2xl" />
                 {#if unreadMessagesLength._ > 0}
                     <NotificationBlob>
                         {unreadMessagesLength._}
@@ -97,13 +93,9 @@
                     title="User menu"
                 >
                     {#if loggedInUser.isAdmin}
-                        <IconCrownSimpleRegular
-                            class="text-2xl duration-200 group-hover:text-gray-50"
-                        />
+                        <IconCrownSimpleRegular class="text-2xl" />
                     {:else}
-                        <IconUserRegular
-                            class="text-2xl duration-200 group-hover:text-gray-50"
-                        />
+                        <IconUserRegular class="text-2xl" />
                     {/if}
                 </button>
                 <UserMenu

@@ -121,10 +121,9 @@
                                     inviter: inviterRecord,
                                 },
                             }
-                            events.update((events_) => {
-                                events_.items = [newEvent, ...events_.items]
-                                return events_
-                            })
+                            if (events._) {
+                                events._.items = [newEvent, ...events._.items]
+                            }
                             unseenEventsLength._ += 1
 
                             if (
@@ -137,12 +136,11 @@
                                 ]
                             }
                         } else if (e.action === "delete") {
-                            events.update((events_) => {
-                                events_.items = events_.items.filter(
+                            if (events._) {
+                                events._.items = events._.items.filter(
                                     (m) => m.id !== e.record.id,
                                 )
-                                return events_
-                            })
+                            }
                             unseenEventsLength._ -= 1
                         }
                     },

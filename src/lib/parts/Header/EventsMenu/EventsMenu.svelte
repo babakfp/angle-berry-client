@@ -20,7 +20,7 @@
         toggleButton: HTMLButtonElement
     } = $props()
 
-    events.set(pbEvents)
+    events._ = pbEvents
 
     $effect(() => {
         if (isOpen && unseenEventsLength._) {
@@ -30,9 +30,9 @@
 </script>
 
 <PopSide id="EventsMenu" bind:isOpen {toggleButton}>
-    {#if $events.items.length > 0}
+    {#if events._ && events._.items.length > 0}
         <ol class="overflow-y-auto overscroll-y-contain sm:text-sm">
-            {#each $events.items as event (event.id)}
+            {#each events._.items as event (event.id)}
                 <Event {loggedInUser} {event} />
             {/each}
             <p class="p-4 text-center text-xs text-gray-500">

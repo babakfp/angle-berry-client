@@ -1,6 +1,9 @@
-import { writable } from "svelte/store"
 import type { ListResult, RealtimeEventsResponse } from "$lib/utilities/pb"
 
-export const events = writable<ListResult<RealtimeEventsResponse>>()
+export const events = $state<{
+    _: ListResult<RealtimeEventsResponse> | undefined
+}>({
+    _: undefined,
+})
 
 export const unseenEventsLength = $state({ _: 0 })

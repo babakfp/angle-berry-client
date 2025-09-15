@@ -58,12 +58,12 @@
         <div class="flex">
             <button
                 type="button"
-                class="group outline-inset relative flex items-center px-2 duration-200 hover:text-gray-50"
+                class="group outline-inset relative flex items-center px-2 text-2xl duration-200 hover:text-gray-50"
                 bind:this={eventsMenuToggle}
                 onclick={() => (isEventsMenuOpen = !isEventsMenuOpen)}
                 title="Notifications"
             >
-                <IconBellSimpleRegular class="text-2xl" />
+                <IconBellSimpleRegular />
                 {#if unseenEventsLength._ > 0}
                     <NotificationBlob>
                         {unseenEventsLength._}
@@ -72,12 +72,12 @@
             </button>
             <button
                 type="button"
-                class="group outline-inset relative flex items-center px-2 duration-200 hover:text-gray-50"
+                class="group outline-inset relative flex items-center px-2 text-2xl duration-200 hover:text-gray-50"
                 bind:this={chatMenuToggle}
                 onclick={() => (isChatMenuOpen = !isChatMenuOpen)}
                 title="Chat"
             >
-                <IconChatCenteredRegular class="text-2xl" />
+                <IconChatCenteredRegular />
                 {#if unreadMessagesLength._ > 0}
                     <NotificationBlob>
                         {unreadMessagesLength._}
@@ -87,15 +87,15 @@
             <div class="relative flex">
                 <button
                     type="button"
-                    class="outline-inset group flex items-center gap-2 pr-4 pl-2 duration-200 hover:text-gray-50"
+                    class="outline-inset group flex items-center gap-2 pr-4 pl-2 text-2xl duration-200 hover:text-gray-50"
                     onclick={() => (isUserMenuOpen = !isUserMenuOpen)}
                     bind:this={userMenuToggle}
                     title="User menu"
                 >
                     {#if loggedInUser.isAdmin}
-                        <IconCrownSimpleRegular class="text-2xl" />
+                        <IconCrownSimpleRegular />
                     {:else}
-                        <IconUserRegular class="text-2xl" />
+                        <IconUserRegular />
                     {/if}
                 </button>
                 <UserMenu

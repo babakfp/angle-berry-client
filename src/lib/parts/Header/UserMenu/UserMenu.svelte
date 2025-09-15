@@ -47,6 +47,15 @@
             <span>{loggedInUser.username}</span>
         </li>
 
+        {#if loggedInUser.isAdmin}
+            <a
+                class="outline-inset flex justify-between border-t border-gray-50/5 p-4 underline duration-200 hover:text-gray-50"
+                href="/admin"
+            >
+                Admin Dashboard
+            </a>
+        {/if}
+
         <li>
             <a
                 class="outline-inset flex justify-between border-t border-gray-50/5 p-4 duration-200 hover:text-gray-50"

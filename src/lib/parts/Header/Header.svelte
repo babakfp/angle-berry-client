@@ -1,7 +1,6 @@
 <script lang="ts">
     import IconBellSimpleRegular from "phosphor-icons-svelte/IconBellSimpleRegular.svelte"
     import IconChatCenteredRegular from "phosphor-icons-svelte/IconChatCenteredRegular.svelte"
-    import IconCrownSimpleFill from "phosphor-icons-svelte/IconCrownSimpleFill.svelte"
     import IconCrownSimpleRegular from "phosphor-icons-svelte/IconCrownSimpleRegular.svelte"
     import IconUserRegular from "phosphor-icons-svelte/IconUserRegular.svelte"
     import { page } from "$app/state"
@@ -57,21 +56,6 @@
         </svelte:element>
 
         <div class="flex">
-            {#if loggedInUser.isAdmin}
-                <a
-                    class="group outline-inset relative flex items-center px-2"
-                    href="/admin"
-                    title="Admin dashboard"
-                >
-                    {#if page.url.pathname === "/admin"}
-                        <IconCrownSimpleFill class="text-2xl" />
-                    {:else}
-                        <IconCrownSimpleRegular
-                            class="text-2xl duration-200 group-hover:text-gray-50"
-                        />
-                    {/if}
-                </a>
-            {/if}
             <button
                 type="button"
                 class="group outline-inset relative flex items-center px-2"
@@ -112,9 +96,15 @@
                     bind:this={userMenuToggle}
                     title="User menu"
                 >
-                    <IconUserRegular
-                        class="text-2xl duration-200 group-hover:text-gray-50"
-                    />
+                    {#if loggedInUser.isAdmin}
+                        <IconCrownSimpleRegular
+                            class="text-2xl duration-200 group-hover:text-gray-50"
+                        />
+                    {:else}
+                        <IconUserRegular
+                            class="text-2xl duration-200 group-hover:text-gray-50"
+                        />
+                    {/if}
                 </button>
                 <UserMenu
                     {loggedInUser}

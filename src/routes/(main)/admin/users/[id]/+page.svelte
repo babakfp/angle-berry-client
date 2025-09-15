@@ -38,7 +38,7 @@
     <title>User : {data.targetUser.username}</title>
 </svelte:head>
 
-<div class="mx-auto w-full max-w-xs">
+<div class="mx-auto w-full max-w-sm">
     <Form
         class="mt-4"
         message={form?.message}

@@ -10,7 +10,7 @@
     <title>Dashboard</title>
 </svelte:head>
 
-<ul class="mx-auto grid w-full max-w-xs gap-2">
+<ul class="mx-auto grid w-full max-w-sm gap-2">
     {#each collections as item}
         <li>
             <a

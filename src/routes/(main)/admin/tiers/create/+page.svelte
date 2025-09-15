@@ -28,7 +28,7 @@
     <title>Tier / Create</title>
 </svelte:head>
 
-<div class="mx-auto w-full max-w-xs">
+<div class="mx-auto w-full max-w-sm">
     <Form
         message={form?.message}
         submitButtonText="Create"

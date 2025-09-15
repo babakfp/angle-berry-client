@@ -11,7 +11,7 @@
         oncontextmenu,
     }: {
         children?: Snippet
-        oncontextmenu: MouseEventHandler<HTMLDivElement>
+        oncontextmenu?: MouseEventHandler<HTMLDivElement>
     } = $props()
 
     let contextMenu = $state<HTMLDivElement>()
@@ -49,7 +49,7 @@
         class="absolute z-50 -translate-y-5"
         oncontextmenu={(e) => {
             e.preventDefault()
-            oncontextmenu(e)
+            oncontextmenu?.(e)
         }}
     >
         <ul

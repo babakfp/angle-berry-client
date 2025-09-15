@@ -28,7 +28,7 @@
         loggedInUser: UsersResponse
     } = $props()
 
-    let copyTimeoutId = $state<number>()
+    let copyTimeoutId = $state<NodeJS.Timeout>()
 
     const replyMessage = () => {
         isContextMenuOpen._ = false

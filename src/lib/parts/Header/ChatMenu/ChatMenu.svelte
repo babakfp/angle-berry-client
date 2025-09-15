@@ -107,16 +107,18 @@
                 isSomethingWentWrongWhenFetchingOlderMessages = false
 
                 const messagesRecords: ListResult<RealtimeMessagesResponse> =
-                    await $pb
-                        .collection("messages")
-                        .getList(pageNumberFortheNextOlderMessagesToFetch, 50, {
+                    await pb._.collection("messages").getList(
+                        pageNumberFortheNextOlderMessagesToFetch,
+                        50,
+                        {
                             sort: "-created",
                             expand: "user,repliedTo,repliedTo.user",
                             filter: `created < "${
                                 $messages.items[$messages.items.length - 1]
                                     .created
                             }"`,
-                        })
+                        },
+                    )
                 if (messagesRecords) {
                     messages.update((messages_) => ({
                         ...messages_,

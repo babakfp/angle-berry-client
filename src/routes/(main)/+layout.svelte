@@ -24,7 +24,7 @@
     onMount(async () => {
         try {
             await Promise.all([
-                $pb.collection("messages").subscribe(
+                pb._.collection("messages").subscribe(
                     "*",
                     async (e) => {
                         if (e.action === "update") {
@@ -48,20 +48,20 @@
                                 return messages_
                             })
                         } else if (e.action === "create") {
-                            const userRecord = await $pb
-                                .collection("users")
-                                .getOne(e.record.user)
+                            const userRecord = await pb._.collection(
+                                "users",
+                            ).getOne(e.record.user)
                             let repliedToRecord:
                                 | (MessagesResponse & {
                                       expand: { user: UsersResponse }
                                   })
                                 | undefined
                             if (e.record.repliedTo) {
-                                repliedToRecord = await $pb
-                                    .collection("messages")
-                                    .getOne(e.record.repliedTo, {
-                                        expand: "user",
-                                    })
+                                repliedToRecord = await pb._.collection(
+                                    "messages",
+                                ).getOne(e.record.repliedTo, {
+                                    expand: "user",
+                                })
                             }
 
                             messages.update((messages_) => {
@@ -90,30 +90,31 @@
                     },
                     { requestKey: "messages-subscribe" },
                 ),
-                $pb.collection("events").subscribe(
+                pb._.collection("events").subscribe(
                     "*",
                     async (e) => {
                         if (e.action === "create") {
                             const userRecord: UsersResponse & {
                                 expand: { retainedTiers: TiersResponse[] }
-                            } = await $pb
-                                .collection("users")
-                                .getOne(e.record.user, {
+                            } = await pb._.collection("users").getOne(
+                                e.record.user,
+                                {
                                     expand: "retainedTiers",
                                     $autoCancel: false,
-                                })
+                                },
+                            )
                             let inviterRecord:
                                 | (UsersResponse & {
                                       expand: { retainedTiers: TiersResponse[] }
                                   })
                                 | undefined
                             if (e.record.inviter)
-                                inviterRecord = await $pb
-                                    .collection("users")
-                                    .getOne(e.record.inviter, {
-                                        expand: "retainedTiers",
-                                        $autoCancel: false,
-                                    })
+                                inviterRecord = await pb._.collection(
+                                    "users",
+                                ).getOne(e.record.inviter, {
+                                    expand: "retainedTiers",
+                                    $autoCancel: false,
+                                })
                             const newEvent = {
                                 ...e.record,
                                 expand: {
@@ -159,8 +160,8 @@
 
     onDestroy(async () => {
         await Promise.all([
-            $pb.collection("messages").unsubscribe(),
-            $pb.collection("events").unsubscribe(),
+            pb._.collection("messages").unsubscribe(),
+            pb._.collection("events").unsubscribe(),
         ])
     })
 </script>

@@ -25,7 +25,7 @@
         try {
             const isMessageDeleted = await Promise.all(
                 messageIdsToDelete._.map((messageId) =>
-                    $pb.collection("messages").delete(messageId),
+                    pb._.collection("messages").delete(messageId),
                 ),
             )
 

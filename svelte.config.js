@@ -15,4 +15,8 @@ export default {
             return
         handler(warning)
     },
+    compilerOptions: {
+        discloseVersion: false,
+        modernAst: true,
+    },
 }

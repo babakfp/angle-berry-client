@@ -126,7 +126,7 @@
                                 events_.items = [newEvent, ...events_.items]
                                 return events_
                             })
-                            unseenEventsLength.update((v) => (v += 1))
+                            unseenEventsLength._ += 1
 
                             if (
                                 newEvent.expand?.inviter?.id
@@ -144,7 +144,7 @@
                                 )
                                 return events_
                             })
-                            unseenEventsLength.update((v) => (v -= 1))
+                            unseenEventsLength._ -= 1
                         }
                     },
                     { requestKey: "events-subscribe" },

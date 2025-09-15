@@ -23,7 +23,9 @@
     events.set(pbEvents)
 
     $effect(() => {
-        if (isOpen && $unseenEventsLength) unseenEventsLength.set(0)
+        if (isOpen && unseenEventsLength._) {
+            unseenEventsLength._ = 0
+        }
     })
 </script>
 

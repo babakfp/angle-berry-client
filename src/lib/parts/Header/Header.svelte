@@ -77,9 +77,9 @@
                 <IconBellSimpleRegular
                     class="text-2xl duration-200 group-hover:text-gray-50"
                 />
-                {#if $unseenEventsLength > 0}
+                {#if unseenEventsLength._ > 0}
                     <NotificationBlob>
-                        {$unseenEventsLength}
+                        {unseenEventsLength._}
                     </NotificationBlob>
                 {/if}
             </button>

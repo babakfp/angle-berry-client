@@ -104,15 +104,6 @@
     }
 }
 
-@layer utilities {
-    [data-phosphor-icon] {
-        @apply pointer-events-none inline-block h-[1em] w-[1em];
-        &:not([fill="none"]) {
-            @apply fill-current;
-        }
-    }
-}
-
 .svelte-hot-french-toast__base {
     @apply bg-gray-700! pl-4!;
 }

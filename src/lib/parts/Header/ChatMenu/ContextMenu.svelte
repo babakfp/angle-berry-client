@@ -32,25 +32,25 @@
 
     const replyMessage = () => {
         isContextMenuOpen.state = false
-        isReplying.set(true)
-        replyTargetMessage.set(contextMenuTargetMessage.state)
-        messageIdToEdit.set(undefined)
-        if ($messageInputElement) $messageInputElement.focus()
+        isReplying.state = true
+        replyTargetMessage.state = contextMenuTargetMessage.state
+        messageIdToEdit.state = undefined
+        if (messageInputElement.state) messageInputElement.state.focus()
     }
 
     const editMessage = () => {
         if (!contextMenuTargetMessage.state) return
         isContextMenuOpen.state = false
-        messageIdToEdit.set(contextMenuTargetMessage.state.id)
-        isReplying.set(false)
-        if ($messageInputElement) $messageInputElement.focus()
+        messageIdToEdit.state = contextMenuTargetMessage.state.id
+        isReplying.state = false
+        if (messageInputElement.state) messageInputElement.state.focus()
     }
 
     const copyMessage = () => {
-        if ($selectedMessageIds.length > 0) {
+        if (selectedMessageIds.state.length > 0) {
             let copiedText = ""
             const selectedMessages = $messages.items
-                .filter((msg) => $selectedMessageIds.includes(msg.id))
+                .filter((msg) => selectedMessageIds.state.includes(msg.id))
                 .sort(
                     (a, b) =>
                         new Date(a.created).getTime()
@@ -80,27 +80,27 @@
 
     const setSelectedMessagesForDeletion = () => {
         isContextMenuOpen.state = false
-        messageIdsToDelete.set($selectedMessageIds)
+        messageIdsToDelete.state = selectedMessageIds.state
     }
 
     const setAMessageForDeletion = () => {
         if (!contextMenuTargetMessage.state) return
         isContextMenuOpen.state = false
-        messageIdsToDelete.set([contextMenuTargetMessage.state.id])
+        messageIdsToDelete.state = [contextMenuTargetMessage.state.id]
     }
 
     const selectMessage = () => {
         if (!contextMenuTargetMessage.state) return
         isContextMenuOpen.state = false
-        $selectedMessageIds = [
-            ...$selectedMessageIds,
+        selectedMessageIds.state = [
+            ...selectedMessageIds.state,
             contextMenuTargetMessage.state.id,
         ]
     }
 
     const clearSelection = () => {
         isContextMenuOpen.state = false
-        selectedMessageIds.set([])
+        selectedMessageIds.state = []
     }
 </script>
 
@@ -125,22 +125,22 @@
     excludeQuerySelectorAll=".MessageContextMenu"
 >
     <MessageContextMenu>
-        {#if !$selectedMessageIds.length || (contextMenuTargetMessage.state && !$selectedMessageIds.includes(contextMenuTargetMessage.state?.id))}
+        {#if !selectedMessageIds.state.length || (contextMenuTargetMessage.state && !selectedMessageIds.state.includes(contextMenuTargetMessage.state?.id))}
             <MessageContextMenuItem
                 title="Reply"
                 icon={IconArrowUUpLeftRegular}
                 onclick={replyMessage}
             />
         {/if}
-        {#if contextMenuTargetMessage.state?.expand.user.id === loggedInUser.id && !$selectedMessageIds.length}
+        {#if contextMenuTargetMessage.state?.expand.user.id === loggedInUser.id && !selectedMessageIds.state.length}
             <MessageContextMenuItem
                 title="Edit"
                 icon={IconPencilSimpleRegular}
                 onclick={editMessage}
             />
         {/if}
-        {#if $selectedMessageIds.length}
-            {#if contextMenuTargetMessage.state && $selectedMessageIds.includes(contextMenuTargetMessage.state?.id)}
+        {#if selectedMessageIds.state.length}
+            {#if contextMenuTargetMessage.state && selectedMessageIds.state.includes(contextMenuTargetMessage.state?.id)}
                 <MessageContextMenuItem
                     title={copyTimeoutId ? "Copied" : "Copy Selected as Text"}
                     icon={copyTimeoutId ? IconCheckRegular : (
@@ -159,8 +159,8 @@
             />
         {/if}
         {#if contextMenuTargetMessage.state?.expand.user.id === loggedInUser.id}
-            {#if $selectedMessageIds.length > 0}
-                {#if contextMenuTargetMessage.state && $selectedMessageIds.includes(contextMenuTargetMessage.state?.id)}
+            {#if selectedMessageIds.state.length > 0}
+                {#if contextMenuTargetMessage.state && selectedMessageIds.state.includes(contextMenuTargetMessage.state?.id)}
                     <MessageContextMenuItem
                         title="Delete Selected"
                         icon={IconTrashSimpleRegular}
@@ -175,7 +175,7 @@
                 />
             {/if}
         {/if}
-        {#if !$selectedMessageIds.includes(contextMenuTargetMessage.state?.id || "")}
+        {#if !selectedMessageIds.state.includes(contextMenuTargetMessage.state?.id || "")}
             <MessageContextMenuItem
                 title="Select"
                 icon={IconCheckCircleRegular}

@@ -3,6 +3,7 @@
     import IconCheckRegular from "phosphor-icons-svelte/IconCheckRegular.svelte"
     import IconPaperPlaneRightRegular from "phosphor-icons-svelte/IconPaperPlaneRightRegular.svelte"
     import IconSpinnerRegular from "phosphor-icons-svelte/IconSpinnerRegular.svelte"
+    import { untrack } from "svelte"
     import { writable } from "svelte/store"
     import { enhance } from "$app/forms"
     import PopSide from "$lib/components/PopSide.svelte"
@@ -41,7 +42,9 @@
     messages.set(pbMessages)
 
     $effect(() => {
-        if (!isOpen && $messageIdToEdit) messageIdToEdit.set(undefined)
+        if (!isOpen && messageIdToEdit.state) {
+            messageIdToEdit.state = undefined
+        }
     })
     $effect(() => {
         if (isOpen && $unreadMessagesLength) unreadMessagesLength.set(0)
@@ -49,29 +52,32 @@
 
     const messageInputValue = writable("")
 
-    messageIdToEdit.subscribe((id) =>
-        messageInputValue.set(
-            $messages.items
-                .find((msg) => msg.id === id)
-                ?.content.replaceAll("<br>", "\n") || "",
-        ),
-    )
+    $effect(() => {
+        messageIdToEdit
+        untrack(() => {
+            messageInputValue.set(
+                $messages.items
+                    .find((msg) => msg.id === messageIdToEdit.state)
+                    ?.content.replaceAll("<br>", "\n") || "",
+            )
+        })
+    })
 
     let isEditingMessage = $state(false)
 
     $effect(() => {
-        isEditingMessage = !!$messageIdToEdit
+        isEditingMessage = !!messageIdToEdit.state
     })
 
     let isSendingMessage = $state(false)
     const submitMessage: SubmitFunction = () => {
         isSendingMessage = true
-        $messageInputElement!.focus()
+        messageInputElement.state!.focus()
         return async ({ result, update }) => {
             isSendingMessage = false
             if (result.type === "success") {
-                isReplying.set(false)
-                messageIdToEdit.set(undefined)
+                isReplying.state = false
+                messageIdToEdit.state = undefined
             }
             update()
         }
@@ -81,7 +87,8 @@
 
     let replyedMessageId = $state<string>()
     $effect(() => {
-        replyedMessageId = $isReplying ? $replyTargetMessage?.id : undefined
+        replyedMessageId =
+            isReplying.state ? replyTargetMessage.state?.id : undefined
     })
 
     let isFetchingOlderMessages = $state(false)
@@ -169,24 +176,25 @@
         use:enhance={submitMessage}
         bind:this={formElement}
     >
-        {#if $isReplying}
+        {#if isReplying.state}
             <MessageActionPreview
-                title="Replying to {$replyTargetMessage?.expand.user.username}"
-                content={$replyTargetMessage?.content || ""}
-                messageId={$replyTargetMessage?.id || ""}
-                onClose={() => isReplying.set(false)}
-                bind:isOpen={$isReplying}
+                title="Replying to {replyTargetMessage.state?.expand.user
+                    .username}"
+                content={replyTargetMessage.state?.content || ""}
+                messageId={replyTargetMessage.state?.id || ""}
+                onClose={() => (isReplying.state = false)}
+                bind:isOpen={isReplying.state}
             />
         {/if}
 
-        {#if $messageIdToEdit}
+        {#if messageIdToEdit.state}
             <MessageActionPreview
                 title="Editing message"
                 content={$messages.items.filter(
-                    (msg) => msg.id === $messageIdToEdit,
+                    (msg) => msg.id === messageIdToEdit.state,
                 )[0]?.content}
-                messageId={$messageIdToEdit}
-                onClose={() => messageIdToEdit.set(undefined)}
+                messageId={messageIdToEdit.state}
+                onClose={() => (messageIdToEdit.state = undefined)}
                 bind:isOpen={isEditingMessage}
             />
         {/if}
@@ -196,7 +204,7 @@
         >
             <textarea
                 class="bg-background outline-inset block field-sizing-content max-h-48 w-full resize-none p-4 placeholder:text-gray-500"
-                bind:this={$messageInputElement}
+                bind:this={messageInputElement.state}
                 bind:value={$messageInputValue}
                 name="messageContent"
                 placeholder="Write your message..."
@@ -224,7 +232,7 @@
                 disabled={isSendingMessage}
             >
                 <div class="flex min-h-14 items-center px-4 text-2xl">
-                    {#if $messageIdToEdit}
+                    {#if messageIdToEdit.state}
                         <IconCheckRegular />
                     {:else if isSendingMessage}
                         <IconSpinnerRegular class="animate-spin" />
@@ -242,7 +250,7 @@
         <input
             type="hidden"
             name="messageIdToEdit"
-            bind:value={$messageIdToEdit}
+            bind:value={messageIdToEdit.state}
         />
     </form>
 

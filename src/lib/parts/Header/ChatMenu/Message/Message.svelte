@@ -32,8 +32,8 @@
     let highlight = $state<HTMLDivElement>()
 
     const handleClick = (e: MouseEvent) => {
-        if ($selectedMessageIds.length > 0) {
-            if ($selectedMessageIds.includes(message.id)) {
+        if (selectedMessageIds.state.length > 0) {
+            if (selectedMessageIds.state.includes(message.id)) {
                 selectedMessageIds.update((v) =>
                     v.filter((v) => v !== message.id),
                 )
@@ -63,8 +63,8 @@
 <li id={message.id} class={["w-full", { "ml-auto": isCurrentUser }]}>
     <div
         class="relative grid gap-1.5 px-4 py-2
-        {$selectedMessageIds.includes(message.id) && 'bg-blue-400/10'}
-        {$selectedMessageIds.length > 0 && 'cursor-pointer'}"
+        {selectedMessageIds.state.includes(message.id) && 'bg-blue-400/10'}
+        {selectedMessageIds.state.length > 0 && 'cursor-pointer'}"
         transition:shrinkHeight={{ duration: 200 }}
         oncontextmenu={(e) => {
             e.preventDefault()
@@ -117,14 +117,14 @@
             updated={message.updated}
         />
 
-        {#if $selectedMessageIds.length > 0}
+        {#if selectedMessageIds.state.length > 0}
             <div
                 class={[
                     "absolute bottom-6 flex text-xl",
                     isCurrentUser ? "left-4" : "right-4",
                 ]}
             >
-                {#if $selectedMessageIds.includes(message.id)}
+                {#if selectedMessageIds.state.includes(message.id)}
                     <IconCheckCircleRegular class="text-green-400" />
                 {:else}
                     <IconCircleRegular />

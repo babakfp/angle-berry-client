@@ -14,17 +14,17 @@
     let isDeletingMessage = $state(false)
     let isDeletePopupOpen = $state(false)
     $effect(() => {
-        isDeletePopupOpen = !!$messageIdsToDelete.length
+        isDeletePopupOpen = !!messageIdsToDelete.state.length
     })
     $effect(() => {
-        if (!isDeletePopupOpen && $messageIdsToDelete.length > 0)
-            messageIdsToDelete.set([])
+        if (!isDeletePopupOpen && messageIdsToDelete.state.length > 0)
+            messageIdsToDelete.state = []
     })
 
     const handleDelete = async () => {
         try {
             const isMessageDeleted = await Promise.all(
-                $messageIdsToDelete.map((messageId) =>
+                messageIdsToDelete.state.map((messageId) =>
                     $pb.collection("messages").delete(messageId),
                 ),
             )
@@ -33,10 +33,10 @@
 
             if (isMessageDeleted) {
                 isDeletingMessage = false
-                messageIdsToDelete.set([])
-                selectedMessageIds.set([])
-                messageIdToEdit.set(undefined)
-                isReplying.set(false)
+                messageIdsToDelete.state = []
+                selectedMessageIds.state = []
+                messageIdToEdit.state = undefined
+                isReplying.state = false
 
                 // Remove other messages reply preview to that deleted message
                 messages.update((messages_) => {
@@ -57,9 +57,9 @@
         } catch (error) {
             console.error(error)
             isDeletingMessage = false
-            messageIdsToDelete.set([])
-            messageIdToEdit.set(undefined)
-            isReplying.set(false)
+            messageIdsToDelete.state = []
+            messageIdToEdit.state = undefined
+            isReplying.state = false
         }
     }
 </script>
@@ -73,7 +73,7 @@
         <button
             type="button"
             class="btn btn-gray"
-            onclick={() => messageIdsToDelete.set([])}
+            onclick={() => (messageIdsToDelete.state = [])}
         >
             Cancel
         </button>

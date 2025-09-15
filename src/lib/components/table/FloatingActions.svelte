@@ -52,7 +52,7 @@
             {selectedItemIds.length > 1 ? "items" : "item"}
         </span>
 
-        <hr class="my-2 border-t-gray-600 sm:hidden" />
+        <hr class="my-2 border-gray-600 sm:hidden" />
 
         <button
             type="button"

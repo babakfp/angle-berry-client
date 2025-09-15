@@ -10,7 +10,7 @@
 </script>
 
 <AnimatePageNavigation
-    class="container min-h-screen max-w-sm! content-center py-12"
+    class="mx-auto min-h-screen max-w-sm content-center px-4 py-12"
 >
     {@render children()}
 </AnimatePageNavigation>

@@ -2,8 +2,8 @@
     import IconBellSimpleRegular from "phosphor-icons-svelte/IconBellSimpleRegular.svelte"
     import IconChatCenteredRegular from "phosphor-icons-svelte/IconChatCenteredRegular.svelte"
     import IconCrownSimpleRegular from "phosphor-icons-svelte/IconCrownSimpleRegular.svelte"
+    import IconUserRegular from "phosphor-icons-svelte/IconUserRegular.svelte"
     import { page } from "$app/state"
-    import Avatar from "$lib/components/Avatar.svelte"
     import NotificationBlob from "$lib/components/NotificationBlob.svelte"
     import { unseenEventsLength } from "$lib/stores/events.svelte"
     import { unreadMessagesLength } from "$lib/stores/messages.svelte"
@@ -102,12 +102,14 @@
             <div class="relative flex">
                 <button
                     type="button"
-                    class="outline-inset flex items-center gap-2 pr-4 pl-2 duration-200 hover:text-gray-50"
+                    class="outline-inset group flex items-center gap-2 pr-4 pl-2 duration-200 hover:text-gray-50"
                     onclick={() => (isUserMenuOpen = !isUserMenuOpen)}
                     bind:this={userMenuToggle}
                     title="User menu"
                 >
-                    <Avatar class="w-8 rounded-full" />
+                    <IconUserRegular
+                        class="text-2xl duration-200 group-hover:text-gray-50"
+                    />
                 </button>
                 <UserMenu
                     {loggedInUser}

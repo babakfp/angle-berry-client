@@ -125,9 +125,9 @@
             }
         }
 
-        if (isContextMenuOpen.state || $isTouchDeviceContextMenuOpen) {
+        if (isContextMenuOpen.state || isTouchDeviceContextMenuOpen.state) {
             isContextMenuOpen.state = false
-            isTouchDeviceContextMenuOpen.set(false)
+            isTouchDeviceContextMenuOpen.state = false
         }
     }
 </script>

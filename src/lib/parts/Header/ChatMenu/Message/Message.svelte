@@ -42,7 +42,7 @@
             }
             // @ts-expect-error TODO
         } else if (e.pointerType !== "mouse") {
-            if ($isTouchDeviceContextMenuOpen) {
+            if (isTouchDeviceContextMenuOpen.state) {
                 isContextMenuOpen.state = false
                 contextMenuTargetEvent.set(undefined)
                 contextMenuTargetMessage.set(undefined)
@@ -54,7 +54,8 @@
                 contextMenuTargetEvent.set(e)
                 contextMenuTargetMessage.set(message)
             }
-            $isTouchDeviceContextMenuOpen = !$isTouchDeviceContextMenuOpen
+            isTouchDeviceContextMenuOpen.state =
+                !isTouchDeviceContextMenuOpen.state
         }
     }
 </script>

@@ -8,14 +8,16 @@
         ContentSnippet,
     }: {
         positioning?: Popover.RootProps["positioning"]
-        TriggerSnippet?: Snippet
+        TriggerSnippet?: Snippet<[Popover.TriggerProps]>
         ContentSnippet?: Snippet
     } = $props()
 </script>
 
 <Popover.Root {positioning} autoFocus={false}>
     <Popover.Trigger>
-        {@render TriggerSnippet?.()}
+        {#snippet asChild(props)}
+            {@render TriggerSnippet?.(props())}
+        {/snippet}
     </Popover.Trigger>
     <Popover.Positioner>
         <Popover.Content

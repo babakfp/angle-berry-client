@@ -103,10 +103,13 @@
             placement: "bottom-start",
         }}
     >
-        {#snippet TriggerSnippet()}
-            <span class="rounded-full bg-gray-700 px-1 py-px">
+        {#snippet TriggerSnippet(props)}
+            <button
+                {...props}
+                class={["rounded-full bg-gray-700 px-1 py-px", props]}
+            >
                 {user.username}
-            </span>
+            </button>
         {/snippet}
 
         {#snippet ContentSnippet()}

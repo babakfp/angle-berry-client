@@ -53,7 +53,7 @@
             {@render ScrollShadow({ position: "top" })}
 
             <div
-                class="max-h-[calc(var(--screen-minus-header)-(--spacing(4)))] overflow-y-auto overscroll-y-contain"
+                class="relative z-1 max-h-[calc(var(--screen-minus-header)-(--spacing(4)))] overflow-y-auto overscroll-y-contain"
             >
                 <div class="flex justify-between p-4">
                     <span>Signed in as</span>

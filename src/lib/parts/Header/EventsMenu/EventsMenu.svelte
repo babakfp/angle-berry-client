@@ -100,7 +100,7 @@
     <Popover
         positioning={{
             boundary: ref,
-            placement: "top-start",
+            placement: "bottom-start",
         }}
     >
         {#snippet TriggerSnippet()}

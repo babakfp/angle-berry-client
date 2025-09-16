@@ -13,7 +13,7 @@
     } = $props()
 </script>
 
-<Popover.Root {positioning}>
+<Popover.Root {positioning} autoFocus={false}>
     <Popover.Trigger>
         {@render TriggerSnippet?.()}
     </Popover.Trigger>

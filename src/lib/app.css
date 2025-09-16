@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tailwindcss-addons";
+@import "tw-animate-css";
 
 @theme {
     --spacing-header: var(--header);

@@ -42,10 +42,13 @@
             <IconUserRegular />
         {/if}
     </Popover.Trigger>
-    <Popover.Positioner>
+    <Popover.Positioner class="-left-2!">
         <Popover.Content
-            class="bg-background hide data-[state=open]:show relative w-64 translate-x-6 overflow-hidden rounded text-sm shadow-[0_4px_16px_0_rgb(0_0_0/0.4)] duration-150 data-[state=open]:-translate-x-2"
-            hidden={false}
+            class={[
+                "bg-background relative w-64 overflow-hidden rounded text-sm shadow-[0_4px_16px_0_rgb(0_0_0/0.4)]",
+                "data-[state=open]:animate-in data-[state=open]:fade-in data-[state=open]:slide-in-from-right",
+                "data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=closed]:slide-out-to-right",
+            ]}
         >
             {@render ScrollShadow({ position: "top" })}
 

@@ -34,6 +34,7 @@
         "sveltekit-superforms": "2.27.1",
         "tailwindcss": "4.1.13",
         "tailwindcss-addons": "4.2.0",
+        "tw-animate-css": "1.3.8",
         "typescript": "5.9.2",
         "valibot": "1.1.0",
         "vite": "7.1.5"

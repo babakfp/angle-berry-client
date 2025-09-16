@@ -157,10 +157,15 @@
                                     {/if}
                                 {:else}
                                     <IconCheckCircleRegular
-                                        class="text-xl {!isSingleSelected(
-                                            option.value,
-                                            selectedOption,
-                                        ) && 'hide'}"
+                                        class={[
+                                            "text-xl",
+                                            {
+                                                hide: !isSingleSelected(
+                                                    option.value,
+                                                    selectedOption,
+                                                ),
+                                            },
+                                        ]}
                                     />
                                 {/if}
                                 <span>{option.label}</span>

@@ -177,8 +177,10 @@
     {/if}
 
     <form
-        class="bg-background sticky bottom-0 z-1 self-end
-		{isSendingMessage && 'pointer-events-none'}"
+        class={[
+            "bg-background sticky bottom-0 z-1 self-end",
+            { "pointer-events-none": isSendingMessage },
+        ]}
         method="post"
         action="/chat"
         use:enhance={submitMessage}

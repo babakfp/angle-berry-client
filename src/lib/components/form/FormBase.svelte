@@ -1,6 +1,7 @@
 <script lang="ts">
     import type { SubmitFunction } from "@sveltejs/kit"
     import { createEventDispatcher, type Snippet } from "svelte"
+    import type { ClassValue } from "svelte/elements"
     import type { SuperForm } from "sveltekit-superforms/client"
     import { enhance } from "$app/forms"
 
@@ -18,7 +19,7 @@
         validateForm?: SuperForm<Record<string, unknown>>["validateForm"]
         action?: string
         canUpload?: boolean
-        class?: string
+        class?: ClassValue
         children?: Snippet
     } = $props()
 

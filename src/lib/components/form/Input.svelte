@@ -33,7 +33,7 @@
     for={String(rest.name)}
     {error}
 >
-    <InputNative {...rest} />
+    <InputNative {...rest} bind:value />
 
     {#snippet buttons()}
         {@render buttonsInner()}

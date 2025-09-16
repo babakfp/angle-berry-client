@@ -19,12 +19,14 @@
 </script>
 
 <input
+    {...rest}
     class={[
         rest.class,
         "peer reset-autofill-input block h-11 w-full rounded border-2 border-gray-700 bg-transparent px-4 placeholder:text-xs placeholder:text-gray-500",
         { "reset-number-input": type === "number" },
     ]}
-    {...rest}
+    {type}
+    bind:value
     id={rest.name}
     oninput={bindValue}
 />

@@ -19,7 +19,8 @@
     </Popover.Trigger>
     <Popover.Positioner>
         <Popover.Content
-            class="rounded bg-gray-700 px-4 py-3 text-xs whitespace-nowrap drop-shadow duration-150"
+            class="hide data-[state=open]:show rounded bg-gray-700 px-4 py-3 text-xs whitespace-nowrap drop-shadow duration-150"
+            hidden={false}
         >
             {@render ContentSnippet?.()}
         </Popover.Content>

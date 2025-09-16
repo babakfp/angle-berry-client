@@ -1,5 +1,6 @@
 <script lang="ts">
     import { Popover } from "@ark-ui/svelte/popover"
+    import { Portal } from "@ark-ui/svelte/portal"
     import IconCrownSimpleRegular from "phosphor-icons-svelte/IconCrownSimpleRegular.svelte"
     import IconUserRegular from "phosphor-icons-svelte/IconUserRegular.svelte"
     import { copy } from "svelte-copy"
@@ -31,6 +32,7 @@
         placement: "bottom-end",
         gutter: 0,
     }}
+    portalled
 >
     <Popover.Trigger
         class="outline-inset flex items-center pr-4 pl-2 text-2xl duration-150 hover:text-gray-50"
@@ -42,102 +44,105 @@
             <IconUserRegular />
         {/if}
     </Popover.Trigger>
-    <Popover.Positioner class="-left-2!">
-        <Popover.Content
-            class={[
-                "bg-background relative w-64 overflow-hidden rounded text-sm shadow-[0_4px_16px_0_rgb(0_0_0/0.4)]",
-                "data-[state=open]:animate-in data-[state=open]:fade-in data-[state=open]:slide-in-from-right-4",
-                "data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=closed]:slide-out-to-right-4",
-            ]}
-        >
-            {@render ScrollShadow({ position: "top" })}
 
-            <div
-                class="relative z-1 max-h-[calc(var(--screen-minus-header)-(--spacing(4)))] overflow-y-auto overscroll-y-contain"
+    <Portal>
+        <Popover.Positioner class="-left-2!">
+            <Popover.Content
+                class={[
+                    "bg-background relative w-64 overflow-hidden rounded text-sm shadow-[0_4px_16px_0_rgb(0_0_0/0.4)]",
+                    "data-[state=open]:animate-in data-[state=open]:fade-in data-[state=open]:slide-in-from-right-4",
+                    "data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=closed]:slide-out-to-right-4",
+                ]}
             >
-                <div class="flex justify-between p-4">
-                    <span>Signed in as</span>
-                    <span>{loggedInUser.username}</span>
-                </div>
+                {@render ScrollShadow({ position: "top" })}
 
-                {#if loggedInUser.isAdmin}
+                <div
+                    class="relative z-1 max-h-[calc(var(--screen-minus-header)-(--spacing(4)))] overflow-y-auto overscroll-y-contain"
+                >
+                    <div class="flex justify-between p-4">
+                        <span>Signed in as</span>
+                        <span>{loggedInUser.username}</span>
+                    </div>
+
+                    {#if loggedInUser.isAdmin}
+                        <a
+                            class="outline-inset flex justify-between border-t border-gray-50/5 p-4 underline duration-150 hover:text-gray-50"
+                            href="/admin"
+                        >
+                            Admin Dashboard
+                        </a>
+                    {/if}
+
                     <a
-                        class="outline-inset flex justify-between border-t border-gray-50/5 p-4 underline duration-150 hover:text-gray-50"
-                        href="/admin"
-                    >
-                        Admin Dashboard
-                    </a>
-                {/if}
-
-                <a
-                    class="outline-inset flex justify-between border-t border-gray-50/5 p-4 duration-150 hover:text-gray-50"
-                    href="/how-to-invite"
-                >
-                    <span>
-                        Invites: {loggedInUser.invitedUsers.length}
-                    </span>
-                    <span class="underline">Start inviting</span>
-                </a>
-
-                <button
-                    type="button"
-                    class="group outline-inset border-y border-gray-50/5 p-4"
-                    onclick={() =>
-                        toast.success(
-                            "Your invite link is copied to Clipboard.",
-                            {
-                                position: "bottom-end",
-                            },
-                        )}
-                    use:copy={`${page.url.origin}/register?id=${loggedInUser.id}`}
-                >
-                    <span class="group-hover:text-gray-50">
-                        Click to copy your invite link:
-                    </span>
-                    <p class="mt-1 text-xs text-gray-500 select-text">
-                        {page.url.origin}/register?id={loggedInUser.id}
-                    </p>
-                </button>
-
-                {#if tiers.length}
-                    <ol>
-                        {#each tiers as tier}
-                            <Tier {loggedInUser} {tier} />
-                        {/each}
-                    </ol>
-                {/if}
-
-                <form action="/login-as" method="post">
-                    <button
-                        type="submit"
-                        class="outline-inset flex w-full items-center justify-between border-t border-gray-50/5 p-4 text-left duration-150 hover:text-gray-50"
+                        class="outline-inset flex justify-between border-t border-gray-50/5 p-4 duration-150 hover:text-gray-50"
+                        href="/how-to-invite"
                     >
                         <span>
-                            Login as {loggedInUser.isAdmin ? "a User" : (
-                                "an Admin"
-                            )}
+                            Invites: {loggedInUser.invitedUsers.length}
                         </span>
-                        {#if loggedInUser.isAdmin}
-                            <IconUserRegular class="text-xl" />
-                        {:else}
-                            <IconCrownSimpleRegular class="text-xl" />
-                        {/if}
-                    </button>
-                </form>
+                        <span class="underline">Start inviting</span>
+                    </a>
 
-                <form action="/logout" method="post">
                     <button
-                        type="submit"
-                        class="outline-inset w-full rounded-b border-t border-gray-50/5 p-4 text-left duration-150 hover:text-gray-50"
+                        type="button"
+                        class="group outline-inset border-y border-gray-50/5 p-4"
+                        onclick={() =>
+                            toast.success(
+                                "Your invite link is copied to Clipboard.",
+                                {
+                                    position: "bottom-end",
+                                },
+                            )}
+                        use:copy={`${page.url.origin}/register?id=${loggedInUser.id}`}
                     >
-                        Logout
+                        <span class="group-hover:text-gray-50">
+                            Click to copy your invite link:
+                        </span>
+                        <p class="mt-1 text-xs text-gray-500 select-text">
+                            {page.url.origin}/register?id={loggedInUser.id}
+                        </p>
                     </button>
-                </form>
-            </div>
 
-            {@render ScrollShadow({ position: "bottom" })}
-        </Popover.Content>
-    </Popover.Positioner>
+                    {#if tiers.length}
+                        <ol>
+                            {#each tiers as tier}
+                                <Tier {loggedInUser} {tier} />
+                            {/each}
+                        </ol>
+                    {/if}
+
+                    <form action="/login-as" method="post">
+                        <button
+                            type="submit"
+                            class="outline-inset flex w-full items-center justify-between border-t border-gray-50/5 p-4 text-left duration-150 hover:text-gray-50"
+                        >
+                            <span>
+                                Login as {loggedInUser.isAdmin ? "a User" : (
+                                    "an Admin"
+                                )}
+                            </span>
+                            {#if loggedInUser.isAdmin}
+                                <IconUserRegular class="text-xl" />
+                            {:else}
+                                <IconCrownSimpleRegular class="text-xl" />
+                            {/if}
+                        </button>
+                    </form>
+
+                    <form action="/logout" method="post">
+                        <button
+                            type="submit"
+                            class="outline-inset w-full rounded-b border-t border-gray-50/5 p-4 text-left duration-150 hover:text-gray-50"
+                        >
+                            Logout
+                        </button>
+                    </form>
+                </div>
+
+                {@render ScrollShadow({ position: "bottom" })}
+            </Popover.Content>
+        </Popover.Positioner>
+    </Portal>
 </Popover.Root>
 
 {#snippet ScrollShadow({ position }: { position: "top" | "bottom" })}

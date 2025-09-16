@@ -46,8 +46,8 @@
         <Popover.Content
             class={[
                 "bg-background relative w-64 overflow-hidden rounded text-sm shadow-[0_4px_16px_0_rgb(0_0_0/0.4)]",
-                "data-[state=open]:animate-in data-[state=open]:fade-in data-[state=open]:slide-in-from-right",
-                "data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=closed]:slide-out-to-right",
+                "data-[state=open]:animate-in data-[state=open]:fade-in data-[state=open]:slide-in-from-right-4",
+                "data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=closed]:slide-out-to-right-4",
             ]}
         >
             {@render ScrollShadow({ position: "top" })}

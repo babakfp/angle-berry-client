@@ -1,7 +1,8 @@
 <script lang="ts">
+    import type { Snippet } from "svelte"
     import { fly } from "svelte/transition"
     import Popover from "$lib/components/Popover.svelte"
-    import PopSide from "$lib/components/PopSide.svelte"
+    import SideDrawer from "$lib/components/SideDrawer.svelte"
     import { events, unseenEventsLength } from "$lib/stores/events.svelte"
     import type {
         ListResult,
@@ -14,12 +15,12 @@
         pbEvents,
         loggedInUser,
         isOpen = $bindable(false),
-        toggleButton,
+        DialogTrigger: MyDialogTrigger,
     }: {
         pbEvents: ListResult<RealtimeEventsResponse>
         loggedInUser: UsersResponse
         isOpen?: boolean
-        toggleButton: HTMLButtonElement
+        DialogTrigger: Snippet
     } = $props()
 
     events._ = pbEvents
@@ -33,7 +34,11 @@
     let ref = $state<HTMLDivElement>()
 </script>
 
-<PopSide id="EventsMenu" bind:isOpen {toggleButton}>
+<SideDrawer title="Events" bind:isOpen>
+    {#snippet DialogTrigger()}
+        {@render MyDialogTrigger()}
+    {/snippet}
+
     <div bind:this={ref}>
         {#if events._ && events._.items.length}
             <ol class="overflow-y-auto overscroll-y-contain sm:text-sm">
@@ -48,7 +53,7 @@
             <p class="px-4 py-6 text-center">No events found!</p>
         {/if}
     </div>
-</PopSide>
+</SideDrawer>
 
 {#snippet Event({ event }: { event: RealtimeEventsResponse })}
     <li

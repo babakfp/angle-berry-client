@@ -1,8 +1,7 @@
 <script lang="ts">
+    import { Dialog } from "@ark-ui/svelte/dialog"
     import IconBellSimpleRegular from "phosphor-icons-svelte/IconBellSimpleRegular.svelte"
     import IconChatCenteredRegular from "phosphor-icons-svelte/IconChatCenteredRegular.svelte"
-    import IconCrownSimpleRegular from "phosphor-icons-svelte/IconCrownSimpleRegular.svelte"
-    import IconUserRegular from "phosphor-icons-svelte/IconUserRegular.svelte"
     import { page } from "$app/state"
     import NotificationBlob from "$lib/components/NotificationBlob.svelte"
     import { unseenEventsLength } from "$lib/stores/events.svelte"
@@ -30,12 +29,6 @@
         pbMessages: ListResult<RealtimeMessagesResponse>
     } = $props()
 
-    let isEventsMenuOpen = $state(false)
-    let eventsMenuToggle = $state<HTMLButtonElement>()
-
-    let isChatMenuOpen = $state(false)
-    let chatMenuToggle = $state<HTMLButtonElement>()
-
     const isHome = $derived(page.url.pathname === "/")
 </script>
 
@@ -53,50 +46,39 @@
         </svelte:element>
 
         <div class="flex">
-            <button
-                type="button"
-                class="outline-inset relative flex items-center px-2 text-2xl duration-150 hover:text-gray-50"
-                bind:this={eventsMenuToggle}
-                onclick={() => (isEventsMenuOpen = !isEventsMenuOpen)}
-                title="Notifications"
-            >
-                <IconBellSimpleRegular />
-                {#if unseenEventsLength._}
-                    <NotificationBlob>
-                        {unseenEventsLength._}
-                    </NotificationBlob>
-                {/if}
-            </button>
-            <button
-                type="button"
-                class="outline-inset relative flex items-center px-2 text-2xl duration-150 hover:text-gray-50"
-                bind:this={chatMenuToggle}
-                onclick={() => (isChatMenuOpen = !isChatMenuOpen)}
-                title="Chat"
-            >
-                <IconChatCenteredRegular />
-                {#if unreadMessagesLength._}
-                    <NotificationBlob>
-                        {unreadMessagesLength._}
-                    </NotificationBlob>
-                {/if}
-            </button>
+            <EventsMenu {loggedInUser} {pbEvents}>
+                {#snippet DialogTrigger()}
+                    <Dialog.Trigger
+                        class="outline-inset relative flex items-center px-2 text-2xl duration-150 hover:text-gray-50"
+                        title="Notifications"
+                    >
+                        <IconBellSimpleRegular />
+                        {#if unseenEventsLength._}
+                            <NotificationBlob>
+                                {unseenEventsLength._}
+                            </NotificationBlob>
+                        {/if}
+                    </Dialog.Trigger>
+                {/snippet}
+            </EventsMenu>
+
+            <ChatMenu {loggedInUser} {pbMessages}>
+                {#snippet DialogTrigger()}
+                    <Dialog.Trigger
+                        class="outline-inset relative flex items-center px-2 text-2xl duration-150 hover:text-gray-50"
+                        title="Chat"
+                    >
+                        <IconChatCenteredRegular />
+                        {#if unreadMessagesLength._}
+                            <NotificationBlob>
+                                {unreadMessagesLength._}
+                            </NotificationBlob>
+                        {/if}
+                    </Dialog.Trigger>
+                {/snippet}
+            </ChatMenu>
 
             <UserMenu {loggedInUser} {tiers} />
         </div>
     </div>
 </header>
-
-<EventsMenu
-    {loggedInUser}
-    {pbEvents}
-    bind:isOpen={isEventsMenuOpen}
-    toggleButton={eventsMenuToggle}
-/>
-
-<ChatMenu
-    {loggedInUser}
-    {pbMessages}
-    bind:isOpen={isChatMenuOpen}
-    toggleButton={chatMenuToggle}
-/>

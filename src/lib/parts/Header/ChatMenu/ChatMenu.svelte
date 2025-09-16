@@ -3,9 +3,9 @@
     import IconCheckRegular from "phosphor-icons-svelte/IconCheckRegular.svelte"
     import IconPaperPlaneRightRegular from "phosphor-icons-svelte/IconPaperPlaneRightRegular.svelte"
     import IconSpinnerRegular from "phosphor-icons-svelte/IconSpinnerRegular.svelte"
-    import { untrack } from "svelte"
+    import { untrack, type Snippet } from "svelte"
     import { enhance } from "$app/forms"
-    import PopSide from "$lib/components/PopSide.svelte"
+    import SideDrawer from "$lib/components/SideDrawer.svelte"
     import { messages, unreadMessagesLength } from "$lib/stores/messages.svelte"
     import { pb } from "$lib/stores/pb.svelte"
     import type {
@@ -30,12 +30,12 @@
         loggedInUser,
         pbMessages,
         isOpen = $bindable(false),
-        toggleButton,
+        DialogTrigger: MyDialogTrigger,
     }: {
         loggedInUser: UsersResponse
         pbMessages: ListResult<RealtimeMessagesResponse>
         isOpen?: boolean
-        toggleButton: HTMLButtonElement
+        DialogTrigger: Snippet
     } = $props()
 
     messages._ = pbMessages
@@ -147,7 +147,11 @@
     }
 </script>
 
-<PopSide bind:isOpen {toggleButton}>
+<SideDrawer title="Chat" bind:isOpen>
+    {#snippet DialogTrigger()}
+        {@render MyDialogTrigger()}
+    {/snippet}
+
     {#if messages._ && messages._.items.length}
         <ol
             id="messages-wrapper"
@@ -267,4 +271,4 @@
         <ContextMenu {loggedInUser} />
         <MessageDeleteModal />
     {/snippet}
-</PopSide>
+</SideDrawer>

@@ -147,7 +147,7 @@
                     Icon={copyTimeoutId ? IconCheckRegular : (
                         IconCopySimpleRegular
                     )}
-                    isDisabled={!!copyTimeoutId}
+                    disabled={!!copyTimeoutId}
                     onclick={copyMessage}
                 />
             {/if}
@@ -155,7 +155,7 @@
             <MessageContextMenuItem
                 title={copyTimeoutId ? "Copied" : "Copy Text"}
                 Icon={copyTimeoutId ? IconCheckRegular : IconCopySimpleRegular}
-                isDisabled={!!copyTimeoutId}
+                disabled={!!copyTimeoutId}
                 onclick={copyMessage}
             />
         {/if}

@@ -2,6 +2,7 @@
     import { Popover } from "@ark-ui/svelte/popover"
     import { Portal } from "@ark-ui/svelte/portal"
     import IconCrownSimpleRegular from "phosphor-icons-svelte/IconCrownSimpleRegular.svelte"
+    import IconGaugeRegular from "phosphor-icons-svelte/IconGaugeRegular.svelte"
     import IconUserRegular from "phosphor-icons-svelte/IconUserRegular.svelte"
     import { copy } from "svelte-copy"
     import toast from "svelte-hot-french-toast"
@@ -69,7 +70,8 @@
                             class="outline-inset flex justify-between border-t border-gray-50/5 p-4 underline duration-150 hover:text-gray-50"
                             href="/admin"
                         >
-                            Admin Dashboard
+                            <span>Admin Dashboard</span>
+                            <IconGaugeRegular class="text-2xl" />
                         </a>
                     {/if}
 
@@ -122,9 +124,9 @@
                                 )}
                             </span>
                             {#if loggedInUser.isAdmin}
-                                <IconUserRegular class="text-xl" />
+                                <IconUserRegular class="text-2xl" />
                             {:else}
-                                <IconCrownSimpleRegular class="text-xl" />
+                                <IconCrownSimpleRegular class="text-2xl" />
                             {/if}
                         </button>
                     </form>

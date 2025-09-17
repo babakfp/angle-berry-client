@@ -110,7 +110,10 @@
         {#snippet TriggerSnippet(props)}
             <button
                 {...props}
-                class={["rounded-full bg-gray-700 px-1.5 py-px", props]}
+                class={[
+                    "rounded-full border border-gray-50/10 bg-gray-700 px-1.5 py-px",
+                    props.class,
+                ]}
             >
                 {user.username}
             </button>

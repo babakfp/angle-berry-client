@@ -22,7 +22,7 @@
     <Popover.Positioner>
         <Popover.Content
             class={[
-                "rounded bg-gray-700 px-4 py-3 text-xs whitespace-nowrap drop-shadow",
+                "rounded border border-gray-50/10 bg-gray-700 px-4 py-3 text-xs whitespace-nowrap drop-shadow",
                 "data-[state=open]:animate-in data-[state=open]:fade-in",
                 "data-[state=closed]:animate-out data-[state=closed]:fade-out",
             ]}

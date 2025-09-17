@@ -136,6 +136,7 @@
 
 <SideDrawer
     title="Chat"
+    classContent="grid-rows-[auto_1fr_auto] sm:grid-rows-[1fr_auto]"
     onOpenChange={(details) => {
         if (!details.open && messageIdToEdit._) {
             messageIdToEdit._ = undefined

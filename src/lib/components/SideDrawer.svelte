@@ -3,15 +3,18 @@
     import { Portal } from "@ark-ui/svelte/portal"
     import IconXRegular from "phosphor-icons-svelte/IconXRegular.svelte"
     import type { Snippet } from "svelte"
+    import type { ClassValue } from "svelte/elements"
     import { beforeNavigate } from "$app/navigation"
 
     let {
         title,
+        classContent,
         onOpenChange,
         DialogTrigger,
         children,
     }: {
         title?: string
+        classContent?: ClassValue
         onOpenChange?: Dialog.RootProps["onOpenChange"]
         DialogTrigger: Snippet
         children: Snippet
@@ -35,12 +38,13 @@
         <Dialog.Positioner>
             <Dialog.Content
                 class={[
-                    "bg-background fixed inset-0 z-50 grid h-dvh grid-rows-[auto_1fr_auto]",
+                    "bg-background fixed inset-0 z-50 grid h-dvh",
                     "data-[state=open]:animate-in data-[state=open]:fade-in data-[state=open]:slide-in-from-bottom-4",
                     "data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=closed]:slide-out-to-bottom-4",
-                    "sm:top-header sm:h-dvh-minus-header sm:left-auto sm:z-40 sm:w-96 sm:grid-rows-[1fr_auto]",
+                    "sm:top-header sm:h-dvh-minus-header sm:left-auto sm:z-40 sm:w-96",
                     "sm:data-[state=open]:slide-in-from-bottom-0 sm:data-[state=open]:slide-in-from-right-4",
                     "sm:data-[state=closed]:slide-out-to-bottom-0 sm:data-[state=closed]:slide-out-to-right-4",
+                    classContent,
                 ]}
             >
                 <Dialog.CloseTrigger

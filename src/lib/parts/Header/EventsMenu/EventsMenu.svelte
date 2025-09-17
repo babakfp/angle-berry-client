@@ -28,6 +28,7 @@
 
 <SideDrawer
     title="Events"
+    classContent="grid-rows-[auto_1fr] sm:grid-rows-[1fr]"
     onOpenChange={(details) => {
         if (details.open && unseenEventsLength._) {
             unseenEventsLength._ = 0

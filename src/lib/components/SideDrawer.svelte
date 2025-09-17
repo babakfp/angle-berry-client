@@ -10,13 +10,11 @@
         isOpen = $bindable(),
         DialogTrigger,
         children,
-        outer,
     }: {
         title?: string
         isOpen?: boolean
         DialogTrigger: Snippet
         children: Snippet
-        outer?: Snippet
     } = $props()
 
     beforeNavigate(() => (isOpen = false))
@@ -54,9 +52,6 @@
 
                 {@render children()}
             </Dialog.Content>
-
-            <!-- TODO: Is it the right place to put this? -->
-            {@render outer?.()}
         </Dialog.Positioner>
     </Portal>
 </Dialog.Root>

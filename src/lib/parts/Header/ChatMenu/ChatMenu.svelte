@@ -267,8 +267,6 @@
         />
     </form>
 
-    {#snippet outer()}
-        <ContextMenu {loggedInUser} />
-        <MessageDeleteModal />
-    {/snippet}
+    <ContextMenu {loggedInUser} />
+    <MessageDeleteModal />
 </SideDrawer>

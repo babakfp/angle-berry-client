@@ -28,7 +28,7 @@
 
 <div
     class={[
-        "bg-background/50 fixed inset-0 z-50 flex h-screen w-screen items-center justify-center",
+        "bg-background/50 fixed inset-0 z-50 flex h-dvh w-dvw items-center justify-center",
         isFullSize ? "p-0 sm:p-8" : "p-8",
         { hidden: !isOpen },
     ]}

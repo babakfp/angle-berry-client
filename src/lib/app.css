@@ -4,7 +4,7 @@
 
 @theme inline {
     --spacing-header: var(--header);
-    --spacing-screen-minus-header: var(--screen-minus-header);
+    --spacing-dvh-minus-header: var(--dvh-minus-header);
 
     --color-gray-50: var(--color-neutral-50);
     --color-gray-100: var(--color-neutral-100);
@@ -79,7 +79,7 @@
 @layer base {
     :root {
         --header: --spacing(16);
-        --screen-minus-header: calc(100vh - var(--header));
+        --dvh-minus-header: calc(100dvh - var(--header));
     }
     ::-webkit-scrollbar {
         @apply h-0 w-0;

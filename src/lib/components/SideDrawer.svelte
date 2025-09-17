@@ -35,10 +35,10 @@
         <Dialog.Positioner>
             <Dialog.Content
                 class={[
-                    "bg-background fixed inset-0 z-50 grid h-screen grid-rows-[auto_1fr_auto]",
+                    "bg-background fixed inset-0 z-50 grid h-dvh grid-rows-[auto_1fr_auto]",
                     "data-[state=open]:animate-in data-[state=open]:fade-in data-[state=open]:slide-in-from-bottom-4",
                     "data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=closed]:slide-out-to-bottom-4",
-                    "sm:top-header sm:h-screen-minus-header sm:left-auto sm:z-40 sm:w-96 sm:grid-rows-[1fr_auto]",
+                    "sm:top-header sm:h-dvh-minus-header sm:left-auto sm:z-40 sm:w-96 sm:grid-rows-[1fr_auto]",
                     "sm:data-[state=open]:slide-in-from-bottom-0 sm:data-[state=open]:slide-in-from-right-4",
                     "sm:data-[state=closed]:slide-out-to-bottom-0 sm:data-[state=closed]:slide-out-to-right-4",
                 ]}

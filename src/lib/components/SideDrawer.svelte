@@ -7,20 +7,21 @@
 
     let {
         title,
-        isOpen = $bindable(),
+        onOpenChange,
         DialogTrigger,
         children,
     }: {
         title?: string
-        isOpen?: boolean
+        onOpenChange?: Dialog.RootProps["onOpenChange"]
         DialogTrigger: Snippet
         children: Snippet
     } = $props()
 
-    beforeNavigate(() => (isOpen = false))
+    let open = $state(false)
+    beforeNavigate(() => (open = false))
 </script>
 
-<Dialog.Root bind:open={isOpen} modal={false}>
+<Dialog.Root bind:open modal={false} {onOpenChange}>
     {@render DialogTrigger()}
     <Portal>
         <!-- TODO: --z-index -->
@@ -44,7 +45,6 @@
             >
                 <Dialog.CloseTrigger
                     class="bg-background outline-inset sticky top-0 z-1 flex h-14 w-full items-center justify-between self-start border-b border-gray-50/5 px-4 sm:hidden"
-                    onclick={() => (isOpen = false)}
                 >
                     <Dialog.Title>{title || "Close"}</Dialog.Title>
                     <IconXRegular class="text-2xl" />

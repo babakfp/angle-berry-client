@@ -29,27 +29,14 @@
     let {
         loggedInUser,
         pbMessages,
-        isOpen = $bindable(false),
         DialogTrigger: MyDialogTrigger,
     }: {
         loggedInUser: UsersResponse
         pbMessages: ListResult<RealtimeMessagesResponse>
-        isOpen?: boolean
         DialogTrigger: Snippet
     } = $props()
 
     messages._ = pbMessages
-
-    $effect(() => {
-        if (!isOpen && messageIdToEdit._) {
-            messageIdToEdit._ = undefined
-        }
-    })
-    $effect(() => {
-        if (isOpen && unreadMessagesLength._) {
-            unreadMessagesLength._ = 0
-        }
-    })
 
     let messageInputValue = $state("")
 
@@ -147,7 +134,17 @@
     }
 </script>
 
-<SideDrawer title="Chat" bind:isOpen>
+<SideDrawer
+    title="Chat"
+    onOpenChange={(details) => {
+        if (!details.open && messageIdToEdit._) {
+            messageIdToEdit._ = undefined
+        }
+        if (details.open && unreadMessagesLength._) {
+            unreadMessagesLength._ = 0
+        }
+    }}
+>
     {#snippet DialogTrigger()}
         {@render MyDialogTrigger()}
     {/snippet}

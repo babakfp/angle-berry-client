@@ -14,27 +14,26 @@
     let {
         pbEvents,
         loggedInUser,
-        isOpen = $bindable(false),
         DialogTrigger: MyDialogTrigger,
     }: {
         pbEvents: ListResult<RealtimeEventsResponse>
         loggedInUser: UsersResponse
-        isOpen?: boolean
         DialogTrigger: Snippet
     } = $props()
 
     events._ = pbEvents
 
-    $effect(() => {
-        if (isOpen && unseenEventsLength._) {
-            unseenEventsLength._ = 0
-        }
-    })
-
     let ref = $state<HTMLDivElement>()
 </script>
 
-<SideDrawer title="Events" bind:isOpen>
+<SideDrawer
+    title="Events"
+    onOpenChange={(details) => {
+        if (details.open && unseenEventsLength._) {
+            unseenEventsLength._ = 0
+        }
+    }}
+>
     {#snippet DialogTrigger()}
         {@render MyDialogTrigger()}
     {/snippet}

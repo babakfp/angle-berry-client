@@ -6,17 +6,15 @@
         title,
         isDisabled,
         class: class_,
-        icon,
+        Icon,
         onclick,
     }: {
         title: string
         isDisabled?: boolean
         class?: string
-        icon: Component
+        Icon: Component
         onclick: MouseEventHandler<HTMLButtonElement>
     } = $props()
-
-    const SvelteComponent = $derived(icon)
 </script>
 
 <li class="flex">
@@ -31,7 +29,7 @@
         {onclick}
     >
         <div class="flex text-sm sm:text-base">
-            <SvelteComponent />
+            <Icon />
         </div>
         <span>{title}</span>
     </button>

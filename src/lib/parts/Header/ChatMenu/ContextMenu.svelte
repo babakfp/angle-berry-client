@@ -129,14 +129,14 @@
         {#if !selectedMessageIds._.length || (contextMenuTargetMessage._ && !selectedMessageIds._.includes(contextMenuTargetMessage._?.id))}
             <MessageContextMenuItem
                 title="Reply"
-                icon={IconArrowUUpLeftRegular}
+                Icon={IconArrowUUpLeftRegular}
                 onclick={replyMessage}
             />
         {/if}
         {#if contextMenuTargetMessage._?.expand.user.id === loggedInUser.id && !selectedMessageIds._.length}
             <MessageContextMenuItem
                 title="Edit"
-                icon={IconPencilSimpleRegular}
+                Icon={IconPencilSimpleRegular}
                 onclick={editMessage}
             />
         {/if}
@@ -144,7 +144,7 @@
             {#if contextMenuTargetMessage._ && selectedMessageIds._.includes(contextMenuTargetMessage._?.id)}
                 <MessageContextMenuItem
                     title={copyTimeoutId ? "Copied" : "Copy Selected as Text"}
-                    icon={copyTimeoutId ? IconCheckRegular : (
+                    Icon={copyTimeoutId ? IconCheckRegular : (
                         IconCopySimpleRegular
                     )}
                     isDisabled={!!copyTimeoutId}
@@ -154,7 +154,7 @@
         {:else}
             <MessageContextMenuItem
                 title={copyTimeoutId ? "Copied" : "Copy Text"}
-                icon={copyTimeoutId ? IconCheckRegular : IconCopySimpleRegular}
+                Icon={copyTimeoutId ? IconCheckRegular : IconCopySimpleRegular}
                 isDisabled={!!copyTimeoutId}
                 onclick={copyMessage}
             />
@@ -164,14 +164,14 @@
                 {#if contextMenuTargetMessage._ && selectedMessageIds._.includes(contextMenuTargetMessage._?.id)}
                     <MessageContextMenuItem
                         title="Delete Selected"
-                        icon={IconTrashSimpleRegular}
+                        Icon={IconTrashSimpleRegular}
                         onclick={setSelectedMessagesForDeletion}
                     />
                 {/if}
             {:else}
                 <MessageContextMenuItem
                     title="Delete"
-                    icon={IconTrashSimpleRegular}
+                    Icon={IconTrashSimpleRegular}
                     onclick={setAMessageForDeletion}
                 />
             {/if}
@@ -179,13 +179,13 @@
         {#if !selectedMessageIds._.includes(contextMenuTargetMessage._?.id || "")}
             <MessageContextMenuItem
                 title="Select"
-                icon={IconCheckCircleRegular}
+                Icon={IconCheckCircleRegular}
                 onclick={selectMessage}
             />
         {:else}
             <MessageContextMenuItem
                 title="Clear Selection"
-                icon={IconCheckCircleRegular}
+                Icon={IconCheckCircleRegular}
                 onclick={clearSelection}
             />
         {/if}

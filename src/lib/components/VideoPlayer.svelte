@@ -23,6 +23,9 @@
     {src}
     controls
     onloadstart={handleLoadStart}
-    controlsList="noplaybackrate"
+    controlsList="noplaybackrate nodownload"
     disablePictureInPicture
+    oncontextmenu={(e) => {
+        e.preventDefault()
+    }}
 ></video>

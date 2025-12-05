@@ -59,12 +59,6 @@
     />
 </Form>
 
-<FloatingActions
-    bind:selectedItemIds={$deleteForm.videos}
-    deleteActionAttribute="?/delete"
-    deleteInputNameAttribute="videos"
-/>
-
 <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
     {#each data.videos as video}
         <li>
@@ -77,3 +71,9 @@
         </li>
     {/each}
 </ul>
+
+<FloatingActions
+    bind:selectedItemIds={$deleteForm.videos}
+    deleteActionAttribute="?/delete"
+    deleteInputNameAttribute="videos"
+/>

@@ -1,6 +1,4 @@
 <script lang="ts">
-    import IconArrowDownRegular from "phosphor-icons-svelte/IconArrowDownRegular.svelte"
-    import IconArrowUpRegular from "phosphor-icons-svelte/IconArrowUpRegular.svelte"
     import toast from "svelte-hot-french-toast"
     import FormBase from "$lib/components/form/FormBase.svelte"
 
@@ -13,40 +11,17 @@
         deleteActionAttribute: `?/${string}`
         deleteInputNameAttribute: string
     } = $props()
-
-    let isPartlyVisible = $state(false)
-
-    $effect(() => {
-        if (!selectedItemIds.length) {
-            isPartlyVisible = false
-        }
-    })
 </script>
 
 <div
     class={[
         "fixed inset-x-0 bottom-4 z-50 px-4 duration-150 sm:bottom-8 sm:mx-auto sm:max-w-xl",
-        {
-            "hide translate-y-full": !selectedItemIds.length,
-            "translate-y-full sm:translate-y-[calc(100%+1rem)]":
-                isPartlyVisible,
-        },
+        { "hide translate-y-4 sm:translate-y-8": !selectedItemIds.length },
     ]}
 >
     <div
         class="group grid gap-2 rounded bg-gray-700 p-4 sm:flex sm:items-center sm:justify-between"
     >
-        <button
-            class="btn btn-gray supports-hover:hide supports-hover:group-hover:show absolute right-4 bottom-full h-8 w-8 -translate-y-2 p-0 duration-150"
-            onclick={() => (isPartlyVisible = !isPartlyVisible)}
-        >
-            {#if isPartlyVisible}
-                <IconArrowUpRegular />
-            {:else}
-                <IconArrowDownRegular />
-            {/if}
-        </button>
-
         <span class="text-center sm:order-2">
             Selected <b>{selectedItemIds.length}</b>
             {selectedItemIds.length > 1 ? "items" : "item"}
@@ -88,3 +63,5 @@
         </FormBase>
     </div>
 </div>
+
+<div class="h-24"></div>

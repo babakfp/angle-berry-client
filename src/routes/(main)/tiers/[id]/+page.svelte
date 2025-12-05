@@ -1,7 +1,6 @@
 <script lang="ts">
     import { PUBLIC_PB_URL } from "$env/static/public"
-    import TiersTable from "$lib/components/TiersTable.svelte"
-    import TiersTableRow from "$lib/components/TiersTableRow.svelte"
+    import * as TiersTable from "$lib/components/TiersTable"
     import VideoPlayer from "$lib/components/VideoPlayer.svelte"
 
     let { data } = $props()
@@ -14,13 +13,13 @@
 <h1 class="text-4xl font-bold text-gray-50">{data?.tier.name}</h1>
 
 <!-- I don't need "tiers" here becaus we only use currentTier -->
-<TiersTable class="mt-8">
-    <TiersTableRow
+<TiersTable.Root class="mt-8">
+    <TiersTable.Row
         loggedInUser={data.loggedInUser}
         tier={data.tier}
         isCurrent={true}
     />
-</TiersTable>
+</TiersTable.Root>
 
 {#if !data.isTierAccessed}
     <p class="mt-8">

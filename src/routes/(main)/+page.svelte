@@ -1,6 +1,5 @@
 <script lang="ts">
-    import TiersTable from "$lib/components/TiersTable.svelte"
-    import TiersTableRow from "$lib/components/TiersTableRow.svelte"
+    import * as TiersTable from "$lib/components/TiersTable"
 
     let { data } = $props()
 </script>
@@ -20,11 +19,11 @@
     </p>
 {/if}
 
-<TiersTable>
+<TiersTable.Root>
     {#each data.tiers as tier}
-        <TiersTableRow loggedInUser={data.loggedInUser} {tier} />
+        <TiersTable.Row loggedInUser={data.loggedInUser} {tier} />
     {/each}
-</TiersTable>
+</TiersTable.Root>
 
 <div class="mt-8">
     <a class="link" href="https://t.me/adminTelegramUsername">Contact</a>

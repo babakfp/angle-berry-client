@@ -21,7 +21,7 @@
         "@types/node": "24.10.1",
         "autoprefixer": "10.4.22",
         "phosphor-icons-svelte": "2.1.0",
-        "pocketbase": "0.26.4",
+        "pocketbase": "0.26.5",
         "pocketbase-types": "3.0.0",
         "prettier": "3.7.4",
         "prettier-plugin-svelte": "3.4.0",

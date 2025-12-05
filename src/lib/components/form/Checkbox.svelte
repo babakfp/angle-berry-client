@@ -1,7 +1,7 @@
 <script lang="ts">
     import IconCheckSquareRegular from "phosphor-icons-svelte/IconCheckSquareRegular.svelte"
     import IconSquareRegular from "phosphor-icons-svelte/IconSquareRegular.svelte"
-    import type { ChangeEventHandler } from "svelte/elements"
+    import type { ChangeEventHandler, ClassValue } from "svelte/elements"
     import Description from "./Description.svelte"
 
     let {
@@ -17,7 +17,7 @@
         onchange,
         ...rest
     }: {
-        class?: string
+        class?: ClassValue
         checked?: boolean
         value?: string
         group?: string[]

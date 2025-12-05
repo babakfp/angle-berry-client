@@ -56,7 +56,7 @@
         ]}
     >
         <div
-            class="inline-flex [&:has(input:focus-visible)]:outline [&:has(input:focus-visible)]:outline-2 [&:has(input:focus-visible)]:outline-[orange]"
+            class="inline-flex [&:has(input:focus-visible)]:outline-2 [&:has(input:focus-visible)]:outline-[orange]"
         >
             <input
                 class="pointer-events-none absolute opacity-0"

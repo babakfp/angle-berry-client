@@ -1,4 +1,6 @@
 <script lang="ts">
+    import type { EventHandler, MouseEventHandler } from "svelte/elements"
+
     let {
         src,
     }: {
@@ -6,14 +8,18 @@
     } = $props()
 
     // When 1 video player volume changes, make other video player volume change too.
-    const handleVolumeChange = (e: Event) => {
+    const handleVolumeChange: EventHandler<Event, HTMLVideoElement> = (e) => {
         document.querySelectorAll("video").forEach((videoElement) => {
             videoElement.volume = (e.target as HTMLVideoElement).volume
         })
     }
 
-    const handleLoadStart = (e: Event) => {
-        ;(e.target as HTMLVideoElement).volume = 0.25
+    const handleLoadStart: EventHandler<Event, HTMLVideoElement> = (e) => {
+        e.currentTarget.volume = 0.25
+    }
+
+    const handleContextMenu: MouseEventHandler<HTMLVideoElement> = (e) => {
+        e.preventDefault()
     }
 </script>
 
@@ -25,7 +31,5 @@
     onloadstart={handleLoadStart}
     controlsList="noplaybackrate nodownload"
     disablePictureInPicture
-    oncontextmenu={(e) => {
-        e.preventDefault()
-    }}
+    oncontextmenu={handleContextMenu}
 ></video>

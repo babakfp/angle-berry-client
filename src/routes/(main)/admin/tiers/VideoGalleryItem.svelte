@@ -25,6 +25,5 @@
         bind:group
         {value}
         {name}
-        label={checked ? "Selected" : ""}
     />
 </div>

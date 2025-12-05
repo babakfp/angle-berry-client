@@ -7,16 +7,14 @@ export default {
         adapter: adapter(),
     },
     preprocess: vitePreprocess(),
-    onwarn: (warning, handler) => {
-        if (
-            warning.code.startsWith("a11y_")
-            || warning.code === "avoid_mouse_events_on_document"
-        )
-            return
-        handler(warning)
-    },
     compilerOptions: {
         discloseVersion: false,
         modernAst: true,
+        warningFilter: (warning) => {
+            return (
+                !warning.code.startsWith("a11y_")
+                && warning.code !== "avoid_mouse_events_on_document"
+            )
+        },
     },
 }

@@ -1,7 +1,7 @@
 <script lang="ts">
     import { PUBLIC_PB_URL } from "$env/static/public"
     import * as TiersTable from "$lib/components/TiersTable"
-    import VideoPlayer from "$lib/components/VideoPlayer.svelte"
+    import Video from "$lib/components/Video.svelte"
 
     let { data } = $props()
 </script>
@@ -34,7 +34,7 @@
     <ul class="mt-8 grid gap-8">
         {#each data.tier.expand?.videos as video}
             <li>
-                <VideoPlayer
+                <Video
                     src="{PUBLIC_PB_URL}/api/files/{video.collectionName}/{video.id}/{video.file}"
                 />
             </li>

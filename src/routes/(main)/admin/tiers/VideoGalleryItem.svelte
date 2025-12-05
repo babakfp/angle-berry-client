@@ -1,6 +1,6 @@
 <script lang="ts">
     import Checkbox from "$lib/components/form/Checkbox.svelte"
-    import VideoPlayer from "$lib/components/VideoPlayer.svelte"
+    import Video from "$lib/components/Video.svelte"
 
     let {
         src,
@@ -18,7 +18,7 @@
 </script>
 
 <div class="grid gap-1">
-    <VideoPlayer {src} />
+    <Video {src} />
     <Checkbox
         class={["btn", checked ? "btn-brand!" : "btn-gray-outline"]}
         {checked}

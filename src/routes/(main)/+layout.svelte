@@ -171,7 +171,7 @@
 />
 
 <AnimatePageNavigation
-    class="min-h-dvh-minus-header container grid content-start items-start py-12"
+    class="min-h-dvh-minus-header container grid content-start items-start pt-12 pb-24"
 >
     {@render children()}
 </AnimatePageNavigation>

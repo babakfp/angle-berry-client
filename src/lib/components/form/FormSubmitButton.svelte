@@ -1,5 +1,6 @@
 <script lang="ts">
     import type { Snippet } from "svelte"
+    import type { ClassValue } from "svelte/elements"
 
     let {
         disabled,
@@ -7,7 +8,7 @@
         children,
     }: {
         disabled?: boolean
-        class?: string
+        class?: ClassValue
         children?: Snippet
     } = $props()
 </script>
@@ -15,8 +16,8 @@
 <button
     type="submit"
     class={[
-        class_ || "btn-brand",
-        "btn h-14 w-full will-change-transform active:scale-95",
+        class_,
+        "btn btn-brand h-14 w-full will-change-transform active:translate-y-px",
     ]}
     {disabled}
 >

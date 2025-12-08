@@ -1,12 +1,14 @@
 <script lang="ts">
+    import type { Snippet } from "svelte"
+
     let {
         class: class_,
-        text,
         type,
+        children,
     }: {
         class?: string
-        text: string
         type: "error" | "success"
+        children: Snippet
     } = $props()
 </script>
 
@@ -20,5 +22,5 @@
         },
     ]}
 >
-    {text}
+    {@render children()}
 </p>

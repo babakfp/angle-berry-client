@@ -103,9 +103,9 @@
 
     {#if message}
         {#if isRedirecting}
-            <Description type="success" text={message} />
+            <Description type="success">{message}</Description>
         {:else}
-            <Description type="error" text={message} />
+            <Description type="error">{message}</Description>
         {/if}
     {/if}
 </FormBase>

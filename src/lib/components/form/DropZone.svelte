@@ -71,6 +71,6 @@
     </label>
 
     {#if error}
-        <Description class="mt-1" type="error" text={error} />
+        <Description class="mt-1" type="error">{error}</Description>
     {/if}
 </div>

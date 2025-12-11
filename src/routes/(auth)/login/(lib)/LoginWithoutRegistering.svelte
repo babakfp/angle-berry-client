@@ -26,24 +26,24 @@
             class="mt-2 list-inside list-disc space-y-1 rounded bg-gray-700 p-4 text-xs"
         >
             <li class="space-y-1">
-                <b>Admin</b>
+                <span class="font-semibold">Admin</span>
                 <ul class="list-inside list-disc space-y-1 pl-4">
                     <li>
-                        Username: <span class="select-text">admin</span>
+                        Username: <code class="select-text">admin</code>
                     </li>
                     <li>
-                        Password: <span class="select-text">adminadmin</span>
+                        Password: <code class="select-text">adminadmin</code>
                     </li>
                 </ul>
             </li>
             <li class="space-y-1">
-                <b>User</b>
+                <span class="font-semibold">User</span>
                 <ul class="list-inside list-disc space-y-1 pl-4">
                     <li>
-                        Username: <span class="select-text">user</span>
+                        Username: <code class="select-text">user</code>
                     </li>
                     <li>
-                        Password: <span class="select-text">useruser</span>
+                        Password: <code class="select-text">useruser</code>
                     </li>
                 </ul>
             </li>

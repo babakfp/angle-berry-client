@@ -127,7 +127,7 @@
     <OutClick onOutClick={handleTriggerClose} excludeElements={trigger}>
         <div
             class={[
-                "absolute top-11 z-20 w-full -translate-y-2 duration-150",
+                "absolute top-11 z-20 w-full -translate-y-2 overflow-hidden rounded-t rounded-b bg-gray-700 duration-150",
                 isOpen ? "translate-y-2!" : "hide",
             ]}
         >
@@ -137,7 +137,7 @@
                         <li class="group">
                             <button
                                 type="button"
-                                class="outline-inset flex w-full items-center gap-2 bg-gray-700 px-4 py-2 text-sm group-first:rounded-t group-first:pt-4 group-last:rounded-b group-last:pb-4 hover:bg-gray-600"
+                                class="outline-inset flex w-full items-center gap-2 px-4 py-2 text-sm group-first:pt-4 group-last:pb-4 hover:bg-gray-600"
                                 onclick={() => {
                                     if (isMultiple) {
                                         handleSelectToggle(option.value)

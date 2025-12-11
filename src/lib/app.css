@@ -28,9 +28,7 @@
     --radius-md: initial;
     --radius: 0.375rem; /* --radius-md */
 
-    --font-sans: "Recursive";
-    --font-mono: "Recursive";
-    --font-mono--font-variation-settings: "MONO" 1;
+    --font-sans: "Jost";
 
     --spacing-header: var(--header);
     --spacing-dvh-minus-header: var(--dvh-minus-header);

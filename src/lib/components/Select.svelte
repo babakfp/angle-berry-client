@@ -106,12 +106,27 @@
 />
 <svelte:document onmouseleave={handleTriggerClose} />
 
-<div class="relative grid gap-2 {class_}">
+<div class="grid gap-2 {class_}">
+    <div class="relative">
+        {@render Trigger()}
+        {@render SelectOptions()}
+    </div>
+
+    {#if selectedOptions.length && isMultiple}
+        {@render SelectedOptions()}
+    {/if}
+
+    {#if error}
+        <Description type="error">{error}</Description>
+    {/if}
+</div>
+
+{#snippet Trigger()}
     <button
         type="button"
         bind:this={trigger}
         class={[
-            "z-30 flex h-11 w-full items-center justify-between rounded bg-gray-700 px-4 hover:bg-gray-600",
+            "z-2 flex h-11 w-full items-center justify-between rounded bg-gray-700 px-4 hover:bg-gray-600",
             { "pointer-events-none opacity-50": readonly },
         ]}
         onclick={handleTriggerToggle}
@@ -123,84 +138,91 @@
         {/if}
         <IconCaretDownRegular class="text-gray-500" />
     </button>
+{/snippet}
 
-    <OutClick onOutClick={handleTriggerClose} excludeElements={trigger}>
-        <div
-            class={[
-                "absolute top-11 z-20 w-full -translate-y-2 overflow-hidden rounded-t rounded-b bg-gray-700 duration-150",
-                isOpen ? "translate-y-2!" : "hide",
-            ]}
-        >
-            {#if options.length}
-                <ul>
-                    {#each options as option}
-                        <li class="group">
-                            <button
-                                type="button"
-                                class="outline-inset flex w-full items-center gap-2 px-4 py-2 text-sm group-first:pt-4 group-last:pb-4 hover:bg-gray-600"
-                                onclick={() => {
-                                    if (isMultiple) {
-                                        handleSelectToggle(option.value)
-                                    } else {
-                                        handleSingleSelect(option.value)
-                                        handleTriggerClose()
-                                    }
-                                }}
-                            >
-                                {#if isMultiple}
-                                    {#if isSelected(option.value, selectedOptions)}
-                                        <IconCheckSquareRegular
-                                            class="text-xl"
-                                        />
-                                    {:else}
-                                        <IconSquareRegular class="text-xl" />
-                                    {/if}
-                                {:else}
-                                    <IconCheckCircleRegular
-                                        class={[
-                                            "text-xl",
-                                            {
-                                                hide: !isSingleSelected(
-                                                    option.value,
-                                                    selectedOption,
-                                                ),
-                                            },
-                                        ]}
-                                    />
-                                {/if}
-                                <span>{option.label}</span>
-                            </button>
-                        </li>
-                    {/each}
-                </ul>
-            {:else}
-                <p>No options to select!</p>
-            {/if}
-        </div>
+{#snippet SelectOptions()}
+    <OutClick
+        onOutClick={handleTriggerClose}
+        excludeElements={trigger}
+        data-state={isOpen ? "open" : "closed"}
+        hidden={!isOpen}
+        class={[
+            "absolute inset-x-0 top-full z-1 w-full translate-y-2 overflow-hidden rounded-t rounded-b bg-gray-700",
+            "data-[state=open]:animate-in data-[state=open]:fade-in data-[state=open]:slide-in-from-top-2",
+            "data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=closed]:slide-out-to-top-2",
+        ]}
+    >
+        {#if options.length}
+            <ul>
+                {#each options as option}
+                    {@render SelectOption(option)}
+                {/each}
+            </ul>
+        {:else}
+            <p>No options to select!</p>
+        {/if}
     </OutClick>
+{/snippet}
 
-    {#if selectedOptions.length && isMultiple}
-        <ul class="flex flex-wrap gap-2">
-            {#each selectedOptions as option}
-                <li class="flex items-center rounded bg-gray-700">
-                    <button
-                        type="button"
-                        class="outline-inset flex p-1 text-gray-500 duration-150 hover:text-gray-50 {(
-                            readonly
-                        ) ?
-                            'pointer-events-none opacity-50'
-                        :   ''}"
-                        onclick={() => handleDeselect(option.value)}
-                    >
-                        <IconXSquareRegular />
-                    </button>
-                    <span class="pr-2 text-xs">{option.label}</span>
-                </li>
-            {/each}
-        </ul>
-    {/if}
+{#snippet SelectOption(option: Option)}
+    <li class="group">
+        <button
+            type="button"
+            class="outline-inset flex w-full items-center gap-2 px-4 py-2 text-sm group-first:pt-4 group-last:pb-4 hover:bg-gray-600"
+            onclick={() => {
+                if (isMultiple) {
+                    handleSelectToggle(option.value)
+                } else {
+                    handleSingleSelect(option.value)
+                    handleTriggerClose()
+                }
+            }}
+        >
+            {#if isMultiple}
+                {#if isSelected(option.value, selectedOptions)}
+                    <IconCheckSquareRegular class="text-xl" />
+                {:else}
+                    <IconSquareRegular class="text-xl" />
+                {/if}
+            {:else}
+                <IconCheckCircleRegular
+                    class={[
+                        "text-xl",
+                        {
+                            hide: !isSingleSelected(
+                                option.value,
+                                selectedOption,
+                            ),
+                        },
+                    ]}
+                />
+            {/if}
+            <span>{option.label}</span>
+        </button>
+    </li>
+{/snippet}
 
-    {#if error}
-        <Description class="mt-1" type="error">{error}</Description>
-    {/if}
-</div>
+{#snippet SelectedOptions()}
+    <ul class="flex flex-wrap gap-2">
+        {#each selectedOptions as option}
+            {@render SelectedOption(option)}
+        {/each}
+    </ul>
+{/snippet}
+
+{#snippet SelectedOption(option: Option)}
+    <li class="flex items-center rounded bg-gray-700">
+        <button
+            type="button"
+            class="outline-inset flex p-1 text-gray-500 duration-150 hover:text-gray-50 {(
+                readonly
+            ) ?
+                'pointer-events-none opacity-50'
+            :   ''}"
+            onclick={() => handleDeselect(option.value)}
+        >
+            <IconXSquareRegular />
+        </button>
+        <span class="pr-2 text-xs">{option.label}</span>
+    </li>
+{/snippet}

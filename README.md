@@ -28,7 +28,6 @@ This project consists of two repositories:
 - [@tailwindcss/cli](https://npmjs.com/package/@tailwindcss/cli)
 - [@tailwindcss/vite](https://npmjs.com/package/@tailwindcss/vite)
 - [@types/node](https://npmjs.com/package/@types/node)
-- [autoprefixer](https://npmjs.com/package/autoprefixer)
 - [phosphor-icons-svelte](https://npmjs.com/package/phosphor-icons-svelte)
 - [pocketbase](https://npmjs.com/package/pocketbase)
 - [pocketbase-types](https://npmjs.com/package/pocketbase-types)

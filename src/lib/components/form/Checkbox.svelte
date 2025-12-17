@@ -51,7 +51,7 @@
     <label
         class={[
             class_,
-            "inline-flex cursor-pointer items-center gap-2 hover:text-gray-50",
+            "inline-flex items-center gap-2 hover:text-gray-50",
             { "pointer-events-none opacity-50": disabled || readonly },
         ]}
     >

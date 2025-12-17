@@ -4,9 +4,7 @@
 </script>
 
 <Collapsible.Root>
-    <Collapsible.Trigger
-        class="btn btn-gray-light cursor-pointer list-none gap-2 text-xs"
-    >
+    <Collapsible.Trigger class="btn btn-gray-light list-none gap-2 text-xs">
         Login Without Registering
         <Collapsible.Indicator class="group">
             <IconCaretDownBold

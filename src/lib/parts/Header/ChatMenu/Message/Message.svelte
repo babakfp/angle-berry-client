@@ -63,10 +63,7 @@
     <div
         class={[
             "relative grid gap-1.5 px-4 py-2",
-            {
-                "bg-blue-400/10": selectedMessageIds._.includes(message.id),
-                "cursor-pointer": selectedMessageIds._.length,
-            },
+            { "bg-blue-400/10": selectedMessageIds._.includes(message.id) },
         ]}
         transition:shrinkHeight={{ duration: 200 }}
         oncontextmenu={(e) => {

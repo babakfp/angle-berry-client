@@ -1,10 +1,11 @@
 <script lang="ts">
     import IconSpinnerRegular from "phosphor-icons-svelte/IconSpinnerRegular.svelte"
-    import { createEventDispatcher, type Snippet } from "svelte"
+    import { createEventDispatcher } from "svelte"
     import toast from "svelte-hot-french-toast"
-    import type { SuperForm } from "sveltekit-superforms/client"
     import Description from "$lib/components/form/Description.svelte"
-    import FormBase from "$lib/components/form/FormBase.svelte"
+    import FormBase, {
+        type FormBaseProps,
+    } from "$lib/components/form/FormBase.svelte"
     import FormSubmitButton from "$lib/components/form/FormSubmitButton.svelte"
 
     const dispatch = createEventDispatcher()
@@ -23,13 +24,7 @@
         message: string
         submitButtonText: string
         submitButtonClass?: string
-        errors?: SuperForm<Record<string, unknown>>["errors"]
-        validateForm?: SuperForm<Record<string, unknown>>["validateForm"]
-        action?: string
-        allowUpload?: boolean
-        class?: string
-        children?: Snippet
-    } = $props()
+    } & FormBaseProps = $props()
 
     let isSubmitting = $state(false)
     let isRedirecting = $state(false)

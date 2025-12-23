@@ -1,3 +1,16 @@
+<script module lang="ts">
+    export type FormBaseProps = {
+        errors?: SuperForm<Record<string, unknown>>["errors"]
+        validateForm?: SuperForm<Record<string, unknown>>["validateForm"]
+        action?: string
+        allowUpload?: boolean
+        class?: ClassValue
+        children?: Snippet
+    }
+
+    //
+</script>
+
 <script lang="ts">
     import type { SubmitFunction } from "@sveltejs/kit"
     import { createEventDispatcher, type Snippet } from "svelte"
@@ -14,14 +27,7 @@
         allowUpload,
         class: class_,
         children,
-    }: {
-        errors?: SuperForm<Record<string, unknown>>["errors"]
-        validateForm?: SuperForm<Record<string, unknown>>["validateForm"]
-        action?: string
-        allowUpload?: boolean
-        class?: ClassValue
-        children?: Snippet
-    } = $props()
+    }: FormBaseProps = $props()
 
     const handleFormSubmit: SubmitFunction = async ({ cancel }) => {
         dispatch("submit")

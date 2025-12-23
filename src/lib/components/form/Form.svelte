@@ -33,22 +33,6 @@
 
     let isSubmitting = $state(false)
     let isRedirecting = $state(false)
-
-    const handleOnSubmit = () => {
-        isSubmitting = true
-        message = ""
-    }
-    const handleOnInvalid = () => {
-        isSubmitting = false
-        message = ""
-    }
-    const handleOnReturn = () => {
-        isSubmitting = false
-    }
-    const handleOnRedirect = () => {
-        dispatch("redirect")
-        isRedirecting = true
-    }
 </script>
 
 <FormBase
@@ -61,10 +45,21 @@
     {allowUpload}
     {errors}
     {validateForm}
-    on:submit={handleOnSubmit}
-    on:invalid={handleOnInvalid}
-    on:return={handleOnReturn}
-    on:redirect={handleOnRedirect}
+    on:submit={() => {
+        isSubmitting = true
+        message = ""
+    }}
+    on:invalid={() => {
+        isSubmitting = false
+        message = ""
+    }}
+    on:return={() => {
+        isSubmitting = false
+    }}
+    on:redirect={() => {
+        dispatch("redirect")
+        isRedirecting = true
+    }}
     on:error
     on:success
     on:failure={(e) => {

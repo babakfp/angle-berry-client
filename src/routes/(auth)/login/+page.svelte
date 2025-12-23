@@ -38,7 +38,7 @@
         submitButtonText="Login"
         {errors}
         {validateForm}
-        on:redirect={() => {
+        onRedirect={() => {
             toast.success("Logged in successfully!", {
                 position: "bottom-end",
             })

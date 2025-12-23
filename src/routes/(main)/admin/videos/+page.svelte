@@ -41,7 +41,7 @@
     submitButtonText="Upload"
     errors={uploadFormErrors}
     validateForm={uploadFormValidateForm}
-    on:success={() => {
+    onSuccess={() => {
         videos = undefined
         toast.success("Uploaded successfully!", {
             position: "bottom-end",

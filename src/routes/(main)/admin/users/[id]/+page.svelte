@@ -52,7 +52,7 @@
         :   ""}
         {errors}
         {validateForm}
-        on:redirect={() => {
+        onRedirect={() => {
             toast.success("Updated successfully!", {
                 position: "bottom-end",
             })

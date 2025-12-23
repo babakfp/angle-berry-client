@@ -40,7 +40,7 @@
         <FormBase
             class="sm:order-3"
             action={deleteActionAttribute}
-            on:success={() => {
+            onSuccess={() => {
                 selectedItemIds = []
                 toast.success("Deleted successfully!", {
                     position: "bottom-end",

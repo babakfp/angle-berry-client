@@ -34,7 +34,7 @@
         submitButtonText="Create"
         {errors}
         {validateForm}
-        on:redirect={() => {
+        onRedirect={() => {
             toast.success("Created successfully!", {
                 position: "bottom-end",
             })

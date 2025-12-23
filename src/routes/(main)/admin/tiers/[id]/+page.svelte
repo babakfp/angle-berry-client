@@ -68,7 +68,7 @@
         submitButtonText="Update"
         errors={updateFormErrors}
         validateForm={updateFormValidate}
-        on:redirect={() => {
+        onRedirect={() => {
             toast.success("Updated successfully!", {
                 position: "bottom-end",
             })
@@ -144,7 +144,7 @@
         submitButtonClass="btn-danger"
         errors={deleteFormErrors}
         validateForm={deleteFormValidate}
-        on:redirect={() => {
+        onRedirect={() => {
             toast.success("Deleted successfully!", {
                 position: "bottom-end",
             })

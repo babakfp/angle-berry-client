@@ -36,7 +36,7 @@
         submitButtonText="Register"
         {errors}
         {validateForm}
-        on:redirect={() => {
+        onRedirect={() => {
             toast.success("Registered successfully!", {
                 position: "bottom-end",
             })

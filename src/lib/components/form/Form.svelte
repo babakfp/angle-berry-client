@@ -1,14 +1,14 @@
-<script lang="ts">
+<script
+    lang="ts"
+    generics="Success extends Record<string, unknown> | undefined, Failure extends Record<string, unknown> | undefined"
+>
     import IconSpinnerRegular from "phosphor-icons-svelte/IconSpinnerRegular.svelte"
-    import { createEventDispatcher } from "svelte"
     import toast from "svelte-hot-french-toast"
     import Description from "$lib/components/form/Description.svelte"
     import FormBase, {
         type FormBaseProps,
     } from "$lib/components/form/FormBase.svelte"
     import FormSubmitButton from "$lib/components/form/FormSubmitButton.svelte"
-
-    const dispatch = createEventDispatcher()
 
     let {
         message = $bindable(),
@@ -20,11 +20,17 @@
         allowUpload,
         class: class_,
         children,
+        onError,
+        onRedirect,
+        onSuccess,
     }: {
         message: string
         submitButtonText: string
         submitButtonClass?: string
-    } & FormBaseProps = $props()
+    } & Omit<
+        FormBaseProps<Success, Failure>,
+        "onSubmit" | "onInvalid" | "onReturn"
+    > = $props()
 
     let isSubmitting = $state(false)
     let isRedirecting = $state(false)
@@ -40,25 +46,27 @@
     {allowUpload}
     {errors}
     {validateForm}
-    on:submit={() => {
+    onSubmit={() => {
         isSubmitting = true
         message = ""
     }}
-    on:invalid={() => {
+    onInvalid={() => {
         isSubmitting = false
         message = ""
     }}
-    on:return={() => {
+    onReturn={() => {
         isSubmitting = false
     }}
-    on:redirect={() => {
-        dispatch("redirect")
+    onRedirect={() => {
+        onRedirect?.()
         isRedirecting = true
     }}
-    on:error
-    on:success
-    on:failure={(e) => {
-        toast.error(e.detail.message, {
+    {onError}
+    {onSuccess}
+    onFailure={(result) => {
+        const message = String(result.data?.message)
+        if (!message) return
+        toast.error(message, {
             position: "bottom-end",
         })
     }}

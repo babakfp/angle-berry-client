@@ -11,14 +11,14 @@
         errors,
         validateForm,
         action,
-        canUpload,
+        allowUpload,
         class: class_,
         children,
     }: {
         errors?: SuperForm<Record<string, unknown>>["errors"]
         validateForm?: SuperForm<Record<string, unknown>>["validateForm"]
         action?: string
-        canUpload?: boolean
+        allowUpload?: boolean
         class?: ClassValue
         children?: Snippet
     } = $props()
@@ -50,7 +50,7 @@
     use:enhance={handleFormSubmit}
     novalidate
     {action}
-    enctype={canUpload ? "multipart/form-data" : undefined}
+    enctype={allowUpload ? "multipart/form-data" : undefined}
 >
     {@render children?.()}
 </form>

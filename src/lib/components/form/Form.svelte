@@ -16,7 +16,7 @@
         errors,
         validateForm,
         action,
-        canUpload,
+        allowUpload,
         class: class_,
         children,
     }: {
@@ -26,7 +26,7 @@
         errors?: SuperForm<Record<string, unknown>>["errors"]
         validateForm?: SuperForm<Record<string, unknown>>["validateForm"]
         action?: string
-        canUpload?: boolean
+        allowUpload?: boolean
         class?: string
         children?: Snippet
     } = $props()
@@ -58,7 +58,7 @@
         { "pointer-events-none": isSubmitting || isRedirecting },
     ]}
     {action}
-    {canUpload}
+    {allowUpload}
     {errors}
     {validateForm}
     on:submit={handleOnSubmit}

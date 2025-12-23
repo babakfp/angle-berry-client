@@ -77,14 +77,19 @@
                                     ...messages._.items,
                                 ]
                             }
-                            unreadMessagesLength._ += 1
+
+                            if (e.record.user !== data.loggedInUser.id) {
+                                unreadMessagesLength._ += 1
+                            }
                         } else if (e.action === "delete") {
                             if (messages._) {
                                 messages._.items = messages._.items.filter(
                                     (m) => m.id !== e.record.id,
                                 )
                             }
-                            unreadMessagesLength._ -= 1
+                            if (e.record.user !== data.loggedInUser.id) {
+                                unreadMessagesLength._ -= 1
+                            }
                         }
                     },
                     { requestKey: "messages-subscribe" },

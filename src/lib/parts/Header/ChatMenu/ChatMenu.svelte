@@ -169,7 +169,7 @@
                         <button type="button">Try again</button>
                     {:else}
                         <p>Fetching older messages</p>
-                        <IconSpinnerRegular class="ml-2 animate-spin text-xl" />
+                        <IconSpinnerRegular class="animate-spin text-xl" />
                     {/if}
                 </div>
             {/if}

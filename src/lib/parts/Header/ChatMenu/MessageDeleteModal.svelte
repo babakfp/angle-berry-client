@@ -86,7 +86,7 @@
         >
             <span>{isDeletingMessage ? "Deleting" : "Delete"}</span>
             {#if isDeletingMessage}
-                <IconSpinnerRegular class="ml-2 animate-spin" />
+                <IconSpinnerRegular class="animate-spin" />
             {/if}
         </button>
     {/snippet}

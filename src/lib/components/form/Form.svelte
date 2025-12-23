@@ -79,9 +79,13 @@
         class={submitButtonClass}
         disabled={isSubmitting || isRedirecting}
     >
-        <span>{isRedirecting ? "Redirecting" : submitButtonText}</span>
+        <span>
+            {isSubmitting ? "Submitting"
+            : isRedirecting ? "Redirecting"
+            : submitButtonText}
+        </span>
         {#if isSubmitting || isRedirecting}
-            <IconSpinnerRegular class="ml-2 animate-spin text-2xl" />
+            <IconSpinnerRegular class="animate-spin text-2xl" />
         {/if}
     </FormSubmitButton>
 

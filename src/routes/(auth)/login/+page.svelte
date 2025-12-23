@@ -31,7 +31,7 @@
     description="Welcome back! Please enter your details."
     footerText="Don't have an account?"
     footerLinkText="Register here"
-    FooterLinkHref="/register"
+    footerLinkHref="/register"
 >
     <Form
         message={form?.message}

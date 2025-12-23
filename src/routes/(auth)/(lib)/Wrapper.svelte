@@ -6,14 +6,14 @@
         description,
         footerText,
         footerLinkText,
-        FooterLinkHref,
+        footerLinkHref,
         children,
     }: {
         title: string
         description: string
         footerText: string
         footerLinkText: string
-        FooterLinkHref: string
+        footerLinkHref: string
         children: Snippet
     } = $props()
 </script>
@@ -27,7 +27,7 @@
 
 <p class="mt-8 text-sm text-gray-400">
     {footerText}
-    <a class="text-gray-50 underline" href={FooterLinkHref}>
+    <a class="text-gray-50 underline" href={footerLinkHref}>
         {footerLinkText}
     </a>
 </p>

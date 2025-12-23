@@ -29,7 +29,7 @@
     description="Welcome, please enter your details."
     footerText="Already have an account?"
     footerLinkText="Login here"
-    FooterLinkHref="/login"
+    footerLinkHref="/login"
 >
     <Form
         message={form?.message}

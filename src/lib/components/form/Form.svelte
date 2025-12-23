@@ -24,7 +24,7 @@
         onRedirect,
         onSuccess,
     }: {
-        message: string
+        message?: string
         submitButtonText: string
         submitButtonClass?: string
     } & Omit<

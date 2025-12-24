@@ -5,8 +5,9 @@ import {
     type TiersResponse,
     type VideosResponse,
 } from "$lib/utilities/pb"
+import type { PageServerLoad } from "./$types"
 
-export const load = async ({ locals, params }) => {
+export const load: PageServerLoad = async ({ locals, params }) => {
     if (!locals.loggedInUser) redirect(303, "/login")
 
     try {

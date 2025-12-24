@@ -2,8 +2,9 @@ import { fail, redirect } from "@sveltejs/kit"
 import { superValidate } from "sveltekit-superforms/server"
 import { pbHandleFormActionError } from "$lib/utilities/pb/helpers"
 import { schema } from "../(lib)/schema"
+import type { PageServerLoad } from "./$types"
 
-export const load = async ({ locals }) => {
+export const load: PageServerLoad = async ({ locals }) => {
     if (locals.loggedInUser) {
         redirect(303, "/")
     }

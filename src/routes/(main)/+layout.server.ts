@@ -7,8 +7,9 @@ import {
     type RealtimeMessagesResponse,
     type TiersResponse,
 } from "$lib/utilities/pb"
+import type { LayoutServerLoad } from "./$types"
 
-export const load = async ({ locals }) => {
+export const load: LayoutServerLoad = async ({ locals }) => {
     if (!locals.loggedInUser) redirect(303, "/login")
 
     try {

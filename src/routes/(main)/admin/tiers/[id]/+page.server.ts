@@ -6,7 +6,7 @@ import {
     pbHandleFormActionError,
 } from "$lib/utilities/pb"
 import { schema } from "../schema"
-import type { PageServerLoad } from "./$types"
+import type { Actions, PageServerLoad } from "./$types"
 
 export const load: PageServerLoad = async ({ locals, params }) => {
     if (!locals.loggedInUser) redirect(303, "/login")
@@ -75,4 +75,4 @@ export const actions = {
 
         redirect(303, "/admin/tiers")
     },
-}
+} satisfies Actions

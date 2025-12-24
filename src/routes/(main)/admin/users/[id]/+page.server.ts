@@ -6,7 +6,7 @@ import {
     pbHandleClientResponseError,
     pbHandleFormActionError,
 } from "$lib/utilities/pb"
-import type { PageServerLoad } from "./$types"
+import type { Actions, PageServerLoad } from "./$types"
 import { schema } from "./schema"
 
 export const load: PageServerLoad = async ({ locals, params }) => {
@@ -74,4 +74,4 @@ export const actions = {
 
         redirect(303, "/admin/users")
     },
-}
+} satisfies Actions

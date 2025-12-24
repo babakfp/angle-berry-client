@@ -5,7 +5,7 @@ import {
     pbHandleClientResponseError,
     pbHandleFormActionError,
 } from "$lib/utilities/pb"
-import type { PageServerLoad } from "./$types"
+import type { Actions, PageServerLoad } from "./$types"
 import { schema } from "./schema.js"
 
 export const load: PageServerLoad = async ({ locals }) => {
@@ -76,4 +76,4 @@ export const actions = {
             throw e
         }
     },
-}
+} satisfies Actions

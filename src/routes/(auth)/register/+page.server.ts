@@ -7,7 +7,7 @@ import {
     type UsersResponse,
 } from "$lib/utilities/pb"
 import { schema } from "../(lib)/schema"
-import type { PageServerLoad } from "./$types"
+import type { Actions, PageServerLoad } from "./$types"
 
 export const load: PageServerLoad = async ({ locals }) => {
     if (locals.loggedInUser) {
@@ -87,4 +87,4 @@ export const actions = {
 
         redirect(303, "")
     },
-}
+} satisfies Actions

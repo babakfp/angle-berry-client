@@ -42,9 +42,7 @@
             action={deleteActionAttribute}
             onSuccess={() => {
                 selectedItemIds = []
-                toast.success("Deleted successfully!", {
-                    position: "bottom-end",
-                })
+                toast.success("Deleted successfully!")
             }}
         >
             <button type="submit" class="btn btn-danger w-full">

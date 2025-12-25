@@ -9,9 +9,7 @@
 
     const copyInviteLink = () => {
         copyText(`${page.url.origin}/register?id=${data.loggedInUser.id}`)
-        toast.success("Your invite link is copied to Clipboard.", {
-            position: "bottom-end",
-        })
+        toast.success("Your invite link is copied to Clipboard.")
     }
 </script>
 

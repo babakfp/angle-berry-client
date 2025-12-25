@@ -20,4 +20,4 @@
 
 {@render children()}
 
-<Toaster />
+<Toaster position="bottom-end" />

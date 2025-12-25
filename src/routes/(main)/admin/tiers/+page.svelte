@@ -18,9 +18,7 @@
 
     $effect(() => {
         if (form?.message) {
-            toast.error(form.message, {
-                position: "bottom-end",
-            })
+            toast.error(form.message)
         }
     })
 

@@ -69,9 +69,7 @@
         errors={updateFormErrors}
         validateForm={updateFormValidate}
         onRedirect={() => {
-            toast.success("Updated successfully!", {
-                position: "bottom-end",
-            })
+            toast.success("Updated successfully!")
         }}
     >
         <Input
@@ -145,9 +143,7 @@
         errors={deleteFormErrors}
         validateForm={deleteFormValidate}
         onRedirect={() => {
-            toast.success("Deleted successfully!", {
-                position: "bottom-end",
-            })
+            toast.success("Deleted successfully!")
         }}
     />
 </div>

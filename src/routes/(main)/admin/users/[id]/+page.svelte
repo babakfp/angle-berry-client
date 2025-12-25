@@ -53,9 +53,7 @@
         {errors}
         {validateForm}
         onRedirect={() => {
-            toast.success("Updated successfully!", {
-                position: "bottom-end",
-            })
+            toast.success("Updated successfully!")
         }}
     >
         <Input

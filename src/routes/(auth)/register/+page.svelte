@@ -37,9 +37,7 @@
         {errors}
         {validateForm}
         onRedirect={() => {
-            toast.success("Registered successfully!", {
-                position: "bottom-end",
-            })
+            toast.success("Registered successfully!")
         }}
     >
         <UsernameField

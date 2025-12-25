@@ -91,9 +91,6 @@
                         onclick={() =>
                             toast.success(
                                 "Your invite link is copied to Clipboard.",
-                                {
-                                    position: "bottom-end",
-                                },
                             )}
                         use:copy={`${page.url.origin}/register?id=${loggedInUser.id}`}
                     >

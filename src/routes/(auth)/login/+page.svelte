@@ -39,9 +39,7 @@
         {errors}
         {validateForm}
         onRedirect={() => {
-            toast.success("Logged in successfully!", {
-                position: "bottom-end",
-            })
+            toast.success("Logged in successfully!")
         }}
     >
         <LoginWithoutRegistering />

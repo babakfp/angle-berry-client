@@ -43,9 +43,7 @@
     validateForm={uploadFormValidateForm}
     onSuccess={() => {
         videos = undefined
-        toast.success("Uploaded successfully!", {
-            position: "bottom-end",
-        })
+        toast.success("Uploaded successfully!")
     }}
 >
     <DropZone

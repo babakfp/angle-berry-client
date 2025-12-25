@@ -66,9 +66,7 @@
     onFailure={(result) => {
         const message = String(result.data?.message)
         if (!message) return
-        toast.error(message, {
-            position: "bottom-end",
-        })
+        toast.error(message)
     }}
 >
     {@render children?.()}

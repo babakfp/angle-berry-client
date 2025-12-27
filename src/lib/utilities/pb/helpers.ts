@@ -4,22 +4,22 @@ import { ClientResponseError } from "$lib/utilities/pb"
 export const pbHandleFormActionError = <T>(e: unknown, data?: T) => {
     if (!(e instanceof ClientResponseError)) {
         return fail(500, {
-            ...data,
             message: "Something went wrong!",
+            ...data,
         })
     }
 
     if (e.status === 0) {
         return fail(500, {
-            ...data,
             message: "Database communication failure!",
+            ...data,
         })
     }
 
     return fail(e.response.status, {
-        ...data,
         message: e.response.message,
         pb: e.response.data,
+        ...data,
     })
 }
 

@@ -31,7 +31,7 @@ export const actions = {
                 .collection("users")
                 .authWithPassword(form.data.username, form.data.password)
         } catch (e) {
-            return pbHandleFormActionError(e, { form })
+            return pbHandleFormActionError(e, form)
         }
 
         if (locals.previewTierId) {

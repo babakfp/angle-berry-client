@@ -41,7 +41,7 @@ export const actions = {
         try {
             await locals.pb.collection("tiers").create(form.data)
         } catch (e) {
-            return pbHandleFormActionError(e, { form })
+            return pbHandleFormActionError(e, form)
         }
 
         redirect(303, "/admin/tiers")

@@ -34,7 +34,7 @@ export const actions = {
                     })
             }
         } catch (e) {
-            return pbHandleFormActionError(e, { form })
+            return pbHandleFormActionError(e, form)
         }
     },
 } satisfies Actions

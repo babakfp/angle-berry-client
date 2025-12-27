@@ -67,7 +67,7 @@ export const actions = {
         try {
             await locals.pb.collection("users").update(params.id, form.data)
         } catch (e) {
-            return pbHandleFormActionError(e, { form })
+            return pbHandleFormActionError(e, form)
         }
 
         redirect(303, "/admin/users")

@@ -9,7 +9,7 @@
     > = RemoteForm<Input, Output>
         & Omit<HTMLFormAttributes, "novalidate" | "enctype"> & {
             allowUpload?: boolean
-            children?: Snippet // TODO: maybe doesn't need to be optional
+            children: Snippet
         }
 
     // TODO
@@ -25,5 +25,5 @@
     enctype={allowUpload ? "multipart/form-data" : undefined}
     {...rest}
 >
-    {@render children?.()}
+    {@render children()}
 </form>

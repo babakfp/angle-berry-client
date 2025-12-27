@@ -1,9 +1,7 @@
-<script
-    lang="ts"
-    generics="Success extends Record<string, unknown> | undefined, Failure extends Record<string, unknown> | undefined"
->
+<script lang="ts" generics="Input extends RemoteFormInput | void, Output">
+    import type { RemoteFormInput } from "@sveltejs/kit"
     import IconSpinnerRegular from "phosphor-icons-svelte/IconSpinnerRegular.svelte"
-    import toast from "svelte-hot-french-toast"
+    import { navigating } from "$app/state"
     import Description from "$lib/components/form/Description.svelte"
     import FormBase, {
         type FormBaseProps,
@@ -14,95 +12,47 @@
         message = $bindable(),
         submitButtonText,
         submitButtonClass,
-        errors,
-        validateForm,
-        action,
-        allowUpload,
-        class: class_,
         children,
-        onError,
-        onRedirect,
-        onSuccess,
+        ...rest
     }: {
         message?: string
         submitButtonText: string
         submitButtonClass?: string
     } & Omit<
-        FormBaseProps<Success, Failure>,
+        FormBaseProps<Input, Output>,
         "onSubmit" | "onInvalid" | "onReturn"
     > = $props()
 
-    let isSubmitting = $state(false)
-    let isRedirecting = $state(false)
+    const isPending = $derived(rest.pending > 0)
+    const isNavigating = $derived(!!navigating.complete)
 </script>
 
 <FormBase
     class={[
         "grid gap-4",
-        class_,
-        { "pointer-events-none": isSubmitting || isRedirecting },
+        rest.class,
+        { "pointer-events-none": isPending || isNavigating },
     ]}
-    {action}
-    {allowUpload}
-    {errors}
-    {validateForm}
-    onSubmit={() => {
-        isSubmitting = true
-        message = ""
-    }}
-    onInvalid={() => {
-        isSubmitting = false
-        message = ""
-    }}
-    onReturn={() => {
-        isSubmitting = false
-    }}
-    onRedirect={() => {
-        onRedirect?.()
-        isRedirecting = true
-    }}
-    {onError}
-    {onSuccess}
-    onFailure={(result) => {
-        const message = String(result.data?.message)
-        if (!message) return
-        toast.error(message)
-    }}
+    {...rest}
 >
-    {@render children?.()}
+    {@render children()}
 
     <FormSubmitButton
         class={submitButtonClass}
-        disabled={isSubmitting || isRedirecting}
+        disabled={isPending || isNavigating}
     >
         <span>
-            {isSubmitting ? "Submitting"
-            : isRedirecting ? "Redirecting"
+            {isPending ? "Pending"
+            : isNavigating ? "Navigating"
             : submitButtonText}
         </span>
-        {#if isSubmitting || isRedirecting}
+        {#if isPending || isNavigating}
             <IconSpinnerRegular class="animate-spin text-2xl" />
         {/if}
     </FormSubmitButton>
 
-    {#if $errors?._errors?.length}
-        {#if $errors?._errors?.length > 1}
-            <ul class="list-inside list-disc">
-                {#each $errors?._errors as error}
-                    <li class="text-xs text-red-400">
-                        {error}
-                    </li>
-                {/each}
-            </ul>
-        {:else}
-            <p class="text-xs text-red-400">
-                {$errors?._errors[0]}
-            </p>
-        {/if}
-    {/if}
-
     {#if message}
-        {#if isRedirecting}
+        {#if isNavigating}
             <Description type="success">{message}</Description>
         {:else}
             <Description type="error">{message}</Description>

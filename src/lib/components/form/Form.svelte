@@ -48,9 +48,7 @@
         {/if}
     </FormSubmitButton>
 
-    {#if message}
-        <Description type={isRedirecting ? "success" : "error"}>
-            {message}
-        </Description>
-    {/if}
+    <Description type={isRedirecting ? "success" : "error"}>
+        {message}
+    </Description>
 </FormBase>

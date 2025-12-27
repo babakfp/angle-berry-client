@@ -5,6 +5,9 @@ import { vitePreprocess } from "@sveltejs/vite-plugin-svelte"
 export default {
     kit: {
         adapter: adapter(),
+        experimental: {
+            remoteFunctions: true,
+        },
     },
     preprocess: vitePreprocess(),
     compilerOptions: {
@@ -15,6 +18,9 @@ export default {
                 !warning.code.startsWith("a11y_")
                 && warning.code !== "avoid_mouse_events_on_document"
             )
+        },
+        experimental: {
+            async: true,
         },
     },
 }

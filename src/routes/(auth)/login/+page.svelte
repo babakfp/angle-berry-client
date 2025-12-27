@@ -3,6 +3,7 @@
     import Form from "$lib/components/form/Form.svelte"
     import PasswordField from "$lib/components/form/PasswordField.svelte"
     import UsernameField from "$lib/components/form/UsernameField.svelte"
+    import { AuthSchema } from "../(lib)/schema"
     import Wrapper from "../(lib)/Wrapper.svelte"
     import LoginWithoutRegistering from "./(lib)/LoginWithoutRegistering.svelte"
     import { login } from "./login.remote"
@@ -59,12 +60,14 @@
         <UsernameField
             {...login.fields.username.as("text")}
             error={login.fields.username.issues()?.[0]?.message}
+            onfocusout={async () => await login.validate()}
         />
 
         <PasswordField
             {...login.fields.password.as("password")}
             error={login.fields.password.issues()?.[0]?.message}
             autocomplete="current-password"
+            onfocusout={async () => await login.validate()}
         />
     </Form>
 </Wrapper>

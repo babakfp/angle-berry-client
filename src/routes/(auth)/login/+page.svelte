@@ -13,7 +13,7 @@
 
     export const snapshot = {
         capture: () => login.fields.value(),
-        restore: (data: Fields) => login.fields.set(data),
+        restore: (fields: Fields) => login.fields.set(fields),
     }
 
     const formIssue = $derived(

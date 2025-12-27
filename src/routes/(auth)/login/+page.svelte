@@ -7,6 +7,8 @@
     import LoginWithoutRegistering from "./(lib)/LoginWithoutRegistering.svelte"
     import { login } from "./login.remote"
 
+    const REDIRECT_MESSAGE = "Logged in successfully!"
+
     type Fields = ReturnType<typeof login.fields.value>
 
     export const snapshot = {
@@ -14,7 +16,7 @@
         restore: (data: Fields) => login.fields.set(data),
     }
 
-    const formMessage = $derived(
+    const formIssue = $derived(
         login.fields.allIssues()?.find((i) => !i.path.length)?.message,
     )
 </script>
@@ -33,13 +35,18 @@
     <Form
         {...login.enhance(async ({ submit }) => {
             await login.validate()
+
+            if (formIssue) {
+                toast.error(formIssue)
+            }
+
             await submit()
 
             if (login.result?.redirect) {
-                toast.success("Logged in successfully!")
+                toast.success(REDIRECT_MESSAGE)
             }
         })}
-        message={formMessage}
+        message={login.result?.redirect ? REDIRECT_MESSAGE : formIssue}
         submitButtonText="Login"
     >
         <LoginWithoutRegistering />

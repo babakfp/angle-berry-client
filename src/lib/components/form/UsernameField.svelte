@@ -1,15 +1,10 @@
 <script lang="ts">
-    import Input from "./Input.svelte"
+    import Input, { type InputProps } from "./Input.svelte"
 
     let {
         value = $bindable(""),
-        error = "",
         ...rest
-    }: {
-        value?: string
-        error?: string
-        [key: string]: any
-    } = $props()
+    }: Omit<InputProps, "type" | "buttons"> = $props()
 </script>
 
 <Input
@@ -19,5 +14,4 @@
     placeholder="A unique username"
     autocomplete="username"
     {...rest}
-    {error}
 />

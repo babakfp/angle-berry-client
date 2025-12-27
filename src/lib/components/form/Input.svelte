@@ -1,9 +1,16 @@
+<script module lang="ts">
+    export type InputProps = InputNativeProps & {
+        label?: string
+        error?: string
+        buttons?: Snippet
+    }
+</script>
+
 <script lang="ts">
     import type { Snippet } from "svelte"
-    import type { HTMLInputAttributes } from "svelte/elements"
     import InputNumberButtons from "$lib/components/form/InputNumberButtons.svelte"
     import InputWrapper from "$lib/components/form/InputWrapper.svelte"
-    import InputNative from "./InputNative.svelte"
+    import InputNative, { type InputNativeProps } from "./InputNative.svelte"
 
     let {
         label,
@@ -11,12 +18,7 @@
         error,
         buttons,
         ...rest
-    }: HTMLInputAttributes & {
-        label?: string
-        value?: string | number
-        error?: string
-        buttons?: Snippet
-    } = $props()
+    }: InputProps = $props()
 </script>
 
 {#snippet buttonsInner()}

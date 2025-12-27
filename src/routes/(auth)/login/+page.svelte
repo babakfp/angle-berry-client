@@ -60,14 +60,14 @@
         <UsernameField
             {...login.fields.username.as("text")}
             error={login.fields.username.issues()?.[0]?.message}
-            onfocusout={async () => await login.validate()}
+            oninput={async () => await login.validate()}
         />
 
         <PasswordField
             {...login.fields.password.as("password")}
             error={login.fields.password.issues()?.[0]?.message}
             autocomplete="current-password"
-            onfocusout={async () => await login.validate()}
+            oninput={async () => await login.validate()}
         />
     </Form>
 </Wrapper>

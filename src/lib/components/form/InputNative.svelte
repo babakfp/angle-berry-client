@@ -19,6 +19,7 @@
         } else {
             value = (e.target as HTMLInputElement).value
         }
+        rest.oninput?.(e)
     }
 </script>
 

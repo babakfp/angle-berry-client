@@ -1,3 +1,9 @@
+<script module lang="ts">
+    export type InputNativeProps = HTMLInputAttributes & {
+        value?: string | number
+    }
+</script>
+
 <script lang="ts">
     import type { FormEventHandler, HTMLInputAttributes } from "svelte/elements"
 
@@ -5,9 +11,7 @@
         type = "text",
         value = $bindable(""),
         ...rest
-    }: HTMLInputAttributes & {
-        value?: string | number
-    } = $props()
+    }: InputNativeProps = $props()
 
     const bindValue: FormEventHandler<HTMLInputElement> = (e) => {
         if (type === "number" || type === "range") {

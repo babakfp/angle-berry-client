@@ -18,10 +18,7 @@
         message?: string
         submitButtonText: string
         submitButtonClass?: string
-    } & Omit<
-        FormBaseProps<Input, Output>,
-        "onSubmit" | "onInvalid" | "onReturn"
-    > = $props()
+    } & FormBaseProps<Input, Output> = $props()
 
     const isPending = $derived(rest.pending > 0)
     const isNavigating = $derived(!!navigating.complete)

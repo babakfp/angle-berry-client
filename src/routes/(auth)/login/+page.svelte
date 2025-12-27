@@ -3,7 +3,6 @@
     import Form from "$lib/components/form/Form.svelte"
     import PasswordField from "$lib/components/form/PasswordField.svelte"
     import UsernameField from "$lib/components/form/UsernameField.svelte"
-    import { AuthSchema } from "../(lib)/schema"
     import Wrapper from "../(lib)/Wrapper.svelte"
     import LoginWithoutRegistering from "./(lib)/LoginWithoutRegistering.svelte"
     import { login } from "./login.remote"

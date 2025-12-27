@@ -42,8 +42,12 @@ export const login = form(AuthSchema, async (data, issue) => {
     }
 
     if (locals.previewTierId) {
-        redirect(303, `/tiers/${locals.previewTierId}`)
+        return {
+            redirect: `/tiers/${locals.previewTierId}`,
+        }
     }
 
-    redirect(303, "/")
+    return {
+        redirect: "/",
+    }
 })

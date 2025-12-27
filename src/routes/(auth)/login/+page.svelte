@@ -1,6 +1,5 @@
 <script lang="ts">
     import toast from "svelte-hot-french-toast"
-    import { beforeNavigate } from "$app/navigation"
     import Form from "$lib/components/form/Form.svelte"
     import PasswordField from "$lib/components/form/PasswordField.svelte"
     import UsernameField from "$lib/components/form/UsernameField.svelte"
@@ -18,10 +17,6 @@
     const formMessage = $derived(
         login.fields.allIssues()?.find((i) => !i.path.length)?.message,
     )
-
-    beforeNavigate(() => {
-        toast.success("Logged in successfully!")
-    })
 </script>
 
 <svelte:head>
@@ -35,7 +30,18 @@
     footerLinkText="Register here"
     footerLinkHref="/register"
 >
-    <Form {...login} message={formMessage} submitButtonText="Login">
+    <Form
+        {...login.enhance(async ({ submit }) => {
+            await login.validate()
+            await submit()
+
+            if (login.result?.redirect) {
+                toast.success("Logged in successfully!")
+            }
+        })}
+        message={formMessage}
+        submitButtonText="Login"
+    >
         <LoginWithoutRegistering />
 
         <!-- TODO: constraints lost after switching away from sveltekit-superforms -->

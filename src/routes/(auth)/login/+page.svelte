@@ -34,7 +34,8 @@
     footerLinkHref="/register"
 >
     <Form
-        {...login.enhance(async ({ submit }) => {
+        form={login}
+        enhance={async ({ submit }) => {
             await login.validate()
 
             if (login.fields.allIssues()?.length) {
@@ -50,7 +51,7 @@
             if (login.result?.redirect) {
                 toast.success(REDIRECT_MESSAGE)
             }
-        })}
+        }}
         message={login.result?.redirect ? REDIRECT_MESSAGE : formIssue}
         submitButtonText="Login"
     >

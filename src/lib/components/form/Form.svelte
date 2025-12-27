@@ -20,7 +20,7 @@
         submitButtonClass?: string
     } & FormBaseProps<Input, Output> = $props()
 
-    const isPending = $derived(rest.pending > 0)
+    const isPending = $derived(rest.form.pending > 0)
     const isNavigating = $derived(!!navigating.complete)
 </script>
 

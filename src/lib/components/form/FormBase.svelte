@@ -6,24 +6,34 @@
     export type FormBaseProps<
         Input extends RemoteFormInput | void,
         Output,
-    > = RemoteForm<Input, Output>
-        & Omit<HTMLFormAttributes, "novalidate" | "enctype"> & {
-            allowUpload?: boolean
-            children: Snippet
-        }
+    > = Omit<HTMLFormAttributes, "novalidate" | "enctype"> & {
+        allowUpload?: boolean
+        children: Snippet
+
+        form: RemoteForm<Input, Output>
+        enhance: Parameters<RemoteForm<Input, Output>["enhance"]>["0"]
+    }
 
     // TODO
 </script>
 
 <script lang="ts" generics="Input extends RemoteFormInput | void, Output">
-    let { allowUpload, children, ...rest }: FormBaseProps<Input, Output> =
-        $props()
+    let {
+        allowUpload,
+        children,
+
+        form,
+        enhance,
+
+        ...rest
+    }: FormBaseProps<Input, Output> = $props()
 </script>
 
 <form
     novalidate
     enctype={allowUpload ? "multipart/form-data" : undefined}
     {...rest}
+    {...form.enhance(enhance)}
 >
     {@render children()}
 </form>

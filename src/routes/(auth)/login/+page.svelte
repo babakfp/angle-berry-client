@@ -1,25 +1,18 @@
 <script lang="ts">
     import toast from "svelte-hot-french-toast"
-    import { superForm } from "sveltekit-superforms/client"
     import Form from "$lib/components/form/Form.svelte"
     import PasswordField from "$lib/components/form/PasswordField.svelte"
     import UsernameField from "$lib/components/form/UsernameField.svelte"
-    import { schema } from "../(lib)/schema"
     import Wrapper from "../(lib)/Wrapper.svelte"
     import LoginWithoutRegistering from "./(lib)/LoginWithoutRegistering.svelte"
+    import { login } from "./login.remote"
 
-    let { data, form } = $props()
-
-    const {
-        form: formData,
-        capture,
-        restore,
-        errors,
-        constraints,
-        validateForm,
-    } = superForm(data.form, { validators: schema })
-
-    export const snapshot = { capture, restore }
+    export const snapshot = {
+        capture: () => login.fields.value(),
+        restore: (data: ReturnType<typeof login.fields.value>) => {
+            return login.fields.set(data)
+        },
+    }
 </script>
 
 <svelte:head>
@@ -46,15 +39,13 @@
 
         <UsernameField
             bind:value={$formData.username}
-            error={$errors?.username?.[0]
-                ?? form?.pb?.username?.message
-                ?? form?.pb?.identity?.message}
+            error={$errors?.username?.[0]}
             {...$constraints.username}
         />
         <PasswordField
             bind:value={$formData.password}
             autocomplete="current-password"
-            error={$errors?.password?.[0] ?? form?.pb?.password?.message}
+            error={$errors?.password?.[0]}
             {...$constraints.password}
         />
     </Form>

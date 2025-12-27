@@ -41,11 +41,11 @@
                 return
             }
 
+            await submit()
+
             if (formIssue) {
                 toast.error(formIssue)
             }
-
-            await submit()
 
             if (login.result?.redirect) {
                 toast.success(REDIRECT_MESSAGE)

@@ -36,6 +36,10 @@
         {...login.enhance(async ({ submit }) => {
             await login.validate()
 
+            if (login.fields.allIssues()?.length) {
+                return
+            }
+
             if (formIssue) {
                 toast.error(formIssue)
             }

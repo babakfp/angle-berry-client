@@ -1,19 +1,11 @@
 <script lang="ts">
-    import type { FullAutoFill } from "svelte/elements"
-    import Input from "./Input.svelte"
+    import Input, { type InputProps } from "./Input.svelte"
     import InputTextButtonToggleable from "./InputTextButtonToggleable.svelte"
 
     let {
         value = $bindable(""),
-        autocomplete,
-        error,
         ...rest
-    }: {
-        value?: string
-        autocomplete: FullAutoFill
-        error?: string
-        [key: string]: any
-    } = $props()
+    }: Omit<InputProps, "type" | "buttons"> = $props()
 
     let isPasswordVisible = $state(false)
 </script>
@@ -24,9 +16,7 @@
     name="password"
     label="Password"
     placeholder="A secret that remains undiscovered"
-    {autocomplete}
     {...rest}
-    {error}
 >
     {#snippet buttons()}
         {#if value}

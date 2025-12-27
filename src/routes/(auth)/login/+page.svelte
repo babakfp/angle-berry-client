@@ -52,6 +52,7 @@
             }
         }}
         message={login.result?.redirect ? REDIRECT_MESSAGE : formIssue}
+        isRedirecting={!!login.result?.redirect}
         submitButtonText="Login"
     >
         <LoginWithoutRegistering />

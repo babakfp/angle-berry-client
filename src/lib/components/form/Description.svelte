@@ -7,7 +7,7 @@
         children,
     }: {
         class?: string
-        type: "error" | "success"
+        type?: "error" | "success"
         children: Snippet
     } = $props()
 </script>
@@ -17,6 +17,7 @@
         class_,
         "text-xs",
         {
+            "text-gray-400": !type,
             "text-red-400": type === "error",
             "text-green-400": type === "success",
         },

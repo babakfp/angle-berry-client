@@ -16,10 +16,10 @@ export const login = form(AuthSchema, async (data, issue) => {
             .authWithPassword(data.username, data.password)
     } catch (e) {
         if (!(e instanceof ClientResponseError)) {
-            return invalid("Something went wrong!")
+            invalid("Something went wrong!")
         }
         if (e.response.status === 0) {
-            return invalid("Database communication failure!")
+            invalid("Database communication failure!")
         }
 
         const d: {
@@ -29,16 +29,16 @@ export const login = form(AuthSchema, async (data, issue) => {
         } = e.response.data
 
         if (d.identity?.message) {
-            return invalid(issue.username(d.identity.message))
+            invalid(issue.username(d.identity.message))
         }
         if (d.username?.message) {
-            return invalid(issue.username(d.username.message))
+            invalid(issue.username(d.username.message))
         }
         if (d.password?.message) {
-            return invalid(issue.password(d.password.message))
+            invalid(issue.password(d.password.message))
         }
 
-        return invalid(e.response.message)
+        invalid(e.response.message)
     }
 
     if (locals.previewTierId) {

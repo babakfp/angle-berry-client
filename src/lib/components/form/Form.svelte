@@ -21,6 +21,7 @@
     } & FormBaseProps<Input, Output> = $props()
 
     const isPending = $derived(rest.form.pending > 0)
+    // TODO
     const isNavigating = $derived(!!navigating.complete)
 </script>
 

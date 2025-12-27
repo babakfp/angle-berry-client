@@ -1,5 +1,6 @@
 <script lang="ts">
     import toast from "svelte-hot-french-toast"
+    import { beforeNavigate } from "$app/navigation"
     import Form from "$lib/components/form/Form.svelte"
     import PasswordField from "$lib/components/form/PasswordField.svelte"
     import UsernameField from "$lib/components/form/UsernameField.svelte"
@@ -7,12 +8,20 @@
     import LoginWithoutRegistering from "./(lib)/LoginWithoutRegistering.svelte"
     import { login } from "./login.remote"
 
+    type Fields = ReturnType<typeof login.fields.value>
+
     export const snapshot = {
         capture: () => login.fields.value(),
-        restore: (data: ReturnType<typeof login.fields.value>) => {
-            return login.fields.set(data)
-        },
+        restore: (data: Fields) => login.fields.set(data),
     }
+
+    const formMessage = $derived(
+        login.fields.allIssues()?.find((i) => !i.path.length)?.message,
+    )
+
+    beforeNavigate(() => {
+        toast.success("Logged in successfully!")
+    })
 </script>
 
 <svelte:head>
@@ -26,27 +35,19 @@
     footerLinkText="Register here"
     footerLinkHref="/register"
 >
-    <Form
-        message={form?.message}
-        submitButtonText="Login"
-        {errors}
-        {validateForm}
-        onRedirect={() => {
-            toast.success("Logged in successfully!")
-        }}
-    >
+    <Form {...login} message={formMessage} submitButtonText="Login">
         <LoginWithoutRegistering />
 
+        <!-- TODO: constraints lost after switching away from sveltekit-superforms -->
         <UsernameField
-            bind:value={$formData.username}
-            error={$errors?.username?.[0]}
-            {...$constraints.username}
+            {...login.fields.username.as("text")}
+            error={login.fields.username.issues()?.[0]?.message}
         />
+
         <PasswordField
-            bind:value={$formData.password}
+            {...login.fields.password.as("password")}
+            error={login.fields.password.issues()?.[0]?.message}
             autocomplete="current-password"
-            error={$errors?.password?.[0]}
-            {...$constraints.password}
         />
     </Form>
 </Wrapper>

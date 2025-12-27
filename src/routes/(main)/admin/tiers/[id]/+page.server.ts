@@ -47,9 +47,7 @@ export const actions = {
                 .collection("tiers")
                 .update(params.id, formUpdate.data)
         } catch (e) {
-            const e2 = pbHandleFormActionError(e, formUpdate)
-            if (e2) return e2
-            throw e
+            return pbHandleFormActionError(e, { formUpdate })
         }
 
         redirect(303, "/admin/tiers")
@@ -68,9 +66,7 @@ export const actions = {
         try {
             await locals.pb.collection("tiers").delete(params.id)
         } catch (e) {
-            const e2 = pbHandleFormActionError(e, formDelete)
-            if (e2) return e2
-            throw e
+            return pbHandleFormActionError(e, { formDelete })
         }
 
         redirect(303, "/admin/tiers")

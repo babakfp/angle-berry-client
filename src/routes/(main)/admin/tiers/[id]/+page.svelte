@@ -19,7 +19,6 @@
         errors: updateFormErrors,
         constraints: updateFormConstraints,
         validateForm: updateFormValidate,
-        formId: updateFormId,
     } = superForm(data.formUpdate, { validators: schema.update })
 
     if (!$updateFormData.name) $updateFormData.name = data.tier.name
@@ -50,11 +49,8 @@
 
     let isGalleryPopupOpen = $state(false)
 
-    const {
-        errors: deleteFormErrors,
-        validateForm: deleteFormValidate,
-        formId: deleteFormId,
-    } = superForm(data.formDelete, { validators: schema.delete.single })
+    const { errors: deleteFormErrors, validateForm: deleteFormValidate } =
+        superForm(data.formDelete, { validators: schema.delete.single })
 </script>
 
 <svelte:head>
@@ -64,7 +60,7 @@
 <div class="mx-auto w-full max-w-sm">
     <Form
         action="?/update"
-        message={form?.id === $updateFormId && form?.message}
+        message={form?.formUpdate?.message}
         submitButtonText="Update"
         errors={updateFormErrors}
         validateForm={updateFormValidate}
@@ -137,7 +133,7 @@
 
     <Form
         action="?/delete"
-        message={form?.id === $deleteFormId && form?.message}
+        message={form?.formDelete?.message}
         submitButtonText="Delete"
         submitButtonClass="btn-danger"
         errors={deleteFormErrors}

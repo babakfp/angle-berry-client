@@ -48,9 +48,7 @@ export const actions = {
                 ),
             )
         } catch (e) {
-            const e2 = pbHandleFormActionError(e, {})
-            if (e2) return e2
-            throw e
+            return pbHandleFormActionError(e, { uploadForm })
         }
     },
     delete: async ({ locals, request }) => {
@@ -71,9 +69,7 @@ export const actions = {
                 }),
             )
         } catch (e) {
-            const e2 = pbHandleFormActionError(e, {})
-            if (e2) return e2
-            throw e
+            return pbHandleFormActionError(e, { deleteForm })
         }
     },
 } satisfies Actions

@@ -50,9 +50,7 @@ export const actions = {
                 ),
             )
         } catch (e) {
-            const e2 = pbHandleFormActionError(e, form)
-            if (e2) return e2
-            throw e
+            return pbHandleFormActionError(e, { form })
         }
     },
 } satisfies Actions

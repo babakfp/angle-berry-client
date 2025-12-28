@@ -1,5 +1,21 @@
-import { error, fail } from "@sveltejs/kit"
+import { error, fail, invalid } from "@sveltejs/kit"
 import { ClientResponseError } from "$lib/utilities/pb"
+
+export const pbInvalid = (
+    e: unknown,
+    callback?: (e: ClientResponseError) => void,
+) => {
+    if (!(e instanceof ClientResponseError)) {
+        invalid("Something went wrong!")
+    }
+    if (e.response.status === 0) {
+        invalid("Database communication failure!")
+    }
+
+    callback?.(e)
+
+    invalid(e.response.message)
+}
 
 export const pbHandleFormActionError = <T>(e: unknown, data?: T) => {
     if (!(e instanceof ClientResponseError)) {

@@ -8,6 +8,7 @@ import { ClientResponseError } from "$lib/utilities/pb"
 export const pbInvalid = (
     e: unknown,
     issue: Parameters<Parameters<typeof form>[1]>[1],
+    callbackAtStart?: (e: ClientResponseError) => "skip" | void,
 ) => {
     if (!(e instanceof ClientResponseError)) {
         invalid("Something went wrong!")
@@ -15,6 +16,8 @@ export const pbInvalid = (
     if (e.response.status === 0) {
         invalid("Database communication failure!")
     }
+
+    if (callbackAtStart?.(e) === "skip") return
 
     Object.entries(
         e.response.data as Record<string, { message?: string } | undefined>,

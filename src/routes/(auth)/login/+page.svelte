@@ -17,7 +17,9 @@
     }
 
     const formIssue = $derived(
-        login.fields.allIssues()?.find((issue) => !issue.path.length)?.message,
+        login.fields.allIssues()?.find((issue) => {
+            return !issue.path.length
+        })?.message,
     )
 </script>
 

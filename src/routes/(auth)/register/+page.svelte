@@ -1,23 +1,25 @@
 <script lang="ts">
     import toast from "svelte-hot-french-toast"
-    import { superForm } from "sveltekit-superforms/client"
     import Form from "$lib/components/form/Form.svelte"
     import PasswordField from "$lib/components/form/PasswordField.svelte"
     import UsernameField from "$lib/components/form/UsernameField.svelte"
-    import { schema } from "../(lib)/schema"
     import Wrapper from "../(lib)/Wrapper.svelte"
+    import { register } from "./register.remote"
 
-    let { data, form } = $props()
+    const REDIRECT_MESSAGE = "Registered successfully!"
 
-    const {
-        form: formData,
-        capture,
-        restore,
-        errors,
-        constraints,
-        validateForm,
-    } = superForm(data.form, { validators: schema })
-    export const snapshot = { capture, restore }
+    type Fields = ReturnType<typeof register.fields.value>
+
+    export const snapshot = {
+        capture: () => register.fields.value(),
+        restore: (fields: Fields) => register.fields.set(fields),
+    }
+
+    const formIssue = $derived(
+        register.fields.allIssues()?.find((issue) => {
+            return !issue.path.length
+        })?.message,
+    )
 </script>
 
 <svelte:head>
@@ -32,24 +34,39 @@
     footerLinkHref="/login"
 >
     <Form
-        message={form?.message}
-        submitButtonText="Register"
-        {errors}
-        {validateForm}
-        onRedirect={() => {
-            toast.success("Registered successfully!")
+        form={register}
+        enhance={async ({ submit }) => {
+            await register.validate()
+
+            if (register.fields.allIssues()?.length) {
+                return
+            }
+
+            await submit()
+
+            if (formIssue) {
+                toast.error(formIssue)
+            }
+
+            if (register.result?.redirect) {
+                toast.success(REDIRECT_MESSAGE)
+            }
         }}
+        message={register.result?.redirect ? REDIRECT_MESSAGE : formIssue}
+        isRedirecting={!!register.result?.redirect}
+        submitButtonText="Register"
     >
         <UsernameField
-            bind:value={$formData.username}
-            error={$errors?.username?.[0] ?? form?.pb?.username?.message}
-            {...$constraints.username}
+            {...register.fields.username.as("text")}
+            error={register.fields.username.issues()?.[0]?.message}
+            oninput={async () => await register.validate()}
         />
+
         <PasswordField
-            bind:value={$formData.password}
+            {...register.fields.password.as("password")}
+            error={register.fields.password.issues()?.[0]?.message}
             autocomplete="new-password"
-            error={$errors?.password?.[0] ?? form?.pb?.password?.message}
-            {...$constraints.password}
+            oninput={async () => await register.validate()}
         />
     </Form>
 </Wrapper>

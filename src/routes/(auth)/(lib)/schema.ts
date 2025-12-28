@@ -1,7 +1,7 @@
-import { valibot } from "sveltekit-superforms/adapters"
 import * as v from "valibot"
 
-export const AuthSchema = v.object({
+export const schema = v.object({
+    // TODO: maybe remove `optional` or replace it with `fallback`?
     username: v.optional(
         v.pipe(
             v.string(),
@@ -17,5 +17,3 @@ export const AuthSchema = v.object({
         "",
     ),
 })
-
-export const schema = valibot(AuthSchema)

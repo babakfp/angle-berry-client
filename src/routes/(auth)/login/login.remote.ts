@@ -1,9 +1,9 @@
 import { redirect } from "@sveltejs/kit"
 import { form, getRequestEvent } from "$app/server"
 import { pbInvalid } from "$lib/utilities/pb"
-import { AuthSchema } from "../(lib)/schema"
+import { schema } from "../(lib)/schema"
 
-export const login = form(AuthSchema, async (data, issue) => {
+export const login = form(schema, async (data, issue) => {
     const { locals } = getRequestEvent()
 
     if (locals.loggedInUser) {

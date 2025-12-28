@@ -21,10 +21,10 @@ export const login = form(schema, async (data, issue) => {
     if (locals.previewTierId) {
         return {
             redirect: `/tiers/${locals.previewTierId}`,
-        }
+        } as const
     }
 
     return {
         redirect: "/",
-    }
+    } as const
 })

@@ -1,5 +1,7 @@
 <script lang="ts">
     import toast from "svelte-hot-french-toast"
+    import { goto } from "$app/navigation"
+    import { resolve } from "$app/paths"
     import Form from "$lib/components/form/Form.svelte"
     import PasswordField from "$lib/components/form/PasswordField.svelte"
     import UsernameField from "$lib/components/form/UsernameField.svelte"
@@ -51,6 +53,7 @@
 
             if (login.result?.redirect) {
                 toast.success(REDIRECT_MESSAGE)
+                goto(resolve(login.result.redirect))
             }
         }}
         message={login.result?.redirect ? REDIRECT_MESSAGE : formIssue}

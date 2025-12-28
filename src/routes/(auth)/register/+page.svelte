@@ -62,14 +62,14 @@
         <UsernameField
             {...register.fields.username.as("text")}
             error={register.fields.username.issues()?.[0]?.message}
-            oninput={async () => await register.validate()}
+            oninput={() => register.validate()}
         />
 
         <PasswordField
             {...register.fields.password.as("password")}
             error={register.fields.password.issues()?.[0]?.message}
             autocomplete="new-password"
-            oninput={async () => await register.validate()}
+            oninput={() => register.validate()}
         />
     </Form>
 </Wrapper>

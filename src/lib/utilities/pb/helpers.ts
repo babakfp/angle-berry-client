@@ -1,9 +1,13 @@
 import { error, fail, invalid } from "@sveltejs/kit"
+import { form } from "$app/server"
 import { ClientResponseError } from "$lib/utilities/pb"
 
+/**
+ * @throws No need to return, it'll throw an error.
+ */
 export const pbInvalid = (
     e: unknown,
-    callback?: (e: ClientResponseError) => void,
+    issue: Parameters<Parameters<typeof form>[1]>[1],
 ) => {
     if (!(e instanceof ClientResponseError)) {
         invalid("Something went wrong!")
@@ -12,7 +16,14 @@ export const pbInvalid = (
         invalid("Database communication failure!")
     }
 
-    callback?.(e)
+    Object.entries(
+        e.response.data as Record<string, { message?: string } | undefined>,
+    ).forEach(([k, v]) => {
+        if (!v?.message) return
+        if (k === "identity") invalid(issue.username(v.message))
+        if (!issue[k]) return
+        invalid(issue[k](v.message))
+    })
 
     invalid(e.response.message)
 }

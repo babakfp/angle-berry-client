@@ -1,4 +1,4 @@
-import { invalid, redirect } from "@sveltejs/kit"
+import { redirect } from "@sveltejs/kit"
 import { form, getRequestEvent } from "$app/server"
 import { pbInvalid } from "$lib/utilities/pb"
 import { AuthSchema } from "../(lib)/schema"
@@ -15,23 +15,7 @@ export const login = form(AuthSchema, async (data, issue) => {
             .collection("users")
             .authWithPassword(data.username, data.password)
     } catch (e) {
-        pbInvalid(e, (e) => {
-            const d: {
-                identity?: { message?: string }
-                username?: { message?: string }
-                password?: { message?: string }
-            } = e.response.data
-
-            if (d.identity?.message) {
-                invalid(issue.username(d.identity.message))
-            }
-            if (d.username?.message) {
-                invalid(issue.username(d.username.message))
-            }
-            if (d.password?.message) {
-                invalid(issue.password(d.password.message))
-            }
-        })
+        pbInvalid(e, issue)
     }
 
     if (locals.previewTierId) {

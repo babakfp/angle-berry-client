@@ -17,8 +17,8 @@ export const register = form(schema, async (data, issue) => {
         try {
             inviter = await locals.pb.collection("users").getOne(inviterId)
         } catch (e) {
-            pbInvalid(e, issue, (err) => {
-                if (err.response.status === 404) return "skip"
+            pbInvalid(e, issue, (e) => {
+                if (e.response.status === 404) return "skip"
             })
         }
     }

@@ -12,6 +12,8 @@
 
         form: RemoteForm<Input, Output>
         enhance: Parameters<RemoteForm<Input, Output>["enhance"]>["0"]
+
+        ref?: HTMLFormElement
     }
 
     // TODO
@@ -25,6 +27,8 @@
         form,
         enhance,
 
+        ref = $bindable(),
+
         ...rest
     }: FormBaseProps<Input, Output> = $props()
 </script>
@@ -34,6 +38,7 @@
     enctype={allowUpload ? "multipart/form-data" : undefined}
     {...rest}
     {...form.enhance(enhance)}
+    bind:this={ref}
 >
     {@render children()}
 </form>

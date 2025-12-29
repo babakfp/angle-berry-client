@@ -1,10 +1,10 @@
 <script lang="ts">
-    import type { SubmitFunction } from "@sveltejs/kit"
     import IconCheckRegular from "phosphor-icons-svelte/IconCheckRegular.svelte"
     import IconPaperPlaneRightRegular from "phosphor-icons-svelte/IconPaperPlaneRightRegular.svelte"
     import IconSpinnerRegular from "phosphor-icons-svelte/IconSpinnerRegular.svelte"
     import { untrack, type Snippet } from "svelte"
-    import { enhance } from "$app/forms"
+    import toast from "svelte-hot-french-toast"
+    import FormBase from "$lib/components/form/FormBase.svelte"
     import SideDrawer from "$lib/components/SideDrawer.svelte"
     import { messages, unreadMessagesLength } from "$lib/stores/messages.svelte"
     import { pb } from "$lib/stores/pb.svelte"
@@ -13,6 +13,7 @@
         RealtimeMessagesResponse,
         UsersResponse,
     } from "$lib/utilities/pb"
+    import { chat } from "./chat.remote"
     import {
         isContextMenuOpen,
         isReplying,
@@ -41,7 +42,7 @@
     let messageInputValue = $state("")
 
     $effect(() => {
-        messageIdToEdit
+        messageIdToEdit._
         untrack(() => {
             if (!messages._) return
             messageInputValue =
@@ -58,18 +59,6 @@
     })
 
     let isSendingMessage = $state(false)
-    const submitMessage: SubmitFunction = () => {
-        isSendingMessage = true
-        messageInputElement._!.focus()
-        return async ({ result, update }) => {
-            isSendingMessage = false
-            if (result.type === "success") {
-                isReplying._ = false
-                messageIdToEdit._ = undefined
-            }
-            update()
-        }
-    }
 
     let formElement = $state<HTMLFormElement>()
 
@@ -132,6 +121,19 @@
             isTouchDeviceContextMenuOpen._ = false
         }
     }
+
+    type Fields = ReturnType<typeof chat.fields.value>
+
+    export const snapshot = {
+        capture: () => chat.fields.value(),
+        restore: (fields: Fields) => chat.fields.set(fields),
+    }
+
+    const formIssue = $derived(
+        chat.fields.allIssues()?.find((issue) => {
+            return !issue.path.length
+        })?.message,
+    )
 </script>
 
 <SideDrawer
@@ -178,15 +180,46 @@
         <p class="px-4 py-6 text-center">No messages found!</p>
     {/if}
 
-    <form
+    <FormBase
         class={[
             "bg-background sticky bottom-0 z-1 self-end",
             { "pointer-events-none": isSendingMessage },
         ]}
-        method="post"
-        action="/chat"
-        use:enhance={submitMessage}
-        bind:this={formElement}
+        form={chat}
+        enhance={async ({ submit }) => {
+            await chat.validate()
+
+            isSendingMessage = true
+            messageInputElement._!.focus()
+
+            const allIssues = chat.fields.allIssues()
+            if (allIssues?.length) {
+                toast.error(
+                    allIssues
+                        .map((issue) =>
+                            allIssues.length > 1 ?
+                                `• ${issue.message}`
+                            :   issue.message,
+                        )
+                        .join("\n"),
+                )
+                isSendingMessage = false
+                return
+            }
+
+            await submit()
+
+            isSendingMessage = false
+
+            if (formIssue) {
+                toast.error(formIssue)
+            } else {
+                isReplying._ = false
+                messageIdToEdit._ = undefined
+                chat.fields.messageContent.set("")
+            }
+        }}
+        bind:ref={formElement}
     >
         {#if isReplying._}
             <MessageActionPreview
@@ -213,11 +246,12 @@
         <div
             class="relative grid grid-cols-[1fr_auto] border-t border-gray-50/5 shadow-[0_-1px_3px_0_rgb(0_0_0/0.1),0_-1px_2px_-1px_rgb(0_0_0/0.1)]"
         >
+            <!-- TODO: placeholder, show "Use (ctrl + enter) to send" on desktop -->
             <textarea
+                {...chat.fields.messageContent.as("text")}
                 class="bg-background outline-inset block field-sizing-content max-h-48 w-full resize-none p-4 placeholder:text-gray-500"
                 bind:this={messageInputElement._}
                 bind:value={messageInputValue}
-                name="messageContent"
                 placeholder="Write your message..."
                 required
                 autocomplete="off"
@@ -230,7 +264,7 @@
                         formElement?.requestSubmit()
                     }
                 }}
-                oninput={(e) => {
+                oninput={() => {
                     messageInputValue = messageInputValue.trimStart()
                 }}
             ></textarea>
@@ -253,17 +287,17 @@
                 </div>
             </button>
         </div>
-        <input
-            type="hidden"
-            name="replyedMessageId"
-            bind:value={replyedMessageId}
-        />
-        <input
-            type="hidden"
-            name="messageIdToEdit"
-            bind:value={messageIdToEdit._}
-        />
-    </form>
+        {#if replyedMessageId}
+            <input
+                {...chat.fields.replyedMessageId.as("hidden", replyedMessageId)}
+            />
+        {/if}
+        {#if messageIdToEdit._}
+            <input
+                {...chat.fields.messageIdToEdit.as("hidden", messageIdToEdit._)}
+            />
+        {/if}
+    </FormBase>
 
     <ContextMenu {loggedInUser} />
     <MessageDeleteModal />

@@ -66,14 +66,30 @@
         <UsernameField
             {...login.fields.username.as("text")}
             error={login.fields.username.issues()?.[0]?.message}
-            oninput={() => login.validate()}
+            onblur={() => {
+                if (!!login.result) return
+                login.validate()
+            }}
+            oninput={() => {
+                if (!!login.result) return
+                if (!login.fields.allIssues()?.length) return
+                login.validate()
+            }}
         />
 
         <PasswordField
             {...login.fields.password.as("password")}
             error={login.fields.password.issues()?.[0]?.message}
             autocomplete="current-password"
-            oninput={() => login.validate()}
+            onblur={() => {
+                if (!!login.result) return
+                login.validate()
+            }}
+            oninput={() => {
+                if (!!login.result) return
+                if (!login.fields.allIssues()?.length) return
+                login.validate()
+            }}
         />
     </Form>
 </Wrapper>

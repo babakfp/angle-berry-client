@@ -62,14 +62,30 @@
         <UsernameField
             {...register.fields.username.as("text")}
             error={register.fields.username.issues()?.[0]?.message}
-            oninput={() => register.validate()}
+            onblur={() => {
+                if (!!register.result) return
+                register.validate()
+            }}
+            oninput={() => {
+                if (!!register.result) return
+                if (!register.fields.allIssues()?.length) return
+                register.validate()
+            }}
         />
 
         <PasswordField
             {...register.fields.password.as("password")}
             error={register.fields.password.issues()?.[0]?.message}
             autocomplete="new-password"
-            oninput={() => register.validate()}
+            onblur={() => {
+                if (!!register.result) return
+                register.validate()
+            }}
+            oninput={() => {
+                if (!!register.result) return
+                if (!register.fields.allIssues()?.length) return
+                register.validate()
+            }}
         />
     </Form>
 </Wrapper>

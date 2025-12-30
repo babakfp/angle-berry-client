@@ -4,7 +4,7 @@ import { isUserACreatedBeforeUserB } from "$lib/utilities/isUserACreatedBeforeUs
 import { pbInvalid } from "$lib/utilities/pb"
 import { schema } from "./schema"
 
-export const login = form(schema, async (data, issue) => {
+export const updateUser = form(schema, async (data, issue) => {
     const { locals, params } = getRequestEvent()
 
     if (!locals.loggedInUser) redirect(303, "/login")

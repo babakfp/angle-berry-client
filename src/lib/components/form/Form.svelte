@@ -1,6 +1,7 @@
 <script lang="ts" generics="Input extends RemoteFormInput | void, Output">
     import type { RemoteFormInput } from "@sveltejs/kit"
     import IconSpinnerRegular from "phosphor-icons-svelte/IconSpinnerRegular.svelte"
+    import type { ClassValue } from "svelte/elements"
     import Description from "$lib/components/form/Description.svelte"
     import FormBase, {
         type FormBaseProps,
@@ -18,7 +19,7 @@
         message?: string
         isRedirecting?: boolean
         submitButtonText: string
-        submitButtonClass?: string
+        submitButtonClass?: ClassValue
     } & FormBaseProps<Input, Output> = $props()
 
     const isPending = $derived(rest.form.pending > 0)

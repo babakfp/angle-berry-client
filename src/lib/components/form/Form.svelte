@@ -41,6 +41,7 @@
         disabled={isPending || isRedirecting}
     >
         <span>
+            <!-- TODO: pending is not good text to show -->
             {isPending ? "Pending"
             : isRedirecting ? "Redirecting"
             : submitButtonText}

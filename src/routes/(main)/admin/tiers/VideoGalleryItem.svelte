@@ -5,14 +5,14 @@
     let {
         src,
         checked,
-        group = $bindable(),
+        group = $bindable([]),
         value,
         name = undefined,
     }: {
         src: string
-        checked: boolean
-        group: string[]
-        value: string
+        checked?: boolean
+        group?: string[]
+        value?: string
         name?: string
     } = $props()
 </script>

@@ -62,7 +62,7 @@
     >
         <LoginWithoutRegistering />
 
-        <!-- TODO: constraints lost after switching away from sveltekit-superforms -->
+        <!-- TODO: constraints are lost (for all forms) after migration to remote functions -->
         <UsernameField
             {...login.fields.username.as("text")}
             error={login.fields.username.issues()?.[0]?.message}

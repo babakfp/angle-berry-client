@@ -1,32 +1,27 @@
 <script lang="ts">
     import toast from "svelte-hot-french-toast"
-    import { superForm } from "sveltekit-superforms/client"
     import { PUBLIC_PB_URL } from "$env/static/public"
     import DropZone from "$lib/components/form/DropZone.svelte"
     import Form from "$lib/components/form/Form.svelte"
+    import FormBase from "$lib/components/form/FormBase.svelte"
     import FloatingActions from "$lib/components/table/FloatingActions.svelte"
     import VideoGalleryItem from "../tiers/VideoGalleryItem.svelte"
-    import { formats, schema } from "./schema"
+    import { deleteVideos, uploadVideos } from "./data.remote"
+    import { formats } from "./schema"
 
-    let { data, form } = $props()
+    let { data } = $props()
 
-    const {
-        form: uploadForm,
-        errors: uploadFormErrors,
-        validateForm: uploadFormValidateForm,
-    } = superForm(data.uploadForm, {
-        validators: schema.upload,
-    })
+    const uploadVideosIssue = $derived(
+        uploadVideos.fields.allIssues()?.find((issue) => {
+            return !issue.path.length
+        })?.message,
+    )
 
-    const { form: deleteForm } = superForm(data.deleteForm, {
-        validators: schema.delete,
-    })
-
-    let videos = $state<FileList>()
-
-    $effect(() => {
-        $uploadForm.videos = videos ? Array.from(videos) : []
-    })
+    const deleteVideosIssue = $derived(
+        deleteVideos.fields.allIssues()?.find((issue) => {
+            return !issue.path.length
+        })?.message,
+    )
 </script>
 
 <svelte:head>
@@ -34,44 +29,70 @@
 </svelte:head>
 
 <Form
-    class="mb-8"
-    message={form?.uploadForm?.message}
-    allowUpload={true}
-    action="?/upload"
-    submitButtonText="Upload"
-    errors={uploadFormErrors}
-    validateForm={uploadFormValidateForm}
-    onSuccess={() => {
-        videos = undefined
+    form={uploadVideos}
+    enhance={async ({ submit }) => {
+        await uploadVideos.validate()
+
+        if (uploadVideos.fields.allIssues()?.length) {
+            return
+        }
+
+        await submit()
+
+        if (uploadVideosIssue) {
+            toast.error(uploadVideosIssue)
+            return
+        }
+
+        uploadVideos.fields.videos.set([])
         toast.success("Uploaded successfully!")
     }}
+    class="mb-8"
+    message={uploadVideosIssue}
+    allowUpload={true}
+    submitButtonText="Upload"
 >
     <DropZone
-        bind:files={videos}
-        name="videos"
+        {...uploadVideos.fields.videos.as("file multiple")}
+        error={uploadVideos.fields.videos.issues()?.[0]?.message}
         accept={formats.map((format) => `.${format}`).join(",")}
-        multiple
-        error={$uploadFormErrors.videos?._errors?.[0]
-            || $uploadFormErrors.videos?.[0]?.[0]
-            || $uploadFormErrors.videos?.[1]?.[0]}
     />
 </Form>
 
-<ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-    {#each data.videos as video}
-        <li>
-            <VideoGalleryItem
-                src="{PUBLIC_PB_URL}/api/files/{video.collectionName}/{video.id}/{video.file}"
-                checked={$deleteForm.videos.includes(video.id)}
-                bind:group={$deleteForm.videos}
-                value={video.id}
-            />
-        </li>
-    {/each}
-</ul>
+<FormBase
+    form={deleteVideos}
+    enhance={async ({ submit }) => {
+        await deleteVideos.validate()
 
-<FloatingActions
-    bind:selectedItemIds={$deleteForm.videos}
-    deleteActionAttribute="?/delete"
-    deleteInputNameAttribute="videos"
-/>
+        if (deleteVideos.fields.allIssues()?.length) {
+            return
+        }
+
+        await submit()
+        console.log(deleteVideos.fields.allIssues())
+
+        if (deleteVideosIssue) {
+            toast.error(deleteVideosIssue)
+            return
+        }
+
+        deleteVideos.fields.videos.set([])
+        toast.success("Deleted successfully!")
+    }}
+>
+    <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {#each data.videos as video}
+            <li>
+                <VideoGalleryItem
+                    {...deleteVideos.fields.videos.as("checkbox", video.id)}
+                    src="{PUBLIC_PB_URL}/api/files/{video.collectionName}/{video.id}/{video.file}"
+                />
+            </li>
+        {/each}
+    </ul>
+
+    <FloatingActions
+        itemsLength={deleteVideos.fields.videos.value()?.length}
+        onClear={() => deleteVideos.fields.videos.set([])}
+    />
+</FormBase>

@@ -1,37 +1,52 @@
 <script lang="ts">
     import toast from "svelte-hot-french-toast"
-    import { superForm } from "sveltekit-superforms/client"
+    import { goto } from "$app/navigation"
+    import { resolve } from "$app/paths"
     import Checkbox from "$lib/components/form/Checkbox.svelte"
     import Form from "$lib/components/form/Form.svelte"
     import Input from "$lib/components/form/Input.svelte"
     import Select from "$lib/components/form/Select.svelte"
     import { isUserACreatedBeforeUserB } from "$lib/utilities/isUserACreatedBeforeUserB"
-    import { schema } from "./schema"
+    import { updateUser } from "./data.remote"
 
-    let { data, form } = $props()
+    let { data } = $props()
 
-    const {
-        form: formData,
-        errors,
-        constraints,
-        validateForm,
-    } = superForm(data.form, { validators: schema })
+    // TODO: should be $derived?
+    updateUser.fields.isAdmin.set((() => data.targetUser.isAdmin)())
+    updateUser.fields.retainedTiers.set((() => data.targetUser.retainedTiers)())
 
-    if (!$formData.isAdmin) $formData.isAdmin = data.targetUser.isAdmin
-    if (!$formData.retainedTiers.length)
-        $formData.retainedTiers = data.targetUser.retainedTiers
-
+    // TODO: should be $derived?
     let selectedRetainedTiers = $state(
-        data.tiers
-            .filter((tier) => $formData.retainedTiers.includes(tier.id))
-            .map((tier) => ({ value: tier.id, label: tier.name })),
+        (() =>
+            data.tiers
+                .filter((tier) =>
+                    data.targetUser.retainedTiers.includes(tier.id),
+                )
+                .map((tier) => ({ value: tier.id, label: tier.name })))(),
     )
 
     $effect(() => {
-        $formData.retainedTiers = selectedRetainedTiers.map(
-            (tier) => tier.value,
+        updateUser.fields.retainedTiers.set(
+            selectedRetainedTiers.map((tier) => tier.value),
         )
     })
+
+    const REDIRECT_MESSAGE = "Updated successfully!"
+
+    type Fields = ReturnType<typeof updateUser.fields.value>
+
+    export const snapshot = {
+        capture: () => updateUser.fields.value(),
+        restore: (fields: Fields) => updateUser.fields.set(fields),
+    }
+
+    const formIssue = $derived(
+        updateUser.fields.allIssues()?.find((issue) => {
+            return !issue.path.length
+        })?.message,
+    )
+
+    let isRedirecting = $state(false)
 </script>
 
 <svelte:head>
@@ -39,21 +54,44 @@
 </svelte:head>
 
 <div class="mx-auto w-full max-w-sm">
+    <!-- TODO: maybe we should just not show seccess message in form? Only for errors. seccess can be done just with a toast. -->
+    <!-- TODO: and maybe we should not use toast for error when not necessary? -->
     <Form
+        form={updateUser}
+        enhance={async ({ submit }) => {
+            await updateUser.validate()
+
+            if (updateUser.fields.allIssues()?.length) {
+                return
+            }
+
+            await submit()
+
+            if (formIssue) {
+                toast.error(formIssue)
+            }
+
+            if (updateUser.result?.redirect) {
+                isRedirecting = true
+                toast.success(REDIRECT_MESSAGE)
+                // TODO: should I await other gotos too?
+                await goto(resolve(updateUser.result.redirect))
+                // TODO: it seems like I need this isRedirecting in other remote functions too
+                isRedirecting = false
+            }
+        }}
+        message={isRedirecting ? REDIRECT_MESSAGE : formIssue}
+        isRedirecting={!!isRedirecting}
         class="mt-4"
-        message={form?.message}
         submitButtonText="Update"
-        submitButtonClass={(
-            data.loggedInUser.id !== data.targetUser.id
-            && data.targetUser.isAdmin
-            && !isUserACreatedBeforeUserB(data.loggedInUser, data.targetUser)
-        ) ?
-            "btn-brand pointer-events-none opacity-50"
-        :   ""}
-        {errors}
-        {validateForm}
-        onRedirect={() => {
-            toast.success("Updated successfully!")
+        submitButtonClass={{
+            "btn-brand pointer-events-none opacity-50":
+                data.loggedInUser.id !== data.targetUser.id
+                && data.targetUser.isAdmin
+                && !isUserACreatedBeforeUserB(
+                    data.loggedInUser,
+                    data.targetUser,
+                ),
         }}
     >
         <Input
@@ -63,6 +101,8 @@
         />
 
         <Select
+            {...updateUser.fields.retainedTiers.as("select multiple")}
+            error={updateUser.fields.retainedTiers.issues()?.[0]?.message}
             label="Tiers"
             placeholder="Select tiers"
             options={data.tiers.map((tier) => ({
@@ -70,9 +110,6 @@
                 label: tier.name,
             }))}
             bind:selectedOptions={selectedRetainedTiers}
-            error={$errors?.retainedTiers?.[0]
-                ?? form?.pb?.retainedTiers?.message}
-            name="retainedTiers"
             readonly={data.loggedInUser.id !== data.targetUser.id
                 && data.targetUser.isAdmin
                 && !isUserACreatedBeforeUserB(
@@ -82,12 +119,10 @@
         />
 
         <Checkbox
+            {...updateUser.fields.isAdmin.as("checkbox")}
+            error={updateUser.fields.isAdmin.issues()?.[0]?.message}
             class="justify-self-start"
-            bind:checked={$formData.isAdmin}
-            name="isAdmin"
-            {...$constraints.isAdmin}
             label="Role admin"
-            error={$errors?.isAdmin?.[0] ?? form?.pb?.isAdmin?.message}
             readonly={data.loggedInUser.id === data.targetUser.id
                 || (data.targetUser.isAdmin
                     && !isUserACreatedBeforeUserB(

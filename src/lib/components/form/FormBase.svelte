@@ -33,6 +33,7 @@
     }: FormBaseProps<Input, Output> = $props()
 </script>
 
+<!-- TODO: quote from docs: "Because our form contains a file input, we’ve added an enctype="multipart/form-data" attribute". we can remove allowUpload then? -->
 <form
     novalidate
     enctype={allowUpload ? "multipart/form-data" : undefined}

@@ -39,7 +39,6 @@ This project consists of two repositories:
 - [svelte-hot-french-toast](https://npmjs.com/package/svelte-hot-french-toast)
 - [svelte-loading-bar](https://npmjs.com/package/svelte-loading-bar)
 - [svelte-outclick](https://npmjs.com/package/svelte-outclick)
-- [sveltekit-superforms](https://npmjs.com/package/sveltekit-superforms)
 - [tailwindcss](https://npmjs.com/package/tailwindcss)
 - [tailwindcss-addons](https://npmjs.com/package/tailwindcss-addons)
 - [typescript](https://npmjs.com/package/typescript)

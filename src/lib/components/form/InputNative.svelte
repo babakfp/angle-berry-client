@@ -8,6 +8,7 @@
     import type { FormEventHandler, HTMLInputAttributes } from "svelte/elements"
 
     let {
+        class: class_,
         type = "text",
         value = $bindable(""),
         ...rest
@@ -26,7 +27,7 @@
 <input
     {...rest}
     class={[
-        rest.class,
+        class_,
         "peer reset-autofill-input block h-11 w-full rounded border-2 border-gray-700 bg-transparent px-4 placeholder:text-xs placeholder:text-gray-500",
         { "reset-number-input": type === "number" },
     ]}

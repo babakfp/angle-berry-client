@@ -1,7 +1,8 @@
 <script lang="ts">
     import toast from "svelte-hot-french-toast"
     import { fade } from "svelte/transition"
-    import { superForm } from "sveltekit-superforms/client"
+    import { goto } from "$app/navigation"
+    import { resolve } from "$app/paths"
     import { PUBLIC_PB_URL } from "$env/static/public"
     import Form from "$lib/components/form/Form.svelte"
     import Input from "$lib/components/form/Input.svelte"
@@ -9,19 +10,41 @@
     import Modal from "$lib/components/Modal.svelte"
     import { capitalizeFirstLetter } from "$lib/utilities/capitalizeFirstLetter"
     import { TIERS_RECORD_VISIBILITY_OPTIONS } from "$lib/utilities/pb"
-    import { schema } from "../schema"
     import VideoGalleryItem from "../VideoGalleryItem.svelte"
+    import { createTier } from "./data.remote"
 
-    let { data, form } = $props()
+    let { data } = $props()
 
-    const {
-        form: formData,
-        errors,
-        constraints,
-        validateForm,
-    } = superForm(data.form, { validators: schema.create })
+    const visibilityOptions = Object.values(
+        TIERS_RECORD_VISIBILITY_OPTIONS,
+    ).map((value) => ({
+        value,
+        label: capitalizeFirstLetter(value),
+    }))
+
+    let selectedVisibility = $state<(typeof visibilityOptions)[number]>()
+
+    $effect(() => {
+        if (!selectedVisibility) return
+        createTier.fields.visibility.set(selectedVisibility.value)
+    })
 
     let isGalleryPopupOpen = $state(false)
+
+    const REDIRECT_MESSAGE = "Created successfully!"
+
+    type Fields = ReturnType<typeof createTier.fields.value>
+
+    export const snapshot = {
+        capture: () => createTier.fields.value(),
+        restore: (fields: Fields) => createTier.fields.set(fields),
+    }
+
+    const updateTierIssue = $derived(
+        createTier.fields.allIssues()?.find((issue) => {
+            return !issue.path.length
+        })?.message,
+    )
 </script>
 
 <svelte:head>
@@ -30,65 +53,102 @@
 
 <div class="mx-auto w-full max-w-sm">
     <Form
-        message={form?.message}
-        submitButtonText="Create"
-        {errors}
-        {validateForm}
-        onRedirect={() => {
-            toast.success("Created successfully!")
+        form={createTier}
+        enhance={async ({ submit }) => {
+            await createTier.validate()
+
+            if (createTier.fields.allIssues()?.length) {
+                return
+            }
+
+            await submit()
+
+            if (updateTierIssue) {
+                toast.error(updateTierIssue)
+                return
+            }
+
+            if (createTier.result?.redirect) {
+                toast.success(REDIRECT_MESSAGE)
+                goto(resolve(createTier.result.redirect))
+            }
         }}
+        message={createTier.result?.redirect ?
+            REDIRECT_MESSAGE
+        :   updateTierIssue}
+        submitButtonText="Update"
     >
         <Input
-            type="text"
+            {...createTier.fields.name.as("text")}
+            error={createTier.fields.name.issues()?.[0]?.message}
+            onblur={() => {
+                if (!!createTier.result) return
+                createTier.validate()
+            }}
+            oninput={() => {
+                if (!!createTier.result) return
+                if (!createTier.fields.allIssues()?.length) return
+                createTier.validate()
+            }}
             label="Name"
-            name="name"
-            bind:value={$formData.name}
-            error={$errors?.name?.[0] ?? form?.pb?.name?.message}
-            {...$constraints.name}
         />
         <Input
-            type="number"
+            {...createTier.fields.price.as("number")}
+            error={createTier.fields.price.issues()?.[0]?.message}
+            onblur={() => {
+                if (!!createTier.result) return
+                createTier.validate()
+            }}
+            oninput={() => {
+                if (!!createTier.result) return
+                if (!createTier.fields.allIssues()?.length) return
+                createTier.validate()
+            }}
             label="Price"
-            name="price"
-            bind:value={$formData.price}
-            error={$errors?.price?.[0] ?? form?.pb?.price?.message}
-            {...$constraints.price}
         />
         <Input
-            type="number"
+            {...createTier.fields.invites.as("number")}
+            error={createTier.fields.invites.issues()?.[0]?.message}
+            onblur={() => {
+                if (!!createTier.result) return
+                createTier.validate()
+            }}
+            oninput={() => {
+                if (!!createTier.result) return
+                if (!createTier.fields.allIssues()?.length) return
+                createTier.validate()
+            }}
             label="Invites"
-            name="invites"
-            bind:value={$formData.invites}
-            error={$errors?.invites?.[0] ?? form?.pb?.invites?.message}
-            {...$constraints.invites}
         />
+        <!-- TODO:
+            onblur={() => {
+                if (!!createTier.result) return
+                createTier.validate()
+            }}
+            oninput={() => {
+                if (!!createTier.result) return
+                if (!createTier.fields.allIssues()?.length) return
+                createTier.validate()
+            }}
+        -->
         <Select
+            {...createTier.fields.visibility.as("select")}
+            error={createTier.fields.visibility.issues()?.[0]?.message}
             label="Visibility"
             placeholder="Select visibility"
-            options={Object.values(TIERS_RECORD_VISIBILITY_OPTIONS).map(
-                (value) => ({
-                    value,
-                    label: capitalizeFirstLetter(value),
-                }),
-            )}
-            bind:selectedOptionValue={$formData.visibility}
+            options={visibilityOptions}
+            bind:selectedOption={selectedVisibility}
             isMultiple={false}
-            error={$errors?.visibility?.[0] ?? form?.pb?.visibility?.message}
-            {...$constraints.visibility}
-            name="visibility"
         />
         <ul class="grid gap-4 rounded bg-gray-700 p-2">
-            {#each $formData.videos as id (id)}
+            {#each createTier.fields.videos.value() as id (id)}
                 {@const video = data.videos.filter(
                     (video) => video.id === id,
                 )[0]}
                 <li transition:fade>
                     <VideoGalleryItem
+                        {...createTier.fields.videos.as("checkbox", video.id)}
                         src="{PUBLIC_PB_URL}/api/files/{video.collectionName}/{video.id}/{video.file}"
-                        checked={$formData.videos.includes(video.id)}
-                        bind:group={$formData.videos}
-                        value={video.id}
-                        name="videos"
                     />
                 </li>
             {/each}
@@ -100,33 +160,34 @@
                 Videos gallery
             </button>
         </ul>
+
+        <Modal
+            title="Videos gallery"
+            bind:isOpen={isGalleryPopupOpen}
+            isFullSize={true}
+        >
+            <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                {#each data.videos as video (video.id)}
+                    <li>
+                        <VideoGalleryItem
+                            {...createTier.fields.videos.as(
+                                "checkbox",
+                                video.id,
+                            )}
+                            src="{PUBLIC_PB_URL}/api/files/{video.collectionName}/{video.id}/{video.file}"
+                        />
+                    </li>
+                {/each}
+            </ul>
+            {#snippet actions()}
+                <button
+                    type="button"
+                    class="btn btn-gray"
+                    onclick={() => (isGalleryPopupOpen = false)}
+                >
+                    Close
+                </button>
+            {/snippet}
+        </Modal>
     </Form>
 </div>
-
-<Modal
-    title="Videos gallery"
-    bind:isOpen={isGalleryPopupOpen}
-    isFullSize={true}
->
-    <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-        {#each data.videos as video (video.id)}
-            <li>
-                <VideoGalleryItem
-                    src="{PUBLIC_PB_URL}/api/files/{video.collectionName}/{video.id}/{video.file}"
-                    checked={$formData.videos.includes(video.id)}
-                    bind:group={$formData.videos}
-                    value={video.id}
-                />
-            </li>
-        {/each}
-    </ul>
-    {#snippet actions()}
-        <button
-            type="button"
-            class="btn btn-gray"
-            onclick={() => (isGalleryPopupOpen = false)}
-        >
-            Close
-        </button>
-    {/snippet}
-</Modal>

@@ -1,7 +1,8 @@
 <script lang="ts">
     import toast from "svelte-hot-french-toast"
     import { fade } from "svelte/transition"
-    import { superForm } from "sveltekit-superforms/client"
+    import { goto } from "$app/navigation"
+    import { resolve } from "$app/paths"
     import { PUBLIC_PB_URL } from "$env/static/public"
     import Form from "$lib/components/form/Form.svelte"
     import Input from "$lib/components/form/Input.svelte"
@@ -9,26 +10,20 @@
     import Modal from "$lib/components/Modal.svelte"
     import { capitalizeFirstLetter } from "$lib/utilities/capitalizeFirstLetter"
     import { TIERS_RECORD_VISIBILITY_OPTIONS } from "$lib/utilities/pb"
-    import { schema } from "../schema"
     import VideoGalleryItem from "../VideoGalleryItem.svelte"
+    import { deleteTier, updateTier } from "./data.remote"
 
-    let { data, form } = $props()
+    let { data } = $props()
 
-    const {
-        form: updateFormData,
-        errors: updateFormErrors,
-        constraints: updateFormConstraints,
-        validateForm: updateFormValidate,
-    } = superForm(data.formUpdate, { validators: schema.update })
-
-    if (!$updateFormData.name) $updateFormData.name = data.tier.name
-    if (!$updateFormData.price) $updateFormData.price = data.tier.price
-    if (!$updateFormData.invites) $updateFormData.invites = data.tier.invites
-    if (!$updateFormData.videos.length)
-        $updateFormData.videos = data.tier.videos
+    updateTier.fields.name.set((() => data.tier.name)())
+    updateTier.fields.price.set((() => data.tier.price)())
+    updateTier.fields.invites.set((() => data.tier.invites)())
+    updateTier.fields.videos.set((() => data.tier.videos)())
 
     let selectedVideos = $derived(
-        data.videos.filter((v) => $updateFormData.videos.includes(v.id)),
+        data.videos.filter((v) =>
+            updateTier.fields.videos.value()?.includes(v.id),
+        ),
     )
 
     const visibilityOptions = Object.values(
@@ -44,13 +39,31 @@
     })
 
     $effect(() => {
-        $updateFormData.visibility = selectedVisibility.value
+        updateTier.fields.visibility.set(selectedVisibility.value)
     })
 
     let isGalleryPopupOpen = $state(false)
 
-    const { errors: deleteFormErrors, validateForm: deleteFormValidate } =
-        superForm(data.formDelete, { validators: schema.delete.single })
+    const REDIRECT_MESSAGE = "Updated successfully!"
+
+    type Fields = ReturnType<typeof updateTier.fields.value>
+
+    export const snapshot = {
+        capture: () => updateTier.fields.value(),
+        restore: (fields: Fields) => updateTier.fields.set(fields),
+    }
+
+    const updateTierIssue = $derived(
+        updateTier.fields.allIssues()?.find((issue) => {
+            return !issue.path.length
+        })?.message,
+    )
+
+    const deleteTierIssue = $derived(
+        deleteTier.fields.allIssues()?.find((issue) => {
+            return !issue.path.length
+        })?.message,
+    )
 </script>
 
 <svelte:head>
@@ -59,63 +72,102 @@
 
 <div class="mx-auto w-full max-w-sm">
     <Form
-        action="?/update"
-        message={form?.formUpdate?.message}
-        submitButtonText="Update"
-        errors={updateFormErrors}
-        validateForm={updateFormValidate}
-        onRedirect={() => {
-            toast.success("Updated successfully!")
+        form={updateTier}
+        enhance={async ({ submit }) => {
+            await updateTier.validate()
+
+            if (updateTier.fields.allIssues()?.length) {
+                return
+            }
+
+            await submit()
+
+            if (updateTierIssue) {
+                toast.error(updateTierIssue)
+                return
+            }
+
+            if (updateTier.result?.redirect) {
+                toast.success(REDIRECT_MESSAGE)
+                goto(resolve(updateTier.result.redirect))
+            }
         }}
+        message={updateTier.result?.redirect ?
+            REDIRECT_MESSAGE
+        :   updateTierIssue}
+        submitButtonText="Update"
     >
         <Input
-            type="text"
+            {...updateTier.fields.name.as("text")}
+            error={updateTier.fields.name.issues()?.[0]?.message}
+            onblur={() => {
+                if (!!updateTier.result) return
+                updateTier.validate()
+            }}
+            oninput={() => {
+                if (!!updateTier.result) return
+                if (!updateTier.fields.allIssues()?.length) return
+                updateTier.validate()
+            }}
             label="Name"
-            name="name"
-            bind:value={$updateFormData.name}
             placeholder={data.tier.name}
-            error={$updateFormErrors?.name?.[0] ?? form?.pb?.name?.message}
-            {...$updateFormConstraints.name}
         />
         <Input
-            type="number"
+            {...updateTier.fields.price.as("number")}
+            error={updateTier.fields.price.issues()?.[0]?.message}
+            onblur={() => {
+                if (!!updateTier.result) return
+                updateTier.validate()
+            }}
+            oninput={() => {
+                if (!!updateTier.result) return
+                if (!updateTier.fields.allIssues()?.length) return
+                updateTier.validate()
+            }}
             label="Price"
-            name="price"
-            bind:value={$updateFormData.price}
             placeholder={`${data.tier.price}`}
-            error={$updateFormErrors?.price?.[0] ?? form?.pb?.price?.message}
-            {...$updateFormConstraints.price}
         />
         <Input
-            type="number"
+            {...updateTier.fields.invites.as("number")}
+            error={updateTier.fields.invites.issues()?.[0]?.message}
+            onblur={() => {
+                if (!!updateTier.result) return
+                updateTier.validate()
+            }}
+            oninput={() => {
+                if (!!updateTier.result) return
+                if (!updateTier.fields.allIssues()?.length) return
+                updateTier.validate()
+            }}
             label="Invites"
-            name="invites"
-            bind:value={$updateFormData.invites}
             placeholder={`${data.tier.invites}`}
-            error={$updateFormErrors?.invites?.[0]
-                ?? form?.pb?.invites?.message}
-            {...$updateFormConstraints.invites}
         />
+        <!-- TODO:
+            onblur={() => {
+                if (!!updateTier.result) return
+                updateTier.validate()
+            }}
+            oninput={() => {
+                if (!!updateTier.result) return
+                if (!updateTier.fields.allIssues()?.length) return
+                updateTier.validate()
+            }}
+        -->
         <Select
+            {...updateTier.fields.visibility.as("select")}
+            error={updateTier.fields.visibility.issues()?.[0]?.message}
             label="Visibility"
             placeholder="Select visibility"
             options={visibilityOptions}
             bind:selectedOption={selectedVisibility}
             isMultiple={false}
-            error={$updateFormErrors?.visibility?.[0]
-                ?? form?.pb?.visibility?.message}
-            {...$updateFormConstraints.visibility}
-            name="visibility"
         />
         <ul class="grid gap-4 rounded bg-gray-700 p-2">
             {#each selectedVideos as video (video.id)}
                 <li transition:fade>
                     <VideoGalleryItem
+                        {...updateTier.fields.videos.as("checkbox", video.id)}
                         src="{PUBLIC_PB_URL}/api/files/{video.collectionName}/{video.id}/{video.file}"
-                        checked={$updateFormData.videos.includes(video.id)}
-                        bind:group={$updateFormData.videos}
-                        value={video.id}
-                        name="videos"
                     />
                 </li>
             {/each}
@@ -127,47 +179,64 @@
                 Videos gallery
             </button>
         </ul>
+
+        <Modal
+            title="Videos gallery"
+            bind:isOpen={isGalleryPopupOpen}
+            isFullSize={true}
+        >
+            <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                {#each data.videos as video (video.id)}
+                    <li>
+                        <VideoGalleryItem
+                            {...updateTier.fields.videos.as(
+                                "checkbox",
+                                video.id,
+                            )}
+                            src="{PUBLIC_PB_URL}/api/files/{video.collectionName}/{video.id}/{video.file}"
+                        />
+                    </li>
+                {/each}
+            </ul>
+            {#snippet actions()}
+                <button
+                    type="button"
+                    class="btn btn-gray"
+                    onclick={() => (isGalleryPopupOpen = false)}
+                >
+                    Close
+                </button>
+            {/snippet}
+        </Modal>
     </Form>
 
     <hr class="my-4 border-gray-700" />
 
     <Form
-        action="?/delete"
-        message={form?.formDelete?.message}
+        form={deleteTier}
+        enhance={async ({ submit }) => {
+            await deleteTier.validate()
+
+            if (deleteTier.fields.allIssues()?.length) {
+                return
+            }
+
+            await submit()
+
+            if (updateTierIssue) {
+                toast.error(updateTierIssue)
+                return
+            }
+
+            if (deleteTier.result?.redirect) {
+                toast.success("Deleted successfully!")
+                goto(resolve(deleteTier.result.redirect))
+            }
+        }}
+        message={deleteTier.result?.redirect ?
+            "Deleted successfully!"
+        :   deleteTierIssue}
         submitButtonText="Delete"
         submitButtonClass="btn-danger"
-        errors={deleteFormErrors}
-        validateForm={deleteFormValidate}
-        onRedirect={() => {
-            toast.success("Deleted successfully!")
-        }}
     />
 </div>
-
-<Modal
-    title="Videos gallery"
-    bind:isOpen={isGalleryPopupOpen}
-    isFullSize={true}
->
-    <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-        {#each data.videos as video (video.id)}
-            <li>
-                <VideoGalleryItem
-                    src="{PUBLIC_PB_URL}/api/files/{video.collectionName}/{video.id}/{video.file}"
-                    checked={$updateFormData.videos.includes(video.id)}
-                    bind:group={$updateFormData.videos}
-                    value={video.id}
-                />
-            </li>
-        {/each}
-    </ul>
-    {#snippet actions()}
-        <button
-            type="button"
-            class="btn btn-gray"
-            onclick={() => (isGalleryPopupOpen = false)}
-        >
-            Close
-        </button>
-    {/snippet}
-</Modal>

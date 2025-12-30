@@ -1,7 +1,7 @@
 <script lang="ts">
     import IconCheckSquareRegular from "phosphor-icons-svelte/IconCheckSquareRegular.svelte"
     import IconSquareRegular from "phosphor-icons-svelte/IconSquareRegular.svelte"
-    import type { ChangeEventHandler, ClassValue } from "svelte/elements"
+    import type { HTMLInputAttributes } from "svelte/elements"
     import Description from "./Description.svelte"
 
     let {
@@ -16,18 +16,11 @@
         error,
         onchange,
         ...rest
-    }: {
-        class?: ClassValue
-        checked?: boolean
+    }: Omit<HTMLInputAttributes, "group"> & {
         value?: string
         group?: string[]
-        disabled?: boolean
-        readonly?: boolean
-        name?: string
         label?: string
         error?: string
-        onchange?: ChangeEventHandler<HTMLInputElement>
-        [key: string]: any
     } = $props()
 
     const handleGroup = (checked: boolean) => {

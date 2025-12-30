@@ -9,6 +9,7 @@
     import FormSubmitButton from "$lib/components/form/FormSubmitButton.svelte"
 
     let {
+        class: class_,
         message = $bindable(),
         isRedirecting,
         submitButtonText,
@@ -28,7 +29,7 @@
 <FormBase
     class={[
         "grid gap-4",
-        rest.class,
+        class_,
         { "pointer-events-none": isPending || isRedirecting },
     ]}
     {...rest}

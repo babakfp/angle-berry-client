@@ -247,6 +247,7 @@
             class="relative grid grid-cols-[1fr_auto] border-t border-gray-50/5 shadow-[0_-1px_3px_0_rgb(0_0_0/0.1),0_-1px_2px_-1px_rgb(0_0_0/0.1)]"
         >
             <!-- TODO: placeholder, show "Use (ctrl + enter) to send" on desktop -->
+            <!-- TODO: we may not need the bind:value={messageInputValue} here anymore -->
             <textarea
                 {...chat.fields.messageContent.as("text")}
                 class="bg-background outline-inset block field-sizing-content max-h-48 w-full resize-none p-4 placeholder:text-gray-500"

@@ -3,7 +3,7 @@ import { form, getRequestEvent } from "$app/server"
 import { pbInvalid } from "$lib/utilities/pb"
 import { schema } from "../schema"
 
-export const createTiers = form(schema.create, async (data, issue) => {
+export const createTier = form(schema.create, async (data, issue) => {
     const { locals } = getRequestEvent()
 
     if (!locals.loggedInUser) redirect(303, "/login")

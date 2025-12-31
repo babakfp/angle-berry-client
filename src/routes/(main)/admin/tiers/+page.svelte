@@ -14,20 +14,20 @@
         Tr,
     } from "$lib/components/table/index"
     import { capitalizeFirstLetter } from "$lib/utilities/capitalizeFirstLetter"
-    import { deleteTier } from "./data.remote"
+    import { deleteTiers } from "./data.remote"
 
     let { data } = $props()
 
     const checkAllCheckboxes: ChangeEventHandler<HTMLInputElement> = (e) => {
         if ((e.target as HTMLInputElement).checked) {
-            deleteTier.fields.ids.set(data.tiers.map((tier) => tier.id))
+            deleteTiers.fields.ids.set(data.tiers.map((tier) => tier.id))
         } else {
-            deleteTier.fields.ids.set([])
+            deleteTiers.fields.ids.set([])
         }
     }
 
     const formIssue = $derived(
-        deleteTier.fields.allIssues()?.find((issue) => {
+        deleteTiers.fields.allIssues()?.find((issue) => {
             return !issue.path.length
         })?.message,
     )
@@ -42,11 +42,11 @@
 </div>
 
 <FormBase
-    form={deleteTier}
+    form={deleteTiers}
     enhance={async ({ submit }) => {
-        await deleteTier.validate()
+        await deleteTiers.validate()
 
-        if (deleteTier.fields.allIssues()?.length) {
+        if (deleteTiers.fields.allIssues()?.length) {
             return
         }
 
@@ -57,7 +57,7 @@
             return
         }
 
-        deleteTier.fields.ids.set([])
+        deleteTiers.fields.ids.set([])
         toast.success("Deleted successfully!")
     }}
 >
@@ -66,7 +66,7 @@
             <Tr>
                 <ThCheckbox
                     checked={!!data.tiers.length
-                        && deleteTier.fields.ids.value()?.length
+                        && deleteTiers.fields.ids.value()?.length
                             === data.tiers.length}
                     readonly={!data.tiers.length}
                     onchange={checkAllCheckboxes}
@@ -86,7 +86,7 @@
                 )}
                 <Tr class="not-last:border-b not-last:border-gray-50/5">
                     <TdCheckbox
-                        {...deleteTier.fields.ids.as("checkbox", tier.id)}
+                        {...deleteTiers.fields.ids.as("checkbox", tier.id)}
                     />
                     <Th class="text-gray-50" containsAnchor={true}>
                         <a
@@ -117,7 +117,7 @@
     </Table>
 
     <FloatingActions
-        itemsLength={deleteTier.fields.ids.value()?.length}
-        onClear={() => deleteTier.fields.ids.set([])}
+        itemsLength={deleteTiers.fields.ids.value()?.length}
+        onClear={() => deleteTiers.fields.ids.set([])}
     />
 </FormBase>

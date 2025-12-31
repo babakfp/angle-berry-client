@@ -1,7 +1,6 @@
 import { redirect } from "@sveltejs/kit"
 import {
-    ClientResponseError,
-    pbHandleClientResponseError,
+    pbHandleError,
     TIERS_RECORD_VISIBILITY_OPTIONS,
     type RealtimeEventsResponse,
     type RealtimeMessagesResponse,
@@ -10,7 +9,9 @@ import {
 import type { LayoutServerLoad } from "./$types"
 
 export const load: LayoutServerLoad = async ({ locals }) => {
-    if (!locals.loggedInUser) redirect(303, "/login")
+    if (!locals.loggedInUser) {
+        redirect(303, "/login")
+    }
 
     try {
         const [messages, events, tiers] = await Promise.all([
@@ -41,9 +42,6 @@ export const load: LayoutServerLoad = async ({ locals }) => {
             tiers,
         }
     } catch (e) {
-        if (e instanceof ClientResponseError) {
-            pbHandleClientResponseError(e)
-        }
-        throw e
+        pbHandleError(e)
     }
 }

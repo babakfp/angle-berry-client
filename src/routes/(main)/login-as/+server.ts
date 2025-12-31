@@ -12,13 +12,16 @@ const auth = {
 }
 
 export const GET = ({ locals }) => {
-    if (!locals.loggedInUser) redirect(303, "/login")
+    if (!locals.loggedInUser) {
+        redirect(303, "/login")
+    }
     redirect(303, "/")
 }
 
 export const POST = async ({ locals }) => {
-    if (!locals.loggedInUser) redirect(303, "/login")
-
+    if (!locals.loggedInUser) {
+        redirect(303, "/login")
+    }
     if (locals.loggedInUser.isAdmin) {
         locals.pb.authStore.clear()
         locals.loggedInUser = undefined

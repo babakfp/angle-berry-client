@@ -1,15 +1,15 @@
 import { redirect } from "@sveltejs/kit"
 import {
-    ClientResponseError,
-    pbHandleClientResponseError,
+    pbHandleError,
     type TiersResponse,
     type VideosResponse,
 } from "$lib/utilities/pb"
 import type { PageServerLoad } from "./$types"
 
 export const load: PageServerLoad = async ({ locals, params }) => {
-    if (!locals.loggedInUser) redirect(303, "/login")
-
+    if (!locals.loggedInUser) {
+        redirect(303, "/login")
+    }
     try {
         const tier: TiersResponse & {
             expand?: {
@@ -33,9 +33,6 @@ export const load: PageServerLoad = async ({ locals, params }) => {
             tier,
         }
     } catch (e) {
-        if (e instanceof ClientResponseError) {
-            pbHandleClientResponseError(e)
-        }
-        throw e
+        pbHandleError(e)
     }
 }

@@ -1,10 +1,7 @@
 import { error } from "@sveltejs/kit"
 import PocketBase from "pocketbase"
 import { PUBLIC_PB_URL } from "$env/static/public"
-import {
-    ClientResponseError,
-    pbHandleClientResponseError,
-} from "$lib/utilities/pb"
+import { pbHandleError } from "$lib/utilities/pb"
 
 export const handle = async ({ event, resolve }) => {
     if (!PUBLIC_PB_URL)
@@ -23,15 +20,11 @@ export const handle = async ({ event, resolve }) => {
                 await event.locals.pb.collection("users").authRefresh()
             ).record
         } catch (e) {
-            if (e instanceof ClientResponseError) {
-                if (e.status === 401) {
-                    event.locals.pb.authStore.clear()
-                } else {
-                    pbHandleClientResponseError(e)
-                }
-            } else {
-                throw e
-            }
+            pbHandleError(e, (e) => {
+                if (e.status !== 401) return
+                event.locals.pb.authStore.clear()
+                return "skip"
+            })
         }
     }
 
@@ -43,10 +36,7 @@ export const handle = async ({ event, resolve }) => {
         ).at(0)?.id
         event.locals.previewTierId = previewTierId
     } catch (e) {
-        if (e instanceof ClientResponseError) {
-            pbHandleClientResponseError(e)
-        }
-        throw e
+        pbHandleError(e)
     }
 
     const response = await resolve(event)

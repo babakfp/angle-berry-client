@@ -8,8 +8,8 @@
         group = $bindable(),
     }: {
         checked: boolean
-        value: string
-        group: string[]
+        value?: string
+        group?: string[]
     } = $props()
 </script>
 

@@ -69,7 +69,6 @@
         }
 
         await submit()
-        console.log(deleteVideos.fields.allIssues())
 
         if (deleteVideosIssue) {
             toast.error(deleteVideosIssue)

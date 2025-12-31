@@ -8,7 +8,7 @@
         class: class_,
         checked = $bindable(),
         value = "on",
-        group = $bindable([]),
+        group = $bindable(),
         disabled,
         readonly,
         name,
@@ -24,6 +24,10 @@
     } = $props()
 
     const handleGroup = (checked: boolean) => {
+        if (!group) {
+            group = []
+        }
+
         if (checked) {
             if (!group.includes(value)) {
                 group = [...group, value]

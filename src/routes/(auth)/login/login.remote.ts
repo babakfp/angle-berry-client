@@ -1,13 +1,7 @@
-import { invalid, redirect } from "@sveltejs/kit"
-import { form, getRequestEvent, query } from "$app/server"
+import { invalid } from "@sveltejs/kit"
+import { form, getRequestEvent } from "$app/server"
 import { pbInvalid } from "$lib/utilities/pb"
 import { schema } from "../(lib)/schema"
-
-export const allowNonLoggedInOnly = query(() => {
-    const { locals } = getRequestEvent()
-    if (!locals.loggedInUser) return
-    redirect(303, "/")
-})
 
 export const login = form(schema, async (data, issue) => {
     const { locals } = getRequestEvent()

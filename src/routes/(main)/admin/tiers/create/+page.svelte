@@ -16,9 +16,9 @@
         validateOnInput,
     } from "$lib/utilities/remote-functions/form"
     import VideoGalleryItem from "../VideoGalleryItem.svelte"
-    import { createTier } from "./data.remote"
+    import { createTier, loadVideos } from "./data.remote"
 
-    let { data } = $props()
+    const videos = await loadVideos()
 
     const visibilityOptions = Object.values(
         TIERS_RECORD_VISIBILITY_OPTIONS,
@@ -110,9 +110,7 @@
         />
         <ul class="grid gap-4 rounded bg-gray-700 p-2">
             {#each createTier.fields.videos.value() as id (id)}
-                {@const video = data.videos.filter(
-                    (video) => video.id === id,
-                )[0]}
+                {@const video = videos.filter((video) => video.id === id)[0]}
                 <li transition:fade>
                     <VideoGalleryItem
                         {...createTier.fields.videos.as("checkbox", video.id)}
@@ -135,7 +133,7 @@
             isFullSize={true}
         >
             <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-                {#each data.videos as video (video.id)}
+                {#each videos as video (video.id)}
                     <li>
                         <VideoGalleryItem
                             {...createTier.fields.videos.as(

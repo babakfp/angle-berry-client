@@ -10,6 +10,7 @@ export const load: PageServerLoad = async ({ locals, params }) => {
     if (!locals.loggedInUser) {
         redirect(303, "/login")
     }
+
     try {
         const tier: TiersResponse & {
             expand?: {

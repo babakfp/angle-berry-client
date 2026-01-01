@@ -1,27 +1,28 @@
 <script lang="ts">
     import toast from "svelte-hot-french-toast"
     import { goto } from "$app/navigation"
+    import { page } from "$app/state"
     import Checkbox from "$lib/components/form/Checkbox.svelte"
     import Form from "$lib/components/form/Form.svelte"
     import Input from "$lib/components/form/Input.svelte"
     import Select from "$lib/components/form/Select.svelte"
     import { isUserACreatedBeforeUserB } from "$lib/utilities/isUserACreatedBeforeUserB"
     import { useIssue, useSnapshot } from "$lib/utilities/remote-functions/form"
-    import { updateUser } from "./data.remote"
+    import { loadUserToEdit, updateUser } from "./data.remote"
 
     let { data } = $props()
 
+    const userToEdit = await loadUserToEdit(page.params.id!)
+
     // TODO: should be $derived?
-    updateUser.fields.isAdmin.set((() => data.targetUser.isAdmin)())
-    updateUser.fields.retainedTiers.set((() => data.targetUser.retainedTiers)())
+    updateUser.fields.isAdmin.set((() => userToEdit.isAdmin)())
+    updateUser.fields.retainedTiers.set((() => userToEdit.retainedTiers)())
 
     // TODO: should be $derived?
     let selectedRetainedTiers = $state(
         (() =>
             data.tiers
-                .filter((tier) =>
-                    data.targetUser.retainedTiers.includes(tier.id),
-                )
+                .filter((tier) => userToEdit.retainedTiers.includes(tier.id))
                 .map((tier) => ({ value: tier.id, label: tier.name })))(),
     )
 
@@ -41,7 +42,7 @@
 </script>
 
 <svelte:head>
-    <title>User : {data.targetUser.username}</title>
+    <title>User : {userToEdit.username}</title>
 </svelte:head>
 
 <div class="mx-auto w-full max-w-sm">
@@ -77,19 +78,12 @@
         submitButtonText="Update"
         submitButtonClass={{
             "btn-brand pointer-events-none opacity-50":
-                data.loggedInUser.id !== data.targetUser.id
-                && data.targetUser.isAdmin
-                && !isUserACreatedBeforeUserB(
-                    data.loggedInUser,
-                    data.targetUser,
-                ),
+                data.loggedInUser.id !== userToEdit.id
+                && userToEdit.isAdmin
+                && !isUserACreatedBeforeUserB(data.loggedInUser, userToEdit),
         }}
     >
-        <Input
-            label="Username"
-            value={data.targetUser.username}
-            readonly={true}
-        />
+        <Input label="Username" value={userToEdit.username} readonly={true} />
 
         <Select
             {...updateUser.fields.retainedTiers.as("select multiple")}
@@ -101,12 +95,9 @@
                 label: tier.name,
             }))}
             bind:selectedOptions={selectedRetainedTiers}
-            readonly={data.loggedInUser.id !== data.targetUser.id
-                && data.targetUser.isAdmin
-                && !isUserACreatedBeforeUserB(
-                    data.loggedInUser,
-                    data.targetUser,
-                )}
+            readonly={data.loggedInUser.id !== userToEdit.id
+                && userToEdit.isAdmin
+                && !isUserACreatedBeforeUserB(data.loggedInUser, userToEdit)}
         />
 
         <Checkbox
@@ -114,11 +105,11 @@
             error={updateUser.fields.isAdmin.issues()?.[0]?.message}
             class="justify-self-start"
             label="Role admin"
-            readonly={data.loggedInUser.id === data.targetUser.id
-                || (data.targetUser.isAdmin
+            readonly={data.loggedInUser.id === userToEdit.id
+                || (userToEdit.isAdmin
                     && !isUserACreatedBeforeUserB(
                         data.loggedInUser,
-                        data.targetUser,
+                        userToEdit,
                     ))}
         />
     </Form>

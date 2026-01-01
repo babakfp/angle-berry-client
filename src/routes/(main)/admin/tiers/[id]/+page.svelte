@@ -10,6 +10,12 @@
     import Modal from "$lib/components/Modal.svelte"
     import { capitalizeFirstLetter } from "$lib/utilities/capitalizeFirstLetter"
     import { TIERS_RECORD_VISIBILITY_OPTIONS } from "$lib/utilities/pb"
+    import {
+        useIssue,
+        useSnapshot,
+        validateOnBlur,
+        validateOnInput,
+    } from "$lib/utilities/remote-functions/form"
     import VideoGalleryItem from "../VideoGalleryItem.svelte"
     import { deleteTier, updateTier } from "./data.remote"
 
@@ -46,24 +52,11 @@
 
     const REDIRECT_MESSAGE = "Updated successfully!"
 
-    type Fields = ReturnType<typeof updateTier.fields.value>
+    export const snapshot = useSnapshot(updateTier)
 
-    export const snapshot = {
-        capture: () => updateTier.fields.value(),
-        restore: (fields: Fields) => updateTier.fields.set(fields),
-    }
+    const updateTierIssue = $derived(useIssue(updateTier))
 
-    const updateTierIssue = $derived(
-        updateTier.fields.allIssues()?.find((issue) => {
-            return !issue.path.length
-        })?.message,
-    )
-
-    const deleteTierIssue = $derived(
-        deleteTier.fields.allIssues()?.find((issue) => {
-            return !issue.path.length
-        })?.message,
-    )
+    const deleteTierIssue = $derived(useIssue(deleteTier))
 </script>
 
 <svelte:head>
@@ -100,58 +93,30 @@
         <Input
             {...updateTier.fields.name.as("text")}
             error={updateTier.fields.name.issues()?.[0]?.message}
-            onblur={() => {
-                if (!!updateTier.result) return
-                updateTier.validate()
-            }}
-            oninput={() => {
-                if (!!updateTier.result) return
-                if (!updateTier.fields.allIssues()?.length) return
-                updateTier.validate()
-            }}
+            onblur={() => validateOnBlur(updateTier)}
+            oninput={() => validateOnInput(updateTier)}
             label="Name"
             placeholder={data.tier.name}
         />
         <Input
             {...updateTier.fields.price.as("number")}
             error={updateTier.fields.price.issues()?.[0]?.message}
-            onblur={() => {
-                if (!!updateTier.result) return
-                updateTier.validate()
-            }}
-            oninput={() => {
-                if (!!updateTier.result) return
-                if (!updateTier.fields.allIssues()?.length) return
-                updateTier.validate()
-            }}
+            onblur={() => validateOnBlur(updateTier)}
+            oninput={() => validateOnInput(updateTier)}
             label="Price"
             placeholder={`${data.tier.price}`}
         />
         <Input
             {...updateTier.fields.invites.as("number")}
             error={updateTier.fields.invites.issues()?.[0]?.message}
-            onblur={() => {
-                if (!!updateTier.result) return
-                updateTier.validate()
-            }}
-            oninput={() => {
-                if (!!updateTier.result) return
-                if (!updateTier.fields.allIssues()?.length) return
-                updateTier.validate()
-            }}
+            onblur={() => validateOnBlur(updateTier)}
+            oninput={() => validateOnInput(updateTier)}
             label="Invites"
             placeholder={`${data.tier.invites}`}
         />
         <!-- TODO:
-            onblur={() => {
-                if (!!updateTier.result) return
-                updateTier.validate()
-            }}
-            oninput={() => {
-                if (!!updateTier.result) return
-                if (!updateTier.fields.allIssues()?.length) return
-                updateTier.validate()
-            }}
+            onblur={() => validateOnBlur(updateTier)}
+            oninput={() => validateOnInput(updateTier)}
         -->
         <Select
             {...updateTier.fields.visibility.as("select")}

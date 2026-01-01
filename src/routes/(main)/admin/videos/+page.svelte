@@ -5,23 +5,15 @@
     import Form from "$lib/components/form/Form.svelte"
     import FormBase from "$lib/components/form/FormBase.svelte"
     import FloatingActions from "$lib/components/table/FloatingActions.svelte"
+    import { useIssue } from "$lib/utilities/remote-functions/form"
     import VideoGalleryItem from "../tiers/VideoGalleryItem.svelte"
     import { deleteVideos, uploadVideos } from "./data.remote"
     import { formats } from "./schema"
 
     let { data } = $props()
 
-    const uploadVideosIssue = $derived(
-        uploadVideos.fields.allIssues()?.find((issue) => {
-            return !issue.path.length
-        })?.message,
-    )
-
-    const deleteVideosIssue = $derived(
-        deleteVideos.fields.allIssues()?.find((issue) => {
-            return !issue.path.length
-        })?.message,
-    )
+    const uploadVideosIssue = $derived(useIssue(uploadVideos))
+    const deleteVideosIssue = $derived(useIssue(deleteVideos))
 </script>
 
 <svelte:head>

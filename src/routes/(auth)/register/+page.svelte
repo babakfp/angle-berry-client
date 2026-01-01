@@ -5,23 +5,19 @@
     import Form from "$lib/components/form/Form.svelte"
     import PasswordField from "$lib/components/form/PasswordField.svelte"
     import UsernameField from "$lib/components/form/UsernameField.svelte"
+    import {
+        useIssue,
+        useSnapshot,
+        validateOnBlur,
+        validateOnInput,
+    } from "$lib/utilities/remote-functions/form"
     import Wrapper from "../(lib)/Wrapper.svelte"
     import { register } from "./register.remote"
 
-    const REDIRECT_MESSAGE = "Registered successfully!"
+    export const snapshot = useSnapshot(register)
 
-    type Fields = ReturnType<typeof register.fields.value>
-
-    export const snapshot = {
-        capture: () => register.fields.value(),
-        restore: (fields: Fields) => register.fields.set(fields),
-    }
-
-    const formIssue = $derived(
-        register.fields.allIssues()?.find((issue) => {
-            return !issue.path.length
-        })?.message,
-    )
+    const SUCCESSFULL_REGISTER_MESSAGE = "Registered successfully!"
+    const formIssue = $derived(useIssue(register))
 </script>
 
 <svelte:head>
@@ -51,41 +47,29 @@
             }
 
             if (register.result?.redirect) {
-                toast.success(REDIRECT_MESSAGE)
+                toast.success(SUCCESSFULL_REGISTER_MESSAGE)
                 goto(resolve(register.result.redirect))
             }
         }}
-        message={register.result?.redirect ? REDIRECT_MESSAGE : formIssue}
+        message={register.result?.redirect ?
+            SUCCESSFULL_REGISTER_MESSAGE
+        :   formIssue}
         isRedirecting={!!register.result?.redirect}
         submitButtonText="Register"
     >
         <UsernameField
             {...register.fields.username.as("text")}
             error={register.fields.username.issues()?.[0]?.message}
-            onblur={() => {
-                if (!!register.result) return
-                register.validate()
-            }}
-            oninput={() => {
-                if (!!register.result) return
-                if (!register.fields.allIssues()?.length) return
-                register.validate()
-            }}
+            onblur={() => validateOnBlur(register)}
+            oninput={() => validateOnInput(register)}
         />
 
         <PasswordField
             {...register.fields.password.as("password")}
             error={register.fields.password.issues()?.[0]?.message}
+            onblur={() => validateOnBlur(register)}
+            oninput={() => validateOnInput(register)}
             autocomplete="new-password"
-            onblur={() => {
-                if (!!register.result) return
-                register.validate()
-            }}
-            oninput={() => {
-                if (!!register.result) return
-                if (!register.fields.allIssues()?.length) return
-                register.validate()
-            }}
         />
     </Form>
 </Wrapper>

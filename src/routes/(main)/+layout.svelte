@@ -6,8 +6,7 @@
     import { messages, unreadMessagesLength } from "$lib/stores/messages.svelte"
     import { pb } from "$lib/stores/pb.svelte"
     import {
-        ClientResponseError,
-        pbHandleClientResponseError,
+        pbHandleError,
         type MessagesResponse,
         type TiersResponse,
         type UsersResponse,
@@ -153,10 +152,7 @@
                 ),
             ])
         } catch (e) {
-            if (e instanceof ClientResponseError) {
-                pbHandleClientResponseError(e)
-            }
-            throw e
+            pbHandleError(e)
         }
     })
 

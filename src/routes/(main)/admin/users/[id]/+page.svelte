@@ -7,6 +7,7 @@
     import Input from "$lib/components/form/Input.svelte"
     import Select from "$lib/components/form/Select.svelte"
     import { isUserACreatedBeforeUserB } from "$lib/utilities/isUserACreatedBeforeUserB"
+    import { useIssue, useSnapshot } from "$lib/utilities/remote-functions/form"
     import { updateUser } from "./data.remote"
 
     let { data } = $props()
@@ -33,18 +34,9 @@
 
     const REDIRECT_MESSAGE = "Updated successfully!"
 
-    type Fields = ReturnType<typeof updateUser.fields.value>
+    export const snapshot = useSnapshot(updateUser)
 
-    export const snapshot = {
-        capture: () => updateUser.fields.value(),
-        restore: (fields: Fields) => updateUser.fields.set(fields),
-    }
-
-    const formIssue = $derived(
-        updateUser.fields.allIssues()?.find((issue) => {
-            return !issue.path.length
-        })?.message,
-    )
+    const formIssue = $derived(useIssue(updateUser))
 
     let isRedirecting = $state(false)
 </script>

@@ -13,6 +13,7 @@
         RealtimeMessagesResponse,
         UsersResponse,
     } from "$lib/utilities/pb"
+    import { useIssue, useSnapshot } from "$lib/utilities/remote-functions/form"
     import { chat } from "./chat.remote"
     import {
         isContextMenuOpen,
@@ -122,18 +123,9 @@
         }
     }
 
-    type Fields = ReturnType<typeof chat.fields.value>
+    export const snapshot = useSnapshot(chat)
 
-    export const snapshot = {
-        capture: () => chat.fields.value(),
-        restore: (fields: Fields) => chat.fields.set(fields),
-    }
-
-    const formIssue = $derived(
-        chat.fields.allIssues()?.find((issue) => {
-            return !issue.path.length
-        })?.message,
-    )
+    const formIssue = $derived(useIssue(chat))
 </script>
 
 <SideDrawer

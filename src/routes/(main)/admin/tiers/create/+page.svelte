@@ -10,6 +10,12 @@
     import Modal from "$lib/components/Modal.svelte"
     import { capitalizeFirstLetter } from "$lib/utilities/capitalizeFirstLetter"
     import { TIERS_RECORD_VISIBILITY_OPTIONS } from "$lib/utilities/pb"
+    import {
+        useIssue,
+        useSnapshot,
+        validateOnBlur,
+        validateOnInput,
+    } from "$lib/utilities/remote-functions/form"
     import VideoGalleryItem from "../VideoGalleryItem.svelte"
     import { createTier } from "./data.remote"
 
@@ -33,18 +39,9 @@
 
     const REDIRECT_MESSAGE = "Created successfully!"
 
-    type Fields = ReturnType<typeof createTier.fields.value>
+    export const snapshot = useSnapshot(createTier)
 
-    export const snapshot = {
-        capture: () => createTier.fields.value(),
-        restore: (fields: Fields) => createTier.fields.set(fields),
-    }
-
-    const updateTierIssue = $derived(
-        createTier.fields.allIssues()?.find((issue) => {
-            return !issue.path.length
-        })?.message,
-    )
+    const updateTierIssue = $derived(useIssue(createTier))
 </script>
 
 <svelte:head>
@@ -81,55 +78,27 @@
         <Input
             {...createTier.fields.name.as("text")}
             error={createTier.fields.name.issues()?.[0]?.message}
-            onblur={() => {
-                if (!!createTier.result) return
-                createTier.validate()
-            }}
-            oninput={() => {
-                if (!!createTier.result) return
-                if (!createTier.fields.allIssues()?.length) return
-                createTier.validate()
-            }}
+            onblur={() => validateOnBlur(createTier)}
+            oninput={() => validateOnInput(createTier)}
             label="Name"
         />
         <Input
             {...createTier.fields.price.as("number")}
             error={createTier.fields.price.issues()?.[0]?.message}
-            onblur={() => {
-                if (!!createTier.result) return
-                createTier.validate()
-            }}
-            oninput={() => {
-                if (!!createTier.result) return
-                if (!createTier.fields.allIssues()?.length) return
-                createTier.validate()
-            }}
+            onblur={() => validateOnBlur(createTier)}
+            oninput={() => validateOnInput(createTier)}
             label="Price"
         />
         <Input
             {...createTier.fields.invites.as("number")}
             error={createTier.fields.invites.issues()?.[0]?.message}
-            onblur={() => {
-                if (!!createTier.result) return
-                createTier.validate()
-            }}
-            oninput={() => {
-                if (!!createTier.result) return
-                if (!createTier.fields.allIssues()?.length) return
-                createTier.validate()
-            }}
+            onblur={() => validateOnBlur(createTier)}
+            oninput={() => validateOnInput(createTier)}
             label="Invites"
         />
         <!-- TODO:
-            onblur={() => {
-                if (!!createTier.result) return
-                createTier.validate()
-            }}
-            oninput={() => {
-                if (!!createTier.result) return
-                if (!createTier.fields.allIssues()?.length) return
-                createTier.validate()
-            }}
+            onblur={() => validateOnBlur(createTier)}
+            oninput={() => validateOnInput(createTier)}
         -->
         <Select
             {...createTier.fields.visibility.as("select")}

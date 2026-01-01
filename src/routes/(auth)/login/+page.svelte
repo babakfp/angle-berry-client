@@ -5,24 +5,20 @@
     import Form from "$lib/components/form/Form.svelte"
     import PasswordField from "$lib/components/form/PasswordField.svelte"
     import UsernameField from "$lib/components/form/UsernameField.svelte"
+    import {
+        useIssue,
+        useSnapshot,
+        validateOnBlur,
+        validateOnInput,
+    } from "$lib/utilities/remote-functions/form"
     import Wrapper from "../(lib)/Wrapper.svelte"
     import LoginWithoutRegistering from "./(lib)/LoginWithoutRegistering.svelte"
     import { login } from "./login.remote"
 
-    const REDIRECT_MESSAGE = "Logged in successfully!"
+    export const snapshot = useSnapshot(login)
 
-    type Fields = ReturnType<typeof login.fields.value>
-
-    export const snapshot = {
-        capture: () => login.fields.value(),
-        restore: (fields: Fields) => login.fields.set(fields),
-    }
-
-    const formIssue = $derived(
-        login.fields.allIssues()?.find((issue) => {
-            return !issue.path.length
-        })?.message,
-    )
+    const SUCCESSFULL_LOGIN_MESSAGE = "Logged in successfully!"
+    const loginIssue = $derived(useIssue(login))
 </script>
 
 <svelte:head>
@@ -47,16 +43,18 @@
 
             await submit()
 
-            if (formIssue) {
-                toast.error(formIssue)
+            if (loginIssue) {
+                toast.error(loginIssue)
             }
 
             if (login.result?.redirect) {
-                toast.success(REDIRECT_MESSAGE)
+                toast.success(SUCCESSFULL_LOGIN_MESSAGE)
                 goto(resolve(login.result.redirect))
             }
         }}
-        message={login.result?.redirect ? REDIRECT_MESSAGE : formIssue}
+        message={login.result?.redirect ?
+            SUCCESSFULL_LOGIN_MESSAGE
+        :   loginIssue}
         isRedirecting={!!login.result?.redirect}
         submitButtonText="Login"
     >
@@ -66,30 +64,16 @@
         <UsernameField
             {...login.fields.username.as("text")}
             error={login.fields.username.issues()?.[0]?.message}
-            onblur={() => {
-                if (!!login.result) return
-                login.validate()
-            }}
-            oninput={() => {
-                if (!!login.result) return
-                if (!login.fields.allIssues()?.length) return
-                login.validate()
-            }}
+            onblur={() => validateOnBlur(login)}
+            oninput={() => validateOnInput(login)}
         />
 
         <PasswordField
             {...login.fields.password.as("password")}
             error={login.fields.password.issues()?.[0]?.message}
             autocomplete="current-password"
-            onblur={() => {
-                if (!!login.result) return
-                login.validate()
-            }}
-            oninput={() => {
-                if (!!login.result) return
-                if (!login.fields.allIssues()?.length) return
-                login.validate()
-            }}
+            onblur={() => validateOnBlur(login)}
+            oninput={() => validateOnInput(login)}
         />
     </Form>
 </Wrapper>

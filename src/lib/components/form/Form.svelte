@@ -25,14 +25,14 @@
         children?: Snippet
     } = $props()
 
-    const isPending = $derived(rest.form.pending > 0)
+    const isSubmitting = $derived(rest.form.pending > 0)
 </script>
 
 <FormBase
     class={[
         "grid gap-4",
         class_,
-        { "pointer-events-none": isPending || isRedirecting },
+        { "pointer-events-none": isSubmitting || isRedirecting },
     ]}
     {...rest}
 >
@@ -40,15 +40,14 @@
 
     <FormSubmitButton
         class={submitButtonClass}
-        disabled={isPending || isRedirecting}
+        disabled={isSubmitting || isRedirecting}
     >
         <span>
-            <!-- TODO: pending is not good text to show -->
-            {isPending ? "Pending"
+            {isSubmitting ? "Submitting"
             : isRedirecting ? "Redirecting"
             : submitButtonText}
         </span>
-        {#if isPending || isRedirecting}
+        {#if isSubmitting || isRedirecting}
             <IconSpinnerRegular class="animate-spin text-2xl" />
         {/if}
     </FormSubmitButton>

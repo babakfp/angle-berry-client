@@ -17,7 +17,10 @@ const create = v.object({
 
 export const schema = {
     create,
-    update: create,
+    update: v.object({
+        id: v.string(),
+        ...create.entries,
+    }),
     delete: {
         single: v.object({
             id: v.string(),

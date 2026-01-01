@@ -21,33 +21,29 @@ export const loadTier = query(v.string(), async (id) => {
     }
 })
 
-export const updateTier = form(schema.update, async (data, issue) => {
-    const { locals, params } = getRequestEvent()
+export const updateTier = form(
+    schema.update,
+    async ({ id, ...data }, issue) => {
+        const { locals } = getRequestEvent()
 
-    if (!locals.loggedInUser) {
-        redirect(401, "/login")
-    }
-    if (!locals.loggedInUser.isAdmin) {
-        redirect(401, "/")
-    }
+        if (!locals.loggedInUser) {
+            redirect(401, "/login")
+        }
+        if (!locals.loggedInUser.isAdmin) {
+            redirect(401, "/")
+        }
 
-    // TODO: get userid from schema insetad of params?
-    const tierId = params.id
+        try {
+            await locals.pb.collection("tiers").update(id, data)
+        } catch (e) {
+            pbInvalid(e, issue)
+        }
 
-    if (!tierId) {
-        invalid("Tier ID is required!")
-    }
-
-    try {
-        await locals.pb.collection("tiers").update(tierId, data)
-    } catch (e) {
-        pbInvalid(e, issue)
-    }
-
-    return {
-        redirect: "/admin/tiers",
-    } as const
-})
+        return {
+            redirect: "/admin/tiers",
+        } as const
+    },
+)
 
 export const deleteTier = form(schema.delete.single, async (data, issue) => {
     const { locals } = getRequestEvent()

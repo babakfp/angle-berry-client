@@ -127,6 +127,7 @@
             bind:selectedOption={selectedVisibility}
             isMultiple={false}
         />
+        <input {...updateTier.fields.id.as("hidden", page.params.id!)} />
         <ul class="grid gap-4 rounded bg-gray-700 p-2">
             {#each selectedVideos as video (video.id)}
                 <li transition:fade>

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { onDestroy, onMount, type Snippet } from "svelte"
+    import { onDestroy, onMount } from "svelte"
     import AnimatePageNavigation from "$lib/components/AnimatePageNavigation.svelte"
     import Header from "$lib/parts/Header/Header.svelte"
     import { events, unseenEventsLength } from "$lib/stores/events.svelte"

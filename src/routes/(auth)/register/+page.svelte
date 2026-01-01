@@ -11,7 +11,9 @@
         validateOnInput,
     } from "$lib/utilities/remote-functions/form"
     import Wrapper from "../(lib)/Wrapper.svelte"
-    import { register } from "./register.remote"
+    import { allowNonLoggedInOnly, register } from "./register.remote"
+
+    allowNonLoggedInOnly()
 
     export const snapshot = useSnapshot(register)
 

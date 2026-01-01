@@ -12,7 +12,9 @@
     } from "$lib/utilities/remote-functions/form"
     import Wrapper from "../(lib)/Wrapper.svelte"
     import LoginWithoutRegistering from "./(lib)/LoginWithoutRegistering.svelte"
-    import { login } from "./login.remote"
+    import { allowNonLoggedInOnly, login } from "./login.remote"
+
+    allowNonLoggedInOnly()
 
     export const snapshot = useSnapshot(login)
 

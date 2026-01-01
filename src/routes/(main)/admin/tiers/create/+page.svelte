@@ -7,7 +7,7 @@
     import Input from "$lib/components/form/Input.svelte"
     import Select from "$lib/components/form/Select.svelte"
     import Modal from "$lib/components/Modal.svelte"
-    import { getAllVideos } from "$lib/server/remotes/admin/getAllVideos.remote"
+    import { getAllVideos } from "$lib/remotes/admin/getAllVideos.remote"
     import { capitalizeFirstLetter } from "$lib/utilities/capitalizeFirstLetter"
     import { TIERS_RECORD_VISIBILITY_OPTIONS } from "$lib/utilities/pb"
     import {

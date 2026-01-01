@@ -1,5 +1,4 @@
 import { redirect } from "@sveltejs/kit"
-import { resolve } from "$app/paths"
 
 const auth = {
     user: {
@@ -14,14 +13,14 @@ const auth = {
 
 export const GET = ({ locals }) => {
     if (!locals.loggedInUser) {
-        redirect(401, resolve("/login"))
+        redirect(401, "/login")
     }
-    redirect(303, resolve("/"))
+    redirect(303, "/")
 }
 
 export const POST = async ({ locals }) => {
     if (!locals.loggedInUser) {
-        redirect(401, resolve("/login"))
+        redirect(401, "/login")
     }
     if (locals.loggedInUser.isAdmin) {
         locals.pb.authStore.clear()
@@ -39,5 +38,5 @@ export const POST = async ({ locals }) => {
             .authWithPassword(auth.admin.username, auth.admin.password)
     }
 
-    redirect(303, resolve("/"))
+    redirect(303, "/")
 }

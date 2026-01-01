@@ -1,7 +1,6 @@
 <script lang="ts">
     import toast from "svelte-hot-french-toast"
     import { goto } from "$app/navigation"
-    import { resolve } from "$app/paths"
     import Form from "$lib/components/form/Form.svelte"
     import PasswordField from "$lib/components/form/PasswordField.svelte"
     import UsernameField from "$lib/components/form/UsernameField.svelte"
@@ -48,7 +47,7 @@
 
             if (register.result?.redirect) {
                 toast.success(SUCCESSFULL_REGISTER_MESSAGE)
-                goto(resolve(register.result.redirect))
+                goto(register.result.redirect)
             }
         }}
         message={register.result?.redirect ?

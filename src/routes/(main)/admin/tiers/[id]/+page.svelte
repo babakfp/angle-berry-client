@@ -2,7 +2,6 @@
     import toast from "svelte-hot-french-toast"
     import { fade } from "svelte/transition"
     import { goto } from "$app/navigation"
-    import { resolve } from "$app/paths"
     import { PUBLIC_PB_URL } from "$env/static/public"
     import Form from "$lib/components/form/Form.svelte"
     import Input from "$lib/components/form/Input.svelte"
@@ -82,7 +81,7 @@
 
             if (updateTier.result?.redirect) {
                 toast.success(REDIRECT_MESSAGE)
-                goto(resolve(updateTier.result.redirect))
+                goto(updateTier.result.redirect)
             }
         }}
         message={updateTier.result?.redirect ?
@@ -195,7 +194,7 @@
 
             if (deleteTier.result?.redirect) {
                 toast.success("Deleted successfully!")
-                goto(resolve(deleteTier.result.redirect))
+                goto(deleteTier.result.redirect)
             }
         }}
         message={deleteTier.result?.redirect ?

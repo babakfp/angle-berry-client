@@ -1,5 +1,4 @@
 import { invalid, redirect } from "@sveltejs/kit"
-import { resolve } from "$app/paths"
 import { form, getRequestEvent } from "$app/server"
 import { isUserACreatedBeforeUserB } from "$lib/utilities/isUserACreatedBeforeUserB"
 import { pbInvalid } from "$lib/utilities/pb"
@@ -9,10 +8,10 @@ export const updateUser = form(schema, async (data, issue) => {
     const { locals, params } = getRequestEvent()
 
     if (!locals.loggedInUser) {
-        redirect(401, resolve("/login"))
+        redirect(401, "/login")
     }
     if (!locals.loggedInUser.isAdmin) {
-        redirect(401, resolve("/"))
+        redirect(401, "/")
     }
 
     // TODO: get userid from schema insetad of params?
@@ -47,6 +46,6 @@ export const updateUser = form(schema, async (data, issue) => {
     }
 
     return {
-        redirect: resolve("/admin/users"),
+        redirect: "/admin/users",
     } as const
 })

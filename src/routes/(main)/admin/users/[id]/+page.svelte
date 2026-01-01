@@ -1,7 +1,6 @@
 <script lang="ts">
     import toast from "svelte-hot-french-toast"
     import { goto } from "$app/navigation"
-    import { resolve } from "$app/paths"
     import Checkbox from "$lib/components/form/Checkbox.svelte"
     import Form from "$lib/components/form/Form.svelte"
     import Input from "$lib/components/form/Input.svelte"
@@ -67,7 +66,7 @@
                 isRedirecting = true
                 toast.success(REDIRECT_MESSAGE)
                 // TODO: should I await other gotos too?
-                await goto(resolve(updateUser.result.redirect))
+                await goto(updateUser.result.redirect)
                 // TODO: it seems like I need this isRedirecting in other remote functions too
                 isRedirecting = false
             }

@@ -1,5 +1,4 @@
 import { invalid, redirect } from "@sveltejs/kit"
-import { resolve } from "$app/paths"
 import { form, getRequestEvent } from "$app/server"
 import { pbInvalid } from "$lib/utilities/pb"
 import { schema } from "../schema"
@@ -8,10 +7,10 @@ export const updateTier = form(schema.update, async (data, issue) => {
     const { locals, params } = getRequestEvent()
 
     if (!locals.loggedInUser) {
-        redirect(401, resolve("/login"))
+        redirect(401, "/login")
     }
     if (!locals.loggedInUser.isAdmin) {
-        redirect(401, resolve("/"))
+        redirect(401, "/")
     }
 
     // TODO: get userid from schema insetad of params?
@@ -28,7 +27,7 @@ export const updateTier = form(schema.update, async (data, issue) => {
     }
 
     return {
-        redirect: resolve("/admin/tiers"),
+        redirect: "/admin/tiers",
     } as const
 })
 
@@ -36,10 +35,10 @@ export const deleteTier = form(schema.delete.single, async (data, issue) => {
     const { locals, params } = getRequestEvent()
 
     if (!locals.loggedInUser) {
-        redirect(401, resolve("/login"))
+        redirect(401, "/login")
     }
     if (!locals.loggedInUser.isAdmin) {
-        redirect(401, resolve("/"))
+        redirect(401, "/")
     }
 
     // TODO: get userid from schema insetad of params?
@@ -56,6 +55,6 @@ export const deleteTier = form(schema.delete.single, async (data, issue) => {
     }
 
     return {
-        redirect: resolve("/admin/tiers"),
+        redirect: "/admin/tiers",
     } as const
 })

@@ -2,7 +2,6 @@
     import toast from "svelte-hot-french-toast"
     import { fade } from "svelte/transition"
     import { goto } from "$app/navigation"
-    import { resolve } from "$app/paths"
     import { PUBLIC_PB_URL } from "$env/static/public"
     import Form from "$lib/components/form/Form.svelte"
     import Input from "$lib/components/form/Input.svelte"
@@ -67,7 +66,7 @@
 
             if (createTier.result?.redirect) {
                 toast.success(REDIRECT_MESSAGE)
-                goto(resolve(createTier.result.redirect))
+                goto(createTier.result.redirect)
             }
         }}
         message={createTier.result?.redirect ?

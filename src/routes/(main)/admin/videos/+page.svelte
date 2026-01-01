@@ -5,7 +5,7 @@
     import Form from "$lib/components/form/Form.svelte"
     import FormBase from "$lib/components/form/FormBase.svelte"
     import FloatingActions from "$lib/components/table/FloatingActions.svelte"
-    import { getAllVideos } from "$lib/server/remotes/admin/getAllVideos"
+    import { getAllVideos } from "$lib/server/remotes/admin/getAllVideos.remote"
     import { useIssue } from "$lib/utilities/remote-functions/form"
     import VideoGalleryItem from "../tiers/VideoGalleryItem.svelte"
     import { deleteVideos, uploadVideos } from "./data.remote"

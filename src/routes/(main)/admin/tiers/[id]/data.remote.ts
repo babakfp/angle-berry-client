@@ -8,7 +8,7 @@ export const updateTier = form(schema.update, async (data, issue) => {
     const { locals, params } = getRequestEvent()
 
     if (!locals.loggedInUser) {
-        redirect(303, resolve("/login"))
+        redirect(401, resolve("/login"))
     }
     if (!locals.loggedInUser.isAdmin) {
         error(401, "You are not authorized to perform this action!")
@@ -36,7 +36,7 @@ export const deleteTier = form(schema.delete.single, async (data, issue) => {
     const { locals, params } = getRequestEvent()
 
     if (!locals.loggedInUser) {
-        redirect(303, resolve("/login"))
+        redirect(401, resolve("/login"))
     }
     if (!locals.loggedInUser.isAdmin) {
         error(401, "You are not authorized to perform this action!")

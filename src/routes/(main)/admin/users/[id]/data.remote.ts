@@ -9,7 +9,7 @@ export const updateUser = form(schema, async (data, issue) => {
     const { locals, params } = getRequestEvent()
 
     if (!locals.loggedInUser) {
-        redirect(303, resolve("/login"))
+        redirect(401, resolve("/login"))
     }
     if (!locals.loggedInUser.isAdmin) {
         error(401, "You are not authorized to perform this action!")

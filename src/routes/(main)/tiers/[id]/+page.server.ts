@@ -9,7 +9,7 @@ import type { PageServerLoad } from "./$types"
 
 export const load: PageServerLoad = async ({ locals, params }) => {
     if (!locals.loggedInUser) {
-        redirect(303, resolve("/login"))
+        redirect(401, resolve("/login"))
     }
 
     try {

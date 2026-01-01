@@ -14,14 +14,14 @@ const auth = {
 
 export const GET = ({ locals }) => {
     if (!locals.loggedInUser) {
-        redirect(303, resolve("/login"))
+        redirect(401, resolve("/login"))
     }
     redirect(303, resolve("/"))
 }
 
 export const POST = async ({ locals }) => {
     if (!locals.loggedInUser) {
-        redirect(303, resolve("/login"))
+        redirect(401, resolve("/login"))
     }
     if (locals.loggedInUser.isAdmin) {
         locals.pb.authStore.clear()

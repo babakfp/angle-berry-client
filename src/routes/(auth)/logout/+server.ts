@@ -5,7 +5,7 @@ export const GET = ({ locals }) => {
     if (locals.loggedInUser) {
         redirect(303, resolve("/"))
     }
-    redirect(303, resolve("/login"))
+    redirect(401, resolve("/login"))
 }
 
 export const POST = ({ locals }) => {
@@ -13,5 +13,5 @@ export const POST = ({ locals }) => {
         locals.pb.authStore.clear()
         locals.loggedInUser = undefined
     }
-    redirect(303, resolve("/login"))
+    redirect(401, resolve("/login"))
 }

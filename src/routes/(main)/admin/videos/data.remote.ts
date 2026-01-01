@@ -8,7 +8,7 @@ export const uploadVideos = form(schema.upload, async (data, issue) => {
     const { locals } = getRequestEvent()
 
     if (!locals.loggedInUser) {
-        redirect(303, resolve("/login"))
+        redirect(401, resolve("/login"))
     }
     if (!locals.loggedInUser.isAdmin) {
         error(401, "You are not authorized to perform this action!")
@@ -31,7 +31,7 @@ export const deleteVideos = form(schema.delete, async (data, issue) => {
     const { locals } = getRequestEvent()
 
     if (!locals.loggedInUser) {
-        redirect(303, resolve("/login"))
+        redirect(401, resolve("/login"))
     }
     if (!locals.loggedInUser.isAdmin) {
         error(401, "You are not authorized to perform this action!")

@@ -17,7 +17,7 @@ export const chat = form(schema, async (data, issue) => {
     const { locals } = getRequestEvent()
 
     if (!locals.loggedInUser) {
-        redirect(303, resolve("/login"))
+        redirect(401, resolve("/login"))
     }
 
     data.messageContent = data.messageContent.replace(/(?:\r\n|\r|\n)/g, "<br>")

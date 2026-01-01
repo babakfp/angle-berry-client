@@ -8,6 +8,8 @@
     import toast from "svelte-hot-french-toast"
     import { beforeNavigate } from "$app/navigation"
     import { page } from "$app/state"
+    import FormBase from "$lib/components/form/FormBase.svelte"
+    import { logout } from "$lib/remotes/logout.remote"
     import type { TiersResponse, UsersResponse } from "$lib/utilities/pb"
     import Tier from "./Tier.svelte"
 
@@ -128,14 +130,22 @@
                         </button>
                     </form>
 
-                    <form action="/logout" method="post">
+                    <FormBase
+                        form={logout}
+                        enhance={async ({ submit }) => {
+                            await submit()
+                            window.location.href = "/login"
+                            // TODO
+                            // toast.success("Logged out successfully!")
+                        }}
+                    >
                         <button
                             type="submit"
                             class="outline-inset w-full rounded-b border-t border-gray-50/5 p-4 text-left duration-150 hover:text-gray-50"
                         >
                             Logout
                         </button>
-                    </form>
+                    </FormBase>
                 </div>
 
                 {@render ScrollShadow({ position: "bottom" })}

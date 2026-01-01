@@ -11,8 +11,8 @@
     import { formats } from "./schema"
 
     const videos = await loadVideos()
-    const uploadVideosIssue = $derived(useIssue(uploadVideos))
-    const deleteVideosIssue = $derived(useIssue(deleteVideos))
+    const uploadIssue = $derived(useIssue(uploadVideos))
+    const deleteIssue = $derived(useIssue(deleteVideos))
 </script>
 
 <svelte:head>
@@ -30,8 +30,8 @@
 
         await submit()
 
-        if (uploadVideosIssue) {
-            toast.error(uploadVideosIssue)
+        if (uploadIssue) {
+            toast.error(uploadIssue)
             return
         }
 
@@ -39,7 +39,7 @@
         toast.success("Uploaded successfully!")
     }}
     class="mb-8"
-    message={uploadVideosIssue}
+    message={uploadIssue}
     allowUpload={true}
     submitButtonText="Upload"
 >
@@ -61,8 +61,8 @@
 
         await submit()
 
-        if (deleteVideosIssue) {
-            toast.error(deleteVideosIssue)
+        if (deleteIssue) {
+            toast.error(deleteIssue)
             return
         }
 

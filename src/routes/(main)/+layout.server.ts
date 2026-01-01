@@ -42,6 +42,6 @@ export const load: LayoutServerLoad = async ({ locals }) => {
             tiers,
         }
     } catch (e) {
-        pbHandleError(e)
+        throw pbHandleError(e)
     }
 }

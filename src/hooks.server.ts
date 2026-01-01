@@ -37,7 +37,7 @@ export const handle = async ({ event, resolve }) => {
         )?.[0]?.id
         event.locals.previewTierId = previewTierId
     } catch (e) {
-        pbHandleError(e)
+        throw pbHandleError(e)
     }
 
     const response = await resolve(event)

@@ -14,6 +14,6 @@ export const load: PageServerLoad = async ({ locals }) => {
         const users = await locals.pb.collection("users").getFullList()
         return { users }
     } catch (e) {
-        pbHandleError(e)
+        throw pbHandleError(e)
     }
 }

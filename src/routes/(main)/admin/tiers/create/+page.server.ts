@@ -14,6 +14,6 @@ export const load: PageServerLoad = async ({ locals }) => {
         const videos = await locals.pb.collection("videos").getFullList()
         return { videos }
     } catch (e) {
-        pbHandleError(e)
+        throw pbHandleError(e)
     }
 }

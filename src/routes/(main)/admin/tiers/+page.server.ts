@@ -19,6 +19,6 @@ export const load: PageServerLoad = async ({ locals }) => {
         ])
         return { tiers, users }
     } catch (e) {
-        pbHandleError(e)
+        throw pbHandleError(e)
     }
 }

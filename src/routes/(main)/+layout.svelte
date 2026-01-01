@@ -152,7 +152,7 @@
                 ),
             ])
         } catch (e) {
-            pbHandleError(e)
+            throw pbHandleError(e)
         }
     })
 

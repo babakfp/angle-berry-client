@@ -2,6 +2,7 @@
     import toast from "svelte-hot-french-toast"
     import { fade } from "svelte/transition"
     import { goto } from "$app/navigation"
+    import { page } from "$app/state"
     import { PUBLIC_PB_URL } from "$env/static/public"
     import Form from "$lib/components/form/Form.svelte"
     import Input from "$lib/components/form/Input.svelte"
@@ -15,20 +16,20 @@
         validateOnBlur,
         validateOnInput,
     } from "$lib/utilities/remote-functions/form"
+    import { loadVideos } from "$lib/utilities/remotes/admin/loadVideos"
     import VideoGalleryItem from "../VideoGalleryItem.svelte"
-    import { deleteTier, updateTier } from "./data.remote"
+    import { deleteTier, loadTier, updateTier } from "./data.remote"
 
-    let { data } = $props()
+    const tier = await loadTier(page.params.id!)
+    const videos = await loadVideos()
 
-    updateTier.fields.name.set((() => data.tier.name)())
-    updateTier.fields.price.set((() => data.tier.price)())
-    updateTier.fields.invites.set((() => data.tier.invites)())
-    updateTier.fields.videos.set((() => data.tier.videos)())
+    updateTier.fields.name.set((() => tier.name)())
+    updateTier.fields.price.set((() => tier.price)())
+    updateTier.fields.invites.set((() => tier.invites)())
+    updateTier.fields.videos.set((() => tier.videos)())
 
     let selectedVideos = $derived(
-        data.videos.filter((v) =>
-            updateTier.fields.videos.value()?.includes(v.id),
-        ),
+        videos.filter((v) => updateTier.fields.videos.value()?.includes(v.id)),
     )
 
     const visibilityOptions = Object.values(
@@ -39,8 +40,8 @@
     }))
 
     let selectedVisibility = $state({
-        value: data.tier.visibility,
-        label: capitalizeFirstLetter(data.tier.visibility),
+        value: tier.visibility,
+        label: capitalizeFirstLetter(tier.visibility),
     })
 
     $effect(() => {
@@ -59,7 +60,7 @@
 </script>
 
 <svelte:head>
-    <title>Tier : {data.tier.name}</title>
+    <title>Tier : {tier.name}</title>
 </svelte:head>
 
 <div class="mx-auto w-full max-w-sm">
@@ -95,7 +96,7 @@
             onblur={() => validateOnBlur(updateTier)}
             oninput={() => validateOnInput(updateTier)}
             label="Name"
-            placeholder={data.tier.name}
+            placeholder={tier.name}
         />
         <Input
             {...updateTier.fields.price.as("number")}
@@ -103,7 +104,7 @@
             onblur={() => validateOnBlur(updateTier)}
             oninput={() => validateOnInput(updateTier)}
             label="Price"
-            placeholder={`${data.tier.price}`}
+            placeholder={`${tier.price}`}
         />
         <Input
             {...updateTier.fields.invites.as("number")}
@@ -111,7 +112,7 @@
             onblur={() => validateOnBlur(updateTier)}
             oninput={() => validateOnInput(updateTier)}
             label="Invites"
-            placeholder={`${data.tier.invites}`}
+            placeholder={`${tier.invites}`}
         />
         <!-- TODO:
             onblur={() => validateOnBlur(updateTier)}
@@ -150,7 +151,7 @@
             isFullSize={true}
         >
             <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-                {#each data.videos as video (video.id)}
+                {#each videos as video (video.id)}
                     <li>
                         <VideoGalleryItem
                             {...updateTier.fields.videos.as(

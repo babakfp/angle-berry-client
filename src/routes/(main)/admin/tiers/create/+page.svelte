@@ -15,8 +15,9 @@
         validateOnBlur,
         validateOnInput,
     } from "$lib/utilities/remote-functions/form"
+    import { loadVideos } from "$lib/utilities/remotes/admin/loadVideos"
     import VideoGalleryItem from "../VideoGalleryItem.svelte"
-    import { createTier, loadVideos } from "./data.remote"
+    import { createTier } from "./data.remote"
 
     const videos = await loadVideos()
 

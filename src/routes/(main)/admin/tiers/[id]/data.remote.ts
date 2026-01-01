@@ -1,7 +1,25 @@
 import { invalid, redirect } from "@sveltejs/kit"
-import { form, getRequestEvent } from "$app/server"
-import { pbInvalid } from "$lib/utilities/pb"
+import * as v from "valibot"
+import { form, getRequestEvent, query } from "$app/server"
+import { pbHandleError, pbInvalid } from "$lib/utilities/pb"
 import { schema } from "../schema"
+
+export const loadTier = query(v.string(), async (id) => {
+    const { locals } = getRequestEvent()
+
+    if (!locals.loggedInUser) {
+        redirect(401, "/login")
+    }
+    if (!locals.loggedInUser.isAdmin) {
+        redirect(401, "/")
+    }
+
+    try {
+        return await locals.pb.collection("tiers").getOne(id)
+    } catch (e) {
+        throw pbHandleError(e)
+    }
+})
 
 export const updateTier = form(schema.update, async (data, issue) => {
     const { locals, params } = getRequestEvent()

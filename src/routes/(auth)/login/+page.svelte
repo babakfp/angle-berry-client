@@ -15,7 +15,7 @@
     import LoginWithoutRegistering from "./(lib)/LoginWithoutRegistering.svelte"
     import { login } from "./login.remote"
 
-    allowNonLoggedInOnly()
+    await allowNonLoggedInOnly()
 
     export const snapshot = useSnapshot(login)
 

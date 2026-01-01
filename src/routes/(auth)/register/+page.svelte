@@ -14,7 +14,7 @@
     import Wrapper from "../(lib)/Wrapper.svelte"
     import { register } from "./register.remote"
 
-    allowNonLoggedInOnly()
+    await allowNonLoggedInOnly()
 
     export const snapshot = useSnapshot(register)
 

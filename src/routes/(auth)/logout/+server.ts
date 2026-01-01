@@ -1,10 +1,11 @@
 import { redirect } from "@sveltejs/kit"
+import { resolve } from "$app/paths"
 
 export const GET = ({ locals }) => {
     if (locals.loggedInUser) {
-        redirect(303, "/")
+        redirect(303, resolve("/"))
     }
-    redirect(303, "/login")
+    redirect(303, resolve("/login"))
 }
 
 export const POST = ({ locals }) => {
@@ -12,5 +13,5 @@ export const POST = ({ locals }) => {
         locals.pb.authStore.clear()
         locals.loggedInUser = undefined
     }
-    redirect(303, "/login")
+    redirect(303, resolve("/login"))
 }

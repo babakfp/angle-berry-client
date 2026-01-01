@@ -1,4 +1,5 @@
 import { error, invalid, redirect } from "@sveltejs/kit"
+import { resolve } from "$app/paths"
 import { form, getRequestEvent } from "$app/server"
 import { pbInvalid } from "$lib/utilities/pb"
 import { schema } from "../schema"
@@ -7,7 +8,7 @@ export const updateTier = form(schema.update, async (data, issue) => {
     const { locals, params } = getRequestEvent()
 
     if (!locals.loggedInUser) {
-        redirect(303, "/login")
+        redirect(303, resolve("/login"))
     }
     if (!locals.loggedInUser.isAdmin) {
         error(401, "You are not authorized to perform this action!")
@@ -27,7 +28,7 @@ export const updateTier = form(schema.update, async (data, issue) => {
     }
 
     return {
-        redirect: "/admin/tiers",
+        redirect: resolve("/admin/tiers"),
     } as const
 })
 
@@ -35,7 +36,7 @@ export const deleteTier = form(schema.delete.single, async (data, issue) => {
     const { locals, params } = getRequestEvent()
 
     if (!locals.loggedInUser) {
-        redirect(303, "/login")
+        redirect(303, resolve("/login"))
     }
     if (!locals.loggedInUser.isAdmin) {
         error(401, "You are not authorized to perform this action!")
@@ -55,6 +56,6 @@ export const deleteTier = form(schema.delete.single, async (data, issue) => {
     }
 
     return {
-        redirect: "/admin/tiers",
+        redirect: resolve("/admin/tiers"),
     } as const
 })

@@ -1,4 +1,5 @@
 import { redirect } from "@sveltejs/kit"
+import { resolve } from "$app/paths"
 import {
     pbHandleError,
     TIERS_RECORD_VISIBILITY_OPTIONS,
@@ -10,7 +11,7 @@ import type { LayoutServerLoad } from "./$types"
 
 export const load: LayoutServerLoad = async ({ locals }) => {
     if (!locals.loggedInUser) {
-        redirect(303, "/login")
+        redirect(303, resolve("/login"))
     }
 
     try {

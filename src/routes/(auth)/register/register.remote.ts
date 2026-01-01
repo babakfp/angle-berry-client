@@ -1,4 +1,5 @@
 import { redirect } from "@sveltejs/kit"
+import { resolve } from "$app/paths"
 import { form, getRequestEvent } from "$app/server"
 import { pbInvalid, type UsersResponse } from "$lib/utilities/pb"
 import { schema } from "../(lib)/schema"
@@ -7,7 +8,7 @@ export const register = form(schema, async (data, issue) => {
     const { locals, url } = getRequestEvent()
 
     if (locals.loggedInUser) {
-        redirect(303, "/")
+        redirect(303, resolve("/"))
     }
 
     let inviter: UsersResponse | undefined = undefined
@@ -63,11 +64,11 @@ export const register = form(schema, async (data, issue) => {
 
     if (locals.previewTierId) {
         return {
-            redirect: `/tiers/${locals.previewTierId}`,
+            redirect: resolve(`/tiers/${locals.previewTierId}`),
         } as const
     }
 
     return {
-        redirect: "/",
+        redirect: resolve("/"),
     } as const
 })

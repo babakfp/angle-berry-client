@@ -8,6 +8,7 @@
     import Input from "$lib/components/form/Input.svelte"
     import Select from "$lib/components/form/Select.svelte"
     import Modal from "$lib/components/Modal.svelte"
+    import { getAllVideos } from "$lib/server/remotes/admin/getAllVideos"
     import { capitalizeFirstLetter } from "$lib/utilities/capitalizeFirstLetter"
     import { TIERS_RECORD_VISIBILITY_OPTIONS } from "$lib/utilities/pb"
     import {
@@ -16,12 +17,11 @@
         validateOnBlur,
         validateOnInput,
     } from "$lib/utilities/remote-functions/form"
-    import { loadVideos } from "$lib/utilities/remotes/admin/loadVideos"
     import VideoGalleryItem from "../VideoGalleryItem.svelte"
     import { deleteTier, loadTier, updateTier } from "./data.remote"
 
     const tier = await loadTier(page.params.id!)
-    const videos = await loadVideos()
+    const videos = await getAllVideos()
 
     updateTier.fields.name.set((() => tier.name)())
     updateTier.fields.price.set((() => tier.price)())

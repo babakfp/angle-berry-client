@@ -7,8 +7,11 @@
         Thead,
         Tr,
     } from "$lib/components/table/index"
+    import { loadUsers } from "./data.remote"
 
     let { data } = $props()
+
+    const users = await loadUsers()
 </script>
 
 <svelte:head>
@@ -25,7 +28,7 @@
         </Tr>
     </Thead>
     <Tbody>
-        {#each data.users as user}
+        {#each users as user}
             <Tr class="not-last:border-b not-last:border-gray-50/5">
                 <Th class="text-gray-50" containsAnchor={true}>
                     <a

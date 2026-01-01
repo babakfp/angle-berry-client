@@ -17,6 +17,7 @@ export default {
             return (
                 !warning.code.startsWith("a11y_")
                 && warning.code !== "avoid_mouse_events_on_document"
+                && warning.code !== "state_referenced_locally"
             )
         },
         experimental: {

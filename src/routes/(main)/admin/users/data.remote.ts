@@ -6,10 +6,10 @@ export const loadUsers = query(async () => {
     const { locals } = getRequestEvent()
 
     if (!locals.loggedInUser) {
-        redirect(401, "/login")
+        redirect(303, "/login")
     }
     if (!locals.loggedInUser.isAdmin) {
-        redirect(401, "/")
+        redirect(303, "/")
     }
 
     try {

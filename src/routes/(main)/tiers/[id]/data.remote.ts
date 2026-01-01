@@ -11,7 +11,7 @@ export const loadData = query(v.string(), async (tierId) => {
     const { locals } = getRequestEvent()
 
     if (!locals.loggedInUser) {
-        redirect(401, "/login")
+        redirect(303, "/login")
     }
 
     try {

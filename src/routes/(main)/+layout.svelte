@@ -12,13 +12,7 @@
         type UsersResponse,
     } from "$lib/utilities/pb"
 
-    let {
-        data = $bindable(),
-        children,
-    }: {
-        data: any
-        children: Snippet
-    } = $props()
+    let { data, children } = $props()
 
     onMount(async () => {
         try {

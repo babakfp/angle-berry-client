@@ -1,4 +1,4 @@
-import { error, invalid, redirect } from "@sveltejs/kit"
+import { invalid, redirect } from "@sveltejs/kit"
 import { resolve } from "$app/paths"
 import { form, getRequestEvent } from "$app/server"
 import { pbInvalid } from "$lib/utilities/pb"
@@ -11,7 +11,7 @@ export const updateTier = form(schema.update, async (data, issue) => {
         redirect(401, resolve("/login"))
     }
     if (!locals.loggedInUser.isAdmin) {
-        error(401, "You are not authorized to perform this action!")
+        redirect(401, resolve("/"))
     }
 
     // TODO: get userid from schema insetad of params?
@@ -39,7 +39,7 @@ export const deleteTier = form(schema.delete.single, async (data, issue) => {
         redirect(401, resolve("/login"))
     }
     if (!locals.loggedInUser.isAdmin) {
-        error(401, "You are not authorized to perform this action!")
+        redirect(401, resolve("/"))
     }
 
     // TODO: get userid from schema insetad of params?

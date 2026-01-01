@@ -4,10 +4,11 @@ import { PUBLIC_PB_URL } from "$env/static/public"
 import { pbHandleError } from "$lib/utilities/pb"
 
 export const handle = async ({ event, resolve }) => {
-    if (!PUBLIC_PB_URL)
+    if (!PUBLIC_PB_URL) {
         error(500, {
             message: "Missing REQUIRED Environment Variable PUBLIC_PB_URL",
         })
+    }
 
     event.locals.pb = new PocketBase(PUBLIC_PB_URL)
     event.locals.pb.authStore.loadFromCookie(

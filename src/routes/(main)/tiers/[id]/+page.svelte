@@ -1,38 +1,38 @@
 <script lang="ts">
+    import { page } from "$app/state"
     import { PUBLIC_PB_URL } from "$env/static/public"
     import * as TiersTable from "$lib/components/TiersTable"
     import Video from "$lib/components/Video.svelte"
+    import { loadData } from "./data.remote.js"
 
     let { data } = $props()
+
+    const { tier, isTierAccessed } = await loadData(page.params.id!)
 </script>
 
 <svelte:head>
-    <title>Tier : {data?.tier.name}</title>
+    <title>Tier : {tier.name}</title>
 </svelte:head>
 
-<h1 class="text-4xl font-bold text-gray-50">{data?.tier.name}</h1>
+<h1 class="text-4xl font-bold text-gray-50">{tier.name}</h1>
 
 <!-- I don't need "tiers" here becaus we only use currentTier -->
 <TiersTable.Root class="mt-8">
-    <TiersTable.Row
-        loggedInUser={data.loggedInUser}
-        tier={data.tier}
-        isCurrent={true}
-    />
+    <TiersTable.Row loggedInUser={data.loggedInUser} {tier} isCurrent={true} />
 </TiersTable.Root>
 
-{#if !data.isTierAccessed}
+{#if !isTierAccessed}
     <p class="mt-8">
-        You don't have access to this tier. You can invite {data?.tier.invites} users
-        to get the access. You currently have {data.loggedInUser.invitedUsers
+        You don't have access to this tier. You can invite {tier.invites} users to
+        get the access. You currently have {data.loggedInUser.invitedUsers
             .length} invites.
         <a class="link" href="/how-to-invite">Learn how to invite</a>
         . When you had enough invites, please refresh the page and it will unlock
         automatically.
     </p>
-{:else if data.tier.expand?.videos.length}
+{:else if tier.expand?.videos.length}
     <ul class="mt-8 grid gap-8">
-        {#each data.tier.expand?.videos as video}
+        {#each tier.expand?.videos as video}
             <li>
                 <Video
                     src="{PUBLIC_PB_URL}/api/files/{video.collectionName}/{video.id}/{video.file}"

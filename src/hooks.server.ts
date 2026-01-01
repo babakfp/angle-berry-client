@@ -33,7 +33,7 @@ export const handle = async ({ event, resolve }) => {
             await event.locals.pb.collection("tiers").getFullList({
                 filter: 'price = 0 && invites = 0 && visibility = "public"',
             })
-        ).at(0)?.id
+        )?.[0]?.id
         event.locals.previewTierId = previewTierId
     } catch (e) {
         pbHandleError(e)

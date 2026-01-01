@@ -4,7 +4,6 @@
     import Form from "$lib/components/form/Form.svelte"
     import PasswordField from "$lib/components/form/PasswordField.svelte"
     import UsernameField from "$lib/components/form/UsernameField.svelte"
-    import { allowNonLoggedInOnly } from "$lib/remotes/allowNonLoggedInOnly.remote"
     import {
         useIssue,
         useSnapshot,
@@ -13,8 +12,6 @@
     } from "$lib/utilities/remote-forms"
     import Wrapper from "../(lib)/Wrapper.svelte"
     import { register } from "./register.remote"
-
-    await allowNonLoggedInOnly()
 
     export const snapshot = useSnapshot(register)
 

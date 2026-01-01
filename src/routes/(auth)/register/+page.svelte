@@ -4,7 +4,7 @@
     import Form from "$lib/components/form/Form.svelte"
     import PasswordField from "$lib/components/form/PasswordField.svelte"
     import UsernameField from "$lib/components/form/UsernameField.svelte"
-    import { allowNonLoggedInOnly } from "$lib/server/remotes"
+    import { allowNonLoggedInOnly } from "$lib/server/remotes/allowNonLoggedInOnly.remote"
     import {
         useIssue,
         useSnapshot,

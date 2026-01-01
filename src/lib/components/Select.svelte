@@ -116,7 +116,9 @@
         {@render SelectedOptions()}
     {/if}
 
-    <Description type="error">{error}</Description>
+    {#if error}
+        <Description type="error">{error}</Description>
+    {/if}
 </div>
 
 {#snippet Trigger()}

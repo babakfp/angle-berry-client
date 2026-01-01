@@ -12,18 +12,16 @@
     } = $props()
 </script>
 
-{#if children}
-    <p
-        class={[
-            class_,
-            "text-xs",
-            {
-                "text-gray-400": !type,
-                "text-red-400": type === "error",
-                "text-green-400": type === "success",
-            },
-        ]}
-    >
-        {@render children()}
-    </p>
-{/if}
+<p
+    class={[
+        class_,
+        "text-xs",
+        {
+            "text-gray-400": !type,
+            "text-red-400": type === "error",
+            "text-green-400": type === "success",
+        },
+    ]}
+>
+    {@render children()}
+</p>

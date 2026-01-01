@@ -7,11 +7,10 @@
     import FloatingActions from "$lib/components/table/FloatingActions.svelte"
     import { useIssue } from "$lib/utilities/remote-functions/form"
     import VideoGalleryItem from "../tiers/VideoGalleryItem.svelte"
-    import { deleteVideos, uploadVideos } from "./data.remote"
+    import { deleteVideos, loadVideos, uploadVideos } from "./data.remote"
     import { formats } from "./schema"
 
-    let { data } = $props()
-
+    const videos = await loadVideos()
     const uploadVideosIssue = $derived(useIssue(uploadVideos))
     const deleteVideosIssue = $derived(useIssue(deleteVideos))
 </script>
@@ -72,7 +71,7 @@
     }}
 >
     <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {#each data.videos as video}
+        {#each videos as video}
             <li>
                 <VideoGalleryItem
                     {...deleteVideos.fields.videos.as("checkbox", video.id)}

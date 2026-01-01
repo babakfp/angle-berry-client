@@ -23,7 +23,7 @@ export const loadUserToEdit = query(v.string(), async (id) => {
 })
 
 export const updateUser = form(schema, async (data, issue) => {
-    const { locals, params } = getRequestEvent()
+    const { locals } = getRequestEvent()
 
     if (!locals.loggedInUser) {
         redirect(401, "/login")
@@ -32,14 +32,7 @@ export const updateUser = form(schema, async (data, issue) => {
         redirect(401, "/")
     }
 
-    // TODO: get userid from schema insetad of params?
-    const userId = params.id
-
-    if (!userId) {
-        invalid("User ID is required!")
-    }
-
-    const targetUser = await locals.pb.collection("users").getOne(userId)
+    const targetUser = await locals.pb.collection("users").getOne(data.id)
 
     if (
         locals.loggedInUser.id !== targetUser.id
@@ -58,7 +51,7 @@ export const updateUser = form(schema, async (data, issue) => {
     }
 
     try {
-        await locals.pb.collection("users").update(userId, data)
+        await locals.pb.collection("users").update(data.id, data)
     } catch (e) {
         pbInvalid(e, issue)
     }

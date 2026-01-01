@@ -112,5 +112,7 @@
                         userToEdit,
                     ))}
         />
+
+        <input {...updateUser.fields.id.as("hidden", page.params.id!)} />
     </Form>
 </div>

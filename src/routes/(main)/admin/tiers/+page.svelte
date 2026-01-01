@@ -14,9 +14,11 @@
         Tr,
     } from "$lib/components/table/index"
     import { capitalizeFirstLetter } from "$lib/utilities/capitalizeFirstLetter"
-    import { deleteTiers } from "./data.remote"
+    import { deleteTiers, loadUsers } from "./data.remote"
 
     let { data } = $props()
+
+    const users = await loadUsers()
 
     const checkAllCheckboxes: ChangeEventHandler<HTMLInputElement> = (e) => {
         if ((e.target as HTMLInputElement).checked) {
@@ -81,7 +83,7 @@
         </Thead>
         <Tbody>
             {#each data.tiers as tier}
-                {@const usersWithThisTier = data.users.filter((user) =>
+                {@const usersWithThisTier = users.filter((user) =>
                     user.retainedTiers.includes(tier.id),
                 )}
                 <Tr class="not-last:border-b not-last:border-gray-50/5">

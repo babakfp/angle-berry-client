@@ -1,7 +1,24 @@
 import { redirect } from "@sveltejs/kit"
-import { form, getRequestEvent } from "$app/server"
-import { pbInvalid } from "$lib/utilities/pb"
+import { form, getRequestEvent, query } from "$app/server"
+import { pbHandleError, pbInvalid } from "$lib/utilities/pb"
 import { schema } from "./schema"
+
+export const loadUsers = query(async () => {
+    const { locals } = getRequestEvent()
+
+    if (!locals.loggedInUser) {
+        redirect(401, "/login")
+    }
+    if (!locals.loggedInUser.isAdmin) {
+        redirect(401, "/")
+    }
+
+    try {
+        return await locals.pb.collection("users").getFullList()
+    } catch (e) {
+        throw pbHandleError(e)
+    }
+})
 
 export const deleteTiers = form(schema.delete.multiple, async (data, issue) => {
     const { locals } = getRequestEvent()

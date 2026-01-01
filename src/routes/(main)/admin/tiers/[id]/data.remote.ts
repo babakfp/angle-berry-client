@@ -50,7 +50,7 @@ export const updateTier = form(schema.update, async (data, issue) => {
 })
 
 export const deleteTier = form(schema.delete.single, async (data, issue) => {
-    const { locals, params } = getRequestEvent()
+    const { locals } = getRequestEvent()
 
     if (!locals.loggedInUser) {
         redirect(401, "/login")
@@ -59,15 +59,8 @@ export const deleteTier = form(schema.delete.single, async (data, issue) => {
         redirect(401, "/")
     }
 
-    // TODO: get userid from schema insetad of params?
-    const tierId = params.id
-
-    if (!tierId) {
-        invalid("Tier ID is required!")
-    }
-
     try {
-        await locals.pb.collection("tiers").delete(tierId)
+        await locals.pb.collection("tiers").delete(data.id)
     } catch (e) {
         pbInvalid(e, issue)
     }

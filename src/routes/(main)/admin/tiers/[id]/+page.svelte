@@ -203,5 +203,7 @@
         :   deleteTierIssue}
         submitButtonText="Delete"
         submitButtonClass="btn-danger"
-    />
+    >
+        <input {...deleteTier.fields.id.as("hidden", page.params.id!)} />
+    </Form>
 </div>

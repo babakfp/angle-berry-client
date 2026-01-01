@@ -1,4 +1,4 @@
-import { redirect } from "@sveltejs/kit"
+import { invalid, redirect } from "@sveltejs/kit"
 import { form, getRequestEvent, query } from "$app/server"
 import { pbHandleError, pbInvalid } from "$lib/utilities/pb"
 import { schema } from "./schema"
@@ -24,10 +24,10 @@ export const uploadVideos = form(schema.upload, async (data, issue) => {
     const { locals } = getRequestEvent()
 
     if (!locals.loggedInUser) {
-        redirect(401, "/login")
+        invalid("You are not logged in!")
     }
     if (!locals.loggedInUser.isAdmin) {
-        redirect(401, "/")
+        invalid("You are not an admin!")
     }
 
     try {
@@ -47,10 +47,10 @@ export const deleteVideos = form(schema.delete, async (data, issue) => {
     const { locals } = getRequestEvent()
 
     if (!locals.loggedInUser) {
-        redirect(401, "/login")
+        invalid("You are not logged in!")
     }
     if (!locals.loggedInUser.isAdmin) {
-        redirect(401, "/")
+        invalid("You are not an admin!")
     }
 
     try {

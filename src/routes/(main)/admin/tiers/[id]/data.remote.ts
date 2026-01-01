@@ -27,10 +27,10 @@ export const updateTier = form(
         const { locals } = getRequestEvent()
 
         if (!locals.loggedInUser) {
-            redirect(401, "/login")
+            invalid("You are not logged in!")
         }
         if (!locals.loggedInUser.isAdmin) {
-            redirect(401, "/")
+            invalid("You are not an admin!")
         }
 
         try {
@@ -49,10 +49,10 @@ export const deleteTier = form(schema.delete.single, async (data, issue) => {
     const { locals } = getRequestEvent()
 
     if (!locals.loggedInUser) {
-        redirect(401, "/login")
+        invalid("You are not logged in!")
     }
     if (!locals.loggedInUser.isAdmin) {
-        redirect(401, "/")
+        invalid("You are not an admin!")
     }
 
     try {

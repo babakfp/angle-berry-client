@@ -26,10 +26,10 @@ export const updateUser = form(schema, async (data, issue) => {
     const { locals } = getRequestEvent()
 
     if (!locals.loggedInUser) {
-        redirect(401, "/login")
+        invalid("You are not logged in!")
     }
     if (!locals.loggedInUser.isAdmin) {
-        redirect(401, "/")
+        invalid("You are not an admin!")
     }
 
     const targetUser = await locals.pb.collection("users").getOne(data.id)

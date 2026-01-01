@@ -1,4 +1,4 @@
-import { redirect } from "@sveltejs/kit"
+import { invalid } from "@sveltejs/kit"
 import * as v from "valibot"
 import { form, getRequestEvent } from "$app/server"
 import { pbInvalid } from "$lib/utilities/pb"
@@ -16,7 +16,7 @@ export const chat = form(schema, async (data, issue) => {
     const { locals } = getRequestEvent()
 
     if (!locals.loggedInUser) {
-        redirect(401, "/login")
+        invalid("You are not logged in!")
     }
 
     data.messageContent = data.messageContent.replace(/(?:\r\n|\r|\n)/g, "<br>")

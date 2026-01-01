@@ -1,4 +1,4 @@
-import { redirect } from "@sveltejs/kit"
+import { invalid } from "@sveltejs/kit"
 import { form, getRequestEvent } from "$app/server"
 import { pbInvalid, type UsersResponse } from "$lib/utilities/pb"
 import { schema } from "../(lib)/schema"
@@ -7,7 +7,7 @@ export const register = form(schema, async (data, issue) => {
     const { locals, url } = getRequestEvent()
 
     if (locals.loggedInUser) {
-        redirect(303, "/")
+        invalid("You are already logged in!")
     }
 
     let inviter: UsersResponse | undefined = undefined

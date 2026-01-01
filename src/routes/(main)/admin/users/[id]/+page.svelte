@@ -7,7 +7,7 @@
     import Input from "$lib/components/form/Input.svelte"
     import Select from "$lib/components/form/Select.svelte"
     import { isUserACreatedBeforeUserB } from "$lib/utilities/isUserACreatedBeforeUserB"
-    import { useIssue, useSnapshot } from "$lib/utilities/remote-functions/form"
+    import { useIssue, useSnapshot } from "$lib/utilities/remote-forms"
     import { loadUserToEdit, updateUser } from "./data.remote"
 
     let { data } = $props()

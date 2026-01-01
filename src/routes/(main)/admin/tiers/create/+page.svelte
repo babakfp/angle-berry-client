@@ -15,7 +15,7 @@
         useSnapshot,
         validateOnBlur,
         validateOnInput,
-    } from "$lib/utilities/remote-functions/form"
+    } from "$lib/utilities/remote-forms"
     import VideoGalleryItem from "../VideoGalleryItem.svelte"
     import { createTier } from "./data.remote"
 

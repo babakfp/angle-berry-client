@@ -13,7 +13,7 @@
         RealtimeMessagesResponse,
         UsersResponse,
     } from "$lib/utilities/pb"
-    import { useIssue, useSnapshot } from "$lib/utilities/remote-functions/form"
+    import { useIssue, useSnapshot } from "$lib/utilities/remote-forms"
     import { chat } from "./chat.remote"
     import {
         isContextMenuOpen,

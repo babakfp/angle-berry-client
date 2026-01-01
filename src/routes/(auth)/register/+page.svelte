@@ -10,7 +10,7 @@
         useSnapshot,
         validateOnBlur,
         validateOnInput,
-    } from "$lib/utilities/remote-functions/form"
+    } from "$lib/utilities/remote-forms"
     import Wrapper from "../(lib)/Wrapper.svelte"
     import { register } from "./register.remote"
 

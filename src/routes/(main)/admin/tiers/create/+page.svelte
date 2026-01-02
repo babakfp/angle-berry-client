@@ -42,6 +42,8 @@
     export const snapshot = useSnapshot(createTier)
 
     const updateTierIssue = $derived(useIssue(createTier))
+
+    let isRedirecting = $state(false)
 </script>
 
 <svelte:head>
@@ -67,12 +69,12 @@
 
             if (createTier.result?.redirect) {
                 toast.success(REDIRECT_MESSAGE)
-                goto(createTier.result.redirect)
+                isRedirecting = true
+                await goto(createTier.result.redirect)
+                isRedirecting = false
             }
         }}
-        message={createTier.result?.redirect ?
-            REDIRECT_MESSAGE
-        :   updateTierIssue}
+        message={isRedirecting ? REDIRECT_MESSAGE : updateTierIssue}
         submitButtonText="Update"
     >
         <Input

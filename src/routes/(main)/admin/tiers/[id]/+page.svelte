@@ -58,6 +58,8 @@
     const updateTierIssue = $derived(useIssue(updateTier))
 
     const deleteTierIssue = $derived(useIssue(deleteTier))
+
+    let isRedirecting = $state(false)
 </script>
 
 <svelte:head>
@@ -83,12 +85,12 @@
 
             if (updateTier.result?.redirect) {
                 toast.success(REDIRECT_MESSAGE)
-                goto(updateTier.result.redirect)
+                isRedirecting = true
+                await goto(updateTier.result.redirect)
+                isRedirecting = false
             }
         }}
-        message={updateTier.result?.redirect ?
-            REDIRECT_MESSAGE
-        :   updateTierIssue}
+        message={isRedirecting ? REDIRECT_MESSAGE : updateTierIssue}
         submitButtonText="Update"
     >
         <Input
@@ -197,12 +199,12 @@
 
             if (deleteTier.result?.redirect) {
                 toast.success("Deleted successfully!")
-                goto(deleteTier.result.redirect)
+                isRedirecting = true
+                await goto(deleteTier.result.redirect)
+                isRedirecting = false
             }
         }}
-        message={deleteTier.result?.redirect ?
-            "Deleted successfully!"
-        :   deleteTierIssue}
+        message={isRedirecting ? "Deleted successfully!" : deleteTierIssue}
         submitButtonText="Delete"
         submitButtonClass="btn-danger"
     >

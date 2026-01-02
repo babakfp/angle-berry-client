@@ -67,11 +67,9 @@
             }
 
             if (updateUser.result?.redirect) {
-                isRedirecting = true
                 toast.success(REDIRECT_MESSAGE)
-                // TODO: should I await other gotos too?
+                isRedirecting = true
                 await goto(updateUser.result.redirect)
-                // TODO: it seems like I need this isRedirecting in other remote functions too
                 isRedirecting = false
             }
         }}

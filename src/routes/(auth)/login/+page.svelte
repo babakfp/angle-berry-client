@@ -21,6 +21,7 @@
 
     const SUCCESSFULL_LOGIN_MESSAGE = "Logged in successfully!"
     const loginIssue = $derived(useIssue(login))
+    let isRedirecting = $state(false)
 </script>
 
 <svelte:head>
@@ -52,13 +53,13 @@
 
             if (login.result?.redirect) {
                 toast.success(SUCCESSFULL_LOGIN_MESSAGE)
-                goto(login.result.redirect)
+                isRedirecting = true
+                await goto(login.result.redirect)
+                isRedirecting = false
             }
         }}
-        message={login.result?.redirect ?
-            SUCCESSFULL_LOGIN_MESSAGE
-        :   loginIssue}
-        isRedirecting={!!login.result?.redirect}
+        message={isRedirecting ? SUCCESSFULL_LOGIN_MESSAGE : loginIssue}
+        {isRedirecting}
         submitButtonText="Login"
     >
         <LoginWithoutRegistering />

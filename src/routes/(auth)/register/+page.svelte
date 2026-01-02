@@ -20,6 +20,7 @@
 
     const SUCCESSFULL_REGISTER_MESSAGE = "Registered successfully!"
     const formIssue = $derived(useIssue(register))
+    let isRedirecting = $state(false)
 </script>
 
 <svelte:head>
@@ -50,13 +51,13 @@
 
             if (register.result?.redirect) {
                 toast.success(SUCCESSFULL_REGISTER_MESSAGE)
-                goto(register.result.redirect)
+                isRedirecting = true
+                await goto(register.result.redirect)
+                isRedirecting = false
             }
         }}
-        message={register.result?.redirect ?
-            SUCCESSFULL_REGISTER_MESSAGE
-        :   formIssue}
-        isRedirecting={!!register.result?.redirect}
+        message={isRedirecting ? SUCCESSFULL_REGISTER_MESSAGE : formIssue}
+        {isRedirecting}
         submitButtonText="Register"
     >
         <UsernameField

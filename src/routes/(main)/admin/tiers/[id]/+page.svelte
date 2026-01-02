@@ -2,7 +2,6 @@
     import toast from "svelte-hot-french-toast"
     import { fade } from "svelte/transition"
     import { goto } from "$app/navigation"
-    import { page } from "$app/state"
     import { PUBLIC_PB_URL } from "$env/static/public"
     import Form from "$lib/components/form/Form.svelte"
     import Input from "$lib/components/form/Input.svelte"
@@ -20,7 +19,9 @@
     import VideoGalleryItem from "../VideoGalleryItem.svelte"
     import { deleteTier, loadTier, updateTier } from "./data.remote"
 
-    const tier = await loadTier(page.params.id!)
+    let { params } = $props()
+
+    const tier = await loadTier(params.id)
     const videos = await getAllVideos()
 
     updateTier.fields.name.set((() => tier.name)())
@@ -127,7 +128,7 @@
             bind:selectedOption={selectedVisibility}
             isMultiple={false}
         />
-        <input {...updateTier.fields.id.as("hidden", page.params.id!)} />
+        <input {...updateTier.fields.id.as("hidden", params.id)} />
         <ul class="grid gap-4 rounded bg-gray-700 p-2">
             {#each selectedVideos as video (video.id)}
                 <li transition:fade>
@@ -205,6 +206,6 @@
         submitButtonText="Delete"
         submitButtonClass="btn-danger"
     >
-        <input {...deleteTier.fields.id.as("hidden", page.params.id!)} />
+        <input {...deleteTier.fields.id.as("hidden", params.id)} />
     </Form>
 </div>

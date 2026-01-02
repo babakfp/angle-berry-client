@@ -1,13 +1,12 @@
 <script lang="ts">
-    import { page } from "$app/state"
     import { PUBLIC_PB_URL } from "$env/static/public"
     import * as TiersTable from "$lib/components/TiersTable"
     import Video from "$lib/components/Video.svelte"
     import { loadData } from "./data.remote.js"
 
-    let { data } = $props()
+    let { data, params } = $props()
 
-    const { tier, isTierAccessed } = await loadData(page.params.id!)
+    const { tier, isTierAccessed } = await loadData(params.id)
 </script>
 
 <svelte:head>

@@ -1,7 +1,6 @@
 <script lang="ts">
     import toast from "svelte-hot-french-toast"
     import { goto } from "$app/navigation"
-    import { page } from "$app/state"
     import Checkbox from "$lib/components/form/Checkbox.svelte"
     import Form from "$lib/components/form/Form.svelte"
     import Input from "$lib/components/form/Input.svelte"
@@ -10,9 +9,9 @@
     import { useIssue, useSnapshot } from "$lib/utilities/remote-forms"
     import { loadUserToEdit, updateUser } from "./data.remote"
 
-    let { data } = $props()
+    let { data, params } = $props()
 
-    const userToEdit = await loadUserToEdit(page.params.id!)
+    const userToEdit = await loadUserToEdit(params.id)
 
     // TODO: should be $derived?
     updateUser.fields.isAdmin.set((() => userToEdit.isAdmin)())
@@ -113,6 +112,6 @@
                     ))}
         />
 
-        <input {...updateUser.fields.id.as("hidden", page.params.id!)} />
+        <input {...updateUser.fields.id.as("hidden", params.id)} />
     </Form>
 </div>

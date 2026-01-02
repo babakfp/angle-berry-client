@@ -19,10 +19,9 @@
         DialogTrigger: Snippet
     } = $props()
 
-    const initialEvents = await loadEvents()
-
     // assignment_value_stale
-    onMount(() => {
+    onMount(async () => {
+        const initialEvents = await loadEvents()
         events._ = initialEvents
     })
 

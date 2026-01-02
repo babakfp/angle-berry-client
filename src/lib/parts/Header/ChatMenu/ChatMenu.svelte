@@ -37,10 +37,9 @@
         DialogTrigger: Snippet
     } = $props()
 
-    const initialMessages = await loadMessages()
-
     // assignment_value_stale
-    onMount(() => {
+    onMount(async () => {
+        const initialMessages = await loadMessages()
         messages._ = initialMessages
     })
 

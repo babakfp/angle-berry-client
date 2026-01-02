@@ -1,16 +1,21 @@
 <script lang="ts">
     import * as TiersTable from "$lib/components/TiersTable"
+    import { getLoggedInUser } from "$lib/remotes/getLoggedInUser.remote"
+    import { getPreviewTierId } from "$lib/remotes/getPreviewTierId.remote"
+    import { loadTiers } from "$lib/remotes/loadTiers.remote"
 
-    let { data } = $props()
+    const loggedInUser = await getLoggedInUser()
+    const tiers = await loadTiers()
+    const previewTierId = await getPreviewTierId()
 </script>
 
 <svelte:head>
     <title>Home</title>
 </svelte:head>
 
-{#if data.previewTierId}
+{#if previewTierId}
     <p class="mb-8">
-        Watch <a class="link" href="/tiers/{data.previewTierId}">free</a>
+        Watch <a class="link" href="/tiers/{previewTierId}">free</a>
         content, and
         <a class="link" href="/how-to-pay">pay</a>
         or
@@ -20,8 +25,8 @@
 {/if}
 
 <TiersTable.Root>
-    {#each data.tiers as tier}
-        <TiersTable.Row loggedInUser={data.loggedInUser} {tier} />
+    {#each tiers as tier}
+        <TiersTable.Row {loggedInUser} {tier} />
     {/each}
 </TiersTable.Root>
 

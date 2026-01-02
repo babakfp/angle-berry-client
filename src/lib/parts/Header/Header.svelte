@@ -6,27 +6,15 @@
     import NotificationBlob from "$lib/components/NotificationBlob.svelte"
     import { unseenEventsLength } from "$lib/stores/events.svelte"
     import { unreadMessagesLength } from "$lib/stores/messages.svelte"
-    import type {
-        ListResult,
-        RealtimeEventsResponse,
-        RealtimeMessagesResponse,
-        TiersResponse,
-        UsersResponse,
-    } from "$lib/utilities/pb"
+    import type { UsersResponse } from "$lib/utilities/pb"
     import ChatMenu from "./ChatMenu/ChatMenu.svelte"
     import EventsMenu from "./EventsMenu/EventsMenu.svelte"
     import UserMenu from "./UserMenu/UserMenu.svelte"
 
     let {
         loggedInUser,
-        tiers,
-        pbEvents,
-        pbMessages,
     }: {
         loggedInUser: UsersResponse
-        tiers: TiersResponse[]
-        pbEvents: ListResult<RealtimeEventsResponse>
-        pbMessages: ListResult<RealtimeMessagesResponse>
     } = $props()
 
     const isHome = $derived(page.url.pathname === "/")
@@ -46,7 +34,7 @@
         </svelte:element>
 
         <div class="flex">
-            <EventsMenu {loggedInUser} {pbEvents}>
+            <EventsMenu {loggedInUser}>
                 {#snippet DialogTrigger()}
                     <Dialog.Trigger
                         class="outline-inset relative flex items-center px-2 text-2xl duration-150 hover:text-gray-50"
@@ -62,7 +50,7 @@
                 {/snippet}
             </EventsMenu>
 
-            <ChatMenu {loggedInUser} {pbMessages}>
+            <ChatMenu {loggedInUser}>
                 {#snippet DialogTrigger()}
                     <Dialog.Trigger
                         class="outline-inset relative flex items-center px-2 text-2xl duration-150 hover:text-gray-50"
@@ -78,7 +66,7 @@
                 {/snippet}
             </ChatMenu>
 
-            <UserMenu {loggedInUser} {tiers} />
+            <UserMenu {loggedInUser} />
         </div>
     </div>
 </header>

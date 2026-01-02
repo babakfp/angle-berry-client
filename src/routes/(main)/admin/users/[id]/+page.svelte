@@ -5,13 +5,17 @@
     import Form from "$lib/components/form/Form.svelte"
     import Input from "$lib/components/form/Input.svelte"
     import Select from "$lib/components/form/Select.svelte"
+    import { getLoggedInUser } from "$lib/remotes/getLoggedInUser.remote"
+    import { loadTiers } from "$lib/remotes/loadTiers.remote"
     import { isUserACreatedBeforeUserB } from "$lib/utilities/isUserACreatedBeforeUserB"
     import { useIssue, useSnapshot } from "$lib/utilities/remote-forms"
     import { loadUserToEdit, updateUser } from "./data.remote"
 
-    let { data, params } = $props()
+    let { params } = $props()
 
     const userToEdit = await loadUserToEdit(params.id)
+    const loggedInUser = await getLoggedInUser()
+    const tiers = await loadTiers()
 
     // TODO: should be $derived?
     updateUser.fields.isAdmin.set((() => userToEdit.isAdmin)())
@@ -20,7 +24,7 @@
     // TODO: should be $derived?
     let selectedRetainedTiers = $state(
         (() =>
-            data.tiers
+            tiers
                 .filter((tier) => userToEdit.retainedTiers.includes(tier.id))
                 .map((tier) => ({ value: tier.id, label: tier.name })))(),
     )
@@ -77,9 +81,9 @@
         submitButtonText="Update"
         submitButtonClass={{
             "btn-brand pointer-events-none opacity-50":
-                data.loggedInUser.id !== userToEdit.id
+                loggedInUser.id !== userToEdit.id
                 && userToEdit.isAdmin
-                && !isUserACreatedBeforeUserB(data.loggedInUser, userToEdit),
+                && !isUserACreatedBeforeUserB(loggedInUser, userToEdit),
         }}
     >
         <Input label="Username" value={userToEdit.username} readonly={true} />
@@ -89,14 +93,14 @@
             error={updateUser.fields.retainedTiers.issues()?.[0]?.message}
             label="Tiers"
             placeholder="Select tiers"
-            options={data.tiers.map((tier) => ({
+            options={tiers.map((tier) => ({
                 value: tier.id,
                 label: tier.name,
             }))}
             bind:selectedOptions={selectedRetainedTiers}
-            readonly={data.loggedInUser.id !== userToEdit.id
+            readonly={loggedInUser.id !== userToEdit.id
                 && userToEdit.isAdmin
-                && !isUserACreatedBeforeUserB(data.loggedInUser, userToEdit)}
+                && !isUserACreatedBeforeUserB(loggedInUser, userToEdit)}
         />
 
         <Checkbox
@@ -104,12 +108,9 @@
             error={updateUser.fields.isAdmin.issues()?.[0]?.message}
             class="justify-self-start"
             label="Role admin"
-            readonly={data.loggedInUser.id === userToEdit.id
+            readonly={loggedInUser.id === userToEdit.id
                 || (userToEdit.isAdmin
-                    && !isUserACreatedBeforeUserB(
-                        data.loggedInUser,
-                        userToEdit,
-                    ))}
+                    && !isUserACreatedBeforeUserB(loggedInUser, userToEdit))}
         />
 
         <input {...updateUser.fields.id.as("hidden", params.id)} />

@@ -2,6 +2,7 @@
     import { onDestroy, onMount } from "svelte"
     import AnimatePageNavigation from "$lib/components/AnimatePageNavigation.svelte"
     import Header from "$lib/parts/Header/Header.svelte"
+    import { getLoggedInUser } from "$lib/remotes/getLoggedInUser.remote"
     import { events, unseenEventsLength } from "$lib/stores/events.svelte"
     import { messages, unreadMessagesLength } from "$lib/stores/messages.svelte"
     import { pb } from "$lib/stores/pb.svelte"
@@ -12,7 +13,9 @@
         type UsersResponse,
     } from "$lib/utilities/pb"
 
-    let { data, children } = $props()
+    let { children } = $props()
+
+    const loggedInUser = await getLoggedInUser()
 
     onMount(async () => {
         try {
@@ -71,7 +74,7 @@
                                 ]
                             }
 
-                            if (e.record.user !== data.loggedInUser.id) {
+                            if (e.record.user !== loggedInUser.id) {
                                 unreadMessagesLength._ += 1
                             }
                         } else if (e.action === "delete") {
@@ -80,7 +83,7 @@
                                     (m) => m.id !== e.record.id,
                                 )
                             }
-                            if (e.record.user !== data.loggedInUser.id) {
+                            if (e.record.user !== loggedInUser.id) {
                                 unreadMessagesLength._ -= 1
                             }
                         }
@@ -125,11 +128,10 @@
                             unseenEventsLength._ += 1
 
                             if (
-                                newEvent.expand?.inviter?.id
-                                === data.loggedInUser.id
+                                newEvent.expand?.inviter?.id === loggedInUser.id
                             ) {
-                                data.loggedInUser.invitedUsers = [
-                                    ...data.loggedInUser.invitedUsers,
+                                loggedInUser.invitedUsers = [
+                                    ...loggedInUser.invitedUsers,
                                     newEvent.expand.user.id,
                                 ]
                             }
@@ -158,12 +160,7 @@
     })
 </script>
 
-<Header
-    loggedInUser={data.loggedInUser}
-    tiers={data.tiers}
-    pbEvents={data.events}
-    pbMessages={data.messages}
-/>
+<Header {loggedInUser} />
 
 <AnimatePageNavigation
     class="min-h-dvh-minus-header container grid content-start items-start pt-12 pb-24"

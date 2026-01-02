@@ -13,16 +13,16 @@
         Thead,
         Tr,
     } from "$lib/components/table/index"
+    import { loadTiers } from "$lib/remotes/loadTiers.remote"
     import { capitalizeFirstLetter } from "$lib/utilities/capitalizeFirstLetter"
     import { deleteTiers, loadUsers } from "./data.remote"
 
-    let { data } = $props()
-
     const users = await loadUsers()
+    const tiers = await loadTiers()
 
     const checkAllCheckboxes: ChangeEventHandler<HTMLInputElement> = (e) => {
         if ((e.target as HTMLInputElement).checked) {
-            deleteTiers.fields.ids.set(data.tiers.map((tier) => tier.id))
+            deleteTiers.fields.ids.set(tiers.map((tier) => tier.id))
         } else {
             deleteTiers.fields.ids.set([])
         }
@@ -67,10 +67,10 @@
         <Thead>
             <Tr>
                 <ThCheckbox
-                    checked={!!data.tiers.length
+                    checked={!!tiers.length
                         && deleteTiers.fields.ids.value()?.length
-                            === data.tiers.length}
-                    readonly={!data.tiers.length}
+                            === tiers.length}
+                    readonly={!tiers.length}
                     onchange={checkAllCheckboxes}
                 />
                 <Th>TIER</Th>
@@ -82,7 +82,7 @@
             </Tr>
         </Thead>
         <Tbody>
-            {#each data.tiers as tier}
+            {#each tiers as tier}
                 {@const usersWithThisTier = users.filter((user) =>
                     user.retainedTiers.includes(tier.id),
                 )}

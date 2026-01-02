@@ -3,25 +3,23 @@
     import { fly } from "svelte/transition"
     import Popover from "$lib/components/Popover.svelte"
     import SideDrawer from "$lib/components/SideDrawer.svelte"
+    import { loadEvents } from "$lib/remotes/loadEvents.remote"
     import { events, unseenEventsLength } from "$lib/stores/events.svelte"
     import type {
-        ListResult,
         RealtimeEventsResponse,
         TiersResponse,
         UsersResponse,
     } from "$lib/utilities/pb"
 
     let {
-        pbEvents,
         loggedInUser,
         DialogTrigger: MyDialogTrigger,
     }: {
-        pbEvents: ListResult<RealtimeEventsResponse>
         loggedInUser: UsersResponse
         DialogTrigger: Snippet
     } = $props()
 
-    events._ = pbEvents
+    events._ = await loadEvents()
 
     let ref = $state<HTMLDivElement>()
 </script>
@@ -65,8 +63,8 @@
                 <div>
                     Welcome. You {@render UserTooltipInfo({
                         user: event.expand.user,
-                    })} have successfully joined this fantastic website. We hope
-                    you have a fabulous time here.
+                    })} have successfully joined this fantastic website. We hope you
+                    have a fabulous time here.
                 </div>
             {:else}
                 <div>
@@ -78,8 +76,8 @@
             <div>
                 Welcome. You {@render UserTooltipInfo({
                     user: event.expand.user,
-                })} have successfully joined this fantastic website. We hope you
-                have a fabulous time here. User {@render UserTooltipInfo({
+                })} have successfully joined this fantastic website. We hope you have
+                a fabulous time here. User {@render UserTooltipInfo({
                     user: event.expand.inviter,
                 })} has invited you.
             </div>

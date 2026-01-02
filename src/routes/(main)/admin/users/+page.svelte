@@ -7,11 +7,11 @@
         Thead,
         Tr,
     } from "$lib/components/table/index"
+    import { loadTiers } from "$lib/remotes/loadTiers.remote"
     import { loadUsers } from "./data.remote"
 
-    let { data } = $props()
-
     const users = await loadUsers()
+    const tiers = await loadTiers()
 </script>
 
 <svelte:head>
@@ -39,7 +39,7 @@
                     </a>
                 </Th>
                 <Td class="px-6 py-4">
-                    {data.tiers
+                    {tiers
                         .filter((tier) => user.retainedTiers.includes(tier.id))
                         .map((tier) => tier.name)
                         .join(", ")}

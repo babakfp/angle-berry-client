@@ -6,6 +6,7 @@
     import toast from "svelte-hot-french-toast"
     import FormBase from "$lib/components/form/FormBase.svelte"
     import SideDrawer from "$lib/components/SideDrawer.svelte"
+    import { loadMessages } from "$lib/remotes/loadMessages.remote"
     import { messages, unreadMessagesLength } from "$lib/stores/messages.svelte"
     import { pb } from "$lib/stores/pb.svelte"
     import type {
@@ -30,15 +31,15 @@
 
     let {
         loggedInUser,
-        pbMessages,
         DialogTrigger: MyDialogTrigger,
     }: {
         loggedInUser: UsersResponse
-        pbMessages: ListResult<RealtimeMessagesResponse>
         DialogTrigger: Snippet
     } = $props()
 
-    messages._ = pbMessages
+    const initialMessages = await loadMessages()
+
+    messages._ = initialMessages
 
     let messageInputValue = $state("")
 
@@ -75,7 +76,8 @@
         // Is reached the top of the scrollable?
         // Added + 200 to fetch the data earlier for a better UX
         if (
-            pageNumberFortheNextOlderMessagesToFetch <= pbMessages.totalPages
+            pageNumberFortheNextOlderMessagesToFetch
+                <= initialMessages.totalPages
             && Math.abs((e.target as HTMLOListElement).scrollTop) + 200
                 >= (e.target as HTMLOListElement).scrollHeight
                     - (e.target as HTMLOListElement).clientHeight

@@ -9,17 +9,18 @@
     import { beforeNavigate } from "$app/navigation"
     import { page } from "$app/state"
     import FormBase from "$lib/components/form/FormBase.svelte"
+    import { loadTiers } from "$lib/remotes/loadTiers.remote"
     import { logout } from "$lib/remotes/logout.remote"
-    import type { TiersResponse, UsersResponse } from "$lib/utilities/pb"
+    import type { UsersResponse } from "$lib/utilities/pb"
     import Tier from "./Tier.svelte"
 
     let {
         loggedInUser,
-        tiers,
     }: {
         loggedInUser: UsersResponse
-        tiers: TiersResponse[]
     } = $props()
+
+    const tiers = await loadTiers()
 
     let isUserMenuOpen = $state(false)
 

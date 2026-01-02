@@ -4,11 +4,12 @@
     import { page } from "$app/state"
     import Input from "$lib/components/form/Input.svelte"
     import InputTextButton from "$lib/components/form/InputTextButton.svelte"
+    import { getLoggedInUser } from "$lib/remotes/getLoggedInUser.remote"
 
-    let { data } = $props()
+    const loggedInUser = await getLoggedInUser()
 
     const copyInviteLink = () => {
-        copyText(`${page.url.origin}/register?id=${data.loggedInUser.id}`)
+        copyText(`${page.url.origin}/register?id=${loggedInUser.id}`)
         toast.success("Your invite link is copied to Clipboard.")
     }
 </script>
@@ -23,7 +24,7 @@
     <Input
         name="userInviteLink"
         label="Your invite link"
-        value="{page.url.origin}/register?id={data.loggedInUser.id}"
+        value="{page.url.origin}/register?id={loggedInUser.id}"
         readonly
     >
         {#snippet buttons()}

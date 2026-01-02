@@ -1,6 +1,4 @@
 <script module lang="ts">
-    import type { ActionResult } from "@sveltejs/kit"
-
     export type FormBaseProps<
         Success extends Record<string, unknown> | undefined,
         Failure extends Record<string, unknown> | undefined,

@@ -7,7 +7,7 @@
 
     let { params } = $props()
 
-    const { tier, isTierAccessed } = await loadData(params.id)
+    const { tier, canUserAccessTier } = await loadData(params.id)
     const loggedInUser = await getLoggedInUser()
 </script>
 
@@ -22,7 +22,7 @@
     <TiersTable.Row {loggedInUser} {tier} isCurrent={true} />
 </TiersTable.Root>
 
-{#if !isTierAccessed}
+{#if !canUserAccessTier}
     <p class="mt-8">
         You don't have access to this tier. You can invite {tier.invites} users to
         get the access. You currently have {loggedInUser.invitedUsers.length} invites.

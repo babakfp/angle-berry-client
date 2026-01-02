@@ -23,17 +23,17 @@ export const loadData = query(v.string(), async (tierId) => {
             .collection("tiers")
             .getOne(tierId, { expand: "videos" })
 
-        const isTierAccessed =
+        const canUserAccessTier =
             tierId === locals.previewTierId
             || locals.loggedInUser.retainedTiers.includes(tierId)
             || locals.loggedInUser.invitedUsers.length >= tier.invites
 
-        if (!isTierAccessed) {
+        if (!canUserAccessTier) {
             tier.expand?.videos.map((video) => (video.file = ""))
         }
 
         return {
-            isTierAccessed,
+            canUserAccessTier,
             tier,
         }
     } catch (e) {

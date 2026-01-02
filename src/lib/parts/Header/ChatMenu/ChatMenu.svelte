@@ -2,7 +2,7 @@
     import IconCheckRegular from "phosphor-icons-svelte/IconCheckRegular.svelte"
     import IconPaperPlaneRightRegular from "phosphor-icons-svelte/IconPaperPlaneRightRegular.svelte"
     import IconSpinnerRegular from "phosphor-icons-svelte/IconSpinnerRegular.svelte"
-    import { untrack, type Snippet } from "svelte"
+    import { onMount, untrack, type Snippet } from "svelte"
     import toast from "svelte-hot-french-toast"
     import FormBase from "$lib/components/form/FormBase.svelte"
     import SideDrawer from "$lib/components/SideDrawer.svelte"
@@ -39,7 +39,10 @@
 
     const initialMessages = await loadMessages()
 
-    messages._ = initialMessages
+    // assignment_value_stale
+    onMount(() => {
+        messages._ = initialMessages
+    })
 
     let messageInputValue = $state("")
 

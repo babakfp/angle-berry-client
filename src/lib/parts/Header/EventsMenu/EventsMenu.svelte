@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { Snippet } from "svelte"
+    import { onMount, type Snippet } from "svelte"
     import { fly } from "svelte/transition"
     import Popover from "$lib/components/Popover.svelte"
     import SideDrawer from "$lib/components/SideDrawer.svelte"
@@ -19,7 +19,12 @@
         DialogTrigger: Snippet
     } = $props()
 
-    events._ = await loadEvents()
+    const initialEvents = await loadEvents()
+
+    // assignment_value_stale
+    onMount(() => {
+        events._ = initialEvents
+    })
 
     let ref = $state<HTMLDivElement>()
 </script>

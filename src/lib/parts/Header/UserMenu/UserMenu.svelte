@@ -6,7 +6,7 @@
     import IconUserRegular from "phosphor-icons-svelte/IconUserRegular.svelte"
     import { copy } from "svelte-copy"
     import toast from "svelte-hot-french-toast"
-    import { beforeNavigate } from "$app/navigation"
+    import { beforeNavigate, goto } from "$app/navigation"
     import { page } from "$app/state"
     import FormBase from "$lib/components/form/FormBase.svelte"
     import { loadTiers } from "$lib/remotes/loadTiers.remote"
@@ -135,9 +135,8 @@
                         form={logout}
                         enhance={async ({ submit }) => {
                             await submit()
-                            window.location.href = "/login"
-                            // TODO
-                            // toast.success("Logged out successfully!")
+                            await goto("/login")
+                            toast.success("Logged out successfully!")
                         }}
                     >
                         <button

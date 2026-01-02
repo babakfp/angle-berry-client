@@ -7,7 +7,7 @@
     import Input from "$lib/components/form/Input.svelte"
     import Select from "$lib/components/form/Select.svelte"
     import Modal from "$lib/components/Modal.svelte"
-    import { getAllVideos } from "$lib/remotes/admin/getAllVideos.remote"
+    import { loadAllVideos } from "$lib/remotes/admin/loadAllVideos.remote"
     import { capitalizeFirstLetter } from "$lib/utilities/capitalizeFirstLetter"
     import { TIERS_RECORD_VISIBILITY_OPTIONS } from "$lib/utilities/pb"
     import {
@@ -22,7 +22,7 @@
     let { params } = $props()
 
     const tier = await loadTier(params.id)
-    const videos = await getAllVideos()
+    const videos = await loadAllVideos()
 
     updateTier.fields.name.set((() => tier.name)())
     updateTier.fields.price.set((() => tier.price)())

@@ -2,7 +2,7 @@ import { redirect } from "@sveltejs/kit"
 import { getRequestEvent, query } from "$app/server"
 import { pbHandleError } from "$lib/utilities/pb"
 
-export const getAllVideos = query(async () => {
+export const loadAllVideos = query(async () => {
     const { locals } = getRequestEvent()
 
     if (!locals.loggedInUser) {

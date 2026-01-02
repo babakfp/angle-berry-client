@@ -5,13 +5,13 @@
     import Form from "$lib/components/form/Form.svelte"
     import FormBase from "$lib/components/form/FormBase.svelte"
     import FloatingActions from "$lib/components/table/FloatingActions.svelte"
-    import { getAllVideos } from "$lib/remotes/admin/getAllVideos.remote"
+    import { loadAllVideos } from "$lib/remotes/admin/loadAllVideos.remote"
     import { useIssue } from "$lib/utilities/remote-forms"
     import VideoGalleryItem from "../tiers/VideoGalleryItem.svelte"
     import { deleteVideos, uploadVideos } from "./data.remote"
     import { formats } from "./schema"
 
-    const videos = await getAllVideos()
+    const videos = await loadAllVideos()
     const uploadIssue = $derived(useIssue(uploadVideos))
     const deleteIssue = $derived(useIssue(deleteVideos))
 </script>

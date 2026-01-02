@@ -23,8 +23,6 @@
         onRedirect?: () => void
         onSuccess?: () => void
     }
-
-    //
 </script>
 
 <script

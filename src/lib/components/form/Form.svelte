@@ -4,6 +4,7 @@
 >
     import IconSpinnerRegular from "phosphor-icons-svelte/IconSpinnerRegular.svelte"
     import toast from "svelte-hot-french-toast"
+    import type { ClassValue } from "svelte/elements"
     import Description from "$lib/components/form/Description.svelte"
     import FormBase, {
         type FormBaseProps,
@@ -26,7 +27,7 @@
     }: {
         message?: string
         submitButtonText: string
-        submitButtonClass?: string
+        submitButtonClass?: ClassValue
     } & Omit<
         FormBaseProps<Success, Failure>,
         "onSubmit" | "onInvalid" | "onReturn"

@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { Snippet } from "svelte"
-    import type { MouseEventHandler } from "svelte/elements"
+    import type { ClassValue, MouseEventHandler } from "svelte/elements"
 
     let {
         class: class_,
@@ -8,7 +8,7 @@
         children,
         onclick,
     }: {
-        class?: string
+        class?: ClassValue
         text?: string
         children?: Snippet
         onclick: MouseEventHandler<HTMLButtonElement>

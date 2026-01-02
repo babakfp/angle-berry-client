@@ -1,12 +1,13 @@
 <script lang="ts">
     import type { Snippet } from "svelte"
+    import type { ClassValue } from "svelte/elements"
 
     let {
         class: class_,
         containsAnchor,
         children,
     }: {
-        class?: string
+        class?: ClassValue
         containsAnchor?: boolean
         children: Snippet
     } = $props()

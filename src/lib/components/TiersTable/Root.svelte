@@ -1,12 +1,13 @@
 <script lang="ts">
     import type { Snippet } from "svelte"
+    import type { ClassValue } from "svelte/elements"
     import { Table, Tbody, Th, Thead, Tr } from "$lib/components/table/index"
 
     let {
         class: class_,
         children,
     }: {
-        class?: string
+        class?: ClassValue
         children?: Snippet
     } = $props()
 </script>

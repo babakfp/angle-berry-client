@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { Component } from "svelte"
-    import type { MouseEventHandler } from "svelte/elements"
+    import type { ClassValue, MouseEventHandler } from "svelte/elements"
 
     let {
         title,
@@ -11,7 +11,7 @@
     }: {
         title: string
         disabled?: boolean
-        class?: string
+        class?: ClassValue
         Icon: Component
         onclick: MouseEventHandler<HTMLButtonElement>
     } = $props()

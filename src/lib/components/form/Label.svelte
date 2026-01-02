@@ -1,4 +1,6 @@
 <script lang="ts">
+    import type { ClassValue } from "svelte/elements"
+
     let {
         for: for_,
         label,
@@ -8,7 +10,7 @@
         for?: string
         label: string
         required?: boolean
-        class?: string
+        class?: ClassValue
     } = $props()
 </script>
 

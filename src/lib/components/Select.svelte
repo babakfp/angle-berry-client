@@ -5,6 +5,7 @@
     import IconSquareRegular from "phosphor-icons-svelte/IconSquareRegular.svelte"
     import IconXSquareRegular from "phosphor-icons-svelte/IconXSquareRegular.svelte"
     import { OutClick } from "svelte-outclick"
+    import type { ClassValue } from "svelte/elements"
     import Description from "$lib/components/form/Description.svelte"
 
     type Option = { value: string; label: string }
@@ -28,7 +29,7 @@
         error?: string
         isMultiple?: boolean
         readonly?: boolean
-        class?: string
+        class?: ClassValue
     } = $props()
 
     let trigger = $state<HTMLButtonElement>()

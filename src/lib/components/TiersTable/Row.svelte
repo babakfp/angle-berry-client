@@ -20,7 +20,7 @@
 
 <Tr class={{ "not-last:border-b not-last:border-gray-50/5": !isCurrent }}>
     <Th
-        class="text-gray-50 {isCurrent ? 'py-4' : ''}"
+        class={["text-gray-50", { "py-4": isCurrent }]}
         containsAnchor={!isCurrent}
     >
         {#if isCurrent}
